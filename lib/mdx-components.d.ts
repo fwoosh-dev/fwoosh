@@ -1,0 +1,26 @@
+import React from "react";
+export declare type Element<T extends keyof JSX.IntrinsicElements> = React.PropsWithoutRef<JSX.IntrinsicElements[T]>;
+export declare const components: {
+    readonly h1: ({ className, ...props }: Element<"h1">) => JSX.Element;
+    readonly h2: ({ className, ...props }: Element<"h2">) => JSX.Element;
+    readonly h3: ({ className, ...props }: Element<"h3">) => JSX.Element;
+    readonly h4: ({ className, ...props }: Element<"h4">) => JSX.Element;
+    readonly h5: ({ className, ...props }: Element<"h5">) => JSX.Element;
+    readonly h6: ({ className, ...props }: Element<"h6">) => JSX.Element;
+    readonly hr: ({ className, ...props }: Element<"hr">) => JSX.Element;
+    readonly p: ({ className, ...props }: Element<"p">) => JSX.Element;
+    readonly inlineCode: ({ className, ...props }: Element<"code">) => JSX.Element;
+    readonly code: ({ className, ...props }: Element<"code">) => JSX.Element;
+    readonly pre: ({ className, ...props }: Element<"pre">) => JSX.Element;
+    readonly a: React.ForwardRefExoticComponent<Pick<React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>, "key" | keyof React.AnchorHTMLAttributes<HTMLAnchorElement>> & React.RefAttributes<HTMLAnchorElement>>;
+    readonly ul: ({ className, ...props }: Element<"ul">) => JSX.Element;
+    readonly ol: ({ className, ...props }: Element<"ol">) => JSX.Element;
+    readonly li: ({ className, ...props }: Element<"li">) => JSX.Element;
+    readonly blockquote: ({ className, ...props }: Element<"blockquote">) => JSX.Element;
+    readonly img: ({ className, src, ...props }: Element<"img">) => JSX.Element;
+    readonly table: ({ className, ...props }: Element<"table">) => JSX.Element;
+    readonly th: ({ className, ...props }: Element<"th">) => JSX.Element;
+    readonly tr: ({ className, ...props }: Element<"tr">) => JSX.Element;
+    readonly td: ({ className, ...props }: Element<"td">) => JSX.Element;
+};
+export declare type Components = typeof components;

@@ -1,4 +1,10 @@
 /// <reference types="react" />
-export default function Document({ children }: {
+interface DocumentProps {
     children: React.ReactNode;
-}): JSX.Element;
+    frontMatter: {
+        title?: string;
+        description?: string;
+    };
+}
+export declare const Document: ({ children, frontMatter }: DocumentProps) => JSX.Element;
+export {};

@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "build": "tsc",
     "start": "yarn build --watch"
@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "ansi-colors": "^4.1.1",
+    "clsx": "^1.1.1",
     "command-line-application": "^0.10.1",
     "endent": "^2.0.1",
     "esbuild": "^0.8.53",
@@ -20,7 +21,8 @@
     "fast-glob": "^3.2.5",
     "find-cache-dir": "^3.3.1",
     "fs-extra": "^9.1.0",
-    "fwoosh": "./",
+    "fwoosh": "link:./",
+    "gray-matter": "^4.0.2",
     "pretty-ms": "^7.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
