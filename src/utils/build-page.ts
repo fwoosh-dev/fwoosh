@@ -79,21 +79,27 @@ export const buildPage = async (
   options: BuildPageOptions
 ): Promise<PageBuild> => {
   const cacheDir = findCacheDir({ name: "fwoosh" })!;
-  const virtualPages: string[] = [];
+  const virtualServerPages: string[] = [];
+  const virtualClientPages: string[] = [];
 
   await Promise.all(
     pages.map(async (page) => {
       // Path to tmp file in cached build dir
-      const virtualPagePath = path.join(
+      const virtualServerPagePath = path.join(
         cacheDir,
         path.relative(options.dir, page).replace(/\.\S+$/, ".js")
       );
+      virtualServerPages.push(virtualServerPagePath);
+      const browserJs = path
+        .relative(options.dir, page)
+        .replace(/\.\S+$/, "-client.js");
+      const virtualBrowserPagePath = path.join(cacheDir, browserJs);
+      virtualClientPages.push(virtualBrowserPagePath);
 
-      await fs.mkdirp(path.dirname(virtualPagePath));
-      virtualPages.push(virtualPagePath);
+      await fs.mkdirp(path.dirname(virtualServerPagePath));
       // Render the page
       await fs.writeFile(
-        virtualPagePath,
+        virtualServerPagePath,
         endent`
           import * as React from 'react'
           import * as Server from 'react-dom/server'
@@ -104,10 +110,28 @@ export const buildPage = async (
             .replace("/index.tsx", "")}";
           
           console.log(Server.renderToString((
-            <Document frontMatter={frontMatter}>
+            <Document attach="${browserJs}" frontMatter={frontMatter}>
               <Component components={components} />
             </Document>
           )))
+        `
+      );
+      
+      await fs.writeFile(
+        virtualBrowserPagePath,
+        endent`
+          import * as React from 'react'
+          import * as ReactDOM from 'react-dom'
+          import { Document, components } from "fwoosh"
+
+          import Component, { frontMatter } from "${path
+            .resolve(page)
+            .replace("/index.tsx", "")}";
+          
+          ReactDOM.hydrate(
+            <Component components={components} />,
+            document.getElementById("root")
+          )
         `
       );
     })
@@ -133,6 +157,40 @@ export const buildPage = async (
     );
   };
 
+  const moveFilesToOut = async (outdir: string) => {
+    await Promise.all(
+      pages.map(async (page) => {
+        const outfile = path.join(outdir, `${path.parse(page).name}.js`);
+        await generatePage(page, outfile);
+      })
+    );
+
+    await Promise.all(
+      virtualClientPages.map(async (page) => {
+        const filePath = path.join(
+          path.dirname(path.relative(cacheDir, page)),
+          `${path.basename(page)}`
+        );
+        const clientJs = path.join(outdir, filePath);
+
+        await fs.copy(clientJs, path.join(options.outDir, filePath));
+      })
+    );
+
+    const chunks = await glob(path.join(outdir, "**/chunks/**"));
+
+    await Promise.all(
+      chunks.map(async (chunk) => {
+        const chunkPath = path.relative(outdir, chunk);
+
+        await fs.copy(
+          path.join(outdir, chunkPath),
+          path.join(options.outDir, chunkPath)
+        );
+      })
+    );
+  };
+
   try {
     const outdir = path.join(cacheDir, "build");
     const mockPackage = path.join(outdir, "package.json");
@@ -144,31 +202,22 @@ export const buildPage = async (
     // Build the tmp build file in the cache
     const builder = await build({
       outdir,
-      entryPoints: virtualPages,
+      entryPoints: [...virtualClientPages, ...virtualServerPages],
       incremental: options.watch === true,
+      chunkNames: "chunks/[name]-[hash]",
       loader: {
         ".js": "jsx",
       },
     });
 
-    await Promise.all(
-      pages.map(async (page) => {
-        const outfile = path.join(outdir, `${path.parse(page).name}.js`);
-        await generatePage(page, outfile);
-      })
-    );
+    await moveFilesToOut(outdir);
 
     return {
       pages,
       rebuild: async () => {
         if (builder.rebuild) {
           await builder.rebuild();
-          await Promise.all(
-            pages.map(async (page) => {
-              const outfile = path.join(outdir, `${path.parse(page).name}.js`);
-              await generatePage(page, outfile);
-            })
-          );
+          await moveFilesToOut(outdir);
         }
       },
     };

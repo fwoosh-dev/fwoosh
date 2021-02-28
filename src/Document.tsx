@@ -1,12 +1,13 @@
 interface DocumentProps {
   children: React.ReactNode;
+  attach?: string;
   frontMatter: {
     title?: string;
     description?: string;
   };
 }
 
-export const Document = ({ children, frontMatter }: DocumentProps) => {
+export const Document = ({ children, frontMatter, attach }: DocumentProps) => {
   return (
     <>
       <html lang="en">
@@ -18,7 +19,7 @@ export const Document = ({ children, frontMatter }: DocumentProps) => {
           />
 
           <meta charSet="UTF-8" />
-          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0"
@@ -50,7 +51,12 @@ export const Document = ({ children, frontMatter }: DocumentProps) => {
             }            
           `}</style>
         </head>
-        <body>{children}</body>
+        
+        <body>
+          <div id="root">{children}</div>
+
+          {attach && <script type="module" src={attach} />}
+        </body>
       </html>
     </>
   );
