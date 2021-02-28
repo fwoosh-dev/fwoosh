@@ -116,7 +116,7 @@ export const buildPage = async (
           )))
         `
       );
-      
+
       await fs.writeFile(
         virtualBrowserPagePath,
         endent`
@@ -177,7 +177,7 @@ export const buildPage = async (
       })
     );
 
-    const chunks = await glob(path.join(outdir, "**/chunks/**"));
+    const chunks = await glob(path.join(outdir, "**/chunk.*"));
 
     await Promise.all(
       chunks.map(async (chunk) => {
@@ -195,7 +195,8 @@ export const buildPage = async (
     const outdir = path.join(cacheDir, "build");
     const mockPackage = path.join(outdir, "package.json");
 
-    if (!(await fs.pathExists(mockPackage))) {
+    if (!fs.existsSync(mockPackage)) {
+      await fs.mkdirp(path.dirname(mockPackage));
       await fs.writeFile(mockPackage, '{ "type": "module" }');
     }
 
@@ -204,7 +205,6 @@ export const buildPage = async (
       outdir,
       entryPoints: [...virtualClientPages, ...virtualServerPages],
       incremental: options.watch === true,
-      chunkNames: "chunks/[name]-[hash]",
       loader: {
         ".js": "jsx",
       },

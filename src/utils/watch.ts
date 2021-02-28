@@ -63,6 +63,7 @@ export const watchPages = (
             // pages on request if they already been built. The will be taken care
             // of by chokidar
             if (cachedBuilder) {
+              spinner.text = `Already built "${url}", using previous result.`;
             } else {
               const start = process.hrtime();
               spinner.start(`Building ${url}...`);
