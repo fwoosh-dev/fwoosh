@@ -1,5 +1,6 @@
 import esbuild from "esbuild";
 import xdm from "xdm/esbuild.js";
+import ms from 'pretty-ms';
 import * as path from "path";
 import exec from "execa";
 import fs from "fs-extra";
@@ -42,6 +43,7 @@ interface BuildWebsiteOptions {
 }
 
 export const buildWebsite = async (options: BuildWebsiteOptions) => {
+  const start = process.hrtime();
   const pages = await glob(path.join(options.dir, "**/*.{mdx,jsx,tsx}"), {
     ignore: ["**/out/**"],
   });
@@ -71,7 +73,7 @@ export const buildWebsite = async (options: BuildWebsiteOptions) => {
         endent`
           import * as React from 'react'
           import * as Server from 'react-dom/server'
-          import { Document } from "fwoosh/document"
+          import Document from "fwoosh/document"
 
           import Component from "${path
             .resolve(page)
@@ -101,12 +103,15 @@ export const buildWebsite = async (options: BuildWebsiteOptions) => {
         });
 
         const { stdout } = await exec("node", [outfile]);
+        const htmlPagePath = path.join(
+          options.outDir,
+          path.dirname(path.relative(options.dir, page)),
+          `${path.parse(page).name}.html`
+        )
+
+        await fs.mkdirp(path.dirname(htmlPagePath));
         await fs.writeFile(
-          path.join(
-            options.outDir,
-            path.dirname(path.relative(options.dir, page)),
-            `${path.parse(page).name}.html`
-          ),
+          htmlPagePath,
           endent`
             <!DOCTYPE html />
             ${stdout}
@@ -114,9 +119,13 @@ export const buildWebsite = async (options: BuildWebsiteOptions) => {
         );
       } catch (error) {
         console.log(redBright("Error"), error);
+        process.exit(1);
       }
     })
   );
+
+  const end = process.hrtime(start)
+  console.info(`\n🔥 Took ${ms(end[1] / 1000000)}`);
 };
 
 const fwoosh: Command = {

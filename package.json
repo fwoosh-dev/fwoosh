@@ -21,6 +21,7 @@
     "find-cache-dir": "^3.3.1",
     "fs-extra": "^9.1.0",
     "fwoosh": "./",
+    "pretty-ms": "^7.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "xdm": "^1.4.0"
