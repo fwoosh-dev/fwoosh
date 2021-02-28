@@ -1,2 +1,2 @@
-export * from "./Document.js";
-export * from "./mdx-components.js";
+export * from "./components/Document.js";
+export * from "./components/components.js";

@@ -54,7 +54,7 @@ const build = (options: esbuild.BuildOptions) => {
     define: {
       "process.env.NODE_ENV": JSON.stringify("development"),
     },
-    inject: [path.join(dirname, "../../src/react-shim.js")],
+    inject: [path.join(dirname, "../../src/utils/react-shim.js")],
     plugins: [frontMatterPlugin],
     ...options,
   });
