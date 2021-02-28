@@ -3,7 +3,7 @@ import path from "path";
 import ora from "ora";
 import fs from "fs-extra";
 import ms from "pretty-ms";
-import { buildPage, BuildPageOptions } from "./build-page.js";
+import { buildPage, BuildPageOptions, PageBuild } from "./build-page.js";
 import ansi from "ansi-colors";
 
 const { bold, underline, green } = ansi;
@@ -18,6 +18,7 @@ export const watchPages = (
 ) => {
   return new Promise<void>((resolve, reject) => {
     const spinner = ora(`🏃‍♂ fwoosh`).start();
+    const builders: PageBuild[] = [];
 
     const server = new http.Server(async ({ url }, res) => {
       if (!url) {
@@ -31,17 +32,26 @@ export const watchPages = (
         const file = url.replace(".html", ".mdx");
         const pagePath = path.join(buildOptions.dir, file);
 
-        await buildPage(pagePath, buildOptions);
-        
+        const cachedBuilder = builders.find((b) => b.page === pagePath);
+        let rebuild = false;
+
+        if (cachedBuilder) {
+          await cachedBuilder.rebuild();
+          rebuild = true;
+        } else {
+          const builder = await buildPage(pagePath, buildOptions);
+          builders.push(builder);
+        }
+
         res.write(
           await fs.readFile(path.join(process.cwd(), buildOptions.outDir, url))
         );
         res.end();
 
         const end = process.hrtime(start);
-        spinner.text = `Built ${bold(`"${pagePath}"`)}, took ${green(
-          ms(end[1] / 1000000)
-        )}`;
+        spinner.text = `${rebuild ? "Rebuild" : "Built"} ${bold(
+          `"${pagePath}"`
+        )}, took ${green(ms(end[1] / 1000000))}`;
       } else {
         res.end();
       }

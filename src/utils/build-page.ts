@@ -63,11 +63,19 @@ export interface BuildPageOptions {
   dir: string;
   /** the directory with the mdx pages */
   outDir: string;
+  /** the build is for watch mode */
+  watch?: boolean;
 }
 
-export const buildPage = async (page: string, options: BuildPageOptions) => {
-  const start = process.hrtime();
+export interface PageBuild {
+  page: string;
+  rebuild: () => Promise<void>;
+}
 
+export const buildPage = async (
+  page: string,
+  options: BuildPageOptions
+): Promise<PageBuild> => {
   const cacheDir = findCacheDir({ name: "fwoosh" })!;
 
   // Path to tmp file in cached build dir
@@ -97,20 +105,9 @@ export const buildPage = async (page: string, options: BuildPageOptions) => {
     `
   );
 
-  try {
-    const outfile = path.join(cacheDir, "build", `${path.parse(page).name}.js`);
-
-    // Build the tmp build file in the cache
-    await build({
-      outfile,
-      entryPoints: [virtualPagePath],
-      loader: {
-        ".js": "jsx",
-      },
-    });
-
+  const generatePage = async (file: string) => {
     // Get the output HTML of the page
-    const { stdout } = await exec("node", [outfile]);
+    const { stdout } = await exec("node", [file]);
     const htmlPagePath = path.join(
       options.outDir,
       path.dirname(path.relative(options.dir, page)),
@@ -126,6 +123,32 @@ export const buildPage = async (page: string, options: BuildPageOptions) => {
         ${stdout}
       `
     );
+  };
+
+  try {
+    const outfile = path.join(cacheDir, "build", `${path.parse(page).name}.js`);
+
+    // Build the tmp build file in the cache
+    const builder = await build({
+      outfile,
+      entryPoints: [virtualPagePath],
+      incremental: options.watch === true,
+      loader: {
+        ".js": "jsx",
+      },
+    });
+
+    await generatePage(outfile);
+
+    return {
+      page,
+      rebuild: async () => {
+        if (builder.rebuild) {
+          builder.rebuild();
+          await generatePage(outfile);
+        }
+      },
+    };
   } catch (error) {
     console.log(redBright("Error"), error);
     process.exit(1);
@@ -144,7 +167,7 @@ export const buildPages = async (options: BuildPageOptions) => {
     return;
   }
 
-  await Promise.all(
+  return Promise.all(
     pages.map((page) => {
       console.log(`${greenBright(bold("Building"))} ${path.basename(page)}`);
       return buildPage(page, options);
