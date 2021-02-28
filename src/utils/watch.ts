@@ -1,7 +1,8 @@
 import http from "http";
 import path from "path";
 import ora from "ora";
-import fs from "fs-extra";
+import chokidar from "chokidar";
+import liveServer from "live-server";
 import ms from "pretty-ms";
 import { buildPage, BuildPageOptions, PageBuild } from "./build-page.js";
 import ansi from "ansi-colors";
@@ -12,6 +13,12 @@ interface WatchPagesOptions {
   port: number;
 }
 
+const makeBuildMessage = (pagePath: string, time: number, rebuild = false) => {
+  return `${rebuild ? "Rebuild" : "Built"} ${bold(
+    `"${pagePath}"`
+  )}, took ${green(ms(time / 1000000))}`;
+};
+
 export const watchPages = (
   options: WatchPagesOptions,
   buildOptions: BuildPageOptions
@@ -20,44 +27,58 @@ export const watchPages = (
     const spinner = ora(`🏃‍♂ fwoosh`).start();
     const builders: PageBuild[] = [];
 
-    const server = new http.Server(async ({ url }, res) => {
-      if (!url) {
-        return res.end();
-      }
-
-      if (url.includes(".html")) {
-        spinner.start(`Building ${url}...`);
-
-        const start = process.hrtime();
-        const file = url.replace(".html", ".mdx");
-        const pagePath = path.join(buildOptions.dir, file);
-
-        const cachedBuilder = builders.find((b) => b.page === pagePath);
-        let rebuild = false;
+    chokidar
+      .watch(`${buildOptions.dir}/**/*.{mdx,jsx,tsx}`, {
+        interval: 0, // No delay
+      })
+      .on("change", async (path) => {
+        const cachedBuilder = builders.find((b) => b.page === path);
 
         if (cachedBuilder) {
+          const start = process.hrtime();
           await cachedBuilder.rebuild();
-          rebuild = true;
-        } else {
-          const builder = await buildPage(pagePath, buildOptions);
-          builders.push(builder);
+          const end = process.hrtime(start);
+          spinner.text = makeBuildMessage(path, end[1], true);
         }
+      });
 
-        res.write(
-          await fs.readFile(path.join(process.cwd(), buildOptions.outDir, url))
-        );
-        res.end();
+    const server = (liveServer.start({
+      port: options.port,
+      root: buildOptions.outDir,
+      // @ts-ignore
+      watch: buildOptions.outDir,
+      logLevel: 0,
+      middleware: [
+        async ({ url }, res: http.ServerResponse, next) => {
+          if (url.includes(".html")) {
+            const file = url.replace(".html", ".mdx");
+            const pagePath = path.join(buildOptions.dir, file);
+            const cachedBuilder = builders.find((b) => b.page === pagePath);
 
-        const end = process.hrtime(start);
-        spinner.text = `${rebuild ? "Rebuild" : "Built"} ${bold(
-          `"${pagePath}"`
-        )}, took ${green(ms(end[1] / 1000000))}`;
-      } else {
-        res.end();
-      }
-    });
+            // Since we also have a file watcher going we don't need build any
+            // pages on request if they already been built. The will be taken care
+            // of by chokidar
+            if (cachedBuilder) {
+            } else {
+              const start = process.hrtime();
+              spinner.start(`Building ${url}...`);
+              const builder = await buildPage(pagePath, {
+                ...buildOptions,
+                watch: true,
+              });
 
-    server.listen(options.port, () => {
+              builders.push(builder);
+              const end = process.hrtime(start);
+              spinner.text = makeBuildMessage(pagePath, end[1]);
+            }
+          }
+
+          next();
+        },
+      ],
+    }) as unknown) as http.Server;
+
+    server.on("listening", () => {
       spinner.succeed(
         `Ready on ${underline(`http://localhost:${options.port}/index.html`)}`
       );

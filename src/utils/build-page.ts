@@ -144,7 +144,7 @@ export const buildPage = async (
       page,
       rebuild: async () => {
         if (builder.rebuild) {
-          builder.rebuild();
+          await builder.rebuild();
           await generatePage(outfile);
         }
       },
