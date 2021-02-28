@@ -1,6 +1,7 @@
 import http from "http";
 import path from "path";
 import ora from "ora";
+import open from "open";
 import chokidar from "chokidar";
 import liveServer from "live-server";
 import ms from "pretty-ms";
@@ -32,7 +33,7 @@ export const watchPages = (
         interval: 0, // No delay
       })
       .on("change", async (path) => {
-        const cachedBuilder = builders.find((b) => b.page === path);
+        const cachedBuilder = builders.find((b) => b.pages.includes(path));
 
         if (cachedBuilder) {
           const start = process.hrtime();
@@ -43,6 +44,7 @@ export const watchPages = (
       });
 
     const server = (liveServer.start({
+      open: false,
       port: options.port,
       root: buildOptions.outDir,
       // @ts-ignore
@@ -53,7 +55,9 @@ export const watchPages = (
           if (url.includes(".html")) {
             const file = url.replace(".html", ".mdx");
             const pagePath = path.join(buildOptions.dir, file);
-            const cachedBuilder = builders.find((b) => b.page === pagePath);
+            const cachedBuilder = builders.find((b) =>
+              b.pages.includes(pagePath)
+            );
 
             // Since we also have a file watcher going we don't need build any
             // pages on request if they already been built. The will be taken care
@@ -62,7 +66,7 @@ export const watchPages = (
             } else {
               const start = process.hrtime();
               spinner.start(`Building ${url}...`);
-              const builder = await buildPage(pagePath, {
+              const builder = await buildPage([pagePath], {
                 ...buildOptions,
                 watch: true,
               });
@@ -79,9 +83,9 @@ export const watchPages = (
     }) as unknown) as http.Server;
 
     server.on("listening", () => {
-      spinner.succeed(
-        `Ready on ${underline(`http://localhost:${options.port}/index.html`)}`
-      );
+      const firstPageUrl = `http://localhost:${options.port}/index.html`;
+      spinner.succeed(`Ready on ${underline(firstPageUrl)}`);
+      open(firstPageUrl);
     });
 
     server.on("error", (error) => {

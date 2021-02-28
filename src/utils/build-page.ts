@@ -49,6 +49,8 @@ const build = (options: esbuild.BuildOptions) => {
 
   return esbuild.build({
     bundle: true,
+    splitting: true,
+    format: "esm",
     define: {
       "process.env.NODE_ENV": JSON.stringify("development"),
     },
@@ -68,44 +70,50 @@ export interface BuildPageOptions {
 }
 
 export interface PageBuild {
-  page: string;
+  pages: string[];
   rebuild: () => Promise<void>;
 }
 
 export const buildPage = async (
-  page: string,
+  pages: string[],
   options: BuildPageOptions
 ): Promise<PageBuild> => {
   const cacheDir = findCacheDir({ name: "fwoosh" })!;
+  const virtualPages: string[] = [];
 
-  // Path to tmp file in cached build dir
-  const virtualPagePath = path.join(
-    cacheDir,
-    path.relative(options.dir, page).replace(/\.\S+$/, ".js")
+  await Promise.all(
+    pages.map(async (page) => {
+      // Path to tmp file in cached build dir
+      const virtualPagePath = path.join(
+        cacheDir,
+        path.relative(options.dir, page).replace(/\.\S+$/, ".js")
+      );
+
+      await fs.mkdirp(path.dirname(virtualPagePath));
+      virtualPages.push(virtualPagePath);
+      // Render the page
+      await fs.writeFile(
+        virtualPagePath,
+        endent`
+          import * as React from 'react'
+          import * as Server from 'react-dom/server'
+          import { Document, components } from "fwoosh"
+
+          import Component, { frontMatter } from "${path
+            .resolve(page)
+            .replace("/index.tsx", "")}";
+          
+          console.log(Server.renderToString((
+            <Document frontMatter={frontMatter}>
+              <Component components={components} />
+            </Document>
+          )))
+        `
+      );
+    })
   );
 
-  await fs.mkdirp(path.dirname(virtualPagePath));
-  // Render the page
-  await fs.writeFile(
-    virtualPagePath,
-    endent`
-      import * as React from 'react'
-      import * as Server from 'react-dom/server'
-      import { Document, components } from "fwoosh"
-
-      import Component, { frontMatter } from "${path
-        .resolve(page)
-        .replace("/index.tsx", "")}";
-      
-      console.log(Server.renderToString((
-        <Document frontMatter={frontMatter}>
-          <Component components={components} />
-        </Document>
-      )))
-    `
-  );
-
-  const generatePage = async (file: string) => {
+  const generatePage = async (page: string, file: string) => {
     // Get the output HTML of the page
     const { stdout } = await exec("node", [file]);
     const htmlPagePath = path.join(
@@ -126,26 +134,41 @@ export const buildPage = async (
   };
 
   try {
-    const outfile = path.join(cacheDir, "build", `${path.parse(page).name}.js`);
+    const outdir = path.join(cacheDir, "build");
+    const mockPackage = path.join(outdir, "package.json");
+
+    if (!(await fs.pathExists(mockPackage))) {
+      await fs.writeFile(mockPackage, '{ "type": "module" }');
+    }
 
     // Build the tmp build file in the cache
     const builder = await build({
-      outfile,
-      entryPoints: [virtualPagePath],
+      outdir,
+      entryPoints: virtualPages,
       incremental: options.watch === true,
       loader: {
         ".js": "jsx",
       },
     });
 
-    await generatePage(outfile);
+    await Promise.all(
+      pages.map(async (page) => {
+        const outfile = path.join(outdir, `${path.parse(page).name}.js`);
+        await generatePage(page, outfile);
+      })
+    );
 
     return {
-      page,
+      pages,
       rebuild: async () => {
         if (builder.rebuild) {
           await builder.rebuild();
-          await generatePage(outfile);
+          await Promise.all(
+            pages.map(async (page) => {
+              const outfile = path.join(outdir, `${path.parse(page).name}.js`);
+              await generatePage(page, outfile);
+            })
+          );
         }
       },
     };
@@ -167,10 +190,7 @@ export const buildPages = async (options: BuildPageOptions) => {
     return;
   }
 
-  return Promise.all(
-    pages.map((page) => {
-      console.log(`${greenBright(bold("Building"))} ${path.basename(page)}`);
-      return buildPage(page, options);
-    })
-  );
+  console.log(`${greenBright(bold("Building all pages"))}`);
+
+  return buildPage(pages, options);
 };

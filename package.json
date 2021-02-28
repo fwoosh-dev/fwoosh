@@ -25,6 +25,7 @@
     "fwoosh": "link:./",
     "gray-matter": "^4.0.2",
     "live-server": "^1.2.1",
+    "open": "^7.4.2",
     "ora": "^5.3.0",
     "pretty-ms": "^7.0.1",
     "react": "^17.0.1",
