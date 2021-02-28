@@ -23,6 +23,7 @@
     "fs-extra": "^9.1.0",
     "fwoosh": "link:./",
     "gray-matter": "^4.0.2",
+    "ora": "^5.3.0",
     "pretty-ms": "^7.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

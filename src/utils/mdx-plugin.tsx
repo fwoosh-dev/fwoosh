@@ -6,7 +6,7 @@ import { createProcessor } from "xdm";
 import * as vfileMessage from "vfile-message";
 import matter from "gray-matter";
 
-import { endent } from "./utils/endent.js";
+import { endent } from "./endent.js";
 
 const eol = /\r\n|\r|\n|\u2028|\u2029/g;
 
