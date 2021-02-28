@@ -1,5 +1,4 @@
 import esbuild from "esbuild";
-import { createProcessor } from "xdm";
 import ms from "pretty-ms";
 import * as path from "path";
 import exec from "execa";
@@ -8,8 +7,14 @@ import findCacheDir from "find-cache-dir";
 import ansi from "ansi-colors";
 import glob from "fast-glob";
 import { app, Command } from "command-line-application";
+
+import { createProcessor } from "xdm";
+import gfm from "remark-gfm";
+import shiki from "rehype-shiki-reloaded";
+
 import * as mdxPlugin from "./mdx-plugin.js";
 import { endent } from "./utils/endent.js";
+import { resolveTheme } from "./utils/resolve-theme.js";
 
 // @ts-ignore
 const { redBright, bold, greenBright } = ansi;
@@ -17,7 +22,18 @@ const { redBright, bold, greenBright } = ansi;
 const frontMatterPlugin: esbuild.Plugin = {
   name: "front-matter",
   setup(build) {
-    const processor = createProcessor();
+    const processor = createProcessor({
+      remarkPlugins: [gfm],
+      rehypePlugins: [
+        [
+          (shiki as any).default,
+          {
+            theme: "github-light",
+            darkTheme: "github-dark",
+          },
+        ],
+      ],
+    });
 
     // When a URL is loaded, we want to actually download the content
     // from the internet. This has just enough logic to be able to
@@ -87,12 +103,12 @@ export const buildWebsite = async (options: BuildWebsiteOptions) => {
           import * as Server from 'react-dom/server'
           import { Document, components } from "fwoosh"
 
-          import Component from "${path
+          import Component, { frontMatter } from "${path
             .resolve(page)
             .replace("/index.tsx", "")}";
           
           console.log(Server.renderToString((
-            <Document>
+            <Document frontMatter={frontMatter}>
               <Component components={components} />
             </Document>
           )))

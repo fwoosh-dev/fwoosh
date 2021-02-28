@@ -114,7 +114,7 @@ const li = ({ className, ...props }: Element<"li">) => (
 const blockquote = ({ className, ...props }: Element<"blockquote">) => (
   <blockquote
     className={makeClass(
-      "blockquote bg-gray-200 px-6 py-6 my-8 border-l-4 border-primary-500",
+      "blockquote bg-gray-200 px-6 py-6 my-8 border-l-4 border-blue-500",
       "dark:bg-gray-800",
       className
     )}
@@ -123,7 +123,7 @@ const blockquote = ({ className, ...props }: Element<"blockquote">) => (
 );
 
 /** The component used to render a `code` in a line of text */
-const inlineCode = ({ className, ...props }: Element<"code">) => (
+const InlineCode = ({ className, ...props }: Element<"code">) => (
   <code
     className={makeClass(
       "text-gray-700 bg-gray-200 rounded",
@@ -159,7 +159,9 @@ const a = React.forwardRef(
     return (
       <a
         ref={ref}
-        href={href}
+        href={
+          href?.includes("#") ? href.replace("#", ".html#") : `${href}.html`
+        }
         className={makeClass(
           "focus-visible:ring ring-offset-2 focus:outline-none rounded",
           !className.includes("header-link") &&
@@ -190,16 +192,19 @@ const ol = ({ className, ...props }: Element<"ol">) => (
 );
 
 /** The component used to render an block of code */
-const code = ({ className, ...props }: Element<"code">) => (
-  <code
-    className={makeClass(
-      className,
-      "text-gray-600 rounded block py-8 px-6 overflow-auto",
-      "dark:bg-gray-800"
-    )}
-    {...props}
-  />
-);
+const code = ({ className, ...props }: Element<"code">) =>
+  className?.includes("language") ? (
+    <code
+      className={makeClass(
+        className,
+        "text-gray-600 rounded block py-8 px-6 overflow-auto",
+        "dark:bg-gray-800"
+      )}
+      {...props}
+    />
+  ) : (
+    <InlineCode className={className} {...props} />
+  );
 
 /** The component used to render a pre */
 const pre = ({ className, ...props }: Element<"pre">) => (
@@ -261,7 +266,6 @@ export const components = {
   h6,
   hr,
   p,
-  inlineCode,
   code,
   pre,
   a,
