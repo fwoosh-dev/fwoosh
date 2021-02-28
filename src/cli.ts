@@ -1,6 +1,7 @@
 import { app, MultiCommand, Option } from "command-line-application";
 import ms from "pretty-ms";
 import ora from "ora";
+import path from "path";
 import fs from "fs-extra";
 
 import { buildPages, BuildPageOptions } from "./utils/build-page.js";
@@ -19,7 +20,6 @@ const sharedOptions: Option[] = [
     name: "out-dir",
     description: "The directory that the built website should ",
     type: String,
-    defaultValue: "docs/out",
   },
 ];
 
@@ -49,6 +49,10 @@ async function run() {
   const start = process.hrtime();
   const options = app(fwoosh);
   const buildOptions = options as BuildPageOptions;
+
+  if (!buildOptions.outDir) {
+    buildOptions.outDir = path.join(buildOptions.dir, 'out')
+  }
 
   if (options) {
     if (options._command === "build") {
