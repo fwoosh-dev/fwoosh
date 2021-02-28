@@ -2,7 +2,6 @@ import esbuild from "esbuild";
 import * as path from "path";
 import exec from "execa";
 import fs from "fs-extra";
-import findCacheDir from "find-cache-dir";
 import ansi from "ansi-colors";
 import glob from "fast-glob";
 
@@ -12,6 +11,7 @@ import shiki from "rehype-shiki-reloaded";
 
 import * as mdxPlugin from "./mdx-plugin.js";
 import { endent } from "./endent.js";
+import { getCacheDir } from "./get-cache-dir.js";
 
 // @ts-ignore
 const { redBright, bold, greenBright } = ansi;
@@ -78,7 +78,7 @@ export const buildPage = async (
   pages: string[],
   options: BuildPageOptions
 ): Promise<PageBuild> => {
-  const cacheDir = findCacheDir({ name: "fwoosh" })!;
+  const cacheDir = getCacheDir()!;
   const virtualServerPages: string[] = [];
   const virtualClientPages: string[] = [];
 
