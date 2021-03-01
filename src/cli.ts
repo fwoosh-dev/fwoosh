@@ -3,19 +3,38 @@ import ms from "pretty-ms";
 import ora from "ora";
 import path from "path";
 import fs from "fs-extra";
+import { cosmiconfig } from "cosmiconfig";
 
 import { buildPages, BuildPageOptions } from "./utils/build-page.js";
 import { watchPages } from "./utils/watch.js";
 import { getCacheDir } from "./utils/get-cache-dir.js";
 
+const name = "fwoosh";
+const explorer = cosmiconfig(name, {
+  searchPlaces: [
+    "package.json",
+    `.${name}rc`,
+    `.${name}rc.json`,
+    `.${name}rc.yaml`,
+    `.${name}rc.yml`,
+    `.${name}rc.js`,
+    `.${name}rc.cjs`,
+    `${name}.config.js`,
+    `${name}.config.json`,
+    `${name}.config.cjs`,
+  ],
+});
+
+const dirOption = {
+  name: "dir",
+  description: "The directory that contains the mdx files for your website.",
+  type: String,
+  defaultOption: true,
+  defaultValue: "docs",
+};
+
 const sharedOptions: Option[] = [
-  {
-    name: "dir",
-    description: "The directory that contains the mdx files for your website.",
-    type: String,
-    defaultOption: true,
-    defaultValue: "docs",
-  },
+  dirOption,
   {
     name: "out-dir",
     description: "The directory that the built website should ",
@@ -24,7 +43,7 @@ const sharedOptions: Option[] = [
 ];
 
 const fwoosh: MultiCommand = {
-  name: "fwoosh",
+  name,
   description: "A lightening quick MDX static website generator.",
   commands: [
     {
@@ -48,7 +67,12 @@ const fwoosh: MultiCommand = {
 async function run() {
   const start = process.hrtime();
   const options = app(fwoosh);
-  const buildOptions = options as BuildPageOptions;
+  const { config } = (await explorer.search()) || {};
+  const buildOptions = { ...config, ...options } as BuildPageOptions;
+
+  if (config.dir && buildOptions.dir === dirOption.defaultValue) {
+    buildOptions.dir = config.dir;
+  }
 
   if (!buildOptions.outDir) {
     buildOptions.outDir = path.join(buildOptions.dir, "out");
@@ -58,12 +82,17 @@ async function run() {
 
   buildOptions.layouts.push(path.join(buildOptions.dir, "layouts"));
 
+  const clean = () => {
+    fs.rmSync(buildOptions.outDir, { recursive: true, force: true });
+    fs.rmSync(getCacheDir(), { recursive: true, force: true });
+  };
+
   if (options) {
     if (options._command === "build") {
+      clean();
       await buildPages(buildOptions);
     } else if (options._command === "clean") {
-      fs.rmSync(buildOptions.outDir, { recursive: true, force: true });
-      fs.rmSync(getCacheDir(), { recursive: true, force: true });
+      clean();
       ora("").succeed("Cleaned output files.");
     } else {
       await watchPages(

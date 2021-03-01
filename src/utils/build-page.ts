@@ -222,7 +222,6 @@ export const buildPage = async (
       options
     );
 
-    console.log(builder);
     await moveFilesToOut(outdir);
 
     return {

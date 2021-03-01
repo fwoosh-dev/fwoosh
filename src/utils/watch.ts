@@ -44,8 +44,6 @@ export const watchPages = (
               b.frontMatters.some((f) => {
                 const layoutPathJsx = path.join(layout, `${f.layout}.jsx`);
                 const layoutPathTsx = path.join(layout, `${f.layout}.tsx`);
-
-                console.log({layoutPathJsx,layoutPathTsx})
                 return existsSync(layoutPathJsx) || existsSync(layoutPathTsx);
               }))
         );
