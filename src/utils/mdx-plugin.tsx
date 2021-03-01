@@ -1,48 +1,45 @@
 // lifted from xdm to add features
 
 import esbuild from "esbuild";
-import path from "path";
-import { promises as fs, existsSync } from "fs";
+import { promises as fs } from "fs";
 import { createProcessor } from "xdm";
 import * as vfileMessage from "vfile-message";
 import matter from "gray-matter";
 
 import { endent } from "./endent.js";
-import { BuildPageOptions } from "./build-page.js";
+import { Layout } from "./page-builder.js";
 
 const eol = /\r\n|\r|\n|\u2028|\u2029/g;
 
 export async function onload(
   processor: ReturnType<typeof createProcessor>,
   data: esbuild.OnLoadArgs,
-  { layouts = [] }: BuildPageOptions
+  layouts: Layout[]
 ): Promise<esbuild.OnLoadResult> {
   const errors: esbuild.PartialMessage[] = [];
   const warnings: esbuild.PartialMessage[] = [];
   let doc = String(await fs.readFile(data.path));
   const { data: frontMatter, content } = matter(doc);
 
-  if (frontMatter.layout && !layouts.length) {
-    throw new Error(
-      "You specified a layout in a file with any defined layout directories!"
+  let layout = "";
+
+  if (frontMatter.layout) {
+    const layoutDefinition = layouts.find(
+      (layout) => layout.name === frontMatter.layout
     );
+
+    if (!layoutDefinition) {
+      throw new Error("You specified a layout that isn't registered!");
+    }
+
+    layout = endent`
+      import UserLayout from "${layoutDefinition.path}";
+
+      export default function Layout(props) {
+        return <UserLayout frontMatter={frontMatter} {...props} />
+      }
+    `;
   }
-
-  const layout = frontMatter.layout
-    ? endent`
-        import UserLayout from "${layouts
-          .map((dir) => [
-            path.resolve(path.join(dir, `${frontMatter.layout}.jsx`)),
-            path.resolve(path.join(dir, `${frontMatter.layout}.tsx`)),
-          ])
-          .flat()
-          .find((p) => existsSync(p))}";
-
-        export default function Layout(props) {
-          return <UserLayout frontMatter={frontMatter} {...props} />
-        }
-      `
-    : "";
 
   doc = endent`
     export const frontMatter = ${JSON.stringify(frontMatter, null, 2)}

@@ -49,6 +49,7 @@
     "react-dom": "^17.0.1",
     "rehype-shiki-reloaded": "^0.0.10",
     "remark-gfm": "^1.0.0",
+    "tapable": "^2.2.0",
     "xdm": "^1.4.0"
   }
 }

@@ -2,12 +2,9 @@ import { app, MultiCommand, Option } from "command-line-application";
 import ms from "pretty-ms";
 import ora from "ora";
 import path from "path";
-import fs from "fs-extra";
 import { cosmiconfig } from "cosmiconfig";
 
-import { buildPages, BuildPageOptions } from "./utils/build-page.js";
-import { watchPages } from "./utils/watch.js";
-import { getCacheDir } from "./utils/get-cache-dir.js";
+import { Fwoosh, FwooshOptions } from "./fwoosh.js";
 
 const name = "fwoosh";
 const explorer = cosmiconfig(name, {
@@ -42,7 +39,7 @@ const sharedOptions: Option[] = [
   },
 ];
 
-const fwoosh: MultiCommand = {
+const fwooshCli: MultiCommand = {
   name,
   description: "A lightening quick MDX static website generator.",
   commands: [
@@ -66,41 +63,29 @@ const fwoosh: MultiCommand = {
 
 async function run() {
   const start = process.hrtime();
-  const options = app(fwoosh);
+  const options = app(fwooshCli);
   const { config } = (await explorer.search()) || {};
-  const buildOptions = { ...config, ...options } as BuildPageOptions;
+  const fwooshOptions = { ...config, ...options } as FwooshOptions;
 
-  if (config.dir && buildOptions.dir === dirOption.defaultValue) {
-    buildOptions.dir = config.dir;
+  if (config.dir && fwooshOptions.dir === dirOption.defaultValue) {
+    fwooshOptions.dir = config.dir;
   }
 
-  if (!buildOptions.outDir) {
-    buildOptions.outDir = path.join(buildOptions.dir, "out");
+  if (!fwooshOptions.outDir) {
+    fwooshOptions.outDir = path.join(fwooshOptions.dir, "out");
   }
 
-  buildOptions.layouts = [];
-
-  buildOptions.layouts.push(path.join(buildOptions.dir, "layouts"));
-
-  const clean = () => {
-    fs.rmSync(buildOptions.outDir, { recursive: true, force: true });
-    fs.rmSync(getCacheDir(), { recursive: true, force: true });
-  };
+  const fwoosh = new Fwoosh(fwooshOptions);
 
   if (options) {
     if (options._command === "build") {
-      clean();
-      await buildPages(buildOptions);
+      fwoosh.clean();
+      await fwoosh.build();
     } else if (options._command === "clean") {
-      clean();
+      fwoosh.clean();
       ora("").succeed("Cleaned output files.");
     } else {
-      await watchPages(
-        {
-          port: 3000,
-        },
-        buildOptions
-      );
+      await fwoosh.dev();
     }
   }
 
