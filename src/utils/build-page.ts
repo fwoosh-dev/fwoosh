@@ -15,39 +15,43 @@ import { getCacheDir } from "./get-cache-dir.js";
 
 // @ts-ignore
 const { redBright, bold, greenBright } = ansi;
+const processor = createProcessor({
+  remarkPlugins: [gfm],
+  rehypePlugins: [
+    [
+      (shiki as any).default,
+      {
+        theme: "github-light",
+        darkTheme: "github-dark",
+      },
+    ],
+  ],
+});
 
-const frontMatterPlugin: esbuild.Plugin = {
-  name: "front-matter",
-  setup(build) {
-    const processor = createProcessor({
-      remarkPlugins: [gfm],
-      rehypePlugins: [
-        [
-          (shiki as any).default,
-          {
-            theme: "github-light",
-            darkTheme: "github-dark",
-          },
-        ],
-      ],
-    });
-
-    // When a URL is loaded, we want to actually download the content
-    // from the internet. This has just enough logic to be able to
-    // handle the example import from unpkg.com but in reality this
-    // would probably need to be more complex.
-    build.onLoad({ filter: /\.mdx$/ }, async (args) => {
-      return mdxPlugin.onload(processor, args);
-    });
-  },
-};
-
-const build = (options: esbuild.BuildOptions) => {
+const build = async (
+  options: esbuild.BuildOptions,
+  fwooshOptions: BuildPageOptions
+) => {
   process.env.NODE_ENV = "development";
 
   const dirname = path.dirname(import.meta.url.replace("file://", ""));
+  const frontMatters: any[] = [];
+  const frontMatterPlugin: esbuild.Plugin = {
+    name: "front-matter",
+    setup(build) {
+      // When a URL is loaded, we want to actually download the content
+      // from the internet. This has just enough logic to be able to
+      // handle the example import from unpkg.com but in reality this
+      // would probably need to be more complex.
+      build.onLoad({ filter: /\.mdx$/ }, async (args) => {
+        const value = await mdxPlugin.onload(processor, args, fwooshOptions);
+        frontMatters.push(value.pluginData.frontMatter);
+        return value;
+      });
+    },
+  };
 
-  return esbuild.build({
+  const buildResult = await esbuild.build({
     bundle: true,
     splitting: true,
     format: "esm",
@@ -58,6 +62,8 @@ const build = (options: esbuild.BuildOptions) => {
     plugins: [frontMatterPlugin],
     ...options,
   });
+
+  return { ...buildResult, frontMatters };
 };
 
 export interface BuildPageOptions {
@@ -67,10 +73,13 @@ export interface BuildPageOptions {
   outDir: string;
   /** the build is for watch mode */
   watch?: boolean;
+  /** Layouts for the MDX content */
+  layouts?: string[];
 }
 
 export interface PageBuild {
   pages: string[];
+  frontMatters: any[];
   rebuild: () => Promise<void>;
 }
 
@@ -201,19 +210,24 @@ export const buildPage = async (
     }
 
     // Build the tmp build file in the cache
-    const builder = await build({
-      outdir,
-      entryPoints: [...virtualClientPages, ...virtualServerPages],
-      incremental: options.watch === true,
-      loader: {
-        ".js": "jsx",
+    const builder = await build(
+      {
+        outdir,
+        entryPoints: [...virtualClientPages, ...virtualServerPages],
+        incremental: options.watch === true,
+        loader: {
+          ".js": "jsx",
+        },
       },
-    });
+      options
+    );
 
+    console.log(builder);
     await moveFilesToOut(outdir);
 
     return {
       pages,
+      frontMatters: builder.frontMatters,
       rebuild: async () => {
         if (builder.rebuild) {
           await builder.rebuild();
@@ -229,7 +243,7 @@ export const buildPage = async (
 
 export const buildPages = async (options: BuildPageOptions) => {
   const pages = await glob(path.join(options.dir, "**/*.{mdx,jsx,tsx}"), {
-    ignore: ["**/out/**"],
+    ignore: ["**/out/**", path.join(options.dir, "/layouts/**")],
   });
 
   if (!pages.length) {

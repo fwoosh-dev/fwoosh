@@ -7,6 +7,7 @@ import liveServer from "live-server";
 import ms from "pretty-ms";
 import { buildPage, BuildPageOptions, PageBuild } from "./build-page.js";
 import ansi from "ansi-colors";
+import { existsSync } from "node:fs";
 
 const { bold, underline, green } = ansi;
 
@@ -32,15 +33,31 @@ export const watchPages = (
       .watch(`${buildOptions.dir}/**/*.{mdx,jsx,tsx}`, {
         interval: 0, // No delay
       })
-      .on("change", async (path) => {
-        const cachedBuilder = builders.find((b) => b.pages.includes(path));
+      .on("change", async (changePath) => {
+        const layout = buildOptions.layouts?.find((l) =>
+          changePath.includes(l)
+        );
+        const cachedBuilders = builders.filter(
+          (b) =>
+            b.pages.includes(changePath) ||
+            (layout &&
+              b.frontMatters.some((f) => {
+                const layoutPathJsx = path.join(layout, `${f.layout}.jsx`);
+                const layoutPathTsx = path.join(layout, `${f.layout}.tsx`);
 
-        if (cachedBuilder) {
-          const start = process.hrtime();
-          await cachedBuilder.rebuild();
-          const end = process.hrtime(start);
-          spinner.text = makeBuildMessage(path, end[1], true);
-        }
+                console.log({layoutPathJsx,layoutPathTsx})
+                return existsSync(layoutPathJsx) || existsSync(layoutPathTsx);
+              }))
+        );
+
+        await Promise.all(
+          cachedBuilders.map(async (cachedBuilder) => {
+            const start = process.hrtime();
+            await cachedBuilder.rebuild();
+            const end = process.hrtime(start);
+            spinner.text = makeBuildMessage(changePath, end[1], true);
+          })
+        );
       });
 
     const server = (liveServer.start({

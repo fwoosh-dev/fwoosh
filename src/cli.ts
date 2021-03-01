@@ -51,8 +51,12 @@ async function run() {
   const buildOptions = options as BuildPageOptions;
 
   if (!buildOptions.outDir) {
-    buildOptions.outDir = path.join(buildOptions.dir, 'out')
+    buildOptions.outDir = path.join(buildOptions.dir, "out");
   }
+
+  buildOptions.layouts = [];
+
+  buildOptions.layouts.push(path.join(buildOptions.dir, "layouts"));
 
   if (options) {
     if (options._command === "build") {
@@ -60,7 +64,7 @@ async function run() {
     } else if (options._command === "clean") {
       fs.rmSync(buildOptions.outDir, { recursive: true, force: true });
       fs.rmSync(getCacheDir(), { recursive: true, force: true });
-      ora('').succeed('Cleaned output files.')
+      ora("").succeed("Cleaned output files.");
     } else {
       await watchPages(
         {

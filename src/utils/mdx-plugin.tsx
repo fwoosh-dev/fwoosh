@@ -1,26 +1,53 @@
 // lifted from xdm to add features
 
 import esbuild from "esbuild";
-import { promises as fs } from "fs";
+import path from "path";
+import { promises as fs, existsSync } from "fs";
 import { createProcessor } from "xdm";
 import * as vfileMessage from "vfile-message";
 import matter from "gray-matter";
 
 import { endent } from "./endent.js";
+import { BuildPageOptions } from "./build-page.js";
 
 const eol = /\r\n|\r|\n|\u2028|\u2029/g;
 
 export async function onload(
   processor: ReturnType<typeof createProcessor>,
-  data: esbuild.OnLoadArgs
+  data: esbuild.OnLoadArgs,
+  { layouts = [] }: BuildPageOptions
 ): Promise<esbuild.OnLoadResult> {
   const errors: esbuild.PartialMessage[] = [];
   const warnings: esbuild.PartialMessage[] = [];
   let doc = String(await fs.readFile(data.path));
   const { data: frontMatter, content } = matter(doc);
 
+  if (frontMatter.layout && !layouts.length) {
+    throw new Error(
+      "You specified a layout in a file with any defined layout directories!"
+    );
+  }
+
+  const layout = frontMatter.layout
+    ? endent`
+        import UserLayout from "${layouts
+          .map((dir) => [
+            path.resolve(path.join(dir, `${frontMatter.layout}.jsx`)),
+            path.resolve(path.join(dir, `${frontMatter.layout}.tsx`)),
+          ])
+          .flat()
+          .find((p) => existsSync(p))}";
+
+        export default function Layout(props) {
+          return <UserLayout frontMatter={frontMatter} {...props} />
+        }
+      `
+    : "";
+
   doc = endent`
     export const frontMatter = ${JSON.stringify(frontMatter, null, 2)}
+
+    ${layout}
 
     ${content}
   `;
@@ -74,5 +101,5 @@ export async function onload(
     });
   }
 
-  return { contents, errors, warnings };
+  return { contents, errors, warnings, pluginData: { frontMatter } };
 }
