@@ -1,5 +1,5 @@
 import { AsyncSeriesWaterfallHook } from "tapable";
-import { promises as fs } from "fs-extra";
+import { promises as fs } from "fs";
 import esbuild from "esbuild";
 import * as path from "path";
 import exec from "execa";
