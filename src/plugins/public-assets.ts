@@ -5,7 +5,7 @@ import glob from "fast-glob";
 import type { Plugin, Fwoosh } from "../fwoosh";
 
 export default class PublicAssetsPlugin implements Plugin {
-  name = "";
+  name = "public-assets";
 
   apply(fwoosh: Fwoosh) {
     fwoosh.hooks.addAssets.tapPromise(this.name, async (assets) => {

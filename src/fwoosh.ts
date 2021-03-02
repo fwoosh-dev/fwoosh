@@ -22,6 +22,7 @@ import * as mdxPlugin from "./utils/mdx-plugin.js";
 import { endent } from "./utils/endent.js";
 import type { Asset, FrontMatter, Layout } from "./types";
 import UserLayoutsPlugin from "./plugins/user-layouts.js";
+import PublicAssetsPlugin from "./plugins/public-assets.js";
 
 const on = (onImport as any).default as typeof onImport;
 
@@ -81,7 +82,7 @@ export class Fwoosh {
 
   constructor(options: FwooshOptions) {
     this.options = options;
-    this.plugins = [new UserLayoutsPlugin()];
+    this.plugins = [new UserLayoutsPlugin(), new PublicAssetsPlugin()];
 
     this.plugins.forEach((plugin) => {
       plugin.apply(this);
@@ -136,17 +137,9 @@ export class Fwoosh {
     console.log(`${greenBright(bold("Building all pages"))}`);
 
     const builder = await this.buildPage(pages);
-
     const assets = await this.hooks.addAssets.promise([]);
 
-    await Promise.all(
-      assets.map((asset) =>
-        fs.copyFile(
-          asset.path,
-          path.join(this.options.outDir, path.resolve(asset.folder, asset.path))
-        )
-      )
-    );
+    await Promise.all(assets.map((asset) => this.copyAsset(asset)));
 
     return builder;
   }
@@ -158,10 +151,22 @@ export class Fwoosh {
       const layouts = await this.getLayouts();
 
       chokidar
-        .watch(`${this.options.dir}/**/*.{mdx,jsx,tsx}`, {
+        .watch(`${this.options.dir}/**`, {
           interval: 0, // No delay
+          ignored: ['**/out']
         })
         .on("change", async (changePath) => {
+          const assets = await this.hooks.addAssets.promise([]);
+          const buildAsset = assets.find((asset) =>
+            changePath.includes(asset.path)
+          );
+
+          if (buildAsset) {
+            await this.copyAsset(buildAsset);
+            spinner.text = `${green("Moved")} ${buildAsset.path}`
+            return;
+          }
+
           const layout = layouts.find((l) => changePath.includes(l.path));
           const cachedBuilders = builders.filter(
             (b) =>
@@ -202,7 +207,6 @@ export class Fwoosh {
               // pages on request if they already been built. The will be taken care
               // of by chokidar
               if (cachedBuilder) {
-                spinner.text = `Already built "${file}", using previous result.`;
               } else {
                 const start = process.hrtime();
                 spinner.start(`Building ${url}...`);
@@ -424,6 +428,15 @@ export class Fwoosh {
       console.log(redBright("Error"), error);
       process.exit(1);
     }
+  }
+
+  private copyAsset(asset: Asset) {
+    const dest = path.join(
+      this.options.outDir,
+      path.relative(asset.folder, asset.path)
+    );
+
+    return fs.copyFile(asset.path, dest);
   }
 }
 
