@@ -11,7 +11,6 @@ import liveServer from "live-server";
 import open from "open";
 import http from "http";
 import ms from "pretty-ms";
-import onImport from "await-to-js";
 
 import { createProcessor } from "xdm";
 import gfm from "remark-gfm";
@@ -23,8 +22,7 @@ import { endent } from "./utils/endent.js";
 import type { Asset, FrontMatter, Layout } from "./types";
 import UserLayoutsPlugin from "./plugins/user-layouts.js";
 import PublicAssetsPlugin from "./plugins/public-assets.js";
-
-const on = (onImport as any).default as typeof onImport;
+import { exists } from "./utils/exists.js";
 
 interface PageBuild {
   pages: string[];
@@ -395,9 +393,8 @@ export class Fwoosh {
     try {
       const outdir = path.join(cacheDir, "build");
       const mockPackage = path.join(outdir, "package.json");
-      const [, mockPagesExists] = await on(fs.stat(mockPackage));
 
-      if (!mockPagesExists) {
+      if (!(await exists(mockPackage))) {
         await fs.mkdir(path.dirname(mockPackage), { recursive: true });
         await fs.writeFile(mockPackage, '{ "type": "module" }');
       }

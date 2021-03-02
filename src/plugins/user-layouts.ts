@@ -1,8 +1,8 @@
 import path from "path";
-import { existsSync } from "fs";
 import glob from "fast-glob";
 
 import type { Plugin, Fwoosh } from "../fwoosh";
+import { exists } from "../utils/exists";
 
 export default class UserLayoutsPlugin implements Plugin {
   name = "user-layouts";
@@ -11,7 +11,7 @@ export default class UserLayoutsPlugin implements Plugin {
     fwoosh.hooks.registerLayouts.tapPromise(this.name, async (layouts) => {
       const userLayoutsDir = path.join(fwoosh.options.dir, "layouts");
 
-      if (existsSync(userLayoutsDir)) {
+      if (await exists(userLayoutsDir)) {
         const userLayouts = await glob(
           path.join(userLayoutsDir, "**/*.{jsx,tsx}")
         );

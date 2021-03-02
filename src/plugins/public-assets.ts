@@ -1,8 +1,8 @@
 import path from "path";
-import { existsSync } from "fs";
 import glob from "fast-glob";
 
 import type { Plugin, Fwoosh } from "../fwoosh";
+import { exists } from "../utils/exists";
 
 export default class PublicAssetsPlugin implements Plugin {
   name = "public-assets";
@@ -11,7 +11,7 @@ export default class PublicAssetsPlugin implements Plugin {
     fwoosh.hooks.addAssets.tapPromise(this.name, async (assets) => {
       const publicAssetsDir = path.join(fwoosh.options.dir, "public");
 
-      if (existsSync(publicAssetsDir)) {
+      if (await exists(publicAssetsDir)) {
         const publicAssets = await glob(path.join(publicAssetsDir, "**/*"));
 
         publicAssets.forEach((asset) => {
