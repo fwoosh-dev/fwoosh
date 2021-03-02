@@ -79,10 +79,10 @@ async function run() {
 
   if (options) {
     if (options._command === "build") {
-      fwoosh.clean();
+      await fwoosh.clean();
       await fwoosh.build();
     } else if (options._command === "clean") {
-      fwoosh.clean();
+      await fwoosh.clean();
       ora("").succeed("Cleaned output files.");
     } else {
       await fwoosh.dev();

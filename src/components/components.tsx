@@ -138,10 +138,10 @@ const InlineCode = ({ className, ...props }: Element<"code">) => (
 /** The component used to render an anchor */
 const a = React.forwardRef(
   (
-    { className = "", href, ...props }: Element<"a">,
+    { className = "", href = "", ...props }: Element<"a">,
     ref: React.Ref<HTMLAnchorElement>
   ) => {
-    if (href?.startsWith("http")) {
+    if (href.startsWith("http")) {
       return (
         <a
           ref={ref}
@@ -159,9 +159,7 @@ const a = React.forwardRef(
     return (
       <a
         ref={ref}
-        href={
-          href?.includes("#") ? href.replace("#", ".html#") : `${href}.html`
-        }
+        href={href.includes("#") ? href.replace("#", ".html#") : `${href}.html`}
         className={makeClass(
           "focus-visible:ring ring-offset-2 focus:outline-none rounded",
           !className.includes("header-link") &&
@@ -193,7 +191,7 @@ const ol = ({ className, ...props }: Element<"ol">) => (
 
 /** The component used to render an block of code */
 const code = ({ className, ...props }: Element<"code">) =>
-  className?.includes("language") ? (
+  className && className.includes("language") ? (
     <code
       className={makeClass(
         className,

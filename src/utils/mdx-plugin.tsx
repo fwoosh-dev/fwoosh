@@ -7,7 +7,7 @@ import * as vfileMessage from "vfile-message";
 import matter from "gray-matter";
 
 import { endent } from "./endent.js";
-import { Layout } from "./page-builder.js";
+import type { Layout } from "../types";
 
 const eol = /\r\n|\r|\n|\u2028|\u2029/g;
 
