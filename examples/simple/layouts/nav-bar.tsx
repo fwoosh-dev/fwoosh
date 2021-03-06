@@ -1,11 +1,10 @@
 import React from "react";
+import { FrontMatter } from "fwoosh";
 
 interface NavBarProps {
   /** The page content */
   children: React.ReactNode;
-  frontMatter: {
-    layout: string;
-  };
+  frontMatter: FrontMatter;
 }
 
 /** Make a  basic navbar page layout */

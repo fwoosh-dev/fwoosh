@@ -261,7 +261,7 @@ export class Fwoosh {
         // Also want to add the front matter to tsx/jsx files that don't have one
         build.onLoad({ filter: /\.(jsx|tsx)$/ }, async (args) => {
           const contents = await fs.readFile(args.path, "utf8");
-          const frontMatter = contents.match(/^export const frontMatter =/gm)
+          const frontMatter = contents.match(/^export const frontMatter/gm)
             ? ""
             : `export const frontMatter = {};`;
 

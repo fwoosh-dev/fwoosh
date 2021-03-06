@@ -9,5 +9,7 @@ export interface Layout {
 }
 
 export interface FrontMatter {
+  title: string;
   layout?: string;
+  description?: string;
 }

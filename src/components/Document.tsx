@@ -1,10 +1,9 @@
+import { FrontMatter } from "../types";
+
 interface DocumentProps {
   children: React.ReactNode;
   attach?: string;
-  frontMatter: {
-    title?: string;
-    description?: string;
-  };
+  frontMatter: FrontMatter;
 }
 
 export const Document = ({ children, frontMatter, attach }: DocumentProps) => {
