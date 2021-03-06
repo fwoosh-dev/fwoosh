@@ -64,7 +64,7 @@ const fwooshCli: MultiCommand = {
 async function run() {
   const start = process.hrtime();
   const options = app(fwooshCli);
-  const { config } = (await explorer.search()) || {};
+  const { config = {} } = (await explorer.search()) || {};
   const fwooshOptions = { ...config, ...options } as FwooshOptions;
 
   if (config.dir && fwooshOptions.dir === dirOption.defaultValue) {
