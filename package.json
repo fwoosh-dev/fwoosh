@@ -8,8 +8,8 @@
   "scripts": {
     "build": "tsc",
     "start": "yarn build --watch",
-    "package": "rm -rf binary && pkg . --out-path binary --targets node14-macos-x64",
-    "fwoosh": "chmod +x ./bin/fwoosh.js && ./bin/fwoosh.js"
+    "fwoosh": "chmod +x ./bin/fwoosh.js && ./bin/fwoosh.js",
+    "release": "auto shipit"
   },
   "keywords": [
     "documentation",
@@ -17,14 +17,15 @@
     "generator"
   ],
   "author": "Andrew Lisowski <lisowski54@gmail.com>",
-  "license": "ISC",
+  "repository": "hipstersmoothie/fwoosh",
+  "license": "MIT",
   "devDependencies": {
-    "@jesec/pkg": "^4.4.9",
     "@types/find-cache-dir": "^3.2.0",
     "@types/live-server": "^1.2.0",
     "@types/node": "^14.14.31",
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",
+    "auto": "^10.18.3",
     "fwoosh": "link:./",
     "prettier": "^2.2.1",
     "typescript": "^4.2.2"
