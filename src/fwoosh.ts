@@ -151,7 +151,7 @@ export class Fwoosh {
       chokidar
         .watch(`${this.options.dir}/**`, {
           interval: 0, // No delay
-          ignored: ['**/out']
+          ignored: ["**/out"],
         })
         .on("change", async (changePath) => {
           const assets = await this.hooks.addAssets.promise([]);
@@ -161,7 +161,7 @@ export class Fwoosh {
 
           if (buildAsset) {
             await this.copyAsset(buildAsset);
-            spinner.text = `${green("Moved")} ${buildAsset.path}`
+            spinner.text = `${green("Moved")} ${buildAsset.path}`;
             return;
           }
 
@@ -238,7 +238,7 @@ export class Fwoosh {
     });
   }
 
-  private async runtEsBuild(esBuildOptions: esbuild.BuildOptions) {
+  private async runEsBuild(esBuildOptions: esbuild.BuildOptions) {
     process.env.NODE_ENV = "development";
 
     const dirname = path.dirname(import.meta.url.replace("file://", ""));
@@ -296,6 +296,7 @@ export class Fwoosh {
         await fs.mkdir(path.dirname(virtualServerPagePath), {
           recursive: true,
         });
+
         // Render the page
         await fs.writeFile(
           virtualServerPagePath,
@@ -304,18 +305,19 @@ export class Fwoosh {
             import * as Server from 'react-dom/server'
             import { Document, components } from "fwoosh"
   
-            import Component, { frontMatter } from "${path
+            import Page, { frontMatter } from "${path
               .resolve(page)
               .replace("/index.tsx", "")}";
             
             console.log(Server.renderToString((
               <Document attach="${browserJs}" frontMatter={frontMatter}>
-                <Component components={components} />
+                <Page components={components} />
               </Document>
             )))
           `
         );
 
+        // For client hydration
         await fs.writeFile(
           virtualBrowserPagePath,
           endent`
@@ -336,34 +338,16 @@ export class Fwoosh {
       })
     );
 
-    const generatePage = async (page: string, file: string) => {
-      // Get the output HTML of the page
-      const { stdout } = await exec("node", [file]);
-      const htmlPagePath = path.join(
-        this.options.outDir,
-        path.dirname(path.relative(this.options.dir, page)),
-        `${path.parse(page).name}.html`
-      );
-
-      // Write the HTML page to the output folder
-      await fs.mkdir(path.dirname(htmlPagePath), { recursive: true });
-      await fs.writeFile(
-        htmlPagePath,
-        endent`
-          <!DOCTYPE html />
-          ${stdout}
-        `
-      );
-    };
-
     const moveFilesToOut = async (outdir: string) => {
+      // SSR all pages
       await Promise.all(
         pages.map(async (page) => {
           const outfile = path.join(outdir, `${path.parse(page).name}.js`);
-          await generatePage(page, outfile);
+          await this.generatePage(page, outfile);
         })
       );
 
+      // Copy client hydration code to outDir
       await Promise.all(
         virtualClientPages.map(async (page) => {
           const filePath = path.join(
@@ -376,6 +360,7 @@ export class Fwoosh {
         })
       );
 
+      // Copy all shared chunks to outDir
       const chunks = await glob(path.join(outdir, "**/chunk.*"));
 
       await Promise.all(
@@ -396,11 +381,12 @@ export class Fwoosh {
 
       if (!(await exists(mockPackage))) {
         await fs.mkdir(path.dirname(mockPackage), { recursive: true });
+        // fake out node into thinking the node_modules/.cache is a module
         await fs.writeFile(mockPackage, '{ "type": "module" }');
       }
 
       // Build the tmp build file in the cache
-      const builder = await this.runtEsBuild({
+      const builder = await this.runEsBuild({
         outdir,
         entryPoints: [...virtualClientPages, ...virtualServerPages],
         incremental: watch === true,
@@ -425,6 +411,27 @@ export class Fwoosh {
       console.log(redBright("Error"), error);
       process.exit(1);
     }
+  }
+
+  /** SSR a page to HTML */
+  private async generatePage(page: string, file: string) {
+    // Get the output HTML of the page
+    const { stdout } = await exec("node", [file]);
+    const htmlPagePath = path.join(
+      this.options.outDir,
+      path.dirname(path.relative(this.options.dir, page)),
+      `${path.parse(page).name}.html`
+    );
+
+    // Write the HTML page to the output folder
+    await fs.mkdir(path.dirname(htmlPagePath), { recursive: true });
+    await fs.writeFile(
+      htmlPagePath,
+      endent`
+        <!DOCTYPE html />
+        ${stdout}
+      `
+    );
   }
 
   private copyAsset(asset: Asset) {

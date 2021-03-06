@@ -1,8 +1,8 @@
 import path from "path";
 import glob from "fast-glob";
 
-import type { Plugin, Fwoosh } from "../fwoosh";
-import { exists } from "../utils/exists";
+import type { Plugin, Fwoosh } from "../fwoosh.js";
+import { exists } from "../utils/exists.js";
 
 export default class PublicAssetsPlugin implements Plugin {
   name = "public-assets";
