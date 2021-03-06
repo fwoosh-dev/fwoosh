@@ -195,8 +195,9 @@ export class Fwoosh {
         middleware: [
           async ({ url }, res: http.ServerResponse, next) => {
             if (url.includes(".html")) {
-              const file = url.replace(".html", ".mdx");
-              const pagePath = path.join(this.options.dir, file);
+              const file = url.replace(".html", ".{mdx,tsx,jsx}");
+              const pageGlob = path.join(this.options.dir, file);
+              const pagePath = (await glob(pageGlob))[0];
               const cachedBuilder = builders.find((b) =>
                 b.pages.includes(pagePath)
               );
