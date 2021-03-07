@@ -7,7 +7,7 @@
   "bin": "bin/fwoosh.js",
   "scripts": {
     "build": "tsc",
-    "vercel-build": "yarn fwoosh build",
+    "vercel-build": "yarn build && yarn fwoosh build",
     "start": "yarn build --watch",
     "fwoosh": "chmod +x ./bin/fwoosh.js && ./bin/fwoosh.js",
     "release": "auto shipit"
