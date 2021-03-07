@@ -15,17 +15,17 @@ export default function Home() {
   return (
     <main>
       <div
-        className="flex flex-col items-center justify-center h-96"
+        className="flex flex-col items-center justify-center h-72 lg:h-96"
         style={{ background: "conic-gradient(at top right, #9CA3AF, white)" }}
       >
-        <h1 className="text-8xl text-gray-800 font-extralight mb-6">fwoosh</h1>
-        <fwoosh.p className="text-xl text-gray-500 font-semibold">
+        <h1 className="text-6xl lg:text-8xl text-gray-800 font-extralight mb-4 lg:mb-6">fwoosh</h1>
+        <fwoosh.p className="text-xl text-gray-500 font-semibold text-center px-4">
           {description}
         </fwoosh.p>
       </div>
 
       <div className="mx-auto my-16 max-w-2xl px-8">
-        <h2 className="text-3xl text-center mb-10">
+        <h2 className="text-2xl lg:text-3xl text-center mb-10">
           A 💀 simple static website generator
         </h2>
 
