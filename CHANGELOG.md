@@ -1,3 +1,15 @@
+# v0.0.10 (Sun Mar 07 2021)
+
+#### ⚠️ Pushed to `main`
+
+- get tailwind integrated ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.9 (Sun Mar 07 2021)
 
 #### ⚠️ Pushed to `main`
