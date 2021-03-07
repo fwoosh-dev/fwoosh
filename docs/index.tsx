@@ -63,7 +63,7 @@ export default function Home() {
           <li className="flex space-x-2 items-start">
             <div className="text-2xl">🔌</div>
             <div className="mt-0.5">
-              Use plugins to build upon fwoosh, add your own assets, templates,
+              Use plugins to build upon fwoosh, add your own assets, layouts,
               and more
             </div>
           </li>
