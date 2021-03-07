@@ -1,3 +1,15 @@
+# v0.0.6 (Sun Mar 07 2021)
+
+#### ⚠️ Pushed to `main`
+
+- add vercel build ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.5 (Sun Mar 07 2021)
 
 #### ⚠️ Pushed to `main`
