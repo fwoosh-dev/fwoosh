@@ -1,3 +1,15 @@
+# v0.0.4 (Sat Mar 06 2021)
+
+#### ⚠️ Pushed to `main`
+
+- update docs (lisowski54@gmail.com)
+
+#### Authors: 1
+
+- Andrew Lisowski (lisowski54@gmail.com)
+
+---
+
 # v0.0.3 (Sat Mar 06 2021)
 
 #### ⚠️ Pushed to `main`
