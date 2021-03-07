@@ -1,3 +1,15 @@
+# v0.0.5 (Sun Mar 07 2021)
+
+#### ⚠️ Pushed to `main`
+
+- add registry ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.4 (Sat Mar 06 2021)
 
 #### ⚠️ Pushed to `main`
