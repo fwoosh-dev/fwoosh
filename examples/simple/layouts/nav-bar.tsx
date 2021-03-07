@@ -15,7 +15,7 @@ const NavBarLayout = ({
   return (
     <div
       id="ignite"
-      className="min-h-screen flex flex-col bg-white dark:bg-gray-1000"
+      className="min-h-screen flex flex-col"
     >
       <div className="w-full bg-red-200 h-12 flex items-center px-3">
         {frontMatter.layout}

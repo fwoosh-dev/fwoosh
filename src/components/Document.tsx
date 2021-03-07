@@ -9,14 +9,8 @@ interface DocumentProps {
 export const Document = ({ children, frontMatter, attach }: DocumentProps) => {
   return (
     <>
-      <html lang="en">
+      <html lang="en" className="dark:bg-gray-900">
         <head>
-          {/* TODO: 1st class integration */}
-          <link
-            href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
-            rel="stylesheet"
-          />
-
           <meta charSet="UTF-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta
@@ -50,7 +44,7 @@ export const Document = ({ children, frontMatter, attach }: DocumentProps) => {
             }            
           `}</style>
         </head>
-        
+
         <body>
           <div id="root">{children}</div>
 

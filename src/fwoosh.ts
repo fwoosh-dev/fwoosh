@@ -11,6 +11,10 @@ import liveServer from "live-server";
 import open from "open";
 import http from "http";
 import ms from "pretty-ms";
+import { setup, ThemeConfiguration } from "twind";
+import { asyncVirtualSheet } from "twind/server";
+import { getStyleTag } from "twind/sheets";
+import { shim } from "twind/shim/server";
 
 import { createProcessor } from "xdm";
 import gfm from "remark-gfm";
@@ -50,6 +54,8 @@ const processor = createProcessor({
   ],
 });
 
+const sheet = asyncVirtualSheet();
+
 const makeBuildMessage = (pagePath: string, time: number, rebuild = false) => {
   return `${rebuild ? "Rebuild" : "Built"} ${bold(
     `"${pagePath}"`
@@ -66,6 +72,8 @@ export interface FwooshOptions {
   dir: string;
   /** the directory with the mdx pages */
   outDir: string;
+  /** Theme to apply to tailwindcss */
+  theme: ThemeConfiguration;
 }
 
 export class Fwoosh {
@@ -85,6 +93,8 @@ export class Fwoosh {
     this.plugins.forEach((plugin) => {
       plugin.apply(this);
     });
+
+    setup({ sheet, mode: "silent", theme: this.options.theme });
   }
 
   private async getLayouts() {
@@ -444,13 +454,18 @@ export class Fwoosh {
       `${path.parse(page).name}.html`
     );
 
+    sheet.reset();
+    const markup = shim(stdout);
+    const styleTag = getStyleTag(sheet);
+
     // Write the HTML page to the output folder
     await fs.mkdir(path.dirname(htmlPagePath), { recursive: true });
     await fs.writeFile(
       htmlPagePath,
       endent`
         <!DOCTYPE html />
-        ${stdout}
+        ${styleTag}
+        ${markup}
       `
     );
   }

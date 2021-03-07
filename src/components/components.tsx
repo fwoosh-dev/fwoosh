@@ -1,13 +1,14 @@
 import React from "react";
 import makeClass from "clsx";
+import { tw } from "twind";
 
 export type Element<
   T extends keyof JSX.IntrinsicElements
 > = React.PropsWithoutRef<JSX.IntrinsicElements[T]>;
 
 const DEFAULT_SPACING = "my-4";
-const DEFAULT_TEXT_COLOR = "text-gray-800 dark:text-gray-300";
-const HEADER_TEXT_COLOR = "text-gray-900 dark:text-gray-200";
+const DEFAULT_TEXT_COLOR = tw`text(gray-800 dark:gray-300)`;
+const HEADER_TEXT_COLOR = tw`text(gray-900 dark:gray-200)`;
 
 /** The component used to render a h1 */
 const h1 = ({ className, ...props }: Element<"h1">) => {
@@ -16,8 +17,13 @@ const h1 = ({ className, ...props }: Element<"h1">) => {
       className={makeClass(
         className,
         "lvl1",
-        "break-words relative text-3xl font-semibold mb-4 md:mb-8",
-        "lg:text-4xl",
+        tw`
+          break-words
+          relative
+          text(3xl lg:4xl)
+          font-semibold
+          mb(4 md:8)
+        `,
         (!className || !className.includes("text-")) && HEADER_TEXT_COLOR
       )}
       {...props}
@@ -30,10 +36,16 @@ const h2 = ({ className, ...props }: Element<"h2">) => (
   <h2
     className={makeClass(
       "lvl2",
-      "break-words relative text-2xl font-normal border-b border-gray-300 pb-2 mb-4 mt-6",
-      "md:mb-6",
-      "lg:text-3xl lg:mt-8 mb:pb-4",
-      "dark:border-gray-700",
+      tw`
+        break-words
+        relative
+        text(2xl lg:3xl)
+        font-normal
+        border(b gray-300 dark:gray-700)
+        pb(2 md:4)
+        mb(4 md:6)
+        mt(6 lg:8)
+      `,
       HEADER_TEXT_COLOR,
       className
     )}
@@ -46,8 +58,13 @@ const h3 = ({ className, ...props }: Element<"h3">) => (
   <h3
     className={makeClass(
       "lvl3",
-      "break-words text-xl relative font-bold mt-6",
-      "lg:text-2xl lg:font-semibold",
+      tw`
+        break-words
+        text(xl lg:2xl)
+        relative
+        font(bold lg:semibold)
+        mt-6
+      `,
       HEADER_TEXT_COLOR,
       className
     )}
@@ -60,7 +77,7 @@ const h4 = ({ className, ...props }: Element<"h4">) => (
   <h4
     className={makeClass(
       "lvl4",
-      "break-words relative text-xl font-semibold mt-8",
+      tw`break-words relative text-xl font-semibold mt-8`,
       HEADER_TEXT_COLOR,
       className
     )}
@@ -73,7 +90,7 @@ const h5 = ({ className, ...props }: Element<"h5">) => (
   <h5
     className={makeClass(
       "lvl5",
-      "break-words relative text-lg font-semibold mt-8",
+      tw`break-words relative text-lg font-semibold mt-8`,
       HEADER_TEXT_COLOR,
       className
     )}
@@ -85,8 +102,8 @@ const h5 = ({ className, ...props }: Element<"h5">) => (
 const h6 = ({ className, ...props }: Element<"h6">) => (
   <h6
     className={makeClass(
-      "break-words lvl6",
-      "relative text-md font-semibold mt-8",
+      "lvl6",
+      tw`break-words relative text-md font-semibold mt-8`,
       HEADER_TEXT_COLOR,
       className
     )}
@@ -114,8 +131,8 @@ const li = ({ className, ...props }: Element<"li">) => (
 const blockquote = ({ className, ...props }: Element<"blockquote">) => (
   <blockquote
     className={makeClass(
-      "blockquote bg-gray-200 px-6 py-6 my-8 border-l-4 border-blue-500",
-      "dark:bg-gray-800",
+      "blockquote",
+      tw`bg(gray-200 dark:gray-800) px-6 py-6 my-8 border(l-4 blue-500)`,
       className
     )}
     {...props}
@@ -126,14 +143,15 @@ const blockquote = ({ className, ...props }: Element<"blockquote">) => (
 const InlineCode = ({ className, ...props }: Element<"code">) => (
   <code
     className={makeClass(
-      "text-gray-700 bg-gray-200 rounded",
-      "dark:bg-gray-800 dark:text-gray-200",
-      className
+      className,
+      tw`rounded text(gray-700 dark:gray-200) bg(gray-200 dark:gray-700)`
     )}
     style={{ padding: "2px 6px" }}
     {...props}
   />
 );
+
+const linkStyles = tw`cursor-pointer text(blue-500 dark:blue-400) focus-visible:ring ring-offset-2 focus:outline-none rounded`;
 
 /** The component used to render an anchor */
 const a = React.forwardRef(
@@ -145,11 +163,7 @@ const a = React.forwardRef(
       return (
         <a
           ref={ref}
-          className={makeClass(
-            `cursor-pointer text-blue-500`,
-            "focus:outline-none focus-visible:ring hover:underline",
-            className
-          )}
+          className={makeClass(linkStyles, className)}
           href={href}
           {...props}
         />
@@ -161,10 +175,9 @@ const a = React.forwardRef(
         ref={ref}
         href={href.includes("#") ? href.replace("#", ".html#") : `${href}.html`}
         className={makeClass(
-          "focus-visible:ring ring-offset-2 focus:outline-none rounded",
-          !className.includes("header-link") &&
-            `hover:underline cursor-pointer text-blue-500`,
-          className
+          className,
+          linkStyles,
+          !className.includes("header-link") && "hover:underline"
         )}
         {...props}
       />
@@ -179,7 +192,7 @@ const ul = ({ className, ...props }: Element<"ul">) => (
 
 const hr = ({ className, ...props }: Element<"hr">) => (
   <hr
-    className={makeClass(className, "m-12 border-b-2", "dark:border-gray-700")}
+    className={makeClass(className, tw`m-12 border(b-2 dark:gray-700)`)}
     {...props}
   />
 );
@@ -207,11 +220,7 @@ const code = ({ className, ...props }: Element<"code">) =>
 /** The component used to render a pre */
 const pre = ({ className, ...props }: Element<"pre">) => (
   <pre
-    className={makeClass(
-      className,
-      "bg-gray-200 rounded border my-6",
-      "dark:bg-gray-800 dark:border-gray-700"
-    )}
+    className={makeClass(className, "rounded border dark:border-gray-700 my-6")}
     style={{
       marginTop: "1.5rem",
       marginBottom: "1.5rem",
@@ -238,11 +247,7 @@ const th = ({ className, ...props }: Element<"th">) => (
 
 const td = ({ className, ...props }: Element<"td">) => (
   <td
-    className={makeClass(
-      className,
-      "py-2 px-3 border-b border-t",
-      "dark:border-gray-800"
-    )}
+    className={makeClass(className, tw`py-2 px-3 border(b t dark:gray-800)`)}
     {...props}
   />
 );

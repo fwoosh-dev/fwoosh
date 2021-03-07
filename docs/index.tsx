@@ -1,5 +1,6 @@
 import * as React from "react";
 import { FrontMatter, components as fwoosh, components } from "fwoosh";
+import { tw } from "twind";
 
 import InstallSnippet from "./snippets/install-snippet.mdx";
 import HelpSnippet from "./snippets/help-snippet.mdx";
@@ -11,102 +12,167 @@ export const frontMatter: FrontMatter = {
   description,
 };
 
+interface CommandDescriptionProps {
+  name: string;
+  description: string;
+}
+
+const CommandDescription = ({ name, description }: CommandDescriptionProps) => (
+  <li>
+    <span className={tw`text-xl text(blue-500 dark:blue-400) font-semibold`}>
+      {name}
+    </span>
+    <span className="dark:text-gray-200">: {description}</span>
+  </li>
+);
+
+interface FeatureProps {
+  icon: string;
+  description: React.ReactNode;
+}
+
+const Feature = ({ icon, description }: FeatureProps) => (
+  <li className="flex space-x-2 items-start">
+    <div className="text-2xl">{icon}</div>
+    <div className="mt-0.5 dark:text-gray-200">{description}</div>
+  </li>
+);
+
 export default function Home() {
   return (
     <main>
       <div
-        className="flex flex-col items-center justify-center h-72 lg:h-96"
-        style={{ background: "conic-gradient(at top right, #9CA3AF, white)" }}
+        className={tw`flex flex-col items-center justify-center h(72 lg:96) dark:bg-gray-800`}
+        // style={{ background: "conic-gradient(at top right, #9CA3AF, white)" }}
       >
-        <h1 className="text-6xl lg:text-8xl text-gray-800 font-extralight mb-4 lg:mb-6">fwoosh</h1>
-        <fwoosh.p className="text-xl text-gray-500 font-semibold text-center px-4">
+        <h1
+          className={tw`text(6xl lg:8xl) text(gray-800 dark:white) font-extralight mb(4 lg:6)`}
+        >
+          fwoosh
+        </h1>
+        <p
+          className={tw`text-xl text(gray-500 dark:gray-400) font-semibold text-center px-4`}
+        >
           {description}
-        </fwoosh.p>
+        </p>
       </div>
 
       <div className="mx-auto my-16 max-w-2xl px-8">
-        <h2 className="text-2xl lg:text-3xl text-center mb-10">
+        <h2
+          className={tw`text(2xl lg:3xl) text-center mb-10 dark:text-gray-100`}
+        >
           A 💀 simple static website generator
         </h2>
 
         <ul className="text-lg space-y-4">
-          <li className="flex space-x-2 items-start">
-            <div className="text-2xl">⚡️</div>
-            <div className="mt-0.5">
-              Lightening quick builds powered by{" "}
-              <fwoosh.a href="https://esbuild.github.io/">esbuild</fwoosh.a>
-            </div>
-          </li>
-          <li className="flex space-x-2 items-start">
-            <div className="text-2xl">🗄</div>
-            <div className="mt-0.5">
-              File System Based Routing: New pages are as easy as adding a file
-            </div>
-          </li>
-          <li className="flex space-x-2 items-start">
-            <div className="text-2xl">📝</div>
-            <div className="mt-0.5">
-              Pages can be authored in modern JavaScript,{" "}
-              <fwoosh.a href="https://www.typescriptlang.org/">
-                TypeScript
-              </fwoosh.a>
-              , or <fwoosh.a href="https://mdxjs.com/">MDX</fwoosh.a>
-            </div>
-          </li>
-          <li className="flex space-x-2 items-start">
-            <div className="text-2xl">🎁</div>
-            <div className="mt-0.5">
-              Build wrappers for you pages using{" "}
-              <span className="font-semibold">Layouts</span>
-            </div>
-          </li>
-          <li className="flex space-x-2 items-start">
-            <div className="text-2xl">🔌</div>
-            <div className="mt-0.5">
-              Use plugins to build upon fwoosh, add your own assets, layouts,
-              and more
-            </div>
-          </li>
+          <Feature
+            icon="⚡️"
+            description={
+              <>
+                Lightening quick builds powered by{" "}
+                <fwoosh.a href="https://esbuild.github.io/">esbuild</fwoosh.a>
+              </>
+            }
+          />
+
+          <Feature
+            icon="🗄"
+            description="File System Based Routing: New pages are as easy as adding a file"
+          />
+
+          <Feature
+            icon="📝"
+            description={
+              <>
+                Pages can be authored in modern JavaScript,{" "}
+                <fwoosh.a href="https://www.typescriptlang.org/">
+                  TypeScript
+                </fwoosh.a>
+                , or <fwoosh.a href="https://mdxjs.com/">MDX</fwoosh.a>
+              </>
+            }
+          />
+
+          <Feature
+            icon="💨"
+            description={
+              <>
+                Built in compile time{" "}
+                <fwoosh.a href="https://tailwindcss.com/">tailwindcss</fwoosh.a>{" "}
+                using <fwoosh.a href="https://twind.dev/">twind</fwoosh.a>
+              </>
+            }
+          />
+
+          <Feature
+            icon="💅🏼"
+            description="Comes with pretty dark-mode enabled markdown components"
+          />
+
+          <Feature
+            icon="🎁"
+            description={
+              <>
+                Build wrappers for you pages using{" "}
+                <span className="font-semibold">Layouts</span>
+              </>
+            }
+          />
+
+          <Feature
+            icon="🔌"
+            description="Use plugins to build upon fwoosh, add your own assets, components, layouts, and more"
+          />
         </ul>
       </div>
 
-      <div className="bg-gray-200 rounded-xl w-20 h-2 mx-auto my-20" />
+      <div
+        className={tw`bg(gray-200 dark:gray-700) rounded-xl w-20 h-2 mx-auto my-20`}
+      />
 
       <div className="mx-auto my-16 max-w-2xl px-8">
-        <h2 className="text-4xl mb-6">Getting Started</h2>
+        <h2 className="text-4xl mb-6 dark:text-gray-100">Getting Started</h2>
+
         <fwoosh.p>First you need to install fwoosh.</fwoosh.p>
+
         <InstallSnippet components={components} />
+
         <fwoosh.p>
           Once installed you need to define the place where you are going to
           store your pages. The default is the <fwoosh.code>docs/</fwoosh.code>{" "}
           folder, but this can be customized using the{" "}
           <fwoosh.code>dir</fwoosh.code> option.
         </fwoosh.p>
-        <fwoosh.h3 className="mt-10">Usage</fwoosh.h3>
+
+        <fwoosh.h3 className="pt-6">Usage</fwoosh.h3>
+
         <fwoosh.p>
           The fwoosh cli comes with a few easy to use commands:
         </fwoosh.p>
+
         <ul>
-          <li>
-            <span className="text-xl text-blue-500 font-semibold">clean</span>
-            <span>: Delete all of fwoosh's build and output files</span>
-          </li>
-          <li>
-            <span className="text-xl text-blue-500 font-semibold">build</span>
-            <span>: Build your static website</span>
-          </li>
-          <li>
-            <span className="text-xl text-blue-500 font-semibold">dev</span>
-            <span>: Start the fwoosh development server</span>
-          </li>
+          <CommandDescription
+            name="clean"
+            description="Delete all of fwoosh's build and output files"
+          />
+          <CommandDescription
+            name="build"
+            description="Build your static website"
+          />
+          <CommandDescription
+            name="dev"
+            description="Start the fwoosh development server"
+          />
         </ul>
+
         <fwoosh.p>
           To get more information about each command use the{" "}
           <fwoosh.code>--help</fwoosh.code> flag.
         </fwoosh.p>
+
         <HelpSnippet components={components} />
 
-        <fwoosh.h3 className="mt-10">Deploying</fwoosh.h3>
+        <fwoosh.h3 className="pt-6">Deploying</fwoosh.h3>
 
         <fwoosh.p>
           To build your website for deploying use{" "}
