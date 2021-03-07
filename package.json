@@ -1,7 +1,7 @@
 {
   "name": "fwoosh",
   "type": "module",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A lightening quick MDX static website generator!",
   "main": "lib/index.js",
   "bin": "bin/fwoosh.js",
