@@ -1,4 +1,4 @@
 node_modules/
-examples/**/out
+**/out
 lib/
 .env

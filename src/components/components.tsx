@@ -146,8 +146,8 @@ const a = React.forwardRef(
         <a
           ref={ref}
           className={makeClass(
-            `underline cursor-pointer ${DEFAULT_TEXT_COLOR}`,
-            "focus:outline-none focus-visible:ring",
+            `cursor-pointer text-blue-500`,
+            "focus:outline-none focus-visible:ring hover:underline",
             className
           )}
           href={href}
@@ -163,7 +163,7 @@ const a = React.forwardRef(
         className={makeClass(
           "focus-visible:ring ring-offset-2 focus:outline-none rounded",
           !className.includes("header-link") &&
-            `underline cursor-pointer ${DEFAULT_TEXT_COLOR}`,
+            `hover:underline cursor-pointer text-blue-500`,
           className
         )}
         {...props}

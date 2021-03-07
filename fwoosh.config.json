@@ -1,4 +1,0 @@
-{
-  "dir": "examples/simple",
-  "plugins": ["./lib/plugins/docs-preset.ts"]
-}

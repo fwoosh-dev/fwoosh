@@ -360,7 +360,10 @@ export class Fwoosh {
       // SSR all pages
       await Promise.all(
         pages.map(async (page) => {
-          const outfile = path.join(outdir, `${path.parse(page).name}.js`);
+          const { name, dir } = path.parse(
+            path.relative(this.options.dir, page)
+          );
+          const outfile = path.join(outdir, dir, `${name}.js`);
           await this.generatePage(page, outfile);
         })
       );
