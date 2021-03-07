@@ -1,3 +1,21 @@
+# v0.0.3 (Sat Mar 06 2021)
+
+#### ⚠️ Pushed to `main`
+
+- add auto gh-pages plugin (lisowski54@gmail.com)
+- make website (lisowski54@gmail.com)
+- export frontMatter type (lisowski54@gmail.com)
+- support all files on dev server (lisowski54@gmail.com)
+- add frontMatter to tsx/jsx files if they don't have it (lisowski54@gmail.com)
+- fix loading with no config (lisowski54@gmail.com)
+- fix build (lisowski54@gmail.com)
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.2 (Sat Mar 06 2021)
 
 #### ⚠️ Pushed to `main`
