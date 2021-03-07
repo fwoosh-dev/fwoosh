@@ -16,11 +16,13 @@
     "static",
     "generator"
   ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "author": "Andrew Lisowski <lisowski54@gmail.com>",
   "repository": "hipstersmoothie/fwoosh",
   "license": "MIT",
   "devDependencies": {
-    "@auto-it/gh-pages": "^10.18.3",
     "@types/find-cache-dir": "^3.2.0",
     "@types/live-server": "^1.2.0",
     "@types/node": "^14.14.31",
@@ -57,13 +59,7 @@
   "auto": {
     "plugins": [
       "npm",
-      "released",
-      [
-        "gh-pages",
-        {
-          "dir": "./docs/out"
-        }
-      ]
+      "released"
     ]
   }
 }
