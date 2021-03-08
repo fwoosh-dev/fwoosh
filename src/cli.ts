@@ -77,6 +77,8 @@ async function run() {
 
   const fwoosh = new Fwoosh(fwooshOptions);
 
+  await fwoosh.loadPlugins();
+
   if (options) {
     if (options._command === "build") {
       await fwoosh.clean();

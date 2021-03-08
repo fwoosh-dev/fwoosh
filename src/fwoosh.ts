@@ -24,6 +24,7 @@ import UserLayoutsPlugin from "./plugins/user-layouts.js";
 import PublicAssetsPlugin from "./plugins/public-assets.js";
 import TailwindPlugin from "./plugins/tailwind/index.js";
 import { exists } from "./utils/exists.js";
+import { officialPlugins } from "./plugins/index.js";
 
 interface PageBuild {
   pages: string[];
@@ -74,6 +75,8 @@ export interface FwooshOptions {
   dir: string;
   /** the directory with the mdx pages */
   outDir: string;
+  /** Plugins applied to this fwoosh instance, contains default plugins */
+  plugins: Array<string | [name: string, options: Record<string, unknown>]>;
 }
 
 export class Fwoosh {
@@ -81,8 +84,6 @@ export class Fwoosh {
   public options: Required<FwooshOptions>;
   /** All of the layouts registered with this fwoosh website */
   private layouts?: Layout[];
-  /** Plugins applied to this fwoosh instance, contains default plugins */
-  private plugins: Plugin[];
 
   /** Places for plugins to "tap" to add to or modify fwoosh's functionality */
   hooks: FwooshHooks = {
@@ -94,16 +95,30 @@ export class Fwoosh {
 
   constructor(options: FwooshOptions) {
     this.options = options;
-    this.plugins = [
-      new UserLayoutsPlugin(),
-      new PublicAssetsPlugin(),
-      new TailwindPlugin(),
-    ];
+  }
 
-    this.plugins.forEach((plugin) => {
+  loadPlugins = async () => {
+    const plugins = [new UserLayoutsPlugin(), new PublicAssetsPlugin()];
+
+    await Promise.all(
+      this.options.plugins.map(async (pluginConfig) => {
+        const [name, options] =
+          typeof pluginConfig === "string" ? [pluginConfig, {}] : pluginConfig;
+
+        const Plugin =
+          name in officialPlugins
+            ? officialPlugins[name as keyof typeof officialPlugins]
+            : await import(name);
+        const plugin = new Plugin(options);
+
+        plugins.push(plugin);
+      })
+    );
+
+    plugins.forEach((plugin) => {
       plugin.apply(this);
     });
-  }
+  };
 
   /** Get the user registered layouts. */
   private async getLayouts() {
