@@ -1,5 +1,6 @@
 import * as React from "react";
-import { FrontMatter, components as fwoosh, components } from "fwoosh";
+import { FrontMatter } from "fwoosh";
+import { components } from "fwoosh/components";
 import { tw } from "twind";
 
 import InstallSnippet from "./snippets/install-snippet.mdx";
@@ -70,7 +71,9 @@ export default function Home() {
             description={
               <>
                 Lightening quick builds powered by{" "}
-                <fwoosh.a href="https://esbuild.github.io/">esbuild</fwoosh.a>
+                <components.a href="https://esbuild.github.io/">
+                  esbuild
+                </components.a>
               </>
             }
           />
@@ -85,10 +88,10 @@ export default function Home() {
             description={
               <>
                 Pages can be authored in modern JavaScript,{" "}
-                <fwoosh.a href="https://www.typescriptlang.org/">
+                <components.a href="https://www.typescriptlang.org/">
                   TypeScript
-                </fwoosh.a>
-                , or <fwoosh.a href="https://mdxjs.com/">MDX</fwoosh.a>
+                </components.a>
+                , or <components.a href="https://mdxjs.com/">MDX</components.a>
               </>
             }
           />
@@ -98,8 +101,11 @@ export default function Home() {
             description={
               <>
                 Built in compile time{" "}
-                <fwoosh.a href="https://tailwindcss.com/">tailwindcss</fwoosh.a>{" "}
-                using <fwoosh.a href="https://twind.dev/">twind</fwoosh.a>
+                <components.a href="https://tailwindcss.com/">
+                  tailwindcss
+                </components.a>{" "}
+                using{" "}
+                <components.a href="https://twind.dev/">twind</components.a>
               </>
             }
           />
@@ -133,22 +139,22 @@ export default function Home() {
       <div className="mx-auto my-16 max-w-2xl px-8">
         <h2 className="text-4xl mb-6 dark:text-gray-100">Getting Started</h2>
 
-        <fwoosh.p>First you need to install fwoosh.</fwoosh.p>
+        <components.p>First you need to install fwoosh.</components.p>
 
         <InstallSnippet components={components} />
 
-        <fwoosh.p>
+        <components.p>
           Once installed you need to define the place where you are going to
-          store your pages. The default is the <fwoosh.code>docs/</fwoosh.code>{" "}
-          folder, but this can be customized using the{" "}
-          <fwoosh.code>dir</fwoosh.code> option.
-        </fwoosh.p>
+          store your pages. The default is the{" "}
+          <components.code>docs/</components.code> folder, but this can be
+          customized using the <components.code>dir</components.code> option.
+        </components.p>
 
-        <fwoosh.h3 className="pt-6">Usage</fwoosh.h3>
+        <components.h3 className="pt-6">Usage</components.h3>
 
-        <fwoosh.p>
+        <components.p>
           The fwoosh cli comes with a few easy to use commands:
-        </fwoosh.p>
+        </components.p>
 
         <ul>
           <CommandDescription
@@ -165,23 +171,23 @@ export default function Home() {
           />
         </ul>
 
-        <fwoosh.p>
+        <components.p>
           To get more information about each command use the{" "}
-          <fwoosh.code>--help</fwoosh.code> flag.
-        </fwoosh.p>
+          <components.code>--help</components.code> flag.
+        </components.p>
 
         <HelpSnippet components={components} />
 
-        <fwoosh.h3 className="pt-6">Deploying</fwoosh.h3>
+        <components.h3 className="pt-6">Deploying</components.h3>
 
-        <fwoosh.p>
+        <components.p>
           To build your website for deploying use{" "}
-          <fwoosh.code>fwoosh build</fwoosh.code>. This creates a set of simple
-          HTML and JS files that represent your static website. All you need to
-          do is upload it to a server somewhere to be hosted. This can be a
-          GitHub pages website, vercel, netlify, an s3 bucket, really anywhere
-          you want 🎉
-        </fwoosh.p>
+          <components.code>fwoosh build</components.code>. This creates a set of
+          simple HTML and JS files that represent your static website. All you
+          need to do is upload it to a server somewhere to be hosted. This can
+          be a GitHub pages website, vercel, netlify, an s3 bucket, really
+          anywhere you want 🎉
+        </components.p>
       </div>
     </main>
   );

@@ -11,10 +11,6 @@ import liveServer from "live-server";
 import open from "open";
 import http from "http";
 import ms from "pretty-ms";
-import { setup, ThemeConfiguration } from "twind";
-import { asyncVirtualSheet } from "twind/server";
-import { getStyleTag } from "twind/sheets";
-import { shim } from "twind/shim/server";
 
 import { createProcessor } from "xdm";
 import gfm from "remark-gfm";
@@ -26,6 +22,7 @@ import { endent } from "./utils/endent.js";
 import type { Asset, FrontMatter, Layout } from "./types";
 import UserLayoutsPlugin from "./plugins/user-layouts.js";
 import PublicAssetsPlugin from "./plugins/public-assets.js";
+import TailwindPlugin from "./plugins/tailwind/index.js";
 import { exists } from "./utils/exists.js";
 
 interface PageBuild {
@@ -54,8 +51,7 @@ const processor = createProcessor({
   ],
 });
 
-const sheet = asyncVirtualSheet();
-
+/** Display a build speed message */
 const makeBuildMessage = (pagePath: string, time: number, rebuild = false) => {
   return `${rebuild ? "Rebuild" : "Built"} ${bold(
     `"${pagePath}"`
@@ -63,8 +59,14 @@ const makeBuildMessage = (pagePath: string, time: number, rebuild = false) => {
 };
 
 interface FwooshHooks {
-  registerLayouts: AsyncSeriesWaterfallHook<[Layout[]]>;
+  /** Add assets to the public directory. */
   addAssets: AsyncSeriesWaterfallHook<[Asset[]]>;
+  /** Add layouts for pages */
+  registerLayouts: AsyncSeriesWaterfallHook<[Layout[]]>;
+  /** Register files with component overrides */
+  registerComponents: AsyncSeriesWaterfallHook<[string[]]>;
+  /** Process the output html for server rendered pages */
+  processPage: AsyncSeriesWaterfallHook<[string]>;
 }
 
 export interface FwooshOptions {
@@ -72,31 +74,38 @@ export interface FwooshOptions {
   dir: string;
   /** the directory with the mdx pages */
   outDir: string;
-  /** Theme to apply to tailwindcss */
-  theme: ThemeConfiguration;
 }
 
 export class Fwoosh {
+  /** User's fwoosh options */
   public options: Required<FwooshOptions>;
+  /** All of the layouts registered with this fwoosh website */
   private layouts?: Layout[];
+  /** Plugins applied to this fwoosh instance, contains default plugins */
   private plugins: Plugin[];
 
+  /** Places for plugins to "tap" to add to or modify fwoosh's functionality */
   hooks: FwooshHooks = {
+    processPage: new AsyncSeriesWaterfallHook(["page"]),
     registerLayouts: new AsyncSeriesWaterfallHook(["layouts"]),
+    registerComponents: new AsyncSeriesWaterfallHook(["components"]),
     addAssets: new AsyncSeriesWaterfallHook(["assets"]),
   };
 
   constructor(options: FwooshOptions) {
     this.options = options;
-    this.plugins = [new UserLayoutsPlugin(), new PublicAssetsPlugin()];
+    this.plugins = [
+      new UserLayoutsPlugin(),
+      new PublicAssetsPlugin(),
+      new TailwindPlugin(),
+    ];
 
     this.plugins.forEach((plugin) => {
       plugin.apply(this);
     });
-
-    setup({ sheet, mode: "silent", theme: this.options.theme });
   }
 
+  /** Get the user registered layouts. */
   private async getLayouts() {
     if (this.layouts) {
       return this.layouts;
@@ -107,6 +116,7 @@ export class Fwoosh {
     return layouts;
   }
 
+  /** Get a specific layout */
   async getLayout(name: string) {
     const layouts = await this.getLayouts();
     const layout = layouts.find((layout) => layout.name === name);
@@ -118,6 +128,7 @@ export class Fwoosh {
     }
   }
 
+  /** Clean up all the output files */
   async clean() {
     await Promise.all([
       fs.rm(this.options.outDir, { recursive: true, force: true }),
@@ -125,6 +136,7 @@ export class Fwoosh {
     ]);
   }
 
+  /** Do a production build of the website */
   async build() {
     const pages = await glob(
       path.join(this.options.dir, "**/*.{mdx,jsx,tsx}"),
@@ -152,6 +164,7 @@ export class Fwoosh {
     return builder;
   }
 
+  /** Start the development server */
   async dev(options: WatchPagesOptions = { port: 3000 }) {
     return new Promise<void>(async (resolve, reject) => {
       const spinner = ora(`🏃‍♂ fwoosh`).start();
@@ -249,12 +262,15 @@ export class Fwoosh {
     });
   }
 
+  /** Run esbuild, returns a incremental builder */
   private async runEsBuild(esBuildOptions: esbuild.BuildOptions) {
     process.env.NODE_ENV = "development";
 
     const dirname = path.dirname(import.meta.url.replace("file://", ""));
     const frontMatters: any[] = [];
     const layouts = await this.getLayouts();
+
+    /** A plugin that parses MDX and Front Matters */
     const frontMatterPlugin: esbuild.Plugin = {
       name: "front-matter",
       setup(build) {
@@ -287,6 +303,47 @@ export class Fwoosh {
       },
     };
 
+    /** A plugin that creates a fake entry point to load registered fwoosh components */
+    const fwooshComponents: esbuild.Plugin = {
+      name: "fwoosh-components",
+      setup: (build) => {
+        build.onResolve({ filter: /^fwoosh\/components$/ }, async (args) => {
+          return {
+            path: args.path,
+            namespace: "fwoosh-components",
+          };
+        });
+
+        build.onLoad({ filter: /^fwoosh\/components$/ }, async (args) => {
+          const userComponents = await this.hooks.registerComponents.promise(
+            []
+          );
+          const userImports = userComponents.map(
+            (userComponent, index) =>
+              `import { components as components${index} } from "${userComponent}";`
+          );
+
+          return {
+            loader: "tsx",
+            resolveDir: path.dirname(args.path),
+            contents: endent`
+              import { components as defaultComponents } from "${path
+                .join(path.dirname(import.meta.url), "components/components.js")
+                .replace("file:", "")}";
+              ${userImports.join("\n")}
+
+              export const components = {
+                ...defaultComponents,
+                ${userImports.map((_, index) => `...components${index},`)}
+              }
+
+              export type Components = typeof components;
+            `,
+          };
+        });
+      },
+    };
+
     const buildResult = await esbuild.build({
       bundle: true,
       splitting: true,
@@ -295,13 +352,14 @@ export class Fwoosh {
         "process.env.NODE_ENV": JSON.stringify("development"),
       },
       inject: [path.join(dirname, "../src/utils/react-shim.js")],
-      plugins: [frontMatterPlugin],
+      plugins: [frontMatterPlugin, fwooshComponents],
       ...esBuildOptions,
     });
 
     return { ...buildResult, frontMatters };
   }
 
+  /** Transform a user page into a static page */
   private async buildPage(pages: string[], watch = false): Promise<PageBuild> {
     const cacheDir = getCacheDir()!;
     const virtualServerPages: string[] = [];
@@ -331,7 +389,8 @@ export class Fwoosh {
           endent`
             import * as React from 'react'
             import * as Server from 'react-dom/server'
-            import { Document, components } from "fwoosh"
+            import { Document } from "fwoosh"
+            import { components } from "fwoosh/components"
   
             import Page, { frontMatter } from "${path
               .resolve(page)
@@ -351,7 +410,8 @@ export class Fwoosh {
           endent`
             import * as React from 'react'
             import * as ReactDOM from 'react-dom'
-            import { Document, components } from "fwoosh"
+            import { Document } from "fwoosh"
+            import { components } from "fwoosh/components"
   
             import Component from "${path
               .resolve(page)
@@ -454,9 +514,7 @@ export class Fwoosh {
       `${path.parse(page).name}.html`
     );
 
-    sheet.reset();
-    const markup = shim(stdout);
-    const styleTag = getStyleTag(sheet);
+    const markup = await this.hooks.processPage.promise(stdout);
 
     // Write the HTML page to the output folder
     await fs.mkdir(path.dirname(htmlPagePath), { recursive: true });
@@ -464,12 +522,12 @@ export class Fwoosh {
       htmlPagePath,
       endent`
         <!DOCTYPE html />
-        ${styleTag}
         ${markup}
       `
     );
   }
 
+  /** Copy an asset to the output folder */
   private copyAsset(asset: Asset) {
     const dest = path.join(
       this.options.outDir,
@@ -480,8 +538,11 @@ export class Fwoosh {
   }
 }
 
+/** A fwoosh plugin */
 export interface Plugin {
+  /** The name of the plugin */
   name: string;
+  /** Hook into fwoosh */
   apply(fwoosh: Fwoosh): void;
 }
 

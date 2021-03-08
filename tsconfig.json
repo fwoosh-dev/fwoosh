@@ -5,7 +5,6 @@
     "allowJs": true,
     "module": "ES2020",
     "outDir": "lib",
-    "rootDir": "src",
     "strict": true,
     "jsx": "react-jsx",
     "target": "es2020",
@@ -13,8 +12,5 @@
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "moduleResolution": "node"
-  },
-  "include": [
-    "src/**/*"
-  ]
+  }
 }

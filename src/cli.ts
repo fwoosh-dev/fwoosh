@@ -55,7 +55,7 @@ const fwooshCli: MultiCommand = {
     },
     {
       name: "clean",
-      description: "Clean up all output files",
+      description: "Clean up all the output files",
       options: sharedOptions,
     },
   ],
