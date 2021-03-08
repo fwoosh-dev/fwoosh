@@ -20,7 +20,7 @@ interface CommandDescriptionProps {
 
 const CommandDescription = ({ name, description }: CommandDescriptionProps) => (
   <li>
-    <span className={tw`text-xl text(blue-500 dark:blue-400) font-semibold`}>
+    <span className={tw`text-xl font-semibold text(blue-500 dark:blue-700)`}>
       {name}
     </span>
     <span className="dark:text-gray-200">: {description}</span>

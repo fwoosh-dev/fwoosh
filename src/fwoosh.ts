@@ -19,12 +19,14 @@ import shiki from "rehype-shiki-reloaded";
 import { getCacheDir } from "./utils/get-cache-dir.js";
 import * as mdxPlugin from "./utils/mdx-plugin.js";
 import { endent } from "./utils/endent.js";
-import type { Asset, FrontMatter, Layout } from "./types";
+import { exists } from "./utils/exists.js";
+
 import UserLayoutsPlugin from "./plugins/user-layouts.js";
 import PublicAssetsPlugin from "./plugins/public-assets.js";
-import TailwindPlugin from "./plugins/tailwind/index.js";
-import { exists } from "./utils/exists.js";
+import UserComponentsPlugin from "./plugins/user-components.js";
 import { officialPlugins } from "./plugins/index.js";
+
+import type { Asset, FrontMatter, Layout } from "./types";
 
 interface PageBuild {
   pages: string[];
@@ -109,11 +111,13 @@ export class Fwoosh {
           name in officialPlugins
             ? officialPlugins[name as keyof typeof officialPlugins]
             : await import(name);
-        const plugin = new Plugin(options);
 
-        plugins.push(plugin);
+        plugins.push(new Plugin(options));
       })
     );
+
+    // User components should override all other registered components
+    plugins.push(new UserComponentsPlugin())
 
     plugins.forEach((plugin) => {
       plugin.apply(this);
