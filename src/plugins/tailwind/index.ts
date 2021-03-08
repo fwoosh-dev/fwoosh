@@ -1,8 +1,9 @@
 import * as path from "path";
-import { setup, ThemeConfiguration } from "twind";
+import { apply, setup, ThemeConfiguration } from "twind";
 import { asyncVirtualSheet } from "twind/server";
 import { getStyleTag } from "twind/sheets";
 import { shim } from "twind/shim/server";
+import { css } from "twind/css";
 
 import type { Plugin, Fwoosh } from "../../fwoosh.js";
 import { endent } from "../../utils/endent.js";
@@ -21,7 +22,15 @@ export default class TailwindPlugin implements Plugin {
 
   constructor(options: TailwindPluginOptions = {}) {
     this.options = options;
-    setup({ sheet, mode: "silent", theme: this.options.theme });
+    setup({
+      sheet,
+      mode: "silent",
+      theme: this.options.theme,
+      preflight: (preflight) =>
+        css(preflight, {
+          html: apply`dark:bg-gray-900`,
+        }),
+    });
   }
 
   apply(fwoosh: Fwoosh) {

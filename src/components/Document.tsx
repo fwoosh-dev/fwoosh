@@ -9,7 +9,7 @@ interface DocumentProps {
 export const Document = ({ children, frontMatter, attach }: DocumentProps) => {
   return (
     <>
-      <html lang="en" className="dark:bg-gray-900">
+      <html lang="en">
         <head>
           <meta charSet="UTF-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
