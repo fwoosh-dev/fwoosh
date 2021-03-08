@@ -220,7 +220,7 @@ const code = ({ className, ...props }: Element<"code">) =>
 /** The component used to render a pre */
 const pre = ({ className, ...props }: Element<"pre">) => (
   <pre
-    className={makeClass(className, "rounded border dark:border-gray-700 my-6")}
+    className={makeClass(className, "rounded border(& dark:gray-700) my-6")}
     style={{
       marginTop: "1.5rem",
       marginBottom: "1.5rem",

@@ -58,10 +58,11 @@ const code = ({ className, style, ...props }: Element<"code">) =>
   );
 
 /** The component used to render a pre */
-const pre = ({ className, ...props }: Element<"pre">) => (
+const pre = ({ style, ...props }: Element<"pre">) => (
   <pre
-    className={makeClass(className, "rounded border dark:border-gray-700 my-6")}
     style={{
+      ...style,
+      border: '1px solid gray',
       marginTop: "1.5rem",
       marginBottom: "1.5rem",
     }}

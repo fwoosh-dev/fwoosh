@@ -22,6 +22,7 @@ export default class TailwindPlugin implements Plugin {
 
   constructor(options: TailwindPluginOptions = {}) {
     this.options = options;
+
     setup({
       sheet,
       mode: "silent",
@@ -42,8 +43,14 @@ export default class TailwindPlugin implements Plugin {
       return [...components, tailwindComponents];
     });
 
+    // Shimming isn't really necessary but it gives us a few things:
+    // 
+    // 1. Easier tailwind usage in MDX files
+    // 2. Attaches html dark background
+    // 3. Better SSR experience
     fwoosh.hooks.processPage.tapPromise(this.name, async (page) => {
       sheet.reset();
+
       const markup = shim(page);
       const styleTag = getStyleTag(sheet);
 
