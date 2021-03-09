@@ -1,3 +1,20 @@
+# v0.0.11 (Tue Mar 09 2021)
+
+#### ⚠️ Pushed to `main`
+
+- twind TS plugin ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- more twind ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add tailwind plugin to our fwoosh config ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- move dark background to twind preflight ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- load official plugins ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- move all tailwind to a plugin ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.10 (Sun Mar 07 2021)
 
 #### ⚠️ Pushed to `main`
