@@ -1,6 +1,8 @@
 import React from "react";
 import { FrontMatter } from "fwoosh";
 
+import NavBarLayout from "./nav-bar";
+
 interface BlogProps {
   /** The page content */
   children: React.ReactNode;
@@ -13,12 +15,14 @@ const BlogLayout = ({
   frontMatter,
 }: BlogProps & React.PropsWithChildren<{}>) => {
   return (
-    <div className="min-h-screen flex flex-col">
-      <div className="w-full bg-blue-200 h-12 flex items-center px-3">
-        {frontMatter.title} Blog
+    <NavBarLayout>
+      <div className="flex flex-col">
+        <div className="w-full bg-blue-200 h-12 flex items-center px-3">
+          {frontMatter.title} Blog
+        </div>
+        {children}
       </div>
-      {children}
-    </div>
+    </NavBarLayout>
   );
 };
 
