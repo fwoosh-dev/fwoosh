@@ -369,7 +369,9 @@ export class Fwoosh {
     const outdir = path.join(cacheDir, "build");
     const virtualServerPages: string[] = [];
     const virtualClientPages: string[] = [];
-    const allPages = await this.getAllPages();
+    const allPages = (await this.getAllPages()).map((p) =>
+      path.relative(this.options.dir, p)
+    );
 
     await Promise.all(
       pages.map(async (page) => {
@@ -491,7 +493,13 @@ export class Fwoosh {
 
       // Build the tmp build file in the cache
       const builder = await this.runEsBuild({
-        outdir,
+        // If we don't do this esbuild doesn't include directory structure
+        outdir: watch
+          ? path.join(
+              outdir,
+              path.dirname(path.relative(this.options.dir, pages[0]))
+            )
+          : outdir,
         entryPoints: [...virtualClientPages, ...virtualServerPages],
         incremental: watch === true,
         loader: {
