@@ -7,14 +7,16 @@ import * as vfileMessage from "vfile-message";
 import matter from "gray-matter";
 
 import { endent } from "./endent.js";
-import type { Layout } from "../types";
+import type { Layout, LayoutMatchContext } from "../types";
 
 const eol = /\r\n|\r|\n|\u2028|\u2029/g;
 
 export async function onload(
   processor: ReturnType<typeof createProcessor>,
   data: esbuild.OnLoadArgs,
-  layouts: Layout[]
+  matchLayout: (
+    args: Pick<LayoutMatchContext, "layout" | "path">
+  ) => Promise<Layout | undefined>
 ): Promise<esbuild.OnLoadResult> {
   const errors: esbuild.PartialMessage[] = [];
   const warnings: esbuild.PartialMessage[] = [];
@@ -24,9 +26,10 @@ export async function onload(
   let layout = "";
 
   if (frontMatter.layout) {
-    const layoutDefinition = layouts.find(
-      (layout) => layout.name === frontMatter.layout
-    );
+    const layoutDefinition = await matchLayout({
+      layout: frontMatter.layout,
+      path: data.path,
+    });
 
     if (!layoutDefinition) {
       throw new Error("You specified a layout that isn't registered!");

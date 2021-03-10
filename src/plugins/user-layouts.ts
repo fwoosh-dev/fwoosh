@@ -8,7 +8,7 @@ export default class UserLayoutsPlugin implements Plugin {
   name = "user-layouts";
 
   apply(fwoosh: Fwoosh) {
-    fwoosh.hooks.registerLayouts.tapPromise(this.name, async (layouts) => {
+    fwoosh.hooks.layout.register.tapPromise(this.name, async (layouts) => {
       const userLayoutsDir = path.join(fwoosh.options.dir, "layouts");
 
       if (await exists(userLayoutsDir)) {

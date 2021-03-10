@@ -1,4 +1,4 @@
-import { AsyncSeriesWaterfallHook } from "tapable";
+import { AsyncSeriesBailHook, AsyncSeriesWaterfallHook } from "tapable";
 import { promises as fs } from "fs";
 import esbuild from "esbuild";
 import * as path from "path";
@@ -26,7 +26,7 @@ import PublicAssetsPlugin from "./plugins/public-assets.js";
 import UserComponentsPlugin from "./plugins/user-components.js";
 import { officialPlugins } from "./plugins/index.js";
 
-import type { Asset, FrontMatter, Layout } from "./types";
+import type { Asset, FrontMatter, FwooshHooks, Layout } from "./types";
 
 interface PageBuild {
   pages: string[];
@@ -61,17 +61,6 @@ const makeBuildMessage = (pagePath: string, time: number, rebuild = false) => {
   )}, took ${green(ms(time / 1000000))}`;
 };
 
-interface FwooshHooks {
-  /** Add assets to the public directory. */
-  addAssets: AsyncSeriesWaterfallHook<[Asset[]]>;
-  /** Add layouts for pages */
-  registerLayouts: AsyncSeriesWaterfallHook<[Layout[]]>;
-  /** Register files with component overrides */
-  registerComponents: AsyncSeriesWaterfallHook<[string[]]>;
-  /** Process the output html for server rendered pages */
-  processPage: AsyncSeriesWaterfallHook<[string]>;
-}
-
 export interface FwooshOptions {
   /** the directory with the mdx pages */
   dir: string;
@@ -84,19 +73,31 @@ export interface FwooshOptions {
 export class Fwoosh {
   /** User's fwoosh options */
   public options: Required<FwooshOptions>;
-  /** All of the layouts registered with this fwoosh website */
-  private layouts?: Layout[];
 
   /** Places for plugins to "tap" to add to or modify fwoosh's functionality */
   hooks: FwooshHooks = {
     processPage: new AsyncSeriesWaterfallHook(["page"]),
-    registerLayouts: new AsyncSeriesWaterfallHook(["layouts"]),
+    layout: {
+      match: new AsyncSeriesBailHook(["pageInfo"]),
+      register: new AsyncSeriesWaterfallHook(["layouts"]),
+    },
     registerComponents: new AsyncSeriesWaterfallHook(["components"]),
     addAssets: new AsyncSeriesWaterfallHook(["assets"]),
   };
 
   constructor(options: FwooshOptions) {
     this.options = options;
+
+    // Default layout match is just based on the name of the layout
+    this.hooks.layout.match.tap("Default", ({ layout, layouts }) => {
+      const layoutDefinition = layouts.find(
+        (registeredLayout) => registeredLayout.name === layout
+      );
+
+      if (layoutDefinition) {
+        return layoutDefinition;
+      }
+    });
   }
 
   loadPlugins = async () => {
@@ -117,35 +118,12 @@ export class Fwoosh {
     );
 
     // User components should override all other registered components
-    plugins.push(new UserComponentsPlugin())
+    plugins.push(new UserComponentsPlugin());
 
     plugins.forEach((plugin) => {
       plugin.apply(this);
     });
   };
-
-  /** Get the user registered layouts. */
-  private async getLayouts() {
-    if (this.layouts) {
-      return this.layouts;
-    }
-
-    const layouts = await this.hooks.registerLayouts.promise([]);
-    this.layouts = layouts;
-    return layouts;
-  }
-
-  /** Get a specific layout */
-  async getLayout(name: string) {
-    const layouts = await this.getLayouts();
-    const layout = layouts.find((layout) => layout.name === name);
-
-    if (!layout) {
-      throw new Error(
-        `You specified a layout in a that isn't registered! ${layout}`
-      );
-    }
-  }
 
   /** Clean up all the output files */
   async clean() {
@@ -188,7 +166,7 @@ export class Fwoosh {
     return new Promise<void>(async (resolve, reject) => {
       const spinner = ora(`🏃‍♂ fwoosh`).start();
       const builders: PageBuild[] = [];
-      const layouts = await this.getLayouts();
+      const layouts = await this.hooks.layout.register.promise([]);
 
       chokidar
         .watch(`${this.options.dir}/**`, {
@@ -287,20 +265,25 @@ export class Fwoosh {
 
     const dirname = path.dirname(import.meta.url.replace("file://", ""));
     const frontMatters: any[] = [];
-    const layouts = await this.getLayouts();
+    const layouts = await this.hooks.layout.register.promise([]);
 
     /** A plugin that parses MDX and Front Matters */
     const frontMatterPlugin: esbuild.Plugin = {
       name: "front-matter",
-      setup(build) {
+      setup: (build) => {
         // When a URL is loaded, we want to actually download the content
         // from the internet. This has just enough logic to be able to
         // handle the example import from unpkg.com but in reality this
         // would probably need to be more complex.
         build.onLoad({ filter: /\.mdx$/ }, async (args) => {
-          const value = await mdxPlugin.onload(processor, args, layouts);
-          frontMatters.push(value.pluginData.frontMatter);
-          return value;
+          const loadResult = await mdxPlugin.onload(processor, args, (context) =>
+            this.hooks.layout.match.promise({
+              ...context,
+              layouts,
+            })
+          );
+          frontMatters.push(loadResult.pluginData.frontMatter);
+          return loadResult;
         });
 
         // Also want to add the front matter to tsx/jsx files that don't have one
