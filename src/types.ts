@@ -6,8 +6,12 @@ export interface Asset {
 }
 
 export interface Layout {
+  /** The name of the layout */
   name: string;
+  /** The path to the layout */
   path: string;
+  /** The plugin that registered the layout */
+  owner: string;
 }
 
 export interface FrontMatter {
@@ -20,7 +24,7 @@ export interface LayoutMatchContext {
   /** The path to the page we're matching a layout to */
   path: string;
   /** The name of the layout to match */
-  layout: string;
+  layout?: string;
   /** All of the registered layouts */
   layouts: Layout[];
 }
@@ -31,7 +35,7 @@ export interface FwooshHooks {
   /** Layout related hooks */
   layout: {
     /** Match a page to a layout */
-    match: AsyncSeriesBailHook<LayoutMatchContext, Layout | undefined>;
+    match: AsyncSeriesBailHook<LayoutMatchContext, Layout | void>;
     /** Add layouts for pages */
     register: AsyncSeriesWaterfallHook<[Layout[]]>;
   };

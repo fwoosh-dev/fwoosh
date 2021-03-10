@@ -22,19 +22,18 @@ export async function onload(
   const warnings: esbuild.PartialMessage[] = [];
   let doc = String(await fs.readFile(data.path));
   const { data: frontMatter, content } = matter(doc);
+  const layoutDefinition = await matchLayout({
+    layout: frontMatter.layout,
+    path: data.path,
+  });
+
+  if (frontMatter.layout && !layoutDefinition) {
+    throw new Error("You specified a layout that isn't registered!");
+  }
 
   let layout = "";
 
-  if (frontMatter.layout) {
-    const layoutDefinition = await matchLayout({
-      layout: frontMatter.layout,
-      path: data.path,
-    });
-
-    if (!layoutDefinition) {
-      throw new Error("You specified a layout that isn't registered!");
-    }
-
+  if (layoutDefinition) {
     layout = endent`
       import UserLayout from "${layoutDefinition.path}";
 

@@ -26,7 +26,7 @@ import PublicAssetsPlugin from "./plugins/public-assets.js";
 import UserComponentsPlugin from "./plugins/user-components.js";
 import { officialPlugins } from "./plugins/index.js";
 
-import type { Asset, FrontMatter, FwooshHooks, Layout } from "./types";
+import type { Asset, FrontMatter, FwooshHooks } from "./types";
 
 interface PageBuild {
   pages: string[];
@@ -87,17 +87,6 @@ export class Fwoosh {
 
   constructor(options: FwooshOptions) {
     this.options = options;
-
-    // Default layout match is just based on the name of the layout
-    this.hooks.layout.match.tap("Default", ({ layout, layouts }) => {
-      const layoutDefinition = layouts.find(
-        (registeredLayout) => registeredLayout.name === layout
-      );
-
-      if (layoutDefinition) {
-        return layoutDefinition;
-      }
-    });
   }
 
   loadPlugins = async () => {
@@ -122,6 +111,17 @@ export class Fwoosh {
 
     plugins.forEach((plugin) => {
       plugin.apply(this);
+    });
+
+    // Default layout match is just based on the name of the layout
+    this.hooks.layout.match.tap("Default", ({ layout, layouts }) => {
+      const layoutDefinition = layouts.find(
+        (registeredLayout) => registeredLayout.name === layout
+      );
+
+      if (layoutDefinition) {
+        return layoutDefinition;
+      }
     });
   };
 
@@ -276,13 +276,20 @@ export class Fwoosh {
         // handle the example import from unpkg.com but in reality this
         // would probably need to be more complex.
         build.onLoad({ filter: /\.mdx$/ }, async (args) => {
-          const loadResult = await mdxPlugin.onload(processor, args, (context) =>
-            this.hooks.layout.match.promise({
-              ...context,
-              layouts,
-            })
+          const loadResult = await mdxPlugin.onload(
+            processor,
+            args,
+            async (context) => {
+              const layout = await this.hooks.layout.match.promise({
+                ...context,
+                layouts,
+              });
+              return layout || undefined;
+            }
           );
+
           frontMatters.push(loadResult.pluginData.frontMatter);
+
           return loadResult;
         });
 
@@ -364,6 +371,7 @@ export class Fwoosh {
   /** Transform a user page into a static page */
   private async buildPage(pages: string[], watch = false): Promise<PageBuild> {
     const cacheDir = getCacheDir()!;
+    const outdir = path.join(cacheDir, "build");
     const virtualServerPages: string[] = [];
     const virtualClientPages: string[] = [];
 
@@ -428,7 +436,7 @@ export class Fwoosh {
       })
     );
 
-    const moveFilesToOut = async (outdir: string) => {
+    const moveFilesToOut = async () => {
       // SSR all pages
       await Promise.all(
         pages.map(async (page) => {
@@ -469,7 +477,6 @@ export class Fwoosh {
     };
 
     try {
-      const outdir = path.join(cacheDir, "build");
       const mockPackage = path.join(outdir, "package.json");
 
       if (!(await exists(mockPackage))) {
@@ -488,7 +495,7 @@ export class Fwoosh {
         },
       });
 
-      await moveFilesToOut(outdir);
+      await moveFilesToOut();
 
       return {
         pages,
@@ -496,7 +503,7 @@ export class Fwoosh {
         rebuild: async () => {
           if (builder.rebuild) {
             await builder.rebuild();
-            await moveFilesToOut(outdir);
+            await moveFilesToOut();
           }
         },
       };
