@@ -5,6 +5,7 @@ import { tw } from "twind";
 
 import InstallSnippet from "./snippets/install-snippet.mdx";
 import HelpSnippet from "./snippets/help-snippet.mdx";
+import ConfigurationSnippet from "./snippets/configuration-snippet.mdx";
 
 const description = "A lightening quick MDX static website generator";
 
@@ -97,25 +98,6 @@ export default function Home() {
           />
 
           <Feature
-            icon="💨"
-            description={
-              <>
-                Built in compile time{" "}
-                <components.a href="https://tailwindcss.com/">
-                  tailwindcss
-                </components.a>{" "}
-                using{" "}
-                <components.a href="https://twind.dev/">twind</components.a>
-              </>
-            }
-          />
-
-          <Feature
-            icon="💅🏼"
-            description="Comes with pretty dark-mode enabled markdown components"
-          />
-
-          <Feature
             icon="🎁"
             description={
               <>
@@ -177,6 +159,33 @@ export default function Home() {
         </components.p>
 
         <HelpSnippet components={components} />
+
+        <components.h3 className="pt-6">Plugins</components.h3>
+
+        <components.p>
+          fwoosh comes with a few plugins that you can use to enhance your
+          static website
+        </components.p>
+
+        <components.ul>
+          <components.li>
+            <components.code>tailwind</components.code>: Style your pages with
+            tailwind, comes with themed markdown components that support dark
+            mode
+          </components.li>
+          <components.li>
+            <components.code>layouts</components.code>: This plugin is
+            loaded by default but you can use the{" "}
+            <components.code>matchDirectory</components.code> option to match
+            your layouts with a directory of the same name
+          </components.li>
+        </components.ul>
+
+        <components.p>
+          To use a plugin create a <components.code>fwoosh.config.json</components.code> and specify the name of the plugins
+        </components.p>
+        
+        <ConfigurationSnippet components={components} />
 
         <components.h3 className="pt-6">Deploying</components.h3>
 
