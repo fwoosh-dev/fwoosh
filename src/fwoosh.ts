@@ -135,12 +135,7 @@ export class Fwoosh {
 
   /** Do a production build of the website */
   async build() {
-    const pages = await glob(
-      path.join(this.options.dir, "**/*.{mdx,jsx,tsx}"),
-      {
-        ignore: ["**/out/**", path.join(this.options.dir, "/layouts/**")],
-      }
-    );
+    const pages = await this.getAllPages();
 
     if (!pages.length) {
       console.log(
@@ -374,6 +369,7 @@ export class Fwoosh {
     const outdir = path.join(cacheDir, "build");
     const virtualServerPages: string[] = [];
     const virtualClientPages: string[] = [];
+    const allPages = await this.getAllPages();
 
     await Promise.all(
       pages.map(async (page) => {
@@ -399,7 +395,7 @@ export class Fwoosh {
           endent`
             import * as React from 'react'
             import * as Server from 'react-dom/server'
-            import { Document } from "fwoosh"
+            import { Document, LayoutContext } from "fwoosh"
             import { components } from "fwoosh/components"
   
             import Page, { frontMatter } from "${path
@@ -408,7 +404,11 @@ export class Fwoosh {
             
             console.log(Server.renderToString((
               <Document attach="${browserJs}" frontMatter={frontMatter}>
-                <Page components={components} />
+                <LayoutContext.Provider value={{ pages: ${JSON.stringify(
+                  allPages
+                )}, currentPage: "${page}" }}>
+                  <Page components={components} />
+                </LayoutContext.Provider>
               </Document>
             )))
           `
@@ -420,7 +420,7 @@ export class Fwoosh {
           endent`
             import * as React from 'react'
             import * as ReactDOM from 'react-dom'
-            import { Document } from "fwoosh"
+            import { Document, LayoutContext } from "fwoosh"
             import { components } from "fwoosh/components"
   
             import Component from "${path
@@ -428,7 +428,11 @@ export class Fwoosh {
               .replace("/index.tsx", "")}";
             
             ReactDOM.hydrate(
-              <Component components={components} />,
+              <LayoutContext.Provider value={{ pages: ${JSON.stringify(
+                allPages
+              )}, currentPage: "${page}" }}>
+                <Component components={components} />
+              </LayoutContext.Provider>,
               document.getElementById("root")
             )
           `
@@ -544,6 +548,12 @@ export class Fwoosh {
     );
 
     return fs.copyFile(asset.path, dest);
+  }
+
+  private getAllPages() {
+    return glob(path.join(this.options.dir, "**/*.{mdx,jsx,tsx}"), {
+      ignore: ["**/out/**", path.join(this.options.dir, "/layouts/**")],
+    });
   }
 }
 

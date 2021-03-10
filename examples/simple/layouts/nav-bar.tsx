@@ -1,5 +1,5 @@
 import React from "react";
-import { FrontMatter } from "fwoosh";
+import { FrontMatter, LayoutContext } from "fwoosh";
 
 interface NavBarProps {
   /** The page content */
@@ -12,13 +12,12 @@ const NavBarLayout = ({
   children,
   frontMatter,
 }: NavBarProps & React.PropsWithChildren<{}>) => {
+  const { pages, currentPage } = React.useContext(LayoutContext);
+
   return (
-    <div
-      id="ignite"
-      className="min-h-screen flex flex-col"
-    >
+    <div id="ignite" className="min-h-screen flex flex-col">
       <div className="w-full bg-red-200 h-12 flex items-center px-3">
-        {frontMatter.layout}
+        {currentPage}
       </div>
       {children}
     </div>
