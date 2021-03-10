@@ -28,12 +28,17 @@ export async function onload(
   });
 
   if (frontMatter.layout && !layoutDefinition) {
-    throw new Error("You specified a layout that isn't registered!");
+    throw new Error(endent`
+      You specified a layout that isn't registered!
+
+      Layout: ${frontMatter.layout}
+      Page: ${data.path}
+    `);
   }
 
   let layout = "";
 
-  if (layoutDefinition) {
+  if (layoutDefinition && !content.includes("export default function")) {
     layout = endent`
       import UserLayout from "${layoutDefinition.path}";
 
