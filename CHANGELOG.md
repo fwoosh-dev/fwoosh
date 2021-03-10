@@ -1,3 +1,21 @@
+# v0.0.12 (Wed Mar 10 2021)
+
+#### ⚠️ Pushed to `main`
+
+- improve docs ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- testing out navbar layout ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix dev builds ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- expose pages to layouts via context ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- only insert layout if it doesn't exist ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add matchDirectory option to layout plugin ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add layout.match hook ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.11 (Tue Mar 09 2021)
 
 #### ⚠️ Pushed to `main`
