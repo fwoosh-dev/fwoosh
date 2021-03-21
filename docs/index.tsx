@@ -70,7 +70,7 @@ export default function Home() {
         <h2
           className={tw`text(2xl lg:3xl) text-center mb-10 dark:text-gray-100`}
         >
-          A 💀 simple static website generator
+          Life's too short waiting for websites to load
         </h2>
 
         <ul className="text-lg space-y-4">
