@@ -29,7 +29,7 @@ export default class TailwindPlugin implements Plugin {
       theme: this.options.theme,
       preflight: (preflight) =>
         css(preflight, {
-          html: apply`dark:bg-gray-900`,
+          html: apply`bg-white dark:bg-gray-900`,
         }),
     });
   }

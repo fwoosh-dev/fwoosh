@@ -162,6 +162,9 @@ export class Fwoosh {
       const spinner = ora(`🏃‍♂ fwoosh`).start();
       const builders: PageBuild[] = [];
       const layouts = await this.hooks.layout.register.promise([]);
+      const assets = await this.hooks.addAssets.promise([]);
+
+      await Promise.all(assets.map((asset) => this.copyAsset(asset)));
 
       chokidar
         .watch(`${this.options.dir}/**`, {

@@ -44,16 +44,23 @@ export default function Home() {
   return (
     <main>
       <div
-        className={tw`flex flex-col items-center justify-center h(72 lg:96) dark:bg-gray-800`}
-        // style={{ background: "conic-gradient(at top right, #9CA3AF, white)" }}
+        className={tw`
+          flex flex-col items-center justify-center
+           h(72 lg:96) 
+           ${() => ({ background: "conic-gradient(at top right, #E5E7EB, white)" })}
+           dark:bg-gray-800 dark:bg-none	
+        `}
       >
         <h1
-          className={tw`text(6xl lg:8xl) text(gray-800 dark:white) font-extralight mb(4 lg:6)`}
+          className={tw`text(6xl lg:8xl) text(gray-800 dark:white) font-extralight mb(6 lg:8) px-12`}
         >
-          fwoosh
+          <picture>
+            <source srcSet="logo-dark.svg" media="(prefers-color-scheme: dark)" className={tw`w-full`} />
+            <img src="logo.svg" alt="fwoosh" />
+          </picture>
         </h1>
         <p
-          className={tw`text-xl text(gray-500 dark:gray-400) font-semibold text-center px-4`}
+          className={tw`text-xl text(gray-600 dark:gray-300) text-center px-4`}
         >
           {description}
         </p>
@@ -184,7 +191,7 @@ export default function Home() {
         <components.p>
           To use a plugin create a <components.code>fwoosh.config.json</components.code> and specify the name of the plugins
         </components.p>
-        
+
         <ConfigurationSnippet components={components} />
 
         <components.h3 className="pt-6">Deploying</components.h3>
