@@ -1,3 +1,15 @@
+# v0.0.13 (Sun Mar 21 2021)
+
+#### ⚠️ Pushed to `main`
+
+- add logo and favicon support ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.12 (Wed Mar 10 2021)
 
 #### ⚠️ Pushed to `main`
