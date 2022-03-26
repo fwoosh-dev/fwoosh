@@ -1,0 +1,11 @@
+{
+  "name": "@fwoosh/react-example",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "fwoosh dev",
+    "build": "fwoosh build"
+  },
+  "dependencies": {
+    "fwoosh": "link:../../packages/core"
+  }
+}

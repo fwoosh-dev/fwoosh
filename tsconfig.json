@@ -8,15 +8,10 @@
     "outDir": "lib",
     "strict": true,
     "jsx": "react-jsx",
-    "target": "es2020",
+    "target": "ES2018",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
-    "moduleResolution": "node",
-    "plugins": [
-      {
-        "name": "@twind/typescript-plugin"
-      }
-    ]
+    "moduleResolution": "node"
   }
 }

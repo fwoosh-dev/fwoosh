@@ -1,3 +1,0 @@
-{
-  "plugins": ["tailwind", ["layouts", { "matchDirectory": true }]]
-}

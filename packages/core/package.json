@@ -1,0 +1,10 @@
+{
+  "name": "@fwoosh/core",
+  "version": "0.0.13",
+  "author": "Andrew Lisowski <lisowski54@gmail.com>",
+  "repository": "hipstersmoothie/fwoosh",
+  "license": "MIT",
+  "scripts": {
+    "build": "echo todo"
+  }
+}
