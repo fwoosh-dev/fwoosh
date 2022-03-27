@@ -1,6 +1,9 @@
 import { Plugin, Fwoosh } from "fwoosh";
+import docgen from "react-docgen-typescript";
 
-interface ReactPluginOptions {}
+interface ReactPluginOptions {
+  docgenOptions: docgen.ParserOptions;
+}
 
 export default class ReactPlugin implements Plugin {
   name = "react";
@@ -20,7 +23,6 @@ export default class ReactPlugin implements Plugin {
         import { Spinner } from "@fwoosh/components";
         
         export function render(id, slug) {
-          console.log("render", id, slug);
           if (!id) {
             return;
           }
@@ -41,6 +43,11 @@ export default class ReactPlugin implements Plugin {
           }
         }      
       `;
+    });
+
+    fwoosh.hooks.generateDocs.tap(this.name, (filepath) => {
+      const docs = docgen.parse(filepath, this.options.docgenOptions);
+      return docs;
     });
   }
 }

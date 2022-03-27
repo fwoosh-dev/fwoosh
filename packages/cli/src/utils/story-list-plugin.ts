@@ -70,7 +70,6 @@ export function storyListPlugin(config: FwooshOptions) {
       if (id.includes(virtualFileId)) {
         try {
           const stories = await getStories(config);
-          console.log(JSON.stringify(stories, null, 2));
           return createVirtualFile(stories);
         } catch (e) {
           console.log(e);

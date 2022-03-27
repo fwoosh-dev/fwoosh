@@ -12,6 +12,7 @@ import { getCacheDir } from "./utils/get-cache-dir.js";
 import { storyListPlugin } from "./utils/story-list-plugin.js";
 import { getStories } from "./utils/get-stories.js";
 import { renderStoryPlugin } from "./utils/render-story-plugin.js";
+import { getDocsPlugin } from "./utils/get-docs-plugin.js";
 
 const require = createRequire(import.meta.url);
 
@@ -30,6 +31,7 @@ export class Fwoosh {
     this.options = options;
     this.hooks = {
       renderStory: new SyncBailHook(),
+      generateDocs: new SyncBailHook(["pathToFile"]),
     };
   }
 
@@ -38,11 +40,17 @@ export class Fwoosh {
 
     await Promise.all(
       (this.options.plugins || []).map(async (pluginConfig) => {
-        const [name, options] =
-          typeof pluginConfig === "string" ? [pluginConfig, {}] : pluginConfig;
+        if (typeof pluginConfig === "object" && "name" in pluginConfig) {
+          plugins.push(pluginConfig);
+        } else {
+          const [name, options] =
+            typeof pluginConfig === "string"
+              ? [pluginConfig, {}]
+              : pluginConfig;
 
-        const Plugin = (await import(name)).default;
-        plugins.push(new Plugin(options));
+          const Plugin = (await import(name)).default;
+          plugins.push(new Plugin(options));
+        }
       })
     );
 
@@ -71,6 +79,7 @@ export class Fwoosh {
       mode: "development",
       root: path.dirname(path.dirname(require.resolve("@fwoosh/app"))),
       plugins: [
+        getDocsPlugin(),
         storyListPlugin(this.options),
         renderStoryPlugin(this.hooks.renderStory.call()),
       ],
@@ -84,6 +93,25 @@ export class Fwoosh {
     });
 
     app.head("*", async (_, res) => res.sendStatus(200));
+
+    app.get<{ title: string }>("/get-docs", async (req, res) => {
+      const stories = await getStories(this.options);
+      const activeStory = stories.find((s) => s.meta.title === req.query.title);
+
+      if (!activeStory) {
+        return res.sendStatus(404);
+      }
+
+      const storyModule = vite.moduleGraph.fileToModulesMap.get(
+        activeStory.meta.file
+      );
+
+      if (!storyModule) {
+        return res.sendStatus(404);
+      }
+
+      res.json(this.hooks.generateDocs.call(activeStory.meta.component));
+    });
 
     app.use(vite.middlewares);
 

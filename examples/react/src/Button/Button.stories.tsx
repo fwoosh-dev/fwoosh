@@ -4,6 +4,7 @@ import { Button } from "./Button";
 
 export const meta: StoryMeta = {
   title: "Components/Button",
+  component: Button,
 };
 
 /** The default story. */
@@ -18,5 +19,5 @@ export const WithDisabled = () => {
 
 /** Add custom styles to a button */
 export const WithStyle = () => {
-  return <Button style={{ background: "red" }}>Click me</Button>;
+  return <Button variant="destructive">Click me</Button>;
 };

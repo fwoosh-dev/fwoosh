@@ -8,6 +8,7 @@
   "repository": "hipstersmoothie/fwoosh",
   "license": "MIT",
   "dependencies": {
-    "fwoosh": "link:../../packages/cli"
+    "fwoosh": "link:../../packages/cli",
+    "react-docgen-typescript": "^2.2.2"
   }
 }

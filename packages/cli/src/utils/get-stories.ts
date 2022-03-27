@@ -3,8 +3,11 @@ import { promises as fs } from "fs";
 import { paramCase, capitalCase } from "change-case";
 import glob from "fast-glob";
 import path from "path";
+import { createRequire } from "module";
 
-import { FwooshOptions, Story, StoryMeta } from "../types";
+import { FwooshOptions, ResolvedStoryMeta, Story, StoryMeta } from "../types";
+
+const require = createRequire(import.meta.url);
 
 function getComment(contents: string, d: { span: { start: number } }) {
   if (
@@ -25,7 +28,6 @@ function getComment(contents: string, d: { span: { start: number } }) {
 
       // Not a jsDoc comment so we can't parse it
       if (contents[i - 1] === "/" && contents[i] === "*") {
-        console.log("not jsdoc");
         return;
       }
 
@@ -36,10 +38,28 @@ function getComment(contents: string, d: { span: { start: number } }) {
   }
 }
 
+function getComponentPath(ast: swc.Module, file: string, value: string) {
+  const imports = ast.body.filter(
+    (node) => node.type === "ImportDeclaration"
+  ) as swc.ImportDeclaration[];
+  const componentImport = imports.find((node) =>
+    node.specifiers.find((s) => s.local.value === value)
+  );
+
+  if (!componentImport) {
+    return;
+  }
+
+  // TODO - handle re-exports
+  return require.resolve(
+    path.resolve(path.dirname(file), componentImport.source.value)
+  );
+}
+
 export async function getStories({
   stories,
   outDir,
-}: FwooshOptions): Promise<{ stories: Story[]; meta: StoryMeta }[]> {
+}: FwooshOptions): Promise<{ stories: Story[]; meta: ResolvedStoryMeta }[]> {
   const files = await glob(stories, {
     ignore: [`${outDir}/**`],
   });
@@ -47,6 +67,7 @@ export async function getStories({
   return Promise.all(
     files.map(async (file) => {
       const contents = await fs.readFile(file, "utf8");
+      const fullPath = path.resolve(file);
 
       const ast = await swc.parse(contents, {
         syntax: "typescript",
@@ -69,12 +90,14 @@ export async function getStories({
       const meta = (metaDeclaration as any).declaration.declarations[0].init.properties.reduce(
         (acc: Record<string, unknown>, property: Record<string, any>) => ({
           ...acc,
-          [property.key.value]: property.value.value,
+          [property.key.value]:
+            property.key.value === "component"
+              ? getComponentPath(ast, fullPath, property.value.value)
+              : property.value.value,
         }),
         {}
       );
       const storiesDeclarations = exports.filter((e) => e !== metaDeclaration);
-      const fullPath = path.resolve(file);
       const stories = (storiesDeclarations as any).map((d: any) => {
         const exportName = d.declaration.declarations[0].id.value;
         return {
@@ -86,7 +109,7 @@ export async function getStories({
         };
       });
 
-      return { stories, meta };
+      return { stories, meta: { ...meta, file: fullPath } };
     })
   );
 }
