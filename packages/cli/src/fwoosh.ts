@@ -6,6 +6,8 @@ import { createServer } from "vite";
 import express from "express";
 import { createRequire } from "module";
 import { SyncBailHook } from "tapable";
+import Unocss from "unocss/vite";
+import presetWind from "@unocss/preset-wind";
 
 import type { FwooshHooks, FwooshOptions } from "./types";
 import { getCacheDir } from "./utils/get-cache-dir.js";
@@ -82,6 +84,7 @@ export class Fwoosh {
         getDocsPlugin(),
         storyListPlugin(this.options),
         renderStoryPlugin(this.hooks.renderStory.call()),
+        Unocss({ presets: [presetWind()], include: [/\.js$/] }),
       ],
       server: {
         port,

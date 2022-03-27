@@ -5,6 +5,7 @@ import dlv from "dlv";
 import { useId } from "@radix-ui/react-id";
 import { Stories } from "@fwoosh/app/stories";
 import { useDocs } from "@fwoosh/app/docs";
+import { components } from "@fwoosh/components";
 import Markdown from "markdown-to-jsx";
 
 import ErrorBoundary from "./ErrorBoundary";
@@ -20,27 +21,27 @@ const PropsTable = ({ docs }: PropsTableProps) => {
     <>
       {docs?.map((doc) => (
         <React.Fragment key={doc.displayName}>
-          <h3>{doc.displayName}</h3>
-          <table>
+          <components.h3>{doc.displayName}</components.h3>
+          <components.table>
             <thead>
-              <tr>
-                <th>Prop</th>
-                <th>Type</th>
-                <th>Default</th>
-                <th>Description</th>
-              </tr>
+              <components.tr>
+                <components.th>Prop</components.th>
+                <components.th>Type</components.th>
+                <components.th>Default</components.th>
+                <components.th>Description</components.th>
+              </components.tr>
             </thead>
             <tbody>
               {Object.entries(doc.props).map(([prop, propDoc]) => (
-                <tr key={`${doc.displayName}-${prop}`}>
-                  <td>{prop}</td>
-                  <td>{propDoc.type.name}</td>
-                  <td>{propDoc.defaultValue?.value}</td>
-                  <td>{propDoc.description}</td>
-                </tr>
+                <components.tr key={`${doc.displayName}-${prop}`}>
+                  <components.td>{prop}</components.td>
+                  <components.td>{propDoc.type.name}</components.td>
+                  <components.td>{propDoc.defaultValue?.value}</components.td>
+                  <components.td>{propDoc.description}</components.td>
+                </components.tr>
               ))}
             </tbody>
-          </table>
+          </components.table>
         </React.Fragment>
       ))}
     </>
@@ -75,11 +76,14 @@ export const DocsPage = () => {
       <Suspense fallback={<Spinner delay={300} />}>
         <div>
           {stories.map((story, index) => {
-            console.log(story);
             return (
               <div>
-                <h2>{story.title}</h2>
-                {story.comment && <Markdown>{story.comment}</Markdown>}
+                <components.h2>{story.title}</components.h2>
+                {story.comment && (
+                  <Markdown options={{ overrides: components }}>
+                    {story.comment}
+                  </Markdown>
+                )}
                 <StoryDiv key={story.slug} slug={story.slug} />
                 {index === 0 && <PropsTable docs={docs} />}
               </div>
