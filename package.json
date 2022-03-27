@@ -1,15 +1,10 @@
 {
-  "name": "fwoosh-monorepo",
-  "version": "0.0.0",
-  "private": true,
-  "license": "MIT",
-  "author": "Andrew Lisowski <lisowski54@gmail.com>",
-  "repository": "hipstersmoothie/fwoosh",
-  "workspaces": [
-    "packages/*",
-    "plugins/*",
-    "examples/*"
-  ],
+  "name": "fwoosh",
+  "type": "module",
+  "version": "0.0.14",
+  "description": "A lightening quick MDX static website generator!",
+  "main": "lib/index.js",
+  "bin": "bin/fwoosh.js",
   "scripts": {
     "build": "tsc -b tsconfig.dev.json",
     "start": "npm run build -- --watch",
