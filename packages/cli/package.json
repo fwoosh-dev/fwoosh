@@ -33,7 +33,13 @@
     "open": "^8.4.0",
     "ora": "^5.3.0",
     "pretty-ms": "^7.0.1",
+    "rehype-shiki-reloaded": "^0.0.10",
+    "rehype-stringify": "^9.0.3",
+    "remark-gfm": "^3.0.1",
+    "remark-parse": "^10.0.1",
+    "remark-rehype": "^10.1.0",
     "tapable": "^2.2.0",
+    "unified": "^10.1.2",
     "vite": "^2.8.6"
   }
 }

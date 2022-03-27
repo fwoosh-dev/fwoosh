@@ -4,12 +4,28 @@ import { paramCase, capitalCase } from "change-case";
 import glob from "fast-glob";
 import path from "path";
 import { createRequire } from "module";
+import gfm from "remark-gfm";
+import shiki from "rehype-shiki-reloaded";
+import { unified } from "unified";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import rehypeStringify from "rehype-stringify";
 
-import { FwooshOptions, ResolvedStoryMeta, Story, StoryMeta } from "../types";
+import { FwooshOptions, ResolvedStoryMeta, Story } from "../types";
 
 const require = createRequire(import.meta.url);
 
-function getComment(contents: string, d: { span: { start: number } }) {
+const markdownToHtml = unified()
+  .use(remarkParse)
+  .use(remarkRehype)
+  .use((shiki as any).default, {
+    theme: "github-light",
+    darkTheme: "github-dark",
+  })
+  .use(rehypeStringify)
+  .use(gfm);
+
+async function getComment(contents: string, d: { span: { start: number } }) {
   if (
     contents[d.span.start - 3] === "*" &&
     contents[d.span.start - 2] === "/"
@@ -34,7 +50,17 @@ function getComment(contents: string, d: { span: { start: number } }) {
       comment.unshift(contents[i--]);
     }
 
-    return comment.join("").trim();
+    const html = await markdownToHtml.process(
+      comment
+        .join("")
+        .trim()
+        .split("\n")
+        .map((line) => line.trim())
+        .map((line) => line.replace(/^\s*\*\s*/, ""))
+        .join("\n")
+    );
+
+    return String(html).split("\n").join("\\\n");
   }
 }
 
@@ -98,16 +124,18 @@ export async function getStories({
         {}
       );
       const storiesDeclarations = exports.filter((e) => e !== metaDeclaration);
-      const stories = (storiesDeclarations as any).map((d: any) => {
-        const exportName = d.declaration.declarations[0].id.value;
-        return {
-          exportName,
-          title: capitalCase(exportName),
-          slug: `${paramCase(meta.title)}--${paramCase(exportName)}`,
-          file: fullPath,
-          comment: getComment(contents, d),
-        };
-      });
+      const stories: Story[] = await Promise.all(
+        (storiesDeclarations as any).map(async (d: any) => {
+          const exportName = d.declaration.declarations[0].id.value;
+          return {
+            exportName,
+            title: capitalCase(exportName),
+            slug: `${paramCase(meta.title)}--${paramCase(exportName)}`,
+            file: fullPath,
+            comment: await getComment(contents, d),
+          };
+        })
+      );
 
       return { stories, meta: { ...meta, file: fullPath } };
     })

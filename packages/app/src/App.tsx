@@ -5,6 +5,8 @@ import { Storybook } from "./components/Storybook";
 import { Docs } from "./components/Docs";
 import { DocsPage } from "./components/DocsPage";
 
+import "./index.css";
+
 export const App = () => {
   return (
     <BrowserRouter>

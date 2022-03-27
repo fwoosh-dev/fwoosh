@@ -7,7 +7,15 @@ export const meta: StoryMeta = {
   component: Button,
 };
 
-/** The default story. */
+/**
+ * The default story.
+ *
+ * Describe you **stories** with the _full power of markdown_!
+ *
+ * ```tsx
+ * console.log("Woah!");
+ * ```
+ */
 export const Playground = () => {
   return <Button>Click me</Button>;
 };

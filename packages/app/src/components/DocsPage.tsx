@@ -78,7 +78,9 @@ export const DocsPage = () => {
             return (
               <div>
                 <h2>{story.title}</h2>
-                {story.comment && <p>{story.comment}</p>}
+                {story.comment && (
+                  <p dangerouslySetInnerHTML={{ __html: story.comment }} />
+                )}
                 <StoryDiv key={story.slug} slug={story.slug} />
                 {index === 0 && <PropsTable docs={docs} />}
               </div>
