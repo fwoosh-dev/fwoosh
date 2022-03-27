@@ -5,6 +5,8 @@
     "incremental": true,
     "allowJs": true,
     "module": "ES2020",
+    "declarationMap": true,
+    "emitDeclarationOnly": false,
     "outDir": "lib",
     "strict": true,
     "jsx": "react-jsx",

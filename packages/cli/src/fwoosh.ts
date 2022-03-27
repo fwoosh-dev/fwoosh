@@ -5,11 +5,13 @@ import open from "open";
 import { createServer } from "vite";
 import express from "express";
 import { createRequire } from "module";
+import { SyncBailHook } from "tapable";
 
 import type { FwooshHooks, FwooshOptions } from "./types";
 import { getCacheDir } from "./utils/get-cache-dir.js";
-import { fwooshPlugin } from "./utils/vite-plugin.js";
+import { storyListPlugin } from "./utils/story-list-plugin.js";
 import { getStories } from "./utils/get-stories.js";
+import { renderStoryPlugin } from "./utils/render-story-plugin.js";
 
 const require = createRequire(import.meta.url);
 
@@ -22,10 +24,13 @@ export class Fwoosh {
   public options: Required<FwooshOptions>;
 
   /** Places for plugins to "tap" to add to or modify fwoosh's functionality */
-  hooks: FwooshHooks = {};
+  public hooks: FwooshHooks;
 
   constructor(options: FwooshOptions) {
     this.options = options;
+    this.hooks = {
+      renderStory: new SyncBailHook(),
+    };
   }
 
   loadPlugins = async () => {
@@ -36,7 +41,7 @@ export class Fwoosh {
         const [name, options] =
           typeof pluginConfig === "string" ? [pluginConfig, {}] : pluginConfig;
 
-        const Plugin = await import(name);
+        const Plugin = (await import(name)).default;
         plugins.push(new Plugin(options));
       })
     );
@@ -66,7 +71,10 @@ export class Fwoosh {
     const vite = await createServer({
       mode: "development",
       root: path.dirname(path.dirname(require.resolve("@fwoosh/app"))),
-      plugins: [fwooshPlugin(this.options)],
+      plugins: [
+        storyListPlugin(this.options),
+        renderStoryPlugin(this.hooks.renderStory.call()),
+      ],
       server: {
         port,
         middlewareMode: "html",

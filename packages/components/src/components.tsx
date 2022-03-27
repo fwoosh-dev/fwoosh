@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import makeClass from "clsx";
 
 export type Element<
@@ -62,7 +62,7 @@ const pre = ({ style, ...props }: Element<"pre">) => (
   <pre
     style={{
       ...style,
-      border: '1px solid gray',
+      border: "1px solid gray",
       marginTop: "1.5rem",
       marginBottom: "1.5rem",
     }}
@@ -89,6 +89,25 @@ const a = React.forwardRef(
     );
   }
 );
+
+export interface LazyLoaderProps {
+  delay?: number;
+}
+
+export const Spinner = ({ delay = 250 }: LazyLoaderProps) => {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setShow(true), delay);
+    return () => clearTimeout(timeout);
+  }, [delay]);
+
+  if (!show) {
+    return null;
+  }
+
+  return <div>Loading...</div>;
+};
 
 export const components = {
   h1,

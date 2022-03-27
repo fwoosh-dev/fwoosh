@@ -1,1 +1,2 @@
-export type { StoryMeta } from "./types";
+export * from "./types";
+export { Plugin, Fwoosh } from "./fwoosh";

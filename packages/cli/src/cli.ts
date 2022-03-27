@@ -1,25 +1,29 @@
 import { app, MultiCommand, Option } from "command-line-application";
 import ms from "pretty-ms";
 import ora from "ora";
-import { cosmiconfig } from "cosmiconfig";
+import { lilconfig } from "lilconfig";
 
 import { Fwoosh } from "./fwoosh.js";
 import { FwooshOptions } from "./types.js";
 
+const loadEsm = (filepath: string) => import(filepath);
+
 const name = "fwoosh";
-const explorer = cosmiconfig(name, {
+const explorer = lilconfig(name, {
   searchPlaces: [
     "package.json",
     `.${name}rc`,
     `.${name}rc.json`,
-    `.${name}rc.yaml`,
-    `.${name}rc.yml`,
     `.${name}rc.js`,
     `.${name}rc.cjs`,
+    `${name}.config.mjs`,
     `${name}.config.js`,
     `${name}.config.json`,
-    `${name}.config.cjs`,
   ],
+  loaders: {
+    ".js": loadEsm,
+    ".mjs": loadEsm,
+  },
 });
 
 const storiesOption: Option = {
@@ -67,7 +71,7 @@ async function run() {
   const start = process.hrtime();
   const options = app(fwooshCli);
   const { config = {} } = (await explorer.search()) || {};
-  const fwooshOptions = { ...config, ...options } as FwooshOptions;
+  const fwooshOptions = { ...config.default, ...options } as FwooshOptions;
 
   if (config.stories) {
     fwooshOptions.stories = config.stories;

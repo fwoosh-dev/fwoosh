@@ -1,0 +1,13 @@
+{
+  "name": "@fwoosh/react",
+  "type": "module",
+  "version": "0.0.13",
+  "description": "A lightening quick component development",
+  "main": "dist/index.js",
+  "author": "Andrew Lisowski <lisowski54@gmail.com>",
+  "repository": "hipstersmoothie/fwoosh",
+  "license": "MIT",
+  "dependencies": {
+    "fwoosh": "link:../../packages/cli"
+  }
+}

@@ -14,61 +14,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@auto-it/bot-list@npm:10.18.3":
-  version: 10.18.3
-  resolution: "@auto-it/bot-list@npm:10.18.3"
-  checksum: 51d5b38ce96ac5381c8edd64c0c457d0d936da9045de6f2ae286f10a63ecfe6baa0fb4773ca4be76251d65d7cf1d0cacbac6f14e3f78e3e8640d789694dc820a
-  languageName: node
-  linkType: hard
-
 "@auto-it/bot-list@npm:10.36.5":
   version: 10.36.5
   resolution: "@auto-it/bot-list@npm:10.36.5"
   checksum: eaae806200ab9ba3d2b7e9ac4ae4b072ff193edcf5d335fd75cfd428be7693cb0edde7be2eea8d7ad396edb9421bc5fab35c1ed6467b782b822ce93efee6d6b1
-  languageName: node
-  linkType: hard
-
-"@auto-it/core@npm:10.18.3":
-  version: 10.18.3
-  resolution: "@auto-it/core@npm:10.18.3"
-  dependencies:
-    "@auto-it/bot-list": 10.18.3
-    "@octokit/plugin-enterprise-compatibility": ^1.2.2
-    "@octokit/plugin-retry": ^3.0.1
-    "@octokit/plugin-throttling": ^3.2.0
-    "@octokit/rest": ^18.0.0
-    await-to-js: ^2.1.1
-    chalk: ^4.0.0
-    cosmiconfig: 7.0.0
-    deepmerge: ^4.0.0
-    dotenv: ^8.0.0
-    endent: ^2.0.1
-    enquirer: ^2.3.4
-    env-ci: ^5.0.1
-    fast-glob: ^3.1.1
-    fp-ts: ^2.5.3
-    fromentries: ^1.2.0
-    gitlog: ^4.0.3
-    https-proxy-agent: ^5.0.0
-    import-cwd: ^3.0.0
-    import-from: ^3.0.0
-    io-ts: ^2.1.2
-    lodash.chunk: ^4.2.0
-    log-symbols: ^4.0.0
-    node-fetch: 2.6.1
-    parse-author: ^2.0.0
-    parse-github-url: 1.0.2
-    pretty-ms: ^7.0.0
-    semver: ^7.0.0
-    signale: ^1.4.0
-    tapable: ^2.0.0-beta.2
-    terminal-link: ^2.1.1
-    tinycolor2: ^1.4.1
-    tslib: 2.1.0
-    type-fest: ^0.21.1
-    typescript-memoize: ^1.0.0-alpha.3
-    url-join: ^4.0.0
-  checksum: c9289650bf0348fcd97c3a32bd37715533cdfec552e686b0acf416175446cb6cc21db4f38a5d9bcb19d03a4e9e57b539339c115501dff6024ccc6712956ec3c2
   languageName: node
   linkType: hard
 
@@ -122,27 +71,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@auto-it/npm@npm:10.18.3":
-  version: 10.18.3
-  resolution: "@auto-it/npm@npm:10.18.3"
-  dependencies:
-    "@auto-it/core": 10.18.3
-    "@auto-it/package-json-utils": 10.18.3
-    await-to-js: ^2.1.1
-    env-ci: ^5.0.1
-    fp-ts: ^2.5.3
-    get-monorepo-packages: ^1.1.0
-    io-ts: ^2.1.2
-    registry-url: ^5.1.0
-    semver: ^7.0.0
-    tslib: 2.1.0
-    typescript-memoize: ^1.0.0-alpha.3
-    url-join: ^4.0.0
-    user-home: ^2.0.0
-  checksum: f9f34acf6227c67138cd7e52c74966611371958ceb8b4450718e5e34a01b9bc1ee563f9db680a42e2086b030af75fe0a2a7811670d066494a075172eae1a54c1
-  languageName: node
-  linkType: hard
-
 "@auto-it/npm@npm:10.36.5":
   version: 10.36.5
   resolution: "@auto-it/npm@npm:10.36.5"
@@ -165,16 +93,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@auto-it/package-json-utils@npm:10.18.3":
-  version: 10.18.3
-  resolution: "@auto-it/package-json-utils@npm:10.18.3"
-  dependencies:
-    parse-author: ^2.0.0
-    parse-github-url: 1.0.2
-  checksum: 53a870e19328c1906e0cdb839d2f5c62aaeed2e56a57a844b37d0ac1d42b31c9fccf01bdb0f3f12a26c5a2ff8d1eabe266f33eee43b56b611abb5d34ec34f405
-  languageName: node
-  linkType: hard
-
 "@auto-it/package-json-utils@npm:10.36.5":
   version: 10.36.5
   resolution: "@auto-it/package-json-utils@npm:10.36.5"
@@ -182,20 +100,6 @@ __metadata:
     parse-author: ^2.0.0
     parse-github-url: 1.0.2
   checksum: 475984b90ee00d6a5118c2d1b2ea3ab6519f21449b8e5bd99e89bfd08bec48ba39f3b18c5f2e181d13a6f60b8e0feee4883d0cc93c0342e597ce699e207b0fea
-  languageName: node
-  linkType: hard
-
-"@auto-it/released@npm:10.18.3":
-  version: 10.18.3
-  resolution: "@auto-it/released@npm:10.18.3"
-  dependencies:
-    "@auto-it/bot-list": 10.18.3
-    "@auto-it/core": 10.18.3
-    deepmerge: ^4.0.0
-    fp-ts: ^2.5.3
-    io-ts: ^2.1.2
-    tslib: 2.1.0
-  checksum: f78d4b85cd05e24c9863c90cd98e552f091c0b1bed37ca9e0e1ce8e010491ae2fa9b50fdcb1263a9767963d6163ce0bd28eecf5f7d5fe0eac0b0223e957daacc
   languageName: node
   linkType: hard
 
@@ -577,7 +481,22 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fwoosh/app@workspace:packages/app"
   dependencies:
+    "@types/react": ^17.0.2
+    "@types/react-dom": ^17.0.1
+    react: ^17.0.1
+    react-dom: ^17.0.1
     react-router-dom: ^6.2.2
+  languageName: unknown
+  linkType: soft
+
+"@fwoosh/components@workspace:packages/components":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/components@workspace:packages/components"
+  dependencies:
+    "@types/react": ^17.0.2
+    "@types/react-dom": ^17.0.1
+    react: ^17.0.1
+    react-dom: ^17.0.1
   languageName: unknown
   linkType: soft
 
@@ -585,8 +504,25 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fwoosh/react-example@workspace:examples/react"
   dependencies:
+    "@fwoosh/react": "link:../../plugins/react"
     "@vitejs/plugin-react": ^1.2.0
     fwoosh: "link:../../packages/cli"
+  languageName: unknown
+  linkType: soft
+
+"@fwoosh/react@link:../../plugins/react::locator=%40fwoosh%2Freact-example%40workspace%3Aexamples%2Freact":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/react@link:../../plugins/react::locator=%40fwoosh%2Freact-example%40workspace%3Aexamples%2Freact"
+  languageName: node
+  linkType: soft
+
+"@fwoosh/react@workspace:plugins/react":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/react@workspace:plugins/react"
+  dependencies:
+    fwoosh: "link:../../packages/cli"
+  bin:
+    react: bin/fwoosh.js
   languageName: unknown
   linkType: soft
 
@@ -688,20 +624,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/core@npm:^3.2.3":
-  version: 3.2.5
-  resolution: "@octokit/core@npm:3.2.5"
-  dependencies:
-    "@octokit/auth-token": ^2.4.4
-    "@octokit/graphql": ^4.5.8
-    "@octokit/request": ^5.4.12
-    "@octokit/types": ^6.0.3
-    before-after-hook: ^2.1.0
-    universal-user-agent: ^6.0.0
-  checksum: ca4ece019818114e43f70cdd91a3cacbe5727d6112d7aff51ba4d8a749c201676e1d8684442848e7d2a0646892733359d606012ffbf1430fb30d1bad6ca21c8c
-  languageName: node
-  linkType: hard
-
 "@octokit/core@npm:^3.5.1":
   version: 3.6.0
   resolution: "@octokit/core@npm:3.6.0"
@@ -763,16 +685,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/plugin-enterprise-compatibility@npm:^1.2.2":
-  version: 1.2.9
-  resolution: "@octokit/plugin-enterprise-compatibility@npm:1.2.9"
-  dependencies:
-    "@octokit/request-error": ^2.0.4
-    "@octokit/types": ^6.0.3
-  checksum: c666fe44943b7263334d532fe0da44d14590f8914d9312664e0ab1370af233ef9efd1a8babc77f5dd67bf5caa04b0d6f6594df39fc5fb4288b0e886f9c8494d8
-  languageName: node
-  linkType: hard
-
 "@octokit/plugin-paginate-rest@npm:^2.16.8":
   version: 2.17.0
   resolution: "@octokit/plugin-paginate-rest@npm:2.17.0"
@@ -784,44 +696,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/plugin-paginate-rest@npm:^2.6.2":
-  version: 2.11.0
-  resolution: "@octokit/plugin-paginate-rest@npm:2.11.0"
-  dependencies:
-    "@octokit/types": ^6.11.0
-  peerDependencies:
-    "@octokit/core": ">=2"
-  checksum: 60597d913c4657597f468309a581e73bc49c29b21be8fa2e7c0ada2cab7ae0743e755678fff46c2ab760c22c3aabec136309d0a2cd284f02d1ee274a3b172e24
-  languageName: node
-  linkType: hard
-
-"@octokit/plugin-request-log@npm:^1.0.2":
-  version: 1.0.3
-  resolution: "@octokit/plugin-request-log@npm:1.0.3"
-  peerDependencies:
-    "@octokit/core": ">=3"
-  checksum: 48ec556c1784048cd6129061c164be3565c77de68a2b4fa44e132fca08648a7034a4435d2cbdec82dacdd8da3f991fa0957e569ab2b092ae4d3a43a822a8a2d0
-  languageName: node
-  linkType: hard
-
 "@octokit/plugin-request-log@npm:^1.0.4":
   version: 1.0.4
   resolution: "@octokit/plugin-request-log@npm:1.0.4"
   peerDependencies:
     "@octokit/core": ">=3"
   checksum: 2086db00056aee0f8ebd79797b5b57149ae1014e757ea08985b71eec8c3d85dbb54533f4fd34b6b9ecaa760904ae6a7536be27d71e50a3782ab47809094bfc0c
-  languageName: node
-  linkType: hard
-
-"@octokit/plugin-rest-endpoint-methods@npm:4.13.4":
-  version: 4.13.4
-  resolution: "@octokit/plugin-rest-endpoint-methods@npm:4.13.4"
-  dependencies:
-    "@octokit/types": ^6.12.0
-    deprecation: ^2.3.1
-  peerDependencies:
-    "@octokit/core": ">=3"
-  checksum: bc2a95403d51cb4dc49c267493e14385e49bb22250eee7bb0c5e2c946effb4c502172907ee259761f5891feeea31286e21ea02ca3daa8dfe03320a1629cee128
   languageName: node
   linkType: hard
 
@@ -837,16 +717,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/plugin-retry@npm:^3.0.1":
-  version: 3.0.7
-  resolution: "@octokit/plugin-retry@npm:3.0.7"
-  dependencies:
-    "@octokit/types": ^6.0.3
-    bottleneck: ^2.15.3
-  checksum: 79c6dc3cc34f1ffe2ab51517513ee0039da5892e909824ae2fc4dcb4da608b39ed1cb2ec6f0367106ecbaea714d95a8fbc46d1534b926592beddacaffa34c8ef
-  languageName: node
-  linkType: hard
-
 "@octokit/plugin-retry@npm:^3.0.9":
   version: 3.0.9
   resolution: "@octokit/plugin-retry@npm:3.0.9"
@@ -854,18 +724,6 @@ __metadata:
     "@octokit/types": ^6.0.3
     bottleneck: ^2.15.3
   checksum: 5744780d308dd2f2b8174264604a9f8ea977374256f5eaf0314e5181c32f96ec53a3cfcee67bf1b48dc7eed401ebefebd2fa744b41cf03103affac92f397a874
-  languageName: node
-  linkType: hard
-
-"@octokit/plugin-throttling@npm:^3.2.0":
-  version: 3.4.1
-  resolution: "@octokit/plugin-throttling@npm:3.4.1"
-  dependencies:
-    "@octokit/types": ^6.0.1
-    bottleneck: ^2.15.3
-  peerDependencies:
-    "@octokit/core": ^3.0.0
-  checksum: 30008c49549f18c8edca759cde7667202edb6e0c987bf7baae1fd6865ce6ee6b2ee289ae88c4c75033900db0e73e096030d5ff52da5daed7c8cae0041769679a
   languageName: node
   linkType: hard
 
@@ -881,7 +739,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/request-error@npm:^2.0.0, @octokit/request-error@npm:^2.0.4":
+"@octokit/request-error@npm:^2.0.0":
   version: 2.0.5
   resolution: "@octokit/request-error@npm:2.0.5"
   dependencies:
@@ -903,7 +761,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/request@npm:^5.3.0, @octokit/request@npm:^5.4.12":
+"@octokit/request@npm:^5.3.0":
   version: 5.4.14
   resolution: "@octokit/request@npm:5.4.14"
   dependencies:
@@ -933,18 +791,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/rest@npm:^18.0.0":
-  version: 18.3.4
-  resolution: "@octokit/rest@npm:18.3.4"
-  dependencies:
-    "@octokit/core": ^3.2.3
-    "@octokit/plugin-paginate-rest": ^2.6.2
-    "@octokit/plugin-request-log": ^1.0.2
-    "@octokit/plugin-rest-endpoint-methods": 4.13.4
-  checksum: 518d63081e2ecb1cfb513fde71e584e5cbc5d510b4ddc15deffd6d7dfb4f251f84ee18a1ae976e2627216656eb7fb1cec45693e32b6facd791e081c6b33d61f5
-  languageName: node
-  linkType: hard
-
 "@octokit/rest@npm:^18.12.0":
   version: 18.12.0
   resolution: "@octokit/rest@npm:18.12.0"
@@ -957,7 +803,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/types@npm:^6.0.1, @octokit/types@npm:^6.0.3, @octokit/types@npm:^6.11.0, @octokit/types@npm:^6.12.0, @octokit/types@npm:^6.7.1":
+"@octokit/types@npm:^6.0.1, @octokit/types@npm:^6.0.3, @octokit/types@npm:^6.7.1":
   version: 6.12.0
   resolution: "@octokit/types@npm:6.12.0"
   dependencies:
@@ -1532,27 +1378,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"auto@npm:^10.18.3":
-  version: 10.18.3
-  resolution: "auto@npm:10.18.3"
-  dependencies:
-    "@auto-it/core": 10.18.3
-    "@auto-it/npm": 10.18.3
-    "@auto-it/released": 10.18.3
-    await-to-js: ^2.1.1
-    chalk: ^4.0.0
-    command-line-application: ^0.10.1
-    endent: ^2.0.1
-    module-alias: ^2.2.2
-    signale: ^1.4.0
-    terminal-link: ^2.1.1
-    tslib: 2.1.0
-  bin:
-    auto: dist/bin/auto.js
-  checksum: 38a0a39dd8f3e1c3c24c5ed8bda71b5e8e4edd2dc10c083bcffad6fb16c2802ab2c675437088109c3271492d59f51315fc59786df6487216d1c1802fbd70ee3c
-  languageName: node
-  linkType: hard
-
 "auto@npm:^10.36.5":
   version: 10.36.5
   resolution: "auto@npm:10.36.5"
@@ -1599,13 +1424,6 @@ __metadata:
   version: 1.5.1
   resolution: "base64-js@npm:1.5.1"
   checksum: 669632eb3745404c2f822a18fc3a0122d2f9a7a13f7fb8b5823ee19d1d2ff9ee5b52c53367176ea4ad093c332fd5ab4bd0ebae5a8e27917a4105a4cfc86b1005
-  languageName: node
-  linkType: hard
-
-"before-after-hook@npm:^2.1.0":
-  version: 2.2.0
-  resolution: "before-after-hook@npm:2.2.0"
-  checksum: 83f0a056f79c695a6788eea3177702cf7fbabad1cb5a53fd274f7820d73546674352ba24677ba62c9f5af963f773e7eea348422f7349a8993215761572b77ca3
   languageName: node
   linkType: hard
 
@@ -2329,17 +2147,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"endent@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "endent@npm:2.0.1"
-  dependencies:
-    dedent: ^0.7.0
-    fast-json-parse: ^1.0.3
-    objectorarray: ^1.0.4
-  checksum: 21a290c8e23d2760d0cda200888964623d3ecba6f7c2fd1fa068477cf2e6168d67c0313d91190e23e3163ab329c8491f5f102802088926abf8afa74e8c652b1a
-  languageName: node
-  linkType: hard
-
 "endent@npm:^2.1.0":
   version: 2.1.0
   resolution: "endent@npm:2.1.0"
@@ -2502,6 +2309,15 @@ __metadata:
   version: 0.14.28
   resolution: "esbuild-openbsd-64@npm:0.14.28"
   conditions: os=openbsd & cpu=x64
+  languageName: node
+  linkType: hard
+
+"esbuild-register@npm:^3.3.2":
+  version: 3.3.2
+  resolution: "esbuild-register@npm:3.3.2"
+  peerDependencies:
+    esbuild: ">=0.12 <1"
+  checksum: 94c353571b23f9a54d00e4551f03696c99b068699f6afaa2bed9cdf5247ec54536f50ea4c68572485904026a4fd374625418682fd240837895839aeba3f29ec2
   languageName: node
   linkType: hard
 
@@ -2921,7 +2737,6 @@ __metadata:
     clsx: ^1.1.1
     command-line-application: ^0.10.1
     cosmiconfig: ^7.0.0
-    endent: ^2.0.1
     execa: ^5.0.0
     find-cache-dir: ^3.3.1
     fwoosh: "link:./packages/cli"
@@ -2935,6 +2750,12 @@ __metadata:
     typescript: ^4.2.2
     wsrun: ^5.2.4
   languageName: unknown
+  linkType: soft
+
+"fwoosh@link:../../packages/cli::locator=%40fwoosh%2Freact%40workspace%3Aplugins%2Freact":
+  version: 0.0.0-use.local
+  resolution: "fwoosh@link:../../packages/cli::locator=%40fwoosh%2Freact%40workspace%3Aplugins%2Freact"
+  languageName: node
   linkType: soft
 
 "fwoosh@link:../../packages/cli::locator=%40fwoosh%2Freact-example%40workspace%3Aexamples%2Freact":
@@ -2959,28 +2780,22 @@ __metadata:
     "@types/find-cache-dir": ^3.2.0
     "@types/live-server": ^1.2.0
     "@types/node": ^14.14.31
-    "@types/react": ^17.0.2
-    "@types/react-dom": ^17.0.1
     ansi-colors: ^4.1.1
-    auto: ^10.18.3
     await-to-js: ^2.1.1
     boxen: ^6.2.1
     change-case: ^4.1.2
     clsx: ^1.1.1
     command-line-application: ^0.10.1
-    cosmiconfig: ^7.0.0
-    endent: ^2.0.1
+    endent: ^2.1.0
+    esbuild-register: ^3.3.2
     execa: ^5.0.0
     express: ^4.17.3
     find-cache-dir: ^3.3.1
+    lilconfig: ^2.0.5
     open: ^8.4.0
     ora: ^5.3.0
-    prettier: ^2.2.1
     pretty-ms: ^7.0.1
-    react: ^17.0.1
-    react-dom: ^17.0.1
     tapable: ^2.2.0
-    typescript: ^4.2.2
     vite: ^2.8.6
   bin:
     fwoosh: bin/fwoosh.js
@@ -3554,6 +3369,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lilconfig@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "lilconfig@npm:2.0.5"
+  checksum: f7bb9e42656f06930ad04e583026f087508ae408d3526b8b54895e934eb2a966b7aafae569656f2c79a29fe6d779b3ec44ba577e80814734c8655d6f71cdf2d1
+  languageName: node
+  linkType: hard
+
 "lines-and-columns@npm:^1.1.6":
   version: 1.1.6
   resolution: "lines-and-columns@npm:1.1.6"
@@ -3962,13 +3784,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:2.6.1, node-fetch@npm:^2.6.1":
-  version: 2.6.1
-  resolution: "node-fetch@npm:2.6.1"
-  checksum: 91075bedd57879117e310fbcc36983ad5d699e522edb1ebcdc4ee5294c982843982652925c3532729fdc86b2d64a8a827797a745f332040d91823c8752ee4d7c
-  languageName: node
-  linkType: hard
-
 "node-fetch@npm:2.6.7, node-fetch@npm:^2.6.7":
   version: 2.6.7
   resolution: "node-fetch@npm:2.6.7"
@@ -3980,6 +3795,13 @@ __metadata:
     encoding:
       optional: true
   checksum: 8d816ffd1ee22cab8301c7756ef04f3437f18dace86a1dae22cf81db8ef29c0bf6655f3215cb0cdb22b420b6fe141e64b26905e7f33f9377a7fa59135ea3e10b
+  languageName: node
+  linkType: hard
+
+"node-fetch@npm:^2.6.1":
+  version: 2.6.1
+  resolution: "node-fetch@npm:2.6.1"
+  checksum: 91075bedd57879117e310fbcc36983ad5d699e522edb1ebcdc4ee5294c982843982652925c3532729fdc86b2d64a8a827797a745f332040d91823c8752ee4d7c
   languageName: node
   linkType: hard
 
@@ -4055,13 +3877,6 @@ __metadata:
   version: 4.1.1
   resolution: "object-assign@npm:4.1.1"
   checksum: fcc6e4ea8c7fe48abfbb552578b1c53e0d194086e2e6bbbf59e0a536381a292f39943c6e9628af05b5528aa5e3318bb30d6b2e53cadaf5b8fe9e12c4b69af23f
-  languageName: node
-  linkType: hard
-
-"objectorarray@npm:^1.0.4":
-  version: 1.0.4
-  resolution: "objectorarray@npm:1.0.4"
-  checksum: f6b1dca119c1eb84ae7870de13066b2171512c826869d3655a13369b91ab7e035a44cc218a0bb09c893455031665f9c13bc0efadec5060c0356cf52311751465
   languageName: node
   linkType: hard
 
@@ -5212,7 +5027,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tapable@npm:^2.0.0-beta.2, tapable@npm:^2.2.0":
+"tapable@npm:^2.2.0":
   version: 2.2.0
   resolution: "tapable@npm:2.2.0"
   checksum: 5a7e31ddd2400d524b68e7ba0373e492ba52b321b8e1eb15b65956e9c1b9ba90dd175210a1318b6752538cbe3b284f4a7218a714be942aeeb812623c243aea25

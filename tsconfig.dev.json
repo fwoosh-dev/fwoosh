@@ -7,6 +7,12 @@
     },
     {
       "path": "packages/app"
+    },
+    {
+      "path": "packages/components"
+    },
+    {
+      "path": "plugins/react"
     }
   ]
 }

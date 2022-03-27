@@ -48,11 +48,12 @@ function createVirtualFile(config: Config) {
   `;
 }
 
-export function fwooshPlugin(config: FwooshOptions) {
+export function storyListPlugin(config: FwooshOptions) {
   const virtualFileId = "@fwoosh/app/stories";
 
   return {
-    name: "generated-list", // required, will show up in warnings and errors
+    name: "story-list",
+
     resolveId(id: string) {
       if (id.includes(virtualFileId)) {
         return virtualFileId;
