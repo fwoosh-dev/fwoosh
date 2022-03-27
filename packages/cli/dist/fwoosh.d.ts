@@ -1,14 +1,6 @@
-import type { FwooshHooks } from "./types";
+import type { FwooshHooks, FwooshOptions } from "./types";
 interface WatchPagesOptions {
     port: number;
-}
-export interface FwooshOptions {
-    /** Globs to match story files */
-    stories: string[];
-    /** the directory with the mdx pages */
-    outDir: string;
-    /** Plugins applied to this fwoosh instance, contains default plugins */
-    plugins: Array<string | [name: string, options: Record<string, unknown>]>;
 }
 export declare class Fwoosh {
     /** User's fwoosh options */
@@ -22,8 +14,7 @@ export declare class Fwoosh {
     /** Do a production build of the website */
     build(): Promise<void>;
     /** Start the development server */
-    dev(options?: WatchPagesOptions): Promise<void>;
-    private getAllPages;
+    dev({ port }?: WatchPagesOptions): Promise<void>;
 }
 /** A fwoosh plugin */
 export interface Plugin {

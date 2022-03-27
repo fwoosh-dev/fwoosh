@@ -1,10 +1,14 @@
 {
-  "name": "@fwoosh/core",
+  "name": "@fwoosh/app",
   "version": "0.0.13",
   "author": "Andrew Lisowski <lisowski54@gmail.com>",
   "repository": "hipstersmoothie/fwoosh",
   "license": "MIT",
+  "main": "dist/index.js",
   "scripts": {
     "build": "echo todo"
+  },
+  "dependencies": {
+    "react-router-dom": "^6.2.2"
   }
 }

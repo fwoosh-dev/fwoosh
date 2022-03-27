@@ -20,7 +20,7 @@
     "@types/node": "^14.14.31",
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",
-    "auto": "^10.18.3",
+    "auto": "^10.36.5",
     "prettier": "^2.2.1",
     "typescript": "^4.2.2",
     "wsrun": "^5.2.4"
@@ -34,6 +34,7 @@
     "endent": "^2.0.1",
     "execa": "^5.0.0",
     "find-cache-dir": "^3.3.1",
+    "fwoosh": "link:./packages/cli",
     "open": "^7.4.2",
     "ora": "^5.3.0",
     "pretty-ms": "^7.0.1",
@@ -46,5 +47,6 @@
       "npm",
       "released"
     ]
-  }
+  },
+  "packageManager": "yarn@3.2.0"
 }

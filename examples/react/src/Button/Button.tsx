@@ -1,3 +1,4 @@
+import * as React from "react";
 import makeClass from "clsx";
 
 import * as styles from "./Button.module.css";

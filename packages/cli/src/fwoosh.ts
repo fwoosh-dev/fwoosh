@@ -1,37 +1,20 @@
 import { promises as fs } from "fs";
-import ansi from "ansi-colors";
-import glob from "fast-glob";
-import ms from "pretty-ms";
+import boxen from "boxen";
+import path from "path";
+import open from "open";
+import { createServer } from "vite";
+import express from "express";
+import { createRequire } from "module";
 
-import type { FwooshHooks } from "./types";
+import type { FwooshHooks, FwooshOptions } from "./types";
 import { getCacheDir } from "./utils/get-cache-dir.js";
+import { fwooshPlugin } from "./utils/vite-plugin.js";
+import { getStories } from "./utils/get-stories.js";
 
-interface PageBuild {
-  pages: string[];
-  rebuild: () => Promise<void>;
-}
+const require = createRequire(import.meta.url);
 
 interface WatchPagesOptions {
   port: number;
-}
-
-// @ts-ignore
-const { bold, green } = ansi;
-
-/** Display a build speed message */
-const makeBuildMessage = (pagePath: string, time: number, rebuild = false) => {
-  return `${rebuild ? "Rebuild" : "Built"} ${bold(
-    `"${pagePath}"`
-  )}, took ${green(ms(time / 1000000))}`;
-};
-
-export interface FwooshOptions {
-  /** Globs to match story files */
-  stories: string[];
-  /** the directory with the mdx pages */
-  outDir: string;
-  /** Plugins applied to this fwoosh instance, contains default plugins */
-  plugins: Array<string | [name: string, options: Record<string, unknown>]>;
 }
 
 export class Fwoosh {
@@ -77,13 +60,43 @@ export class Fwoosh {
   }
 
   /** Start the development server */
-  async dev(options: WatchPagesOptions = { port: 3000 }) {
-    console.log("TODO");
-  }
+  async dev({ port }: WatchPagesOptions = { port: 3000 }) {
+    const stories = await getStories(this.options);
+    const app = express();
+    const vite = await createServer({
+      mode: "development",
+      root: path.dirname(path.dirname(require.resolve("@fwoosh/app"))),
+      plugins: [fwooshPlugin(this.options)],
+      server: {
+        port,
+        middlewareMode: "html",
+        fs: {
+          strict: false,
+        },
+      },
+    });
 
-  private getAllPages() {
-    return glob(this.options.stories, {
-      ignore: [`${this.options.outDir}/**`],
+    app.head("*", async (_, res) => res.sendStatus(200));
+
+    app.get("/meta.json", async (_, res) => {
+      res.json(stories);
+    });
+
+    app.use(vite.middlewares);
+
+    app.listen(port, async () => {
+      console.log(
+        boxen(`fwoosh served at http://localhost:${port}`, {
+          padding: 1,
+          margin: 1,
+          borderStyle: "round",
+          borderColor: "green",
+          titleAlignment: "center",
+          textAlignment: "center",
+        })
+      );
+
+      // await open(`http://localhost:${port}`);
     });
   }
 }

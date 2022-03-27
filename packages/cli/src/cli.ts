@@ -3,7 +3,8 @@ import ms from "pretty-ms";
 import ora from "ora";
 import { cosmiconfig } from "cosmiconfig";
 
-import { Fwoosh, FwooshOptions } from "./fwoosh.js";
+import { Fwoosh } from "./fwoosh.js";
+import { FwooshOptions } from "./types.js";
 
 const name = "fwoosh";
 const explorer = cosmiconfig(name, {

@@ -1,14 +1,13 @@
 import { promises as fs } from "fs";
-import ansi from "ansi-colors";
-import glob from "fast-glob";
-import ms from "pretty-ms";
+import boxen from "boxen";
+import path from "path";
+import { createServer } from "vite";
+import express from "express";
+import { createRequire } from "module";
 import { getCacheDir } from "./utils/get-cache-dir.js";
-// @ts-ignore
-const { bold, green } = ansi;
-/** Display a build speed message */
-const makeBuildMessage = (pagePath, time, rebuild = false) => {
-    return `${rebuild ? "Rebuild" : "Built"} ${bold(`"${pagePath}"`)}, took ${green(ms(time / 1000000))}`;
-};
+import { fwooshPlugin } from "./utils/vite-plugin.js";
+import { getStories } from "./utils/get-stories.js";
+const require = createRequire(import.meta.url);
 export class Fwoosh {
     constructor(options) {
         /** Places for plugins to "tap" to add to or modify fwoosh's functionality */
@@ -38,12 +37,36 @@ export class Fwoosh {
         console.log("TODO");
     }
     /** Start the development server */
-    async dev(options = { port: 3000 }) {
-        console.log("TODO");
-    }
-    getAllPages() {
-        return glob(this.options.stories, {
-            ignore: [`${this.options.outDir}/**`],
+    async dev({ port } = { port: 3000 }) {
+        const stories = await getStories(this.options);
+        const app = express();
+        const vite = await createServer({
+            mode: "development",
+            root: path.dirname(path.dirname(require.resolve("@fwoosh/app"))),
+            plugins: [fwooshPlugin(this.options)],
+            server: {
+                port,
+                middlewareMode: "html",
+                fs: {
+                    strict: false,
+                },
+            },
+        });
+        app.head("*", async (_, res) => res.sendStatus(200));
+        app.get("/meta.json", async (_, res) => {
+            res.json(stories);
+        });
+        app.use(vite.middlewares);
+        app.listen(port, async () => {
+            console.log(boxen(`fwoosh served at http://localhost:${port}`, {
+                padding: 1,
+                margin: 1,
+                borderStyle: "round",
+                borderColor: "green",
+                titleAlignment: "center",
+                textAlignment: "center",
+            }));
+            // await open(`http://localhost:${port}`);
         });
     }
 }

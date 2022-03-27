@@ -9,6 +9,7 @@
     "strict": true,
     "jsx": "react-jsx",
     "target": "ES2018",
+    "lib": ["es2019", "DOM"],
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
