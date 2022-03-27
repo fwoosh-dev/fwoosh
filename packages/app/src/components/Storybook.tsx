@@ -2,38 +2,30 @@ import React from "react";
 import { Outlet, Link } from "react-router-dom";
 import { StoryTree, useStoryTree } from "../hooks/useStoryTree";
 
-interface TreeItemProps {
-  tree: StoryTree;
-  path?: string[];
-}
-
-const TreeItem = ({ tree, path = [] }: TreeItemProps) => {
+const TreeItem = ({ tree }: { tree: StoryTree }) => {
   return (
     <>
       {Object.entries(tree).map(([title, items]) => {
-        const currentPath = [...path, title];
-        const pathString = currentPath.join("-");
-
         return (
-          <React.Fragment key={`group-${pathString}`}>
+          <>
+            <span style={{ color: "grey" }}>{title}</span>
             {Array.isArray(items) ? (
-              <Link key={pathString} to={pathString}>
-                {title}
-              </Link>
+              items.map((story) => (
+                <Link key={story.slug} to={story.slug}>
+                  {story.title}
+                </Link>
+              ))
             ) : (
-              <>
-                <span style={{ color: "grey" }}>{title}</span>
-                <TreeItem tree={items} path={currentPath} />
-              </>
+              <TreeItem tree={items} />
             )}
-          </React.Fragment>
+          </>
         );
       })}
     </>
   );
 };
 
-export const Docs = () => {
+export const Storybook = () => {
   const tree = useStoryTree();
 
   return (

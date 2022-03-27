@@ -1,5 +1,4 @@
 import { AsyncSeriesBailHook, SyncBailHook } from "tapable";
-import type { Stories } from "@fwoosh/app/stories";
 
 export interface StoryMeta {
   /** The title used to create the sidebar tree structure. */
@@ -11,11 +10,6 @@ export interface Story {
   title: string;
   slug: string;
   file: string;
-}
-
-interface RenderStoryContext {
-  slug: string;
-  stories: Stories;
 }
 
 export interface FwooshHooks {

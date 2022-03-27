@@ -1,10 +1,10 @@
 import { pascalCase } from "change-case";
 
 import { endent } from "./endent.js";
-import { FwooshOptions, Story } from "../types";
+import { FwooshOptions, Story, StoryMeta } from "../types";
 import { getStories } from "./get-stories.js";
 
-type Config = { stories: Story[] }[];
+type Config = { stories: Story[]; meta: StoryMeta }[];
 
 const defaultListModule = endent`
   import { lazy } from "react";
@@ -13,7 +13,9 @@ const defaultListModule = endent`
 `;
 
 function createVirtualFile(config: Config) {
-  const allStories = config.flatMap((file) => file.stories);
+  const allStories = config.flatMap((file) =>
+    file.stories.map((s) => ({ ...s, grouping: file.meta.title }))
+  );
   const lazyComponents = allStories.map(
     (story) => endent`
       const ${pascalCase(story.slug)} = lazy(() =>
@@ -27,6 +29,7 @@ function createVirtualFile(config: Config) {
     (story) => `'${story.slug}': {
       title: '${story.title}',
       slug: '${story.slug}',
+      grouping: '${story.grouping}',
       component: ${pascalCase(story.slug)},
     }`
   );

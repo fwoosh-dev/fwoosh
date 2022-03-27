@@ -1,16 +1,19 @@
 import React, { Suspense } from "react";
 import { render } from "@fwoosh/app/render";
 import { useParams } from "react-router-dom";
+import { useId } from "@radix-ui/react-id";
 
 import ErrorBoundary from "./ErrorBoundary";
 import { Spinner } from "./Spinner";
 
 const StoryDiv = React.memo(({ slug }: { slug: string }) => {
-  React.useEffect(() => {
-    render(slug);
-  }, [slug]);
+  const id = useId();
 
-  return <div id="story" />;
+  React.useEffect(() => {
+    render(id, slug);
+  }, [id, slug]);
+
+  return <div id={id} />;
 });
 
 export const Story = () => {

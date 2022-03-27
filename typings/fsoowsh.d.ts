@@ -3,6 +3,7 @@ declare module "@fwoosh/app/stories" {
     [key: string]: {
       title: string;
       slug: string;
+      grouping: string;
       component: any;
     };
   }
@@ -11,5 +12,5 @@ declare module "@fwoosh/app/stories" {
 }
 
 declare module "@fwoosh/app/render" {
-  export function render(slug: string): void;
+  export function render(id: string, slug: string): void;
 }
