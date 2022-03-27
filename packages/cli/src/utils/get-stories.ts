@@ -6,6 +6,36 @@ import path from "path";
 
 import { FwooshOptions, Story, StoryMeta } from "../types";
 
+function getComment(contents: string, d: { span: { start: number } }) {
+  if (
+    contents[d.span.start - 3] === "*" &&
+    contents[d.span.start - 2] === "/"
+  ) {
+    let i = d.span.start - 4;
+    const comment = [contents[i]];
+
+    while (true) {
+      if (
+        contents[i - 2] === "/" &&
+        contents[i - 1] === "*" &&
+        contents[i] === "*"
+      ) {
+        break;
+      }
+
+      // Not a jsDoc comment so we can't parse it
+      if (contents[i - 1] === "/" && contents[i] === "*") {
+        console.log("not jsdoc");
+        return;
+      }
+
+      comment.unshift(contents[i--]);
+    }
+
+    return comment.join("").trim();
+  }
+}
+
 export async function getStories({
   stories,
   outDir,
@@ -45,14 +75,16 @@ export async function getStories({
       );
       const storiesDeclarations = exports.filter((e) => e !== metaDeclaration);
       const fullPath = path.resolve(file);
-      const stories = (storiesDeclarations as any)
-        .map((d: any) => d.declaration.declarations[0].id.value)
-        .map((exportName: string) => ({
+      const stories = (storiesDeclarations as any).map((d: any) => {
+        const exportName = d.declaration.declarations[0].id.value;
+        return {
           exportName,
           title: capitalCase(exportName),
           slug: `${paramCase(meta.title)}--${paramCase(exportName)}`,
           file: fullPath,
-        }));
+          comment: getComment(contents, d),
+        };
+      });
 
       return { stories, meta };
     })

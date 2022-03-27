@@ -35,9 +35,16 @@ export const DocsPage = () => {
     <ErrorBoundary>
       <Suspense fallback={<Spinner delay={300} />}>
         <div>
-          {stories.map((story) => (
-            <StoryDiv key={story.slug} slug={story.slug} />
-          ))}
+          {stories.map((story) => {
+            console.log(story);
+            return (
+              <div>
+                <h2>{story.title}</h2>
+                {story.comment && <p>{story.comment}</p>}
+                <StoryDiv key={story.slug} slug={story.slug} />
+              </div>
+            );
+          })}
         </div>
       </Suspense>
     </ErrorBoundary>

@@ -10,6 +10,7 @@ export interface Story {
   title: string;
   slug: string;
   file: string;
+  comment?: string;
 }
 
 export interface FwooshHooks {

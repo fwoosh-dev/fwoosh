@@ -5,6 +5,7 @@ declare module "@fwoosh/app/stories" {
       slug: string;
       grouping: string;
       component: any;
+      comment?: string;
     };
   }
 

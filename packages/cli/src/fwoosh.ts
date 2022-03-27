@@ -66,7 +66,6 @@ export class Fwoosh {
 
   /** Start the development server */
   async dev({ port }: WatchPagesOptions = { port: 3000 }) {
-    const stories = await getStories(this.options);
     const app = express();
     const vite = await createServer({
       mode: "development",
@@ -85,10 +84,6 @@ export class Fwoosh {
     });
 
     app.head("*", async (_, res) => res.sendStatus(200));
-
-    app.get("/meta.json", async (_, res) => {
-      res.json(stories);
-    });
 
     app.use(vite.middlewares);
 
