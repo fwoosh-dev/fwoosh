@@ -29,6 +29,7 @@ export function getDocsPlugin() {
               }
 
               const params = new URLSearchParams({ title: path.replace(/-/g, "/") });
+              setDocs();
 
               fetch("/get-docs?" + params).then((res) => res.json()).then((data) => {
                 setDocs(data);

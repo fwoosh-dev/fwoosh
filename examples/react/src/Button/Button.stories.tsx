@@ -11,16 +11,19 @@ export const meta: StoryMeta = {
  * The default story.
  *
  * Describe you **stories** with the _full power of markdown_!
- *
- * ```tsx
- * console.log("Woah!");
- * ```
+
  */
 export const Playground = () => {
   return <Button>Click me</Button>;
 };
 
-/** A button can be disabled. */
+/**
+ * A button can be disabled.
+ *
+ * ```tsx
+ * console.log("Woah!");
+ * ```
+ */
 export const WithDisabled = () => {
   return <Button disabled>Click me</Button>;
 };

@@ -21,7 +21,7 @@ const PropsTable = ({ docs }: PropsTableProps) => {
     <>
       {docs?.map((doc) => (
         <React.Fragment key={doc.displayName}>
-          <components.h3>{doc.displayName}</components.h3>
+          <components.h4>{doc.displayName} Props</components.h4>
           <components.table>
             <thead>
               <components.tr>
@@ -55,14 +55,17 @@ const StoryDiv = React.memo(({ slug }: { slug: string }) => {
     render(id, slug);
   }, [id, slug]);
 
-  return <div id={id} />;
+  return (
+    <div className="rounded-md border border-gray-400 px-4 py-8" id={id} />
+  );
 });
 
 export const DocsPage = () => {
   const tree = useStoryTree();
   const params = useParams<{ docsPath: string }>();
   const docs = useDocs(params.docsPath);
-  const stories = React.useMemo(() => {
+  const [, name] = params.docsPath?.split("-") || [];
+  const [firstStory, ...stories] = React.useMemo(() => {
     if (!params.docsPath) {
       return [];
     }
@@ -74,18 +77,30 @@ export const DocsPage = () => {
   return (
     <ErrorBoundary>
       <Suspense fallback={<Spinner delay={300} />}>
-        <div>
-          {stories.map((story, index) => {
+        <div className="max-w-80ch mt-12 mb-20">
+          <components.h1>{name}</components.h1>
+          {firstStory && (
+            <>
+              {firstStory.comment && (
+                <Markdown options={{ overrides: components }}>
+                  {firstStory.comment.replace(/class=/g, "className=")}
+                </Markdown>
+              )}
+              <StoryDiv slug={firstStory.slug} />
+            </>
+          )}
+          <PropsTable docs={docs} />
+          <components.h2>Stories</components.h2>
+          {stories.map((story) => {
             return (
-              <div>
-                <components.h2>{story.title}</components.h2>
+              <div key={story.slug}>
+                <components.h3>{story.title}</components.h3>
                 {story.comment && (
                   <Markdown options={{ overrides: components }}>
-                    {story.comment}
+                    {story.comment.replace(/class=/g, "className=")}
                   </Markdown>
                 )}
-                <StoryDiv key={story.slug} slug={story.slug} />
-                {index === 0 && <PropsTable docs={docs} />}
+                <StoryDiv slug={story.slug} />
               </div>
             );
           })}

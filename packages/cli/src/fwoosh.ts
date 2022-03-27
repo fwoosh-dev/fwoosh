@@ -8,6 +8,7 @@ import { createRequire } from "module";
 import { SyncBailHook } from "tapable";
 import Unocss from "unocss/vite";
 import presetWind from "@unocss/preset-wind";
+import transformerDirective from "@unocss/transformer-directives";
 
 import type { FwooshHooks, FwooshOptions } from "./types";
 import { getCacheDir } from "./utils/get-cache-dir.js";
@@ -84,7 +85,11 @@ export class Fwoosh {
         getDocsPlugin(),
         storyListPlugin(this.options),
         renderStoryPlugin(this.hooks.renderStory.call()),
-        Unocss({ presets: [presetWind()], include: [/\.js$/] }),
+        Unocss({
+          presets: [presetWind()],
+          include: [/\.(js|tsx|jsx|css)$/],
+          transformers: [transformerDirective()],
+        }),
       ],
       server: {
         port,

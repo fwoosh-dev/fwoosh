@@ -502,6 +502,7 @@ __metadata:
     "@types/dlv": ^1.1.2
     "@types/react": ^17.0.2
     "@types/react-dom": ^17.0.1
+    "@unocss/reset": ^0.30.6
     dlv: ^1.1.3
     dset: ^3.1.1
     react: ^17.0.1
@@ -1409,7 +1410,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@unocss/reset@npm:0.30.6":
+"@unocss/reset@npm:0.30.6, @unocss/reset@npm:^0.30.6":
   version: 0.30.6
   resolution: "@unocss/reset@npm:0.30.6"
   checksum: 828864eeff7340976f4feecb3efbfe9cd8cf7d8ef9a85b81d62add1b4644d6638c586aa07f7d35ea46d0fc6d5aaf6b41b04733acc873c9d9fbbea8fee0048725
@@ -1423,7 +1424,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@unocss/transformer-directives@npm:0.30.6":
+"@unocss/transformer-directives@npm:0.30.6, @unocss/transformer-directives@npm:^0.30.6":
   version: 0.30.6
   resolution: "@unocss/transformer-directives@npm:0.30.6"
   dependencies:
@@ -3310,6 +3311,7 @@ __metadata:
     "@types/live-server": ^1.2.0
     "@types/node": ^14.14.31
     "@unocss/preset-wind": ^0.30.6
+    "@unocss/transformer-directives": ^0.30.6
     ansi-colors: ^4.1.1
     await-to-js: ^2.1.1
     boxen: ^6.2.1

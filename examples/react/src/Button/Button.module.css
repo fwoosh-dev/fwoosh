@@ -3,3 +3,7 @@
   padding: 8px 16px;
   border: 1px solid #ccc;
 }
+
+.root:disabled {
+  opacity: 0.5;
+}

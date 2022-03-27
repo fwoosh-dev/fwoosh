@@ -86,7 +86,7 @@ function getComponentPath(ast: swc.Module, file: string, value: string) {
   );
 }
 
-let parsed: Record<string, number> = {};
+let parsed = 0;
 
 export async function getStories({
   stories,
@@ -96,57 +96,60 @@ export async function getStories({
     ignore: [`${outDir}/**`],
   });
 
-  return Promise.all(
-    files.map(async (file) => {
-      const contents = await fs.readFile(file, "utf8");
-      const fullPath = path.resolve(file);
+  const data = [];
 
-      const ast = await swc.parse(contents, {
-        syntax: "typescript",
-        tsx: true,
-        comments: false,
-        script: true,
-      });
+  for (const file of files) {
+    const contents = await fs.readFile(file, "utf8");
+    const fullPath = path.resolve(file);
 
-      const exports = ast.body.filter(
-        (node) => node.type === "ExportDeclaration"
-      );
+    const ast = await swc.parse(contents, {
+      syntax: "typescript",
+      tsx: true,
+      comments: false,
+      script: true,
+    });
 
-      const metaDeclaration = exports.find(
-        (e) =>
-          "declaration" in e &&
-          e.declaration.type === "VariableDeclaration" &&
-          "value" in e.declaration.declarations[0].id &&
-          e.declaration.declarations[0].id.value === "meta"
-      );
-      const meta = (metaDeclaration as any).declaration.declarations[0].init.properties.reduce(
-        (acc: Record<string, unknown>, property: Record<string, any>) => ({
-          ...acc,
-          [property.key.value]:
-            property.key.value === "component"
-              ? getComponentPath(ast, fullPath, property.value.value)
-              : property.value.value,
-        }),
-        {}
-      );
-      const storiesDeclarations = exports.filter((e) => e !== metaDeclaration);
-      const stories: Story[] = await Promise.all(
-        (storiesDeclarations as any).map(async (d: any) => {
-          const exportName = d.declaration.declarations[0].id.value;
-          return {
-            exportName,
-            title: capitalCase(exportName),
-            slug: `${paramCase(meta.title)}--${paramCase(exportName)}`,
-            file: fullPath,
-            comment: await getComment(contents, parsed[file] || 0, d),
-          };
-        })
-      );
+    const exports = ast.body.filter(
+      (node) => node.type === "ExportDeclaration"
+    );
 
-      // There's a bug in swc that causes it to not have the correct span.start
-      // on subsequent calls to parse. This is a hack to fix that.
-      parsed[file] = 1 + contents.length + (parsed[file] ? parsed[file] : 0);
-      return { stories, meta: { ...meta, file: fullPath } };
-    })
-  );
+    const metaDeclaration = exports.find(
+      (e) =>
+        "declaration" in e &&
+        e.declaration.type === "VariableDeclaration" &&
+        "value" in e.declaration.declarations[0].id &&
+        e.declaration.declarations[0].id.value === "meta"
+    );
+    const meta = (metaDeclaration as any).declaration.declarations[0].init.properties.reduce(
+      (acc: Record<string, unknown>, property: Record<string, any>) => ({
+        ...acc,
+        [property.key.value]:
+          property.key.value === "component"
+            ? getComponentPath(ast, fullPath, property.value.value)
+            : property.value.value,
+      }),
+      {}
+    );
+    const storiesDeclarations = exports.filter((e) => e !== metaDeclaration);
+    const stories: Story[] = await Promise.all(
+      (storiesDeclarations as any).map(async (d: any) => {
+        const exportName = d.declaration.declarations[0].id.value;
+        return {
+          exportName,
+          title: capitalCase(exportName),
+          slug: `${paramCase(meta.title)}--${paramCase(exportName)}`,
+          file: fullPath,
+          comment: await getComment(contents, parsed, d),
+        };
+      })
+    );
+
+    // There's a bug in swc that causes it to not have the correct span.start
+    // on subsequent calls to parse. This is a hack to fix that.
+    // Because of this same bug we also have to parse story files linearly.
+    parsed += 1 + contents.length;
+    data.push({ stories, meta: { ...meta, file: fullPath } });
+  }
+
+  return data;
 }

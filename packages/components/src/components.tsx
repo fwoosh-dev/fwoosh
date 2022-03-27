@@ -25,7 +25,7 @@ const h1 = ({ className, ...props }: Element<"h1">) => (
 const h2 = ({ className, ...props }: Element<"h2">) => (
   <h2
     className={makeClass(
-      "lvl2 text-2xl lg:text-3xl font-normal mb-4 md:mb-6 mt-6 lg:mt-8",
+      "lvl2 text-2xl lg:text-3xl font-normal md:mb-6 mt-6 lg:mt-8 border-b border-gray-300 pb-2 mb-4",
       className
     )}
     {...props}
@@ -106,13 +106,9 @@ const code = ({ className, style, ...props }: Element<"code">) =>
       {...props}
       className={makeClass(
         className,
-        "rounded text-gray-700 dark:text-gray-200 bg-gray-200 dark:bg-gray-700"
+        "rounded py-6 px-4 text-gray-700 dark:text-gray-200 bg-gray-200 dark:bg-gray-700"
       )}
       style={{
-        padding: "12px 20px",
-        display: "block",
-        overflow: "auto",
-        borderRadius: 4,
         ...style,
       }}
     />
@@ -123,7 +119,10 @@ const code = ({ className, style, ...props }: Element<"code">) =>
 /** The component used to render a pre */
 const pre = ({ style, className, ...props }: Element<"pre">) => (
   <pre
-    className={makeClass(className, "rounded border dark:border-gray-700 my-6")}
+    className={makeClass(
+      className,
+      "pre rounded border dark:border-gray-700 my-6"
+    )}
     style={{
       ...style,
       marginTop: "1.5rem",
