@@ -5,6 +5,7 @@ import dlv from "dlv";
 import { useId } from "@radix-ui/react-id";
 import { Stories } from "@fwoosh/app/stories";
 import { useDocs } from "@fwoosh/app/docs";
+import Markdown from "markdown-to-jsx";
 
 import ErrorBoundary from "./ErrorBoundary";
 import { Spinner } from "./Spinner";
@@ -78,9 +79,7 @@ export const DocsPage = () => {
             return (
               <div>
                 <h2>{story.title}</h2>
-                {story.comment && (
-                  <p dangerouslySetInnerHTML={{ __html: story.comment }} />
-                )}
+                {story.comment && <Markdown>{story.comment}</Markdown>}
                 <StoryDiv key={story.slug} slug={story.slug} />
                 {index === 0 && <PropsTable docs={docs} />}
               </div>

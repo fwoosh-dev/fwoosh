@@ -1,14 +1,15 @@
 {
-  "name": "fwoosh",
-  "type": "module",
+  "name": "fwoosh-monorepo",
   "version": "0.0.14",
   "description": "A lightening quick MDX static website generator!",
-  "main": "lib/index.js",
-  "bin": "bin/fwoosh.js",
+  "workspaces": [
+    "packages/*",
+    "plugins/*",
+    "examples/*"
+  ],
   "scripts": {
     "build": "tsc -b tsconfig.dev.json",
     "start": "npm run build -- --watch",
-    "vercel-build": "yarn build && yarn fwoosh build",
     "release": "auto shipit"
   },
   "devDependencies": {

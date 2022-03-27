@@ -25,12 +25,16 @@ const markdownToHtml = unified()
   .use(rehypeStringify)
   .use(gfm);
 
-async function getComment(contents: string, d: { span: { start: number } }) {
+async function getComment(
+  contents: string,
+  offset: number,
+  d: { span: { start: number } }
+) {
   if (
-    contents[d.span.start - 3] === "*" &&
-    contents[d.span.start - 2] === "/"
+    contents[d.span.start - offset - 3] === "*" &&
+    contents[d.span.start - offset - 2] === "/"
   ) {
-    let i = d.span.start - 4;
+    let i = d.span.start - offset - 4;
     const comment = [contents[i]];
 
     while (true) {
@@ -82,6 +86,8 @@ function getComponentPath(ast: swc.Module, file: string, value: string) {
   );
 }
 
+let parsed: Record<string, number> = {};
+
 export async function getStories({
   stories,
   outDir,
@@ -132,11 +138,14 @@ export async function getStories({
             title: capitalCase(exportName),
             slug: `${paramCase(meta.title)}--${paramCase(exportName)}`,
             file: fullPath,
-            comment: await getComment(contents, d),
+            comment: await getComment(contents, parsed[file] || 0, d),
           };
         })
       );
 
+      // There's a bug in swc that causes it to not have the correct span.start
+      // on subsequent calls to parse. This is a hack to fix that.
+      parsed[file] = 1 + contents.length + (parsed[file] ? parsed[file] : 0);
       return { stories, meta: { ...meta, file: fullPath } };
     })
   );
