@@ -3,6 +3,7 @@ declare module "@fwoosh/app/stories" {
     [key: string]: {
       title: string;
       slug: string;
+      code: string;
       grouping: string;
       component: any;
       comment?: string;

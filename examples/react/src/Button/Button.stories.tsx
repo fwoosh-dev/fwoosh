@@ -22,6 +22,10 @@ export const Playground = () => {
  *
  * ```tsx
  * console.log("Woah!");
+ *
+ * const Example = () => {
+ *   return <Button disabled>Click me</Button>;
+ * }
  * ```
  */
 export const WithDisabled = () => {

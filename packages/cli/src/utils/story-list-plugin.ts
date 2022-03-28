@@ -30,7 +30,8 @@ function createVirtualFile(config: Config) {
       title: '${story.title}',
       slug: '${story.slug}',
       grouping: '${story.grouping}',
-      comment: '${story.comment}',
+      comment: \`${story.comment}\`,
+      code: \`${story.code}\`,
       component: ${pascalCase(story.slug)},
     }`
   );

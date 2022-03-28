@@ -1,0 +1,5 @@
+.showingCode code,
+.showingCode pre {
+  @apply rounded-t-none;
+  margin-top: 0 !important;
+}

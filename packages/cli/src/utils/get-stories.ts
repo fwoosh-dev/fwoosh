@@ -12,6 +12,7 @@ import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
 
 import { FwooshOptions, ResolvedStoryMeta, Story } from "../types";
+import { endent } from "./endent.js";
 
 const require = createRequire(import.meta.url);
 
@@ -24,6 +25,10 @@ const markdownToHtml = unified()
   })
   .use(rehypeStringify)
   .use(gfm);
+
+function sanitizeString(str: string) {
+  return str.replace(/`/g, "\\\\`");
+}
 
 async function getComment(
   contents: string,
@@ -60,11 +65,11 @@ async function getComment(
         .trim()
         .split("\n")
         .map((line) => line.trim())
-        .map((line) => line.replace(/^\s*\*\s*/, ""))
+        .map((line) => line.replace(/^\s*\*/, ""))
         .join("\n")
     );
 
-    return String(html).split("\n").join("\\\n");
+    return sanitizeString(String(html));
   }
 }
 
@@ -131,15 +136,25 @@ export async function getStories({
       {}
     );
     const storiesDeclarations = exports.filter((e) => e !== metaDeclaration);
+
     const stories: Story[] = await Promise.all(
       (storiesDeclarations as any).map(async (d: any) => {
         const exportName = d.declaration.declarations[0].id.value;
+        const code = await markdownToHtml.process(
+          endent`
+            \`\`\`tsx
+            ${contents.slice(d.span.start - parsed, d.span.end - parsed)}
+            \`\`\`
+          `
+        );
+
         return {
           exportName,
           title: capitalCase(exportName),
           slug: `${paramCase(meta.title)}--${paramCase(exportName)}`,
           file: fullPath,
           comment: await getComment(contents, parsed, d),
+          code: sanitizeString(String(code)),
         };
       })
     );

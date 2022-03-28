@@ -1,4 +1,5 @@
 import React, { Suspense } from "react";
+import makeClass from "clsx";
 import { render } from "@fwoosh/app/render";
 import { useParams } from "react-router-dom";
 import dlv from "dlv";
@@ -6,11 +7,13 @@ import { useId } from "@radix-ui/react-id";
 import { Stories } from "@fwoosh/app/stories";
 import { useDocs } from "@fwoosh/app/docs";
 import { components } from "@fwoosh/components";
-import Markdown from "markdown-to-jsx";
+import * as Collapsible from "@radix-ui/react-collapsible";
 
 import ErrorBoundary from "./ErrorBoundary";
 import { Spinner } from "./Spinner";
 import { useStoryTree } from "../hooks/useStoryTree";
+import { StyledMarkdown } from "./StyledMarkdown";
+import * as styles from "./DocsPage.module.css";
 
 interface PropsTableProps {
   docs: ReturnType<typeof useDocs>;
@@ -48,17 +51,40 @@ const PropsTable = ({ docs }: PropsTableProps) => {
   );
 };
 
-const StoryDiv = React.memo(({ slug }: { slug: string }) => {
-  const id = useId();
+const StoryDiv = React.memo(
+  ({ slug, code }: { slug: string; code: string }) => {
+    const id = useId();
+    const [codeShowing, codeShowingSet] = React.useState(false);
 
-  React.useEffect(() => {
-    render(id, slug);
-  }, [id, slug]);
+    React.useEffect(() => {
+      render(id, slug);
+    }, [id, slug]);
 
-  return (
-    <div className="rounded-md border border-gray-400 px-4 py-8" id={id} />
-  );
-});
+    return (
+      <Collapsible.Root open={codeShowing} onOpenChange={codeShowingSet}>
+        <div className="relative">
+          <div
+            className={makeClass(
+              "border border-gray-400 px-4 py-8",
+              codeShowing ? "rounded-t-md" : "rounded-md"
+            )}
+            id={id}
+          />
+          <Collapsible.Trigger asChild={true}>
+            <button className="absolute border bottom-0 right-0 px-2 rounded-tl">
+              {codeShowing ? "Hide" : "Show"} code
+            </button>
+          </Collapsible.Trigger>
+        </div>
+        <Collapsible.Content>
+          <StyledMarkdown className={codeShowing && styles.showingCode}>
+            {code}
+          </StyledMarkdown>
+        </Collapsible.Content>
+      </Collapsible.Root>
+    );
+  }
+);
 
 export const DocsPage = () => {
   const tree = useStoryTree();
@@ -82,11 +108,9 @@ export const DocsPage = () => {
           {firstStory && (
             <>
               {firstStory.comment && (
-                <Markdown options={{ overrides: components }}>
-                  {firstStory.comment.replace(/class=/g, "className=")}
-                </Markdown>
+                <StyledMarkdown>{firstStory.comment}</StyledMarkdown>
               )}
-              <StoryDiv slug={firstStory.slug} />
+              <StoryDiv slug={firstStory.slug} code={firstStory.code} />
             </>
           )}
           <PropsTable docs={docs} />
@@ -96,11 +120,9 @@ export const DocsPage = () => {
               <div key={story.slug}>
                 <components.h3>{story.title}</components.h3>
                 {story.comment && (
-                  <Markdown options={{ overrides: components }}>
-                    {story.comment.replace(/class=/g, "className=")}
-                  </Markdown>
+                  <StyledMarkdown>{story.comment}</StyledMarkdown>
                 )}
-                <StoryDiv slug={story.slug} />
+                <StoryDiv slug={story.slug} code={story.code} />
               </div>
             );
           })}

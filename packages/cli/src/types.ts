@@ -19,6 +19,7 @@ export interface Story {
   title: string;
   slug: string;
   file: string;
+  code: string;
   comment?: string;
 }
 
