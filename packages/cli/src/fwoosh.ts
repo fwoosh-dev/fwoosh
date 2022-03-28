@@ -1,7 +1,7 @@
 import { promises as fs } from "fs";
 import boxen from "boxen";
 import path from "path";
-import open from "open";
+// import open from "open";
 import { createServer } from "vite";
 import express from "express";
 import { createRequire } from "module";
@@ -11,7 +11,6 @@ import presetWind from "@unocss/preset-wind";
 import transformerDirective from "@unocss/transformer-directives";
 
 import type { FwooshHooks, FwooshOptions } from "./types";
-import { getCacheDir } from "./utils/get-cache-dir.js";
 import { storyListPlugin } from "./utils/story-list-plugin.js";
 import { getStories } from "./utils/get-stories.js";
 import { renderStoryPlugin } from "./utils/render-story-plugin.js";
@@ -66,7 +65,6 @@ export class Fwoosh {
   async clean() {
     await Promise.all([
       fs.rm(this.options.outDir, { recursive: true, force: true }),
-      fs.rm(getCacheDir(), { recursive: true, force: true }),
     ]);
   }
 
@@ -86,7 +84,7 @@ export class Fwoosh {
         storyListPlugin(this.options),
         renderStoryPlugin(this.hooks.renderStory.call()),
         Unocss({
-          presets: [presetWind()],
+          presets: [presetWind({ dark: "media" })],
           include: [/\.(js|tsx|jsx|css)$/],
           transformers: [transformerDirective()],
         }),
