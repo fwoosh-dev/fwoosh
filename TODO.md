@@ -2,8 +2,8 @@
 
 - [ ] create vue plugin and example
 - [ ] make sidebar and layout pluggable
-- [ ] add styling
-- [ ] add theming
+- [ ] switch to stitches
+  - [ ] add theming
 - [ ] addons panel + hooks
 - [ ] toolbar tools + hooks
 - [ ] decorator hook
@@ -11,8 +11,6 @@
 - [ ] action utility
 - [ ] search
 - [ ] command pallette?
-- [ ] code previews in docs
 - [ ] code preview in addon panel
-- [ ] docs
 - [ ] make component docs lookup follow re-exports
 - [ ] add cache for docgen

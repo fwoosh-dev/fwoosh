@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import makeClass from "clsx";
+import { styled } from "./stitches";
 
 export type Element<
   T extends keyof JSX.IntrinsicElements
@@ -7,41 +8,47 @@ export type Element<
 
 const DEFAULT_SPACING = "my-4";
 const DEFAULT_TEXT_COLOR = "text(gray-800 dark:gray-300)";
-const HEADER_TEXT_COLOR = "text(gray-900 dark:gray-200)";
 
 /** The component used to render a h1 */
-const h1 = ({ className, ...props }: Element<"h1">) => (
-  <h1
-    className={makeClass(
-      className,
-      "lvl1 text-3xl lg:text-4xl font-semibold mb-4 md:mb-8",
-      HEADER_TEXT_COLOR
-    )}
-    {...props}
-  />
-);
+const h1 = styled("h1", {
+  text: "3xl",
+  mb: 4,
+  color: "$grey11",
+  fontWeight: 600,
+
+  "@md": {
+    mb: 5,
+  },
+  "@lg": {
+    text: "4xl",
+  },
+});
 
 /** The component used to render a h2 */
-const h2 = ({ className, ...props }: Element<"h2">) => (
-  <h2
-    className={makeClass(
-      "lvl2 text-2xl lg:text-3xl font-normal md:mb-6 mt-6 lg:mt-8 border-b border-gray-300 pb-2 mb-4",
-      className
-    )}
-    {...props}
-  />
-);
+const h2 = styled("h2", {
+  text: "2xl",
+  mt: 6,
+  mb: 4,
+  pb: 2,
+  color: "$grey11",
+  fontWeight: 500,
+  borderBottom: "1px solid $gray6",
+
+  "@md": {
+    mb: 5,
+  },
+  "@lg": {
+    text: "3xl",
+    my: 8,
+  },
+});
 
 /** The component used to render a h3 */
-const h3 = ({ className, ...props }: Element<"h3">) => (
-  <h3
-    className={makeClass(
-      "lvl3 text-xl lg:text-2xl font-bold lg:font-semibold mt-6",
-      className
-    )}
-    {...props}
-  />
-);
+const h3 = styled("h2", {
+  text: "xl",
+  mt: 6,
+  fontWeight: 500,
+});
 
 /** The component used to render a h4 */
 const h4 = ({ className, ...props }: Element<"h4">) => (
@@ -68,12 +75,11 @@ const h6 = ({ className, ...props }: Element<"h6">) => (
 );
 
 /** The component used to render a p */
-const p = ({ className, ...props }: Element<"p">) => (
-  <p
-    className={makeClass(DEFAULT_SPACING, className, DEFAULT_TEXT_COLOR)}
-    {...props}
-  />
-);
+const p = styled("p", {
+  my: 4,
+  text: "lg",
+  color: "$gray11",
+});
 
 /** The component used to render a li */
 const li = ({ className, ...props }: Element<"li">) => (
@@ -84,20 +90,29 @@ const li = ({ className, ...props }: Element<"li">) => (
 );
 
 /** The component used to render a blockquote */
-const blockquote = ({ className, ...props }: Element<"blockquote">) => (
-  <blockquote
-    className={makeClass(
-      "bg-gray-200 dark:bg-gray-800 px-6 py-6 my-8 border-l-4 border-blue-500",
-      className
-    )}
-    {...props}
-  />
-);
+const blockquote = styled("blockquote", {
+  px: 4,
+  py: 0.5,
+  my: 6,
+  borderLeft: "4px solid $primary8",
+  text: "lg",
+  background: "$primary2",
+  "& p": {
+    color: "$primary11",
+  },
+});
 
 /** The component used to render a `code` in a line of text */
-const InlineCode = (props: Element<"code">) => (
-  <code style={{ padding: "2px 6px", background: "#d0d0d0" }} {...props} />
-);
+const InlineCode = styled("code", {
+  fontSize: "max(12px, 85%)",
+  whiteSpace: "nowrap",
+  paddingTop: 0,
+  paddingRight: 3,
+  paddingBottom: 2,
+  paddingLeft: 3,
+  background: "$primary2",
+  color: "$primary10",
+});
 
 /** The component used to render an block of code */
 const code = ({ className, style, ...props }: Element<"code">) =>
@@ -184,22 +199,19 @@ const table = ({ className, ...props }: Element<"table">) => (
   </div>
 );
 
-const th = ({ className, ...props }: Element<"th">) => (
-  <th
-    className={makeClass(className, "pb-4 px-3 text-left font-semibold")}
-    {...props}
-  />
-);
+const th = styled("th", {
+  pb: 4,
+  textAlign: "left",
+  fontWeight: 300,
+  color: "$gray10",
+});
 
-const td = ({ className, ...props }: Element<"td">) => (
-  <td
-    className={makeClass(
-      className,
-      "py-2 px-3 border-b border-t dark:border-gray-800"
-    )}
-    {...props}
-  />
-);
+const td = styled("td", {
+  py: 6,
+  borderBottom: "1px solid",
+  borderTop: "1px solid",
+  borderColor: "$gray5",
+});
 
 const tr = ({ className, ...props }: Element<"tr">) => (
   <tr className={makeClass(className, "tr")} {...props} />

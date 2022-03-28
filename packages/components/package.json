@@ -5,7 +5,7 @@
   "author": "Andrew Lisowski <lisowski54@gmail.com>",
   "repository": "hipstersmoothie/fwoosh",
   "license": "MIT",
-  "main": "dist/components.js",
+  "main": "dist/index.js",
   "dependencies": {
     "react": "^17.0.1",
     "react-dom": "^17.0.1"

@@ -498,8 +498,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fwoosh/app@workspace:packages/app"
   dependencies:
+    "@radix-ui/colors": ^0.1.8
     "@radix-ui/react-collapsible": ^0.1.6
     "@radix-ui/react-id": ^0.1.5
+    "@stitches/react": ^1.2.7
     "@types/dlv": ^1.1.2
     "@types/react": ^17.0.2
     "@types/react-dom": ^17.0.1
@@ -863,6 +865,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@radix-ui/colors@npm:^0.1.8":
+  version: 0.1.8
+  resolution: "@radix-ui/colors@npm:0.1.8"
+  checksum: 35fb8e48b1333e0a800ee55ce554d29016c10d2cb23aa161c6476c32b8231ec78f0ae57535ad482aa35adf0b64c957d92da88ef7f3a3f4a2f8c06870208c7ed1
+  languageName: node
+  linkType: hard
+
 "@radix-ui/primitive@npm:0.1.0":
   version: 0.1.0
   resolution: "@radix-ui/primitive@npm:0.1.0"
@@ -1003,6 +1012,15 @@ __metadata:
     estree-walker: ^2.0.1
     picomatch: ^2.2.2
   checksum: 2e86d9bfb95919727bcba0bbbdbedc98e25a1e51fe3047f18ec6d85e0743d1c73e1c0de3f9fdbd2ff6b90c32f30d4b2706c9e794f3c2e7a80156980081558e2e
+  languageName: node
+  linkType: hard
+
+"@stitches/react@npm:^1.2.7":
+  version: 1.2.7
+  resolution: "@stitches/react@npm:1.2.7"
+  peerDependencies:
+    react: ">= 16.3.0"
+  checksum: f4a66d208607a5f72d902d06388c0e3c5cec6cccc207e3b01228d3dc8e5b09742f4191fe932fac84c19ece825df174009025ba5939511501914785ed26a2c767
   languageName: node
   linkType: hard
 

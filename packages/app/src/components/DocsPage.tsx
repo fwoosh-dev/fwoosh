@@ -6,7 +6,7 @@ import dlv from "dlv";
 import { useId } from "@radix-ui/react-id";
 import { Stories } from "@fwoosh/app/stories";
 import { useDocs } from "@fwoosh/app/docs";
-import { components } from "@fwoosh/components";
+import { components, css } from "@fwoosh/components";
 import * as Collapsible from "@radix-ui/react-collapsible";
 
 import ErrorBoundary from "./ErrorBoundary";
@@ -37,9 +37,21 @@ const PropsTable = ({ docs }: PropsTableProps) => {
             <tbody>
               {Object.entries(doc.props).map(([prop, propDoc]) => (
                 <components.tr key={`${doc.displayName}-${prop}`}>
-                  <components.td>{prop}</components.td>
-                  <components.td>{propDoc.type.name}</components.td>
-                  <components.td>{propDoc.defaultValue?.value}</components.td>
+                  <components.td>
+                    <components.code>{prop}</components.code>
+                  </components.td>
+                  <components.td>
+                    {propDoc.type.name && (
+                      <components.code>{propDoc.type.name}</components.code>
+                    )}
+                  </components.td>
+                  <components.td>
+                    {propDoc.defaultValue?.value && (
+                      <components.code>
+                        {propDoc.defaultValue?.value}
+                      </components.code>
+                    )}
+                  </components.td>
                   <components.td>{propDoc.description}</components.td>
                 </components.tr>
               ))}
