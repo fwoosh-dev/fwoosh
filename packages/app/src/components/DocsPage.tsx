@@ -1,12 +1,13 @@
 import React, { Suspense } from "react";
 import { render } from "@fwoosh/app/render";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import dlv from "dlv";
 import { useId } from "@radix-ui/react-id";
 import { Stories } from "@fwoosh/app/stories";
 import { useDocs } from "@fwoosh/app/docs";
 import { components, PageWrapper, styled } from "@fwoosh/components";
 import * as Collapsible from "@radix-ui/react-collapsible";
+import { paramCase } from "change-case";
 
 import ErrorBoundary from "./ErrorBoundary";
 import { Spinner } from "./Spinner";
@@ -14,6 +15,11 @@ import { useStoryTree } from "../hooks/useStoryTree";
 import { StyledMarkdown } from "./StyledMarkdown";
 import * as styles from "./DocsPage.module.css";
 import { ThemeToggle } from "./ThemeToggle";
+
+const DocsLayout = styled("div", {
+  display: "grid",
+  gridTemplateColumns: "1fr minmax(200px, 300px)",
+});
 
 const StoryPreview = styled("div", {
   border: "1px solid $gray7",
@@ -43,6 +49,52 @@ const ShowCodeButton = styled("button", {
   color: "$gray10",
 });
 
+const QuickNav = styled("div", {
+  my: 10,
+  position: "sticky",
+  top: "$4",
+  height: "fit-content",
+  px: 8,
+});
+
+const NavHeader = styled("div", {
+  display: "flex",
+  alignItems: "center",
+  px: 2,
+  my: 2,
+});
+
+const NavTitle = styled("h1", {
+  text: "xl",
+  color: "$gray11",
+  flex: 1,
+});
+
+const TitleNavItem = styled("li", {
+  height: "$8",
+  text: "sm",
+  color: "$gray10",
+  display: "flex",
+  alignItems: "center",
+  px: 2,
+
+  "&:hover": {
+    color: "$gray11",
+    backgroundColor: "$gray2",
+  },
+
+  "&:active": {
+    color: "$gray11",
+    backgroundColor: "$gray4",
+  },
+});
+
+const NavGroup = styled("div", {
+  [`&  ${TitleNavItem}`]: {
+    pl: 5,
+  },
+});
+
 interface PropsTableProps {
   docs: ReturnType<typeof useDocs>;
 }
@@ -52,7 +104,7 @@ const PropsTable = ({ docs }: PropsTableProps) => {
     <>
       {docs?.map((doc) => (
         <React.Fragment key={doc.displayName}>
-          <components.h4>{doc.displayName} Props</components.h4>
+          <components.h3 id="props">{doc.displayName} Props</components.h3>
           <components.table>
             <thead>
               <components.tr>
@@ -137,31 +189,62 @@ export const DocsPage = () => {
   return (
     <ErrorBoundary>
       <Suspense fallback={<Spinner delay={300} />}>
-        <PageWrapper>
-          <ThemeToggle />
-          <components.h1>{name}</components.h1>
-          {firstStory && (
-            <>
-              {firstStory.comment && (
-                <StyledMarkdown>{firstStory.comment}</StyledMarkdown>
-              )}
-              <StoryDiv slug={firstStory.slug} code={firstStory.code} />
-            </>
-          )}
-          <PropsTable docs={docs} />
-          <components.h2>Stories</components.h2>
-          {stories.map((story) => {
-            return (
-              <div key={story.slug}>
-                <components.h3>{story.title}</components.h3>
-                {story.comment && (
-                  <StyledMarkdown>{story.comment}</StyledMarkdown>
+        <DocsLayout>
+          <PageWrapper>
+            <components.h1 id="intro">{name}</components.h1>
+            {firstStory && (
+              <>
+                {firstStory.comment && (
+                  <StyledMarkdown>{firstStory.comment}</StyledMarkdown>
                 )}
-                <StoryDiv slug={story.slug} code={story.code} />
-              </div>
-            );
-          })}
-        </PageWrapper>
+                <StoryDiv slug={firstStory.slug} code={firstStory.code} />
+              </>
+            )}
+            <PropsTable docs={docs} />
+            <components.h2 id="stories">Stories</components.h2>
+            {stories.map((story) => {
+              return (
+                <div key={story.slug}>
+                  <components.h3 id={paramCase(story.title)}>
+                    {story.title}
+                  </components.h3>
+                  {story.comment && (
+                    <StyledMarkdown>{story.comment}</StyledMarkdown>
+                  )}
+                  <StoryDiv slug={story.slug} code={story.code} />
+                </div>
+              );
+            })}
+          </PageWrapper>
+          <QuickNav>
+            <NavHeader>
+              <NavTitle>Quick nav</NavTitle>
+              <ThemeToggle />
+            </NavHeader>
+            <ul>
+              <a href="#intro">
+                <TitleNavItem>Introduction</TitleNavItem>
+              </a>
+              <a href="#props">
+                <TitleNavItem>Properties</TitleNavItem>
+              </a>
+              <a href="#stories">
+                <TitleNavItem>Stories</TitleNavItem>
+              </a>
+              <NavGroup>
+                {stories.map((story) => {
+                  return (
+                    <a href={`#${paramCase(story.title)}`}>
+                      <TitleNavItem key={story.slug}>
+                        {story.title}
+                      </TitleNavItem>
+                    </a>
+                  );
+                })}
+              </NavGroup>
+            </ul>
+          </QuickNav>
+        </DocsLayout>
       </Suspense>
     </ErrorBoundary>
   );

@@ -12,6 +12,7 @@ const h1 = styled("h1", {
   mb: 4,
   color: "$gray11",
   fontWeight: 600,
+  scrollMarginTop: "$4",
 
   "@md": {
     mb: 5,
@@ -30,6 +31,7 @@ const h2 = styled("h2", {
   color: "$gray11",
   fontWeight: 500,
   borderBottom: "1px solid $gray7",
+  scrollMarginTop: "$4",
 
   "@md": {
     mb: 5,
@@ -46,6 +48,7 @@ const h3 = styled("h3", {
   color: "$gray11",
   mt: 6,
   fontWeight: 500,
+  scrollMarginTop: "$4",
 });
 
 /** The component used to render a h4 */
@@ -54,6 +57,7 @@ const h4 = styled("h4", {
   color: "$gray11",
   fontWeight: 700,
   mt: 8,
+  scrollMarginTop: "$4",
 });
 
 /** The component used to render a h5 */
@@ -63,6 +67,7 @@ const h5 = styled("h5", {
   fontWeight: 500,
   mt: 8,
   fontStyle: "italic",
+  scrollMarginTop: "$4",
 });
 
 /** The component used to render a h6 */
@@ -70,6 +75,7 @@ const h6 = styled("h6", {
   fontWeight: 500,
   mt: 8,
   color: "$gray11",
+  scrollMarginTop: "$4",
 });
 
 /** The component used to render a p */
