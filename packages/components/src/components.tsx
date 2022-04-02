@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
-import makeClass from "clsx";
+import * as React from "react";
+import { Link } from "react-router-dom";
 import { styled } from "./stitches";
 
 export type Element<
   T extends keyof JSX.IntrinsicElements
 > = React.PropsWithoutRef<JSX.IntrinsicElements[T]>;
-
-const DEFAULT_SPACING = "my-4";
-const DEFAULT_TEXT_COLOR = "text(gray-800 dark:gray-300)";
 
 /** The component used to render a h1 */
 const h1 = styled("h1", {
@@ -44,35 +41,32 @@ const h2 = styled("h2", {
 });
 
 /** The component used to render a h3 */
-const h3 = styled("h2", {
+const h3 = styled("h3", {
   text: "xl",
   mt: 6,
   fontWeight: 500,
 });
 
 /** The component used to render a h4 */
-const h4 = ({ className, ...props }: Element<"h4">) => (
-  <h4
-    className={makeClass("lvl4 text-xl font-semibold mt-8", className)}
-    {...props}
-  />
-);
+const h4 = styled("h4", {
+  text: "lg",
+  fontWeight: 700,
+  mt: 8,
+});
 
 /** The component used to render a h5 */
-const h5 = ({ className, ...props }: Element<"h5">) => (
-  <h5
-    className={makeClass("lvl5 text-lg font-semibold mt-8", className)}
-    {...props}
-  />
-);
+const h5 = styled("h5", {
+  text: "lg",
+  fontWeight: 500,
+  mt: 8,
+  fontStyle: "italic",
+});
 
 /** The component used to render a h6 */
-const h6 = ({ className, ...props }: Element<"h6">) => (
-  <h6
-    className={makeClass("lvl6 text-md font-semibold mt-8", className)}
-    {...props}
-  />
-);
+const h6 = styled("h6", {
+  fontWeight: 500,
+  mt: 8,
+});
 
 /** The component used to render a p */
 const p = styled("p", {
@@ -82,12 +76,7 @@ const p = styled("p", {
 });
 
 /** The component used to render a li */
-const li = ({ className, ...props }: Element<"li">) => (
-  <li
-    className={makeClass(DEFAULT_SPACING, className, DEFAULT_TEXT_COLOR)}
-    {...props}
-  />
-);
+const li = styled("li");
 
 /** The component used to render a blockquote */
 const blockquote = styled("blockquote", {
@@ -114,38 +103,37 @@ const InlineCode = styled("code", {
   color: "$primary10",
 });
 
+const CodeBlock = styled("pre", {
+  py: 6,
+  px: 4,
+});
+
 /** The component used to render an block of code */
-const code = ({ className, style, ...props }: Element<"code">) =>
+const code = ({ className, ...props }: Element<"code">) =>
   className && className.includes("language") ? (
-    <code
-      {...props}
-      className={makeClass(
-        className,
-        "rounded py-6 px-4 text-gray-700 dark:text-gray-200 bg-gray-200 dark:bg-gray-700"
-      )}
-      style={{
-        ...style,
-      }}
-    />
+    <CodeBlock className={className} {...props} />
   ) : (
-    <InlineCode className={className} style={style} {...props} />
+    <InlineCode className={className} {...props} />
   );
 
 /** The component used to render a pre */
-const pre = ({ style, className, ...props }: Element<"pre">) => (
-  <pre
-    className={makeClass(
-      className,
-      "pre rounded border dark:border-gray-700 my-6"
-    )}
-    style={{
-      ...style,
-      marginTop: "1.5rem",
-      marginBottom: "1.5rem",
-    }}
-    {...props}
-  />
-);
+const pre = styled("pre", {
+  borderRadius: 4,
+  marginTop: "1.5rem",
+  marginBottom: "1.5rem",
+  border: "1px solid $gray6",
+  textAlign: "left",
+  fontWeight: 300,
+  color: "$gray10",
+  my: 6,
+  overflow: "hidden",
+});
+
+const Anchor = styled("a", {
+  cursor: "pointer",
+  color: "$primary10",
+  textDecoration: "underline",
+});
 
 /** The component used to render an anchor */
 const a = React.forwardRef(
@@ -154,19 +142,13 @@ const a = React.forwardRef(
     ref: React.Ref<HTMLAnchorElement>
   ) => {
     if (href.startsWith("http")) {
-      return <a ref={ref} href={href} {...props} />;
+      return <Anchor ref={ref} href={href} {...props} />;
     }
 
     return (
-      <a
-        ref={ref}
-        href={href.includes("#") ? href.replace("#", ".html#") : `${href}.html`}
-        className={makeClass(
-          "cursor-pointer text-blue-500 dark:text-blue-400 focus-visible:ring ring-offset-2 focus:outline-none rounded",
-          className
-        )}
-        {...props}
-      />
+      <Link to={href}>
+        <Anchor ref={ref} {...props} />
+      </Link>
     );
   }
 );
@@ -176,9 +158,9 @@ export interface LazyLoaderProps {
 }
 
 export const Spinner = ({ delay = 250 }: LazyLoaderProps) => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = React.useState(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const timeout = setTimeout(() => setShow(true), delay);
     return () => clearTimeout(timeout);
   }, [delay]);
@@ -190,49 +172,95 @@ export const Spinner = ({ delay = 250 }: LazyLoaderProps) => {
   return <div>Loading...</div>;
 };
 
-const table = ({ className, ...props }: Element<"table">) => (
-  <div className="overflow-auto">
-    <table
-      className={makeClass(className, DEFAULT_TEXT_COLOR, "w-full my-6")}
-      {...props}
-    />
-  </div>
-);
+const table = styled("table", {
+  my: 8,
+  width: "100%",
+});
 
 const th = styled("th", {
   pb: 4,
   textAlign: "left",
   fontWeight: 300,
   color: "$gray10",
+  text: "sm",
 });
 
 const td = styled("td", {
-  py: 6,
+  py: 4,
   borderBottom: "1px solid",
   borderTop: "1px solid",
   borderColor: "$gray5",
 });
 
-const tr = ({ className, ...props }: Element<"tr">) => (
-  <tr className={makeClass(className, "tr")} {...props} />
-);
+const tr = styled("tr");
 
-const hr = ({ className, ...props }: Element<"hr">) => (
-  <hr
-    className={makeClass(className, "m-12 border-b-2 dark:border-gray-700")}
-    {...props}
-  />
-);
+const hr = styled("hr", {
+  my: 12,
+  mx: 20,
+  borderTop: "none",
+  borderBottom: "1px solid $gray7",
+  listStyle: "disc",
+});
 
 /** The component used to render an ul */
-const ul = ({ className, ...props }: Element<"ul">) => (
-  <ul className={makeClass(className, "my-6 ul")} {...props} />
-);
+const ul = styled("ul", {
+  my: 6,
+  listStyle: "disc",
+  text: "lg",
+
+  "& li": {
+    ml: 8,
+  },
+});
 
 /** The component used to render an ol */
-const ol = ({ className, ...props }: Element<"ol">) => (
-  <ol className={makeClass(className, "my-6 ol")} {...props} />
-);
+const ol = styled("ul", {
+  my: 6,
+  listStyle: "decimal",
+  text: "lg",
+
+  "& li": {
+    ml: 8,
+  },
+});
+
+export const SidebarLayout = styled("div", {
+  display: "grid",
+  gridTemplateColumns: "280px 1fr",
+  minHeight: "100vh",
+});
+
+export const Logo = styled("div", {
+  px: 12,
+  py: 6,
+});
+
+export const Sidebar = styled("div", {
+  borderRight: "1px solid $gray4",
+});
+
+export const SidebarItem = styled("div", {
+  height: "$10",
+  px: 2,
+  display: "flex",
+  alignItems: "center",
+  '&[aria-selected="true"]': {
+    backgroundColor: "$gray4",
+  },
+});
+
+export const Content = styled("div", {
+  maxHeight: "100vh",
+  overflowY: "auto",
+});
+
+export const PageWrapper = styled("div", {
+  mt: 16,
+  mb: 28,
+  mx: "auto",
+  maxWidth: "$5xl",
+  width: "100%",
+});
 
 export const components = {
   h1,

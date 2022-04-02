@@ -51,6 +51,21 @@ const space = {
   72: "18rem",
   80: "20rem",
   96: "24rem",
+  auto: "auto",
+};
+
+const sizes = {
+  xs: "20rem",
+  sm: "24rem",
+  md: "28rem",
+  lg: "32rem",
+  xl: "36rem",
+  "2xl": "42rem",
+  "3xl": "48rem",
+  "4xl": "56rem",
+  "5xl": "64rem",
+  "6xl": "72rem",
+  "7xl": "80rem",
 };
 
 export const {
@@ -73,6 +88,7 @@ export const {
       ) as Record<string, string>),
     },
     space: space,
+    sizes: { ...space, ...sizes },
   },
   media: {
     sm: "(min-width: 640px)",
