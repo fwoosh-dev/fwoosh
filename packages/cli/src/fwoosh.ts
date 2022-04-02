@@ -15,6 +15,7 @@ import { storyListPlugin } from "./utils/story-list-plugin.js";
 import { getStories } from "./utils/get-stories.js";
 import { renderStoryPlugin } from "./utils/render-story-plugin.js";
 import { getDocsPlugin } from "./utils/get-docs-plugin.js";
+import { fwooshConfigPlugin } from "./utils/fwoosh-config-plugin.js";
 
 const require = createRequire(import.meta.url);
 
@@ -80,6 +81,7 @@ export class Fwoosh {
       mode: "development",
       root: path.dirname(path.dirname(require.resolve("@fwoosh/app"))),
       plugins: [
+        fwooshConfigPlugin(this.options),
         getDocsPlugin(),
         storyListPlugin(this.options),
         renderStoryPlugin(this.hooks.renderStory.call()),

@@ -1,3 +1,4 @@
+/** Plugin that defers loading a story to a plugin */
 export function renderStoryPlugin(renderFunction: string) {
   const virtualFileId = "@fwoosh/app/render";
 

@@ -53,6 +53,7 @@ function createVirtualFile(config: Config) {
   `;
 }
 
+/** Plugin that creates a virtual module with references to all the stories */
 export function storyListPlugin(config: FwooshOptions) {
   const virtualFileId = "@fwoosh/app/stories";
 

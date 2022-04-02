@@ -1,6 +1,7 @@
 import ReactPlugin from "@fwoosh/react";
 
 export default {
+  title: "@fwoosh/react",
   plugins: [
     new ReactPlugin({
       docgenOptions: {

@@ -4,12 +4,11 @@ import {
   SidebarItem,
   SidebarItems,
   SidebarLayout,
-  SidebarTitle,
+  SidebarSectionTitle,
 } from "@fwoosh/components";
 import React from "react";
 import { Outlet, Link, useParams } from "react-router-dom";
 import { StoryTree, useStoryTree } from "../hooks/useStoryTree";
-import { ThemeToggle } from "./ThemeToggle";
 
 interface TreeItemProps {
   tree: StoryTree;
@@ -35,7 +34,7 @@ const TreeItem = ({ tree, path = [] }: TreeItemProps) => {
               </Link>
             ) : (
               <>
-                <SidebarTitle>{title}</SidebarTitle>
+                <SidebarSectionTitle>{title}</SidebarSectionTitle>
                 <TreeItem tree={items} path={currentPath} />
               </>
             )}
@@ -57,7 +56,6 @@ export const Docs = () => {
         </SidebarItems>
       </Sidebar>
       <Content>
-        <ThemeToggle />
         <Outlet />
       </Content>
     </SidebarLayout>

@@ -252,6 +252,13 @@ export const Sidebar = styled("div", {
 });
 
 export const SidebarTitle = styled("div", {
+  text: "2xl",
+  fontWeight: 400,
+  color: "$gray11",
+  flex: 1,
+});
+
+export const SidebarSectionTitle = styled("div", {
   height: "$8",
   fontWeight: 500,
   color: "$gray11",

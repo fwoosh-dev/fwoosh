@@ -1,5 +1,6 @@
 import { endent } from "./endent.js";
 
+/** Generates a react hook that requests docs at runtime. */
 export function getDocsPlugin() {
   const virtualFileId = "@fwoosh/app/docs";
 

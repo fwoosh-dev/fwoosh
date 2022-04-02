@@ -13,6 +13,11 @@ declare module "@fwoosh/app/stories" {
   export const stories: Stories;
 }
 
+declare module "@fwoosh/app/config" {
+  import { FwooshOptions } from "../packages/cli/src/types";
+  export const config: Pick<FwooshOptions, "title">;
+}
+
 declare module "@fwoosh/app/render" {
   export function render(id: string, slug: string): void;
 }

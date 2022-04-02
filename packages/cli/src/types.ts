@@ -29,6 +29,8 @@ export interface FwooshHooks {
 }
 
 export interface FwooshOptions {
+  /** The title for the storybook/docs */
+  title: string;
   /** Globs to match story files */
   stories: string[];
   /** the directory with the mdx pages */

@@ -43,6 +43,12 @@ const sharedOptions: Option[] = [
     type: String,
     defaultValue: "./out",
   },
+  {
+    name: "title",
+    description: "The title for the storybook/docs",
+    type: String,
+    defaultValue: "Component",
+  },
 ];
 
 const fwooshCli: MultiCommand = {
@@ -71,7 +77,7 @@ async function run() {
   const start = process.hrtime();
   const options = app(fwooshCli);
   const { config = {} } = (await explorer.search()) || {};
-  const fwooshOptions = { ...config.default, ...options } as FwooshOptions;
+  const fwooshOptions = { ...options, ...config.default } as FwooshOptions;
 
   if (config.stories) {
     fwooshOptions.stories = config.stories;

@@ -13,6 +13,7 @@ import { Spinner } from "./Spinner";
 import { useStoryTree } from "../hooks/useStoryTree";
 import { StyledMarkdown } from "./StyledMarkdown";
 import * as styles from "./DocsPage.module.css";
+import { ThemeToggle } from "./ThemeToggle";
 
 const StoryPreview = styled("div", {
   border: "1px solid $gray7",
@@ -137,6 +138,7 @@ export const DocsPage = () => {
     <ErrorBoundary>
       <Suspense fallback={<Spinner delay={300} />}>
         <PageWrapper>
+          <ThemeToggle />
           <components.h1>{name}</components.h1>
           {firstStory && (
             <>

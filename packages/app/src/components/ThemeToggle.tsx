@@ -14,9 +14,6 @@ const ThemeToggleButton = styled("button", {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  position: "absolute",
-  top: "$4",
-  right: "$4",
 
   "&:hover": {
     background: "$gray3",
