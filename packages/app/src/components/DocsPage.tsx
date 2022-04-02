@@ -1,12 +1,11 @@
 import React, { Suspense } from "react";
-import makeClass from "clsx";
 import { render } from "@fwoosh/app/render";
 import { useParams } from "react-router-dom";
 import dlv from "dlv";
 import { useId } from "@radix-ui/react-id";
 import { Stories } from "@fwoosh/app/stories";
 import { useDocs } from "@fwoosh/app/docs";
-import { components, css, PageWrapper } from "@fwoosh/components";
+import { components, PageWrapper, styled } from "@fwoosh/components";
 import * as Collapsible from "@radix-ui/react-collapsible";
 
 import ErrorBoundary from "./ErrorBoundary";
@@ -14,6 +13,34 @@ import { Spinner } from "./Spinner";
 import { useStoryTree } from "../hooks/useStoryTree";
 import { StyledMarkdown } from "./StyledMarkdown";
 import * as styles from "./DocsPage.module.css";
+
+const StoryPreview = styled("div", {
+  border: "1px solid $gray7",
+  px: 4,
+  py: 8,
+  borderRadius: "4px",
+
+  variants: {
+    state: {
+      open: {
+        borderBottomLeftRadius: 0,
+        borderBottomRightRadius: 0,
+        borderBottom: "none",
+      },
+    },
+  },
+});
+
+const ShowCodeButton = styled("button", {
+  px: 2,
+  position: "absolute",
+  bottom: 0,
+  right: 0,
+  borderTop: "1px solid $gray7",
+  borderLeft: "1px solid $gray7",
+  borderTopLeftRadius: 4,
+  color: "$gray10",
+});
 
 interface PropsTableProps {
   docs: ReturnType<typeof useDocs>;
@@ -75,17 +102,11 @@ const StoryDiv = React.memo(
     return (
       <Collapsible.Root open={codeShowing} onOpenChange={codeShowingSet}>
         <div className="relative">
-          <div
-            className={makeClass(
-              "border border-gray-400 px-4 py-8",
-              codeShowing ? "rounded-t-md" : "rounded-md"
-            )}
-            id={id}
-          />
+          <StoryPreview state={codeShowing ? "open" : undefined} id={id} />
           <Collapsible.Trigger asChild={true}>
-            <button className="absolute border bottom-0 right-0 px-2 rounded-tl">
+            <ShowCodeButton>
               {codeShowing ? "Hide" : "Show"} code
-            </button>
+            </ShowCodeButton>
           </Collapsible.Trigger>
         </div>
         <Collapsible.Content>

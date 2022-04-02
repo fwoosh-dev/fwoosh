@@ -8,20 +8,6 @@
   margin-left: 1.5rem;
 }
 
-.syntax-dark {
-  display: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  .syntax-light {
-    display: none;
-  }
-
-  .syntax-dark {
-    display: block;
-  }
-}
-
 html {
   font-family: "Inter", "system-ui";
 }

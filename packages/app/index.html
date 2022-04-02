@@ -6,6 +6,32 @@
     <title>Vite App</title>
   </head>
   <body>
+    <script type="module">
+      import { getInitialColorMode, darkTheme } from "@fwoosh/components";
+      const initialColorMode = getInitialColorMode();
+
+      if (initialColorMode === "dark") {
+        document.body.classList.add(darkTheme);
+      }
+
+      const style = document.createElement("style");
+      style.appendChild(
+        document.createTextNode(`
+          .syntax-dark {
+            display: none;
+          }
+
+          .${darkTheme} .syntax-light {
+            display: none;
+          }
+
+          .${darkTheme} .syntax-dark {
+            display: block;
+          }
+        `)
+      );
+      document.head.append(style);
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/index.tsx"></script>
   </body>

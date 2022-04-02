@@ -269,6 +269,11 @@ export const SidebarItem = styled("li", {
   display: "flex",
   alignItems: "center",
   color: "$gray10",
+
+  "&:hover": {
+    backgroundColor: "$gray2",
+  },
+
   '&[aria-selected="true"]': {
     backgroundColor: "$gray4",
     color: "$gray11",
