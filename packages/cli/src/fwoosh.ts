@@ -5,7 +5,7 @@ import path from "path";
 import { createServer } from "vite";
 import express from "express";
 import { createRequire } from "module";
-import { SyncBailHook } from "tapable";
+import { SyncBailHook, SyncWaterfallHook } from "tapable";
 import Unocss from "unocss/vite";
 import presetWind from "@unocss/preset-wind";
 import transformerDirective from "@unocss/transformer-directives";
@@ -16,6 +16,7 @@ import { getStories } from "./utils/get-stories.js";
 import { renderStoryPlugin } from "./utils/render-story-plugin.js";
 import { getDocsPlugin } from "./utils/get-docs-plugin.js";
 import { fwooshConfigPlugin } from "./utils/fwoosh-config-plugin.js";
+import { fwooshUiPlugin } from "./utils/fwoosh-ui-plugin.js";
 
 const require = createRequire(import.meta.url);
 
@@ -33,6 +34,7 @@ export class Fwoosh {
   constructor(options: FwooshOptions) {
     this.options = options;
     this.hooks = {
+      registerToolbarControl: new SyncWaterfallHook(["toolbarControls"]),
       renderStory: new SyncBailHook(),
       generateDocs: new SyncBailHook(["pathToFile"]),
     };
@@ -77,10 +79,12 @@ export class Fwoosh {
   /** Start the development server */
   async dev({ port }: WatchPagesOptions = { port: 3000 }) {
     const app = express();
+    const toolbarControls = this.hooks.registerToolbarControl.call([]);
     const vite = await createServer({
       mode: "development",
       root: path.dirname(path.dirname(require.resolve("@fwoosh/app"))),
       plugins: [
+        fwooshUiPlugin(toolbarControls),
         fwooshConfigPlugin(this.options),
         getDocsPlugin(),
         storyListPlugin(this.options),

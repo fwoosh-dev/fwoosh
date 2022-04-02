@@ -3,6 +3,7 @@ import ReactPlugin from "@fwoosh/react";
 export default {
   title: "@fwoosh/react",
   plugins: [
+    "@fwoosh/zoom",
     new ReactPlugin({
       docgenOptions: {
         propFilter: (prop) => {

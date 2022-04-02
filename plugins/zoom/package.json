@@ -1,0 +1,16 @@
+{
+  "name": "@fwoosh/zoom",
+  "type": "module",
+  "version": "0.0.14",
+  "description": "Toolbar plugin to controls the zoom level of the story.",
+  "main": "dist/index.js",
+  "author": "Andrew Lisowski <lisowski54@gmail.com>",
+  "repository": "hipstersmoothie/fwoosh",
+  "license": "MIT",
+  "dependencies": {
+    "fwoosh": "link:../../packages/cli"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.31"
+  }
+}

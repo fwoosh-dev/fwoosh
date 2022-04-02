@@ -306,6 +306,23 @@ export const PageWrapper = styled("div", {
   width: "100%",
 });
 
+export const IconButton = styled("button", {
+  color: "$gray11",
+  height: "$10",
+  width: "$10",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+
+  "&:hover": {
+    background: "$gray3",
+  },
+
+  "&:active": {
+    background: "$gray5",
+  },
+});
+
 export const components = {
   h1,
   h2,
@@ -331,3 +348,5 @@ export const components = {
 } as const;
 
 export type Components = typeof components;
+
+export * as Toolbar from "./Toolbar.js";

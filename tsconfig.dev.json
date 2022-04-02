@@ -13,6 +13,9 @@
     },
     {
       "path": "plugins/react"
+    },
+    {
+      "path": "plugins/zoom"
     }
   ]
 }

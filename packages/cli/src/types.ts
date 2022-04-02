@@ -1,4 +1,4 @@
-import { AsyncSeriesBailHook, SyncBailHook } from "tapable";
+import { AsyncSeriesBailHook, SyncBailHook, SyncWaterfallHook } from "tapable";
 import type { ComponentDoc } from "react-docgen-typescript";
 import { Plugin } from "./fwoosh";
 
@@ -26,6 +26,7 @@ export interface Story {
 export interface FwooshHooks {
   renderStory: SyncBailHook<void, string>;
   generateDocs: SyncBailHook<string, ComponentDoc[]>;
+  registerToolbarControl: SyncWaterfallHook<[string[]]>;
 }
 
 export interface FwooshOptions {

@@ -1,16 +1,15 @@
 import React, { Suspense } from "react";
 import { render } from "@fwoosh/app/render";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import dlv from "dlv";
 import { useId } from "@radix-ui/react-id";
 import { Stories } from "@fwoosh/app/stories";
 import { useDocs } from "@fwoosh/app/docs";
-import { components, PageWrapper, styled } from "@fwoosh/components";
+import { components, PageWrapper, styled, Spinner } from "@fwoosh/components";
 import * as Collapsible from "@radix-ui/react-collapsible";
 import { paramCase } from "change-case";
 
 import ErrorBoundary from "./ErrorBoundary";
-import { Spinner } from "./Spinner";
 import { useStoryTree } from "../hooks/useStoryTree";
 import { StyledMarkdown } from "./StyledMarkdown";
 import * as styles from "./DocsPage.module.css";

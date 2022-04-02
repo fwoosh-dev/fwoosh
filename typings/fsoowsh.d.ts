@@ -26,3 +26,9 @@ declare module "@fwoosh/app/docs" {
   import type { ComponentDoc } from "react-docgen-typescript";
   export function useDocs(file?: string): ComponentDoc[];
 }
+
+declare module "@fwoosh/app/ui" {
+  export const toolbarControls: Array<
+    ({ storyPreviewId: string }) => JSX.Element
+  >;
+}

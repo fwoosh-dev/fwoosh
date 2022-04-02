@@ -4,25 +4,8 @@ import {
   getInitialColorMode,
   setColorMode,
   darkTheme,
-  styled,
+  IconButton,
 } from "@fwoosh/components";
-
-const ThemeToggleButton = styled("button", {
-  color: "$gray11",
-  height: "$10",
-  width: "$10",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-
-  "&:hover": {
-    background: "$gray3",
-  },
-
-  "&:active": {
-    background: "$gray5",
-  },
-});
 
 export const ThemeToggle = () => {
   const [theme, setTheme] = useState(getInitialColorMode());
@@ -42,12 +25,12 @@ export const ThemeToggle = () => {
   }, [theme]);
 
   return (
-    <ThemeToggleButton
+    <IconButton
       onClick={onToggleTheme}
       aria-label={ariaLabel}
       title={ariaLabel}
     >
       {theme === "dark" ? <Moon /> : <Sun />}
-    </ThemeToggleButton>
+    </IconButton>
   );
 };
