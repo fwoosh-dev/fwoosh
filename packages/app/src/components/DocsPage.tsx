@@ -6,7 +6,7 @@ import dlv from "dlv";
 import { useId } from "@radix-ui/react-id";
 import { Stories } from "@fwoosh/app/stories";
 import { useDocs } from "@fwoosh/app/docs";
-import { components, css } from "@fwoosh/components";
+import { components, css, PageWrapper } from "@fwoosh/components";
 import * as Collapsible from "@radix-ui/react-collapsible";
 
 import ErrorBoundary from "./ErrorBoundary";
@@ -115,7 +115,7 @@ export const DocsPage = () => {
   return (
     <ErrorBoundary>
       <Suspense fallback={<Spinner delay={300} />}>
-        <div className="max-w-80ch mt-12 mb-20">
+        <PageWrapper>
           <components.h1>{name}</components.h1>
           {firstStory && (
             <>
@@ -138,7 +138,7 @@ export const DocsPage = () => {
               </div>
             );
           })}
-        </div>
+        </PageWrapper>
       </Suspense>
     </ErrorBoundary>
   );

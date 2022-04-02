@@ -1,5 +1,13 @@
+import {
+  Content,
+  Sidebar,
+  SidebarItem,
+  SidebarItems,
+  SidebarLayout,
+  SidebarTitle,
+} from "@fwoosh/components";
 import React from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useParams } from "react-router-dom";
 import { StoryTree, useStoryTree } from "../hooks/useStoryTree";
 
 interface TreeItemProps {
@@ -8,6 +16,8 @@ interface TreeItemProps {
 }
 
 const TreeItem = ({ tree, path = [] }: TreeItemProps) => {
+  const params = useParams<{ docsPath: string }>();
+
   return (
     <>
       {Object.entries(tree).map(([title, items]) => {
@@ -18,11 +28,13 @@ const TreeItem = ({ tree, path = [] }: TreeItemProps) => {
           <React.Fragment key={`group-${pathString}`}>
             {Array.isArray(items) ? (
               <Link key={pathString} to={pathString}>
-                {title}
+                <SidebarItem aria-selected={pathString === params.docsPath}>
+                  {title}
+                </SidebarItem>
               </Link>
             ) : (
               <>
-                <span style={{ color: "grey" }}>{title}</span>
+                <SidebarTitle>{title}</SidebarTitle>
                 <TreeItem tree={items} path={currentPath} />
               </>
             )}
@@ -37,11 +49,15 @@ export const Docs = () => {
   const tree = useStoryTree();
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "200px 1fr" }}>
-      <ul style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-        <TreeItem tree={tree} />
-      </ul>
-      <Outlet />
-    </div>
+    <SidebarLayout>
+      <Sidebar>
+        <SidebarItems>
+          <TreeItem tree={tree} />
+        </SidebarItems>
+      </Sidebar>
+      <Content>
+        <Outlet />
+      </Content>
+    </SidebarLayout>
   );
 };

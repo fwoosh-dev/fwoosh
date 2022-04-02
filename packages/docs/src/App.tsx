@@ -3,32 +3,37 @@ import { capitalCase } from "change-case";
 import {
   Sidebar,
   SidebarItem,
+  SidebarItems,
   SidebarLayout,
   Logo,
   Content,
+  darkTheme,
 } from "@fwoosh/components";
 import { modules } from "./utils/get-docs";
-
-import "../../app/src/index.css";
 
 export const App = () => {
   const params = useParams<{ page: string }>();
 
   return (
-    <SidebarLayout>
+    <SidebarLayout className={darkTheme}>
       <Sidebar>
         <Link to="/">
           <Logo>
-            <img src="/logo-2.svg" alt="fwoosh" />
+            <picture>
+              <source src="/logo-2.svg" media="(prefers-color-scheme: light)" />
+              <img src="/logo-dark.svg" alt="fwoosh" />
+            </picture>
           </Logo>
         </Link>
-        {Object.keys(modules).map((name) => (
-          <Link key={name} to={name}>
-            <SidebarItem aria-selected={name === params.page}>
-              {capitalCase(name)}
-            </SidebarItem>
-          </Link>
-        ))}
+        <SidebarItems>
+          {Object.keys(modules).map((name) => (
+            <Link key={name} to={name}>
+              <SidebarItem aria-selected={name === params.page}>
+                {capitalCase(name)}
+              </SidebarItem>
+            </Link>
+          ))}
+        </SidebarItems>
       </Sidebar>
       <Content>
         <Outlet />
