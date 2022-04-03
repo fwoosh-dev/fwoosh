@@ -6,8 +6,8 @@ export default {
     "@fwoosh/props-panel",
     "@fwoosh/source-panel",
     "@fwoosh/actions",
-    "@fwoosh/measure",
     "@fwoosh/zoom",
+    "@fwoosh/measure",
     new ReactPlugin({
       docgenOptions: {
         propFilter: (prop) => {

@@ -10,25 +10,29 @@ interface CanvasState {
   height?: number;
 }
 
-function getDocumentWidthAndHeight() {
-  const container = document.documentElement;
-
-  const height = Math.max(container.scrollHeight, container.offsetHeight);
-  const width = Math.max(container.scrollWidth, container.offsetWidth);
+function getDocumentWidthAndHeight(el: HTMLElement) {
+  const height = Math.max(el.scrollHeight, el.offsetHeight);
+  const width = Math.max(el.scrollWidth, el.offsetWidth);
   return { width, height };
 }
 
-function createCanvas(): CanvasState {
+function createCanvas(id: string): CanvasState {
   const canvas = document.createElement("canvas");
-  canvas.id = "storybook-addon-measure";
+  canvas.id = "fwoosh-addon-measure";
   const context = canvas.getContext("2d");
 
   if (!context) {
     throw new Error("Canvas is not supported in this browser");
   }
 
+  const el = document.getElementById(id);
+
+  if (!el) {
+    throw new Error("Can't find element with id " + id);
+  }
+
   // Set canvas width & height
-  const { width, height } = getDocumentWidthAndHeight();
+  const { width, height } = getDocumentWidthAndHeight(el);
   setCanvasWidthAndHeight(canvas, context, { width, height });
   // Position canvas
   canvas.style.position = "absolute";
@@ -37,7 +41,7 @@ function createCanvas(): CanvasState {
   canvas.style.zIndex = "2147483647";
   // Disable any user interactions
   canvas.style.pointerEvents = "none";
-  document.body.appendChild(canvas);
+  el.appendChild(canvas);
 
   return { canvas, context, width, height };
 }
@@ -61,9 +65,9 @@ function setCanvasWidthAndHeight(
 
 let state: CanvasState = {};
 
-export function init() {
+export function init(id: string) {
   if (!state.canvas) {
-    state = createCanvas();
+    state = createCanvas(id);
   }
 }
 
@@ -84,7 +88,7 @@ export function draw(callback: (context: CanvasRenderingContext2D) => void) {
   }
 }
 
-export function rescale() {
+export function rescale(id: string) {
   if (!state.canvas || !state.context) {
     throw new Error("Canvas is not initialized");
   }
@@ -92,7 +96,13 @@ export function rescale() {
   // First reset so that the canvas size doesn't impact the container size
   setCanvasWidthAndHeight(state.canvas, state.context, { width: 0, height: 0 });
 
-  const { width, height } = getDocumentWidthAndHeight();
+  const el = document.getElementById(id);
+
+  if (!el) {
+    throw new Error("Can't find element with id " + id);
+  }
+
+  const { width, height } = getDocumentWidthAndHeight(el);
   setCanvasWidthAndHeight(state.canvas, state.context, { width, height });
 
   // update state

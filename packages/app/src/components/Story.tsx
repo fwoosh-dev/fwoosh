@@ -18,10 +18,6 @@ const StoryToolbar = styled(Toolbar.Root, {
 });
 
 const PanelContainer = styled("div", {
-  position: "absolute",
-  bottom: 0,
-  left: 0,
-  right: 0,
   height: 400,
   borderTop: "1px solid $gray4",
 });
@@ -33,12 +29,17 @@ const Wrapper = styled("div", {
   flexDirection: "column",
 });
 
+const Root = styled("div", {
+  position: "relative",
+  flex: 1,
+});
+
 const StoryDiv = React.memo(({ slug, id }: { slug: string; id: string }) => {
   React.useEffect(() => {
     render(id, slug);
   }, [id, slug]);
 
-  return <div id={id} />;
+  return <Root id={id} />;
 });
 
 export const Story = () => {

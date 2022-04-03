@@ -55,7 +55,17 @@ function floatingAlignment(extremities: Extremities): FloatingAlignment {
   };
 }
 
-function measureElement(element: Element): ElementMeasurements {
+function measureElement(
+  element: Element,
+  containerId: string
+): ElementMeasurements {
+  const container = document.getElementById(containerId);
+
+  if (!container) {
+    throw new Error(`Could not find container with id ${containerId}`);
+  }
+
+  const containerBox = container.getBoundingClientRect();
   const style = getComputedStyle(element);
   // eslint-disable-next-line prefer-const
   let {
@@ -82,10 +92,10 @@ function measureElement(element: Element): ElementMeasurements {
     borderRightWidth,
   } = style;
 
-  top = top + window.scrollY;
-  left = left + window.scrollX;
-  bottom = bottom + window.scrollY;
-  right = right + window.scrollX;
+  top = top + window.scrollY - containerBox.top;
+  left = left + window.scrollX - containerBox.left;
+  bottom = bottom + window.scrollY - containerBox.top;
+  right = right + window.scrollX - containerBox.left;
 
   const margin = {
     top: pxToNumber(marginTop),
@@ -317,10 +327,10 @@ function drawContent(
   ];
 }
 
-function drawBoxModel(element: Element) {
+function drawBoxModel(element: Element, id: string) {
   return (context: CanvasRenderingContext2D) => {
     if (element && context) {
-      const measurements = measureElement(element);
+      const measurements = measureElement(element, id);
 
       const marginLabels = drawMargin(context, measurements);
       const paddingLabels = drawPadding(context, measurements);
@@ -341,8 +351,8 @@ function drawBoxModel(element: Element) {
   };
 }
 
-export function drawSelectedElement(element: Element) {
-  draw(drawBoxModel(element));
+export function drawSelectedElement(element: Element, id: string) {
+  draw(drawBoxModel(element, id));
 }
 
 export const deepElementFromPoint = (x: number, y: number) => {
@@ -372,10 +382,10 @@ export const deepElementFromPoint = (x: number, y: number) => {
   return shadowElement || element;
 };
 
-export function findAndDrawElement(x: number, y: number) {
+export function findAndDrawElement(x: number, y: number, id: string) {
   const nodeAtPointerRef = deepElementFromPoint(x, y);
 
   if (nodeAtPointerRef) {
-    drawSelectedElement(nodeAtPointerRef);
+    drawSelectedElement(nodeAtPointerRef, id);
   }
 }

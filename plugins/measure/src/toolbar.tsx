@@ -25,11 +25,14 @@ export default function MeasureControl({
     const onMouseOver = (event: MouseEvent) => {
       window.requestAnimationFrame(() => {
         event.stopPropagation();
-        findAndDrawElement(event.clientX, event.clientY);
+        findAndDrawElement(event.clientX, event.clientY, storyPreviewId);
       });
     };
 
-    const onResize = () => window.requestAnimationFrame(rescale);
+    const onResize = () =>
+      window.requestAnimationFrame(() => {
+        rescale(storyPreviewId);
+      });
 
     if (on) {
       const story = document.getElementById(storyPreviewId);
@@ -39,7 +42,7 @@ export default function MeasureControl({
       }
 
       story.addEventListener("mouseover", onMouseOver);
-      init();
+      init(storyPreviewId);
       window.addEventListener("resize", onResize);
     }
 
@@ -47,7 +50,7 @@ export default function MeasureControl({
       window.removeEventListener("resize", onResize);
       destroy();
     };
-  }, [on]);
+  }, [on, storyPreviewId]);
 
   return (
     <IconButton onClick={onToggle} aria-label={label} title={label}>
