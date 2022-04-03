@@ -323,6 +323,16 @@ export const IconButton = styled("button", {
   },
 });
 
+export const SidebarHeader = styled("div", {
+  height: "$10",
+  display: "flex",
+  alignItems: "center",
+  gap: 8,
+  px: 2,
+  my: 4,
+  py: 2,
+});
+
 export const components = {
   h1,
   h2,

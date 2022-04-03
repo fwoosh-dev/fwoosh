@@ -4,8 +4,11 @@ import {
   SidebarItem,
   SidebarItems,
   SidebarLayout,
+  SidebarHeader,
+  SidebarTitle,
   SidebarSectionTitle,
 } from "@fwoosh/components";
+import { config } from "@fwoosh/app/config";
 import React from "react";
 import { Outlet, Link, useParams } from "react-router-dom";
 import { StoryTree, useStoryTree } from "../hooks/useStoryTree";
@@ -51,6 +54,9 @@ export const Docs = () => {
   return (
     <SidebarLayout>
       <Sidebar>
+        <SidebarHeader>
+          <SidebarTitle>{config.title}</SidebarTitle>
+        </SidebarHeader>
         <SidebarItems>
           <TreeItem tree={tree} />
         </SidebarItems>

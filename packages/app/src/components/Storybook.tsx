@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  styled,
   Content,
   SidebarItems,
   SidebarItem,
@@ -8,6 +7,7 @@ import {
   SidebarSectionTitle,
   SidebarTitle,
   Sidebar,
+  SidebarHeader,
 } from "@fwoosh/components";
 import { config } from "@fwoosh/app/config";
 import { Outlet, Link, useParams } from "react-router-dom";
@@ -40,16 +40,6 @@ const TreeItem = ({ tree }: { tree: StoryTree }) => {
     </>
   );
 };
-
-const SidebarHeader = styled("div", {
-  height: "$10",
-  display: "flex",
-  alignItems: "center",
-  gap: 8,
-  px: 2,
-  my: 4,
-  py: 2,
-});
 
 export const Storybook = () => {
   const tree = useStoryTree();
