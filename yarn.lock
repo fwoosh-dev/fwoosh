@@ -583,6 +583,7 @@ __metadata:
   resolution: "@fwoosh/actions@workspace:plugins/actions"
   dependencies:
     "@devtools-ds/object-inspector": ^1.1.2
+    "@fwoosh/components": "link:../../packages/components"
     "@types/node": ^14.14.31
     fwoosh: "link:../../packages/cli"
   languageName: unknown
@@ -617,6 +618,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@fwoosh/components@link:../../packages/components::locator=%40fwoosh%2Factions%40workspace%3Aplugins%2Factions":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/components@link:../../packages/components::locator=%40fwoosh%2Factions%40workspace%3Aplugins%2Factions"
+  languageName: node
+  linkType: soft
+
 "@fwoosh/components@workspace:packages/components":
   version: 0.0.0-use.local
   resolution: "@fwoosh/components@workspace:packages/components"
@@ -639,6 +646,15 @@ __metadata:
     change-case: ^4.1.2
     rehype-slug: ^5.0.1
     vite: ^2.8.6
+  languageName: unknown
+  linkType: soft
+
+"@fwoosh/measure@workspace:plugins/measure":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/measure@workspace:plugins/measure"
+  dependencies:
+    "@types/node": ^14.14.31
+    fwoosh: "link:../../packages/cli"
   languageName: unknown
   linkType: soft
 
@@ -3629,6 +3645,12 @@ __metadata:
 "fwoosh@link:../../packages/cli::locator=%40fwoosh%2Factions%40workspace%3Aplugins%2Factions":
   version: 0.0.0-use.local
   resolution: "fwoosh@link:../../packages/cli::locator=%40fwoosh%2Factions%40workspace%3Aplugins%2Factions"
+  languageName: node
+  linkType: soft
+
+"fwoosh@link:../../packages/cli::locator=%40fwoosh%2Fmeasure%40workspace%3Aplugins%2Fmeasure":
+  version: 0.0.0-use.local
+  resolution: "fwoosh@link:../../packages/cli::locator=%40fwoosh%2Fmeasure%40workspace%3Aplugins%2Fmeasure"
   languageName: node
   linkType: soft
 

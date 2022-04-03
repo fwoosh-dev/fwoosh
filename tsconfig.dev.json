@@ -25,6 +25,9 @@
     },
     {
       "path": "plugins/actions"
+    },
+    {
+      "path": "plugins/measure"
     }
   ]
 }

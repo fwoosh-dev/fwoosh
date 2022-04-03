@@ -30,6 +30,7 @@ declare module "@fwoosh/app/docs" {
 declare module "@fwoosh/app/ui" {
   interface ToolbarPlugin {
     ({ storyPreviewId: string }): JSX.Element;
+    componentName: string;
     displayName: string;
   }
   interface PanelPlugin {

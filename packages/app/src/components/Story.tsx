@@ -52,7 +52,7 @@ export const Story = () => {
           {toolbarControls.length > 0 && (
             <StoryToolbar>
               {toolbarControls.map((Control) => (
-                <Control key={Control.displayName} storyPreviewId={id} />
+                <Control key={Control.componentName} storyPreviewId={id} />
               ))}
             </StoryToolbar>
           )}

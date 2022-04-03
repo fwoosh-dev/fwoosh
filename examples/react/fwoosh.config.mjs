@@ -6,6 +6,7 @@ export default {
     "@fwoosh/props-panel",
     "@fwoosh/source-panel",
     "@fwoosh/actions",
+    "@fwoosh/measure",
     "@fwoosh/zoom",
     new ReactPlugin({
       docgenOptions: {
