@@ -1,3 +1,5 @@
+import React from "react";
+
 type ColorMode = "light" | "dark";
 
 export function getInitialColorMode(): "light" | "dark" {
@@ -29,3 +31,11 @@ export function getInitialColorMode(): "light" | "dark" {
 export function setColorMode(colorMode: ColorMode) {
   window.localStorage.setItem("fwoosh-color-mode", colorMode);
 }
+
+export function getColorMode() {
+  return window.localStorage.getItem("fwoosh-color-mode");
+}
+
+export const ColorModeContext = React.createContext<ColorMode | undefined>(
+  "dark"
+);

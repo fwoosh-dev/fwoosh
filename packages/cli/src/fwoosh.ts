@@ -1,4 +1,5 @@
 import { promises as fs } from "fs";
+import to from "await-to-js";
 import boxen from "boxen";
 import path from "path";
 // import open from "open";
@@ -54,7 +55,24 @@ export class Fwoosh {
               ? [pluginConfig, {}]
               : pluginConfig;
 
-          const Plugin = (await import(name)).default;
+          let Plugin;
+
+          try {
+            ({ default: Plugin } = await import(`${name}/plugin.js`));
+          } catch (e) {
+            if (e.code !== "ERR_MODULE_NOT_FOUND") {
+              throw e;
+            }
+          }
+
+          if (!Plugin) {
+            ({ default: Plugin } = await import(name));
+          }
+
+          if (!Plugin) {
+            throw new Error(`Could not find plugin ${name}`);
+          }
+
           plugins.push(new Plugin(options));
         }
       })

@@ -426,12 +426,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.7.6":
+"@babel/runtime@npm:7.7.2":
+  version: 7.7.2
+  resolution: "@babel/runtime@npm:7.7.2"
+  dependencies:
+    regenerator-runtime: ^0.13.2
+  checksum: 4319b6a1771f2e0181de26a983ae2788f1af428dcac3c0225d459be8a50167cee5be0d66856306b8eab53c1b3e1cae68cb481ef1be5ca2259f997ce3b12557b7
+  languageName: node
+  linkType: hard
+
+"@babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.7.6":
   version: 7.17.8
   resolution: "@babel/runtime@npm:7.17.8"
   dependencies:
     regenerator-runtime: ^0.13.4
   checksum: 68d195c1630bb91ac20e86635d292a17ebab7f361cfe79406b3f5a6cc2e59fa283ae5006568899abf869312c2b35b744bd407aea8ffdb650f1a68d07785d47e9
+  languageName: node
+  linkType: hard
+
+"@babel/runtime@npm:~7.5.4":
+  version: 7.5.5
+  resolution: "@babel/runtime@npm:7.5.5"
+  dependencies:
+    regenerator-runtime: ^0.13.2
+  checksum: b04ed65993bbf4371a880f7afc289f1f2a5f5a9e882c64448b41481aa289ed650a2b6155c6179f3d32fccf159f9be947989af5ff7a4f9b847f60f25e631ad533
   languageName: node
   linkType: hard
 
@@ -474,6 +492,72 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@design-systems/utils@npm:2.12.0":
+  version: 2.12.0
+  resolution: "@design-systems/utils@npm:2.12.0"
+  dependencies:
+    "@babel/runtime": ^7.11.2
+    clsx: ^1.0.4
+    focus-lock: ^0.8.0
+    react-merge-refs: ^1.0.0
+  peerDependencies:
+    "@types/react": "*"
+    react: ">= 16.8.6"
+    react-dom: ">= 16.8.6"
+  checksum: 6659eadb485b55d25d465b0b262c22e7d196f35b27aa1f8f7b6f3bacda9d7c5f6186a46afe56dd223c70f91c61392c81a541ea7dec588960499d049a8c06f3b7
+  languageName: node
+  linkType: hard
+
+"@devtools-ds/object-inspector@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "@devtools-ds/object-inspector@npm:1.1.2"
+  dependencies:
+    "@babel/runtime": 7.7.2
+    "@devtools-ds/object-parser": ^1.1.2
+    "@devtools-ds/themes": ^1.1.2
+    "@devtools-ds/tree": ^1.1.2
+    clsx: 1.1.0
+  peerDependencies:
+    react: ">= 16.8.6"
+  checksum: 1f9596660a5c625cb73129df397dd197faf0abb5678b57e8e33a9e8f24768d482aa442ea9090831a40f56d36737ee46d3db6706068e811ded8a2fc9e4b2ce361
+  languageName: node
+  linkType: hard
+
+"@devtools-ds/object-parser@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "@devtools-ds/object-parser@npm:1.1.2"
+  dependencies:
+    "@babel/runtime": ~7.5.4
+  checksum: 0a331ea2d90fef36ea04a264a7b3e7856804b8657eae6949a531d201ec38f0ff489282a9e973aa67d348a182f3e3d2ce4fe560e7d3e8a3e88fe814724001a67e
+  languageName: node
+  linkType: hard
+
+"@devtools-ds/themes@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "@devtools-ds/themes@npm:1.1.2"
+  dependencies:
+    "@babel/runtime": ~7.5.4
+    "@design-systems/utils": 2.12.0
+    clsx: 1.1.0
+  peerDependencies:
+    react: ">= 16.8.6"
+  checksum: 9040521c478c31edb37617f23a44885b3158d412c3d5f1eebf6352dd7f606510137f652156cc116d864c1a1a8bd753d9c25fbdb724f0220636916ff52ad7888b
+  languageName: node
+  linkType: hard
+
+"@devtools-ds/tree@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "@devtools-ds/tree@npm:1.1.2"
+  dependencies:
+    "@babel/runtime": 7.7.2
+    "@devtools-ds/themes": ^1.1.2
+    clsx: 1.1.0
+  peerDependencies:
+    react: ">= 16.8.6"
+  checksum: c7311319bb47c530cbe8b6ec3da19bebe62d9e2a1e9621d9d4bd303499ad7f97d94dfae32ce22ac52056644250703792f46e6bc9b20e76d1a269b716f5c1d4a2
+  languageName: node
+  linkType: hard
+
 "@endemolshinegroup/cosmiconfig-typescript-loader@npm:^3.0.2":
   version: 3.0.2
   resolution: "@endemolshinegroup/cosmiconfig-typescript-loader@npm:3.0.2"
@@ -487,6 +571,22 @@ __metadata:
   checksum: 7fe0198622b1063c40572034df7e8ba867865a1b4815afe230795929abcf785758b34d7806a8e2100ba8ab4e92c5a1c3e11a980c466c4406df6e7ec6e50df8b6
   languageName: node
   linkType: hard
+
+"@fwoosh/actions@link:../../plugins/actions::locator=%40fwoosh%2Freact-example%40workspace%3Aexamples%2Freact":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/actions@link:../../plugins/actions::locator=%40fwoosh%2Freact-example%40workspace%3Aexamples%2Freact"
+  languageName: node
+  linkType: soft
+
+"@fwoosh/actions@workspace:plugins/actions":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/actions@workspace:plugins/actions"
+  dependencies:
+    "@devtools-ds/object-inspector": ^1.1.2
+    "@types/node": ^14.14.31
+    fwoosh: "link:../../packages/cli"
+  languageName: unknown
+  linkType: soft
 
 "@fwoosh/app@link:../app::locator=fwoosh%40workspace%3Apackages%2Fcli":
   version: 0.0.0-use.local
@@ -510,7 +610,6 @@ __metadata:
     dlv: ^1.1.3
     dset: ^3.1.1
     inter-ui: ^3.19.3
-    interweave: ^13.0.0
     react: ^17.0.1
     react-dom: ^17.0.1
     react-feather: ^2.0.9
@@ -526,6 +625,7 @@ __metadata:
     "@radix-ui/react-toolbar": ^0.1.5
     "@types/react": ^17.0.2
     "@types/react-dom": ^17.0.1
+    interweave: ^13.0.0
     react: ^17.0.1
     react-dom: ^17.0.1
   languageName: unknown
@@ -555,6 +655,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fwoosh/react-example@workspace:examples/react"
   dependencies:
+    "@fwoosh/actions": "link:../../plugins/actions"
     "@fwoosh/react": "link:../../plugins/react"
     "@vitejs/plugin-react": ^1.2.0
     fwoosh: "link:../../packages/cli"
@@ -2405,7 +2506,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:^1.1.1":
+"clsx@npm:1.1.0":
+  version: 1.1.0
+  resolution: "clsx@npm:1.1.0"
+  checksum: 50e889839a557b8a2fca063ee7ea22ba8c261e7f9f7aadc257065fc77f16fa0a98ce826fb2b126d05fb736560333971dbb882874054df7bb8f4317e224ec1978
+  languageName: node
+  linkType: hard
+
+"clsx@npm:^1.0.4, clsx@npm:^1.1.1":
   version: 1.1.1
   resolution: "clsx@npm:1.1.1"
   checksum: ff052650329773b9b245177305fc4c4dc3129f7b2be84af4f58dc5defa99538c61d4207be7419405a5f8f3d92007c954f4daba5a7b74e563d5de71c28c830063
@@ -3417,6 +3525,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"focus-lock@npm:^0.8.0":
+  version: 0.8.1
+  resolution: "focus-lock@npm:0.8.1"
+  dependencies:
+    tslib: ^1.9.3
+  checksum: 3b25b06bb8e23a3a826a8eda89e547593a688486df531db92f6b767d96d397dc1efed4529ec3a44cb3ec1fbdd44abe50a30d0ce498f732501b36f5f18b619003
+  languageName: node
+  linkType: hard
+
 "follow-redirects@npm:^1.14.8":
   version: 1.14.9
   resolution: "follow-redirects@npm:1.14.9"
@@ -3507,6 +3624,12 @@ __metadata:
     prettier: ^2.2.1
     typescript: ^4.2.2
   languageName: unknown
+  linkType: soft
+
+"fwoosh@link:../../packages/cli::locator=%40fwoosh%2Factions%40workspace%3Aplugins%2Factions":
+  version: 0.0.0-use.local
+  resolution: "fwoosh@link:../../packages/cli::locator=%40fwoosh%2Factions%40workspace%3Aplugins%2Factions"
+  languageName: node
   linkType: soft
 
 "fwoosh@link:../../packages/cli::locator=%40fwoosh%2Fprops-panel%40workspace%3Aplugins%2Fprops-panel":
@@ -6067,6 +6190,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-merge-refs@npm:^1.0.0":
+  version: 1.1.0
+  resolution: "react-merge-refs@npm:1.1.0"
+  checksum: 90884352999002d868ab9f1bcfe3222fb0f2178ed629f1da7e98e5a9b02a2c96b4aa72800db92aabd69d2483211b4be57a2088e89a11a0b660e7ada744d4ddf7
+  languageName: node
+  linkType: hard
+
 "react-refresh@npm:^0.11.0":
   version: 0.11.0
   resolution: "react-refresh@npm:0.11.0"
@@ -6135,7 +6265,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"regenerator-runtime@npm:^0.13.4":
+"regenerator-runtime@npm:^0.13.2, regenerator-runtime@npm:^0.13.4":
   version: 0.13.9
   resolution: "regenerator-runtime@npm:0.13.9"
   checksum: 65ed455fe5afd799e2897baf691ca21c2772e1a969d19bb0c4695757c2d96249eb74ee3553ea34a91062b2a676beedf630b4c1551cc6299afb937be1426ec55e
@@ -6946,7 +7076,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^1.14.1":
+"tslib@npm:^1.14.1, tslib@npm:^1.9.3":
   version: 1.14.1
   resolution: "tslib@npm:1.14.1"
   checksum: dbe628ef87f66691d5d2959b3e41b9ca0045c3ee3c7c7b906cc1e328b39f199bb1ad9e671c39025bd56122ac57dfbf7385a94843b1cc07c60a4db74795829acd

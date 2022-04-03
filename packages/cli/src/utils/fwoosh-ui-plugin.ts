@@ -8,8 +8,16 @@ function lazyLoadComponents(imports: { name?: string; filepath: string }[]) {
     names.push(name);
 
     return endent`
-      const ${name} = React.lazy(() => import('${i.filepath}'));
-      ${name}.displayName = '${name}';
+      const ${name} = React.lazy(() => import('${i.filepath}').then(m => {
+        if (m.Name) {
+          m.default.panelTitle = m.Name;
+        }
+        return m;
+      }));
+      ${name}.componentName = '${name}';
+      ${name}.displayName = React.lazy(() => import('${i.filepath}').then(m => {
+        return { default: m.Name || (() => '${name}') };
+      }));
     `;
   });
 

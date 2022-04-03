@@ -29,5 +29,6 @@ export const List = styled(TabsPrimitive.List, {
   borderBottom: `1px solid $gray4`,
 });
 export const Content = styled(TabsPrimitive.Content, {
-  height: "100%",
+  flex: 1,
+  overflow: "auto",
 });

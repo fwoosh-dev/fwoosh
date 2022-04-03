@@ -65,22 +65,24 @@ export const Story = () => {
 
           {panels.length > 0 && (
             <PanelContainer>
-              <Tabs.Root defaultValue={panels[0]?.displayName}>
+              <Tabs.Root defaultValue={panels[0]?.componentName}>
                 <Tabs.List>
-                  {panels.map((Panel) => (
-                    <Tabs.Trigger
-                      key={`trigger-${Panel.displayName}`}
-                      value={Panel.displayName}
-                    >
-                      {Panel.displayName}
-                    </Tabs.Trigger>
-                  ))}
+                  {panels.map((Panel) => {
+                    return (
+                      <Tabs.Trigger
+                        key={`trigger-${Panel.componentName}`}
+                        value={Panel.componentName}
+                      >
+                        <Panel.displayName />
+                      </Tabs.Trigger>
+                    );
+                  })}
                 </Tabs.List>
 
                 {panels.map((Panel) => (
                   <Tabs.Content
-                    key={`content-${Panel.displayName}`}
-                    value={Panel.displayName}
+                    key={`content-${Panel.componentName}`}
+                    value={Panel.componentName}
                   >
                     <Panel storyPreviewId={id} />
                   </Tabs.Content>

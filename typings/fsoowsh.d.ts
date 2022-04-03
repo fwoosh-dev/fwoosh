@@ -28,11 +28,16 @@ declare module "@fwoosh/app/docs" {
 }
 
 declare module "@fwoosh/app/ui" {
-  interface UiPlugin {
+  interface ToolbarPlugin {
     ({ storyPreviewId: string }): JSX.Element;
     displayName: string;
   }
+  interface PanelPlugin {
+    ({ storyPreviewId: string }): JSX.Element;
+    componentName: string;
+    displayName: () => JSX.Element;
+  }
 
-  export const toolbarControls: Array<UiPlugin>;
-  export const panels: Array<UiPlugin>;
+  export const toolbarControls: Array<ToolbarPlugin>;
+  export const panels: Array<PanelPlugin>;
 }

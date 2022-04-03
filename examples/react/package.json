@@ -7,6 +7,7 @@
     "build": "yarn fwoosh build"
   },
   "devDependencies": {
+    "@fwoosh/actions": "link:../../plugins/actions",
     "@fwoosh/react": "link:../../plugins/react",
     "@vitejs/plugin-react": "^1.2.0",
     "fwoosh": "link:../../packages/cli"
