@@ -501,7 +501,6 @@ __metadata:
     "@radix-ui/colors": ^0.1.8
     "@radix-ui/react-collapsible": ^0.1.6
     "@radix-ui/react-id": ^0.1.5
-    "@radix-ui/react-toolbar": ^0.1.5
     "@stitches/react": ^1.2.7
     "@types/dlv": ^1.1.2
     "@types/react": ^17.0.2
@@ -523,6 +522,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fwoosh/components@workspace:packages/components"
   dependencies:
+    "@radix-ui/react-tabs": ^0.1.5
+    "@radix-ui/react-toolbar": ^0.1.5
     "@types/react": ^17.0.2
     "@types/react-dom": ^17.0.1
     react: ^17.0.1
@@ -538,6 +539,15 @@ __metadata:
     change-case: ^4.1.2
     rehype-slug: ^5.0.1
     vite: ^2.8.6
+  languageName: unknown
+  linkType: soft
+
+"@fwoosh/props-panel@workspace:plugins/props-panel":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/props-panel@workspace:plugins/props-panel"
+  dependencies:
+    "@types/node": ^14.14.31
+    fwoosh: "link:../../packages/cli"
   languageName: unknown
   linkType: soft
 
@@ -1075,6 +1085,23 @@ __metadata:
   peerDependencies:
     react: ^16.8 || ^17.0
   checksum: 216927b9b1dae28328d630f6b2c91f1a424c0b00fb4efcebb7a109fdfc5bceda5cf878dfac5baa8aa441150d4c5263f5a914f2962bbce8375972ae076e4d3b65
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-tabs@npm:^0.1.5":
+  version: 0.1.5
+  resolution: "@radix-ui/react-tabs@npm:0.1.5"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+    "@radix-ui/primitive": 0.1.0
+    "@radix-ui/react-context": 0.1.1
+    "@radix-ui/react-id": 0.1.5
+    "@radix-ui/react-primitive": 0.1.4
+    "@radix-ui/react-roving-focus": 0.1.5
+    "@radix-ui/react-use-controllable-state": 0.1.0
+  peerDependencies:
+    react: ^16.8 || ^17.0
+  checksum: 323d8f669ec739e9f697df26edd5695536f648d5851d84a7f9e7d8bf9913504ce7c7bb12f99d7e2da07830e1f4ab05f5f74c0456989fe64acef35b4ed6aa4a42
   languageName: node
   linkType: hard
 
@@ -3471,6 +3498,12 @@ __metadata:
     prettier: ^2.2.1
     typescript: ^4.2.2
   languageName: unknown
+  linkType: soft
+
+"fwoosh@link:../../packages/cli::locator=%40fwoosh%2Fprops-panel%40workspace%3Aplugins%2Fprops-panel":
+  version: 0.0.0-use.local
+  resolution: "fwoosh@link:../../packages/cli::locator=%40fwoosh%2Fprops-panel%40workspace%3Aplugins%2Fprops-panel"
+  languageName: node
   linkType: soft
 
 "fwoosh@link:../../packages/cli::locator=%40fwoosh%2Freact%40workspace%3Aplugins%2Freact":

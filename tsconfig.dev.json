@@ -16,6 +16,9 @@
     },
     {
       "path": "plugins/zoom"
+    },
+    {
+      "path": "plugins/props-panel"
     }
   ]
 }

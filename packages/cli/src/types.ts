@@ -27,6 +27,7 @@ export interface FwooshHooks {
   renderStory: SyncBailHook<void, string>;
   generateDocs: SyncBailHook<string, ComponentDoc[]>;
   registerToolbarControl: SyncWaterfallHook<[string[]]>;
+  registerPanel: SyncWaterfallHook<[{ name: string; filepath: string }[]]>;
 }
 
 export interface FwooshOptions {

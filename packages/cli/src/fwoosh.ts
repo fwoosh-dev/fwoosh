@@ -34,6 +34,7 @@ export class Fwoosh {
   constructor(options: FwooshOptions) {
     this.options = options;
     this.hooks = {
+      registerPanel: new SyncWaterfallHook(["panels"]),
       registerToolbarControl: new SyncWaterfallHook(["toolbarControls"]),
       renderStory: new SyncBailHook(),
       generateDocs: new SyncBailHook(["pathToFile"]),
@@ -80,11 +81,12 @@ export class Fwoosh {
   async dev({ port }: WatchPagesOptions = { port: 3000 }) {
     const app = express();
     const toolbarControls = this.hooks.registerToolbarControl.call([]);
+    const panels = this.hooks.registerPanel.call([]);
     const vite = await createServer({
       mode: "development",
       root: path.dirname(path.dirname(require.resolve("@fwoosh/app"))),
       plugins: [
-        fwooshUiPlugin(toolbarControls),
+        fwooshUiPlugin({ toolbarControls, panels }),
         fwooshConfigPlugin(this.options),
         getDocsPlugin(),
         storyListPlugin(this.options),

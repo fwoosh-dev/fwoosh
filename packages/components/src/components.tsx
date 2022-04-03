@@ -348,5 +348,3 @@ export const components = {
 } as const;
 
 export type Components = typeof components;
-
-export * as Toolbar from "./Toolbar.js";

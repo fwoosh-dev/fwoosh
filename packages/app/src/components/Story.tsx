@@ -1,11 +1,11 @@
 import React, { Suspense } from "react";
 import { render } from "@fwoosh/app/render";
-import { toolbarControls } from "@fwoosh/app/ui";
+import { toolbarControls, panels } from "@fwoosh/app/ui";
 import { useParams } from "react-router-dom";
 import { useId } from "@radix-ui/react-id";
 
 import ErrorBoundary from "./ErrorBoundary";
-import { styled, Toolbar, Spinner } from "@fwoosh/components";
+import { styled, Toolbar, Spinner, Tabs } from "@fwoosh/components";
 
 const StoryToolbar = styled(Toolbar.Root, {
   display: "flex",
@@ -14,6 +14,23 @@ const StoryToolbar = styled(Toolbar.Root, {
   gap: 2,
   height: "$12",
   borderBottom: "1px solid $gray4",
+  flexShrink: 0,
+});
+
+const PanelContainer = styled("div", {
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  right: 0,
+  minHeight: 400,
+  borderTop: "1px solid $gray4",
+});
+
+const Wrapper = styled("div", {
+  position: "relative",
+  height: "100%",
+  display: "flex",
+  flexDirection: "column",
 });
 
 const StoryDiv = React.memo(({ slug, id }: { slug: string; id: string }) => {
@@ -31,16 +48,47 @@ export const Story = () => {
   return (
     <ErrorBoundary>
       <Suspense fallback={<Spinner delay={300} />}>
-        <StoryToolbar>
-          {toolbarControls.map((Control) => (
-            <Control key={(Control as any).displayName} storyPreviewId={id} />
-          ))}
-        </StoryToolbar>
-        {params.storyId ? (
-          <StoryDiv slug={params.storyId} id={id} />
-        ) : (
-          <div>Story not found</div>
-        )}
+        <Wrapper>
+          {toolbarControls.length > 0 && (
+            <StoryToolbar>
+              {toolbarControls.map((Control) => (
+                <Control key={Control.displayName} storyPreviewId={id} />
+              ))}
+            </StoryToolbar>
+          )}
+
+          {params.storyId ? (
+            <StoryDiv slug={params.storyId} id={id} />
+          ) : (
+            <div>Story not found</div>
+          )}
+
+          {panels.length > 0 && (
+            <PanelContainer>
+              <Tabs.Root defaultValue={panels[0]?.displayName}>
+                <Tabs.List>
+                  {panels.map((Panel) => (
+                    <Tabs.Trigger
+                      key={`trigger-${Panel.displayName}`}
+                      value={Panel.displayName}
+                    >
+                      {Panel.displayName}
+                    </Tabs.Trigger>
+                  ))}
+                </Tabs.List>
+
+                {panels.map((Panel) => (
+                  <Tabs.Content
+                    key={`content-${Panel.displayName}`}
+                    value={Panel.displayName}
+                  >
+                    <Panel storyPreviewId={id} />
+                  </Tabs.Content>
+                ))}
+              </Tabs.Root>
+            </PanelContainer>
+          )}
+        </Wrapper>
       </Suspense>
     </ErrorBoundary>
   );

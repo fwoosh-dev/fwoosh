@@ -28,7 +28,11 @@ declare module "@fwoosh/app/docs" {
 }
 
 declare module "@fwoosh/app/ui" {
-  export const toolbarControls: Array<
-    ({ storyPreviewId: string }) => JSX.Element
-  >;
+  interface UiPlugin {
+    ({ storyPreviewId: string }): JSX.Element;
+    displayName: string;
+  }
+
+  export const toolbarControls: Array<UiPlugin>;
+  export const panels: Array<UiPlugin>;
 }

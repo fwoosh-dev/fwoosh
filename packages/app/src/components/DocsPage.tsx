@@ -5,7 +5,7 @@ import dlv from "dlv";
 import { useId } from "@radix-ui/react-id";
 import { Stories } from "@fwoosh/app/stories";
 import { useDocs } from "@fwoosh/app/docs";
-import { components, PageWrapper, styled, Spinner } from "@fwoosh/components";
+import { components, PageWrapper, styled, Spinner, PropsTable } from "@fwoosh/components";
 import * as Collapsible from "@radix-ui/react-collapsible";
 import { paramCase } from "change-case";
 
@@ -93,54 +93,6 @@ const NavGroup = styled("div", {
     pl: 5,
   },
 });
-
-interface PropsTableProps {
-  docs: ReturnType<typeof useDocs>;
-}
-
-const PropsTable = ({ docs }: PropsTableProps) => {
-  return (
-    <>
-      {docs?.map((doc) => (
-        <React.Fragment key={doc.displayName}>
-          <components.h3 id="props">{doc.displayName} Props</components.h3>
-          <components.table>
-            <thead>
-              <components.tr>
-                <components.th>Prop</components.th>
-                <components.th>Type</components.th>
-                <components.th>Default</components.th>
-                <components.th>Description</components.th>
-              </components.tr>
-            </thead>
-            <tbody>
-              {Object.entries(doc.props).map(([prop, propDoc]) => (
-                <components.tr key={`${doc.displayName}-${prop}`}>
-                  <components.td>
-                    <components.code>{prop}</components.code>
-                  </components.td>
-                  <components.td>
-                    {propDoc.type.name && (
-                      <components.code>{propDoc.type.name}</components.code>
-                    )}
-                  </components.td>
-                  <components.td>
-                    {propDoc.defaultValue?.value && (
-                      <components.code>
-                        {propDoc.defaultValue?.value}
-                      </components.code>
-                    )}
-                  </components.td>
-                  <components.td>{propDoc.description}</components.td>
-                </components.tr>
-              ))}
-            </tbody>
-          </components.table>
-        </React.Fragment>
-      ))}
-    </>
-  );
-};
 
 const StoryDiv = React.memo(
   ({ slug, code }: { slug: string; code: string }) => {

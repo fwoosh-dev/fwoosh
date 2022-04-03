@@ -1,8 +1,29 @@
 import { endent } from "./endent.js";
 import { pascalCase } from "change-case";
 
+function lazyLoadComponents(imports: { name?: string; filepath: string }[]) {
+  const names: string[] = [];
+  const components = imports.map((i) => {
+    const name = i.name || pascalCase(i.filepath);
+    names.push(name);
+
+    return endent`
+      const ${name} = React.lazy(() => import('${i.filepath}'));
+      ${name}.displayName = '${name}';
+    `;
+  });
+
+  return { names, components };
+}
+
 /** Plugin that injects fwoosh config options into the front-end */
-export function fwooshUiPlugin(controls: string[]) {
+export function fwooshUiPlugin({
+  panels,
+  toolbarControls,
+}: {
+  panels: { name: string; filepath: string }[];
+  toolbarControls: string[];
+}) {
   const virtualFileId = "@fwoosh/app/ui";
 
   return {
@@ -18,25 +39,19 @@ export function fwooshUiPlugin(controls: string[]) {
 
     async load(id: string) {
       if (id.includes(virtualFileId)) {
-        const lazyToolbarComponentNames: string[] = [];
-        const lazyToolbarComponents = controls.map((control) => {
-          const name = pascalCase(control);
-          lazyToolbarComponentNames.push(name);
-
-          return endent`
-            const ${name} = React.lazy(() => import('${control}'));
-            ${name}.displayName = '${name}';
-          `;
-        });
+        const toolbar = lazyLoadComponents(
+          toolbarControls.map((filepath) => ({ filepath }))
+        );
+        const panel = lazyLoadComponents(panels);
 
         return endent`
           import * as React from "react";
 
-          ${lazyToolbarComponents.join("")}
+          ${toolbar.components.join("")}
+          export const toolbarControls = [ ${toolbar.names.join(", ")}];
 
-          export const toolbarControls = [ ${lazyToolbarComponentNames.join(
-            ", "
-          )}];
+          ${panel.components.join("")}
+          export const panels = [ ${panel.names.join(", ")}];
         `;
       }
       return;
