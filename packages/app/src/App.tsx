@@ -6,24 +6,41 @@ import { Docs } from "./components/Docs";
 import { DocsPage } from "./components/DocsPage";
 
 import "./index.css";
+import {
+  ColorMode,
+  ColorModeContext,
+  getInitialColorMode,
+} from "@fwoosh/components";
 
 export const App = () => {
+  const [colorMode, colorModeSet] = React.useState<ColorMode | undefined>();
+
+  React.useEffect(() => {
+    colorModeSet(getInitialColorMode());
+
+    window.addEventListener("fwoosh-color-mode-change", (e) =>
+      colorModeSet((e as CustomEvent).detail.colorMode)
+    );
+  }, []);
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/">
-          <Route index />
-          <Route path="story">
-            <Route path=":storyId" element={<Story />} />
+    <ColorModeContext.Provider value={colorMode}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/">
+            <Route index />
+            <Route path="story">
+              <Route path=":storyId" element={<Story />} />
+            </Route>
+            <Route path="storybook" element={<Storybook />}>
+              <Route path=":storyId" element={<Story />} />
+            </Route>
+            <Route path="docs" element={<Docs />}>
+              <Route path=":docsPath" element={<DocsPage />} />
+            </Route>
           </Route>
-          <Route path="storybook" element={<Storybook />}>
-            <Route path=":storyId" element={<Story />} />
-          </Route>
-          <Route path="docs" element={<Docs />}>
-            <Route path=":docsPath" element={<DocsPage />} />
-          </Route>
-        </Route>
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </ColorModeContext.Provider>
   );
 };

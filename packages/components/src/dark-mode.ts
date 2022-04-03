@@ -1,6 +1,6 @@
 import React from "react";
 
-type ColorMode = "light" | "dark";
+export type ColorMode = "light" | "dark";
 
 export function getInitialColorMode(): "light" | "dark" {
   const persistedColorPreference = window.localStorage.getItem(
@@ -30,6 +30,10 @@ export function getInitialColorMode(): "light" | "dark" {
 
 export function setColorMode(colorMode: ColorMode) {
   window.localStorage.setItem("fwoosh-color-mode", colorMode);
+  const event = new CustomEvent("fwoosh-color-mode-change", {
+    detail: { colorMode },
+  });
+  window.dispatchEvent(event);
 }
 
 export function getColorMode() {

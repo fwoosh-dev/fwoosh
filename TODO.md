@@ -24,10 +24,10 @@
 - [ ] create vue plugin and example
 - [ ] html plugin and example
 - [ ] controls plugin
-- [ ] action plugin
-- [ ] code preview addon
+- [x] action plugin
+- [x] code preview addon
 - [ ] Axe addon
-- [ ] redlines addon
+- [x] measure addon
 - [ ] component theme addon
 - [ ] figma addon
 
