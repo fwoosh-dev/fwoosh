@@ -308,8 +308,9 @@ export const PageWrapper = styled("div", {
 
 export const IconButton = styled("button", {
   color: "$gray11",
-  height: "$10",
-  width: "$10",
+  height: "$9",
+  width: "$9",
+  p: 2,
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
