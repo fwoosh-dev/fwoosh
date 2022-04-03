@@ -11,6 +11,7 @@ type Action = [string, number, any[]];
 
 const createShareState = () => {
   let actions: Action[] = [];
+  let slug: string;
   const listeners = new Map<string, (newActions: Action[]) => void>();
 
   setAddAction((name, id, args) => {
@@ -39,7 +40,15 @@ const createShareState = () => {
       };
     }, [id]);
 
-    React.useEffect(clearActions, [params.storyId]);
+    React.useEffect(() => {
+      if (params.storyId !== slug) {
+        clearActions();
+      }
+
+      if (params.storyId) {
+        slug = params.storyId;
+      }
+    }, [params.storyId]);
 
     return currentActions;
   };
