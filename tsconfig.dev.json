@@ -19,6 +19,9 @@
     },
     {
       "path": "plugins/props-panel"
+    },
+    {
+      "path": "plugins/source-panel"
     }
   ]
 }

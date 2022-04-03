@@ -9,6 +9,7 @@
   "dependencies": {
     "@radix-ui/react-tabs": "^0.1.5",
     "@radix-ui/react-toolbar": "^0.1.5",
+    "interweave": "^13.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },

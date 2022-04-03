@@ -1,5 +1,5 @@
 import React from "react";
-import { components } from "@fwoosh/components";
+import { components } from "./components";
 import { Interweave, TransformCallback } from "interweave";
 
 const transform: TransformCallback = (node, children) => {

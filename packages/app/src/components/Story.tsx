@@ -22,7 +22,7 @@ const PanelContainer = styled("div", {
   bottom: 0,
   left: 0,
   right: 0,
-  minHeight: 400,
+  height: 400,
   borderTop: "1px solid $gray4",
 });
 

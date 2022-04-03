@@ -5,7 +5,7 @@ import { styled } from "./stitches";
 export const Root = styled(TabsPrimitive.Root, {
   display: "flex",
   flexDirection: "column",
-  gap: 2,
+  height: "100%",
 });
 
 export const Trigger = styled(TabsPrimitive.Trigger, {
@@ -28,4 +28,6 @@ export const List = styled(TabsPrimitive.List, {
   display: "flex",
   borderBottom: `1px solid $gray4`,
 });
-export const Content = TabsPrimitive.Content;
+export const Content = styled(TabsPrimitive.Content, {
+  height: "100%",
+});

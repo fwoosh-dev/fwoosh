@@ -5,6 +5,7 @@ export default {
   plugins: [
     "@fwoosh/zoom",
     "@fwoosh/props-panel",
+    "@fwoosh/source-panel",
     new ReactPlugin({
       docgenOptions: {
         propFilter: (prop) => {
