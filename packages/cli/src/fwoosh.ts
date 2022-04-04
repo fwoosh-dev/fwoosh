@@ -126,23 +126,14 @@ export class Fwoosh {
 
     app.head("*", async (_, res) => res.sendStatus(200));
 
-    app.get<{ title: string }>("/get-docs", async (req, res) => {
-      const stories = await getStories(this.options);
-      const activeStory = stories.find((s) => s.meta.title === req.query.title);
+    app.get<{ file: string }>("/get-docs", async (req, res) => {
+      const file = (req.query.file as string)
+        .replace("http://localhost:3000/@fs", "")
+        .replace("/dist/", "/src/")
+        .replace(".js", ".tsx");
+      const docs = this.hooks.generateDocs.call(file);
 
-      if (!activeStory) {
-        return res.sendStatus(404);
-      }
-
-      const storyModule = vite.moduleGraph.fileToModulesMap.get(
-        activeStory.meta.file
-      );
-
-      if (!storyModule) {
-        return res.sendStatus(404);
-      }
-
-      res.json(this.hooks.generateDocs.call(activeStory.meta.component));
+      res.json(docs);
     });
 
     app.use(vite.middlewares);

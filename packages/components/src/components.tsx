@@ -7,7 +7,7 @@ export type Element<
 > = React.PropsWithoutRef<JSX.IntrinsicElements[T]>;
 
 /** The component used to render a h1 */
-const h1 = styled("h1", {
+export const h1 = styled("h1", {
   text: "3xl",
   mb: 4,
   color: "$gray11",
@@ -23,7 +23,7 @@ const h1 = styled("h1", {
 });
 
 /** The component used to render a h2 */
-const h2 = styled("h2", {
+export const h2 = styled("h2", {
   text: "2xl",
   mt: 6,
   mb: 4,
@@ -43,7 +43,7 @@ const h2 = styled("h2", {
 });
 
 /** The component used to render a h3 */
-const h3 = styled("h3", {
+export const h3 = styled("h3", {
   text: "xl",
   color: "$gray11",
   mt: 6,
@@ -52,7 +52,7 @@ const h3 = styled("h3", {
 });
 
 /** The component used to render a h4 */
-const h4 = styled("h4", {
+export const h4 = styled("h4", {
   text: "lg",
   color: "$gray11",
   fontWeight: 700,
@@ -61,7 +61,7 @@ const h4 = styled("h4", {
 });
 
 /** The component used to render a h5 */
-const h5 = styled("h5", {
+export const h5 = styled("h5", {
   text: "lg",
   color: "$gray11",
   fontWeight: 500,
@@ -71,7 +71,7 @@ const h5 = styled("h5", {
 });
 
 /** The component used to render a h6 */
-const h6 = styled("h6", {
+export const h6 = styled("h6", {
   fontWeight: 500,
   mt: 8,
   color: "$gray11",
@@ -79,32 +79,33 @@ const h6 = styled("h6", {
 });
 
 /** The component used to render a p */
-const p = styled("p", {
+export const p = styled("p", {
   my: 4,
   text: "lg",
   color: "$gray11",
 });
 
 /** The component used to render a li */
-const li = styled("li", {
+export const li = styled("li", {
   color: "$gray11",
 });
 
 /** The component used to render a blockquote */
-const blockquote = styled("blockquote", {
+export const blockquote = styled("blockquote", {
   px: 4,
   py: 0.5,
   my: 6,
   borderLeft: "4px solid $primary8",
   text: "lg",
   background: "$primary2",
+  color: "$primary11",
   "& p": {
     color: "$primary11",
   },
 });
 
 /** The component used to render a `code` in a line of text */
-const InlineCode = styled("code", {
+export const InlineCode = styled("code", {
   fontSize: "max(12px, 85%)",
   whiteSpace: "nowrap",
   paddingTop: 0,
@@ -115,13 +116,13 @@ const InlineCode = styled("code", {
   color: "$primary10",
 });
 
-const CodeBlock = styled("pre", {
+export const CodeBlock = styled("pre", {
   py: 6,
   px: 4,
 });
 
 /** The component used to render an block of code */
-const code = ({ className, ...props }: Element<"code">) =>
+export const code = ({ className, ...props }: Element<"code">) =>
   className && className.includes("language") ? (
     <CodeBlock className={className} {...props} />
   ) : (
@@ -129,7 +130,7 @@ const code = ({ className, ...props }: Element<"code">) =>
   );
 
 /** The component used to render a pre */
-const pre = styled("pre", {
+export const pre = styled("pre", {
   borderRadius: 4,
   marginTop: "1.5rem",
   marginBottom: "1.5rem",
@@ -141,14 +142,14 @@ const pre = styled("pre", {
   overflow: "hidden",
 });
 
-const Anchor = styled("a", {
+export const Anchor = styled("a", {
   cursor: "pointer",
   color: "$primary10",
   textDecoration: "underline",
 });
 
 /** The component used to render an anchor */
-const a = React.forwardRef(
+export const a = React.forwardRef(
   (
     { href = "", className, ...props }: Element<"a">,
     ref: React.Ref<HTMLAnchorElement>
@@ -188,30 +189,32 @@ export const Spinner = ({ delay = 250 }: LazyLoaderProps) => {
   return <LoadingText>Loading...</LoadingText>;
 };
 
-const table = styled("table", {
+export const table = styled("table", {
   my: 8,
   width: "100%",
 });
 
-const th = styled("th", {
+export const th = styled("th", {
   pb: 4,
+  px: 2,
   textAlign: "left",
   fontWeight: 300,
   color: "$gray10",
   text: "sm",
 });
 
-const td = styled("td", {
+export const td = styled("td", {
   py: 4,
+  px: 2,
   color: "$gray11",
   borderBottom: "1px solid",
   borderTop: "1px solid",
   borderColor: "$gray5",
 });
 
-const tr = styled("tr");
+export const tr = styled("tr");
 
-const hr = styled("hr", {
+export const hr = styled("hr", {
   my: 12,
   mx: 20,
   borderTop: "none",
@@ -220,7 +223,7 @@ const hr = styled("hr", {
 });
 
 /** The component used to render an ul */
-const ul = styled("ul", {
+export const ul = styled("ul", {
   my: 6,
   listStyle: "disc",
   text: "lg",
@@ -231,7 +234,7 @@ const ul = styled("ul", {
 });
 
 /** The component used to render an ol */
-const ol = styled("ul", {
+export const ol = styled("ul", {
   my: 6,
   listStyle: "decimal",
   text: "lg",

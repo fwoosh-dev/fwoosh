@@ -132,77 +132,78 @@ const StoryDiv = React.memo(
 export const DocsPage = () => {
   const tree = useStoryTree();
   const params = useParams<{ docsPath: string }>();
-  const docs = useDocs(params.docsPath);
-  const [, name] = params.docsPath?.split("-") || [];
-  const [firstStory, ...stories] = React.useMemo(() => {
-    if (!params.docsPath) {
-      return [];
-    }
+  return null;
+  // const docs = useDocs(params.docsPath);
+  // const [, name] = params.docsPath?.split("-") || [];
+  // const [firstStory, ...stories] = React.useMemo(() => {
+  //   if (!params.docsPath) {
+  //     return [];
+  //   }
 
-    const path = params.docsPath.split("-");
-    return dlv(tree, path) as Stories[string][];
-  }, [params.docsPath]);
+  //   const path = params.docsPath.split("-");
+  //   return dlv(tree, path) as Stories[string][];
+  // }, [params.docsPath]);
 
-  return (
-    <ErrorBoundary>
-      <Suspense fallback={<Spinner delay={300} />}>
-        <DocsLayout>
-          <PageWrapper>
-            <components.h1 id="intro">{name}</components.h1>
-            {firstStory && (
-              <>
-                {firstStory.comment && (
-                  <StyledMarkdown>{firstStory.comment}</StyledMarkdown>
-                )}
-                <StoryDiv slug={firstStory.slug} code={firstStory.code} />
-              </>
-            )}
-            <PropsTable docs={docs} />
-            <components.h2 id="stories">Stories</components.h2>
-            {stories.map((story) => {
-              return (
-                <div key={story.slug}>
-                  <components.h3 id={paramCase(story.title)}>
-                    {story.title}
-                  </components.h3>
-                  {story.comment && (
-                    <StyledMarkdown>{story.comment}</StyledMarkdown>
-                  )}
-                  <StoryDiv slug={story.slug} code={story.code} />
-                </div>
-              );
-            })}
-          </PageWrapper>
-          <QuickNav>
-            <NavHeader>
-              <NavTitle>Quick nav</NavTitle>
-              <ThemeToggle />
-            </NavHeader>
-            <ul>
-              <a href="#intro">
-                <TitleNavItem>Introduction</TitleNavItem>
-              </a>
-              <a href="#props">
-                <TitleNavItem>Properties</TitleNavItem>
-              </a>
-              <a href="#stories">
-                <TitleNavItem>Stories</TitleNavItem>
-              </a>
-              <NavGroup>
-                {stories.map((story) => {
-                  return (
-                    <a href={`#${paramCase(story.title)}`}>
-                      <TitleNavItem key={story.slug}>
-                        {story.title}
-                      </TitleNavItem>
-                    </a>
-                  );
-                })}
-              </NavGroup>
-            </ul>
-          </QuickNav>
-        </DocsLayout>
-      </Suspense>
-    </ErrorBoundary>
-  );
+  // return (
+  //   <ErrorBoundary>
+  //     <Suspense fallback={<Spinner delay={300} />}>
+  //       <DocsLayout>
+  //         <PageWrapper>
+  //           <components.h1 id="intro">{name}</components.h1>
+  //           {firstStory && (
+  //             <>
+  //               {firstStory.comment && (
+  //                 <StyledMarkdown>{firstStory.comment}</StyledMarkdown>
+  //               )}
+  //               <StoryDiv slug={firstStory.slug} code={firstStory.code} />
+  //             </>
+  //           )}
+  //           <PropsTable docs={docs} />
+  //           <components.h2 id="stories">Stories</components.h2>
+  //           {stories.map((story) => {
+  //             return (
+  //               <div key={story.slug}>
+  //                 <components.h3 id={paramCase(story.title)}>
+  //                   {story.title}
+  //                 </components.h3>
+  //                 {story.comment && (
+  //                   <StyledMarkdown>{story.comment}</StyledMarkdown>
+  //                 )}
+  //                 <StoryDiv slug={story.slug} code={story.code} />
+  //               </div>
+  //             );
+  //           })}
+  //         </PageWrapper>
+  //         <QuickNav>
+  //           <NavHeader>
+  //             <NavTitle>Quick nav</NavTitle>
+  //             <ThemeToggle />
+  //           </NavHeader>
+  //           <ul>
+  //             <a href="#intro">
+  //               <TitleNavItem>Introduction</TitleNavItem>
+  //             </a>
+  //             <a href="#props">
+  //               <TitleNavItem>Properties</TitleNavItem>
+  //             </a>
+  //             <a href="#stories">
+  //               <TitleNavItem>Stories</TitleNavItem>
+  //             </a>
+  //             <NavGroup>
+  //               {stories.map((story) => {
+  //                 return (
+  //                   <a href={`#${paramCase(story.title)}`}>
+  //                     <TitleNavItem key={story.slug}>
+  //                       {story.title}
+  //                     </TitleNavItem>
+  //                   </a>
+  //                 );
+  //               })}
+  //             </NavGroup>
+  //           </ul>
+  //         </QuickNav>
+  //       </DocsLayout>
+  //     </Suspense>
+  //   </ErrorBoundary>
+  // );
 };

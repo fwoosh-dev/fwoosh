@@ -27,19 +27,31 @@ const Table = ({ doc }: TableProps) => {
         {Object.entries(doc.props).map(([prop, propDoc]) => (
           <components.tr key={`${doc.displayName}-${prop}`}>
             <components.td>
-              <components.code>{prop}</components.code>
+              <div style={{ minWidth: 100, maxWidth: 200 }}>
+                <components.code>{prop}</components.code>
+              </div>
             </components.td>
             <components.td>
-              {propDoc.type.name && (
-                <components.code>{propDoc.type.name}</components.code>
-              )}
+              <div style={{ minWidth: 100, maxWidth: 300, overflow: "auto" }}>
+                {propDoc.type.name && (
+                  <components.code>{propDoc.type.name}</components.code>
+                )}
+              </div>
             </components.td>
-            <components.td>
-              {propDoc.defaultValue?.value && (
-                <components.code>{propDoc.defaultValue?.value}</components.code>
-              )}
+            <components.td style={{ minWidth: 100, maxWidth: 200 }}>
+              <div style={{ minWidth: 100, maxWidth: 200 }}>
+                {propDoc.defaultValue?.value && (
+                  <components.code>
+                    {propDoc.defaultValue?.value}
+                  </components.code>
+                )}
+              </div>
             </components.td>
-            <components.td>{propDoc.description}</components.td>
+            <components.td style={{ width: "100%" }}>
+              <div style={{ minWidth: 100, maxWidth: 200 }}>
+                {propDoc.description}
+              </div>
+            </components.td>
           </components.tr>
         ))}
       </tbody>
@@ -50,6 +62,10 @@ const Table = ({ doc }: TableProps) => {
 interface PropsTableProps {
   docs: ReturnType<typeof useDocs>;
 }
+
+const Panel = styled(Tabs.Content, {
+  p: 4,
+});
 
 export const PropsTable = ({ docs }: PropsTableProps) => {
   if (!docs?.length) {
@@ -77,12 +93,10 @@ export const PropsTable = ({ docs }: PropsTableProps) => {
         ))}
       </Tabs.List>
       {docs?.map((doc) => (
-        <Tabs.Content
-          key={`content-${doc.displayName}`}
-          value={doc.displayName}
-        >
+        <Panel key={`content-${doc.displayName}`} value={doc.displayName}>
+          {doc.description && <components.p>{doc.description}</components.p>}
           <Table doc={doc} />
-        </Tabs.Content>
+        </Panel>
       ))}
     </Tabs.Root>
   );

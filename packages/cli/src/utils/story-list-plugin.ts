@@ -33,6 +33,7 @@ function createVirtualFile(config: Config) {
       comment: \`${story.comment}\`,
       code: \`${story.code}\`,
       component: ${pascalCase(story.slug)},
+      meta: import('${story.file}').then((module) => module.meta)
     }`
   );
 

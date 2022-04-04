@@ -1,4 +1,4 @@
-import { AsyncSeriesBailHook, SyncBailHook, SyncWaterfallHook } from "tapable";
+import { SyncBailHook, SyncWaterfallHook } from "tapable";
 import type { ComponentDoc } from "react-docgen-typescript";
 import { Plugin } from "./fwoosh";
 

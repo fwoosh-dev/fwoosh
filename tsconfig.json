@@ -1,4 +1,6 @@
 {
+  "exclude": ["**/dist/**/*"],
+
   "compilerOptions": {
     "declaration": true,
     "importHelpers": true,

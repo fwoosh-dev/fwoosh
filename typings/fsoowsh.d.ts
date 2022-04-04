@@ -1,4 +1,5 @@
 declare module "@fwoosh/app/stories" {
+  // import { StoryMeta } from "fwoosh";
   export interface Stories {
     [key: string]: {
       title: string;
@@ -7,6 +8,7 @@ declare module "@fwoosh/app/stories" {
       grouping: string;
       component: any;
       comment?: string;
+      meta: StoryMeta;
     };
   }
 
@@ -14,7 +16,7 @@ declare module "@fwoosh/app/stories" {
 }
 
 declare module "@fwoosh/app/config" {
-  import { FwooshOptions } from "../packages/cli/src/types";
+  // import { FwooshOptions } from "fwoosh";
   export const config: Pick<FwooshOptions, "title">;
 }
 
@@ -24,7 +26,8 @@ declare module "@fwoosh/app/render" {
 
 declare module "@fwoosh/app/docs" {
   import type { ComponentDoc } from "react-docgen-typescript";
-  export function useDocs(file?: string): ComponentDoc[];
+  // import { StoryMeta } from "fwoosh";
+  export function useDocs(meta?: StoryMeta): ComponentDoc[];
 }
 
 declare module "@fwoosh/app/ui" {

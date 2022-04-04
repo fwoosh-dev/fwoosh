@@ -1,0 +1,15 @@
+{
+  "name": "@fwoosh/fwoosh-example",
+  "version": "0.0.0",
+  "scripts": {
+    "fwoosh": "../../packages/cli/bin/fwoosh.js",
+    "start": "yarn fwoosh dev",
+    "build": "yarn fwoosh build"
+  },
+  "devDependencies": {
+    "@fwoosh/components": "link:../../packages/components",
+    "@fwoosh/react": "link:../../plugins/react",
+    "@vitejs/plugin-react": "^1.2.0",
+    "fwoosh": "link:../../packages/cli"
+  }
+}

@@ -1,0 +1,20 @@
+diff --git a/dist/esm/Tree.css.js b/dist/esm/Tree.css.js
+index 6ff265aacc2e3baab5b16adbfd901d8c4b56550e..7512efef38be807fbbda36084f95ae66d268fc78 100644
+--- a/dist/esm/Tree.css.js
++++ b/dist/esm/Tree.css.js
+@@ -1 +1,13 @@
+-module.exports = {"tree":"Tree-tree-dafc550","item":"Tree-item-b4d8a64","group":"Tree-group-29935df","label":"Tree-label-dffffad","focusWhite":"Tree-focusWhite-854681c","arrow":"Tree-arrow-d8dcc4f","hover":"Tree-hover-a1ec1f2","open":"Tree-open-66c52a1","dark":"Tree-dark-c6a383c","chrome":"Tree-chrome-4aff21a","light":"Tree-light-42cad7e"};
+\ No newline at end of file
++export default {
++  tree: "Tree-tree-dafc550",
++  item: "Tree-item-b4d8a64",
++  group: "Tree-group-29935df",
++  label: "Tree-label-dffffad",
++  focusWhite: "Tree-focusWhite-854681c",
++  arrow: "Tree-arrow-d8dcc4f",
++  hover: "Tree-hover-a1ec1f2",
++  open: "Tree-open-66c52a1",
++  dark: "Tree-dark-c6a383c",
++  chrome: "Tree-chrome-4aff21a",
++  light: "Tree-light-42cad7e",
++};
