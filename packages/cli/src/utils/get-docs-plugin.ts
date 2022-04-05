@@ -71,42 +71,47 @@ export function getDocsPlugin() {
       async load(id: string) {
         if (id.includes(virtualFileId)) {
           return endent`
-          import { lazy } from "react";
-          import * as React from "react";
-    
-          export const useDocs = (meta) => {
-            const [docs, setDocs] = React.useState();
+            import { lazy } from "react";
+            import * as React from "react";
+            import { useQuery } from "react-query";
+            
+            export const useDocs = (key, meta) => {
+              const { data } = useQuery(
+                key,
+                async () => {
+                  if (!meta) {
+                    return;
+                  }
+            
+                  const resolvedMeta = meta.then
+                    ? await meta
+                    : meta.component
+                    ? meta
+                    : (await meta()).default;
+            
+                  if (!resolvedMeta?.component) {
+                    return;
+                  }
+            
+                  const components = Array.isArray(resolvedMeta.component)
+                    ? resolvedMeta.component
+                    : [resolvedMeta.component];
+                  const displayedComponents = components.map((c) => c.displayName);
+                  const file = components[0].fwoosh_file;
+                  const params = new URLSearchParams({ file });
+                  const res = await fetch("/get-docs?" + params);
+                  const data = await res.json();
+            
+                  return data.filter((doc) =>
+                    displayedComponents.includes(doc.displayName)
+                  );
+                },
+                { suspense: true }
+              );
 
-            console.log('meta', meta)
-
-            React.useEffect(async () => {
-              if (!meta) {
-                return;
-              }
-
-              // TODO: get this to work with already resolved modules
-              // TODO: make it use suspense
-              const resolvedMeta = meta.then ? await meta : meta.components ? meta : (await meta()).default;
-              setDocs();
-              
-              if (!resolvedMeta?.component) {
-                return;
-              }
-
-              const components = Array.isArray(resolvedMeta.component) ? resolvedMeta.component : [resolvedMeta.component];
-              const displayedComponents = components.map((c) => c.displayName);
-              const file = components[0].fwoosh_file;
-              const params = new URLSearchParams({ file });
-              setDocs();
-
-              fetch("/get-docs?" + params).then((res) => res.json()).then((data) => {
-                setDocs(data.filter((doc) => displayedComponents.includes(doc.displayName)));
-              })
-            }, [meta]);
-
-            return docs;
-          };
-        `;
+              return data;
+            };
+          `;
         }
       },
     },

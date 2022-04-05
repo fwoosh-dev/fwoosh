@@ -47,6 +47,8 @@ export const Story = () => {
   const params = useParams<{ storyId: string }>();
   const id = useId();
 
+  console.log({ panels });
+
   return (
     <ErrorBoundary>
       <Suspense fallback={<Spinner delay={300} />}>
@@ -86,7 +88,11 @@ export const Story = () => {
                     key={`content-${Panel.componentName}`}
                     value={Panel.componentName}
                   >
-                    <Panel storyPreviewId={id} />
+                    <ErrorBoundary>
+                      <Suspense fallback={<Spinner />}>
+                        <Panel storyPreviewId={id} />
+                      </Suspense>
+                    </ErrorBoundary>
                   </Tabs.Content>
                 ))}
               </Tabs.Root>

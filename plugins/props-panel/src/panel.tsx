@@ -8,9 +8,10 @@ export default function PropsPanel() {
   const params = useParams<{ storyId: string }>();
   const [, story] =
     Object.entries(stories).find(([slug]) => slug === params.storyId) || [];
-
-  console.log(story?.component?._payload?._result.component);
-  const docs = useDocs(story?.component?._payload?._result || story?.meta);
+  const docs = useDocs(
+    story?.slug || "none",
+    story?.component?._payload?._result || story?.meta
+  );
 
   return <PropsTable docs={docs} />;
 }

@@ -1,16 +1,25 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
+
 import { Story } from "./components/Story";
 import { Storybook } from "./components/Storybook";
 import { Docs } from "./components/Docs";
 import { DocsPage } from "./components/DocsPage";
-
 import "./index.css";
 import {
   ColorMode,
   ColorModeContext,
   getInitialColorMode,
 } from "@fwoosh/components";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      suspense: true,
+    },
+  },
+});
 
 export const App = () => {
   const [colorMode, colorModeSet] = React.useState<ColorMode | undefined>();
@@ -24,23 +33,25 @@ export const App = () => {
   }, []);
 
   return (
-    <ColorModeContext.Provider value={colorMode}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/">
-            <Route index />
-            <Route path="story">
-              <Route path=":storyId" element={<Story />} />
+    <QueryClientProvider client={queryClient}>
+      <ColorModeContext.Provider value={colorMode}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/">
+              <Route index />
+              <Route path="story">
+                <Route path=":storyId" element={<Story />} />
+              </Route>
+              <Route path="storybook" element={<Storybook />}>
+                <Route path=":storyId" element={<Story />} />
+              </Route>
+              <Route path="docs" element={<Docs />}>
+                <Route path=":docsPath" element={<DocsPage />} />
+              </Route>
             </Route>
-            <Route path="storybook" element={<Storybook />}>
-              <Route path=":storyId" element={<Story />} />
-            </Route>
-            <Route path="docs" element={<Docs />}>
-              <Route path=":docsPath" element={<DocsPage />} />
-            </Route>
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </ColorModeContext.Provider>
+          </Routes>
+        </BrowserRouter>
+      </ColorModeContext.Provider>
+    </QueryClientProvider>
   );
 };

@@ -4,6 +4,11 @@ import { components } from "./components.js";
 import * as Tabs from "./Tabs.js";
 import { styled } from "./stitches.js";
 
+const NoPropMessage = styled("div", {
+  text: "2xl",
+  color: "$gray10",
+});
+
 const Wrapper = styled("div", {
   px: 4,
 });
@@ -13,49 +18,63 @@ interface TableProps {
 }
 
 const Table = ({ doc }: TableProps) => {
+  const rows = Object.entries(doc.props);
+
   return (
-    <components.table>
-      <thead>
-        <components.tr>
-          <components.th>Prop</components.th>
-          <components.th>Type</components.th>
-          <components.th>Default</components.th>
-          <components.th>Description</components.th>
-        </components.tr>
-      </thead>
-      <tbody>
-        {Object.entries(doc.props).map(([prop, propDoc]) => (
-          <components.tr key={`${doc.displayName}-${prop}`}>
-            <components.td>
-              <div style={{ minWidth: 100, maxWidth: 200 }}>
-                <components.code>{prop}</components.code>
-              </div>
-            </components.td>
-            <components.td>
-              <div style={{ minWidth: 100, maxWidth: 300, overflow: "auto" }}>
-                {propDoc.type.name && (
-                  <components.code>{propDoc.type.name}</components.code>
-                )}
-              </div>
-            </components.td>
-            <components.td style={{ minWidth: 100, maxWidth: 200 }}>
-              <div style={{ minWidth: 100, maxWidth: 200 }}>
-                {propDoc.defaultValue?.value && (
-                  <components.code>
-                    {propDoc.defaultValue?.value}
-                  </components.code>
-                )}
-              </div>
-            </components.td>
-            <components.td style={{ width: "100%" }}>
-              <div style={{ minWidth: 100, maxWidth: 200 }}>
-                {propDoc.description}
-              </div>
-            </components.td>
-          </components.tr>
-        ))}
-      </tbody>
-    </components.table>
+    <>
+      {doc.description && <components.p>{doc.description}</components.p>}
+      {rows.length > 0 ? (
+        <components.table>
+          <thead>
+            <components.tr>
+              <components.th>Prop</components.th>
+              <components.th>Type</components.th>
+              <components.th>Default</components.th>
+              <components.th>Description</components.th>
+            </components.tr>
+          </thead>
+          <tbody>
+            {rows.map(([prop, propDoc]) => (
+              <components.tr key={`${doc.displayName}-${prop}`}>
+                <components.td>
+                  <div style={{ minWidth: 100, maxWidth: 200 }}>
+                    <components.code>{prop}</components.code>
+                  </div>
+                </components.td>
+                <components.td>
+                  <div
+                    style={{ minWidth: 100, maxWidth: 300, overflow: "auto" }}
+                  >
+                    {propDoc.type.name && (
+                      <components.code>{propDoc.type.name}</components.code>
+                    )}
+                  </div>
+                </components.td>
+                <components.td style={{ minWidth: 100, maxWidth: 200 }}>
+                  <div style={{ minWidth: 100, maxWidth: 200 }}>
+                    {propDoc.defaultValue?.value && (
+                      <components.code>
+                        {propDoc.defaultValue?.value}
+                      </components.code>
+                    )}
+                  </div>
+                </components.td>
+                <components.td style={{ width: "100%" }}>
+                  <div style={{ minWidth: 100, maxWidth: 200 }}>
+                    {propDoc.description}
+                  </div>
+                </components.td>
+              </components.tr>
+            ))}
+          </tbody>
+        </components.table>
+      ) : (
+        <NoPropMessage>
+          This component has no documented properties. Some properties might be
+          ignored though, such as HTML attributes.
+        </NoPropMessage>
+      )}
+    </>
   );
 };
 
@@ -94,7 +113,6 @@ export const PropsTable = ({ docs }: PropsTableProps) => {
       </Tabs.List>
       {docs?.map((doc) => (
         <Panel key={`content-${doc.displayName}`} value={doc.displayName}>
-          {doc.description && <components.p>{doc.description}</components.p>}
           <Table doc={doc} />
         </Panel>
       ))}

@@ -18,6 +18,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-feather": "^2.0.9",
+    "react-query": "^3.34.19",
     "react-router-dom": "^6.2.2"
   },
   "devDependencies": {
