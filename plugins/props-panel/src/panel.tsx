@@ -2,7 +2,11 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useDocs } from "@fwoosh/app/docs";
 import { stories } from "@fwoosh/app/stories";
-import { PropsTable } from "@fwoosh/components";
+import { PropsTable, styled } from "@fwoosh/components";
+
+const Wrapper = styled("div", {
+  px: 4,
+});
 
 export default function PropsPanel() {
   const params = useParams<{ storyId: string }>();
@@ -11,5 +15,9 @@ export default function PropsPanel() {
   const key = story?.slug || "none";
   const docs = useDocs(key, story?.component?._payload?._result, story?.meta);
 
-  return <PropsTable key={key} docs={docs} />;
+  return (
+    <Wrapper>
+      <PropsTable key={key} docs={docs} />
+    </Wrapper>
+  );
 }

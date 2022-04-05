@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { keyframes, styled } from "./stitches";
 
 const spin = keyframes({
@@ -44,11 +44,11 @@ const Wrapper = styled("div", {
   gap: "$2",
 });
 
-export interface LazyLoaderProps {
+export interface LazyLoaderProps extends React.ComponentProps<typeof Wrapper> {
   delay?: number;
 }
 
-export const Spinner: FC<LazyLoaderProps> = ({ delay = 1000 }) => {
+export const Spinner = ({ delay = 1000, ...props }: LazyLoaderProps) => {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -61,7 +61,7 @@ export const Spinner: FC<LazyLoaderProps> = ({ delay = 1000 }) => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper {...props}>
       <SpinnerComponent />
       <Message>Loading...</Message>
     </Wrapper>

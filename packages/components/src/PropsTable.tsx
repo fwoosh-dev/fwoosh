@@ -5,12 +5,7 @@ import * as Tabs from "./Tabs.js";
 import { styled } from "./stitches.js";
 
 const NoPropMessage = styled("div", {
-  text: "2xl",
   color: "$gray10",
-});
-
-const Wrapper = styled("div", {
-  px: 4,
 });
 
 interface TableProps {
@@ -80,10 +75,6 @@ interface PropsTableProps {
   docs: ReturnType<typeof useDocs>;
 }
 
-const Panel = styled(Tabs.Content, {
-  p: 4,
-});
-
 export const PropsTable = ({ docs }: PropsTableProps) => {
   if (!docs) {
     return null;
@@ -94,11 +85,7 @@ export const PropsTable = ({ docs }: PropsTableProps) => {
   }
 
   if (docs.length === 1) {
-    return (
-      <Wrapper>
-        <Table doc={docs[0]} />
-      </Wrapper>
-    );
+    return <Table doc={docs[0]} />;
   }
 
   return (
@@ -114,9 +101,12 @@ export const PropsTable = ({ docs }: PropsTableProps) => {
         ))}
       </Tabs.List>
       {docs?.map((doc) => (
-        <Panel key={`content-${doc.displayName}`} value={doc.displayName}>
+        <Tabs.Content
+          key={`content-${doc.displayName}`}
+          value={doc.displayName}
+        >
           <Table doc={doc} />
-        </Panel>
+        </Tabs.Content>
       ))}
     </Tabs.Root>
   );
