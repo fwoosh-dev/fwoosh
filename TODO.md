@@ -2,6 +2,7 @@
 
 ### Core
 
+- [ ] URGENT: fix/update docs mode
 - [ ] document fwoosh/components with fwoosh
 - [ ] make sidebar and layout pluggable
 - [x] switch to stitches
