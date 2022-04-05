@@ -28,6 +28,9 @@
     },
     {
       "path": "plugins/measure"
+    },
+    {
+      "path": "plugins/story-description-panel"
     }
   ]
 }

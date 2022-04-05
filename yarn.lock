@@ -726,6 +726,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@fwoosh/story-description-panel@workspace:plugins/story-description-panel":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/story-description-panel@workspace:plugins/story-description-panel"
+  dependencies:
+    "@types/node": ^14.14.31
+    fwoosh: "link:../../packages/cli"
+  languageName: unknown
+  linkType: soft
+
 "@fwoosh/zoom@workspace:plugins/zoom":
   version: 0.0.0-use.local
   resolution: "@fwoosh/zoom@workspace:plugins/zoom"
@@ -3783,6 +3792,12 @@ __metadata:
 "fwoosh@link:../../packages/cli::locator=%40fwoosh%2Fsource-panel%40workspace%3Aplugins%2Fsource-panel":
   version: 0.0.0-use.local
   resolution: "fwoosh@link:../../packages/cli::locator=%40fwoosh%2Fsource-panel%40workspace%3Aplugins%2Fsource-panel"
+  languageName: node
+  linkType: soft
+
+"fwoosh@link:../../packages/cli::locator=%40fwoosh%2Fstory-description-panel%40workspace%3Aplugins%2Fstory-description-panel":
+  version: 0.0.0-use.local
+  resolution: "fwoosh@link:../../packages/cli::locator=%40fwoosh%2Fstory-description-panel%40workspace%3Aplugins%2Fstory-description-panel"
   languageName: node
   linkType: soft
 

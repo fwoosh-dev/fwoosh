@@ -3,6 +3,7 @@ import ReactPlugin from "@fwoosh/react";
 export default {
   title: "@fwoosh/react",
   plugins: [
+    "@fwoosh/story-description-panel",
     "@fwoosh/props-panel",
     "@fwoosh/source-panel",
     "@fwoosh/actions",
