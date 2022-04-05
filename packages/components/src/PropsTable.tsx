@@ -87,8 +87,12 @@ const Panel = styled(Tabs.Content, {
 });
 
 export const PropsTable = ({ docs }: PropsTableProps) => {
-  if (!docs?.length) {
+  if (!docs) {
     return null;
+  }
+
+  if (!docs.length) {
+    return <NoPropMessage>No property documentation found.</NoPropMessage>;
   }
 
   if (docs.length === 1) {
