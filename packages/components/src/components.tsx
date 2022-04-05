@@ -85,7 +85,7 @@ export const p = styled("p", {
   color: "$gray11",
 });
 
-/** The component used to render a li */
+/** The component used to render a li. */
 export const li = styled("li", {
   color: "$gray11",
 });
@@ -165,29 +165,6 @@ export const a = React.forwardRef(
     );
   }
 );
-
-export interface LazyLoaderProps {
-  delay?: number;
-}
-
-const LoadingText = styled("div", {
-  color: "$gray10",
-});
-
-export const Spinner = ({ delay = 250 }: LazyLoaderProps) => {
-  const [show, setShow] = React.useState(false);
-
-  React.useEffect(() => {
-    const timeout = setTimeout(() => setShow(true), delay);
-    return () => clearTimeout(timeout);
-  }, [delay]);
-
-  if (!show) {
-    return null;
-  }
-
-  return <LoadingText>Loading...</LoadingText>;
-};
 
 export const table = styled("table", {
   my: 8,

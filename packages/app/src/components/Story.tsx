@@ -53,7 +53,7 @@ export const Story = () => {
     <Wrapper>
       {toolbarControls.length > 0 && (
         <StoryToolbar>
-          <Suspense fallback={<Spinner delay={300} />}>
+          <Suspense fallback={<Spinner />}>
             {toolbarControls.map((Control) => (
               <Control key={Control.componentName} storyPreviewId={id} />
             ))}
@@ -62,7 +62,7 @@ export const Story = () => {
       )}
 
       <ErrorBoundary>
-        <Suspense fallback={<Spinner delay={300} />}>
+        <Suspense fallback={<Spinner />}>
           {params.storyId ? (
             <StoryDiv slug={params.storyId} id={id} />
           ) : (
@@ -75,7 +75,7 @@ export const Story = () => {
         <PanelContainer>
           <Tabs.Root defaultValue={panels[0]?.componentName}>
             <Tabs.List>
-              <Suspense fallback={<Spinner delay={300} />}>
+              <Suspense fallback={<Spinner />}>
                 {panels.map((Panel) => {
                   return (
                     <Tabs.Trigger
@@ -95,7 +95,7 @@ export const Story = () => {
                 value={Panel.componentName}
               >
                 <ErrorBoundary>
-                  <Suspense fallback={<Spinner delay={300} />}>
+                  <Suspense fallback={<Spinner />}>
                     <Panel storyPreviewId={id} />
                   </Suspense>
                 </ErrorBoundary>
