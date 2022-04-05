@@ -71,61 +71,73 @@ export function getDocsPlugin() {
       async load(id: string) {
         if (id.includes(virtualFileId)) {
           return endent`
-            import { lazy } from "react";
-            import * as React from "react";
-            import { useQuery } from "react-query";
-            
-            export const useDocs = (key, story, meta) => {
-              console.log("useDocs", key, meta);
-              const { data } = useQuery(
-                key,
-                async () => {
-                  if (!meta) {
-                    return;
-                  }
-            
-                  let resolvedMeta;
-                  
-                  if (meta.then) {
-                    const resolvedPromise = await meta;
+          import { lazy } from "react";
+          import * as React from "react";
+          import { useQuery } from "react-query";
+          
+          async function resolveComponents(story, fallback) {
+            let resolvedMeta;
 
-                    if (resolvedPromise.component) {
-                      resolvedMeta = resolvedPromise;
-                    } else if (meta.component) {
-                      resolvedMeta = meta;
-                    } else {
-                      resolvedMeta = (await meta()).default;
-                    }
-                  } else if (meta.component) {
-                    resolvedMeta = meta;
-                  } else {
-                    resolvedMeta = (await meta()).default;
-                  }
+            // Components declared on the story
+            if (story.component) {
+              resolvedMeta = story;
+            } 
+            // Resolved lazy component
+            else if (story.then) {
+              const resolvedPromise = await story;
+          
+              if (resolvedPromise.component) {
+                resolvedMeta = resolvedPromise;
+              }
+            }
+            // Unresolved lazy component
+            else if (typeof story === "function") {
+              const resolvedPromise = (await story()).default;
 
-                  console.log(resolvedMeta);
-            
-                  if (!resolvedMeta?.component) {
-                    return;
-                  }
-            
-                  const components = Array.isArray(resolvedMeta.component)
-                    ? resolvedMeta.component
-                    : [resolvedMeta.component];
-                  const displayedComponents = components.map((c) => c.displayName);
-                  const file = components[0].fwoosh_file;
-                  const params = new URLSearchParams({ file });
-                  const res = await fetch("/get-docs?" + params);
-                  const data = await res.json();
-            
-                  return data.filter((doc) =>
-                    displayedComponents.includes(doc.displayName)
-                  );
-                },
-                { suspense: true }
-              );
+              if (resolvedPromise.component) {
+                resolvedMeta = resolvedPromise;
+              }
+            }
 
-              return data;
-            };
+            if (!resolvedMeta && fallback) {
+              resolvedMeta = resolveComponents(fallback, undefined);
+            }
+          
+            return resolvedMeta
+          }
+          
+          export const useDocs = (key, story, meta) => {
+            const { data } = useQuery(
+              key,
+              async () => {
+                if (!meta) {
+                  return;
+                }
+          
+                const resolvedMeta = await resolveComponents(story, meta);
+          
+                if (!resolvedMeta?.component) {
+                  return;
+                }
+          
+                const components = Array.isArray(resolvedMeta.component)
+                  ? resolvedMeta.component
+                  : [resolvedMeta.component];
+                const displayedComponents = components.map((c) => c.displayName);
+                const file = components[0].fwoosh_file;
+                const params = new URLSearchParams({ file });
+                const res = await fetch("/get-docs?" + params);
+                const data = await res.json();
+          
+                return data.filter((doc) =>
+                  displayedComponents.includes(doc.displayName)
+                );
+              },
+              { suspense: true }
+            );
+          
+            return data;
+          };
           `;
         }
       },

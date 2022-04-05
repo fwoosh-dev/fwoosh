@@ -33,25 +33,27 @@ export const App = () => {
   }, []);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ColorModeContext.Provider value={colorMode}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/">
-              <Route index />
-              <Route path="story">
-                <Route path=":storyId" element={<Story />} />
+    <React.StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <ColorModeContext.Provider value={colorMode}>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/">
+                <Route index />
+                <Route path="story">
+                  <Route path=":storyId" element={<Story />} />
+                </Route>
+                <Route path="storybook" element={<Storybook />}>
+                  <Route path=":storyId" element={<Story />} />
+                </Route>
+                <Route path="docs" element={<Docs />}>
+                  <Route path=":docsPath" element={<DocsPage />} />
+                </Route>
               </Route>
-              <Route path="storybook" element={<Storybook />}>
-                <Route path=":storyId" element={<Story />} />
-              </Route>
-              <Route path="docs" element={<Docs />}>
-                <Route path=":docsPath" element={<DocsPage />} />
-              </Route>
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </ColorModeContext.Provider>
-    </QueryClientProvider>
+            </Routes>
+          </BrowserRouter>
+        </ColorModeContext.Provider>
+      </QueryClientProvider>
+    </React.StrictMode>
   );
 };

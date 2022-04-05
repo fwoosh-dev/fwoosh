@@ -50,56 +50,60 @@ export const Story = () => {
   console.log({ panels });
 
   return (
-    <ErrorBoundary>
-      <Suspense fallback={<Spinner delay={300} />}>
-        <Wrapper>
-          {toolbarControls.length > 0 && (
-            <StoryToolbar>
-              {toolbarControls.map((Control) => (
-                <Control key={Control.componentName} storyPreviewId={id} />
-              ))}
-            </StoryToolbar>
-          )}
+    <Wrapper>
+      {toolbarControls.length > 0 && (
+        <StoryToolbar>
+          <Suspense fallback={<Spinner delay={300} />}>
+            {toolbarControls.map((Control) => (
+              <Control key={Control.componentName} storyPreviewId={id} />
+            ))}
+          </Suspense>
+        </StoryToolbar>
+      )}
 
+      <ErrorBoundary>
+        <Suspense fallback={<Spinner delay={300} />}>
           {params.storyId ? (
             <StoryDiv slug={params.storyId} id={id} />
           ) : (
             <div>Story not found</div>
           )}
+        </Suspense>
+      </ErrorBoundary>
 
-          {panels.length > 0 && (
-            <PanelContainer>
-              <Tabs.Root defaultValue={panels[0]?.componentName}>
-                <Tabs.List>
-                  {panels.map((Panel) => {
-                    return (
-                      <Tabs.Trigger
-                        key={`trigger-${Panel.componentName}`}
-                        value={Panel.componentName}
-                      >
-                        <Panel.displayName />
-                      </Tabs.Trigger>
-                    );
-                  })}
-                </Tabs.List>
+      {panels.length > 0 && (
+        <PanelContainer>
+          <Tabs.Root defaultValue={panels[0]?.componentName}>
+            <Tabs.List>
+              <Suspense fallback={<Spinner delay={300} />}>
+                {panels.map((Panel) => {
+                  return (
+                    <Tabs.Trigger
+                      key={`trigger-${Panel.componentName}`}
+                      value={Panel.componentName}
+                    >
+                      <Panel.displayName />
+                    </Tabs.Trigger>
+                  );
+                })}
+              </Suspense>
+            </Tabs.List>
 
-                {panels.map((Panel) => (
-                  <Tabs.Content
-                    key={`content-${Panel.componentName}`}
-                    value={Panel.componentName}
-                  >
-                    <ErrorBoundary>
-                      <Suspense fallback={<Spinner />}>
-                        <Panel storyPreviewId={id} />
-                      </Suspense>
-                    </ErrorBoundary>
-                  </Tabs.Content>
-                ))}
-              </Tabs.Root>
-            </PanelContainer>
-          )}
-        </Wrapper>
-      </Suspense>
-    </ErrorBoundary>
+            {panels.map((Panel) => (
+              <Tabs.Content
+                key={`content-${Panel.componentName}`}
+                value={Panel.componentName}
+              >
+                <ErrorBoundary>
+                  <Suspense fallback={<Spinner delay={300} />}>
+                    <Panel storyPreviewId={id} />
+                  </Suspense>
+                </ErrorBoundary>
+              </Tabs.Content>
+            ))}
+          </Tabs.Root>
+        </PanelContainer>
+      )}
+    </Wrapper>
   );
 };
