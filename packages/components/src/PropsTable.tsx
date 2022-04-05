@@ -60,9 +60,7 @@ const Table = ({ doc }: TableProps) => {
                   </div>
                 </components.td>
                 <components.td style={{ width: "100%" }}>
-                  <div style={{ minWidth: 100, maxWidth: 200 }}>
-                    {propDoc.description}
-                  </div>
+                  <div style={{ minWidth: 100 }}>{propDoc.description}</div>
                 </components.td>
               </components.tr>
             ))}

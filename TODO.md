@@ -11,7 +11,6 @@
 - [ ] decorator hook
 - [ ] search
 - [ ] command pallette?
-- [ ] make component docs lookup follow re-exports
 - [ ] add cache for docgen
 - [ ] build command
 - [ ] MDX only pages

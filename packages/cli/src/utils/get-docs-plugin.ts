@@ -75,7 +75,8 @@ export function getDocsPlugin() {
             import * as React from "react";
             import { useQuery } from "react-query";
             
-            export const useDocs = (key, meta) => {
+            export const useDocs = (key, story, meta) => {
+              console.log("useDocs", key, meta);
               const { data } = useQuery(
                 key,
                 async () => {
@@ -83,11 +84,25 @@ export function getDocsPlugin() {
                     return;
                   }
             
-                  const resolvedMeta = meta.then
-                    ? await meta
-                    : meta.component
-                    ? meta
-                    : (await meta()).default;
+                  let resolvedMeta;
+                  
+                  if (meta.then) {
+                    const resolvedPromise = await meta;
+
+                    if (resolvedPromise.component) {
+                      resolvedMeta = resolvedPromise;
+                    } else if (meta.component) {
+                      resolvedMeta = meta;
+                    } else {
+                      resolvedMeta = (await meta()).default;
+                    }
+                  } else if (meta.component) {
+                    resolvedMeta = meta;
+                  } else {
+                    resolvedMeta = (await meta()).default;
+                  }
+
+                  console.log(resolvedMeta);
             
                   if (!resolvedMeta?.component) {
                     return;
