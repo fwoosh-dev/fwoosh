@@ -7,9 +7,6 @@ import { createServer } from "vite";
 import express from "express";
 import { createRequire } from "module";
 import { SyncBailHook, SyncWaterfallHook } from "tapable";
-import Unocss from "unocss/vite";
-import presetWind from "@unocss/preset-wind";
-import transformerDirective from "@unocss/transformer-directives";
 
 import type { FwooshHooks, FwooshOptions } from "./types";
 import { storyListPlugin } from "./utils/story-list-plugin.js";
@@ -109,11 +106,6 @@ export class Fwoosh {
         getDocsPlugin(),
         storyListPlugin(this.options),
         renderStoryPlugin(this.hooks.renderStory.call()),
-        Unocss({
-          presets: [presetWind({ dark: "media" })],
-          include: [/\.(js|tsx|jsx|css)$/],
-          transformers: [transformerDirective()],
-        }),
       ],
       server: {
         port,

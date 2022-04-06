@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import {
   Content,
   SidebarItems,
@@ -8,11 +8,42 @@ import {
   SidebarTitle,
   Sidebar,
   SidebarHeader,
+  styled,
+  Toolbar,
+  Spinner,
+  Tabs,
 } from "@fwoosh/components";
+import { toolbarControls, panels } from "@fwoosh/app/ui";
 import { config } from "@fwoosh/app/config";
 import { Outlet, Link, useParams } from "react-router-dom";
+import { useId } from "@radix-ui/react-id";
+
 import { StoryTree, useStoryTree } from "../hooks/useStoryTree";
 import { ThemeToggle } from "./ThemeToggle";
+import ErrorBoundary from "./ErrorBoundary";
+import { StoryIdContext } from "./Story";
+
+const StoryToolbar = styled(Toolbar.Root, {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: 2,
+  height: "$12",
+  borderBottom: "1px solid $gray4",
+  flexShrink: 0,
+});
+
+const StoryWrapper = styled("div", {
+  position: "relative",
+  height: "100%",
+  display: "flex",
+  flexDirection: "column",
+});
+
+const PanelContainer = styled("div", {
+  height: 400,
+  borderTop: "1px solid $gray4",
+});
 
 const TreeItem = ({ tree }: { tree: StoryTree }) => {
   const params = useParams<{ storyId: string }>();
@@ -43,6 +74,7 @@ const TreeItem = ({ tree }: { tree: StoryTree }) => {
 
 export const Storybook = () => {
   const tree = useStoryTree();
+  const id = useId();
 
   return (
     <SidebarLayout>
@@ -56,7 +88,53 @@ export const Storybook = () => {
         </SidebarItems>
       </Sidebar>
       <Content>
-        <Outlet />
+        <StoryWrapper>
+          {toolbarControls.length > 0 && (
+            <StoryToolbar>
+              <Suspense fallback={<Spinner />}>
+                {toolbarControls.map((Control) => (
+                  <Control key={Control.componentName} storyPreviewId={id} />
+                ))}
+              </Suspense>
+            </StoryToolbar>
+          )}
+          <StoryIdContext.Provider value={id}>
+            <Outlet />
+          </StoryIdContext.Provider>
+          {panels.length > 0 && (
+            <PanelContainer>
+              <Tabs.Root defaultValue={panels[0]?.componentName}>
+                <Tabs.List>
+                  <Suspense fallback={<Spinner />}>
+                    {panels.map((Panel) => {
+                      return (
+                        <Tabs.Trigger
+                          key={`trigger-${Panel.componentName}`}
+                          value={Panel.componentName}
+                        >
+                          <Panel.displayName />
+                        </Tabs.Trigger>
+                      );
+                    })}
+                  </Suspense>
+                </Tabs.List>
+
+                {panels.map((Panel) => (
+                  <Tabs.Content
+                    key={`content-${Panel.componentName}`}
+                    value={Panel.componentName}
+                  >
+                    <ErrorBoundary>
+                      <Suspense fallback={<Spinner />}>
+                        <Panel storyPreviewId={id} />
+                      </Suspense>
+                    </ErrorBoundary>
+                  </Tabs.Content>
+                ))}
+              </Tabs.Root>
+            </PanelContainer>
+          )}
+        </StoryWrapper>
       </Content>
     </SidebarLayout>
   );

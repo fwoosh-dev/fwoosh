@@ -8,6 +8,7 @@ import { Docs } from "./components/Docs";
 import { DocsPage } from "./components/DocsPage";
 import "./index.css";
 import {
+  AppWrapper,
   ColorMode,
   ColorModeContext,
   getInitialColorMode,
@@ -36,22 +37,24 @@ export const App = () => {
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
         <ColorModeContext.Provider value={colorMode}>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/">
-                <Route index />
-                <Route path="story">
-                  <Route path=":storyId" element={<Story />} />
+          <AppWrapper>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/">
+                  <Route index />
+                  <Route path="story">
+                    <Route path=":storyId" element={<Story />} />
+                  </Route>
+                  <Route path="storybook" element={<Storybook />}>
+                    <Route path=":storyId" element={<Story />} />
+                  </Route>
+                  <Route path="docs" element={<Docs />}>
+                    <Route path=":docsPath" element={<DocsPage />} />
+                  </Route>
                 </Route>
-                <Route path="storybook" element={<Storybook />}>
-                  <Route path=":storyId" element={<Story />} />
-                </Route>
-                <Route path="docs" element={<Docs />}>
-                  <Route path=":docsPath" element={<DocsPage />} />
-                </Route>
-              </Route>
-            </Routes>
-          </BrowserRouter>
+              </Routes>
+            </BrowserRouter>
+          </AppWrapper>
         </ColorModeContext.Provider>
       </QueryClientProvider>
     </React.StrictMode>

@@ -1,33 +1,14 @@
 import React, { Suspense } from "react";
 import { render } from "@fwoosh/app/render";
-import { toolbarControls, panels } from "@fwoosh/app/ui";
 import { useParams } from "react-router-dom";
 import { useId } from "@radix-ui/react-id";
 
 import ErrorBoundary from "./ErrorBoundary";
-import { styled, Toolbar, Spinner, Tabs } from "@fwoosh/components";
+import { styled, Spinner } from "@fwoosh/components";
 
-const StoryToolbar = styled(Toolbar.Root, {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  gap: 2,
-  height: "$12",
-  borderBottom: "1px solid $gray4",
-  flexShrink: 0,
-});
-
-const PanelContainer = styled("div", {
-  height: 400,
-  borderTop: "1px solid $gray4",
-});
-
-const Wrapper = styled("div", {
-  position: "relative",
-  height: "100%",
-  display: "flex",
-  flexDirection: "column",
-});
+export const StoryIdContext = React.createContext<string | undefined>(
+  undefined
+);
 
 const Root = styled("div", {
   position: "relative",
@@ -45,65 +26,18 @@ const StoryDiv = React.memo(({ slug, id }: { slug: string; id: string }) => {
 
 export const Story = () => {
   const params = useParams<{ storyId: string }>();
+  const contextId = React.useContext(StoryIdContext);
   const id = useId();
 
-  console.log({ panels });
-
   return (
-    <Wrapper>
-      {toolbarControls.length > 0 && (
-        <StoryToolbar>
-          <Suspense fallback={<Spinner />}>
-            {toolbarControls.map((Control) => (
-              <Control key={Control.componentName} storyPreviewId={id} />
-            ))}
-          </Suspense>
-        </StoryToolbar>
-      )}
-
-      <ErrorBoundary>
-        <Suspense fallback={<Spinner />}>
-          {params.storyId ? (
-            <StoryDiv slug={params.storyId} id={id} />
-          ) : (
-            <div>Story not found</div>
-          )}
-        </Suspense>
-      </ErrorBoundary>
-
-      {panels.length > 0 && (
-        <PanelContainer>
-          <Tabs.Root defaultValue={panels[0]?.componentName}>
-            <Tabs.List>
-              <Suspense fallback={<Spinner />}>
-                {panels.map((Panel) => {
-                  return (
-                    <Tabs.Trigger
-                      key={`trigger-${Panel.componentName}`}
-                      value={Panel.componentName}
-                    >
-                      <Panel.displayName />
-                    </Tabs.Trigger>
-                  );
-                })}
-              </Suspense>
-            </Tabs.List>
-
-            {panels.map((Panel) => (
-              <Tabs.Content
-                key={`content-${Panel.componentName}`}
-                value={Panel.componentName}
-              >
-                <ErrorBoundary>
-                  <Suspense fallback={<Spinner />}>
-                    <Panel storyPreviewId={id} />
-                  </Suspense>
-                </ErrorBoundary>
-              </Tabs.Content>
-            ))}
-          </Tabs.Root>
-        </PanelContainer>
-      )}
-    </Wrapper>
+    <ErrorBoundary>
+      <Suspense fallback={<Spinner />}>
+        {params.storyId ? (
+          <StoryDiv slug={params.storyId} id={contextId || id} />
+        ) : (
+          <div>Story not found</div>
+        )}
+      </Suspense>
+    </ErrorBoundary>
   );
 };

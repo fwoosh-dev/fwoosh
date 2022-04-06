@@ -221,11 +221,14 @@ export const ol = styled("ul", {
   },
 });
 
+export const AppWrapper = styled("div", {
+  background: "$gray1",
+  minHeight: "100vh",
+});
+
 export const SidebarLayout = styled("div", {
   display: "grid",
   gridTemplateColumns: "280px 1fr",
-  minHeight: "100vh",
-  background: "$gray1",
 });
 
 export const Logo = styled("div", {

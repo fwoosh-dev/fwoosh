@@ -2,7 +2,6 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "inter-ui/inter.css";
-import "@unocss/reset/tailwind.css";
 import "../../app/src/index.css";
 
 import { App } from "./App";

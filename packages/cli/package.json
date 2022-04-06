@@ -15,8 +15,6 @@
   "dependencies": {
     "@fwoosh/app": "link:../app",
     "@swc/core": "^1.2.160",
-    "@unocss/preset-wind": "^0.30.6",
-    "@unocss/transformer-directives": "^0.30.6",
     "boxen": "^6.2.1",
     "change-case": "^4.1.2",
     "command-line-application": "^0.10.1",
@@ -35,7 +33,6 @@
     "remark-rehype": "^10.1.0",
     "tapable": "^2.2.0",
     "unified": "^10.1.2",
-    "unocss": "^0.30.6",
     "vite": "^2.8.6"
   }
 }
