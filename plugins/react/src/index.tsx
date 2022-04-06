@@ -46,8 +46,8 @@ export default class ReactPlugin implements Plugin {
         import { stories } from "@fwoosh/app/stories";
         import { Spinner } from "@fwoosh/components";
         
-        export function render(id, slug) {
-          if (!id) {
+        export function render(el, slug) {
+          if (!el) {
             return;
           }
           
@@ -60,7 +60,7 @@ export default class ReactPlugin implements Plugin {
                 },
                 React.createElement(stories[slug].component)
               ),
-              document.getElementById(id)
+              el
             );
           } catch (e) {
             console.log("error", e);

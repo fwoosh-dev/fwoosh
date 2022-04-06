@@ -20,6 +20,7 @@ import ErrorBoundary from "./ErrorBoundary";
 import { useStoryTree } from "../hooks/useStoryTree";
 import * as styles from "./DocsPage.module.css";
 import { ThemeToggle } from "./ThemeToggle";
+import { useRender } from "../hooks/useRender";
 
 const DocsLayout = styled("div", {
   display: "grid",
@@ -104,15 +105,12 @@ const StoryDiv = React.memo(
   ({ slug, code }: { slug: string; code: string }) => {
     const id = useId();
     const [codeShowing, codeShowingSet] = React.useState(false);
-
-    React.useEffect(() => {
-      render(id, slug);
-    }, [id, slug]);
+    const ref = useRender({ id, slug });
 
     return (
       <Collapsible.Root open={codeShowing} onOpenChange={codeShowingSet}>
         <div className="relative">
-          <StoryPreview state={codeShowing ? "open" : undefined} id={id} />
+          <StoryPreview state={codeShowing ? "open" : undefined} ref={ref} />
           <Collapsible.Trigger asChild={true}>
             <ShowCodeButton>
               {codeShowing ? "Hide" : "Show"} code

@@ -1,10 +1,10 @@
 import React, { Suspense } from "react";
-import { render } from "@fwoosh/app/render";
 import { useParams } from "react-router-dom";
 import { useId } from "@radix-ui/react-id";
 
+import { Spinner, styled } from "@fwoosh/components";
 import ErrorBoundary from "./ErrorBoundary";
-import { styled, Spinner } from "@fwoosh/components";
+import { useRender } from "../hooks/useRender";
 
 export const StoryIdContext = React.createContext<string | undefined>(
   undefined
@@ -17,11 +17,8 @@ const Root = styled("div", {
 });
 
 const StoryDiv = React.memo(({ slug, id }: { slug: string; id: string }) => {
-  React.useEffect(() => {
-    render(id, slug);
-  }, [id, slug]);
-
-  return <Root id={id} />;
+  const ref = useRender({ id, slug });
+  return <Root ref={ref} />;
 });
 
 export const Story = () => {

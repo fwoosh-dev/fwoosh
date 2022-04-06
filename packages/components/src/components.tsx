@@ -229,6 +229,7 @@ export const AppWrapper = styled("div", {
 export const SidebarLayout = styled("div", {
   display: "grid",
   gridTemplateColumns: "280px 1fr",
+  minHeight: "100vh",
 });
 
 export const Logo = styled("div", {

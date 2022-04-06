@@ -46,3 +46,8 @@ export const WithStyle = () => {
     </Button>
   );
 };
+
+/** Add custom styles to a button */
+export const WithoutStyle = () => {
+  return <button onClick={action("onClick")}>Click me</button>;
+};
