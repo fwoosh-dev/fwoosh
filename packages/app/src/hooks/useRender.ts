@@ -14,8 +14,13 @@ export const useRender = ({ id, slug }: UseRenderOptions) => {
       return;
     }
 
+    if (ref.current.shadowRoot) {
+      ref.current.shadowRoot.innerHTML = "";
+    }
+
     // make wrapper a shadow root
-    const shadowRoot = ref.current.attachShadow({ mode: "open" });
+    const shadowRoot =
+      ref.current.shadowRoot || ref.current.attachShadow({ mode: "open" });
     // put content into shadow root
     const storyRoot = document.createElement("div");
     storyRoot.id = id;
@@ -24,7 +29,6 @@ export const useRender = ({ id, slug }: UseRenderOptions) => {
     const root = ref.current.shadowRoot?.querySelector(
       `#${id}`
     ) as HTMLDivElement;
-    console.log(root);
 
     render(root, slug);
   }, [id, slug]);
