@@ -28,6 +28,7 @@ export default function ZoomControl({
     const storyPreview = document.getElementById(storyPreviewId);
 
     if (storyPreview) {
+      // @ts-ignore
       storyPreview.style.zoom = `${zoom / 100}`;
     }
   }, [zoom]);

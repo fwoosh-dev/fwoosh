@@ -94,7 +94,7 @@ export function getDocsPlugin() {
             else if (typeof story === "function") {
               const resolvedPromise = (await story()).default;
 
-              if (resolvedPromise.component) {
+              if (resolvedPromise?.component) {
                 resolvedMeta = resolvedPromise;
               }
             }

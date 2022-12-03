@@ -57,7 +57,12 @@ export class Fwoosh {
           try {
             ({ default: Plugin } = await import(`${name}/plugin.js`));
           } catch (e) {
-            if (e.code !== "ERR_MODULE_NOT_FOUND") {
+            if (
+              e &&
+              typeof e === "object" &&
+              "code" in e &&
+              e.code !== "ERR_MODULE_NOT_FOUND"
+            ) {
               throw e;
             }
           }

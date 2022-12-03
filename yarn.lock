@@ -585,7 +585,7 @@ __metadata:
     "@radix-ui/colors": ^0.1.8
     "@radix-ui/react-collapsible": ^0.1.6
     "@radix-ui/react-id": ^0.1.5
-    "@stitches/react": ^1.2.7
+    "@stitches/react": ^1.2.8
     "@types/dlv": ^1.1.2
     "@types/react": ^17.0.2
     "@types/react-dom": ^17.0.1
@@ -598,7 +598,6 @@ __metadata:
     react-dom: ^17.0.1
     react-feather: ^2.0.9
     react-query: ^3.34.19
-    react-resize-detector: ^7.0.0
     react-router-dom: ^6.2.2
   languageName: unknown
   linkType: soft
@@ -1312,12 +1311,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@stitches/react@npm:^1.2.7":
-  version: 1.2.7
-  resolution: "@stitches/react@npm:1.2.7"
+"@stitches/react@npm:^1.2.8":
+  version: 1.2.8
+  resolution: "@stitches/react@npm:1.2.8"
   peerDependencies:
     react: ">= 16.3.0"
-  checksum: f4a66d208607a5f72d902d06388c0e3c5cec6cccc207e3b01228d3dc8e5b09742f4191fe932fac84c19ece825df174009025ba5939511501914785ed26a2c767
+  checksum: 029795323cdedb5599ec0636526fc233b2cf41fa9c1f4a704b1f7f457c6170053384a7430afed45e25f73e348d7c391cf1379bc079943cd9cad44302234a5244
   languageName: node
   linkType: hard
 
@@ -1684,13 +1683,6 @@ __metadata:
     "@types/prop-types": "*"
     csstype: ^3.0.2
   checksum: a5198857165feddcbfc7d33e3322460ac62b8894d702414496a825b0c82272911ec33a42ef7c9d623a59308070eef4dfee6ff834b0674aa3f87eeb644196ee3b
-  languageName: node
-  linkType: hard
-
-"@types/resize-observer-browser@npm:^0.1.6":
-  version: 0.1.7
-  resolution: "@types/resize-observer-browser@npm:0.1.7"
-  checksum: 0377eaac8bb7a17b983b49a156006032380b459bfebefc54a5aa2f7f8a9786d2b60723e8837c61ef733330b478f4f26293e9edbdc8006238e4f80c878c56c988
   languageName: node
   linkType: hard
 
@@ -3417,7 +3409,7 @@ __metadata:
     fwoosh: "link:./packages/cli"
     patch-package: ^6.4.7
     prettier: ^2.2.1
-    typescript: ^4.2.2
+    typescript: ^4.9.3
   languageName: unknown
   linkType: soft
 
@@ -4314,13 +4306,6 @@ __metadata:
   version: 4.4.2
   resolution: "lodash.get@npm:4.4.2"
   checksum: e403047ddb03181c9d0e92df9556570e2b67e0f0a930fcbbbd779370972368f5568e914f913e93f3b08f6d492abc71e14d4e9b7a18916c31fa04bd2306efe545
-  languageName: node
-  linkType: hard
-
-"lodash@npm:^4.17.21":
-  version: 4.17.21
-  resolution: "lodash@npm:4.17.21"
-  checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
   languageName: node
   linkType: hard
 
@@ -6011,19 +5996,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-resize-detector@npm:^7.0.0":
-  version: 7.0.0
-  resolution: "react-resize-detector@npm:7.0.0"
-  dependencies:
-    "@types/resize-observer-browser": ^0.1.6
-    lodash: ^4.17.21
-  peerDependencies:
-    react: ^16.0.0 || ^17.0.0
-    react-dom: ^16.0.0 || ^17.0.0
-  checksum: 8525746a4841f020bc50b26166ef1f1951c64991f7117f4dafe423f29c4fefe8595b806881ac3ec81ebd0b29df3480e282a1db8bbe927df4a620282154c7ed1c
-  languageName: node
-  linkType: hard
-
 "react-router-dom@npm:^6.2.2":
   version: 6.2.2
   resolution: "react-router-dom@npm:6.2.2"
@@ -6973,23 +6945,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.2.2":
-  version: 4.2.2
-  resolution: "typescript@npm:4.2.2"
+"typescript@npm:^4.9.3":
+  version: 4.9.3
+  resolution: "typescript@npm:4.9.3"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: e035ade8bac05c23dbd30045122f7b0c6f63693c23c394b563161118c0bea66887ec470337d3e9f44e6459793332f741c731e86eeffd83ddebff23f70f71669b
+  checksum: 17b8f816050b412403e38d48eef0e893deb6be522d6dc7caf105e54a72e34daf6835c447735fd2b28b66784e72bfbf87f627abb4818a8e43d1fa8106396128dc
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.2.2#~builtin<compat/typescript>":
-  version: 4.2.2
-  resolution: "typescript@patch:typescript@npm%3A4.2.2#~builtin<compat/typescript>::version=4.2.2&hash=bda367"
+"typescript@patch:typescript@^4.9.3#~builtin<compat/typescript>":
+  version: 4.9.3
+  resolution: "typescript@patch:typescript@npm%3A4.9.3#~builtin<compat/typescript>::version=4.9.3&hash=bda367"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 2ea53f587f80083e0f184f552c044233fe07c2b5b7f04d2aaa8bd495f1f19822dbb27f3f060a2c6947240278045659ca00f1e4dea0d7e6f86ed3abd691796229
+  checksum: ef65c22622d864497d0a0c5db693523329b3284c15fe632e93ad9aa059e8dc38ef3bd767d6f26b1e5ecf9446f49bd0f6c4e5714a2eeaf352805dc002479843d1
   languageName: node
   linkType: hard
 
