@@ -3,7 +3,10 @@
   "type": "module",
   "version": "0.0.14",
   "description": "A lightening quick component development",
-  "main": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./types": "./dist/types.d.ts"
+  },
   "author": "Andrew Lisowski <lisowski54@gmail.com>",
   "repository": "hipstersmoothie/fwoosh",
   "license": "MIT",

@@ -5,10 +5,7 @@
 - [ ] URGENT: fix/update docs mode
 - [ ] document fwoosh/components with fwoosh
 - [ ] make sidebar and layout pluggable
-- [x] switch to stitches
 - [ ] add theming
-- [x] addons panel + hooks
-- [x] toolbar tools + hooks
 - [ ] decorator hook
 - [ ] search
 - [ ] command pallette?
@@ -18,16 +15,16 @@
 - [ ] sidebar sort
 - [ ] hooks for completely custom routes/layouts
 - [ ] figure way to use iframe to make media queries and vh working
+  - maybe some type of arg on the story
+  - defaulting to an iframe is REALLY slow
 
 ### Plugins
 
 - [ ] create vue plugin and example
 - [ ] html plugin and example
 - [ ] controls plugin
-- [x] action plugin
-- [x] code preview addon
 - [ ] Axe addon
-- [x] measure addon
+- [ ] measure addon
 - [ ] component theme addon
 - [ ] figma addon
 

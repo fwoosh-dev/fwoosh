@@ -1,5 +1,7 @@
 import * as React from "react";
 import type { StoryMeta } from "fwoosh";
+// todo make this work right
+import type { Story } from "@fwoosh/react/dist/types";
 import { components } from "@fwoosh/components";
 
 export const meta: StoryMeta = {
@@ -9,7 +11,7 @@ export const meta: StoryMeta = {
 /**
  * All the Headings.
  */
-export const Headings = () => {
+export const Headings: Story = () => {
   return (
     <>
       <components.h1>Heading Level 1</components.h1>
@@ -34,7 +36,7 @@ Headings.component = [
 /**
  * An unordered list of items.
  */
-export const UnorderedList = () => {
+export const UnorderedList: Story = () => {
   return (
     <components.ul>
       <components.li>A list</components.li>
@@ -49,7 +51,7 @@ UnorderedList.component = [components.ul, components.li];
 /**
  * An ordered list of items.
  */
-export const OrderedList = () => {
+export const OrderedList: Story = () => {
   return (
     <components.ol>
       <components.li>A list</components.li>
@@ -64,7 +66,7 @@ OrderedList.component = [components.ol, components.li];
 /**
  * Use a blockquote to quote text or call out important information.
  */
-export const Blockquote = () => {
+export const Blockquote: Story = () => {
   return (
     <components.blockquote>
       <components.p>A blockquote</components.p>
@@ -77,7 +79,7 @@ Blockquote.component = [components.blockquote];
 /**
  * Use the `code` component to display inline code snippets.
  */
-export const InlineCode = () => {
+export const InlineCode: Story = () => {
   return (
     <components.p>
       Text with an <components.code>inline code block</components.code>
@@ -90,7 +92,7 @@ InlineCode.component = [components.code];
 /**
  * Use a blockquote to quote text or call out important information.
  */
-export const Anchor = () => {
+export const Anchor: Story = () => {
   return (
     <components.p>
       Text{" "}
