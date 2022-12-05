@@ -12,3 +12,4 @@ lib/
 !.yarn/versions
 yarn-error.log
 dist/
+.env
