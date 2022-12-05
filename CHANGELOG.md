@@ -1,3 +1,60 @@
+# v0.0.15 (Sun Dec 04 2022)
+
+#### ⚠️ Pushed to `main`
+
+- add author ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix shadow root ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix buttons ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add story type ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- upgrade typescript ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- solve style encapsulation ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix story view ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- get docs mode working again ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- styled spinner ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix props ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- story description plugin ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add todo ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix falling back to meta ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- slightly improve docgen speed ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- use suspense in docs loading ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- working ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add color mode context ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix clearing actions too early ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- improve measure ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add measure plugin ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- actions panel ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- make icon buttons smaller ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add source panel ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add sidebar title to docs view ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add panel plugins ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add toolbar plugins ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add quick nav to docs ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add title + add config loading ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- dark mode toggle ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- use layout components ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add more styles ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- switching to stitches ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- code previews for stories ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- clean up deps ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add setup ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix mulptiple stories bugs ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- working on making it pretty ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix swc bug ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- Merge origin/main into main ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- markdown formatting for comments ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- docgen ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- get comments working ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- split modes ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- move react render into plugin ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- progress ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- pivot ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.14 (Sun Mar 21 2021)
 
 #### ⚠️ Pushed to `main`
