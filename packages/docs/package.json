@@ -1,6 +1,5 @@
 {
   "name": "@fwoosh/docs",
-  "version": "0.0.18",
   "type": "module",
   "private": true,
   "scripts": {
