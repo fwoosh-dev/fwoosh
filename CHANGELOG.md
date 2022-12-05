@@ -15,6 +15,19 @@
 
 #### ⚠️ Pushed to `main`
 
+- update lerna (lisowski54@gmail.com)
+- update auto (lisowski54@gmail.com)
+
+#### Authors: 1
+
+- Andrew Lisowski (lisowski54@gmail.com)
+
+---
+
+# v0.0.16 (Sun Dec 04 2022)
+
+#### ⚠️ Pushed to `main`
+
 - update auto (lisowski54@gmail.com)
 
 #### Authors: 1
