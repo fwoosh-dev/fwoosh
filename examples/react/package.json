@@ -1,6 +1,6 @@
 {
   "name": "@fwoosh/react-example",
-  "version": "0.0.0",
+  "version": "0.0.15",
   "scripts": {
     "fwoosh": "../../packages/cli/bin/fwoosh.js",
     "start": "yarn fwoosh dev",
