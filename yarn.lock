@@ -14,19 +14,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@auto-it/bot-list@npm:10.36.5":
-  version: 10.36.5
-  resolution: "@auto-it/bot-list@npm:10.36.5"
-  checksum: eaae806200ab9ba3d2b7e9ac4ae4b072ff193edcf5d335fd75cfd428be7693cb0edde7be2eea8d7ad396edb9421bc5fab35c1ed6467b782b822ce93efee6d6b1
+"@auto-it/bot-list@npm:10.37.6":
+  version: 10.37.6
+  resolution: "@auto-it/bot-list@npm:10.37.6"
+  checksum: 6faa594908b36d47f7ce5dda3cc5042ec11c50d8a7660a3eb3f1033d7eeb5f98abc528c6ff21e52bbd4c462a4172769e88af2ad3e9b79268fde1e95b97d64542
   languageName: node
   linkType: hard
 
-"@auto-it/core@npm:10.36.5":
-  version: 10.36.5
-  resolution: "@auto-it/core@npm:10.36.5"
+"@auto-it/core@npm:10.37.6":
+  version: 10.37.6
+  resolution: "@auto-it/core@npm:10.37.6"
   dependencies:
-    "@auto-it/bot-list": 10.36.5
+    "@auto-it/bot-list": 10.37.6
     "@endemolshinegroup/cosmiconfig-typescript-loader": ^3.0.2
+    "@octokit/core": ^3.5.1
     "@octokit/plugin-enterprise-compatibility": 1.3.0
     "@octokit/plugin-retry": ^3.0.9
     "@octokit/plugin-throttling": ^3.6.2
@@ -59,7 +60,7 @@ __metadata:
     tapable: ^2.2.0
     terminal-link: ^2.1.1
     tinycolor2: ^1.4.1
-    ts-node: ^9.1.1
+    ts-node: ^10.9.1
     tslib: 2.1.0
     type-fest: ^0.21.1
     typescript-memoize: ^1.0.0-alpha.3
@@ -67,16 +68,16 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: fff46962c6e426bb5bfce32b044672b781488e03af9aaddce40f2f9f24026d8d6fe34c374a0b54ebc8f972ffa846e954fee391153199b8ddffe54f0a39826f2c
+  checksum: 9037f100d432d3e6425a7b8b96246ce447ab1b4944ca0e6fa4bb45cf344b22c1b38ca382bb92b4b894003d774be187c1b618b66f8d3dfb5ebf6213af7b3e8fe5
   languageName: node
   linkType: hard
 
-"@auto-it/npm@npm:10.36.5":
-  version: 10.36.5
-  resolution: "@auto-it/npm@npm:10.36.5"
+"@auto-it/npm@npm:10.37.6":
+  version: 10.37.6
+  resolution: "@auto-it/npm@npm:10.37.6"
   dependencies:
-    "@auto-it/core": 10.36.5
-    "@auto-it/package-json-utils": 10.36.5
+    "@auto-it/core": 10.37.6
+    "@auto-it/package-json-utils": 10.37.6
     await-to-js: ^3.0.0
     endent: ^2.1.0
     env-ci: ^5.0.1
@@ -89,31 +90,44 @@ __metadata:
     typescript-memoize: ^1.0.0-alpha.3
     url-join: ^4.0.0
     user-home: ^2.0.0
-  checksum: ff747c5454238efc7c6e486fc94dfd7fd53a8e554de072047fa8ad0f747d4e5df481d733cea2d4a5f9a71de4d0f44c78ffe10450cb34aa52cca299df24bf01a5
+  checksum: c15cce60f7c6e4c848f62758dc95e8f8b7f309df6da64fb5b736934895e76b231e258486884ac99c8ddc0453f0457a8b49be302ccbcaa4aed8e3c760c5f31b89
   languageName: node
   linkType: hard
 
-"@auto-it/package-json-utils@npm:10.36.5":
-  version: 10.36.5
-  resolution: "@auto-it/package-json-utils@npm:10.36.5"
+"@auto-it/package-json-utils@npm:10.37.6":
+  version: 10.37.6
+  resolution: "@auto-it/package-json-utils@npm:10.37.6"
   dependencies:
     parse-author: ^2.0.0
     parse-github-url: 1.0.2
-  checksum: 475984b90ee00d6a5118c2d1b2ea3ab6519f21449b8e5bd99e89bfd08bec48ba39f3b18c5f2e181d13a6f60b8e0feee4883d0cc93c0342e597ce699e207b0fea
+  checksum: 21179e150cf80ab4c13d14f3b15f5d63631ff8588c65e7d18f75ea41a030f2648464d8594f3873a499fb60058fc9e262bbfbc5208aa8a7affd2e86bac19cd39e
   languageName: node
   linkType: hard
 
-"@auto-it/released@npm:10.36.5":
-  version: 10.36.5
-  resolution: "@auto-it/released@npm:10.36.5"
+"@auto-it/released@npm:10.37.6":
+  version: 10.37.6
+  resolution: "@auto-it/released@npm:10.37.6"
   dependencies:
-    "@auto-it/bot-list": 10.36.5
-    "@auto-it/core": 10.36.5
+    "@auto-it/bot-list": 10.37.6
+    "@auto-it/core": 10.37.6
     deepmerge: ^4.0.0
     fp-ts: ^2.5.3
     io-ts: ^2.1.2
     tslib: 2.1.0
-  checksum: a399ac21f2a8d160d9a1fd22720b8e096794b1f320e95689c8ef2dc0e0587ade37ca344312b5d6304750eca468f071b1ff53f3725363cc1fb87f846dbd561351
+  checksum: 4299267825e6f04dae08f8d27d51ef6cdad76b0574d6289123d569529c9c3b851f811c6f37def58103099b4ddea3bf4c7a1064827b1182d18e592af27ba0da97
+  languageName: node
+  linkType: hard
+
+"@auto-it/version-file@npm:10.37.6":
+  version: 10.37.6
+  resolution: "@auto-it/version-file@npm:10.37.6"
+  dependencies:
+    "@auto-it/core": 10.37.6
+    fp-ts: ^2.5.3
+    io-ts: ^2.1.2
+    semver: ^7.0.0
+    tslib: 1.10.0
+  checksum: 6a68dc9ca871d6fb74dc79b9bfc50de413650e0b79da6a7e47fcb0cf847cbe277a5a025dd726cb58c5bccd91428c1faaf10bf0ba16fa75329c8a468604adec65
   languageName: node
   linkType: hard
 
@@ -475,6 +489,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@cspotcode/source-map-support@npm:^0.8.0":
+  version: 0.8.1
+  resolution: "@cspotcode/source-map-support@npm:0.8.1"
+  dependencies:
+    "@jridgewell/trace-mapping": 0.3.9
+  checksum: 5718f267085ed8edb3e7ef210137241775e607ee18b77d95aa5bd7514f47f5019aa2d82d96b3bf342ef7aa890a346fa1044532ff7cc3009e7d24fce3ce6200fa
+  languageName: node
+  linkType: hard
+
 "@design-systems/utils@npm:2.12.0":
   version: 2.12.0
   resolution: "@design-systems/utils@npm:2.12.0"
@@ -745,6 +768,16 @@ __metadata:
   version: 1.4.11
   resolution: "@jridgewell/sourcemap-codec@npm:1.4.11"
   checksum: 3b2afaf8400fb07a36db60e901fcce6a746cdec587310ee9035939d89878e57b2dec8173b0b8f63176f647efa352294049a53c49739098eb907ff81fec2547c8
+  languageName: node
+  linkType: hard
+
+"@jridgewell/trace-mapping@npm:0.3.9":
+  version: 0.3.9
+  resolution: "@jridgewell/trace-mapping@npm:0.3.9"
+  dependencies:
+    "@jridgewell/resolve-uri": ^3.0.3
+    "@jridgewell/sourcemap-codec": ^1.4.10
+  checksum: d89597752fd88d3f3480845691a05a44bd21faac18e2185b6f436c3b0fd0c5a859fbbd9aaa92050c4052caf325ad3e10e2e1d1b64327517471b7d51babc0ddef
   languageName: node
   linkType: hard
 
@@ -1468,6 +1501,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tsconfig/node10@npm:^1.0.7":
+  version: 1.0.9
+  resolution: "@tsconfig/node10@npm:1.0.9"
+  checksum: a33ae4dc2a621c0678ac8ac4bceb8e512ae75dac65417a2ad9b022d9b5411e863c4c198b6ba9ef659e14b9fb609bbec680841a2e84c1172df7a5ffcf076539df
+  languageName: node
+  linkType: hard
+
+"@tsconfig/node12@npm:^1.0.7":
+  version: 1.0.11
+  resolution: "@tsconfig/node12@npm:1.0.11"
+  checksum: 5ce29a41b13e7897a58b8e2df11269c5395999e588b9a467386f99d1d26f6c77d1af2719e407621412520ea30517d718d5192a32403b8dfcc163bf33e40a338a
+  languageName: node
+  linkType: hard
+
+"@tsconfig/node14@npm:^1.0.0":
+  version: 1.0.3
+  resolution: "@tsconfig/node14@npm:1.0.3"
+  checksum: 19275fe80c4c8d0ad0abed6a96dbf00642e88b220b090418609c4376e1cef81bf16237bf170ad1b341452feddb8115d8dd2e5acdfdea1b27422071163dc9ba9d
+  languageName: node
+  linkType: hard
+
+"@tsconfig/node16@npm:^1.0.2":
+  version: 1.0.3
+  resolution: "@tsconfig/node16@npm:1.0.3"
+  checksum: 3a8b657dd047495b7ad23437d6afd20297ce90380ff0bdee93fc7d39a900dbd8d9e26e53ff6b465e7967ce2adf0b218782590ce9013285121e6a5928fbd6819f
+  languageName: node
+  linkType: hard
+
 "@types/acorn@npm:^4.0.0":
   version: 4.0.6
   resolution: "@types/acorn@npm:4.0.6"
@@ -1759,12 +1820,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"acorn-walk@npm:^8.1.1":
+  version: 8.2.0
+  resolution: "acorn-walk@npm:8.2.0"
+  checksum: 1715e76c01dd7b2d4ca472f9c58968516a4899378a63ad5b6c2d668bba8da21a71976c14ec5f5b75f887b6317c4ae0b897ab141c831d741dc76024d8745f1ad1
+  languageName: node
+  linkType: hard
+
 "acorn@npm:^8.0.0":
   version: 8.7.0
   resolution: "acorn@npm:8.7.0"
   bin:
     acorn: bin/acorn
   checksum: e0f79409d68923fbf1aa6d4166f3eedc47955320d25c89a20cc822e6ba7c48c5963d5bc657bc242d68f7a4ac9faf96eef033e8f73656da6c640d4219935fdfd0
+  languageName: node
+  linkType: hard
+
+"acorn@npm:^8.4.1":
+  version: 8.8.1
+  resolution: "acorn@npm:8.8.1"
+  bin:
+    acorn: bin/acorn
+  checksum: 4079b67283b94935157698831967642f24a075c52ce3feaaaafe095776dfbe15d86a1b33b1e53860fc0d062ed6c83f4284a5c87c85b9ad51853a01173da6097f
   languageName: node
   linkType: hard
 
@@ -1946,13 +2023,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"auto@npm:^10.36.5":
-  version: 10.36.5
-  resolution: "auto@npm:10.36.5"
+"auto@npm:^10.37.6":
+  version: 10.37.6
+  resolution: "auto@npm:10.37.6"
   dependencies:
-    "@auto-it/core": 10.36.5
-    "@auto-it/npm": 10.36.5
-    "@auto-it/released": 10.36.5
+    "@auto-it/core": 10.37.6
+    "@auto-it/npm": 10.37.6
+    "@auto-it/released": 10.37.6
+    "@auto-it/version-file": 10.37.6
     await-to-js: ^3.0.0
     chalk: ^4.0.0
     command-line-application: ^0.10.1
@@ -1963,7 +2041,7 @@ __metadata:
     tslib: 2.1.0
   bin:
     auto: dist/bin/auto.js
-  checksum: 1452b3fcd8b5afd411b848d69f3b82f214f60ca287901b85ee9ca612ee2bbc00ca9122047fc02f917a71bb00578e3840df72f9a882503b1bc7be0fe746924522
+  checksum: 0f223e5b412ef04af184b9d1ded234664cf96f77d105a1b30d433746386ef609679c92c557b196b51bf36e239568afcbc8e76539752a48d210a6b6785d79219c
   languageName: node
   linkType: hard
 
@@ -3405,7 +3483,7 @@ __metadata:
   resolution: "fwoosh-monorepo@workspace:."
   dependencies:
     "@types/node": ^14.14.31
-    auto: ^10.36.5
+    auto: ^10.37.6
     fwoosh: "link:./packages/cli"
     patch-package: ^6.4.7
     prettier: ^2.2.1
@@ -6858,7 +6936,45 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-node@npm:^9, ts-node@npm:^9.1.1":
+"ts-node@npm:^10.9.1":
+  version: 10.9.1
+  resolution: "ts-node@npm:10.9.1"
+  dependencies:
+    "@cspotcode/source-map-support": ^0.8.0
+    "@tsconfig/node10": ^1.0.7
+    "@tsconfig/node12": ^1.0.7
+    "@tsconfig/node14": ^1.0.0
+    "@tsconfig/node16": ^1.0.2
+    acorn: ^8.4.1
+    acorn-walk: ^8.1.1
+    arg: ^4.1.0
+    create-require: ^1.1.0
+    diff: ^4.0.1
+    make-error: ^1.1.1
+    v8-compile-cache-lib: ^3.0.1
+    yn: 3.1.1
+  peerDependencies:
+    "@swc/core": ">=1.2.50"
+    "@swc/wasm": ">=1.2.50"
+    "@types/node": "*"
+    typescript: ">=2.7"
+  peerDependenciesMeta:
+    "@swc/core":
+      optional: true
+    "@swc/wasm":
+      optional: true
+  bin:
+    ts-node: dist/bin.js
+    ts-node-cwd: dist/bin-cwd.js
+    ts-node-esm: dist/bin-esm.js
+    ts-node-script: dist/bin-script.js
+    ts-node-transpile-only: dist/bin-transpile.js
+    ts-script: dist/bin-script-deprecated.js
+  checksum: 090adff1302ab20bd3486e6b4799e90f97726ed39e02b39e566f8ab674fd5bd5f727f43615debbfc580d33c6d9d1c6b1b3ce7d8e3cca3e20530a145ffa232c35
+  languageName: node
+  linkType: hard
+
+"ts-node@npm:^9":
   version: 9.1.1
   resolution: "ts-node@npm:9.1.1"
   dependencies:
@@ -7239,6 +7355,13 @@ __metadata:
   bin:
     uvu: bin.js
   checksum: 0cf8e9e6ec79199dacc64fe0e9f82b5bf1d2308f3c54ec1aba5d1ca0a4beff4f173cae0f87bc52d35121565fd232b969fbf52cca3707e20517e62645e19b898e
+  languageName: node
+  linkType: hard
+
+"v8-compile-cache-lib@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "v8-compile-cache-lib@npm:3.0.1"
+  checksum: 78089ad549e21bcdbfca10c08850022b22024cdcc2da9b168bcf5a73a6ed7bf01a9cebb9eac28e03cd23a684d81e0502797e88f3ccd27a32aeab1cfc44c39da0
   languageName: node
   linkType: hard
 
