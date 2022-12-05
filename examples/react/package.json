@@ -11,5 +11,6 @@
     "@fwoosh/react": "link:../../plugins/react",
     "@vitejs/plugin-react": "^1.2.0",
     "fwoosh": "link:../../packages/cli"
-  }
+  },
+  "version": "0.0.18"
 }
