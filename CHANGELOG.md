@@ -2,6 +2,25 @@
 
 #### ⚠️ Pushed to `main`
 
+- remove versions ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix private ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- make examples private ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add license ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- update lerna ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- update auto ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/components`, `@fwoosh/actions`, `@fwoosh/measure`, `@fwoosh/props-panel`, `@fwoosh/react`, `@fwoosh/source-panel`, `@fwoosh/story-description-panel`, `@fwoosh/zoom`
+  - add publish config ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
+# v0.0.16 (Sun Dec 04 2022)
+
+#### ⚠️ Pushed to `main`
+
 - remove versions (lisowski54@gmail.com)
 - fix private (lisowski54@gmail.com)
 - make examples private (lisowski54@gmail.com)
