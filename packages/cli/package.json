@@ -34,5 +34,8 @@
     "tapable": "^2.2.0",
     "unified": "^10.1.2",
     "vite": "^2.8.6"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

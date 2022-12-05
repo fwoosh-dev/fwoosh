@@ -13,5 +13,8 @@
   "dependencies": {
     "fwoosh": "link:../../packages/cli",
     "react-docgen-typescript": "^2.2.2"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
