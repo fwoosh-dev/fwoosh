@@ -1,6 +1,7 @@
 {
   "name": "@fwoosh/fwoosh-example",
   "version": "0.0.16",
+  "private": "true",
   "scripts": {
     "fwoosh": "../../packages/cli/bin/fwoosh.js",
     "start": "yarn fwoosh dev",
