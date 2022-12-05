@@ -1,5 +1,4 @@
 import { promises as fs } from "fs";
-import to from "await-to-js";
 import boxen from "boxen";
 import path from "path";
 // import open from "open";
@@ -10,7 +9,6 @@ import { SyncBailHook, SyncWaterfallHook } from "tapable";
 
 import type { FwooshHooks, FwooshOptions } from "./types";
 import { storyListPlugin } from "./utils/story-list-plugin.js";
-import { getStories } from "./utils/get-stories.js";
 import { renderStoryPlugin } from "./utils/render-story-plugin.js";
 import { getDocsPlugin } from "./utils/get-docs-plugin.js";
 import { fwooshConfigPlugin } from "./utils/fwoosh-config-plugin.js";

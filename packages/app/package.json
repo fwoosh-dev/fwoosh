@@ -9,7 +9,6 @@
     "@radix-ui/colors": "^0.1.8",
     "@radix-ui/react-collapsible": "^0.1.6",
     "@radix-ui/react-id": "^0.1.5",
-    "@stitches/react": "^1.2.8",
     "@unocss/reset": "^0.30.6",
     "clsx": "^1.1.1",
     "dlv": "^1.1.3",
