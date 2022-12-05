@@ -2,6 +2,22 @@
 
 #### ⚠️ Pushed to `main`
 
+- fix private (lisowski54@gmail.com)
+- make examples private (lisowski54@gmail.com)
+- add license (lisowski54@gmail.com)
+- update lerna (lisowski54@gmail.com)
+- update auto (lisowski54@gmail.com)
+
+#### Authors: 1
+
+- Andrew Lisowski (lisowski54@gmail.com)
+
+---
+
+# v0.0.16 (Sun Dec 04 2022)
+
+#### ⚠️ Pushed to `main`
+
 - make examples private (lisowski54@gmail.com)
 - add license (lisowski54@gmail.com)
 - update lerna (lisowski54@gmail.com)
