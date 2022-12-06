@@ -1,3 +1,15 @@
+# v0.0.23 (Mon Dec 05 2022)
+
+#### ⚠️ Pushed to `main`
+
+- add missing dep (lisowski54@gmail.com)
+
+#### Authors: 1
+
+- Andrew Lisowski (lisowski54@gmail.com)
+
+---
+
 # v0.0.22 (Sun Dec 04 2022)
 
 #### ⚠️ Pushed to `main`
