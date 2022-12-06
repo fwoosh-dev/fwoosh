@@ -5199,7 +5199,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-glob@npm:^3.2.9":
+"fast-glob@npm:^3.2.12, fast-glob@npm:^3.2.9":
   version: 3.2.12
   resolution: "fast-glob@npm:3.2.12"
   dependencies:
@@ -5553,6 +5553,7 @@ __metadata:
     endent: ^2.1.0
     esbuild-register: ^3.3.2
     express: ^4.17.3
+    fast-glob: ^3.2.12
     lilconfig: ^2.0.5
     markdown-to-jsx: ^7.1.7
     open: ^8.4.0
