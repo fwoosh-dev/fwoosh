@@ -1,3 +1,5 @@
+import * as React from "react";
+
 type Component = React.FunctionComponent<any> | React.ClassicComponent<any>;
 
 export interface Story {

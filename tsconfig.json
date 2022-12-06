@@ -11,7 +11,7 @@
     "emitDeclarationOnly": false,
     "outDir": "lib",
     "strict": true,
-    "jsx": "react-jsx",
+    "jsx": "react",
     "target": "ES2018",
     "lib": ["es2019", "DOM"],
     "esModuleInterop": true,
