@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "clean": "rm -rf **/tsconfig.tsbuildinfo && rm -rf **/dist && rm -rf **/node_modules",
-    "build": "tsc -b tsconfig.dev.json",
+    "build": "lerna run build && tsc -b tsconfig.dev.json",
     "start": "npm run build -- --watch",
     "release": "auto shipit"
   },

@@ -27,5 +27,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "scripts": {
+    "build": "rsync -a --prune-empty-dirs --include '*/' --include '*.css' --exclude '*' src/ dist/"
   }
 }
