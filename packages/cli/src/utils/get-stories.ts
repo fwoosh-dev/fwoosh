@@ -98,7 +98,7 @@ export async function getStories({
   outDir,
 }: FwooshOptions): Promise<{ stories: Story[]; meta: ResolvedStoryMeta }[]> {
   const files = await glob(stories, {
-    ignore: [`${outDir}/**`],
+    ignore: [`${outDir}/**`, "**/node_modules/**"],
   });
 
   const data = [];
