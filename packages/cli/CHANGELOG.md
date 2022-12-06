@@ -1,3 +1,15 @@
+# v0.0.25 (Mon Dec 05 2022)
+
+#### ⚠️ Pushed to `main`
+
+- add node modules to ignore (lisowski54@gmail.com)
+
+#### Authors: 1
+
+- Andrew Lisowski (lisowski54@gmail.com)
+
+---
+
 # v0.0.24 (Mon Dec 05 2022)
 
 #### ⚠️ Pushed to `main`
