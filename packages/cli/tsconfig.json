@@ -11,7 +11,7 @@
 
   "references": [
     {
-      "path": "../app"
+      "path": "../app/tsconfig.build.json"
     }
   ]
 }

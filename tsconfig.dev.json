@@ -6,7 +6,7 @@
       "path": "packages/cli"
     },
     {
-      "path": "packages/app"
+      "path": "packages/app/tsconfig.build.json"
     },
     {
       "path": "packages/components"
