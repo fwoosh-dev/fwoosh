@@ -30,7 +30,7 @@ function createVirtualFile(config: Config) {
       title: '${story.title}',
       slug: '${story.slug}',
       grouping: '${story.grouping}',
-      comment: \`${story.comment}\`,
+      comment: ${story.comment ? `\`${story.comment}\`` : "undefined"},
       code: \`${story.code}\`,
       component: ${pascalCase(story.slug)},
       meta: import('${story.file}').then((module) => module.meta)
