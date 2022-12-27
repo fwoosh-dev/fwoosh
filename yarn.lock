@@ -5478,6 +5478,7 @@ __metadata:
     lerna: ^6.1.0
     patch-package: ^6.4.7
     prettier: ^2.2.1
+    rimraf: ^3.0.2
     typescript: ^4.9.3
   languageName: unknown
   linkType: soft

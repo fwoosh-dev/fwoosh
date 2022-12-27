@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import * as React from "react";
 import { keyframes, styled } from "./stitches";
 
 const spin = keyframes({
@@ -49,9 +49,9 @@ export interface LazyLoaderProps extends React.ComponentProps<typeof Wrapper> {
 }
 
 export const Spinner = ({ delay = 1000, ...props }: LazyLoaderProps) => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = React.useState(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const timeout = setTimeout(() => setShow(true), delay);
     return () => clearTimeout(timeout);
   }, [delay]);

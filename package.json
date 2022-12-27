@@ -9,8 +9,8 @@
     "examples/*"
   ],
   "scripts": {
-    "clean": "rm -rf **/tsconfig.tsbuildinfo && rm -rf **/dist && rm -rf **/node_modules",
-    "build": "lerna run build && tsc -b tsconfig.dev.json",
+    "clean": "rimraf '**/tsconfig.tsbuildinfo' && rimraf '**/dist' && rimraf '**/node_modules'",
+    "build": "tsc -b tsconfig.dev.json && lerna run build",
     "start": "npm run build -- --watch",
     "release": "auto shipit"
   },
@@ -20,6 +20,7 @@
     "lerna": "^6.1.0",
     "patch-package": "^6.4.7",
     "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
     "typescript": "^4.9.3"
   },
   "dependencies": {
