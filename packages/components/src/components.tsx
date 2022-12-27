@@ -286,6 +286,7 @@ export const PageWrapper = styled("div", {
   mt: 16,
   mb: 28,
   mx: "auto",
+  px: 8,
   maxWidth: "$4xl",
   width: "100%",
 });
