@@ -621,6 +621,9 @@ __metadata:
     react-feather: ^2.0.9
     react-query: ^3.34.19
     react-router-dom: ^6.2.2
+  peerDependencies:
+    react: ^16.8 || ^17.0
+    react-dom: ^16.8 || ^17.0
   languageName: unknown
   linkType: soft
 
@@ -644,10 +647,10 @@ __metadata:
     "@radix-ui/react-toolbar": ^0.1.5
     "@stitches/react": ^1.2.8
     "@types/react": ^17.0.2
-    "@types/react-dom": ^17.0.1
     interweave: ^13.0.0
     react: ^17.0.1
-    react-dom: ^17.0.1
+  peerDependencies:
+    react: ^16.8 || ^17.0
   languageName: unknown
   linkType: soft
 
