@@ -110,6 +110,16 @@ export class Fwoosh {
         storyListPlugin(this.options),
         renderStoryPlugin(this.hooks.renderStory.call()),
       ],
+      optimizeDeps: {
+        include: [
+          "react",
+          "react-dom",
+          "prop-types",
+          "@devtools-ds/themes",
+          "@devtools-ds/tree",
+          "@devtools-ds/object-inspector",
+        ],
+      },
       server: {
         port,
         middlewareMode: "html",
