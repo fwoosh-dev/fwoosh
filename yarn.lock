@@ -720,6 +720,8 @@ __metadata:
   dependencies:
     fwoosh: "link:../../packages/cli"
     react-docgen-typescript: ^2.2.2
+  peerDependencies:
+    typescript: ^4
   languageName: unknown
   linkType: soft
 
