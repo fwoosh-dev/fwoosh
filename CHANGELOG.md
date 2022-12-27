@@ -1,3 +1,17 @@
+# v0.0.29 (Tue Dec 27 2022)
+
+#### ⚠️ Pushed to `main`
+
+- update lock ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/components`
+  - make react a peer dep ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.28 (Tue Dec 27 2022)
 
 #### ⚠️ Pushed to `main`
