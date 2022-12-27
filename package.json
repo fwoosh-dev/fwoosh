@@ -32,9 +32,5 @@
       "released"
     ]
   },
-  "packageManager": "yarn@3.2.0",
-  "resolutions": {
-    "@devtools-ds/tree@1.1.2": "patch:@devtools-ds/tree@npm:1.1.2#.yarn/patches/@devtools-ds-tree-npm-1.1.2-f6d01efdfa.patch",
-    "@devtools-ds/object-inspector@1.1.2": "patch:@devtools-ds/object-inspector@npm:1.1.2#.yarn/patches/@devtools-ds-object-inspector-npm-1.1.2-2e6f63de45.patch"
-  }
+  "packageManager": "yarn@3.2.0"
 }

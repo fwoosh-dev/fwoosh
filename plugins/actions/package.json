@@ -8,7 +8,7 @@
   "repository": "hipstersmoothie/fwoosh",
   "license": "MIT",
   "dependencies": {
-    "@devtools-ds/object-inspector": "^1.1.2",
+    "@devtools-ds/object-inspector": "^1.2.1",
     "@fwoosh/components": "link:../../packages/components",
     "fwoosh": "link:../../packages/cli"
   },
