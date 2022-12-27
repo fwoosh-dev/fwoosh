@@ -19,6 +19,8 @@ export function getDocsPlugin() {
       transform(src: string, id: string) {
         if (
           !id.includes("vite") &&
+          !id.includes("node_modules/@fwoosh") &&
+          !id.endsWith(".css.js") &&
           !id.includes(".stories.") &&
           (id.endsWith(".js") ||
             id.endsWith(".jsx") ||
