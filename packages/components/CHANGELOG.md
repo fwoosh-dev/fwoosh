@@ -1,3 +1,16 @@
+# v0.0.27 (Tue Dec 27 2022)
+
+#### ⚠️ Pushed to `main`
+
+- fix build ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- update page spacing ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.22 (Sun Dec 04 2022)
 
 #### ⚠️ Pushed to `main`

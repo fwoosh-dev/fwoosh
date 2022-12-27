@@ -1,3 +1,24 @@
+# v0.0.27 (Tue Dec 27 2022)
+
+#### ⚠️ Pushed to `main`
+
+- fix start ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- update lcok file ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `fwoosh`
+  - test fix ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - fix running as a package ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - fix undefined comment ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - exclude more files from docs ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/components`
+  - fix build ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - update page spacing ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.26 (Mon Dec 05 2022)
 
 #### ⚠️ Pushed to `main`
