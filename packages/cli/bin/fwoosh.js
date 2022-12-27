@@ -1,3 +1,3 @@
-#!/usr/bin/env node -r esbuild-register
+#!/usr/bin/env node
 
 import "../dist/cli.js";
