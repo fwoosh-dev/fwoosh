@@ -118,6 +118,9 @@ export class Fwoosh {
           "@devtools-ds/themes",
           "@devtools-ds/tree",
           "@devtools-ds/object-inspector",
+          "escape-html",
+          "react-router",
+          "react-router-dom",
         ],
       },
       server: {
