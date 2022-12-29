@@ -1,3 +1,17 @@
+# v0.0.30 (Thu Dec 29 2022)
+
+#### ⚠️ Pushed to `main`
+
+- `fwoosh`
+  - try register in a different way ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add esbuild register back ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.29 (Tue Dec 27 2022)
 
 #### ⚠️ Pushed to `main`
