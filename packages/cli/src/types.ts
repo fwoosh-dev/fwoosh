@@ -1,6 +1,7 @@
 import { SyncBailHook, SyncWaterfallHook } from "tapable";
 import type { ComponentDoc } from "react-docgen-typescript";
 import { Plugin } from "./fwoosh";
+import { InlineConfig } from "vite";
 
 export interface StoryMeta {
   /** The title used to create the sidebar tree structure. */
@@ -30,6 +31,8 @@ export interface FwooshHooks {
   registerPanel: SyncWaterfallHook<[{ name: string; filepath: string }[]]>;
 }
 
+type ViteConfig = Omit<InlineConfig, "mode" | "root">;
+
 export interface FwooshOptions {
   /** The title for the storybook/docs */
   title: string;
@@ -41,4 +44,6 @@ export interface FwooshOptions {
   plugins: Array<
     string | [name: string, options: Record<string, unknown>] | Plugin
   >;
+  /** Modify the Vite configuration used to load your fwoosh instance. */
+  config?: (config: ViteConfig) => Promise<ViteConfig> | ViteConfig;
 }

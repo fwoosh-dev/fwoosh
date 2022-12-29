@@ -1,8 +1,7 @@
 import { promises as fs } from "fs";
 import boxen from "boxen";
 import path from "path";
-// import open from "open";
-import { createServer } from "vite";
+import { createServer, InlineConfig } from "vite";
 import express from "express";
 import { createRequire } from "module";
 import { SyncBailHook, SyncWaterfallHook } from "tapable";
@@ -28,7 +27,10 @@ export class Fwoosh {
   public hooks: FwooshHooks;
 
   constructor(options: FwooshOptions) {
-    this.options = options;
+    this.options = {
+      config: (config) => config,
+      ...options,
+    };
     this.hooks = {
       registerPanel: new SyncWaterfallHook(["panels"]),
       registerToolbarControl: new SyncWaterfallHook(["toolbarControls"]),
@@ -100,9 +102,7 @@ export class Fwoosh {
     const app = express();
     const toolbarControls = this.hooks.registerToolbarControl.call([]);
     const panels = this.hooks.registerPanel.call([]);
-    const vite = await createServer({
-      mode: "development",
-      root: path.dirname(path.dirname(require.resolve("@fwoosh/app"))),
+    const baseConfig: InlineConfig = {
       plugins: [
         fwooshUiPlugin({ toolbarControls, panels }),
         fwooshConfigPlugin(this.options),
@@ -130,6 +130,12 @@ export class Fwoosh {
           strict: false,
         },
       },
+    };
+
+    const vite = await createServer({
+      mode: "development",
+      root: path.dirname(path.dirname(require.resolve("@fwoosh/app"))),
+      ...(await this.options.config(baseConfig)),
     });
 
     app.head("*", async (_, res) => res.sendStatus(200));
@@ -148,7 +154,7 @@ export class Fwoosh {
 
     app.listen(port, async () => {
       console.log(
-        boxen(`fwoosh served at http://localhost:${port}`, {
+        boxen(`fwoosh served at http://localhost:${port}/storybook`, {
           padding: 1,
           margin: 1,
           borderStyle: "round",
