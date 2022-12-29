@@ -1,3 +1,15 @@
+# v0.0.31 (Thu Dec 29 2022)
+
+#### ⚠️ Pushed to `main`
+
+- switch away from shadow roots, styles too encapsulated ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.30 (Thu Dec 29 2022)
 
 #### ⚠️ Pushed to `main`
