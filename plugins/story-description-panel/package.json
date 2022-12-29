@@ -1,7 +1,7 @@
 {
   "name": "@fwoosh/story-description-panel",
   "type": "module",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "description": "Render your stories source code in a panel.",
   "main": "dist/index.js",
   "author": "Andrew Lisowski <lisowski54@gmail.com>",
