@@ -1,3 +1,15 @@
+# v0.0.32 (Thu Dec 29 2022)
+
+#### ⚠️ Pushed to `main`
+
+- add ability to modify vite config directly ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.31 (Thu Dec 29 2022)
 
 #### ⚠️ Pushed to `main`
