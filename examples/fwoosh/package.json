@@ -9,7 +9,7 @@
   "devDependencies": {
     "@fwoosh/components": "link:../../packages/components",
     "@fwoosh/react": "link:../../plugins/react",
-    "@vitejs/plugin-react": "^1.2.0",
+    "@vitejs/plugin-react": "^3.0.0",
     "fwoosh": "link:../../packages/cli"
   },
   "version": "0.0.34"

@@ -35,7 +35,7 @@
     "remark-rehype": "^10.1.0",
     "tapable": "^2.2.0",
     "unified": "^10.1.2",
-    "vite": "^2.8.6"
+    "vite": "^4.0.3"
   },
   "publishConfig": {
     "access": "public"

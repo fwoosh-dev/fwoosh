@@ -9,7 +9,7 @@
   "devDependencies": {
     "@mdx-js/rollup": "^2.1.1",
     "rehype-slug": "^5.0.1",
-    "vite": "^2.8.6"
+    "vite": "^4.0.3"
   },
   "dependencies": {
     "change-case": "^4.1.2"
