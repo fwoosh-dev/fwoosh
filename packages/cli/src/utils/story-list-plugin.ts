@@ -1,8 +1,10 @@
 import { pascalCase } from "change-case";
+import chokidar from "chokidar";
 
 import { endent } from "./endent.js";
 import { FwooshOptions, Story, StoryMeta } from "../types";
-import { getStories } from "./get-stories.js";
+import { getStories, getStoryList } from "./get-stories.js";
+import { ViteDevServer } from "vite";
 
 type Config = { stories: Story[]; meta: StoryMeta }[];
 
@@ -80,6 +82,25 @@ export function storyListPlugin(config: FwooshOptions) {
         }
       }
       return;
+    },
+
+    configureServer(server: ViteDevServer) {
+      const storyWatcher = chokidar.watch(config.stories, {
+        persistent: true,
+        ignored: /node_modules/,
+      });
+
+      async function reload() {
+        const mod = await server.moduleGraph.getModuleByUrl(virtualFileId);
+
+        if (mod) {
+          server.reloadModule(mod);
+          server.ws.send({ type: "full-reload" });
+        }
+      }
+
+      storyWatcher.on("add", reload);
+      storyWatcher.on("unlink", reload);
     },
   };
 }
