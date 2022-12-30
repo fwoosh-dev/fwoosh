@@ -742,6 +742,7 @@ __metadata:
     react-dom: ^17.0.1
     react-feather: ^2.0.9
     react-query: ^3.34.19
+    react-resizable-panels: ^0.0.23
     react-router-dom: ^6.2.2
   peerDependencies:
     react: ^16.8 || ^17.0
@@ -9466,6 +9467,16 @@ __metadata:
   version: 0.14.0
   resolution: "react-refresh@npm:0.14.0"
   checksum: dc69fa8c993df512f42dd0f1b604978ae89bd747c0ed5ec595c0cc50d535fb2696619ccd98ae28775cc01d0a7c146a532f0f7fb81dc22e1977c242a4912312f4
+  languageName: node
+  linkType: hard
+
+"react-resizable-panels@npm:^0.0.23":
+  version: 0.0.23
+  resolution: "react-resizable-panels@npm:0.0.23"
+  peerDependencies:
+    react: ^16.14.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.14.0 || ^17.0.0 || ^18.0.0
+  checksum: 32232ba6f68ad5b1fa6878c5dd97b13952b84a28000e6a1229f706a102c33edb224b990857778b0d3639cb9cccf6d4e1ed3bf9e8b8a428a64b017d76cee773a2
   languageName: node
   linkType: hard
 

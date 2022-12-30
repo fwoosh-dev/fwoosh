@@ -16,6 +16,7 @@
     "inter-ui": "^3.19.3",
     "react-feather": "^2.0.9",
     "react-query": "^3.34.19",
+    "react-resizable-panels": "^0.0.23",
     "react-router-dom": "^6.2.2"
   },
   "peerDependencies": {
