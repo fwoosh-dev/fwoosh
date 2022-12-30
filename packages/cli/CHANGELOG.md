@@ -1,3 +1,15 @@
+# v0.0.36 (Fri Dec 30 2022)
+
+#### ⚠️ Pushed to `main`
+
+- update deprecated option usage ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.35 (Fri Dec 30 2022)
 
 #### ⚠️ Pushed to `main`

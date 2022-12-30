@@ -1,3 +1,15 @@
+# v0.0.36 (Fri Dec 30 2022)
+
+#### ⚠️ Pushed to `main`
+
+- make panel resizable ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.34 (Fri Dec 30 2022)
 
 #### ⚠️ Pushed to `main`
