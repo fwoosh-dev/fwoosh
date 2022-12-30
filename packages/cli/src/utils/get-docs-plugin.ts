@@ -112,7 +112,7 @@ export function getDocsPlugin() {
             const { data } = useQuery(
               key,
               async () => {
-                if (!meta) {
+                if (!meta || !story) {
                   return;
                 }
           
