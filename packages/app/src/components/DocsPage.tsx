@@ -168,23 +168,27 @@ export const DocsPage = () => {
             <Suspense fallback={<Spinner style={{ height: 200 }} />}>
               <DocsPropsTable story={firstStory} />
             </Suspense>
-            <components.h2 id="stories">Stories</components.h2>
-            {stories.map((story) => {
-              return (
-                <div key={story.slug}>
-                  <components.h3 id={paramCase(story.title)}>
-                    {story.title}
-                  </components.h3>
-                  {story.comment && (
-                    <StyledMarkdown>{story.comment}</StyledMarkdown>
-                  )}
-                  <StoryDiv slug={story.slug} code={story.code} />
-                  <Suspense fallback={<Spinner style={{ height: 200 }} />}>
-                    <DocsPropsTable story={story} />
-                  </Suspense>
-                </div>
-              );
-            })}
+            {stories.length > 0 && (
+              <>
+                <components.h2 id="stories">Stories</components.h2>
+                {stories.map((story) => {
+                  return (
+                    <div key={story.slug}>
+                      <components.h3 id={paramCase(story.title)}>
+                        {story.title}
+                      </components.h3>
+                      {story.comment && (
+                        <StyledMarkdown>{story.comment}</StyledMarkdown>
+                      )}
+                      <StoryDiv slug={story.slug} code={story.code} />
+                      <Suspense fallback={<Spinner style={{ height: 200 }} />}>
+                        <DocsPropsTable story={story} />
+                      </Suspense>
+                    </div>
+                  );
+                })}
+              </>
+            )}
           </PageWrapper>
           <QuickNav>
             <NavHeader>
