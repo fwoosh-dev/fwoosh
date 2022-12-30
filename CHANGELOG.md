@@ -1,3 +1,18 @@
+# v0.0.35 (Fri Dec 30 2022)
+
+#### ⚠️ Pushed to `main`
+
+- `fwoosh`
+  - reload page when stories added/removed ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - factor out get story list funciton ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - upgrade vite ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.34 (Fri Dec 30 2022)
 
 #### ⚠️ Pushed to `main`
