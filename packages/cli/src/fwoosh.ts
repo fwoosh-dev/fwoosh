@@ -125,7 +125,7 @@ export class Fwoosh {
       },
       server: {
         port,
-        middlewareMode: "html",
+        middlewareMode: true,
         fs: {
           strict: false,
         },
