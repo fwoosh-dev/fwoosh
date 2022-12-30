@@ -1,3 +1,17 @@
+# v0.0.34 (Fri Dec 30 2022)
+
+#### ⚠️ Pushed to `main`
+
+- `@fwoosh/app`
+  - only render extra stories if there are some ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - fix multiple stories rendering ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.33 (Fri Dec 30 2022)
 
 #### ⚠️ Pushed to `main`
