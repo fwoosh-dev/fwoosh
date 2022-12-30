@@ -103,15 +103,22 @@ function getComponentPath(ast: swc.Module, file: string, value: string) {
   );
 }
 
+export async function getStoryList({
+  stories,
+  outDir,
+}: Pick<FwooshOptions, "stories" | "outDir">) {
+  return await glob(stories, {
+    ignore: [`${outDir}/**`, "**/node_modules/**"],
+  });
+}
+
 let parsed = 0;
 
 export async function getStories({
   stories,
   outDir,
 }: FwooshOptions): Promise<{ stories: Story[]; meta: ResolvedStoryMeta }[]> {
-  const files = await glob(stories, {
-    ignore: [`${outDir}/**`, "**/node_modules/**"],
-  });
+  const files = await getStoryList({ stories, outDir });
 
   const data = [];
 
