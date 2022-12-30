@@ -1,3 +1,16 @@
+# v0.0.33 (Fri Dec 30 2022)
+
+#### ⚠️ Pushed to `main`
+
+- improve story comment finding ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix crash when no story and fetching docs ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.32 (Thu Dec 29 2022)
 
 #### ⚠️ Pushed to `main`

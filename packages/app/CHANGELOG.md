@@ -1,3 +1,15 @@
+# v0.0.33 (Fri Dec 30 2022)
+
+#### ⚠️ Pushed to `main`
+
+- only render properties title when there are properties ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.31 (Thu Dec 29 2022)
 
 #### ⚠️ Pushed to `main`
