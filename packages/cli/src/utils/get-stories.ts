@@ -35,11 +35,23 @@ async function getComment(
   offset: number,
   d: { span: { start: number } }
 ) {
+  let i: number | undefined;
+
   if (
     contents[d.span.start - offset - 3] === "*" &&
     contents[d.span.start - offset - 2] === "/"
   ) {
-    let i = d.span.start - offset - 4;
+    i = d.span.start - offset - 4;
+  }
+
+  if (
+    contents[d.span.start - offset - 4] === "*" &&
+    contents[d.span.start - offset - 3] === "/"
+  ) {
+    i = d.span.start - offset - 5;
+  }
+
+  if (typeof i === "number") {
     const comment = [contents[i]];
 
     while (true) {
