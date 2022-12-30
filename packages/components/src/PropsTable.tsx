@@ -73,9 +73,10 @@ const Table = ({ doc }: TableProps) => {
 
 interface PropsTableProps {
   docs: ReturnType<typeof useDocs>;
+  hasTitle?: boolean;
 }
 
-export const PropsTable = ({ docs }: PropsTableProps) => {
+export const PropsTable = ({ docs, hasTitle }: PropsTableProps) => {
   if (!docs) {
     return null;
   }
@@ -85,29 +86,37 @@ export const PropsTable = ({ docs }: PropsTableProps) => {
   }
 
   if (docs.length === 1) {
-    return <Table doc={docs[0]} />;
+    return (
+      <>
+        {hasTitle && <components.h3>Properties</components.h3>}
+        <Table doc={docs[0]} />;
+      </>
+    );
   }
 
   return (
-    <Tabs.Root defaultValue={docs?.[0].displayName}>
-      <Tabs.List>
+    <>
+      {hasTitle && <components.h3>Properties</components.h3>}
+      <Tabs.Root defaultValue={docs?.[0].displayName}>
+        <Tabs.List>
+          {docs?.map((doc) => (
+            <Tabs.Trigger
+              key={`trigger-${doc.displayName}`}
+              value={doc.displayName}
+            >
+              {doc.displayName}
+            </Tabs.Trigger>
+          ))}
+        </Tabs.List>
         {docs?.map((doc) => (
-          <Tabs.Trigger
-            key={`trigger-${doc.displayName}`}
+          <Tabs.Content
+            key={`content-${doc.displayName}`}
             value={doc.displayName}
           >
-            {doc.displayName}
-          </Tabs.Trigger>
+            <Table doc={doc} />
+          </Tabs.Content>
         ))}
-      </Tabs.List>
-      {docs?.map((doc) => (
-        <Tabs.Content
-          key={`content-${doc.displayName}`}
-          value={doc.displayName}
-        >
-          <Table doc={doc} />
-        </Tabs.Content>
-      ))}
-    </Tabs.Root>
+      </Tabs.Root>
+    </>
   );
 };

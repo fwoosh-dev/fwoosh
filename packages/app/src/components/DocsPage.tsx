@@ -132,12 +132,9 @@ const DocsPropsTable = ({ story }: { story: Stories[number] }) => {
   const docs = useDocs(key, story?.component?._payload?._result, story?.meta);
 
   return (
-    <>
-      <components.h3>Properties</components.h3>
-      <div style={{ height: "fit-content" }}>
-        <PropsTable docs={docs} />
-      </div>
-    </>
+    <div style={{ height: "fit-content" }}>
+      <PropsTable docs={docs} hasTitle />
+    </div>
   );
 };
 
