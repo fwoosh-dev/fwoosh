@@ -47,6 +47,7 @@ export const h3 = styled("h3", {
   text: "xl",
   color: "$gray11",
   mt: 6,
+  mb: 4,
   fontWeight: 500,
   scrollMarginTop: "$4",
 });
