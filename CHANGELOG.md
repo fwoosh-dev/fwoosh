@@ -1,3 +1,18 @@
+# v0.0.45 (Sat Dec 31 2022)
+
+#### ⚠️ Pushed to `main`
+
+- `@fwoosh/app`, `@fwoosh/components`
+  - upgrade radix ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`
+  - add keys to links ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.44 (Sat Dec 31 2022)
 
 #### ⚠️ Pushed to `main`
