@@ -99,8 +99,6 @@ export async function getStoryList({
   });
 }
 
-let parsed = 0;
-
 export async function getStories({
   stories,
   outDir,
@@ -149,7 +147,7 @@ export async function getStories({
         const code = await markdownToHtml.process(
           endent`
             \`\`\`tsx
-            ${contents.slice(d.span.start - parsed, d.span.end - parsed)}
+            ${contents.slice(d.span.start - 1, d.span.end)}
             \`\`\`
           `
         );
@@ -165,10 +163,6 @@ export async function getStories({
       })
     );
 
-    // There's a bug in swc that causes it to not have the correct span.start
-    // on subsequent calls to parse. This is a hack to fix that.
-    // Because of this same bug we also have to parse story files linearly.
-    parsed += 1 + contents.length;
     data.push({ stories, meta: { ...meta, file: fullPath } });
   }
 
