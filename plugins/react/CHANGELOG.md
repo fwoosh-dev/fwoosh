@@ -1,3 +1,15 @@
+# v0.0.44 (Sat Dec 31 2022)
+
+#### ⚠️ Pushed to `main`
+
+- add error page for story not found ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.26 (Mon Dec 05 2022)
 
 #### ⚠️ Pushed to `main`

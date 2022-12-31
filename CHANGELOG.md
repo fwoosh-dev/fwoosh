@@ -1,3 +1,20 @@
+# v0.0.44 (Sat Dec 31 2022)
+
+#### ⚠️ Pushed to `main`
+
+- `@fwoosh/app`
+  - fix docs/ show code button ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add error handling to docs pages ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add root redirects ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/react`
+  - add error page for story not found ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.43 (Sat Dec 31 2022)
 
 #### ⚠️ Pushed to `main`
