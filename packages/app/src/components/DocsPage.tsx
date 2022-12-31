@@ -211,7 +211,10 @@ const DocsContent = () => {
           <NavGroup>
             {stories.map((story) => {
               return (
-                <a href={`#${paramCase(story.title)}`}>
+                <a
+                  key={`#${paramCase(story.title)}`}
+                  href={`#${paramCase(story.title)}`}
+                >
                   <TitleNavItem key={story.slug}>{story.title}</TitleNavItem>
                 </a>
               );
