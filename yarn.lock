@@ -728,8 +728,8 @@ __metadata:
   resolution: "@fwoosh/app@workspace:packages/app"
   dependencies:
     "@radix-ui/colors": ^0.1.8
-    "@radix-ui/react-collapsible": ^0.1.6
-    "@radix-ui/react-id": ^0.1.5
+    "@radix-ui/react-collapsible": ^1.0.1
+    "@radix-ui/react-id": ^1.0.0
     "@types/dlv": ^1.1.2
     "@types/react": ^17.0.2
     "@types/react-dom": ^17.0.1
@@ -766,8 +766,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fwoosh/components@workspace:packages/components"
   dependencies:
-    "@radix-ui/react-tabs": ^0.1.5
-    "@radix-ui/react-toolbar": ^0.1.5
+    "@radix-ui/react-tabs": ^1.0.1
+    "@radix-ui/react-toolbar": ^1.0.1
     "@stitches/react": ^1.2.8
     "@types/react": ^17.0.2
     interweave: ^13.0.0
@@ -2416,247 +2416,273 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/primitive@npm:0.1.0":
-  version: 0.1.0
-  resolution: "@radix-ui/primitive@npm:0.1.0"
+"@radix-ui/primitive@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@radix-ui/primitive@npm:1.0.0"
   dependencies:
     "@babel/runtime": ^7.13.10
-  checksum: 5f721bcfebb2482fc2d034d2782219f4b1035977d3a1bd854719ff07c82fb545083ff1247a987ea0218109c5801375724f60910b0c71f7bb78ea0ab21b2bcb26
+  checksum: 72996afaf346ec4f4c73422f14f6cb2d0de994801ba7cbb9a4a67b0050e0cd74625182c349ef8017ccae1406579d4b74a34a225ef2efe61e8e5337decf235deb
   languageName: node
   linkType: hard
 
-"@radix-ui/react-collapsible@npm:^0.1.6":
-  version: 0.1.6
-  resolution: "@radix-ui/react-collapsible@npm:0.1.6"
+"@radix-ui/react-collapsible@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@radix-ui/react-collapsible@npm:1.0.1"
   dependencies:
     "@babel/runtime": ^7.13.10
-    "@radix-ui/primitive": 0.1.0
-    "@radix-ui/react-compose-refs": 0.1.0
-    "@radix-ui/react-context": 0.1.1
-    "@radix-ui/react-id": 0.1.5
-    "@radix-ui/react-presence": 0.1.2
-    "@radix-ui/react-primitive": 0.1.4
-    "@radix-ui/react-use-controllable-state": 0.1.0
-    "@radix-ui/react-use-layout-effect": 0.1.0
+    "@radix-ui/primitive": 1.0.0
+    "@radix-ui/react-compose-refs": 1.0.0
+    "@radix-ui/react-context": 1.0.0
+    "@radix-ui/react-id": 1.0.0
+    "@radix-ui/react-presence": 1.0.0
+    "@radix-ui/react-primitive": 1.0.1
+    "@radix-ui/react-use-controllable-state": 1.0.0
+    "@radix-ui/react-use-layout-effect": 1.0.0
   peerDependencies:
-    react: ^16.8 || ^17.0
-  checksum: b54dc6ece5d2e53a2cdf68da7d4ea3aaa0266da8e34b02de40d33d5fcdc957fd00c8bd0265d03e945f52ac78c191bdbe3ca23e53f39fc6239319c4f2dd17aa5e
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
+  checksum: 24c4611c06b258cf1710c9978a0ad529f25f074e7654dd6fdf615f1e43dc100bbc9f8b2acd7a318153f2e27f3c4670d209c12a336004ff43f73cd05278e9a754
   languageName: node
   linkType: hard
 
-"@radix-ui/react-collection@npm:0.1.4":
-  version: 0.1.4
-  resolution: "@radix-ui/react-collection@npm:0.1.4"
+"@radix-ui/react-collection@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@radix-ui/react-collection@npm:1.0.1"
   dependencies:
     "@babel/runtime": ^7.13.10
-    "@radix-ui/react-compose-refs": 0.1.0
-    "@radix-ui/react-context": 0.1.1
-    "@radix-ui/react-primitive": 0.1.4
-    "@radix-ui/react-slot": 0.1.2
+    "@radix-ui/react-compose-refs": 1.0.0
+    "@radix-ui/react-context": 1.0.0
+    "@radix-ui/react-primitive": 1.0.1
+    "@radix-ui/react-slot": 1.0.1
   peerDependencies:
-    react: ^16.8 || ^17.0
-  checksum: 7c2b0ccca5e873e570ebd53e9133de86dfff26df01e16a7af2f4af1e55df71f90dd6d89995b24cf01b6eeaf04a3b05481a8f916792f76de58f9b0e77e0c4902f
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
+  checksum: 4922b358baf54aa343da5235fd061a289bedef9488254696bb4eb09b320da9da91bf55e148d89f07df80afa5429804f8a203159978cddeea423e58fdea703cd0
   languageName: node
   linkType: hard
 
-"@radix-ui/react-compose-refs@npm:0.1.0":
-  version: 0.1.0
-  resolution: "@radix-ui/react-compose-refs@npm:0.1.0"
+"@radix-ui/react-compose-refs@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@radix-ui/react-compose-refs@npm:1.0.0"
   dependencies:
     "@babel/runtime": ^7.13.10
   peerDependencies:
-    react: ^16.8 || ^17.0
-  checksum: d1455577b2afee141998e847890e8f5ba5cb17aa58ba699f9abe21c7948e2435bbda28f7f7efe825ca200c66bcaf095ff4b93553778d599cba3f611c97cd222e
+    react: ^16.8 || ^17.0 || ^18.0
+  checksum: fb98be2e275a1a758ccac647780ff5b04be8dcf25dcea1592db3b691fecf719c4c0700126da605b2f512dd89caa111352b9fad59528d736b4e0e9a0e134a74a1
   languageName: node
   linkType: hard
 
-"@radix-ui/react-context@npm:0.1.1":
-  version: 0.1.1
-  resolution: "@radix-ui/react-context@npm:0.1.1"
+"@radix-ui/react-context@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@radix-ui/react-context@npm:1.0.0"
   dependencies:
     "@babel/runtime": ^7.13.10
   peerDependencies:
-    react: ^16.8 || ^17.0
-  checksum: 85ed35b6e386706bc3a8d21ff7e2a55d0f452fd8ab89f6c9a6c2e271e390c8788800517589d5606a3bfbcca08741fbcb4b6c695c466a284ae35957d92620c467
+    react: ^16.8 || ^17.0 || ^18.0
+  checksum: 43c6b6f2183398161fe6b109e83fff240a6b7babbb27092b815932342a89d5ca42aa9806bfae5927970eed5ff90feed04c67aa29c6721f84ae826f17fcf34ce0
   languageName: node
   linkType: hard
 
-"@radix-ui/react-id@npm:0.1.5, @radix-ui/react-id@npm:^0.1.5":
-  version: 0.1.5
-  resolution: "@radix-ui/react-id@npm:0.1.5"
+"@radix-ui/react-direction@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@radix-ui/react-direction@npm:1.0.0"
   dependencies:
     "@babel/runtime": ^7.13.10
-    "@radix-ui/react-use-layout-effect": 0.1.0
   peerDependencies:
-    react: ^16.8 || ^17.0
-  checksum: 66d7df2b36ded3be4ac0abfe2b85e90abf80863054b365db06b4aca998b72a6fb493a4b1bc437a80ddfaa29a32e266d2aafc746f795e76354bc24802c0bfe791
+    react: ^16.8 || ^17.0 || ^18.0
+  checksum: 92a40de4087b161a56957872daf204a7735bd21f2fccbd42deff322d759977d085ad3dcdae05af437b7e64e628e939e0d67e5bc468a3027e1b02e0a7dc90c485
   languageName: node
   linkType: hard
 
-"@radix-ui/react-presence@npm:0.1.2":
-  version: 0.1.2
-  resolution: "@radix-ui/react-presence@npm:0.1.2"
+"@radix-ui/react-id@npm:1.0.0, @radix-ui/react-id@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@radix-ui/react-id@npm:1.0.0"
   dependencies:
     "@babel/runtime": ^7.13.10
-    "@radix-ui/react-compose-refs": 0.1.0
-    "@radix-ui/react-use-layout-effect": 0.1.0
+    "@radix-ui/react-use-layout-effect": 1.0.0
   peerDependencies:
-    react: ">=16.8"
-  checksum: 7a189e24a353b30f0b6ee87d0577bdb183dde79a2be8105638e73d28e7538f4f6dd64d205634bdd6100bcfdabab713870e8cdb0f01ae9cd9a44f6650eb9e7ce6
+    react: ^16.8 || ^17.0 || ^18.0
+  checksum: ba323cedd6a6df6f6e51ed1f7f7747988ce432b47fd94d860f962b14b342dcf049eae33f8ad0b72fd7df6329a7375542921132271fba64ab0a271c93f09c48d1
   languageName: node
   linkType: hard
 
-"@radix-ui/react-primitive@npm:0.1.4":
-  version: 0.1.4
-  resolution: "@radix-ui/react-primitive@npm:0.1.4"
+"@radix-ui/react-presence@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@radix-ui/react-presence@npm:1.0.0"
   dependencies:
     "@babel/runtime": ^7.13.10
-    "@radix-ui/react-slot": 0.1.2
+    "@radix-ui/react-compose-refs": 1.0.0
+    "@radix-ui/react-use-layout-effect": 1.0.0
   peerDependencies:
-    react: ^16.8 || ^17.0
-  checksum: e7b83dc51565a7a54dfd16296e2aa1639dafe32655e3a3974d29d28497f0e9ec9cdf0ee59bc54a88b2a51eeb307781f01f6fcacb4d6dc84a8e10631ddb6142e5
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
+  checksum: a607d67795aa265e88f1765dcc7c18bebf6d88d116cb7f529ebe5a3fbbe751a42763aff0c1c89cdd8ce7f7664355936c4070fd3d4685774aff1a80fa95f4665b
   languageName: node
   linkType: hard
 
-"@radix-ui/react-roving-focus@npm:0.1.5":
-  version: 0.1.5
-  resolution: "@radix-ui/react-roving-focus@npm:0.1.5"
+"@radix-ui/react-primitive@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@radix-ui/react-primitive@npm:1.0.1"
   dependencies:
     "@babel/runtime": ^7.13.10
-    "@radix-ui/primitive": 0.1.0
-    "@radix-ui/react-collection": 0.1.4
-    "@radix-ui/react-compose-refs": 0.1.0
-    "@radix-ui/react-context": 0.1.1
-    "@radix-ui/react-id": 0.1.5
-    "@radix-ui/react-primitive": 0.1.4
-    "@radix-ui/react-use-callback-ref": 0.1.0
-    "@radix-ui/react-use-controllable-state": 0.1.0
+    "@radix-ui/react-slot": 1.0.1
   peerDependencies:
-    react: ^16.8 || ^17.0
-  checksum: 5a0504c1e6d617d0f3483fe7d16c4bc1552536f56828800ae6dac40cd9e758101405d99c3005721d059475715d28ede1f276cdf5d089b61d59b939fadf544a30
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
+  checksum: 1cc86b72f926be4a42122e7e456e965de0906f16b0dc244b8448bac05905f208598c984a0dd40026f654b4a71d0235335d48a18e377b07b0ec6c6917576a8080
   languageName: node
   linkType: hard
 
-"@radix-ui/react-separator@npm:0.1.4":
-  version: 0.1.4
-  resolution: "@radix-ui/react-separator@npm:0.1.4"
+"@radix-ui/react-roving-focus@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@radix-ui/react-roving-focus@npm:1.0.1"
   dependencies:
     "@babel/runtime": ^7.13.10
-    "@radix-ui/react-primitive": 0.1.4
+    "@radix-ui/primitive": 1.0.0
+    "@radix-ui/react-collection": 1.0.1
+    "@radix-ui/react-compose-refs": 1.0.0
+    "@radix-ui/react-context": 1.0.0
+    "@radix-ui/react-direction": 1.0.0
+    "@radix-ui/react-id": 1.0.0
+    "@radix-ui/react-primitive": 1.0.1
+    "@radix-ui/react-use-callback-ref": 1.0.0
+    "@radix-ui/react-use-controllable-state": 1.0.0
   peerDependencies:
-    react: ^16.8 || ^17.0
-  checksum: 9e9767966a02b1f7362115b651e03fcf915147b6f5ad0b4b52f7161c1d0a2ca9b786033f45dfd0d9da8ac2acf544fbe7f30f1e824e406fb529dd58a2d965fbd8
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
+  checksum: a8f1d22086622d7439b36ee5d38c6eb412bb99e71fa6986c25ed4506528ac48f32cbc06ed329bc7844fc9c9d402dec06e749b6272bef3ea26688620ad6b11fad
   languageName: node
   linkType: hard
 
-"@radix-ui/react-slot@npm:0.1.2":
-  version: 0.1.2
-  resolution: "@radix-ui/react-slot@npm:0.1.2"
+"@radix-ui/react-separator@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@radix-ui/react-separator@npm:1.0.1"
   dependencies:
     "@babel/runtime": ^7.13.10
-    "@radix-ui/react-compose-refs": 0.1.0
+    "@radix-ui/react-primitive": 1.0.1
   peerDependencies:
-    react: ^16.8 || ^17.0
-  checksum: 216927b9b1dae28328d630f6b2c91f1a424c0b00fb4efcebb7a109fdfc5bceda5cf878dfac5baa8aa441150d4c5263f5a914f2962bbce8375972ae076e4d3b65
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
+  checksum: c7d7aa21f4b00127da07452cf17bca59d02fe40c62ba662d72d4a906b6722173de28a5fd647ed5d11fc483fa62fa74f075433764d8803b07f2721c957e5ec13a
   languageName: node
   linkType: hard
 
-"@radix-ui/react-tabs@npm:^0.1.5":
-  version: 0.1.5
-  resolution: "@radix-ui/react-tabs@npm:0.1.5"
+"@radix-ui/react-slot@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@radix-ui/react-slot@npm:1.0.1"
   dependencies:
     "@babel/runtime": ^7.13.10
-    "@radix-ui/primitive": 0.1.0
-    "@radix-ui/react-context": 0.1.1
-    "@radix-ui/react-id": 0.1.5
-    "@radix-ui/react-primitive": 0.1.4
-    "@radix-ui/react-roving-focus": 0.1.5
-    "@radix-ui/react-use-controllable-state": 0.1.0
+    "@radix-ui/react-compose-refs": 1.0.0
   peerDependencies:
-    react: ^16.8 || ^17.0
-  checksum: 323d8f669ec739e9f697df26edd5695536f648d5851d84a7f9e7d8bf9913504ce7c7bb12f99d7e2da07830e1f4ab05f5f74c0456989fe64acef35b4ed6aa4a42
+    react: ^16.8 || ^17.0 || ^18.0
+  checksum: a20693f8ce532bd6cbff12ba543dfcf90d451f22923bd60b57dc9e639f6e53348915e182002b33444feb6ab753434e78e2a54085bf7092aadda4418f0423763f
   languageName: node
   linkType: hard
 
-"@radix-ui/react-toggle-group@npm:0.1.5":
-  version: 0.1.5
-  resolution: "@radix-ui/react-toggle-group@npm:0.1.5"
+"@radix-ui/react-tabs@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@radix-ui/react-tabs@npm:1.0.1"
   dependencies:
     "@babel/runtime": ^7.13.10
-    "@radix-ui/primitive": 0.1.0
-    "@radix-ui/react-context": 0.1.1
-    "@radix-ui/react-primitive": 0.1.4
-    "@radix-ui/react-roving-focus": 0.1.5
-    "@radix-ui/react-toggle": 0.1.4
-    "@radix-ui/react-use-controllable-state": 0.1.0
+    "@radix-ui/primitive": 1.0.0
+    "@radix-ui/react-context": 1.0.0
+    "@radix-ui/react-direction": 1.0.0
+    "@radix-ui/react-id": 1.0.0
+    "@radix-ui/react-presence": 1.0.0
+    "@radix-ui/react-primitive": 1.0.1
+    "@radix-ui/react-roving-focus": 1.0.1
+    "@radix-ui/react-use-controllable-state": 1.0.0
   peerDependencies:
-    react: ^16.8 || ^17.0
-  checksum: e2a45b49f882e52c245da056833382b725307e308c1068f2ce323e72b09747730c70c3c43e0791d6f5b269128afd13c59eb91c96445252eae92ec54f15d8f793
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
+  checksum: d5e8ac40d40b6c795bb0e1d1b942fd133b9c1978b21f07d06352159182e229b2bb2d0d3b9a04d288692d41cff3ba90f128a5e95995e0cc59352cc82d1ee72599
   languageName: node
   linkType: hard
 
-"@radix-ui/react-toggle@npm:0.1.4":
-  version: 0.1.4
-  resolution: "@radix-ui/react-toggle@npm:0.1.4"
+"@radix-ui/react-toggle-group@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@radix-ui/react-toggle-group@npm:1.0.1"
   dependencies:
     "@babel/runtime": ^7.13.10
-    "@radix-ui/primitive": 0.1.0
-    "@radix-ui/react-primitive": 0.1.4
-    "@radix-ui/react-use-controllable-state": 0.1.0
+    "@radix-ui/primitive": 1.0.0
+    "@radix-ui/react-context": 1.0.0
+    "@radix-ui/react-direction": 1.0.0
+    "@radix-ui/react-primitive": 1.0.1
+    "@radix-ui/react-roving-focus": 1.0.1
+    "@radix-ui/react-toggle": 1.0.1
+    "@radix-ui/react-use-controllable-state": 1.0.0
   peerDependencies:
-    react: ^16.8 || ^17.0
-  checksum: 7725372ba730d804032d5d97a08c193500373de8f156ebd0e7b4833dad26306a0e2449ce012ec3ff4545956aa40eff81be9c8945425dca67d747c8dc920495a8
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
+  checksum: 310c061a7e8184efe8e97870fa9806f2eb6da2b66a54640f7902ce357439e4ca09ff139e85686585cd8bf6b53559a906aeedc33b19572026c2d2a2a372651764
   languageName: node
   linkType: hard
 
-"@radix-ui/react-toolbar@npm:^0.1.5":
-  version: 0.1.5
-  resolution: "@radix-ui/react-toolbar@npm:0.1.5"
+"@radix-ui/react-toggle@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@radix-ui/react-toggle@npm:1.0.1"
   dependencies:
     "@babel/runtime": ^7.13.10
-    "@radix-ui/primitive": 0.1.0
-    "@radix-ui/react-context": 0.1.1
-    "@radix-ui/react-primitive": 0.1.4
-    "@radix-ui/react-roving-focus": 0.1.5
-    "@radix-ui/react-separator": 0.1.4
-    "@radix-ui/react-toggle-group": 0.1.5
+    "@radix-ui/primitive": 1.0.0
+    "@radix-ui/react-primitive": 1.0.1
+    "@radix-ui/react-use-controllable-state": 1.0.0
   peerDependencies:
-    react: ^16.8 || ^17.0
-  checksum: 58cf50ca5e579bdfe549080fb11451cb4f2367d83776cdd411c752c524dbab0826d82a05e7863adedb00ef800885a357fbaab56a35747beff26f4f22aeb75639
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
+  checksum: 9754df4add6c1d4bced810431e51696cd482465aaf84ffca008caf13f5f33e6e4133ce146ae208fede93acfedbfffcee3808794d4f147c949cc15465f3cc22a7
   languageName: node
   linkType: hard
 
-"@radix-ui/react-use-callback-ref@npm:0.1.0":
-  version: 0.1.0
-  resolution: "@radix-ui/react-use-callback-ref@npm:0.1.0"
+"@radix-ui/react-toolbar@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@radix-ui/react-toolbar@npm:1.0.1"
   dependencies:
     "@babel/runtime": ^7.13.10
+    "@radix-ui/primitive": 1.0.0
+    "@radix-ui/react-context": 1.0.0
+    "@radix-ui/react-direction": 1.0.0
+    "@radix-ui/react-primitive": 1.0.1
+    "@radix-ui/react-roving-focus": 1.0.1
+    "@radix-ui/react-separator": 1.0.1
+    "@radix-ui/react-toggle-group": 1.0.1
   peerDependencies:
-    react: ^16.8 || ^17.0
-  checksum: 5356971123d7bbc66a208eca4709483190d0927a6817089f885d4538cd701a174d76830ba36cfaa6336b340415aaefaddc606a575246b0cbcb4b1f2897075203
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
+  checksum: 0007bc416356a231ead4b25ef90653904bee59ccc0cddaee568084e01838bfa829101af571a711f2c4b7d0e1d38ea2d7308b3e18b04ecd892d196cd67f5588ab
   languageName: node
   linkType: hard
 
-"@radix-ui/react-use-controllable-state@npm:0.1.0":
-  version: 0.1.0
-  resolution: "@radix-ui/react-use-controllable-state@npm:0.1.0"
+"@radix-ui/react-use-callback-ref@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@radix-ui/react-use-callback-ref@npm:1.0.0"
   dependencies:
     "@babel/runtime": ^7.13.10
-    "@radix-ui/react-use-callback-ref": 0.1.0
   peerDependencies:
-    react: ^16.8 || ^17.0
-  checksum: 2ddd05854af227b74e8b4a76d0d3c49e83b481b059fad68b769f76b46faa4db8eeb68e1ccf15cf6c4c54a89e6debc6440ee492ccac64570bdf12173e49b2fddc
+    react: ^16.8 || ^17.0 || ^18.0
+  checksum: a8dda76ba0a26e23dc6ab5003831ad7439f59ba9d696a517643b9ee6a7fb06b18ae7a8f5a3c00c530d5c8104745a466a077b7475b99b4c0f5c15f5fc29474471
   languageName: node
   linkType: hard
 
-"@radix-ui/react-use-layout-effect@npm:0.1.0":
-  version: 0.1.0
-  resolution: "@radix-ui/react-use-layout-effect@npm:0.1.0"
+"@radix-ui/react-use-controllable-state@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@radix-ui/react-use-controllable-state@npm:1.0.0"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+    "@radix-ui/react-use-callback-ref": 1.0.0
+  peerDependencies:
+    react: ^16.8 || ^17.0 || ^18.0
+  checksum: 35f1e714bbe3fc9f5362a133339dd890fb96edb79b63168a99403c65dd5f2b63910e0c690255838029086719e31360fa92544a55bc902cfed4442bb3b55822e2
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-use-layout-effect@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@radix-ui/react-use-layout-effect@npm:1.0.0"
   dependencies:
     "@babel/runtime": ^7.13.10
   peerDependencies:
-    react: ^16.8 || ^17.0
-  checksum: d8be1f97706dec2dcdf98284ad04a115898338dd34f68d61cf9bfda87d88c694019576313a235202b05be3a56ab6453fcee44d651f6b8a502a0cd2dbde153f49
+    react: ^16.8 || ^17.0 || ^18.0
+  checksum: fcdc8cfa79bd45766ebe3de11039c58abe3fed968cb39c12b2efce5d88013c76fe096ea4cee464d42576d02fe7697779b682b4268459bca3c4e48644f5b4ac5e
   languageName: node
   linkType: hard
 
