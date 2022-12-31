@@ -28,3 +28,13 @@ export const useStoryTree = (): StoryTree => {
 
   return tree;
 };
+
+export const getFirstStory = (tree: StoryTree): Stories[string] => {
+  const first = Object.values(tree)[0];
+
+  if (Array.isArray(first)) {
+    return first[0];
+  }
+
+  return getFirstStory(first);
+};

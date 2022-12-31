@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 import { Story } from "./components/Story";
@@ -13,6 +13,7 @@ import {
   ColorModeContext,
   getInitialColorMode,
 } from "@fwoosh/components";
+import { getFirstStory, useStoryTree } from "./hooks/useStoryTree";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -21,6 +22,22 @@ const queryClient = new QueryClient({
     },
   },
 });
+
+const FirstDocsPage = () => {
+  const tree = useStoryTree();
+
+  return (
+    <Navigate
+      to={"/docs/" + getFirstStory(tree).grouping.replace(/\//g, "-")}
+    />
+  );
+};
+
+const FirstStory = () => {
+  const tree = useStoryTree();
+
+  return <Navigate to={"/storybook/" + getFirstStory(tree).slug} />;
+};
 
 export const App = () => {
   const [colorMode, colorModeSet] = React.useState<ColorMode | undefined>();
@@ -47,9 +64,11 @@ export const App = () => {
                   </Route>
                   <Route path="storybook" element={<Storybook />}>
                     <Route path=":storyId" element={<Story />} />
+                    <Route index element={<FirstStory />} />
                   </Route>
                   <Route path="docs" element={<Docs />}>
                     <Route path=":docsPath" element={<DocsPage />} />
+                    <Route index element={<FirstDocsPage />} />
                   </Route>
                 </Route>
               </Routes>
