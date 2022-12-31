@@ -1,5 +1,4 @@
 import React, { Suspense } from "react";
-import { render } from "@fwoosh/app/render";
 import { useParams } from "react-router-dom";
 import dlv from "dlv";
 import { useId } from "@radix-ui/react-id";
@@ -101,6 +100,10 @@ const NavGroup = styled("div", {
   },
 });
 
+const CollapsibleRoot = styled(Collapsible.Root, {
+  position: "relative",
+});
+
 const StoryDiv = React.memo(
   ({ slug, code }: { slug: string; code: string }) => {
     const id = useId();
@@ -108,21 +111,17 @@ const StoryDiv = React.memo(
     const ref = useRender({ id, slug });
 
     return (
-      <Collapsible.Root open={codeShowing} onOpenChange={codeShowingSet}>
-        <div className="relative">
-          <StoryPreview state={codeShowing ? "open" : undefined} ref={ref} />
-          <Collapsible.Trigger asChild={true}>
-            <ShowCodeButton>
-              {codeShowing ? "Hide" : "Show"} code
-            </ShowCodeButton>
-          </Collapsible.Trigger>
-        </div>
+      <CollapsibleRoot open={codeShowing} onOpenChange={codeShowingSet}>
+        <StoryPreview state={codeShowing ? "open" : undefined} ref={ref} />
+        <Collapsible.Trigger asChild={true}>
+          <ShowCodeButton>{codeShowing ? "Hide" : "Show"} code</ShowCodeButton>
+        </Collapsible.Trigger>
         <Collapsible.Content>
           <StyledMarkdown className={codeShowing && styles.showingCode}>
             {code}
           </StyledMarkdown>
         </Collapsible.Content>
-      </Collapsible.Root>
+      </CollapsibleRoot>
     );
   }
 );
