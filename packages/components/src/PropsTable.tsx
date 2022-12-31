@@ -89,7 +89,7 @@ export const PropsTable = ({ docs, hasTitle }: PropsTableProps) => {
     return (
       <>
         {hasTitle && <components.h3>Properties</components.h3>}
-        <Table doc={docs[0]} />;
+        <Table doc={docs[0]} />
       </>
     );
   }
