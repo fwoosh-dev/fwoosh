@@ -1,3 +1,16 @@
+# v0.0.43 (Sat Dec 31 2022)
+
+#### ⚠️ Pushed to `main`
+
+- `@fwoosh/app`, `@fwoosh/source-panel`, `@fwoosh/story-description-panel`
+  - tighten panel scrolling ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.42 (Sat Dec 31 2022)
 
 #### ⚠️ Pushed to `main`
