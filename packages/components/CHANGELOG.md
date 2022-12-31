@@ -1,3 +1,15 @@
+# v0.0.40 (Sat Dec 31 2022)
+
+#### ⚠️ Pushed to `main`
+
+- remove extra char ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.38 (Sat Dec 31 2022)
 
 #### ⚠️ Pushed to `main`
