@@ -10,11 +10,13 @@ const Panel = styled("div", {
   "& > span": {
     height: "100%",
   },
+
   "& pre": {
     margin: 0,
     border: "none",
     borderRadius: 0,
     height: "100%",
+    overflow: "auto",
   },
 });
 

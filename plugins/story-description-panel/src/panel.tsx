@@ -7,16 +7,6 @@ const Panel = styled("div", {
   height: "100%",
   width: "100%",
   px: 4,
-
-  "& > span": {
-    height: "100%",
-  },
-  "& pre": {
-    margin: 0,
-    border: "none",
-    borderRadius: 0,
-    height: "100%",
-  },
 });
 
 export default function DescriptionPanel() {
