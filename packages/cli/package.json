@@ -1,7 +1,7 @@
 {
   "name": "fwoosh",
   "type": "module",
-  "version": "0.0.42",
+  "version": "0.0.43",
   "description": "A lightening quick component development",
   "main": "dist/index.js",
   "bin": "bin/fwoosh.js",
