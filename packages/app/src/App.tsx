@@ -58,17 +58,17 @@ export const App = () => {
             <BrowserRouter>
               <Routes>
                 <Route path="/">
-                  <Route index />
+                  <Route index element={<FirstDocsPage />} />
                   <Route path="story">
                     <Route path=":storyId" element={<Story />} />
                   </Route>
                   <Route path="storybook" element={<Storybook />}>
-                    <Route path=":storyId" element={<Story />} />
                     <Route index element={<FirstStory />} />
+                    <Route path=":storyId" element={<Story />} />
                   </Route>
                   <Route path="docs" element={<Docs />}>
-                    <Route path=":docsPath" element={<DocsPage />} />
                     <Route index element={<FirstDocsPage />} />
+                    <Route path=":docsPath" element={<DocsPage />} />
                   </Route>
                 </Route>
               </Routes>
