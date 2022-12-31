@@ -1,3 +1,15 @@
+# v0.0.39 (Sat Dec 31 2022)
+
+#### ⚠️ Pushed to `main`
+
+- make story fill pane ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.36 (Fri Dec 30 2022)
 
 #### ⚠️ Pushed to `main`
