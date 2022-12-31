@@ -1,7 +1,7 @@
 {
   "name": "@fwoosh/react",
   "type": "module",
-  "version": "0.0.45",
+  "version": "0.0.46",
   "description": "A lightening quick component development",
   "exports": {
     ".": "./dist/index.js",
