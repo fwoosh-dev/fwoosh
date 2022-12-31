@@ -30,7 +30,7 @@ function sanitizeString(str: string) {
   return str.replace(/`/g, "\\\\`").replace(/\${/g, "\\${");
 }
 
-let parsed = 0;
+let parsed = 1;
 
 async function getComment(contents: string, d: { span: { start: number } }) {
   let i = d.span.start - parsed;
