@@ -30,8 +30,10 @@ function sanitizeString(str: string) {
   return str.replace(/`/g, "\\\\`").replace(/\${/g, "\\${");
 }
 
+let parsed = 0;
+
 async function getComment(contents: string, d: { span: { start: number } }) {
-  let i = d.span.start;
+  let i = d.span.start - parsed;
 
   while (contents[i] !== "\n") {
     i--;
@@ -147,7 +149,7 @@ export async function getStories({
         const code = await markdownToHtml.process(
           endent`
             \`\`\`tsx
-            ${contents.slice(d.span.start - 1, d.span.end)}
+            ${contents.slice(d.span.start - parsed, d.span.end - parsed)}
             \`\`\`
           `
         );
@@ -164,6 +166,8 @@ export async function getStories({
     );
 
     data.push({ stories, meta: { ...meta, file: fullPath } });
+    // TODO - this is a hack to get the correct span for the next story
+    parsed = ast.span.end + 2;
   }
 
   return data;
