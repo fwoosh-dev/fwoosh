@@ -1,3 +1,15 @@
+# v0.0.48 (Sat Dec 31 2022)
+
+#### ⚠️ Pushed to `main`
+
+- fix prop loading ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.42 (Sat Dec 31 2022)
 
 #### ⚠️ Pushed to `main`
