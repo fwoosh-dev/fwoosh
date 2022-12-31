@@ -1,5 +1,6 @@
 import React from "react";
 import { render } from "@fwoosh/app/render";
+import { stories } from "@fwoosh/app/stories";
 
 interface UseRenderOptions {
   id: string;
@@ -12,6 +13,10 @@ export const useRender = ({ id, slug }: UseRenderOptions) => {
   React.useEffect(() => {
     if (!id || !ref.current) {
       return;
+    }
+
+    if (!stories[slug]) {
+      throw new Error(`Story not found: ${slug}`);
     }
 
     ref.current.id = id;

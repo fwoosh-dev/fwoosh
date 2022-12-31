@@ -5,29 +5,42 @@ import * as React from "react";
 
 const ErrorMessage = styled("h1", {
   text: "2xl",
-  color: "$gray9",
+  color: "$primary11",
   fontWeight: "bold",
   textAlign: "center",
 });
 
+const ErrorWrapper = styled("div", {
+  height: "100%",
+  width: "100%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  background: "$primary3",
+});
+
 export default class ErrorBoundary extends React.Component<
   {},
-  { hasError: boolean }
+  { error: Error | undefined }
 > {
   constructor(props: any) {
     super(props);
-    this.state = { hasError: false };
+    this.state = { error: undefined };
   }
 
-  static getDerivedStateFromError() {
-    return { hasError: true };
+  static getDerivedStateFromError(error: Error) {
+    return { error };
   }
 
   componentDidCatch() {}
 
   render() {
-    if (this.state.hasError) {
-      return <ErrorMessage>Something went wrong!</ErrorMessage>;
+    if (this.state.error) {
+      return (
+        <ErrorWrapper>
+          <ErrorMessage>{this.state.error.message}</ErrorMessage>
+        </ErrorWrapper>
+      );
     }
     return this.props.children;
   }

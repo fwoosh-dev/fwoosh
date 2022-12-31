@@ -63,7 +63,7 @@ export default class ReactPlugin implements Plugin {
               el
             );
           } catch (e) {
-            console.log("error", e);
+            console.error("error", e);
           }
         }      
       `;
