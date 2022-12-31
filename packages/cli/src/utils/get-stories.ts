@@ -30,28 +30,15 @@ function sanitizeString(str: string) {
   return str.replace(/`/g, "\\\\`").replace(/\${/g, "\\${");
 }
 
-async function getComment(
-  contents: string,
-  offset: number,
-  d: { span: { start: number } }
-) {
-  let i: number | undefined;
+async function getComment(contents: string, d: { span: { start: number } }) {
+  let i = d.span.start;
 
-  if (
-    contents[d.span.start - offset - 3] === "*" &&
-    contents[d.span.start - offset - 2] === "/"
-  ) {
-    i = d.span.start - offset - 4;
+  while (contents[i] !== "\n") {
+    i--;
   }
 
-  if (
-    contents[d.span.start - offset - 4] === "*" &&
-    contents[d.span.start - offset - 3] === "/"
-  ) {
-    i = d.span.start - offset - 5;
-  }
-
-  if (typeof i === "number") {
+  if (contents[i - 1] === "/" && contents[i - 2] === "*") {
+    i -= 3;
     const comment = [contents[i]];
 
     while (true) {
@@ -172,7 +159,7 @@ export async function getStories({
           title: capitalCase(exportName),
           slug: `${paramCase(meta.title)}--${paramCase(exportName)}`,
           file: fullPath,
-          comment: await getComment(contents, parsed, d),
+          comment: await getComment(contents, d),
           code: sanitizeString(String(code)),
         };
       })
