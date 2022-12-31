@@ -81,11 +81,11 @@ export function getDocsPlugin() {
             let resolvedMeta;
 
             // Components declared on the story
-            if (story.component) {
+            if (story?.component) {
               resolvedMeta = story;
             } 
             // Resolved lazy component
-            else if (story.then) {
+            else if (story?.then) {
               const resolvedPromise = await story;
           
               if (resolvedPromise.component) {
@@ -112,7 +112,7 @@ export function getDocsPlugin() {
             const { data } = useQuery(
               key,
               async () => {
-                if (!meta || !story) {
+                if (!meta) {
                   return;
                 }
           
