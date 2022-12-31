@@ -14,6 +14,8 @@ const Root = styled("div", {
   position: "relative",
   flex: 1,
   overflow: "auto",
+  height: "100%",
+  width: "100%",
 });
 
 const StoryDiv = React.memo(({ slug, id }: { slug: string; id: string }) => {
