@@ -46,6 +46,10 @@ const PanelContainer = styled("div", {
   borderTop: "1px solid $gray4",
 });
 
+const TabContent = styled(Tabs.Content, {
+  display: "flex",
+});
+
 const PanelResizer = styled("div", {
   width: "100%",
   borderTop: "1px solid transparent",
@@ -169,7 +173,7 @@ export const Storybook = () => {
                       </Tabs.List>
 
                       {panels.map((Panel) => (
-                        <Tabs.Content
+                        <TabContent
                           key={`content-${Panel.componentName}`}
                           value={Panel.componentName}
                         >
@@ -178,7 +182,7 @@ export const Storybook = () => {
                               <Panel storyPreviewId={id} />
                             </Suspense>
                           </ErrorBoundary>
-                        </Tabs.Content>
+                        </TabContent>
                       ))}
                     </Tabs.Root>
                   </PanelContainer>

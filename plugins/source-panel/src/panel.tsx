@@ -5,6 +5,7 @@ import { StyledMarkdown, styled } from "@fwoosh/components";
 
 const Panel = styled("div", {
   height: "100%",
+  width: "100%",
 
   "& > span": {
     height: "100%",
