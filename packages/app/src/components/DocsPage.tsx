@@ -138,7 +138,7 @@ const DocsPropsTable = ({ story }: { story: Stories[number] }) => {
   );
 };
 
-export const DocsPage = () => {
+const DocsContent = () => {
   const tree = useStoryTree();
   const params = useParams<{ docsPath: string }>();
   const [, name] = params.docsPath?.split("-") || [];
@@ -148,77 +148,87 @@ export const DocsPage = () => {
     }
 
     const path = params.docsPath.split("-");
-    return dlv(tree, path) as Stories[string][];
+    const story = dlv(tree, path) as Stories[string][];
+
+    if (!story) {
+      throw new Error(`Could not find documentation page: ${params.docsPath}`);
+    }
+
+    return story;
   }, [params.docsPath]);
 
   return (
+    <DocsLayout>
+      <PageWrapper>
+        <components.h1 id="intro">{name}</components.h1>
+        {firstStory && (
+          <>
+            {firstStory.comment && (
+              <StyledMarkdown>{firstStory.comment}</StyledMarkdown>
+            )}
+            <StoryDiv slug={firstStory.slug} code={firstStory.code} />
+          </>
+        )}
+        <Suspense fallback={<Spinner style={{ height: 200 }} />}>
+          <DocsPropsTable story={firstStory} />
+        </Suspense>
+        {stories.length > 0 && (
+          <>
+            <components.h2 id="stories">Stories</components.h2>
+            {stories.map((story) => {
+              return (
+                <div key={story.slug}>
+                  <components.h3 id={paramCase(story.title)}>
+                    {story.title}
+                  </components.h3>
+                  {story.comment && (
+                    <StyledMarkdown>{story.comment}</StyledMarkdown>
+                  )}
+                  <StoryDiv slug={story.slug} code={story.code} />
+                  <Suspense fallback={<Spinner style={{ height: 200 }} />}>
+                    <DocsPropsTable story={story} />
+                  </Suspense>
+                </div>
+              );
+            })}
+          </>
+        )}
+      </PageWrapper>
+      <QuickNav>
+        <NavHeader>
+          <NavTitle>Quick nav</NavTitle>
+          <ThemeToggle />
+        </NavHeader>
+        <ul>
+          <a href="#intro">
+            <TitleNavItem>Introduction</TitleNavItem>
+          </a>
+          <a href="#props">
+            <TitleNavItem>Properties</TitleNavItem>
+          </a>
+          <a href="#stories">
+            <TitleNavItem>Stories</TitleNavItem>
+          </a>
+          <NavGroup>
+            {stories.map((story) => {
+              return (
+                <a href={`#${paramCase(story.title)}`}>
+                  <TitleNavItem key={story.slug}>{story.title}</TitleNavItem>
+                </a>
+              );
+            })}
+          </NavGroup>
+        </ul>
+      </QuickNav>
+    </DocsLayout>
+  );
+};
+
+export const DocsPage = () => {
+  return (
     <ErrorBoundary>
       <Suspense fallback={<Spinner />}>
-        <DocsLayout>
-          <PageWrapper>
-            <components.h1 id="intro">{name}</components.h1>
-            {firstStory && (
-              <>
-                {firstStory.comment && (
-                  <StyledMarkdown>{firstStory.comment}</StyledMarkdown>
-                )}
-                <StoryDiv slug={firstStory.slug} code={firstStory.code} />
-              </>
-            )}
-            <Suspense fallback={<Spinner style={{ height: 200 }} />}>
-              <DocsPropsTable story={firstStory} />
-            </Suspense>
-            {stories.length > 0 && (
-              <>
-                <components.h2 id="stories">Stories</components.h2>
-                {stories.map((story) => {
-                  return (
-                    <div key={story.slug}>
-                      <components.h3 id={paramCase(story.title)}>
-                        {story.title}
-                      </components.h3>
-                      {story.comment && (
-                        <StyledMarkdown>{story.comment}</StyledMarkdown>
-                      )}
-                      <StoryDiv slug={story.slug} code={story.code} />
-                      <Suspense fallback={<Spinner style={{ height: 200 }} />}>
-                        <DocsPropsTable story={story} />
-                      </Suspense>
-                    </div>
-                  );
-                })}
-              </>
-            )}
-          </PageWrapper>
-          <QuickNav>
-            <NavHeader>
-              <NavTitle>Quick nav</NavTitle>
-              <ThemeToggle />
-            </NavHeader>
-            <ul>
-              <a href="#intro">
-                <TitleNavItem>Introduction</TitleNavItem>
-              </a>
-              <a href="#props">
-                <TitleNavItem>Properties</TitleNavItem>
-              </a>
-              <a href="#stories">
-                <TitleNavItem>Stories</TitleNavItem>
-              </a>
-              <NavGroup>
-                {stories.map((story) => {
-                  return (
-                    <a href={`#${paramCase(story.title)}`}>
-                      <TitleNavItem key={story.slug}>
-                        {story.title}
-                      </TitleNavItem>
-                    </a>
-                  );
-                })}
-              </NavGroup>
-            </ul>
-          </QuickNav>
-        </DocsLayout>
+        <DocsContent />
       </Suspense>
     </ErrorBoundary>
   );
