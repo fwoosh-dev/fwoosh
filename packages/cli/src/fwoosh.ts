@@ -130,6 +130,7 @@ export class Fwoosh {
           strict: false,
         },
       },
+      assetsInclude: ["**/*.html"],
     };
 
     const vite = await createServer({
