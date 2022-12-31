@@ -230,7 +230,7 @@ export const AppWrapper = styled("div", {
 export const SidebarLayout = styled("div", {
   display: "grid",
   gridTemplateColumns: "280px 1fr",
-  minHeight: "100vh",
+  height: "100vh",
 });
 
 export const Logo = styled("div", {
@@ -240,6 +240,9 @@ export const Logo = styled("div", {
 
 export const Sidebar = styled("div", {
   borderRight: "1px solid $gray4",
+  minHeight: 0,
+  height: "100%",
+  overflow: "auto",
 });
 
 export const SidebarTitle = styled("div", {
