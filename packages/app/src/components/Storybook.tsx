@@ -42,7 +42,7 @@ const StoryWrapper = styled("div", {
 });
 
 const PanelContainer = styled("div", {
-  height: 400,
+  height: "100%",
   borderTop: "1px solid $gray4",
 });
 
