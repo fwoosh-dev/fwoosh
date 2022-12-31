@@ -3,6 +3,7 @@ import docgen from "react-docgen-typescript";
 import ts from "typescript";
 
 interface ReactPluginOptions {
+  tsconfig?: string;
   docgenOptions: docgen.ParserOptions;
 }
 
@@ -21,6 +22,23 @@ export default class ReactPlugin implements Plugin {
       module: ts.ModuleKind.CommonJS,
       target: ts.ScriptTarget.Latest,
     };
+
+    if (this.options.tsconfig) {
+      const configFile = ts.readConfigFile(
+        this.options.tsconfig,
+        ts.sys.readFile
+      );
+      const userCompilerOptions = ts.parseJsonConfigFileContent(
+        configFile.config,
+        ts.sys,
+        "./"
+      );
+
+      compilerOptions = {
+        ...compilerOptions,
+        ...userCompilerOptions.options,
+      };
+    }
 
     const docGenParser = docgen.withCompilerOptions(
       compilerOptions,
