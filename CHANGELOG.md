@@ -1,3 +1,16 @@
+# v0.0.41 (Sat Dec 31 2022)
+
+#### ⚠️ Pushed to `main`
+
+- `fwoosh`
+  - remove parsed entirely ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.40 (Sat Dec 31 2022)
 
 #### ⚠️ Pushed to `main`
