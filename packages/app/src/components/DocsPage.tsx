@@ -1,6 +1,8 @@
 import React, { Suspense } from "react";
 import { useParams } from "react-router-dom";
 import dlv from "dlv";
+import equal from "fast-deep-equal/react";
+import type { ComponentDoc } from "react-docgen-typescript";
 import { useId } from "@radix-ui/react-id";
 import { Stories } from "@fwoosh/app/stories";
 import { useDocs } from "@fwoosh/app/docs";
@@ -126,9 +128,19 @@ const StoryDiv = React.memo(
   }
 );
 
-const DocsPropsTable = ({ story }: { story: Stories[number] }) => {
+const DocsPropsTable = ({
+  story,
+  firstStoryDocs,
+}: {
+  story: Stories[number];
+  firstStoryDocs: ComponentDoc[] | undefined;
+}) => {
   const key = story?.slug || "none";
   const docs = useDocs(key, story?.component?._payload?._result, story?.meta);
+
+  if (equal(docs, firstStoryDocs)) {
+    return null;
+  }
 
   return (
     <div style={{ height: "fit-content" }}>
@@ -155,6 +167,11 @@ const DocsContent = () => {
 
     return story;
   }, [params.docsPath]);
+  const firstStoryDocs = useDocs(
+    firstStory.slug,
+    firstStory.component?._payload?._result,
+    firstStory.meta
+  );
 
   return (
     <DocsLayout>
@@ -169,7 +186,7 @@ const DocsContent = () => {
           </>
         )}
         <Suspense fallback={<Spinner style={{ height: 200 }} />}>
-          <DocsPropsTable story={firstStory} />
+          <DocsPropsTable story={firstStory} firstStoryDocs={[]} />
         </Suspense>
         {stories.length > 0 && (
           <>
@@ -184,8 +201,13 @@ const DocsContent = () => {
                     <StyledMarkdown>{story.comment}</StyledMarkdown>
                   )}
                   <StoryDiv slug={story.slug} code={story.code} />
-                  <Suspense fallback={<Spinner style={{ height: 200 }} />}>
-                    <DocsPropsTable story={story} />
+                  <Suspense
+                    fallback={<Spinner style={{ height: 200 }} delay={2000} />}
+                  >
+                    <DocsPropsTable
+                      story={story}
+                      firstStoryDocs={firstStoryDocs}
+                    />
                   </Suspense>
                 </div>
               );
