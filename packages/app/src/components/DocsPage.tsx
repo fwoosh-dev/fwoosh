@@ -15,10 +15,14 @@ import {
   StyledMarkdown,
 } from "@fwoosh/components";
 import * as Collapsible from "@radix-ui/react-collapsible";
-import { paramCase } from "change-case";
+import { paramCase, headerCase } from "change-case";
 
 import ErrorBoundary from "./ErrorBoundary";
-import { useStoryTree } from "../hooks/useStoryTree";
+import {
+  getStoryGroup,
+  StoryTreeItem,
+  useStoryTree,
+} from "../hooks/useStoryTree";
 import * as styles from "./DocsPage.module.css";
 import { ThemeToggle } from "./ThemeToggle";
 import { useRender } from "../hooks/useRender";
@@ -152,20 +156,23 @@ const DocsPropsTable = ({
 const DocsContent = () => {
   const tree = useStoryTree();
   const params = useParams<{ docsPath: string }>();
-  const [, name] = params.docsPath?.split("-") || [];
+  const [, ...nameParts] = params.docsPath?.split("-") || [];
+  const name = nameParts.map((p) => headerCase(p)).join(" ");
   const [firstStory, ...stories] = React.useMemo(() => {
     if (!params.docsPath) {
       return [];
     }
 
     const path = params.docsPath.split("-");
-    const story = dlv(tree, path) as Stories[string][];
+    const story = getStoryGroup(tree, path);
 
     if (!story) {
       throw new Error(`Could not find documentation page: ${params.docsPath}`);
     }
 
-    return story;
+    return story
+      .filter((s): s is StoryTreeItem => "story" in s)
+      .map((s) => s.story);
   }, [params.docsPath]);
   const firstStoryDocs = useDocs(
     firstStory.slug,

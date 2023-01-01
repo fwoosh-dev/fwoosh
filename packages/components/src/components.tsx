@@ -227,62 +227,13 @@ export const AppWrapper = styled("div", {
   minHeight: "100vh",
 });
 
-export const SidebarLayout = styled("div", {
-  display: "grid",
-  gridTemplateColumns: "280px 1fr",
-  height: "100vh",
-});
-
 export const Logo = styled("div", {
   px: 12,
   py: 6,
 });
 
-export const Sidebar = styled("div", {
-  borderRight: "1px solid $gray4",
-  minHeight: 0,
-  height: "100%",
-  overflow: "auto",
-});
-
-export const SidebarTitle = styled("div", {
-  text: "2xl",
-  fontWeight: 400,
-  color: "$gray11",
-  flex: 1,
-});
-
-export const SidebarSectionTitle = styled("div", {
-  height: "$8",
-  fontWeight: 500,
-  color: "$gray11",
-  px: 2,
-  display: "flex",
-  alignItems: "center",
-  mt: 2,
-});
-
-export const SidebarItems = styled("ul");
-
-export const SidebarItem = styled("li", {
-  height: "$10",
-  px: 2,
-  display: "flex",
-  alignItems: "center",
-  color: "$gray10",
-
-  "&:hover": {
-    backgroundColor: "$gray2",
-  },
-
-  '&[aria-selected="true"]': {
-    backgroundColor: "$gray4",
-    color: "$gray11",
-  },
-});
-
 export const Content = styled("div", {
-  maxHeight: "100vh",
+  height: "100%",
   overflowY: "auto",
 });
 
@@ -311,16 +262,6 @@ export const IconButton = styled("button", {
   "&:active": {
     background: "$gray5",
   },
-});
-
-export const SidebarHeader = styled("div", {
-  height: "$10",
-  display: "flex",
-  alignItems: "center",
-  gap: 8,
-  px: 2,
-  my: 4,
-  py: 2,
 });
 
 export const components = {

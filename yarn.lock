@@ -389,6 +389,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.9.2":
+  version: 7.20.7
+  resolution: "@babel/runtime@npm:7.20.7"
+  dependencies:
+    regenerator-runtime: ^0.13.11
+  checksum: 4629ce5c46f06cca9cfb9b7fc00d48003335a809888e2b91ec2069a2dcfbfef738480cff32ba81e0b7c290f8918e5c22ddcf2b710001464ee84ba62c7e32a3a3
+  languageName: node
+  linkType: hard
+
 "@babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.6.2, @babel/runtime@npm:^7.7.2":
   version: 7.17.8
   resolution: "@babel/runtime@npm:7.17.8"
@@ -740,11 +749,13 @@ __metadata:
     fast-deep-equal: ^3.1.3
     inter-ui: ^3.19.3
     react: ^17.0.1
+    react-arborist: ^2.1.1
     react-dom: ^17.0.1
     react-feather: ^2.0.9
     react-query: ^3.34.19
     react-resizable-panels: ^0.0.23
     react-router-dom: ^6.6.1
+    react-use-measure: ^2.1.1
   peerDependencies:
     react: ^16.8 || ^17.0
     react-dom: ^16.8 || ^17.0
@@ -2687,6 +2698,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-dnd/asap@npm:^4.0.0":
+  version: 4.0.1
+  resolution: "@react-dnd/asap@npm:4.0.1"
+  checksum: 757db3b5c436a95383b74f187f503321092909401ce9665d9cc1999308a44de22809bf8dbe82c9126bd73b72dd6665bbc4a788e864fc3c243c59f65057a4f87f
+  languageName: node
+  linkType: hard
+
+"@react-dnd/invariant@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@react-dnd/invariant@npm:2.0.0"
+  checksum: ef1e989920d70b15c80dccb01af9b598081d76993311aa22d2e9a3ec41d10a88540eeec4b4de7a8b2a2ea52dfc3495ab45e39192c2d27795a9258bd6b79d000e
+  languageName: node
+  linkType: hard
+
+"@react-dnd/shallowequal@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@react-dnd/shallowequal@npm:2.0.0"
+  checksum: b5bbdc795d65945bb7ba2322bed5cf8d4c6fe91dced98c3b10e3d16822c438f558751135ff296f8d1aa1eaa9d0037dacab2b522ca5eb812175123b9996966dcb
+  languageName: node
+  linkType: hard
+
 "@remix-run/router@npm:1.2.1":
   version: 1.2.1
   resolution: "@remix-run/router@npm:1.2.1"
@@ -4504,6 +4536,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"debounce@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "debounce@npm:1.2.1"
+  checksum: 682a89506d9e54fb109526f4da255c5546102fbb8e3ae75eef3b04effaf5d4853756aee97475cd4650641869794e44f410eeb20ace2b18ea592287ab2038519e
+  languageName: node
+  linkType: hard
+
 "debug@npm:2.6.9":
   version: 2.6.9
   resolution: "debug@npm:2.6.9"
@@ -4716,6 +4755,17 @@ __metadata:
   version: 1.1.3
   resolution: "dlv@npm:1.1.3"
   checksum: d7381bca22ed11933a1ccf376db7a94bee2c57aa61e490f680124fa2d1cd27e94eba641d9f45be57caab4f9a6579de0983466f620a2cd6230d7ec93312105ae7
+  languageName: node
+  linkType: hard
+
+"dnd-core@npm:14.0.1":
+  version: 14.0.1
+  resolution: "dnd-core@npm:14.0.1"
+  dependencies:
+    "@react-dnd/asap": ^4.0.0
+    "@react-dnd/invariant": ^2.0.0
+    redux: ^4.1.1
+  checksum: dbc50727f53baad1cb1e0430a2a1b81c5c291389322f90fdc46edeb2fd49cc206ce4fa30a95afb53d88238945228e34866d7465f7ea49285c296baf883551301
   languageName: node
   linkType: hard
 
@@ -6077,6 +6127,15 @@ __metadata:
     capital-case: ^1.0.4
     tslib: ^2.0.3
   checksum: 571c83eeb25e8130d172218712f807c0b96d62b020981400bccc1503a7cf14b09b8b10498a962d2739eccf231d950e3848ba7d420b58a6acd2f9283439546cd9
+  languageName: node
+  linkType: hard
+
+"hoist-non-react-statics@npm:^3.3.2":
+  version: 3.3.2
+  resolution: "hoist-non-react-statics@npm:3.3.2"
+  dependencies:
+    react-is: ^16.7.0
+  checksum: b1538270429b13901ee586aa44f4cc3ecd8831c061d06cb8322e50ea17b3f5ce4d0e2e66394761e6c8e152cd8c34fb3b4b690116c6ce2bd45b18c746516cb9e8
   languageName: node
   linkType: hard
 
@@ -7467,6 +7526,13 @@ __metadata:
   version: 0.3.0
   resolution: "media-typer@npm:0.3.0"
   checksum: af1b38516c28ec95d6b0826f6c8f276c58aec391f76be42aa07646b4e39d317723e869700933ca6995b056db4b09a78c92d5440dc23657e6764be5d28874bba1
+  languageName: node
+  linkType: hard
+
+"memoize-one@npm:>=3.1.1 <6":
+  version: 5.2.1
+  resolution: "memoize-one@npm:5.2.1"
+  checksum: a3cba7b824ebcf24cdfcd234aa7f86f3ad6394b8d9be4c96ff756dafb8b51c7f71320785fbc2304f1af48a0467cbbd2a409efc9333025700ed523f254cb52e3d
   languageName: node
   linkType: hard
 
@@ -9400,6 +9466,56 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-arborist@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "react-arborist@npm:2.1.1"
+  dependencies:
+    react-dnd: ^14.0.3
+    react-dnd-html5-backend: ^14.0.1
+    react-window: ^1.8.6
+    redux: ^4.1.1
+    use-sync-external-store: ^1.2.0
+  peerDependencies:
+    react: ">= 16.14"
+    react-dom: ">= 16.14"
+  checksum: 3806eea09594127d3a43d80f08119b2b51a8a14c7891398564c2e80b9d69e5e880a05b1766d2e92766fc5d5e06a1b241d8492375257bbf77c35cefa176914ebc
+  languageName: node
+  linkType: hard
+
+"react-dnd-html5-backend@npm:^14.0.1":
+  version: 14.1.0
+  resolution: "react-dnd-html5-backend@npm:14.1.0"
+  dependencies:
+    dnd-core: 14.0.1
+  checksum: 6aa8d62c6b2288893b3f216d476d2f84495b40d33578ba9e3a5051dc093a71dc59700e6927ed7ac596ff8d7aa3b3f29404f7d173f844bd6144ed633403dd8e96
+  languageName: node
+  linkType: hard
+
+"react-dnd@npm:^14.0.3":
+  version: 14.0.5
+  resolution: "react-dnd@npm:14.0.5"
+  dependencies:
+    "@react-dnd/invariant": ^2.0.0
+    "@react-dnd/shallowequal": ^2.0.0
+    dnd-core: 14.0.1
+    fast-deep-equal: ^3.1.3
+    hoist-non-react-statics: ^3.3.2
+  peerDependencies:
+    "@types/hoist-non-react-statics": ">= 3.3.1"
+    "@types/node": ">= 12"
+    "@types/react": ">= 16"
+    react: ">= 16.14"
+  peerDependenciesMeta:
+    "@types/hoist-non-react-statics":
+      optional: true
+    "@types/node":
+      optional: true
+    "@types/react":
+      optional: true
+  checksum: 464e231de8c2b79546049a1600b67b1df0b7f762f23c688d3e9aeddbf334b1e64931ef91d0129df3c8be255f0af76e89426729dbcbefe4bdc09b0f665d2da368
+  languageName: node
+  linkType: hard
+
 "react-docgen-typescript@npm:^2.2.2":
   version: 2.2.2
   resolution: "react-docgen-typescript@npm:2.2.2"
@@ -9433,7 +9549,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-is@npm:^16.13.1":
+"react-is@npm:^16.13.1, react-is@npm:^16.7.0":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: f7a19ac3496de32ca9ae12aa030f00f14a3d45374f1ceca0af707c831b2a6098ef0d6bdae51bd437b0a306d7f01d4677fcc8de7c0d331eb47ad0f46130e53c5f
@@ -9503,6 +9619,31 @@ __metadata:
   peerDependencies:
     react: ">=16.8"
   checksum: 58f0ad29123e2854d547915a1ae1cc2687504e396d71db50fe8f36ad733d7940a2914d45868a8478b6138536e119fa5e3303212b7c7b1d81d80cd5b0bbefdfa2
+  languageName: node
+  linkType: hard
+
+"react-use-measure@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "react-use-measure@npm:2.1.1"
+  dependencies:
+    debounce: ^1.2.1
+  peerDependencies:
+    react: ">=16.13"
+    react-dom: ">=16.13"
+  checksum: b8e8939229d463c3c505f7b617925c0228efae0cd6f651371f463846417b06c9170be57df51293a61027c41770f8a090fdb8a08717c4e36290ccb496e0318f1f
+  languageName: node
+  linkType: hard
+
+"react-window@npm:^1.8.6":
+  version: 1.8.8
+  resolution: "react-window@npm:1.8.8"
+  dependencies:
+    "@babel/runtime": ^7.0.0
+    memoize-one: ">=3.1.1 <6"
+  peerDependencies:
+    react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+  checksum: a19f43b9015fb84e16db983617dac618a8b298881d2ca96ffc2fb00534afd958ee57a00fd0017733b56f8c34dd84e5be59337877aed3c66329ed3b84e8d018ba
   languageName: node
   linkType: hard
 
@@ -9659,6 +9800,22 @@ __metadata:
   version: 2.0.0
   resolution: "reduce-flatten@npm:2.0.0"
   checksum: 64393ef99a16b20692acfd60982d7fdbd7ff8d9f8f185c6023466444c6dd2abb929d67717a83cec7f7f8fb5f46a25d515b3b2bf2238fdbfcdbfd01d2a9e73cb8
+  languageName: node
+  linkType: hard
+
+"redux@npm:^4.1.1":
+  version: 4.2.0
+  resolution: "redux@npm:4.2.0"
+  dependencies:
+    "@babel/runtime": ^7.9.2
+  checksum: 75f3955c89b3f18edf5411e5fb482aa2e4f41a416183e8802a6bf6472c4fc3d47675b8b321d147f8af8e0f616436ac507bf5a25f1c4d6180e797b549c7db2c1d
+  languageName: node
+  linkType: hard
+
+"regenerator-runtime@npm:^0.13.11":
+  version: 0.13.11
+  resolution: "regenerator-runtime@npm:0.13.11"
+  checksum: 27481628d22a1c4e3ff551096a683b424242a216fee44685467307f14d58020af1e19660bf2e26064de946bad7eff28950eae9f8209d55723e2d9351e632bbb4
   languageName: node
   linkType: hard
 
@@ -11259,6 +11416,15 @@ __metadata:
   version: 4.0.1
   resolution: "url-join@npm:4.0.1"
   checksum: f74e868bf25dbc8be6a8d7237d4c36bb5b6c62c72e594d5ab1347fe91d6af7ccd9eb5d621e30152e4da45c2e9a26bec21390e911ab54a62d4d82e76028374ee5
+  languageName: node
+  linkType: hard
+
+"use-sync-external-store@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "use-sync-external-store@npm:1.2.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 5c639e0f8da3521d605f59ce5be9e094ca772bd44a4ce7322b055a6f58eeed8dda3c94cabd90c7a41fb6fa852210092008afe48f7038792fd47501f33299116a
   languageName: node
   linkType: hard
 

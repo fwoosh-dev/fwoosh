@@ -12,6 +12,7 @@ import { config } from "@fwoosh/app/config";
 import React from "react";
 import { Outlet, Link, useParams } from "react-router-dom";
 import { StoryTree, useStoryTree } from "../hooks/useStoryTree";
+import { DocsSidebarTree } from "./sidebar/DocsSidebarTree";
 
 interface TreeItemProps {
   tree: StoryTree;
@@ -49,8 +50,6 @@ const TreeItem = ({ tree, path = [] }: TreeItemProps) => {
 };
 
 export const Docs = () => {
-  const tree = useStoryTree();
-
   return (
     <SidebarLayout>
       <Sidebar>
@@ -58,7 +57,7 @@ export const Docs = () => {
           <SidebarTitle>{config.title}</SidebarTitle>
         </SidebarHeader>
         <SidebarItems>
-          <TreeItem tree={tree} />
+          <DocsSidebarTree />
         </SidebarItems>
       </Sidebar>
       <Content>

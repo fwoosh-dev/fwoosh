@@ -6,6 +6,7 @@ import { PropsTable, styled } from "@fwoosh/components";
 
 const Wrapper = styled("div", {
   px: 4,
+  width: "100%",
 });
 
 export default function PropsPanel() {
