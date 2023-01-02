@@ -19,6 +19,7 @@ import {
   ColorModeContext,
   components,
   getInitialColorMode,
+  Spinner,
 } from "@fwoosh/components";
 import { getFirstStory, useStoryTree } from "./hooks/useStoryTree";
 
@@ -58,7 +59,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <FirstDocsPage />,
+        element: (
+          <React.Suspense fallback={<Spinner delay={2000} />}>
+            <FirstDocsPage />
+          </React.Suspense>
+        ),
       },
       {
         path: "story/:storyId",
@@ -70,7 +75,11 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <FirstStory />,
+            element: (
+              <React.Suspense fallback={<Spinner delay={2000} />}>
+                <FirstStory />
+              </React.Suspense>
+            ),
           },
           {
             path: ":storyId",
@@ -84,7 +93,11 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <FirstDocsPage />,
+            element: (
+              <React.Suspense fallback={<Spinner delay={2000} />}>
+                <FirstDocsPage />
+              </React.Suspense>
+            ),
           },
           {
             path: ":docsPath",

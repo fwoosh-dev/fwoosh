@@ -1,32 +1,12 @@
 import React from "react";
+import { stories, StoryData } from "@fwoosh/app/stories";
 import {
-  BasicStoryData,
-  MDXStoryData,
-  stories,
-  StoryData,
-} from "@fwoosh/app/stories";
-
-export interface StoryTreeItem {
-  story: BasicStoryData;
-  id: string;
-  name: string;
-}
-
-export interface MDXPageTreeItem {
-  mdxFile: MDXStoryData;
-  id: string;
-  name: string;
-}
-
-export type StorySidebarChildItem = StoryTree | StoryTreeItem | MDXPageTreeItem;
-
-export interface StoryTree {
-  name: string;
-  id: string;
-  children: StorySidebarChildItem[];
-}
-
-export type StorySidebarItem = StoryTree | MDXPageTreeItem;
+  StorySidebarChildItem,
+  StorySidebarItem,
+  StoryTree,
+} from "@fwoosh/app/ui";
+import { useQuery } from "react-query";
+import { matchTreeSortingOrder } from "@fwoosh/utils";
 
 interface UseStoryTreeOptions {
   includeStories?: boolean;
@@ -35,18 +15,16 @@ interface UseStoryTreeOptions {
 export const useStoryTree = ({
   includeStories = true,
 }: UseStoryTreeOptions = {}) => {
-  return React.useMemo(() => {
-    const treeData: StorySidebarItem[] = [];
-
-    console.log({ stories });
+  const tree = React.useMemo(() => {
+    const treeData: StorySidebarChildItem[] = [];
 
     Object.values(stories).forEach((story) => {
       const { grouping } = story;
       const levels = grouping.split("/");
-      let currentItem: StorySidebarItem | undefined;
+      let currentItem: StorySidebarChildItem | undefined;
 
       for (const [index, level] of levels.entries()) {
-        // Set up the root item
+        // Set up the root level
         if (!currentItem) {
           currentItem = treeData.find((item) => item.name === level);
 
@@ -86,36 +64,51 @@ export const useStoryTree = ({
           }
 
           // Push the story as a leaf
-          if (includeStories && index === levels.length - 1 && currentItem) {
+          if (index === levels.length - 1 && currentItem) {
             const folderIndex = currentItem.children.findIndex(
               (i) => "children" in i
             );
             const insertIndex =
               folderIndex > -1 ? folderIndex : currentItem.children.length;
 
-            currentItem.children.splice(
-              insertIndex,
-              0,
-              "code" in story
-                ? {
-                    name: story.title,
-                    story,
-                    id: story.slug,
-                  }
-                : {
-                    name: story.title,
-                    mdxFile: story.mdxFile,
-                    id: story.slug,
-                  }
-            );
+            if ("code" in story) {
+              if (includeStories) {
+                currentItem.children.splice(insertIndex, 0, {
+                  name: story.title,
+                  story,
+                  id: story.slug,
+                });
+              }
+            } else {
+              currentItem.children.splice(insertIndex, 0, {
+                name: story.title,
+                mdxFile: story.mdxFile,
+                id: story.slug,
+              });
+            }
           }
         }
       }
     });
 
-    console.log({ treeData });
     return treeData;
   }, [includeStories]);
+
+  const { data = [] } = useQuery(["storyTree", tree], async () => {
+    const res = await fetch("/sort", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(tree),
+    });
+    const data = await res.json();
+
+    return matchTreeSortingOrder(tree, data);
+  });
+
+  return data;
 };
 
 export const getFirstStory = (tree: StorySidebarChildItem[]): StoryData => {
@@ -132,10 +125,12 @@ export const getFirstStory = (tree: StorySidebarChildItem[]): StoryData => {
   return getFirstStory(tree.slice(1));
 };
 
-export const getStoryGroup = (tree: StorySidebarItem[], path: string[]) => {
-  let currentItem: StorySidebarItem | undefined;
+export const getStoryGroup = (
+  tree: StorySidebarChildItem[],
+  path: string[]
+) => {
+  let currentItem: StorySidebarChildItem | undefined;
 
-  console.log({ tree, path });
   for (const part of path) {
     if (!currentItem) {
       currentItem = tree.find((item) => item.name === part);
@@ -152,10 +147,6 @@ export const getStoryGroup = (tree: StorySidebarItem[], path: string[]) => {
       }
     }
   }
-
-  console.log({
-    currentItem,
-  });
 
   return !currentItem
     ? undefined

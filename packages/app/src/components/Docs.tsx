@@ -8,11 +8,13 @@ import {
   HeaderTitle,
   SidebarSectionTitle,
   styled,
+  Spinner,
 } from "@fwoosh/components";
 import { config } from "@fwoosh/app/config";
 import React from "react";
 import { Outlet, Link, useParams } from "react-router-dom";
-import { StoryTree } from "../hooks/useStoryTree";
+import { StoryTree } from "@fwoosh/app/ui";
+
 import { DocsSidebarTree } from "./sidebar/DocsSidebarTree";
 import { ThemeToggle } from "./ThemeToggle";
 import { CONTENT_ID } from "../constants";
@@ -67,7 +69,9 @@ export const Docs = () => {
       <SidebarLayout>
         <Sidebar>
           <SidebarItems>
-            <DocsSidebarTree />
+            <React.Suspense fallback={<Spinner delay={2000} />}>
+              <DocsSidebarTree />
+            </React.Suspense>
           </SidebarItems>
         </Sidebar>
         <Content id={CONTENT_ID}>

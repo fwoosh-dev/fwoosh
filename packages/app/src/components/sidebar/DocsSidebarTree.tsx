@@ -9,12 +9,13 @@ import {
 } from "@fwoosh/components";
 import { NavLink, useParams } from "react-router-dom";
 import { stories } from "@fwoosh/app/stories";
+import { StorySidebarChildItem } from "@fwoosh/app/ui";
 
-import { useStoryTree, StorySidebarItem } from "../../hooks/useStoryTree";
+import { useStoryTree } from "../../hooks/useStoryTree";
 import { SidebarFolderOpenIndicatorWrapper } from "@fwoosh/components/src";
 import { resetContentScrollPosition, SidebarTree } from "./SidebarTree";
 
-function Node({ node, style }: NodeRendererProps<StorySidebarItem>) {
+function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
   const isValidPath = React.useMemo(() => {
     return Object.values(stories).some(
       (story) => story.grouping.replace(/\//g, "-") === node.data.id

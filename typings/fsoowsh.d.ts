@@ -60,4 +60,31 @@ declare module "@fwoosh/app/ui" {
 
   export const toolbarControls: Array<ToolbarPlugin>;
   export const panels: Array<PanelPlugin>;
+
+  import { BasicStoryData, MDXStoryData } from "@fwoosh/app/stories";
+
+  export interface StoryTreeItem {
+    story: BasicStoryData;
+    id: string;
+    name: string;
+  }
+
+  export interface MDXPageTreeItem {
+    mdxFile: MDXStoryData;
+    id: string;
+    name: string;
+  }
+
+  export type StorySidebarChildItem =
+    | StoryTree
+    | StoryTreeItem
+    | MDXPageTreeItem;
+
+  export interface StoryTree {
+    name: string;
+    id: string;
+    children: StorySidebarChildItem[];
+  }
+
+  export type StorySidebarItem = StoryTree | MDXPageTreeItem;
 }

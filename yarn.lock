@@ -882,6 +882,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@fwoosh/utils@workspace:packages/utils":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/utils@workspace:packages/utils"
+  languageName: unknown
+  linkType: soft
+
 "@fwoosh/zoom@workspace:plugins/zoom":
   version: 0.0.0-use.local
   resolution: "@fwoosh/zoom@workspace:plugins/zoom"

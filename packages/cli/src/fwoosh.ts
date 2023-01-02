@@ -7,6 +7,8 @@ import { createRequire } from "module";
 import { SyncBailHook, SyncWaterfallHook } from "tapable";
 import mdx from "@mdx-js/rollup";
 import remarkFrontmatter from "remark-frontmatter";
+import { sortTree } from "@fwoosh/utils";
+import bodyParser from "body-parser";
 
 import type { FwooshHooks, FwooshOptions } from "./types";
 import { storyListPlugin } from "./utils/story-list-plugin.js";
@@ -31,6 +33,7 @@ export class Fwoosh {
   constructor(options: FwooshOptions) {
     this.options = {
       modifyViteConfig: (config) => config,
+      sortSidebarItems: () => 0,
       ...options,
     };
     this.hooks = {
@@ -161,6 +164,14 @@ export class Fwoosh {
       const docs = this.hooks.generateDocs.call(file);
 
       res.json(docs);
+    });
+
+    app.use(express.json({ limit: "50mb" }));
+    app.use(express.urlencoded({ limit: "50mb" }));
+    app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(bodyParser.json());
+    app.post("/sort", async (req, res) => {
+      res.json(sortTree(req.body, this.options.sortSidebarItems));
     });
 
     app.use(vite.middlewares);

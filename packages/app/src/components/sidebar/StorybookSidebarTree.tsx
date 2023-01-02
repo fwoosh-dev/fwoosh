@@ -9,16 +9,12 @@ import {
   SIDEBAR_ITEM_INDENT,
 } from "@fwoosh/components";
 import { NavLink, useParams } from "react-router-dom";
+import { StorySidebarChildItem, StoryTreeItem } from "@fwoosh/app/ui";
 
-import {
-  useStoryTree,
-  StoryTreeItem,
-  hasActiveChild,
-  StorySidebarItem,
-} from "../../hooks/useStoryTree";
+import { useStoryTree, hasActiveChild } from "../../hooks/useStoryTree";
 import { resetContentScrollPosition, SidebarTree } from "./SidebarTree";
 
-function Node({ node, style }: NodeRendererProps<StorySidebarItem>) {
+function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
   const finalStyle = {
     ...style,
     paddingLeft: (style.paddingLeft as number) + SIDEBAR_ITEM_INDENT,

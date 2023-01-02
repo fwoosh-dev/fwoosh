@@ -1,7 +1,9 @@
 import { SyncBailHook, SyncWaterfallHook } from "tapable";
 import type { ComponentDoc } from "react-docgen-typescript";
-import { Plugin } from "./fwoosh";
 import { InlineConfig } from "vite";
+import { StorySidebarChildItem } from "@fwoosh/app/ui";
+
+import { Plugin } from "./fwoosh";
 
 export interface StoryMeta {
   /** The title used to create the sidebar tree structure. */
@@ -46,4 +48,9 @@ export interface FwooshOptions {
   >;
   /** Modify the Vite configuration used to load your fwoosh instance. */
   modifyViteConfig?: (config: ViteConfig) => Promise<ViteConfig> | ViteConfig;
+  /** Modify the sorting of items in the sidebar */
+  sortSidebarItems?: (
+    a: StorySidebarChildItem,
+    b: StorySidebarChildItem
+  ) => number;
 }

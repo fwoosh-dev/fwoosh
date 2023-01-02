@@ -1,0 +1,12 @@
+{
+  "name": "@fwoosh/utils",
+  "type": "module",
+  "version": "0.0.50",
+  "author": "Andrew Lisowski <lisowski54@gmail.com>",
+  "repository": "hipstersmoothie/fwoosh",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  }
+}

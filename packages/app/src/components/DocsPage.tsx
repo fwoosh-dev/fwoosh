@@ -16,14 +16,10 @@ import {
 import * as Collapsible from "@radix-ui/react-collapsible";
 import { paramCase, headerCase } from "change-case";
 import { stories } from "@fwoosh/app/stories";
+import { StorySidebarChildItem, StoryTreeItem } from "@fwoosh/app/ui";
 
 import ErrorBoundary from "./ErrorBoundary";
-import {
-  getStoryGroup,
-  StorySidebarChildItem,
-  useStoryTree,
-  StoryTreeItem,
-} from "../hooks/useStoryTree";
+import { getStoryGroup, useStoryTree } from "../hooks/useStoryTree";
 import * as styles from "./DocsPage.module.css";
 import { useRender } from "../hooks/useRender";
 import { MDXProvider } from "@mdx-js/react";

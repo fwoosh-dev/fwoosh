@@ -21,7 +21,6 @@ type StoryWithGrouping = Story & { grouping: string };
 function createVirtualFile(config: FwooshFileDescriptor[]) {
   const allFiles = config.flatMap<MDXFileDescriptor | StoryWithGrouping>(
     (file) => {
-      console.log({ file });
       return "stories" in file
         ? file.stories.map((s) => ({
             ...s,
@@ -108,7 +107,7 @@ export function storyListPlugin(config: FwooshOptions) {
           const stories = await getStories(config);
           return createVirtualFile(stories);
         } catch (e) {
-          console.log(e);
+          console.error(e);
           return defaultListModule;
         }
       }
