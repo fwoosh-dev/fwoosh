@@ -154,7 +154,13 @@ export async function getStories({ stories, outDir }: FwooshOptions) {
           "value" in e.declaration.declarations[0].id &&
           e.declaration.declarations[0].id.value === "meta"
       );
-      const meta = (metaDeclaration as any).declaration.declarations[0].init.properties.reduce(
+      const defaultExport = ast.body.find(
+        (node) => node.type === "ExportDefaultExpression"
+      );
+      const metaObject = metaDeclaration
+        ? (metaDeclaration as any).declaration.declarations[0].init
+        : (defaultExport as any).expression;
+      const meta = metaObject.properties.reduce(
         (acc: Record<string, unknown>, property: Record<string, any>) => ({
           ...acc,
           [property.key.value]:
