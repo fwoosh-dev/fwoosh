@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  Outlet,
+  RouterProvider,
+} from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 import { Story } from "./components/Story";
@@ -39,6 +44,55 @@ const FirstStory = () => {
   return <Navigate to={"/storybook/" + getFirstStory(tree).slug} />;
 };
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: (
+      <AppWrapper>
+        <Outlet />
+      </AppWrapper>
+    ),
+    children: [
+      {
+        index: true,
+        element: <FirstDocsPage />,
+      },
+      {
+        path: "story/:storyId",
+        element: <Story />,
+      },
+      {
+        path: "storybook",
+        element: <Storybook />,
+        children: [
+          {
+            index: true,
+            element: <FirstStory />,
+          },
+          {
+            path: ":storyId",
+            element: <Story />,
+          },
+        ],
+      },
+      {
+        path: "docs",
+        element: <Docs />,
+        children: [
+          {
+            index: true,
+            element: <FirstDocsPage />,
+          },
+          {
+            path: ":docsPath",
+            element: <DocsPage />,
+          },
+        ],
+      },
+    ],
+  },
+]);
+
 export const App = () => {
   const [colorMode, colorModeSet] = React.useState<ColorMode | undefined>();
 
@@ -55,24 +109,7 @@ export const App = () => {
       <QueryClientProvider client={queryClient}>
         <ColorModeContext.Provider value={colorMode}>
           <AppWrapper>
-            <BrowserRouter>
-              <Routes>
-                <Route path="/">
-                  <Route index element={<FirstDocsPage />} />
-                  <Route path="story">
-                    <Route path=":storyId" element={<Story />} />
-                  </Route>
-                  <Route path="storybook" element={<Storybook />}>
-                    <Route index element={<FirstStory />} />
-                    <Route path=":storyId" element={<Story />} />
-                  </Route>
-                  <Route path="docs" element={<Docs />}>
-                    <Route index element={<FirstDocsPage />} />
-                    <Route path=":docsPath" element={<DocsPage />} />
-                  </Route>
-                </Route>
-              </Routes>
-            </BrowserRouter>
+            <RouterProvider router={router} />
           </AppWrapper>
         </ColorModeContext.Provider>
       </QueryClientProvider>
