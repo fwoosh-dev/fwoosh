@@ -30,7 +30,7 @@ export class Fwoosh {
 
   constructor(options: FwooshOptions) {
     this.options = {
-      config: (config) => config,
+      modifyViteConfig: (config) => config,
       ...options,
     };
     this.hooks = {
@@ -148,7 +148,7 @@ export class Fwoosh {
     const vite = await createServer({
       mode: "development",
       root: path.dirname(path.dirname(require.resolve("@fwoosh/app"))),
-      ...(await this.options.config(baseConfig)),
+      ...(await this.options.modifyViteConfig(baseConfig)),
     });
 
     app.head("*", async (_, res) => res.sendStatus(200));

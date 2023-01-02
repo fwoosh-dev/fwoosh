@@ -45,5 +45,5 @@ export interface FwooshOptions {
     string | [name: string, options: Record<string, unknown>] | Plugin
   >;
   /** Modify the Vite configuration used to load your fwoosh instance. */
-  config?: (config: ViteConfig) => Promise<ViteConfig> | ViteConfig;
+  modifyViteConfig?: (config: ViteConfig) => Promise<ViteConfig> | ViteConfig;
 }
