@@ -17,7 +17,7 @@ export default function DescriptionPanel() {
   const params = useParams<{ storyId: string }>();
   const story = Object.values(stories).find((s) => s.slug === params.storyId);
 
-  if (!story?.comment) {
+  if (!story || !("comment" in story) || !story.comment) {
     return (
       <Panel>
         <NoDescriptionMessage>

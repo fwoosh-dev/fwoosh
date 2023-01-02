@@ -25,7 +25,7 @@ export default function SourcePanel() {
   const params = useParams<{ storyId: string }>();
   const story = Object.values(stories).find((s) => s.slug === params.storyId);
 
-  if (!story?.code) {
+  if (!story || !("code" in story) || !story.code) {
     return null;
   }
 

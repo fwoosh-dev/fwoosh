@@ -12,7 +12,7 @@ export interface StoryMeta {
 
 export interface ResolvedStoryMeta extends StoryMeta {
   /** The file where the story is defined */
-  file: string;
+  file?: string;
 }
 
 export interface Story {

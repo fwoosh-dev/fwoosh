@@ -5,6 +5,8 @@ import { createServer, InlineConfig } from "vite";
 import express from "express";
 import { createRequire } from "module";
 import { SyncBailHook, SyncWaterfallHook } from "tapable";
+import mdx from "@mdx-js/rollup";
+import remarkFrontmatter from "remark-frontmatter";
 
 import type { FwooshHooks, FwooshOptions } from "./types";
 import { storyListPlugin } from "./utils/story-list-plugin.js";
@@ -104,6 +106,10 @@ export class Fwoosh {
     const panels = this.hooks.registerPanel.call([]);
     const baseConfig: InlineConfig = {
       plugins: [
+        mdx({
+          remarkPlugins: [remarkFrontmatter],
+          providerImportSource: "@mdx-js/react",
+        }),
         fwooshUiPlugin({ toolbarControls, panels }),
         fwooshConfigPlugin(this.options),
         getDocsPlugin(),

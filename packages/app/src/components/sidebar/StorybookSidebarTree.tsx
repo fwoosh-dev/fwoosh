@@ -12,13 +12,13 @@ import { NavLink, useParams } from "react-router-dom";
 
 import {
   useStoryTree,
-  StoryTree,
   StoryTreeItem,
   hasActiveChild,
+  StorySidebarItem,
 } from "../../hooks/useStoryTree";
 import { resetContentScrollPosition, SidebarTree } from "./SidebarTree";
 
-function Node({ node, style }: NodeRendererProps<StoryTree>) {
+function Node({ node, style }: NodeRendererProps<StorySidebarItem>) {
   const finalStyle = {
     ...style,
     paddingLeft: (style.paddingLeft as number) + SIDEBAR_ITEM_INDENT,
@@ -45,9 +45,10 @@ function Node({ node, style }: NodeRendererProps<StoryTree>) {
     );
   }
 
-  const isChildActive = node.tree.props.selection
-    ? hasActiveChild(node.data, node.tree.props.selection)
-    : false;
+  const isChildActive =
+    node.tree.props.selection && "children" in node.data
+      ? hasActiveChild(node.data, node.tree.props.selection)
+      : false;
 
   return (
     <SidebarSectionTitle

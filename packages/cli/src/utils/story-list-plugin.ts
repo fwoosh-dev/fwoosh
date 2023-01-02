@@ -2,11 +2,13 @@ import { pascalCase } from "change-case";
 import chokidar from "chokidar";
 
 import { endent } from "./endent.js";
-import { FwooshOptions, Story, StoryMeta } from "../types";
-import { getStories, getStoryList } from "./get-stories.js";
+import { FwooshOptions, Story } from "../types";
+import {
+  FwooshFileDescriptor,
+  getStories,
+  MDXFileDescriptor,
+} from "./get-stories.js";
 import { ViteDevServer } from "vite";
-
-type Config = { stories: Story[]; meta: StoryMeta }[];
 
 const defaultListModule = endent`
   import { lazy } from "react";
@@ -14,30 +16,59 @@ const defaultListModule = endent`
   export const stories = {};
 `;
 
-function createVirtualFile(config: Config) {
-  const allStories = config.flatMap((file) =>
-    file.stories.map((s) => ({ ...s, grouping: file.meta.title }))
+type StoryWithGrouping = Story & { grouping: string };
+
+function createVirtualFile(config: FwooshFileDescriptor[]) {
+  const allFiles = config.flatMap<MDXFileDescriptor | StoryWithGrouping>(
+    (file) => {
+      console.log({ file });
+      return "stories" in file
+        ? file.stories.map((s) => ({
+            ...s,
+            grouping: file.meta.title,
+          }))
+        : [file];
+    }
   );
-  const lazyComponents = allStories.map(
-    (story) => endent`
+
+  const lazyComponents = allFiles.map((story) => {
+    if ("mdxFile" in story) {
+      return endent`
+        const ${pascalCase(story.meta.title)} = lazy(() =>
+          import('${story.mdxFile}')
+        );
+      `;
+    }
+
+    return endent`
       const ${pascalCase(story.slug)} = lazy(() =>
         import('${story.file}').then((module) => {
           return { default: module['${story.exportName}'] };
         })
       );
-    `
-  );
-  const storyMap = allStories.map(
-    (story) => `'${story.slug}': {
-      title: '${story.title}',
-      slug: '${story.slug}',
-      grouping: '${story.grouping}',
-      comment: ${story.comment ? `\`${story.comment}\`` : "undefined"},
-      code: \`${story.code}\`,
-      component: ${pascalCase(story.slug)},
-      meta: import('${story.file}').then((module) => module.meta)
-    }`
-  );
+    `;
+  });
+  const fileMap = allFiles.map((file) => {
+    if ("grouping" in file) {
+      return `'${file.slug}': {
+        title: '${file.title}',
+        slug: '${file.slug}',
+        grouping: '${file.grouping}',
+        comment: ${file.comment ? `\`${file.comment}\`` : "undefined"},
+        code: \`${file.code}\`,
+        component: ${file.file ? pascalCase(file.slug) : "undefined"},
+        meta: import('${file.file}').then((module) => module.meta)
+      }`;
+    }
+
+    return `'${file.meta.title}': {
+      title: '${file.meta.title}',
+      slug: '${file.meta.title}',
+      grouping: '${file.meta.title}',
+      meta: ${JSON.stringify(file.meta)},
+      component: ${pascalCase(file.meta.title)},
+    }`;
+  });
 
   return endent`
       import { lazy } from "react";
@@ -45,7 +76,7 @@ function createVirtualFile(config: Config) {
 
       ${lazyComponents.join("")}
 
-      export let stories = { ${storyMap} };
+      export let stories = { ${fileMap} };
 
       if (import.meta.hot) {
         import.meta.hot.accept((mod) => {

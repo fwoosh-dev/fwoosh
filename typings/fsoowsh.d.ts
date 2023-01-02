@@ -1,15 +1,27 @@
 declare module "@fwoosh/app/stories" {
-  // import { StoryMeta } from "fwoosh";
+  export interface BasicStoryData {
+    title: string;
+    slug: string;
+    grouping: string;
+    code: string;
+    component: any;
+    comment?: string;
+    meta: StoryMeta;
+  }
+
+  export interface MDXStoryData {
+    title: string;
+    slug: string;
+    grouping: string;
+    meta: StoryMeta;
+    component: any;
+    mdxFile: any;
+  }
+
+  export type StoryData = BasicStoryData | MDXStoryData;
+
   export interface Stories {
-    [key: string]: {
-      title: string;
-      slug: string;
-      code: string;
-      grouping: string;
-      component: any;
-      comment?: string;
-      meta: StoryMeta;
-    };
+    [key: string]: StoryData;
   }
 
   export const stories: Stories;

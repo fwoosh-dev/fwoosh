@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import equal from "fast-deep-equal/react";
 import type { ComponentDoc } from "react-docgen-typescript";
 import { useId } from "@radix-ui/react-id";
-import { Stories } from "@fwoosh/app/stories";
+import { BasicStoryData } from "@fwoosh/app/stories";
 import { useDocs } from "@fwoosh/app/docs";
 import {
   components,
@@ -15,15 +15,18 @@ import {
 } from "@fwoosh/components";
 import * as Collapsible from "@radix-ui/react-collapsible";
 import { paramCase, headerCase } from "change-case";
+import { stories } from "@fwoosh/app/stories";
 
 import ErrorBoundary from "./ErrorBoundary";
 import {
   getStoryGroup,
-  StoryTreeItem,
+  StorySidebarChildItem,
   useStoryTree,
+  StoryTreeItem,
 } from "../hooks/useStoryTree";
 import * as styles from "./DocsPage.module.css";
 import { useRender } from "../hooks/useRender";
+import { MDXProvider } from "@mdx-js/react";
 
 const DocsLayout = styled("div", {
   display: "grid",
@@ -134,7 +137,7 @@ const DocsPropsTable = ({
   story,
   firstStoryDocs,
 }: {
-  story: Stories[number];
+  story: BasicStoryData;
   firstStoryDocs: ComponentDoc[] | undefined;
 }) => {
   const key = story?.slug || "none";
@@ -151,31 +154,18 @@ const DocsPropsTable = ({
   );
 };
 
-const DocsContent = () => {
-  const tree = useStoryTree();
+const StoryDocsPage = ({
+  stories: [firstStory, ...stories],
+}: {
+  stories: [StoryTreeItem, ...StorySidebarChildItem[]];
+}) => {
   const params = useParams<{ docsPath: string }>();
   const [, ...nameParts] = params.docsPath?.split("-") || [];
   const name = nameParts.map((p) => headerCase(p)).join(" ");
-  const [firstStory, ...stories] = React.useMemo(() => {
-    if (!params.docsPath) {
-      return [];
-    }
-
-    const path = params.docsPath.split("-");
-    const story = getStoryGroup(tree, path);
-
-    if (!story) {
-      throw new Error(`Could not find documentation page: ${params.docsPath}`);
-    }
-
-    return story
-      .filter((s): s is StoryTreeItem => "story" in s)
-      .map((s) => s.story);
-  }, [params.docsPath]);
   const firstStoryDocs = useDocs(
-    firstStory.slug,
-    firstStory.component?._payload?._result,
-    firstStory.meta
+    firstStory.story.slug || "none",
+    firstStory.story.component?._payload?._result,
+    firstStory.story.meta
   );
 
   return (
@@ -184,33 +174,42 @@ const DocsContent = () => {
         <components.h1 id="intro">{name}</components.h1>
         {firstStory && (
           <>
-            {firstStory.comment && (
-              <StyledMarkdown>{firstStory.comment}</StyledMarkdown>
+            {firstStory.story.comment && (
+              <StyledMarkdown>{firstStory.story.comment}</StyledMarkdown>
             )}
-            <StoryDiv slug={firstStory.slug} code={firstStory.code} />
+            <StoryDiv
+              slug={firstStory.story.slug}
+              code={firstStory.story.code}
+            />
           </>
         )}
+
         <Suspense fallback={<Spinner style={{ height: 200 }} />}>
-          <DocsPropsTable story={firstStory} firstStoryDocs={[]} />
+          <DocsPropsTable story={firstStory.story} firstStoryDocs={[]} />
         </Suspense>
+
         {stories.length > 0 && (
           <>
             <components.h2 id="stories">Stories</components.h2>
             {stories.map((story) => {
+              if ("mdxFile" in story || "children" in story) {
+                return null;
+              }
+
               return (
-                <div key={story.slug}>
-                  <components.h3 id={paramCase(story.title)}>
-                    {story.title}
+                <div key={story.story.slug}>
+                  <components.h3 id={paramCase(story.story.title)}>
+                    {story.story.title}
                   </components.h3>
-                  {story.comment && (
-                    <StyledMarkdown>{story.comment}</StyledMarkdown>
+                  {story.story.comment && (
+                    <StyledMarkdown>{story.story.comment}</StyledMarkdown>
                   )}
-                  <StoryDiv slug={story.slug} code={story.code} />
+                  <StoryDiv slug={story.story.slug} code={story.story.code} />
                   <Suspense
                     fallback={<Spinner style={{ height: 200 }} delay={2000} />}
                   >
                     <DocsPropsTable
-                      story={story}
+                      story={story.story}
                       firstStoryDocs={firstStoryDocs}
                     />
                   </Suspense>
@@ -236,12 +235,18 @@ const DocsContent = () => {
           </a>
           <NavGroup>
             {stories.map((story) => {
+              if ("mdxFile" in story || "children" in story) {
+                return null;
+              }
+
               return (
                 <a
-                  key={`#${paramCase(story.title)}`}
-                  href={`#${paramCase(story.title)}`}
+                  key={`#${paramCase(story.story.title)}`}
+                  href={`#${paramCase(story.story.title)}`}
                 >
-                  <TitleNavItem key={story.slug}>{story.title}</TitleNavItem>
+                  <TitleNavItem key={story.story.slug}>
+                    {story.story.title}
+                  </TitleNavItem>
                 </a>
               );
             })}
@@ -249,6 +254,53 @@ const DocsContent = () => {
         </ul>
       </QuickNav>
     </DocsLayout>
+  );
+};
+
+const MDXPageWrapper = styled("div", {
+  mt: 12,
+  mb: 20,
+});
+
+const MDXOnlyDocsPage = ({ id }: { id: string }) => {
+  const { component: MDXPage } = stories[id];
+  return (
+    <MDXProvider
+      components={
+        components as React.ComponentProps<typeof MDXProvider>["components"]
+      }
+    >
+      <MDXPageWrapper>
+        <MDXPage />
+      </MDXPageWrapper>
+    </MDXProvider>
+  );
+};
+
+const DocsContent = () => {
+  const tree = useStoryTree();
+  const params = useParams<{ docsPath: string }>();
+  const [firstStory, ...restStories] = React.useMemo(() => {
+    if (!params.docsPath) {
+      return [];
+    }
+
+    const path = params.docsPath.split("-");
+    const story = getStoryGroup(tree, path);
+
+    if (!story) {
+      throw new Error(`Could not find documentation page: ${params.docsPath}`);
+    }
+
+    return story;
+  }, [params.docsPath]);
+
+  if ("mdxFile" in firstStory) {
+    return <MDXOnlyDocsPage id={firstStory.id} />;
+  }
+
+  return (
+    <StoryDocsPage stories={[firstStory as StoryTreeItem, ...restStories]} />
   );
 };
 

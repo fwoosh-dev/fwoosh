@@ -10,11 +10,11 @@ import {
 import { NavLink, useParams } from "react-router-dom";
 import { stories } from "@fwoosh/app/stories";
 
-import { useStoryTree, StoryTree } from "../../hooks/useStoryTree";
+import { useStoryTree, StorySidebarItem } from "../../hooks/useStoryTree";
 import { SidebarFolderOpenIndicatorWrapper } from "@fwoosh/components/src";
 import { resetContentScrollPosition, SidebarTree } from "./SidebarTree";
 
-function Node({ node, style }: NodeRendererProps<StoryTree>) {
+function Node({ node, style }: NodeRendererProps<StorySidebarItem>) {
   const isValidPath = React.useMemo(() => {
     return Object.values(stories).some(
       (story) => story.grouping.replace(/\//g, "-") === node.data.id
@@ -25,7 +25,10 @@ function Node({ node, style }: NodeRendererProps<StoryTree>) {
     paddingLeft: (style.paddingLeft as number) + SIDEBAR_ITEM_INDENT,
   };
 
-  if (node.data.children.length === 0) {
+  if (
+    "mdxFile" in node.data ||
+    ("children" in node.data && node.data.children.length === 0)
+  ) {
     const isActive = node.data.id === node.tree.props.selection;
 
     return (

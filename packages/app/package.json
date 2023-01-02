@@ -6,6 +6,7 @@
   "license": "MIT",
   "main": "dist/index.js",
   "dependencies": {
+    "@mdx-js/react": "^2.2.1",
     "@radix-ui/colors": "^0.1.8",
     "@radix-ui/react-collapsible": "^1.0.1",
     "@radix-ui/react-id": "^1.0.0",

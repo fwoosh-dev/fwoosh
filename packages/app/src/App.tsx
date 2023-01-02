@@ -17,6 +17,7 @@ import {
   AppWrapper,
   ColorMode,
   ColorModeContext,
+  components,
   getInitialColorMode,
 } from "@fwoosh/components";
 import { getFirstStory, useStoryTree } from "./hooks/useStoryTree";
