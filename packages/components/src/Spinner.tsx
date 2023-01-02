@@ -44,11 +44,12 @@ const Wrapper = styled("div", {
   gap: "$2",
 });
 
-export interface LazyLoaderProps extends React.ComponentProps<typeof Wrapper> {
+export interface LazyLoaderProps {
   delay?: number;
+  children: React.ReactNode;
 }
 
-export const Spinner = ({ delay = 1000, ...props }: LazyLoaderProps) => {
+export const DelayedRender = ({ delay = 1000, children }: LazyLoaderProps) => {
   const [show, setShow] = React.useState(false);
 
   React.useEffect(() => {
@@ -60,10 +61,19 @@ export const Spinner = ({ delay = 1000, ...props }: LazyLoaderProps) => {
     return null;
   }
 
+  return <>{children}</>;
+};
+
+export const Spinner = ({
+  delay = 1000,
+  ...props
+}: Pick<LazyLoaderProps, "delay"> & React.ComponentProps<typeof Wrapper>) => {
   return (
-    <Wrapper {...props}>
-      <SpinnerComponent />
-      <Message>Loading...</Message>
-    </Wrapper>
+    <DelayedRender delay={delay}>
+      <Wrapper {...props}>
+        <SpinnerComponent />
+        <Message>Loading...</Message>
+      </Wrapper>
+    </DelayedRender>
   );
 };
