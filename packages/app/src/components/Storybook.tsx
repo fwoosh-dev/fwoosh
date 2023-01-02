@@ -8,11 +8,11 @@ import {
   Toolbar,
   Spinner,
   Tabs,
-  SidebarHeader,
-  SidebarTitle,
+  HeaderBar,
+  HeaderTitle,
 } from "@fwoosh/components";
 import { toolbarControls, panels } from "@fwoosh/app/ui";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useId } from "@radix-ui/react-id";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 
@@ -90,8 +90,8 @@ export const Storybook = () => {
 
   return (
     <>
-      <SidebarHeader>
-        <SidebarTitle>{config.title}</SidebarTitle>
+      <HeaderBar>
+        <HeaderTitle>{config.title}</HeaderTitle>
         {toolbarControls.length > 0 && (
           <StoryToolbar>
             <Suspense fallback={<Spinner />}>
@@ -102,7 +102,7 @@ export const Storybook = () => {
           </StoryToolbar>
         )}
         <ThemeToggle />
-      </SidebarHeader>
+      </HeaderBar>
 
       <SidebarLayout>
         <Sidebar>

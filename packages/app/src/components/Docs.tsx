@@ -4,20 +4,26 @@ import {
   SidebarItem,
   SidebarItems,
   SidebarLayout,
-  SidebarHeader,
-  SidebarTitle,
+  HeaderBar,
+  HeaderTitle,
   SidebarSectionTitle,
+  styled,
 } from "@fwoosh/components";
 import { config } from "@fwoosh/app/config";
 import React from "react";
 import { Outlet, Link, useParams } from "react-router-dom";
-import { StoryTree, useStoryTree } from "../hooks/useStoryTree";
+import { StoryTree } from "../hooks/useStoryTree";
 import { DocsSidebarTree } from "./sidebar/DocsSidebarTree";
+import { ThemeToggle } from "./ThemeToggle";
 
 interface TreeItemProps {
   tree: StoryTree;
   path?: string[];
 }
+
+const Split = styled("div", {
+  flex: 1,
+});
 
 const TreeItem = ({ tree, path = [] }: TreeItemProps) => {
   const params = useParams<{ docsPath: string }>();
@@ -51,18 +57,22 @@ const TreeItem = ({ tree, path = [] }: TreeItemProps) => {
 
 export const Docs = () => {
   return (
-    <SidebarLayout>
-      <Sidebar>
-        <SidebarHeader>
-          <SidebarTitle>{config.title}</SidebarTitle>
-        </SidebarHeader>
-        <SidebarItems>
-          <DocsSidebarTree />
-        </SidebarItems>
-      </Sidebar>
-      <Content>
-        <Outlet />
-      </Content>
-    </SidebarLayout>
+    <>
+      <HeaderBar>
+        <HeaderTitle>{config.title}</HeaderTitle>
+        <Split />
+        <ThemeToggle />
+      </HeaderBar>
+      <SidebarLayout>
+        <Sidebar>
+          <SidebarItems>
+            <DocsSidebarTree />
+          </SidebarItems>
+        </Sidebar>
+        <Content>
+          <Outlet />
+        </Content>
+      </SidebarLayout>
+    </>
   );
 };

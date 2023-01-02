@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Tree, NodeRendererProps } from "react-arborist";
+import { NodeRendererProps } from "react-arborist";
 import {
   SidebarActiveDot,
   SidebarFolderOpenIndicator,
@@ -7,23 +7,16 @@ import {
   SidebarItem,
   SidebarSectionTitle,
   SIDEBAR_ITEM_INDENT,
-  styled,
 } from "@fwoosh/components";
-import useMeasure from "react-use-measure";
 import { Link, useParams } from "react-router-dom";
 
-import * as styles from "./SidebarTree.module.css";
 import {
   useStoryTree,
   StoryTree,
   StoryTreeItem,
   hasActiveChild,
 } from "../../hooks/useStoryTree";
-
-const Wrapper = styled("div", {
-  height: "100%",
-  widows: "100%",
-});
+import { SidebarTree } from "./SidebarTree";
 
 function Node({ node, style }: NodeRendererProps<StoryTree>) {
   const finalStyle = {
@@ -71,24 +64,10 @@ function Node({ node, style }: NodeRendererProps<StoryTree>) {
 export const StorybookSidebarTree = () => {
   const params = useParams<{ storyId: string }>();
   const tree = useStoryTree();
-  const [ref, bounds] = useMeasure();
 
   return (
-    <Wrapper ref={ref}>
-      <Tree
-        initialData={tree}
-        selection={params.storyId}
-        rowHeight={(SidebarItem as any).height}
-        width={bounds.width}
-        height={bounds.height}
-        indent={SIDEBAR_ITEM_INDENT}
-        disableDrag={true}
-        disableDrop={true}
-        selectionFollowsFocus={true}
-        rowClassName={styles.flex}
-      >
-        {Node}
-      </Tree>
-    </Wrapper>
+    <SidebarTree data={tree} activeId={params.storyId}>
+      {Node}
+    </SidebarTree>
   );
 };

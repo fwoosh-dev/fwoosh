@@ -1,6 +1,5 @@
 import React, { Suspense } from "react";
 import { useParams } from "react-router-dom";
-import dlv from "dlv";
 import equal from "fast-deep-equal/react";
 import type { ComponentDoc } from "react-docgen-typescript";
 import { useId } from "@radix-ui/react-id";
@@ -24,7 +23,6 @@ import {
   useStoryTree,
 } from "../hooks/useStoryTree";
 import * as styles from "./DocsPage.module.css";
-import { ThemeToggle } from "./ThemeToggle";
 import { useRender } from "../hooks/useRender";
 
 const DocsLayout = styled("div", {
@@ -61,9 +59,9 @@ const ShowCodeButton = styled("button", {
 });
 
 const QuickNav = styled("div", {
-  my: 10,
+  mb: 10,
   position: "sticky",
-  top: "$4",
+  top: "$10",
   height: "fit-content",
   px: 8,
 });
@@ -225,7 +223,6 @@ const DocsContent = () => {
       <QuickNav>
         <NavHeader>
           <NavTitle>Quick nav</NavTitle>
-          <ThemeToggle />
         </NavHeader>
         <ul>
           <a href="#intro">

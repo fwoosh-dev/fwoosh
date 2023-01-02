@@ -238,7 +238,7 @@ export const Content = styled("div", {
 });
 
 export const PageWrapper = styled("div", {
-  mt: 16,
+  mt: 10,
   mb: 28,
   mx: "auto",
   px: 8,

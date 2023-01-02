@@ -1,13 +1,6 @@
 import * as React from "react";
 import { styled } from "./stitches";
 
-export const SidebarTitle = styled("div", {
-  text: "2xl",
-  fontWeight: 400,
-  color: "$gray11",
-  width: "279px",
-});
-
 export const SidebarSectionTitle = styled("div", {
   height: "$10",
   color: "$gray8",
@@ -62,16 +55,6 @@ export const Sidebar = styled("div", {
   minHeight: 0,
   height: "100%",
   overflow: "auto",
-});
-
-export const SidebarHeader = styled("div", {
-  height: "$14",
-  display: "flex",
-  alignItems: "center",
-  borderBottom: "1px solid $gray4",
-  gap: 8,
-  px: 2,
-  py: 2,
 });
 
 export const SIDEBAR_ITEM_INDENT = 16;
