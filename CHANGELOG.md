@@ -1,3 +1,21 @@
+# v0.0.49 (Mon Jan 02 2023)
+
+#### ⚠️ Pushed to `main`
+
+- `@fwoosh/app`, `@fwoosh/components`
+  - organize code and fix header in docs mode ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/components`, `@fwoosh/props-panel`
+  - improve sidebar tree rendering ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`
+  - fix each story re-rendering props table ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add root redirect ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.48 (Sat Dec 31 2022)
 
 #### ⚠️ Pushed to `main`

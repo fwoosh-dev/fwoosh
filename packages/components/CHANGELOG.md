@@ -1,3 +1,16 @@
+# v0.0.49 (Mon Jan 02 2023)
+
+#### ⚠️ Pushed to `main`
+
+- organize code and fix header in docs mode ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- improve sidebar tree rendering ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.45 (Sat Dec 31 2022)
 
 #### ⚠️ Pushed to `main`
