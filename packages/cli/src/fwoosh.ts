@@ -121,6 +121,12 @@ export class Fwoosh {
           "escape-html",
           "react-router",
           "react-router-dom",
+          "debounce",
+          "react/jsx-runtime",
+          "hoist-non-react-statics",
+          "fast-deep-equal",
+          "fast-deep-equal/react",
+          "use-sync-external-store/shim",
         ],
       },
       server: {
