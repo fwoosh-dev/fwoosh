@@ -17,6 +17,7 @@ const Panel = styled("div", {
     borderRadius: 0,
     height: "100%",
     overflow: "auto",
+    text: "sm",
   },
 });
 

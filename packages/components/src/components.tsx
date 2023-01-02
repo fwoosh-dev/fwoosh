@@ -82,7 +82,6 @@ export const h6 = styled("h6", {
 /** The component used to render a p */
 export const p = styled("p", {
   my: 4,
-  text: "lg",
   color: "$gray11",
 });
 
@@ -225,6 +224,11 @@ export const ol = styled("ul", {
 export const AppWrapper = styled("div", {
   background: "$gray1",
   minHeight: "100vh",
+  fontFamily: "Inter, system-ui",
+
+  "@supports (font-variation-settings: normal)": {
+    fontFamily: "Inter Var, system-ui",
+  },
 });
 
 export const Logo = styled("div", {

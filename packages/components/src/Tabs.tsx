@@ -1,4 +1,3 @@
-import React from "react";
 import * as TabsPrimitive from "@radix-ui/react-tabs";
 import { styled } from "./stitches";
 
@@ -12,6 +11,7 @@ export const Trigger = styled(TabsPrimitive.Trigger, {
   p: 4,
   color: "$gray10",
   position: "relative",
+  text: "sm",
 
   '&[data-state="active"]': {
     color: "$primary11",
