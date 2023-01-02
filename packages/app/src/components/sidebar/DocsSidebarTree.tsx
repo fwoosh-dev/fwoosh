@@ -7,7 +7,7 @@ import {
   SidebarSectionTitle,
   SIDEBAR_ITEM_INDENT,
 } from "@fwoosh/components";
-import { Link, useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { stories } from "@fwoosh/app/stories";
 
 import { useStoryTree, StoryTree } from "../../hooks/useStoryTree";
@@ -31,7 +31,7 @@ function Node({ node, style }: NodeRendererProps<StoryTree>) {
     return (
       <SidebarItem
         style={finalStyle}
-        as={Link}
+        as={NavLink}
         to={node.data.id}
         aria-selected={isActive}
       >
@@ -49,7 +49,7 @@ function Node({ node, style }: NodeRendererProps<StoryTree>) {
     return (
       <SidebarItem
         style={finalStyle}
-        as={Link}
+        as={NavLink}
         to={node.data.id}
         data-active={isChildActive}
       >

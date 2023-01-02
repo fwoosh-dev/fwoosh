@@ -8,7 +8,7 @@ import {
   SidebarSectionTitle,
   SIDEBAR_ITEM_INDENT,
 } from "@fwoosh/components";
-import { Link, useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 
 import {
   useStoryTree,
@@ -33,7 +33,7 @@ function Node({ node, style }: NodeRendererProps<StoryTree>) {
         key={slug}
         style={finalStyle}
         aria-selected={isActive}
-        as={Link}
+        as={NavLink}
         to={slug}
       >
         <SidebarFolderOpenIndicatorWrapper>
