@@ -1,3 +1,21 @@
+# v0.0.50 (Mon Jan 02 2023)
+
+#### ⚠️ Pushed to `main`
+
+- `@fwoosh/app`
+  - reset scroll position for content when navigating ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - switch to nav links ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - reset panels when story changes ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - switch to new style router ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `fwoosh`
+  - add more dep to optimize ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.49 (Mon Jan 02 2023)
 
 #### ⚠️ Pushed to `main`

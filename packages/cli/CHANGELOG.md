@@ -1,3 +1,15 @@
+# v0.0.50 (Mon Jan 02 2023)
+
+#### ⚠️ Pushed to `main`
+
+- add more dep to optimize ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.48 (Sat Dec 31 2022)
 
 #### ⚠️ Pushed to `main`
