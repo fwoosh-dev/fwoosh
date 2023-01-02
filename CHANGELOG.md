@@ -1,3 +1,16 @@
+# v0.0.51 (Mon Jan 02 2023)
+
+#### ⚠️ Pushed to `main`
+
+- `@fwoosh/components`, `@fwoosh/source-panel`
+  - improve ui a lil ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.50 (Mon Jan 02 2023)
 
 #### ⚠️ Pushed to `main`
