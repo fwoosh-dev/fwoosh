@@ -12,7 +12,7 @@ import {
   HeaderTitle,
 } from "@fwoosh/components";
 import { toolbarControls, panels } from "@fwoosh/app/ui";
-import { Outlet } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import { useId } from "@radix-ui/react-id";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 
@@ -71,6 +71,7 @@ const PanelResizer = styled("div", {
 
 export const Storybook = () => {
   const id = useId();
+  const params = useParams<{ storyId: string }>();
   const story = (
     <StoryIdContext.Provider value={id}>
       <Outlet />
@@ -145,7 +146,7 @@ export const Storybook = () => {
 
                         {panels.map((Panel) => (
                           <TabContent
-                            key={`content-${Panel.componentName}`}
+                            key={`content-${Panel.componentName}-${params.storyId}`}
                             value={Panel.componentName}
                           >
                             <ErrorBoundary>
