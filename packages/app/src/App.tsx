@@ -4,6 +4,7 @@ import {
   Navigate,
   Outlet,
   RouterProvider,
+  ScrollRestoration,
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 
@@ -50,6 +51,7 @@ const router = createBrowserRouter([
     element: (
       <AppWrapper>
         <Outlet />
+        <ScrollRestoration />
       </AppWrapper>
     ),
     children: [

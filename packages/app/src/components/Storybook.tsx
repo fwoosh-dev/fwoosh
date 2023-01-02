@@ -21,6 +21,7 @@ import { StoryIdContext } from "./Story";
 import { StorybookSidebarTree } from "./sidebar/StorybookSidebarTree";
 import { ThemeToggle } from "./ThemeToggle";
 import { config } from "@fwoosh/app/config";
+import { CONTENT_ID } from "../constants";
 
 const StoryToolbar = styled(Toolbar.Root, {
   display: "flex",
@@ -111,7 +112,7 @@ export const Storybook = () => {
             <StorybookSidebarTree />
           </SidebarItems>
         </Sidebar>
-        <Content>
+        <Content id={CONTENT_ID}>
           <StoryWrapper>
             {panels.length > 0 ? (
               <>

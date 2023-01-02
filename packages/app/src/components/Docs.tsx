@@ -15,6 +15,7 @@ import { Outlet, Link, useParams } from "react-router-dom";
 import { StoryTree } from "../hooks/useStoryTree";
 import { DocsSidebarTree } from "./sidebar/DocsSidebarTree";
 import { ThemeToggle } from "./ThemeToggle";
+import { CONTENT_ID } from "../constants";
 
 interface TreeItemProps {
   tree: StoryTree;
@@ -69,7 +70,7 @@ export const Docs = () => {
             <DocsSidebarTree />
           </SidebarItems>
         </Sidebar>
-        <Content>
+        <Content id={CONTENT_ID}>
           <Outlet />
         </Content>
       </SidebarLayout>

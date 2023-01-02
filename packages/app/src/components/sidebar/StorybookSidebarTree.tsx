@@ -16,7 +16,7 @@ import {
   StoryTreeItem,
   hasActiveChild,
 } from "../../hooks/useStoryTree";
-import { SidebarTree } from "./SidebarTree";
+import { resetContentScrollPosition, SidebarTree } from "./SidebarTree";
 
 function Node({ node, style }: NodeRendererProps<StoryTree>) {
   const finalStyle = {
@@ -35,6 +35,7 @@ function Node({ node, style }: NodeRendererProps<StoryTree>) {
         aria-selected={isActive}
         as={NavLink}
         to={slug}
+        onClick={resetContentScrollPosition}
       >
         <SidebarFolderOpenIndicatorWrapper>
           {isActive && <SidebarActiveDot />}

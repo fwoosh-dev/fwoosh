@@ -12,7 +12,7 @@ import { stories } from "@fwoosh/app/stories";
 
 import { useStoryTree, StoryTree } from "../../hooks/useStoryTree";
 import { SidebarFolderOpenIndicatorWrapper } from "@fwoosh/components/src";
-import { SidebarTree } from "./SidebarTree";
+import { resetContentScrollPosition, SidebarTree } from "./SidebarTree";
 
 function Node({ node, style }: NodeRendererProps<StoryTree>) {
   const isValidPath = React.useMemo(() => {
@@ -34,6 +34,7 @@ function Node({ node, style }: NodeRendererProps<StoryTree>) {
         as={NavLink}
         to={node.data.id}
         aria-selected={isActive}
+        onClick={resetContentScrollPosition}
       >
         <SidebarFolderOpenIndicatorWrapper>
           {isActive && <SidebarActiveDot />}
@@ -52,6 +53,7 @@ function Node({ node, style }: NodeRendererProps<StoryTree>) {
         as={NavLink}
         to={node.data.id}
         data-active={isChildActive}
+        onClick={resetContentScrollPosition}
       >
         <SidebarFolderOpenIndicator
           as="button"
