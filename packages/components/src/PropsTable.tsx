@@ -4,7 +4,7 @@ import { components } from "./components.js";
 import * as Tabs from "./Tabs.js";
 import { styled } from "./stitches.js";
 
-const NoPropMessage = styled("div", {
+const NoPropMessage = styled(components.p, {
   color: "$gray10",
 });
 

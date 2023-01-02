@@ -43,6 +43,7 @@ const StoryWrapper = styled("div", {
 const PanelContainer = styled("div", {
   height: "100%",
   borderTop: "1px solid $gray4",
+  backgroundColor: "$gray0",
 });
 
 const TabContent = styled(Tabs.Content, {

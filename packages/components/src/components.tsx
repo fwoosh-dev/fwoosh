@@ -252,8 +252,9 @@ export const PageWrapper = styled("div", {
 
 export const IconButton = styled("button", {
   color: "$gray11",
-  height: "$9",
-  width: "$9",
+  height: "$8",
+  width: "$8",
+  borderRadius: "4px",
   p: 2,
   display: "flex",
   alignItems: "center",

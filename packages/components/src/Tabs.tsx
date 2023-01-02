@@ -11,7 +11,7 @@ export const Trigger = styled(TabsPrimitive.Trigger, {
   p: 4,
   color: "$gray10",
   position: "relative",
-  text: "sm",
+  text: "xs",
 
   '&[data-state="active"]': {
     color: "$primary11",

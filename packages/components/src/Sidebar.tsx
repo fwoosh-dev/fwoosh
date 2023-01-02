@@ -13,7 +13,7 @@ export const SidebarItem = styled("li", {
   alignItems: "center",
   color: "$gray9",
   width: "100%",
-  text: "sm",
+  text: "xs",
 
   "&:hover": {
     backgroundColor: "$gray2",
@@ -61,6 +61,10 @@ export const SidebarFolderOpenIndicatorIcon = styled("div", {
   height: 6,
   width: 6,
   transformOrigin: "center",
+
+  '[data-color-mode="dark"] &': {
+    filter: "invert(1)",
+  },
 });
 
 export const SidebarFolderOpenIndicator = ({

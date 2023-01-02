@@ -110,7 +110,7 @@ export const App = () => {
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
         <ColorModeContext.Provider value={colorMode}>
-          <AppWrapper>
+          <AppWrapper data-color-mode={colorMode}>
             <RouterProvider router={router} />
           </AppWrapper>
         </ColorModeContext.Provider>

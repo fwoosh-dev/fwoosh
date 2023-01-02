@@ -11,7 +11,7 @@ export const HeaderBar = styled("div", {
 });
 
 export const HeaderTitle = styled("div", {
-  text: "2xl",
+  text: "lg",
   fontWeight: 400,
   color: "$gray11",
   width: "279px",

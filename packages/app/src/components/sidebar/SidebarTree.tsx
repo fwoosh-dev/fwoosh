@@ -42,8 +42,7 @@ export function SidebarTree<T>({ activeId, children, data }: SidebarProps<T>) {
         disableDrop={true}
         selectionFollowsFocus={true}
         rowClassName={styles.flex}
-        paddingTop={20}
-        paddingBottom={40}
+        padding={8}
       >
         {children}
       </Tree>
