@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import equal from "fast-deep-equal/react";
 import type { ComponentDoc } from "react-docgen-typescript";
 import { useId } from "@radix-ui/react-id";
@@ -301,8 +301,10 @@ const DocsContent = () => {
 };
 
 export const DocsPage = () => {
+  const location = useLocation();
+
   return (
-    <ErrorBoundary>
+    <ErrorBoundary key={location.pathname}>
       <Suspense fallback={<Spinner />}>
         <DocsContent />
       </Suspense>
