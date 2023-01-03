@@ -1,3 +1,15 @@
+# v0.0.57 (Tue Jan 03 2023)
+
+#### ⚠️ Pushed to `main`
+
+- render pop table descriptions from markdown to html ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.56 (Tue Jan 03 2023)
 
 #### ⚠️ Pushed to `main`
