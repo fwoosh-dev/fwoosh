@@ -174,6 +174,10 @@ const TableWrapper = styled("div", {
 const Table = styled("table", {
   my: 8,
   minWidth: 800,
+
+  "&:first-child": {
+    mt: 4,
+  },
 });
 
 export const table = (props: React.ComponentPropsWithoutRef<"table">) => (
@@ -188,7 +192,7 @@ export const th = styled("th", {
   textAlign: "left",
   fontWeight: 300,
   color: "$gray10",
-  text: "sm",
+  text: "xs",
 
   "&:first-of-type": {
     position: "sticky",

@@ -19,6 +19,10 @@ const Panel = styled("div", {
     overflow: "auto",
     text: "sm",
   },
+
+  "& pre pre": {
+    p: 4,
+  },
 });
 
 export default function SourcePanel() {
