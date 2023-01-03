@@ -1,19 +1,21 @@
-import { StorySidebarChildItem } from "@fwoosh/app/ui";
+import { StorySidebarChildItem, StoryTree } from "@fwoosh/app/ui";
 
 export function sortTree(
   tree: StorySidebarChildItem[],
   sortFn: (a: StorySidebarChildItem, b: StorySidebarChildItem) => number
 ): StorySidebarChildItem[] {
-  return tree.sort(sortFn).map((item) => {
-    if ("children" in item) {
-      return {
-        ...item,
-        children: sortTree(item.children, sortFn),
-      };
-    }
+  return tree
+    .map((item) => {
+      if ("children" in item) {
+        return {
+          ...item,
+          children: sortTree(item.children, sortFn),
+        };
+      }
 
-    return item;
-  });
+      return item;
+    })
+    .sort(sortFn);
 }
 
 export function matchTreeSortingOrder(
@@ -22,9 +24,14 @@ export function matchTreeSortingOrder(
 ): StorySidebarChildItem[] {
   const withSortedChildren = a.map((item) => {
     if ("children" in item) {
+      const bItem = b.find((bItem) => bItem.id === item.id);
+
       return {
         ...item,
-        children: matchTreeSortingOrder(item.children, b),
+        children: matchTreeSortingOrder(
+          item.children,
+          (bItem as StoryTree).children
+        ),
       };
     }
 
