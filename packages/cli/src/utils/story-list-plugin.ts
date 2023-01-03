@@ -30,46 +30,66 @@ function createVirtualFile(config: FwooshFileDescriptor[]) {
     }
   );
 
-  const lazyComponents = allFiles.map((story) => {
-    if ("mdxFile" in story) {
-      return endent`
-        const ${pascalCase(story.meta.title)} = lazy(() =>
-          import('${story.mdxFile}')
-        );
-      `;
+  const usedComponentNames = new Set<string>();
+
+  function getComponentName(title: string) {
+    let name = pascalCase(title);
+
+    if (usedComponentNames.has(name)) {
+      let i = 1;
+      while (usedComponentNames.has(name + i)) {
+        i++;
+      }
+      name = name + i;
     }
 
-    return endent`
-      const ${pascalCase(story.slug)} = lazy(() =>
-        import('${story.file}').then((module) => {
-          return { default: module['${story.exportName}'] };
-        })
-      );
-    `;
-  });
-  const fileMap = allFiles.map((file) => {
-    if ("grouping" in file) {
-      return `'${file.slug}': {
+    usedComponentNames.add(name);
+
+    return name;
+  }
+
+  const fileMap: string[] = [];
+  const lazyComponents: string[] = [];
+
+  for (const file of allFiles) {
+    if ("mdxFile" in file) {
+      const componentName = getComponentName(file.meta.title);
+
+      lazyComponents.push(endent`
+        const ${componentName} = lazy(() => import('${file.mdxFile}'));
+      `);
+
+      fileMap.push(`'${file.meta.title}': {
+        title: '${file.meta.title}',
+        slug: '${file.meta.title}',
+        grouping: '${file.meta.title}',
+        meta: ${JSON.stringify(file.meta)},
+        component: ${componentName},
+      }`);
+    } else {
+      const componentName = getComponentName(file.slug);
+
+      lazyComponents.push(endent`
+        const ${componentName} = lazy(() =>
+          import('${file.file}').then((module) => {
+            return { default: module['${file.exportName}'] };
+          })
+        );
+      `);
+
+      fileMap.push(`'${file.slug}': {
         title: '${file.title}',
         slug: '${file.slug}',
         grouping: '${file.grouping}',
         comment: ${file.comment ? `\`${file.comment}\`` : "undefined"},
         code: \`${file.code}\`,
-        component: ${file.file ? pascalCase(file.slug) : "undefined"},
+        component: ${componentName},
         meta: import('${
           file.file
         }').then((module) => module.meta || module.default)
-      }`;
+      }`);
     }
-
-    return `'${file.meta.title}': {
-      title: '${file.meta.title}',
-      slug: '${file.meta.title}',
-      grouping: '${file.meta.title}',
-      meta: ${JSON.stringify(file.meta)},
-      component: ${pascalCase(file.meta.title)},
-    }`;
-  });
+  }
 
   return endent`
       import { lazy } from "react";
