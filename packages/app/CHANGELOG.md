@@ -1,3 +1,15 @@
+# v0.0.55 (Tue Jan 03 2023)
+
+#### ⚠️ Pushed to `main`
+
+- fix suspending too much ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.54 (Tue Jan 03 2023)
 
 #### ⚠️ Pushed to `main`
