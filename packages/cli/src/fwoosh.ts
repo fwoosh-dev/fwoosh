@@ -34,7 +34,7 @@ export class Fwoosh {
   constructor(options: FwooshOptions) {
     this.options = {
       modifyViteConfig: (config) => config,
-      sortSidebarItems: () => 0,
+      sortSidebarItems: (a, b) => a.name.localeCompare(b.name),
       ...options,
     };
     this.hooks = {
