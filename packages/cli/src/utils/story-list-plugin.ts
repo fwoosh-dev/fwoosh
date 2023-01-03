@@ -147,11 +147,11 @@ export function storyListPlugin(config: FwooshOptions) {
 
         if (mod) {
           server.reloadModule(mod);
-          server.ws.send({ type: "full-reload" });
         }
       }
 
       storyWatcher.on("add", reload);
+      storyWatcher.on("change", reload);
       storyWatcher.on("unlink", reload);
     },
   };
