@@ -23,12 +23,14 @@ export const Trigger = styled(TabsPrimitive.Trigger, {
     borderBottom: "4px solid $primary8",
   },
 });
+
 export const List = styled(TabsPrimitive.List, {
   flexShrink: 0,
   display: "flex",
   borderBottom: `1px solid $gray4`,
   overflow: "auto",
 });
+
 export const Content = styled(TabsPrimitive.Content, {
   flex: 1,
   overflow: "auto",
