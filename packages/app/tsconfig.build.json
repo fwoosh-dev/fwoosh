@@ -9,9 +9,5 @@
     "composite": true
   },
 
-  "references": [
-    {
-      "path": "../../packages/components"
-    }
-  ]
+  "references": [{ "path": "../components" }, { "path": "../utils" }]
 }
