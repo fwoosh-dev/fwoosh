@@ -26,7 +26,10 @@ import { MDXProvider } from "@mdx-js/react";
 
 const DocsLayout = styled("div", {
   display: "grid",
-  gridTemplateColumns: "1fr minmax(200px, 300px)",
+
+  "@lg": {
+    gridTemplateColumns: "1fr minmax(200px, 300px)",
+  },
 });
 
 const StoryPreview = styled("div", {
@@ -34,6 +37,7 @@ const StoryPreview = styled("div", {
   px: 4,
   py: 8,
   borderRadius: "4px",
+  overflow: "auto",
 
   variants: {
     state: {
@@ -63,6 +67,11 @@ const QuickNav = styled("div", {
   top: "$10",
   height: "fit-content",
   px: 8,
+  display: "none",
+
+  "@lg": {
+    display: "block",
+  },
 });
 
 const NavHeader = styled("div", {

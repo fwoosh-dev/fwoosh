@@ -166,10 +166,21 @@ export const a = React.forwardRef(
   }
 );
 
-export const table = styled("table", {
-  my: 8,
+const TableWrapper = styled("div", {
   width: "100%",
+  overflow: "auto",
 });
+
+const Table = styled("table", {
+  my: 8,
+  minWidth: 800,
+});
+
+export const table = (props: React.ComponentPropsWithoutRef<"table">) => (
+  <TableWrapper>
+    <Table {...props} />
+  </TableWrapper>
+);
 
 export const th = styled("th", {
   pb: 4,
@@ -178,6 +189,12 @@ export const th = styled("th", {
   fontWeight: 300,
   color: "$gray10",
   text: "sm",
+
+  "&:first-of-type": {
+    position: "sticky",
+    left: 0,
+    background: "inherit",
+  },
 });
 
 export const td = styled("td", {
@@ -187,9 +204,15 @@ export const td = styled("td", {
   borderBottom: "1px solid",
   borderTop: "1px solid",
   borderColor: "$gray5",
+
+  "&:first-of-type": {
+    position: "sticky",
+    left: 0,
+    background: "inherit",
+  },
 });
 
-export const tr = styled("tr");
+export const tr = styled("tr", {});
 
 export const hr = styled("hr", {
   my: 12,
@@ -248,6 +271,7 @@ export const PageWrapper = styled("div", {
   px: 8,
   maxWidth: "$4xl",
   width: "100%",
+  minWidth: 0,
 });
 
 export const IconButton = styled("button", {

@@ -110,7 +110,9 @@ export const Storybook = () => {
       <SidebarLayout>
         <Sidebar>
           <SidebarItems>
-            <StorybookSidebarTree />
+            <React.Suspense fallback={<Spinner delay={2000} />}>
+              <StorybookSidebarTree />
+            </React.Suspense>
           </SidebarItems>
         </Sidebar>
         <Content id={CONTENT_ID}>
