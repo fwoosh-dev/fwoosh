@@ -16,6 +16,7 @@ import { renderStoryPlugin } from "./utils/render-story-plugin.js";
 import { getDocsPlugin } from "./utils/get-docs-plugin.js";
 import { fwooshConfigPlugin } from "./utils/fwoosh-config-plugin.js";
 import { fwooshUiPlugin } from "./utils/fwoosh-ui-plugin.js";
+import { convertMarkdownToHtml } from "./utils/get-stories.js";
 
 const require = createRequire(import.meta.url);
 
@@ -162,8 +163,14 @@ export class Fwoosh {
         .replace("/dist/", "/src/")
         .replace(".js", ".tsx");
       const docs = this.hooks.generateDocs.call(file);
+      const docsWithHtmlDescriptions = await Promise.all(
+        docs.map(async (doc) => ({
+          ...doc,
+          description: await convertMarkdownToHtml(doc.description),
+        }))
+      );
 
-      res.json(docs);
+      res.json(docsWithHtmlDescriptions);
     });
 
     app.use(express.json({ limit: "50mb" }));

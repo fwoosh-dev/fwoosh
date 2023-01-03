@@ -3,6 +3,7 @@ import { useDocs } from "@fwoosh/app/docs";
 import { components } from "./components.js";
 import * as Tabs from "./Tabs.js";
 import { styled } from "./stitches.js";
+import { StyledMarkdown } from "./StyledMarkdown.js";
 
 const NoPropMessage = styled(components.p, {
   color: "$gray10",
@@ -17,7 +18,7 @@ const Table = ({ doc }: TableProps) => {
 
   return (
     <>
-      {doc.description && <components.p>{doc.description}</components.p>}
+      {doc.description && <StyledMarkdown>{doc.description}</StyledMarkdown>}
       {rows.length > 0 ? (
         <components.table>
           <thead>

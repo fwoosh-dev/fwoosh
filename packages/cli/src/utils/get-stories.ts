@@ -31,6 +31,19 @@ function sanitizeString(str: string) {
   return str.replace(/`/g, "\\\\`").replace(/\${/g, "\\${");
 }
 
+export async function convertMarkdownToHtml(markdown: string) {
+  const html = await markdownToHtml.process(
+    markdown
+      .trim()
+      .split("\n")
+      .map((line) => line.trim())
+      .map((line) => line.replace(/^\s*\*/, ""))
+      .join("\n")
+  );
+
+  return sanitizeString(String(html));
+}
+
 let parsed = 1;
 
 async function getComment(contents: string, d: { span: { start: number } }) {
@@ -61,17 +74,7 @@ async function getComment(contents: string, d: { span: { start: number } }) {
       comment.unshift(contents[i--]);
     }
 
-    const html = await markdownToHtml.process(
-      comment
-        .join("")
-        .trim()
-        .split("\n")
-        .map((line) => line.trim())
-        .map((line) => line.replace(/^\s*\*/, ""))
-        .join("\n")
-    );
-
-    return sanitizeString(String(html));
+    return convertMarkdownToHtml(comment.join(""));
   }
 }
 
