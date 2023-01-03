@@ -85,12 +85,32 @@ function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
   );
 }
 
+function filterOutStories(tree: StorySidebarChildItem[]) {
+  const filteredTree: StorySidebarChildItem[] = [];
+
+  for (const item of tree) {
+    if ("story" in item) {
+      continue;
+    }
+
+    if ("mdxFile" in item) {
+      filteredTree.push(item);
+      continue;
+    }
+
+    const filteredChildren = filterOutStories(item.children);
+    filteredTree.push({ ...item, children: filteredChildren });
+  }
+
+  return filteredTree;
+}
+
 export const DocsSidebarTree = () => {
   const params = useParams<{ docsPath: string }>();
-  const tree = useStoryTree({ includeStories: false });
+  const tree = useStoryTree();
 
   return (
-    <SidebarTree data={tree} activeId={params.docsPath}>
+    <SidebarTree data={filterOutStories(tree)} activeId={params.docsPath}>
       {Node}
     </SidebarTree>
   );

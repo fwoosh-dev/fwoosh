@@ -1,20 +1,10 @@
 import React from "react";
 import { stories, StoryData } from "@fwoosh/app/stories";
-import {
-  StorySidebarChildItem,
-  StorySidebarItem,
-  StoryTree,
-} from "@fwoosh/app/ui";
+import { StorySidebarChildItem, StoryTree } from "@fwoosh/app/ui";
 import { useQuery } from "react-query";
 import { matchTreeSortingOrder } from "@fwoosh/utils";
 
-interface UseStoryTreeOptions {
-  includeStories?: boolean;
-}
-
-export const useStoryTree = ({
-  includeStories = true,
-}: UseStoryTreeOptions = {}) => {
+export const useStoryTree = () => {
   const tree = React.useMemo(() => {
     const treeData: StorySidebarChildItem[] = [];
 
@@ -72,13 +62,11 @@ export const useStoryTree = ({
               folderIndex > -1 ? folderIndex : currentItem.children.length;
 
             if ("code" in story) {
-              if (includeStories) {
-                currentItem.children.splice(insertIndex, 0, {
-                  name: story.title,
-                  story,
-                  id: story.slug,
-                });
-              }
+              currentItem.children.splice(insertIndex, 0, {
+                name: story.title,
+                story,
+                id: story.slug,
+              });
             } else {
               currentItem.children.splice(insertIndex, 0, {
                 name: story.title,
@@ -92,9 +80,9 @@ export const useStoryTree = ({
     });
 
     return treeData;
-  }, [includeStories]);
+  }, []);
 
-  const { data = [] } = useQuery(["storyTree", tree], async () => {
+  const { data = [] } = useQuery("storyTree", async () => {
     const res = await fetch("/sort", {
       method: "POST",
       headers: {

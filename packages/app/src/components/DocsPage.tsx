@@ -131,13 +131,18 @@ const StoryDiv = React.memo(
 
 const DocsPropsTable = ({
   story,
-  firstStoryDocs,
+  firstStory,
 }: {
   story: BasicStoryData;
-  firstStoryDocs: ComponentDoc[] | undefined;
+  firstStory?: StoryTreeItem;
 }) => {
   const key = story?.slug || "none";
   const docs = useDocs(key, story?.component?._payload?._result, story?.meta);
+  const firstStoryDocs = useDocs(
+    firstStory?.story.slug || "none",
+    firstStory?.story.component?._payload?._result,
+    firstStory?.story.meta
+  );
 
   if (equal(docs, firstStoryDocs)) {
     return null;
@@ -158,11 +163,6 @@ const StoryDocsPage = ({
   const params = useParams<{ docsPath: string }>();
   const [, ...nameParts] = params.docsPath?.split("-") || [];
   const name = nameParts.map((p) => headerCase(p)).join(" ");
-  const firstStoryDocs = useDocs(
-    firstStory.story.slug || "none",
-    firstStory.story.component?._payload?._result,
-    firstStory.story.meta
-  );
 
   return (
     <DocsLayout>
@@ -173,15 +173,18 @@ const StoryDocsPage = ({
             {firstStory.story.comment && (
               <StyledMarkdown>{firstStory.story.comment}</StyledMarkdown>
             )}
-            <StoryDiv
-              slug={firstStory.story.slug}
-              code={firstStory.story.code}
-            />
+            <Suspense fallback={"SUSPENDED SECOND LEVEL"}>
+              <StoryDiv
+                slug={firstStory.story.slug}
+                code={firstStory.story.code}
+                key={firstStory.story.slug}
+              />
+            </Suspense>
           </>
         )}
 
         <Suspense fallback={<Spinner style={{ height: 200 }} />}>
-          <DocsPropsTable story={firstStory.story} firstStoryDocs={[]} />
+          <DocsPropsTable story={firstStory.story} />
         </Suspense>
 
         {stories.length > 0 && (
@@ -206,7 +209,7 @@ const StoryDocsPage = ({
                   >
                     <DocsPropsTable
                       story={story.story}
-                      firstStoryDocs={firstStoryDocs}
+                      firstStory={firstStory}
                     />
                   </Suspense>
                 </div>
@@ -273,7 +276,7 @@ const MDXOnlyDocsPage = ({ id }: { id: string }) => {
   );
 };
 
-const DocsContent = () => {
+const DocsContent = React.memo(() => {
   const tree = useStoryTree();
   const params = useParams<{ docsPath: string }>();
   const [firstStory, ...restStories] = React.useMemo(() => {
@@ -291,6 +294,10 @@ const DocsContent = () => {
     return story;
   }, [params.docsPath]);
 
+  if (!firstStory) {
+    return null;
+  }
+
   if ("mdxFile" in firstStory) {
     return <MDXOnlyDocsPage id={firstStory.id} />;
   }
@@ -298,9 +305,9 @@ const DocsContent = () => {
   return (
     <StoryDocsPage stories={[firstStory as StoryTreeItem, ...restStories]} />
   );
-};
+});
 
-export const DocsPage = () => {
+export const DocsPage = React.memo(() => {
   const location = useLocation();
 
   return (
@@ -310,4 +317,4 @@ export const DocsPage = () => {
       </Suspense>
     </ErrorBoundary>
   );
-};
+});
