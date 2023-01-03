@@ -27,9 +27,10 @@ export function getDocsPlugin() {
             id.endsWith(".ts") ||
             id.endsWith(".tsx"))
         ) {
-          return endent`
-            ${src}
-          
+          return (
+            src +
+            "\n" +
+            endent`
             import * as currentModule from "${id}";
             let fwoosh_visited = [];
 
@@ -53,7 +54,8 @@ export function getDocsPlugin() {
             }
 
             fwoosh_traverseExports(currentModule);
-          `;
+          `
+          );
         }
 
         return src;
