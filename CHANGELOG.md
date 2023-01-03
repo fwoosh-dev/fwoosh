@@ -1,3 +1,31 @@
+# v0.0.52 (Tue Jan 03 2023)
+
+#### ⚠️ Pushed to `main`
+
+- remove completed todos ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`
+  - fix build ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - fix errors sticking when navigating ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `fwoosh`
+  - add support for meta in default ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - rename config option ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/utils`
+  - get story sort function working ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/props-panel`, `@fwoosh/source-panel`, `@fwoosh/story-description-panel`
+  - MDX only pages ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/components`, `@fwoosh/props-panel`
+  - add props loading placeholder ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/story-description-panel`
+  - add no description message ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/components`
+  - more ui improvements ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.51 (Mon Jan 02 2023)
 
 #### ⚠️ Pushed to `main`

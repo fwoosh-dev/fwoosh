@@ -1,3 +1,16 @@
+# v0.0.52 (Tue Jan 03 2023)
+
+#### ⚠️ Pushed to `main`
+
+- add props loading placeholder ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- more ui improvements ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.51 (Mon Jan 02 2023)
 
 #### ⚠️ Pushed to `main`

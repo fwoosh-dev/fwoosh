@@ -1,3 +1,16 @@
+# v0.0.52 (Tue Jan 03 2023)
+
+#### ⚠️ Pushed to `main`
+
+- MDX only pages ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add no description message ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.46 (Sat Dec 31 2022)
 
 #### ⚠️ Pushed to `main`

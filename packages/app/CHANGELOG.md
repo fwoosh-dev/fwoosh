@@ -1,3 +1,19 @@
+# v0.0.52 (Tue Jan 03 2023)
+
+#### ⚠️ Pushed to `main`
+
+- fix build ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix errors sticking when navigating ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- get story sort function working ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- MDX only pages ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- more ui improvements ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.50 (Mon Jan 02 2023)
 
 #### ⚠️ Pushed to `main`
