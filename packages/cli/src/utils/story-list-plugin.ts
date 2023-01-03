@@ -92,19 +92,12 @@ function createVirtualFile(config: FwooshFileDescriptor[]) {
   }
 
   return endent`
-      import { lazy } from "react";
-      import * as React from "react";
+    import { lazy } from "react";
+    import * as React from "react";
 
-      ${lazyComponents.join("")}
+    ${lazyComponents.join("")}
 
-      export let stories = { ${fileMap} };
-
-      if (import.meta.hot) {
-        import.meta.hot.accept((mod) => {
-          // TODO - figure out how to do this
-          import.meta.hot.invalidate();
-        });
-      }
+    export let stories = { ${fileMap} };
   `;
 }
 
