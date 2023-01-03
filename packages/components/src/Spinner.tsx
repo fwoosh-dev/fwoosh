@@ -45,6 +45,7 @@ const Wrapper = styled("div", {
 });
 
 export interface LazyLoaderProps {
+  /** Delay the spinner being shown for N ms. */
   delay?: number;
   children: React.ReactNode;
 }
