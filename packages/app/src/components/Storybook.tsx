@@ -48,6 +48,7 @@ const PanelContainer = styled("div", {
 
 const TabContent = styled(Tabs.Content, {
   display: "flex",
+  text: "sm",
 });
 
 const PanelResizer = styled("div", {
