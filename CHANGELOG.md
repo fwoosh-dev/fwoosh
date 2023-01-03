@@ -1,3 +1,16 @@
+# v0.0.54 (Tue Jan 03 2023)
+
+#### ⚠️ Pushed to `main`
+
+- `@fwoosh/app`, `fwoosh`
+  - add missing deps ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.53 (Tue Jan 03 2023)
 
 #### ⚠️ Pushed to `main`
