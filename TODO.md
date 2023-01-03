@@ -6,6 +6,9 @@
 - [ ] make sidebar and layout pluggable
 - [ ] add theming
 - [ ] decorator hook
+- [ ] pull description from component jsdoc
+- [ ] MDX only pages TOC
+- [ ] config as named export (ex: `export config: FwooshOptions = `)
 - [ ] search
 - [ ] command pallette?
 - [ ] add cache for docgen
