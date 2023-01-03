@@ -321,7 +321,7 @@ export const DocsPage = React.memo(() => {
 
   return (
     <ErrorBoundary key={location.pathname}>
-      <Suspense fallback={<Spinner />}>
+      <Suspense fallback={<Spinner>Loading documentation...</Spinner>}>
         <DocsContent />
       </Suspense>
     </ErrorBoundary>

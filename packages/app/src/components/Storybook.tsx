@@ -46,6 +46,10 @@ const PanelContainer = styled("div", {
   backgroundColor: "$gray0",
 });
 
+const TabsList = styled(Tabs.List, {
+  height: "$12",
+});
+
 const TabContent = styled(Tabs.Content, {
   display: "flex",
   text: "sm",
@@ -98,7 +102,7 @@ export const Storybook = () => {
         <HeaderTitle>{config.title}</HeaderTitle>
         {toolbarControls.length > 0 && (
           <StoryToolbar>
-            <Suspense fallback={<Spinner />}>
+            <Suspense fallback={<Spinner size={5} />}>
               {toolbarControls.map((Control) => (
                 <Control key={Control.componentName} storyPreviewId={id} />
               ))}
@@ -111,7 +115,7 @@ export const Storybook = () => {
       <SidebarLayout>
         <Sidebar>
           <SidebarItems>
-            <React.Suspense fallback={<Spinner delay={2000} />}>
+            <React.Suspense fallback={<Spinner delay={2000} size={8} />}>
               <StorybookSidebarTree />
             </React.Suspense>
           </SidebarItems>
@@ -134,8 +138,10 @@ export const Storybook = () => {
                   <Panel maxSize={75}>
                     <PanelContainer>
                       <Tabs.Root defaultValue={panels[0]?.componentName}>
-                        <Tabs.List>
-                          <Suspense fallback={<Spinner />}>
+                        <TabsList>
+                          <Suspense
+                            fallback={<Spinner delay={3000} size={5} />}
+                          >
                             {panels.map((Panel) => {
                               return (
                                 <Tabs.Trigger
@@ -147,7 +153,7 @@ export const Storybook = () => {
                               );
                             })}
                           </Suspense>
-                        </Tabs.List>
+                        </TabsList>
 
                         {panels.map((Panel) => (
                           <TabContent

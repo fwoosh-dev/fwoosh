@@ -12,8 +12,6 @@ const spin = keyframes({
 
 const SpinnerComponent = styled("div", {
   borderRadius: "50%",
-  width: "$10",
-  height: "$10",
   position: "relative",
   borderTop: ".3rem solid $gray6",
   borderRight: ".3rem solid $gray6",
@@ -65,15 +63,30 @@ export const DelayedRender = ({ delay = 1000, children }: LazyLoaderProps) => {
   return <>{children}</>;
 };
 
+type SpinnerProps = Pick<LazyLoaderProps, "delay"> &
+  React.ComponentProps<typeof Wrapper> & {
+    /** The size the spinner should display at. */
+    size?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
+    /** The message to display below the spinner. */
+    children?: React.ReactNode;
+  };
+
 export const Spinner = ({
   delay = 1000,
+  size = 10,
+  children,
   ...props
-}: Pick<LazyLoaderProps, "delay"> & React.ComponentProps<typeof Wrapper>) => {
+}: SpinnerProps) => {
   return (
     <DelayedRender delay={delay}>
       <Wrapper {...props}>
-        <SpinnerComponent />
-        <Message>Loading...</Message>
+        <SpinnerComponent
+          css={{
+            width: `$${size}`,
+            height: `$${size}`,
+          }}
+        />
+        {children && <Message>{children}</Message>}
       </Wrapper>
     </DelayedRender>
   );

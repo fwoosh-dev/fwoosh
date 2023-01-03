@@ -30,7 +30,7 @@ export const Story = () => {
 
   return (
     <ErrorBoundary key={params.storyId}>
-      <Suspense fallback={<Spinner />}>
+      <Suspense fallback={<Spinner>Loading story...</Spinner>}>
         {params.storyId ? (
           <StoryDiv slug={params.storyId} id={contextId || id} />
         ) : (
