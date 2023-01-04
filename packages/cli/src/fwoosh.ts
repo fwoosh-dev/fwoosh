@@ -7,7 +7,7 @@ import { createRequire } from "module";
 import { SyncBailHook, SyncWaterfallHook } from "tapable";
 import mdx from "@mdx-js/rollup";
 import remarkFrontmatter from "remark-frontmatter";
-import { sortTree } from "@fwoosh/utils";
+import { log, sortTree } from "@fwoosh/utils";
 import bodyParser from "body-parser";
 
 import type { FwooshHooks, FwooshOptions } from "./types";
@@ -50,6 +50,14 @@ export class Fwoosh {
       renderStory: new SyncBailHook(),
       generateDocs: new SyncBailHook(["pathToFile"]),
     };
+
+    this.hooks.generateDocs.intercept({
+      call: (filepath: string) => {
+        log.info(
+          `Generating docs for ${path.relative(process.cwd(), filepath)}`
+        );
+      },
+    });
   }
 
   loadPlugins = async () => {
