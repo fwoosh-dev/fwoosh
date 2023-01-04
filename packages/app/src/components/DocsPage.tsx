@@ -190,7 +190,7 @@ const StoryDocsPage = ({
           <>
             <components.h2 id="stories">Stories</components.h2>
             {stories.map((story) => {
-              if ("mdxFile" in story || "children" in story) {
+              if (story.type === "mdx" || story.type === "tree") {
                 return null;
               }
 
@@ -233,7 +233,7 @@ const StoryDocsPage = ({
           </a>
           <NavGroup>
             {stories.map((story) => {
-              if ("mdxFile" in story || "children" in story) {
+              if (story.type === "mdx" || story.type === "tree") {
                 return null;
               }
 
@@ -297,7 +297,7 @@ const DocsContent = React.memo(() => {
     return null;
   }
 
-  if ("mdxFile" in firstStory) {
+  if (firstStory.type === "mdx") {
     return <MDXOnlyDocsPage id={firstStory.id} />;
   }
 

@@ -20,7 +20,7 @@ function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
     paddingLeft: (style.paddingLeft as number) + SIDEBAR_ITEM_INDENT,
   };
 
-  if ("story" in node.data) {
+  if (node.data.type === "story") {
     const slug = ((node.data as unknown) as StoryTreeItem).story.slug;
     const isActive = slug === node.tree.props.selection;
 
@@ -42,7 +42,7 @@ function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
   }
 
   const isChildActive =
-    node.tree.props.selection && "children" in node.data
+    node.tree.props.selection && node.data.type === "tree"
       ? hasActiveChild(node.data, node.tree.props.selection)
       : false;
 

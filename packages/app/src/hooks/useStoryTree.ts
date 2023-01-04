@@ -23,11 +23,13 @@ function getStories() {
                 name: level,
                 id: levels.slice(0, index + 1).join("-"),
                 mdxFile: story.mdxFile,
+                type: "mdx",
               }
             : {
                 name: level,
                 id: levels.slice(0, index + 1).join("-"),
                 children: [],
+                type: "tree",
               };
           treeData.push(currentItem);
         }
@@ -35,15 +37,16 @@ function getStories() {
         continue;
       }
 
-      if ("children" in currentItem) {
+      if (currentItem.type === "tree") {
         const childItem = currentItem.children.find(
           (item) => "name" in item && item.name === level
         );
 
-        if (childItem && "children" in childItem) {
+        if (childItem && childItem.type === "tree") {
           currentItem = childItem;
         } else {
-          const newItem = {
+          const newItem: StoryTree = {
+            type: "tree",
             name: level,
             id: levels.slice(0, index + 1).join("-"),
             children: [],
@@ -55,7 +58,7 @@ function getStories() {
         // Push the story as a leaf
         if (index === levels.length - 1 && currentItem) {
           const folderIndex = currentItem.children.findIndex(
-            (i) => "children" in i
+            (i) => i.type === "tree"
           );
           const insertIndex =
             folderIndex > -1 ? folderIndex : currentItem.children.length;
@@ -65,12 +68,14 @@ function getStories() {
               name: story.title,
               story,
               id: story.slug,
+              type: "story",
             });
           } else {
             currentItem.children.splice(insertIndex, 0, {
               name: story.title,
               mdxFile: story.mdxFile,
               id: story.slug,
+              type: "mdx",
             });
           }
         }
@@ -104,11 +109,11 @@ export const useStoryTree = () => {
 export const getFirstStory = (tree: StorySidebarChildItem[]): StoryData => {
   const first = tree[0];
 
-  if ("story" in first) {
+  if (first.type === "story") {
     return first.story;
   }
 
-  if ("children" in first) {
+  if (first.type === "tree") {
     return getFirstStory(first.children);
   }
 
@@ -127,12 +132,12 @@ export const getStoryGroup = (
       continue;
     }
 
-    if ("children" in currentItem) {
+    if (currentItem.type === "tree") {
       const childItem = currentItem.children.find(
         (item) => "name" in item && item.name === part
       );
 
-      if (childItem && "children" in childItem) {
+      if (childItem && childItem.type === "tree") {
         currentItem = childItem;
       }
     }
@@ -140,7 +145,7 @@ export const getStoryGroup = (
 
   return !currentItem
     ? undefined
-    : "children" in currentItem
+    : currentItem.type === "tree"
     ? currentItem.children
     : [currentItem];
 };
@@ -148,7 +153,7 @@ export const getStoryGroup = (
 export const hasActiveChild = (tree: StoryTree, slug: string): boolean => {
   return tree.children.some(
     (item) =>
-      ("story" in item && item.story.slug === slug) ||
-      ("children" in item && hasActiveChild(item, slug))
+      (item.type === "story" && item.story.slug === slug) ||
+      (item.type === "tree" && hasActiveChild(item, slug))
   );
 };

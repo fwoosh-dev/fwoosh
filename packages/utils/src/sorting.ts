@@ -6,7 +6,7 @@ export function sortTree(
 ): StorySidebarChildItem[] {
   return tree
     .map((item) => {
-      if ("children" in item) {
+      if (item.type === "tree") {
         return {
           ...item,
           children: sortTree(item.children, sortFn),
@@ -23,7 +23,7 @@ export function matchTreeSortingOrder(
   b: StorySidebarChildItem[]
 ): StorySidebarChildItem[] {
   const withSortedChildren = a.map((item) => {
-    if ("children" in item) {
+    if (item.type === "tree") {
       const bItem = b.find((bItem) => bItem.id === item.id);
 
       return {

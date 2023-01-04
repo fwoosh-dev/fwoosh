@@ -60,12 +60,14 @@ declare module "@fwoosh/app/ui" {
   import { BasicStoryData, MDXStoryData } from "@fwoosh/app/stories";
 
   export interface StoryTreeItem {
+    type: "story";
     story: BasicStoryData;
     id: string;
     name: string;
   }
 
   export interface MDXPageTreeItem {
+    type: "mdx";
     mdxFile: MDXStoryData;
     id: string;
     name: string;
@@ -77,6 +79,7 @@ declare module "@fwoosh/app/ui" {
     | MDXPageTreeItem;
 
   export interface StoryTree {
+    type: "tree";
     name: string;
     id: string;
     children: StorySidebarChildItem[];
