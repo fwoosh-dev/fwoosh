@@ -1,3 +1,17 @@
+# v0.0.59 (Wed Jan 04 2023)
+
+#### ⚠️ Pushed to `main`
+
+- `fwoosh`
+  - fix getting comment ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add coode back ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.58 (Wed Jan 04 2023)
 
 #### ⚠️ Pushed to `main`
