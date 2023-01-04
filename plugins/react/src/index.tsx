@@ -49,13 +49,24 @@ export default class ReactPlugin implements Plugin {
     let files = new Set<string>();
 
     function createProgram() {
-      return ts.createProgram(
+      const newProgram = ts.createProgram(
         Array.from(files),
         compilerOptions,
         undefined,
         tsProgram
       );
+      tsProgram = newProgram;
+      return newProgram;
     }
+
+    fwoosh.hooks.generateDocs.tap(this.name, (filepath) => {
+      files.add(filepath);
+      const docs1 = docGenParser.parseWithProgramProvider(
+        filepath,
+        createProgram
+      );
+      return docs1;
+    });
 
     fwoosh.hooks.renderStory.tap(this.name, () => {
       return `
@@ -85,15 +96,6 @@ export default class ReactPlugin implements Plugin {
           }
         }      
       `;
-    });
-
-    fwoosh.hooks.generateDocs.tap(this.name, (filepath) => {
-      files.add(filepath);
-      const docs1 = docGenParser.parseWithProgramProvider(
-        filepath,
-        createProgram
-      );
-      return docs1;
     });
   }
 }
