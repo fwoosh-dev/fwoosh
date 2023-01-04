@@ -1,3 +1,18 @@
+# v0.0.63 (Wed Jan 04 2023)
+
+#### ⚠️ Pushed to `main`
+
+- `fwoosh`
+  - fix deprecation warning ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - move startup to info log ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add logs for other hooks ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.62 (Wed Jan 04 2023)
 
 #### ⚠️ Pushed to `main`
