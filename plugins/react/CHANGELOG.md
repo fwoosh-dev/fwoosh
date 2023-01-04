@@ -1,3 +1,15 @@
+# v0.0.62 (Wed Jan 04 2023)
+
+#### ⚠️ Pushed to `main`
+
+- re-us ts.Program to speed up type generation ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.47 (Sat Dec 31 2022)
 
 #### ⚠️ Pushed to `main`

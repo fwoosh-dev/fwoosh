@@ -1,3 +1,15 @@
+# v0.0.62 (Wed Jan 04 2023)
+
+#### ⚠️ Pushed to `main`
+
+- add info log for docs generating ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.61 (Wed Jan 04 2023)
 
 #### ⚠️ Pushed to `main`

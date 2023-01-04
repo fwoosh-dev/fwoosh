@@ -1,3 +1,18 @@
+# v0.0.62 (Wed Jan 04 2023)
+
+#### ⚠️ Pushed to `main`
+
+- `fwoosh`
+  - add info log for docs generating ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/react`
+  - re-us ts.Program to speed up type generation ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.61 (Wed Jan 04 2023)
 
 #### ⚠️ Pushed to `main`
