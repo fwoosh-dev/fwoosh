@@ -1,4 +1,4 @@
-import swc from "@swc/core";
+import swc, { ImportDeclaration, Module } from "@swc/core";
 import { promises as fs } from "fs";
 import { paramCase, capitalCase } from "change-case";
 import glob from "fast-glob";
@@ -45,11 +45,7 @@ export async function convertMarkdownToHtml(markdown: string) {
   return sanitizeString(String(html));
 }
 
-let parsed = 1;
-
-function getComment(contents: string, d: { span: { start: number } }) {
-  let i = d.span.start - parsed;
-
+async function getComment(contents: string, i: number) {
   while (contents[i] !== "\n") {
     i--;
   }
@@ -75,14 +71,14 @@ function getComment(contents: string, d: { span: { start: number } }) {
       comment.unshift(contents[i--]);
     }
 
-    return convertMarkdownToHtml(comment.join(""));
+    return await convertMarkdownToHtml(comment.join(""));
   }
 }
 
-function getComponentPath(ast: swc.Module, file: string, value: string) {
+function getComponentPath(ast: Module, file: string, value: string) {
   const imports = ast.body.filter(
     (node) => node.type === "ImportDeclaration"
-  ) as swc.ImportDeclaration[];
+  ) as ImportDeclaration[];
   const componentImport = imports.find((node) =>
     node.specifiers.find((s) => s.local.value === value)
   );
@@ -131,10 +127,13 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
       const [, frontmatter] = contents.match(/^---\n(.+)\n---/) || [];
 
       if (frontmatter) {
-        data.push({
+        const fileDescriptor: FwooshFileDescriptor = {
           meta: yaml.load(frontmatter) as StoryMeta,
           mdxFile: fullPath,
-        });
+        };
+
+        data.push(fileDescriptor);
+        log.trace("Found MDX file:", fileDescriptor);
       }
     } catch (e) {
       console.error(e);
@@ -182,7 +181,10 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
         const code = await markdownToHtml.process(
           endent`
               \`\`\`tsx
-              ${contents.slice(d.span.start - parsed, d.span.end - parsed)}
+              ${contents.slice(
+                d.span.start - ast.span.start,
+                d.span.end - ast.span.start
+              )}
               \`\`\`
             `
         );
@@ -192,15 +194,18 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
           title: capitalCase(exportName),
           slug: `${paramCase(meta.title)}--${paramCase(exportName)}`,
           file: fullPath,
-          comment: await getComment(contents, d),
+          comment: await getComment(contents, d.span.start - ast.span.start),
           code: sanitizeString(String(code)),
         };
       })
     );
 
-    data.push({ stories, meta: { ...meta, file: fullPath } });
-    // TODO - this is a hack to get the correct span for the next story
-    parsed = ast.span.end + 2;
+    const fileDescriptor: FwooshFileDescriptor = {
+      stories,
+      meta: { ...meta, file: fullPath },
+    };
+    data.push(fileDescriptor);
+    log.trace("Found story file:", fileDescriptor);
   }
 
   log.info(`Completed parsing ${filename}!`);
