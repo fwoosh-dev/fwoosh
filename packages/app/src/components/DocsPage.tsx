@@ -1,7 +1,5 @@
 import React, { Suspense } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import equal from "fast-deep-equal/react";
-import type { ComponentDoc } from "react-docgen-typescript";
 import { useId } from "@radix-ui/react-id";
 import { BasicStoryData } from "@fwoosh/app/stories";
 import { useDocs } from "@fwoosh/app/docs";
@@ -23,6 +21,7 @@ import { getStoryGroup, useStoryTree } from "../hooks/useStoryTree";
 import * as styles from "./DocsPage.module.css";
 import { useRender } from "../hooks/useRender";
 import { MDXProvider } from "@mdx-js/react";
+import { StoryMeta } from "fwoosh";
 
 const DocsLayout = styled("div", {
   display: "grid",
@@ -138,9 +137,14 @@ const StoryDiv = React.memo(
   }
 );
 
-const DocsPropsTable = ({ story }: { story: BasicStoryData }) => {
-  const key = story?.slug || "none";
-  const docs = useDocs(key, story?.component?._payload?._result);
+const DocsPropsTable = ({
+  story,
+  meta,
+}: {
+  story: BasicStoryData;
+  meta: StoryMeta;
+}) => {
+  const docs = useDocs(story.slug, meta);
 
   return (
     <div style={{ height: "fit-content" }}>
@@ -174,12 +178,14 @@ const StoryDocsPage = ({
                 key={firstStory.story.slug}
               />
             </Suspense>
+            <Suspense fallback={<Spinner style={{ height: 200 }} />}>
+              <DocsPropsTable
+                story={firstStory.story}
+                meta={firstStory.story.meta}
+              />
+            </Suspense>
           </>
         )}
-
-        <Suspense fallback={<Spinner style={{ height: 200 }} />}>
-          <DocsPropsTable story={firstStory.story} />
-        </Suspense>
 
         {stories.length > 0 && (
           <>
@@ -201,7 +207,10 @@ const StoryDocsPage = ({
                   <Suspense
                     fallback={<Spinner style={{ height: 200 }} delay={2000} />}
                   >
-                    <DocsPropsTable story={story.story} />
+                    <DocsPropsTable
+                      story={story.story}
+                      meta={story.story?.component?._payload?._result}
+                    />
                   </Suspense>
                 </div>
               );
