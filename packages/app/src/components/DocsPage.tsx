@@ -138,24 +138,9 @@ const StoryDiv = React.memo(
   }
 );
 
-const DocsPropsTable = ({
-  story,
-  firstStory,
-}: {
-  story: BasicStoryData;
-  firstStory?: StoryTreeItem;
-}) => {
+const DocsPropsTable = ({ story }: { story: BasicStoryData }) => {
   const key = story?.slug || "none";
-  const docs = useDocs(key, story?.component?._payload?._result, story?.meta);
-  const firstStoryDocs = useDocs(
-    firstStory?.story.slug || "none",
-    firstStory?.story.component?._payload?._result,
-    firstStory?.story.meta
-  );
-
-  if (equal(docs, firstStoryDocs)) {
-    return null;
-  }
+  const docs = useDocs(key, story?.component?._payload?._result);
 
   return (
     <div style={{ height: "fit-content" }}>
@@ -216,10 +201,7 @@ const StoryDocsPage = ({
                   <Suspense
                     fallback={<Spinner style={{ height: 200 }} delay={2000} />}
                   >
-                    <DocsPropsTable
-                      story={story.story}
-                      firstStory={firstStory}
-                    />
+                    <DocsPropsTable story={story.story} />
                   </Suspense>
                 </div>
               );

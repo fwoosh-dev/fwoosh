@@ -79,19 +79,19 @@ export function getDocsPlugin() {
           import * as React from "react";
           import { useQuery } from "react-query";
           
-          async function resolveComponents(story, fallback) {
-            let resolvedMeta;
+          async function resolveComponents(story) {
+            let component;
 
             // Components declared on the story
             if (story?.component) {
-              resolvedMeta = story;
+              component = story;
             } 
             // Resolved lazy component
             else if (story?.then) {
               const resolvedPromise = await story;
           
               if (resolvedPromise.component) {
-                resolvedMeta = resolvedPromise;
+                component = resolvedPromise;
               }
             }
             // Unresolved lazy component
@@ -99,34 +99,26 @@ export function getDocsPlugin() {
               const resolvedPromise = (await story()).default;
 
               if (resolvedPromise?.component) {
-                resolvedMeta = resolvedPromise;
+                component = resolvedPromise;
               }
             }
-
-            if (!resolvedMeta && fallback) {
-              resolvedMeta = resolveComponents(fallback, undefined);
-            }
           
-            return resolvedMeta
+            return component
           }
           
-          export const useDocs = (key, story, meta) => {
+          export const useDocs = (key, story) => {
             const { data } = useQuery(
               key,
               async () => {
-                if (!meta) {
+                const component = await resolveComponents(story);
+          
+                if (!component?.component) {
                   return;
                 }
           
-                const resolvedMeta = await resolveComponents(story, meta);
-          
-                if (!resolvedMeta?.component) {
-                  return;
-                }
-          
-                const components = Array.isArray(resolvedMeta.component)
-                  ? resolvedMeta.component
-                  : [resolvedMeta.component];
+                const components = Array.isArray(component.component)
+                  ? component.component
+                  : [component.component];
                 const displayedComponents = components.map((c) => c.displayName);
                 const file = components[0].fwoosh_file;
                 const params = new URLSearchParams({ file });

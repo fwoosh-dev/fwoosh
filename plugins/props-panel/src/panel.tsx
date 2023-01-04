@@ -24,8 +24,7 @@ function PropsPanelContent() {
     key,
     story && "component" in story
       ? story?.component?._payload?._result
-      : undefined,
-    story?.meta
+      : undefined
   );
 
   return (
