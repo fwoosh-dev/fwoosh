@@ -1,7 +1,7 @@
 {
   "name": "@fwoosh/zoom",
   "type": "module",
-  "version": "0.0.61",
+  "version": "0.0.62",
   "description": "Toolbar plugin to controls the zoom level of the story.",
   "main": "dist/index.js",
   "author": "Andrew Lisowski <lisowski54@gmail.com>",
