@@ -21,7 +21,6 @@ import { getStoryGroup, useStoryTree } from "../hooks/useStoryTree";
 import * as styles from "./DocsPage.module.css";
 import { useRender } from "../hooks/useRender";
 import { MDXProvider } from "@mdx-js/react";
-import { StoryMeta } from "fwoosh";
 
 const DocsLayout = styled("div", {
   display: "grid",
@@ -142,7 +141,7 @@ const DocsPropsTable = ({
   meta,
 }: {
   story: BasicStoryData;
-  meta: StoryMeta;
+  meta: { component: any };
 }) => {
   const docs = useDocs(story.slug, meta);
 
