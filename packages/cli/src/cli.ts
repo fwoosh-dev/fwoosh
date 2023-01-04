@@ -111,8 +111,9 @@ async function run() {
     }
   }
 
+  const { log } = await import("@fwoosh/utils");
   const end = process.hrtime(start);
-  console.info(`\n🔥 Took ${ms(end[1] / 1000000)}`);
+  log.info(`Dev server start up took: ${ms(end[1] / 1000000)}`);
 }
 
 run();
