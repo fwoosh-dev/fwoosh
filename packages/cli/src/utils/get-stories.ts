@@ -188,7 +188,7 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
           title: capitalCase(exportName),
           slug: `${paramCase(meta.title)}--${paramCase(exportName)}`,
           file: fullPath,
-          comment: getComment(contents, d),
+          comment: await getComment(contents, d),
           code: sanitizeString(String(code)),
         };
       })
