@@ -1,3 +1,18 @@
+# v0.0.60 (Wed Jan 04 2023)
+
+#### ⚠️ Pushed to `main`
+
+- `fwoosh`
+  - fix parsing comment in parallel ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `fwoosh`, `@fwoosh/utils`
+  - add logging util ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.59 (Wed Jan 04 2023)
 
 #### ⚠️ Pushed to `main`
