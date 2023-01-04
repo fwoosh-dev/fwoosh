@@ -1,6 +1,9 @@
 import swc, { ImportDeclaration, Module } from "@swc/core";
 import { promises as fs } from "fs";
 import { paramCase, capitalCase } from "change-case";
+import ms from "pretty-ms";
+import { performance } from "perf_hooks";
+
 import glob from "fast-glob";
 import path from "path";
 import { createRequire } from "module";
@@ -116,6 +119,7 @@ export type FwooshFileDescriptor = StoryFileDescriptor | MDXFileDescriptor;
 
 async function getStory(file: string, data: FwooshFileDescriptor[]) {
   const filename = path.basename(file);
+  const start = performance.now();
 
   log.info(`Parsing ${filename}...`);
 
@@ -208,14 +212,23 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
     log.trace("Found story file:", fileDescriptor);
   }
 
-  log.info(`Completed parsing ${filename}!`);
+  const end = performance.now();
+
+  log.info(`Completed parsing ${filename} (${ms(end - start)})`);
 }
 
 export async function getStories({ stories, outDir }: FwooshOptions) {
-  const files = await getStoryList({ stories, outDir });
   const data: FwooshFileDescriptor[] = [];
 
+  const startFiles = performance.now();
+  const files = await getStoryList({ stories, outDir });
+  const endFiles = performance.now();
+  log.info(`Get stories: (${ms(endFiles - startFiles)})`);
+
+  const startStories = performance.now();
   await Promise.all(files.map((file) => getStory(file, data)));
+  const endStories = performance.now();
+  log.info(`Parse stories: (${ms(endStories - startStories)})`);
 
   return data;
 }

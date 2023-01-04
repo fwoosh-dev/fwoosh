@@ -1,5 +1,6 @@
 import { pascalCase } from "change-case";
 import chokidar from "chokidar";
+import ms from "pretty-ms";
 
 import { endent } from "./endent.js";
 import { FwooshOptions, Story } from "../types";
@@ -9,6 +10,7 @@ import {
   MDXFileDescriptor,
 } from "./get-stories.js";
 import { ViteDevServer } from "vite";
+import { log } from "@fwoosh/utils";
 
 const defaultListModule = endent`
   import { lazy } from "react";
@@ -135,10 +137,11 @@ export function storyListPlugin(config: FwooshOptions) {
         ignored: /node_modules/,
       });
 
-      async function reload() {
+      async function reload(path: string) {
         const mod = await server.moduleGraph.getModuleByUrl(virtualFileId);
 
         if (mod) {
+          log.info("Reloading, changes detected in stories:", path);
           server.reloadModule(mod);
         }
       }

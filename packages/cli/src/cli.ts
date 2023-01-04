@@ -80,7 +80,7 @@ const fwooshCli: MultiCommand = {
 };
 
 async function run() {
-  const start = process.hrtime();
+  const start = performance.now();
   const options = app(fwooshCli);
   const { config = {} } = (await explorer.search()) || {};
   const fwooshOptions = { ...options, ...config.default } as FwooshOptions;
@@ -112,8 +112,8 @@ async function run() {
   }
 
   const { log } = await import("@fwoosh/utils");
-  const end = process.hrtime(start);
-  log.info(`Dev server start up took: ${ms(end[1] / 1000000)}`);
+  const end = performance.now();
+  log.info(`Dev server start up took: ${ms(end - start)}`);
 }
 
 run();

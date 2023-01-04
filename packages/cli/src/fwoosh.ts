@@ -1,4 +1,5 @@
 import { promises as fs } from "fs";
+import ms from "pretty-ms";
 import boxen from "boxen";
 import path from "path";
 import { createServer, InlineConfig } from "vite";
@@ -76,14 +77,6 @@ export class Fwoosh {
               return `${indent}-  ${terminalLink(i, i)}`;
             })
             .join("\n")
-        );
-      },
-    });
-
-    this.hooks.generateDocs.intercept({
-      call: (filepath: string) => {
-        log.info(
-          `Generating docs for ${path.relative(process.cwd(), filepath)}`
         );
       },
     });
@@ -211,7 +204,16 @@ export class Fwoosh {
         .replace("http://localhost:3000/@fs", "")
         .replace("/dist/", "/src/")
         .replace(".js", ".tsx");
+
+      const generateDocsStart = performance.now();
       const docs = this.hooks.generateDocs.call(file);
+      const generateDocsEnd = performance.now();
+      log.info(
+        `Generate docs: ${path.relative(process.cwd(), file)} (${ms(
+          generateDocsEnd - generateDocsStart
+        )})`
+      );
+
       const docsWithHtmlDescriptions = await Promise.all(
         docs.map(async (doc) => ({
           ...doc,
