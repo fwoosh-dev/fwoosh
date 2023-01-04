@@ -1,3 +1,18 @@
+# v0.0.61 (Wed Jan 04 2023)
+
+#### ⚠️ Pushed to `main`
+
+- `fwoosh`
+  - improve default sort - respect story definition order ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/utils`
+  - improve typing ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.60 (Wed Jan 04 2023)
 
 #### ⚠️ Pushed to `main`
