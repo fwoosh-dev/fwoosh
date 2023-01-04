@@ -899,7 +899,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fwoosh/utils@workspace:packages/utils"
   dependencies:
+    "@types/lodash.chunk": ^4.2.7
     consola: ^2.15.3
+    lodash.chunk: ^4.2.0
   languageName: unknown
   linkType: soft
 
@@ -3093,6 +3095,22 @@ __metadata:
   version: 0.0.29
   resolution: "@types/json5@npm:0.0.29"
   checksum: e60b153664572116dfea673c5bda7778dbff150498f44f998e34b5886d8afc47f16799280e4b6e241c0472aef1bc36add771c569c68fc5125fc2ae519a3eb9ac
+  languageName: node
+  linkType: hard
+
+"@types/lodash.chunk@npm:^4.2.7":
+  version: 4.2.7
+  resolution: "@types/lodash.chunk@npm:4.2.7"
+  dependencies:
+    "@types/lodash": "*"
+  checksum: 09df5ca00d8866776038bf94658d30b4ea84bffe5f81c14c01568bcb6be692bf59f6ea093de2bb0afbb3f8e54ae96ebd97595f2838ab59b77865427ca77d391e
+  languageName: node
+  linkType: hard
+
+"@types/lodash@npm:*":
+  version: 4.14.191
+  resolution: "@types/lodash@npm:4.14.191"
+  checksum: ba0d5434e10690869f32d5ea49095250157cae502f10d57de0a723fd72229ce6c6a4979576f0f13e0aa9fbe3ce2457bfb9fa7d4ec3d6daba56730a51906d1491
   languageName: node
   linkType: hard
 

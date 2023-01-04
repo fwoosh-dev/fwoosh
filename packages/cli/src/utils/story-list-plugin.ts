@@ -137,18 +137,18 @@ export function storyListPlugin(config: FwooshOptions) {
         ignored: /node_modules/,
       });
 
-      async function reload(path: string) {
+      const reload = (type: string) => async (path: string) => {
         const mod = await server.moduleGraph.getModuleByUrl(virtualFileId);
 
         if (mod) {
-          log.info("Reloading, changes detected in stories:", path);
+          log.info(`Reloading, story "${type}" detected:`, path);
           server.reloadModule(mod);
         }
-      }
+      };
 
-      storyWatcher.on("add", reload);
-      storyWatcher.on("change", reload);
-      storyWatcher.on("unlink", reload);
+      storyWatcher.on("add", reload("add"));
+      storyWatcher.on("change", reload("change"));
+      storyWatcher.on("unlink", reload("unlink"));
     },
   };
 }

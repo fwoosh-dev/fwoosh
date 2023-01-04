@@ -17,7 +17,7 @@ import rehypeStringify from "rehype-stringify";
 
 import { FwooshOptions, ResolvedStoryMeta, Story, StoryMeta } from "../types";
 import { endent } from "./endent.js";
-import { log } from "@fwoosh/utils";
+import { chunkPromisesTimes, log } from "@fwoosh/utils";
 
 const require = createRequire(import.meta.url);
 
@@ -121,7 +121,7 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
   const filename = path.basename(file);
   const start = performance.now();
 
-  log.info(`Parsing ${filename}...`);
+  log.info(`Parse: ${filename}...`);
 
   const contents = await fs.readFile(file, "utf8");
   const fullPath = path.resolve(file);
@@ -143,12 +143,15 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
       console.error(e);
     }
   } else {
+    const startAst = performance.now();
     const ast = await swc.parse(contents, {
       syntax: "typescript",
       tsx: true,
       comments: false,
       script: true,
     });
+    const endAst = performance.now();
+    log.info(`Parse AST: ${filename} (${ms(endAst - startAst)})`);
 
     const exports = ast.body.filter(
       (node) => node.type === "ExportDeclaration"
@@ -179,6 +182,7 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
     );
     const storiesDeclarations = exports.filter((e) => e !== metaDeclaration);
 
+    const startMDToHTML = performance.now();
     const stories: Story[] = await Promise.all(
       (storiesDeclarations as any).map(async (d: any) => {
         const exportName = d.declaration.declarations[0].id.value;
@@ -203,6 +207,8 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
         };
       })
     );
+    const endMDToHTML = performance.now();
+    log.info(`Generate highlighted code:(${ms(endMDToHTML - startMDToHTML)})`);
 
     const fileDescriptor: FwooshFileDescriptor = {
       stories,
@@ -214,19 +220,23 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
 
   const end = performance.now();
 
-  log.info(`Completed parsing ${filename} (${ms(end - start)})`);
+  log.info(`Parse complete: ${filename} (${ms(end - start)})\n`);
 }
 
 export async function getStories({ stories, outDir }: FwooshOptions) {
-  const data: FwooshFileDescriptor[] = [];
-
   const startFiles = performance.now();
   const files = await getStoryList({ stories, outDir });
   const endFiles = performance.now();
+
   log.info(`Get stories: (${ms(endFiles - startFiles)})`);
+  log.info(`Found ${files.length} files`);
+  log.debug(files);
 
   const startStories = performance.now();
-  await Promise.all(files.map((file) => getStory(file, data)));
+  const data: FwooshFileDescriptor[] = [];
+
+  await chunkPromisesTimes(files, 1, (file) => getStory(file, data));
+
   const endStories = performance.now();
   log.info(`Parse stories: (${ms(endStories - startStories)})`);
 
