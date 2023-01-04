@@ -1,3 +1,20 @@
+# v0.0.58 (Wed Jan 04 2023)
+
+#### ⚠️ Pushed to `main`
+
+- fix build ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- simplify logic for displaying props tables for stories and root ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- don't fallback to meta.component when not on a story ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- clean up spinners ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- decrease text size in actions panel ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- organize code ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.57 (Tue Jan 03 2023)
 
 #### ⚠️ Pushed to `main`

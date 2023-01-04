@@ -1,3 +1,19 @@
+# v0.0.58 (Wed Jan 04 2023)
+
+#### ⚠️ Pushed to `main`
+
+- add tabs docs ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- clean up spinners ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix chevron size/color ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- align spacing across panels ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add stories for testing ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.57 (Tue Jan 03 2023)
 
 #### ⚠️ Pushed to `main`

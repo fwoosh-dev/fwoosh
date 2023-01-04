@@ -1,3 +1,38 @@
+# v0.0.58 (Wed Jan 04 2023)
+
+#### ⚠️ Pushed to `main`
+
+- update example name ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`
+  - fix build ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - simplify logic for displaying props tables for stories and root ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - decrease text size in actions panel ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - organize code ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `fwoosh`
+  - improve startup speed by loading stories in parallel ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add alphabetic sort as default ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - turn on hmr for storeis file ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - reload stories on changes ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - mix stories with same name creating collisions ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/props-panel`
+  - don't fallback to meta.component when not on a story ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/utils`
+  - fix sorting sub tree ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/components`
+  - add tabs docs ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - fix chevron size/color ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add stories for testing ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/components`
+  - clean up spinners ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/components`, `@fwoosh/source-panel`
+  - align spacing across panels ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.57 (Tue Jan 03 2023)
 
 #### ⚠️ Pushed to `main`

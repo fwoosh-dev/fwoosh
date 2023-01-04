@@ -1,3 +1,20 @@
+# v0.0.58 (Wed Jan 04 2023)
+
+#### ⚠️ Pushed to `main`
+
+- improve startup speed by loading stories in parallel ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- don't fallback to meta.component when not on a story ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add alphabetic sort as default ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- turn on hmr for storeis file ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- reload stories on changes ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- mix stories with same name creating collisions ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.57 (Tue Jan 03 2023)
 
 #### ⚠️ Pushed to `main`

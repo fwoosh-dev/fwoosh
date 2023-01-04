@@ -1,3 +1,15 @@
+# v0.0.58 (Wed Jan 04 2023)
+
+#### ⚠️ Pushed to `main`
+
+- don't fallback to meta.component when not on a story ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.52 (Tue Jan 03 2023)
 
 #### ⚠️ Pushed to `main`
