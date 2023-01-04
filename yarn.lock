@@ -898,6 +898,8 @@ __metadata:
 "@fwoosh/utils@workspace:packages/utils":
   version: 0.0.0-use.local
   resolution: "@fwoosh/utils@workspace:packages/utils"
+  dependencies:
+    consola: ^2.15.3
   languageName: unknown
   linkType: soft
 
@@ -4383,6 +4385,13 @@ __metadata:
     ini: ^1.3.4
     proto-list: ~1.2.1
   checksum: 828137a28e7c2fc4b7fb229bd0cd6c1397bcf83434de54347e608154008f411749041ee392cbe42fab6307e02de4c12480260bf769b7d44b778fdea3839eafab
+  languageName: node
+  linkType: hard
+
+"consola@npm:^2.15.3":
+  version: 2.15.3
+  resolution: "consola@npm:2.15.3"
+  checksum: 8ef7a09b703ec67ac5c389a372a33b6dc97eda6c9876443a60d76a3076eea0259e7f67a4e54fd5a52f97df73690822d090cf8b7e102b5761348afef7c6d03e28
   languageName: node
   linkType: hard
 

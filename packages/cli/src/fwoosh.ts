@@ -147,6 +147,11 @@ export class Fwoosh {
         },
       },
       assetsInclude: ["**/*.html"],
+      define: {
+        "process.env": {
+          LOG_LEVEL: process.env.LOG_LEVEL,
+        },
+      },
     };
 
     const vite = await createServer({

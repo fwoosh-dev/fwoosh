@@ -3,7 +3,6 @@ import ms from "pretty-ms";
 import ora from "ora";
 import { lilconfig } from "lilconfig";
 
-import { Fwoosh } from "./fwoosh.js";
 import { FwooshOptions } from "./types.js";
 
 const loadEsm = (filepath: string) => import(filepath);
@@ -49,6 +48,13 @@ const sharedOptions: Option[] = [
     type: String,
     defaultValue: "Component",
   },
+  {
+    name: "log-level",
+    description: "The amount of logs to print",
+    type: String,
+    defaultValue: "log",
+    typeLabel: "log | info | debug",
+  },
 ];
 
 const fwooshCli: MultiCommand = {
@@ -83,6 +89,12 @@ async function run() {
     fwooshOptions.stories = config.stories;
   }
 
+  if (options?.logLevel) {
+    process.env.LOG_LEVEL = options.logLevel;
+  }
+
+  // Dynamic import so we can set env vars before loading
+  const { Fwoosh } = await import("./fwoosh.js");
   const fwoosh = new Fwoosh(fwooshOptions);
 
   await fwoosh.loadPlugins();

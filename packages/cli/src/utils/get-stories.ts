@@ -14,6 +14,7 @@ import rehypeStringify from "rehype-stringify";
 
 import { FwooshOptions, ResolvedStoryMeta, Story, StoryMeta } from "../types";
 import { endent } from "./endent.js";
+import { log } from "@fwoosh/utils";
 
 const require = createRequire(import.meta.url);
 
@@ -119,6 +120,9 @@ export type FwooshFileDescriptor = StoryFileDescriptor | MDXFileDescriptor;
 
 async function getStory(file: string, data: FwooshFileDescriptor[]) {
   const filename = path.basename(file);
+
+  log.info(`Parsing ${filename}...`);
+
   const contents = await fs.readFile(file, "utf8");
   const fullPath = path.resolve(file);
 
@@ -198,6 +202,8 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
     // TODO - this is a hack to get the correct span for the next story
     parsed = ast.span.end + 2;
   }
+
+  log.info(`Completed parsing ${filename}!`);
 }
 
 export async function getStories({ stories, outDir }: FwooshOptions) {
