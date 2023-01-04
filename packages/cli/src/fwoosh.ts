@@ -9,6 +9,7 @@ import mdx from "@mdx-js/rollup";
 import remarkFrontmatter from "remark-frontmatter";
 import { log, sortTree } from "@fwoosh/utils";
 import bodyParser from "body-parser";
+import terminalLink from "terminal-link";
 
 import type { FwooshHooks, FwooshOptions } from "./types";
 import { storyListPlugin } from "./utils/story-list-plugin.js";
@@ -50,6 +51,34 @@ export class Fwoosh {
       renderStory: new SyncBailHook(),
       generateDocs: new SyncBailHook(["pathToFile"]),
     };
+
+    this.hooks.registerPanel.intercept({
+      result: (result) => {
+        log.info(
+          "Registered panels:\n",
+          result
+            .map((i, index) => {
+              const indent = index === 0 ? " " : "  ";
+              return `${indent}-  ${terminalLink(i.name, i.filepath)}`;
+            })
+            .join("\n")
+        );
+      },
+    });
+
+    this.hooks.registerToolbarControl.intercept({
+      result: (result) => {
+        log.info(
+          "Registered toolbars:\n",
+          result
+            .map((i, index) => {
+              const indent = index === 0 ? " " : "  ";
+              return `${indent}-  ${terminalLink(i, i)}`;
+            })
+            .join("\n")
+        );
+      },
+    });
 
     this.hooks.generateDocs.intercept({
       call: (filepath: string) => {
