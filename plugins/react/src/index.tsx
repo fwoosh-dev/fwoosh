@@ -73,7 +73,7 @@ export default class ReactPlugin implements Plugin {
         import React, { Suspense } from "react";
         import ReactDOM from "react-dom";
         import { stories } from "@fwoosh/app/stories";
-        import { Spinner } from "@fwoosh/components";
+        import { Spinner, ErrorBoundary } from "@fwoosh/components";
         
         export function render(el, slug) {
           if (!el) {
@@ -83,11 +83,15 @@ export default class ReactPlugin implements Plugin {
           try {
             ReactDOM.render(
               React.createElement(
-                Suspense,
-                {
-                  fallback: React.createElement(Spinner, { deley: 300 }),
-                },
-                React.createElement(stories[slug].component)
+                ErrorBoundary,
+                {},
+                React.createElement(
+                  Suspense,
+                  {
+                    fallback: React.createElement(Spinner, { deley: 300 }),
+                  },
+                  React.createElement(stories[slug].component)
+                )
               ),
               el
             );
