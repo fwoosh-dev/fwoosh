@@ -82,12 +82,8 @@ export function getDocsPlugin({ port }: { port: number }) {
             async function resolveComponents(meta) {
               let component;
             
-              if (typeof meta === "string") {
-                component = await import(/* @vite-ignore */meta)
-                  .then((module) => module.meta || module.default)
-              }
               // Components declared on the meta
-              else if (meta?.component) {
+              if (meta?.component) {
                 component = meta;
               }
               // Resolved lazy component
