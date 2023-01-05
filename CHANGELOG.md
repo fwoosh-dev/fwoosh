@@ -1,3 +1,19 @@
+# v0.0.72 (Thu Jan 05 2023)
+
+#### ⚠️ Pushed to `main`
+
+- fix clean script to include all tsbuildinfo files ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/react`
+  - add error boundary around react story ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/components`
+  - move error boundary into components ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.71 (Thu Jan 05 2023)
 
 #### ⚠️ Pushed to `main`

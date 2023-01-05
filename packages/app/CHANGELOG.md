@@ -1,3 +1,15 @@
+# v0.0.72 (Thu Jan 05 2023)
+
+#### ⚠️ Pushed to `main`
+
+- move error boundary into components ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.70 (Thu Jan 05 2023)
 
 #### ⚠️ Pushed to `main`
