@@ -1,3 +1,16 @@
+# v0.0.64 (Thu Jan 05 2023)
+
+#### ⚠️ Pushed to `main`
+
+- fix indentation of souce code ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- improve logging ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.61 (Wed Jan 04 2023)
 
 #### ⚠️ Pushed to `main`

@@ -1,3 +1,20 @@
+# v0.0.64 (Thu Jan 05 2023)
+
+#### ⚠️ Pushed to `main`
+
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/utils`, `@fwoosh/source-panel`
+  - fix indentation of souce code ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `fwoosh`, `@fwoosh/utils`
+  - improve logging ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `fwoosh`
+  - add better timing info ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.63 (Wed Jan 04 2023)
 
 #### ⚠️ Pushed to `main`
