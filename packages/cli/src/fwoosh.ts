@@ -19,6 +19,7 @@ import type { FwooshHooks, FwooshOptions } from "./types";
 import { storyListPlugin } from "./utils/story-list-plugin.js";
 import { renderStoryPlugin } from "./utils/render-story-plugin.js";
 import { getDocsPlugin } from "./utils/get-docs-plugin.js";
+import { fwooshSetupPlugin } from "./utils/fwoosh-setup-plugin.js";
 import { fwooshConfigPlugin } from "./utils/fwoosh-config-plugin.js";
 import { fwooshUiPlugin } from "./utils/fwoosh-ui-plugin.js";
 import { convertMarkdownToHtml } from "./utils/get-stories.js";
@@ -38,6 +39,7 @@ export class Fwoosh {
 
   constructor(options: FwooshOptions) {
     this.options = {
+      setup: "",
       open: false,
       modifyViteConfig: (config) => config,
       sortSidebarItems: (a, b) => {
@@ -49,6 +51,7 @@ export class Fwoosh {
         return a.name.localeCompare(b.name);
       },
       ...options,
+      stories: options.stories || ["**/*.stories.@(js|jsx|ts|tsx)"],
     };
     this.hooks = {
       registerPanel: new SyncWaterfallHook(["panels"]),
@@ -157,6 +160,7 @@ export class Fwoosh {
           remarkPlugins: [remarkFrontmatter],
           providerImportSource: "@mdx-js/react",
         }),
+        fwooshSetupPlugin({ file: this.options.setup }),
         fwooshUiPlugin({ toolbarControls, panels }),
         fwooshConfigPlugin(this.options),
         getDocsPlugin({ port }),

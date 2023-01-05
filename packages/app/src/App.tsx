@@ -1,3 +1,4 @@
+import "@fwoosh/app/setup";
 import React from "react";
 import {
   createBrowserRouter,
