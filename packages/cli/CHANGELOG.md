@@ -1,3 +1,15 @@
+# v0.0.65 (Thu Jan 05 2023)
+
+#### ⚠️ Pushed to `main`
+
+- fix string sanitization ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.64 (Thu Jan 05 2023)
 
 #### ⚠️ Pushed to `main`
