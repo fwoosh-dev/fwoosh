@@ -1,4 +1,3 @@
-import React from "react";
 import { stories, StoryData } from "@fwoosh/app/stories";
 import { StorySidebarChildItem, StoryTree } from "@fwoosh/app/ui";
 import { useQuery } from "react-query";
@@ -86,9 +85,9 @@ function getStories() {
   return treeData;
 }
 
-export const useStoryTree = () => {
-  const tree = React.useMemo(getStories, []);
+const tree = getStories();
 
+export const useStoryTree = () => {
   const { data = [] } = useQuery("storyTree", async () => {
     const res = await fetch("/sort", {
       method: "POST",
