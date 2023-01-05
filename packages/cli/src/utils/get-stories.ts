@@ -32,7 +32,7 @@ const markdownToHtml = unified()
   .use(gfm);
 
 export function sanitizeString(str: string) {
-  return str.replace(/`/g, "\\\\`").replace(/\${/g, "\\${");
+  return str.replace(/`/g, "\\`").replace(/\${/g, "\\${");
 }
 
 export async function convertMarkdownToHtml(markdown: string) {
