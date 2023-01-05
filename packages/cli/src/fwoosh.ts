@@ -260,8 +260,10 @@ export class Fwoosh {
         })
       );
 
-      process.env.OPEN_MATCH_HOST_ONLY = "true";
-      open(`http://localhost:${port}`);
+      if (this.options.open) {
+        process.env.OPEN_MATCH_HOST_ONLY = "true";
+        open(`http://localhost:${port}`);
+      }
     });
   }
 }
