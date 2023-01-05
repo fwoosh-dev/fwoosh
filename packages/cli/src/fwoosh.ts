@@ -274,7 +274,7 @@ export class Fwoosh {
 
       if (this.options.open) {
         process.env.OPEN_MATCH_HOST_ONLY = "true";
-        open(`http://localhost:${port}`);
+        open(`http://localhost:${port}/${this.options.open}`);
       }
     });
   }

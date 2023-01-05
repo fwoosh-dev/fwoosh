@@ -73,9 +73,10 @@ const fwooshCli: MultiCommand = {
         ...sharedOptions,
         {
           name: "open",
-          type: Boolean,
+          type: String,
           description: "Open the browser to the dev server",
           defaultValue: false,
+          typeLabel: "storybook | docs",
         },
       ],
     },
@@ -91,7 +92,16 @@ async function run() {
   const start = performance.now();
   const options = app(fwooshCli);
   const { config = {} } = (await explorer.search()) || {};
-  const fwooshOptions = { ...options, ...config.default } as FwooshOptions;
+  const fwooshOptions = {
+    ...options,
+    open:
+      options?.open === "storybook" || options?.open === null
+        ? "storybook"
+        : options?.open === "docs"
+        ? "docs"
+        : false,
+    ...config.default,
+  } as FwooshOptions;
 
   if (config.stories) {
     fwooshOptions.stories = config.stories;

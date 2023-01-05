@@ -43,7 +43,7 @@ export interface FwooshOptions {
   /** the directory with the mdx pages */
   outDir: string;
   /** Open the browser when running the dev server */
-  open?: boolean;
+  open?: "storybook" | "docs" | false;
   /** Plugins applied to this fwoosh instance, contains default plugins */
   plugins: Array<
     string | [name: string, options: Record<string, unknown>] | Plugin
