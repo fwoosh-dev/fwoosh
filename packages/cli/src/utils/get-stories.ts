@@ -169,7 +169,6 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
     });
     lastEnd.value = ast.span.end + 1;
     const offset = ast.span.start - 1 - currentLastEnd;
-    const parsedContents = contents.slice(offset, ast.span.end);
     const endAst = performance.now();
     log.info(`Parse AST: ${filename} (${ms(endAst - startAst)})`);
 
@@ -210,7 +209,7 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
         const start = d.span.start + offset - ast.span.start;
         const nearestExport = findExportKeyword(contents, start);
         const code = contents.slice(
-          findExportKeyword(contents, d.span.start + offset - ast.span.start),
+          nearestExport,
           d.span.end + offset - ast.span.start - (start - nearestExport)
         );
 
@@ -219,7 +218,7 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
           title: capitalCase(exportName),
           slug,
           file: fullPath,
-          comment: await getComment(contents, d.span.start - ast.span.start),
+          comment: await getComment(contents, nearestExport),
           code: sanitizeString(code),
         };
       })
