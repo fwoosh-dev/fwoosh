@@ -1,3 +1,15 @@
+# v0.0.66 (Thu Jan 05 2023)
+
+#### ⚠️ Pushed to `main`
+
+- eww: swc not handling comments really makes things hard ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.65 (Thu Jan 05 2023)
 
 #### ⚠️ Pushed to `main`
