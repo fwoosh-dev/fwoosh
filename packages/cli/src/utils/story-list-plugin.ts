@@ -1,6 +1,5 @@
 import { pascalCase } from "change-case";
 import chokidar from "chokidar";
-import ms from "pretty-ms";
 
 import { endent } from "./endent.js";
 import { FwooshOptions, Story } from "../types";
@@ -90,17 +89,19 @@ function createVirtualFile(config: FwooshFileDescriptor[]) {
           file.file
         }').then((module) => module.meta || module.default)
       }`);
+      console.log(fileMap[fileMap.length - 1]);
     }
   }
 
-  return endent`
+  const file =
+    endent`
     import { lazy } from "react";
     import * as React from "react";
 
     ${lazyComponents.join("")}
+  ` + `\nexport let stories = { ${fileMap} }`;
 
-    export let stories = { ${fileMap} };
-  `;
+  return file;
 }
 
 /** Plugin that creates a virtual module with references to all the stories */

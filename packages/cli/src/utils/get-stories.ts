@@ -31,7 +31,7 @@ const markdownToHtml = unified()
   .use(rehypeStringify)
   .use(gfm);
 
-function sanitizeString(str: string) {
+export function sanitizeString(str: string) {
   return str.replace(/`/g, "\\\\`").replace(/\${/g, "\\${");
 }
 
@@ -40,7 +40,6 @@ export async function convertMarkdownToHtml(markdown: string) {
     markdown
       .trim()
       .split("\n")
-      .map((line) => line.trim())
       .map((line) => line.replace(/^\s*\*/, ""))
       .join("\n")
   );
@@ -186,24 +185,19 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
     const stories: Story[] = await Promise.all(
       (storiesDeclarations as any).map(async (d: any) => {
         const exportName = d.declaration.declarations[0].id.value;
-        const code = await markdownToHtml.process(
-          endent`
-              \`\`\`tsx
-              ${contents.slice(
-                d.span.start - ast.span.start,
-                d.span.end - ast.span.start
-              )}
-              \`\`\`
-            `
+        const slug = `${paramCase(meta.title)}--${paramCase(exportName)}`;
+        const code = contents.slice(
+          d.span.start - ast.span.start,
+          d.span.end - ast.span.start
         );
 
         return {
           exportName,
           title: capitalCase(exportName),
-          slug: `${paramCase(meta.title)}--${paramCase(exportName)}`,
+          slug,
           file: fullPath,
           comment: await getComment(contents, d.span.start - ast.span.start),
-          code: sanitizeString(String(code)),
+          code: sanitizeString(code),
         };
       })
     );

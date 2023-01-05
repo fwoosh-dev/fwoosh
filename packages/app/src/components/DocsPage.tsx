@@ -15,12 +15,13 @@ import * as Collapsible from "@radix-ui/react-collapsible";
 import { paramCase, headerCase } from "change-case";
 import { stories } from "@fwoosh/app/stories";
 import { StorySidebarChildItem, StoryTreeItem } from "@fwoosh/app/ui";
+import { useHighlightedCode } from "@fwoosh/utils";
+import { MDXProvider } from "@mdx-js/react";
 
 import ErrorBoundary from "./ErrorBoundary";
 import { getStoryGroup, useStoryTree } from "../hooks/useStoryTree";
 import * as styles from "./DocsPage.module.css";
 import { useRender } from "../hooks/useRender";
-import { MDXProvider } from "@mdx-js/react";
 
 const DocsLayout = styled("div", {
   display: "grid",
@@ -114,6 +115,20 @@ const CollapsibleRoot = styled(Collapsible.Root, {
   position: "relative",
 });
 
+const StoryCode = React.memo(({ code }: { code: string }) => {
+  const highlightedCode = useHighlightedCode({ code });
+
+  if (!highlightedCode) {
+    return null;
+  }
+
+  return (
+    <StyledMarkdown className={styles.showingCode}>
+      {highlightedCode}
+    </StyledMarkdown>
+  );
+});
+
 const StoryDiv = React.memo(
   ({ slug, code }: { slug: string; code: string }) => {
     const id = useId();
@@ -127,9 +142,9 @@ const StoryDiv = React.memo(
           <ShowCodeButton>{codeShowing ? "Hide" : "Show"} code</ShowCodeButton>
         </Collapsible.Trigger>
         <Collapsible.Content>
-          <StyledMarkdown className={codeShowing && styles.showingCode}>
-            {code}
-          </StyledMarkdown>
+          <Suspense fallback={<Spinner delay={2000} />}>
+            <StoryCode code={code} />
+          </Suspense>
         </Collapsible.Content>
       </CollapsibleRoot>
     );
@@ -170,13 +185,11 @@ const StoryDocsPage = ({
             {firstStory.story.comment && (
               <StyledMarkdown>{firstStory.story.comment}</StyledMarkdown>
             )}
-            <Suspense fallback={"SUSPENDED SECOND LEVEL"}>
-              <StoryDiv
-                slug={firstStory.story.slug}
-                code={firstStory.story.code}
-                key={firstStory.story.slug}
-              />
-            </Suspense>
+            <StoryDiv
+              slug={firstStory.story.slug}
+              code={firstStory.story.code}
+              key={firstStory.story.slug}
+            />
             <Suspense fallback={<Spinner style={{ height: 200 }} />}>
               <DocsPropsTable
                 story={firstStory.story}

@@ -12,6 +12,7 @@ import { log, sortTree } from "@fwoosh/utils";
 import bodyParser from "body-parser";
 import terminalLink from "terminal-link";
 
+import { endent } from "./utils/endent.js";
 import type { FwooshHooks, FwooshOptions } from "./types";
 import { storyListPlugin } from "./utils/story-list-plugin.js";
 import { renderStoryPlugin } from "./utils/render-story-plugin.js";
@@ -229,6 +230,16 @@ export class Fwoosh {
     app.use(bodyParser.json());
     app.post("/sort", async (req, res) => {
       res.json(sortTree(req.body, this.options.sortSidebarItems));
+    });
+
+    app.use(bodyParser.text());
+    app.post("/highlight-code", async (req, res) => {
+      const html = await convertMarkdownToHtml(endent`
+        \`\`\`tsx
+        ${req.body}
+        \`\`\`
+      `);
+      res.json({ html });
     });
 
     app.use(vite.middlewares);

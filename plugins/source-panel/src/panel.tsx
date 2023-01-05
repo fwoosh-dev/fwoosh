@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { stories } from "@fwoosh/app/stories";
 import { StyledMarkdown, styled } from "@fwoosh/components";
+import { useHighlightedCode } from "@fwoosh/utils";
 
 const Panel = styled("div", {
   height: "100%",
@@ -25,6 +26,11 @@ const Panel = styled("div", {
   },
 });
 
+function HighlightedSource({ code }: { code: string }) {
+  const highlightedCode = useHighlightedCode({ code });
+  return <StyledMarkdown>{highlightedCode}</StyledMarkdown>;
+}
+
 export default function SourcePanel() {
   const params = useParams<{ storyId: string }>();
   const story = Object.values(stories).find((s) => s.slug === params.storyId);
@@ -35,7 +41,7 @@ export default function SourcePanel() {
 
   return (
     <Panel>
-      <StyledMarkdown>{story.code}</StyledMarkdown>
+      <HighlightedSource code={story.code} />
     </Panel>
   );
 }
