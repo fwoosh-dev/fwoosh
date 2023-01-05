@@ -138,11 +138,7 @@ export type FwooshFileDescriptor = StoryFileDescriptor | MDXFileDescriptor;
 const lastEnd = { value: 0 };
 
 async function getStory(file: string, data: FwooshFileDescriptor[]) {
-  const filename = path.basename(file);
   const start = performance.now();
-
-  log.info(`Parse: ${filename}...`);
-
   const contents = await fs.readFile(file, "utf8");
   const fullPath = path.resolve(file);
 
@@ -163,7 +159,6 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
       console.error(e);
     }
   } else {
-    const startAst = performance.now();
     const currentLastEnd = lastEnd.value;
     const ast = await swc.parse(contents, {
       syntax: "typescript",
@@ -173,8 +168,6 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
     });
     lastEnd.value = ast.span.end + 1;
     const offset = ast.span.start - 1 - currentLastEnd;
-    const endAst = performance.now();
-    log.info(`Parse AST: ${filename} (${ms(endAst - startAst)})`);
 
     const exports = ast.body.filter(
       (node) => node.type === "ExportDeclaration"
@@ -204,8 +197,6 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
       {}
     );
     const storiesDeclarations = exports.filter((e) => e !== metaDeclaration);
-
-    const startMDToHTML = performance.now();
     const stories: Story[] = await Promise.all(
       (storiesDeclarations as any).map(async (d: any) => {
         const exportName = d.declaration.declarations[0].id.value;
@@ -227,8 +218,6 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
         };
       })
     );
-    const endMDToHTML = performance.now();
-    log.info(`Generate highlighted code:(${ms(endMDToHTML - startMDToHTML)})`);
 
     const fileDescriptor: FwooshFileDescriptor = {
       stories,
@@ -240,7 +229,7 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
 
   const end = performance.now();
 
-  log.info(`Parse complete: ${filename} (${ms(end - start)})\n`);
+  log.info(`Parse: ${path.basename(file)} (${ms(end - start)})`);
 }
 
 export async function getStories({ stories, outDir }: FwooshOptions) {
