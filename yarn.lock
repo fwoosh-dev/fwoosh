@@ -3052,6 +3052,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/express-serve-static-core@npm:*, @types/express-serve-static-core@npm:^4.17.31":
+  version: 4.17.32
+  resolution: "@types/express-serve-static-core@npm:4.17.32"
+  dependencies:
+    "@types/node": "*"
+    "@types/qs": "*"
+    "@types/range-parser": "*"
+  checksum: 70ec1b8f386628850b315a7b9fd4240a5a70297b41ef1c39af65c8b9661d2c775cfff4686b491fd90e5b6eef43088af203700c5541aec0d063db0c6cbeff254c
+  languageName: node
+  linkType: hard
+
 "@types/express-serve-static-core@npm:^4.17.18":
   version: 4.17.28
   resolution: "@types/express-serve-static-core@npm:4.17.28"
@@ -3060,6 +3071,29 @@ __metadata:
     "@types/qs": "*"
     "@types/range-parser": "*"
   checksum: 826489811a5b371c10f02443b4ca894ffc05813bfdf2b60c224f5c18ac9a30a2e518cb9ef9fdfcaa2a1bb17f8bfa4ed1859ccdb252e879c9276271b4ee2df5a9
+  languageName: node
+  linkType: hard
+
+"@types/express-ws@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "@types/express-ws@npm:3.0.1"
+  dependencies:
+    "@types/express": "*"
+    "@types/express-serve-static-core": "*"
+    "@types/ws": "*"
+  checksum: fe0979f0c4ae6ce1d3cd6e9e5a99882d7dd461a774b3ad67066965db058bc9cc90ec9deed6bb4ee8414cf50b800ab84d6d042d375ee3b0b31483a3ec91647146
+  languageName: node
+  linkType: hard
+
+"@types/express@npm:*":
+  version: 4.17.15
+  resolution: "@types/express@npm:4.17.15"
+  dependencies:
+    "@types/body-parser": "*"
+    "@types/express-serve-static-core": ^4.17.31
+    "@types/qs": "*"
+    "@types/serve-static": "*"
+  checksum: b4acd8a836d4f6409cdf79b12d6e660485249b62500cccd61e7997d2f520093edf77d7f8498ca79d64a112c6434b6de5ca48039b8fde2c881679eced7e96979b
   languageName: node
   linkType: hard
 
@@ -3274,6 +3308,15 @@ __metadata:
   version: 2.0.6
   resolution: "@types/unist@npm:2.0.6"
   checksum: 25cb860ff10dde48b54622d58b23e66214211a61c84c0f15f88d38b61aa1b53d4d46e42b557924a93178c501c166aa37e28d7f6d994aba13d24685326272d5db
+  languageName: node
+  linkType: hard
+
+"@types/ws@npm:*":
+  version: 8.5.4
+  resolution: "@types/ws@npm:8.5.4"
+  dependencies:
+    "@types/node": "*"
+  checksum: fefbad20d211929bb996285c4e6f699b12192548afedbe4930ab4384f8a94577c9cd421acaad163cacd36b88649509970a05a0b8f20615b30c501ed5269038d1
   languageName: node
   linkType: hard
 
@@ -5347,6 +5390,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"express-ws@npm:^5.0.2":
+  version: 5.0.2
+  resolution: "express-ws@npm:5.0.2"
+  dependencies:
+    ws: ^7.4.6
+  peerDependencies:
+    express: ^4.0.0 || ^5.0.0-alpha.1
+  checksum: a7134c51b6a630a369bbc7e06b6fad9ec174d535dd76c990ea6285e6cb08abad408ddb1162ba347ec5725fc483ae9f035f2eecb22ea91f3ecebff05772f62f0b
+  languageName: node
+  linkType: hard
+
 "express@npm:^4.17.3":
   version: 4.17.3
   resolution: "express@npm:4.17.3"
@@ -5811,6 +5865,7 @@ __metadata:
     "@mdx-js/rollup": ^2.2.1
     "@swc/core": ^1.3.24
     "@types/express": ^4.17.13
+    "@types/express-ws": ^3.0.1
     "@types/js-yaml": ^4.0.5
     "@types/lodash.debounce": ^4.0.7
     better-opn: ^3.0.2
@@ -5821,6 +5876,7 @@ __metadata:
     esbuild: ^0.16.12
     esbuild-register: ^3.4.2
     express: ^4.17.3
+    express-ws: ^5.0.2
     fast-glob: ^3.2.12
     js-yaml: ^4.1.0
     lilconfig: ^2.0.5
@@ -12037,6 +12093,21 @@ __metadata:
     type-fest: ^0.4.1
     write-json-file: ^3.2.0
   checksum: 7864d44370f42a6761f6898d07ee2818c7a2faad45116580cf779f3adaf94e4bea5557612533a6c421c32323253ecb63b50615094960a637aeaef5df0fd2d6cd
+  languageName: node
+  linkType: hard
+
+"ws@npm:^7.4.6":
+  version: 7.5.9
+  resolution: "ws@npm:7.5.9"
+  peerDependencies:
+    bufferutil: ^4.0.1
+    utf-8-validate: ^5.0.2
+  peerDependenciesMeta:
+    bufferutil:
+      optional: true
+    utf-8-validate:
+      optional: true
+  checksum: c3c100a181b731f40b7f2fddf004aa023f79d64f489706a28bc23ff88e87f6a64b3c6651fbec3a84a53960b75159574d7a7385709847a62ddb7ad6af76f49138
   languageName: node
   linkType: hard
 

@@ -4,6 +4,7 @@ import boxen from "boxen";
 import path from "path";
 import { createServer, InlineConfig } from "vite";
 import express from "express";
+import expressWs from "express-ws";
 import { createRequire } from "module";
 import { SyncBailHook, SyncWaterfallHook } from "tapable";
 import mdx from "@mdx-js/rollup";
@@ -146,6 +147,8 @@ export class Fwoosh {
   /** Start the development server */
   async dev({ port }: WatchPagesOptions = { port: 3000 }) {
     const app = express();
+    const ws = expressWs(app);
+
     const toolbarControls = this.hooks.registerToolbarControl.call([]);
     const panels = this.hooks.registerPanel.call([]);
     const baseConfig: InlineConfig = {
@@ -191,7 +194,8 @@ export class Fwoosh {
       assetsInclude: ["**/*.html"],
       define: {
         "process.env": {
-          LOG_LEVEL: process.env.LOG_LEVEL,
+          LOG_LEVEL: "process.env.LOG_LEVEL",
+          FWOOSH_PORT: port,
         },
       },
     };
@@ -232,8 +236,16 @@ export class Fwoosh {
     app.use(express.json({ limit: "50mb" }));
     app.use(bodyParser.urlencoded({ extended: false, limit: "50mb" }));
     app.use(bodyParser.json());
-    app.post("/sort", async (req, res) => {
-      res.json(sortTree(req.body, this.options.sortSidebarItems));
+
+    ws.app.ws("/sort", (ws) => {
+      ws.on("message", (message) => {
+        const result = sortTree(
+          JSON.parse(message.toString()),
+          this.options.sortSidebarItems
+        );
+
+        ws.send(JSON.stringify(result));
+      });
     });
 
     app.use(bodyParser.text());

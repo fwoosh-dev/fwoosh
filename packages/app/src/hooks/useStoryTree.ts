@@ -1,6 +1,7 @@
+import * as React from "react";
 import { stories, StoryData } from "@fwoosh/app/stories";
 import { StorySidebarChildItem, StoryTree } from "@fwoosh/app/ui";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { matchTreeSortingOrder } from "@fwoosh/utils";
 
 function getStories() {
@@ -90,17 +91,19 @@ const tree = getStories();
 
 export const useStoryTree = () => {
   const { data = [] } = useQuery("storyTree", async () => {
-    const res = await fetch("/sort", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(tree),
-    });
-    const data = await res.json();
+    return new Promise<StorySidebarChildItem[]>((resolve) => {
+      const socket = new WebSocket(
+        `ws://localhost:${process.env.FWOOSH_PORT}/sort`
+      );
 
-    return matchTreeSortingOrder(tree, data);
+      socket.addEventListener("open", () => {
+        socket.send(JSON.stringify(tree));
+      });
+
+      socket.addEventListener("message", (event) => {
+        resolve(JSON.parse(event.data));
+      });
+    });
   });
 
   return data;
