@@ -1,3 +1,16 @@
+# v0.0.68 (Thu Jan 05 2023)
+
+#### ⚠️ Pushed to `main`
+
+- `fwoosh`
+  - load metas as needed instead of all up front ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.67 (Thu Jan 05 2023)
 
 #### ⚠️ Pushed to `main`
