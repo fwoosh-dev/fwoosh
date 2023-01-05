@@ -89,7 +89,6 @@ function createVirtualFile(config: FwooshFileDescriptor[]) {
           file.file
         }').then((module) => module.meta || module.default)
       }`);
-      console.log(fileMap[fileMap.length - 1]);
     }
   }
 

@@ -104,6 +104,22 @@ export async function getStoryList({
   });
 }
 
+function findExportKeyword(contents: string, index: number): number {
+  while (
+    contents[index] &&
+    contents[index] !== "e" &&
+    contents[index + 1] !== "x" &&
+    contents[index + 2] !== "p" &&
+    contents[index + 3] !== "o" &&
+    contents[index + 4] !== "r" &&
+    contents[index + 5] !== "t"
+  ) {
+    index--;
+  }
+
+  return index;
+}
+
 interface StoryFileDescriptor {
   stories: Story[];
   meta: ResolvedStoryMeta;
@@ -115,6 +131,7 @@ export interface MDXFileDescriptor {
 }
 
 export type FwooshFileDescriptor = StoryFileDescriptor | MDXFileDescriptor;
+const lastEnd = { value: 0 };
 
 async function getStory(file: string, data: FwooshFileDescriptor[]) {
   const filename = path.basename(file);
@@ -143,12 +160,16 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
     }
   } else {
     const startAst = performance.now();
+    const currentLastEnd = lastEnd.value;
     const ast = await swc.parse(contents, {
       syntax: "typescript",
       tsx: true,
       comments: false,
       script: true,
     });
+    lastEnd.value = ast.span.end + 1;
+    const offset = ast.span.start - 1 - currentLastEnd;
+    const parsedContents = contents.slice(offset, ast.span.end);
     const endAst = performance.now();
     log.info(`Parse AST: ${filename} (${ms(endAst - startAst)})`);
 
@@ -186,9 +207,11 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
       (storiesDeclarations as any).map(async (d: any) => {
         const exportName = d.declaration.declarations[0].id.value;
         const slug = `${paramCase(meta.title)}--${paramCase(exportName)}`;
+        const start = d.span.start + offset - ast.span.start;
+        const nearestExport = findExportKeyword(contents, start);
         const code = contents.slice(
-          d.span.start - ast.span.start,
-          d.span.end - ast.span.start
+          findExportKeyword(contents, d.span.start + offset - ast.span.start),
+          d.span.end + offset - ast.span.start - (start - nearestExport)
         );
 
         return {
