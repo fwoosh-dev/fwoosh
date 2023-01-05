@@ -11,6 +11,7 @@ import remarkFrontmatter from "remark-frontmatter";
 import { log, sortTree } from "@fwoosh/utils";
 import bodyParser from "body-parser";
 import terminalLink from "terminal-link";
+import open from "better-opn";
 
 import { endent } from "./utils/endent.js";
 import type { FwooshHooks, FwooshOptions } from "./types";
@@ -36,6 +37,7 @@ export class Fwoosh {
 
   constructor(options: FwooshOptions) {
     this.options = {
+      open: false,
       modifyViteConfig: (config) => config,
       sortSidebarItems: (a, b) => {
         // Keep stories sorted by order they were defined
@@ -258,7 +260,8 @@ export class Fwoosh {
         })
       );
 
-      // await open(`http://localhost:${port}`);
+      process.env.OPEN_MATCH_HOST_ONLY = "true";
+      open(`http://localhost:${port}`);
     });
   }
 }

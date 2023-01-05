@@ -69,7 +69,15 @@ const fwooshCli: MultiCommand = {
     {
       name: "dev",
       description: "Start the development server",
-      options: sharedOptions,
+      options: [
+        ...sharedOptions,
+        {
+          name: "open",
+          type: Boolean,
+          description: "Open the browser to the dev server",
+          defaultValue: false,
+        },
+      ],
     },
     {
       name: "clean",
