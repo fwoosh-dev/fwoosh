@@ -8,7 +8,7 @@ import {
   SidebarSectionTitle,
   SIDEBAR_ITEM_INDENT,
 } from "@fwoosh/components";
-import { NavLink, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { StorySidebarChildItem, StoryTreeItem } from "@fwoosh/app/ui";
 
 import { useStoryTree, hasActiveChild } from "../../hooks/useStoryTree";
@@ -29,7 +29,7 @@ function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
         key={slug}
         style={finalStyle}
         aria-selected={isActive}
-        as={NavLink}
+        as={Link}
         to={slug}
         onClick={resetContentScrollPosition}
       >
