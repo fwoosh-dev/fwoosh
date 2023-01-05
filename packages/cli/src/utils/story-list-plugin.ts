@@ -6,7 +6,7 @@ import { endent } from "./endent.js";
 import { FwooshOptions, Story } from "../types";
 import {
   FwooshFileDescriptor,
-  getStories,
+  getStoryData,
   MDXFileDescriptor,
 } from "./get-stories.js";
 import { ViteDevServer } from "vite";
@@ -110,7 +110,7 @@ export function storyListPlugin(config: FwooshOptions) {
   let file = "";
 
   async function generateFile() {
-    const stories = await getStories(config);
+    const stories = await getStoryData(config);
     file = createVirtualFile(stories);
     return file;
   }

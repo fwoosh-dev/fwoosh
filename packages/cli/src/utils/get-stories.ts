@@ -232,7 +232,7 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
   log.info(`Parse: ${path.basename(file)} (${ms(end - start)})`);
 }
 
-export async function getStories({ stories, outDir }: FwooshOptions) {
+export async function getStoryData({ stories, outDir }: FwooshOptions) {
   const startFiles = performance.now();
   const files = await getStoryList({ stories, outDir });
   const endFiles = performance.now();
