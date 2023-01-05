@@ -79,27 +79,31 @@ export function getDocsPlugin({ port }: { port: number }) {
             import * as React from "react";
             import { useQuery } from "react-query";
             
-            async function resolveComponents(story) {
+            async function resolveComponents(meta) {
               let component;
             
-              // Components declared on the story
-              if (story?.component) {
-                component = story;
+              if (typeof meta === "string") {
+                component = await import(/* @vite-ignore */meta)
+                  .then((module) => module.meta || module.default)
+              }
+              // Components declared on the meta
+              else if (meta?.component) {
+                component = meta;
               }
               // Resolved lazy component
-              else if (story?.then) {
-                const resolvedPromise = await story;
+              else if (meta?.then) {
+                const resolvedPromise = await meta;
             
                 if (resolvedPromise.component) {
                   component = resolvedPromise;
                 }
               }
               // Unresolved lazy component
-              else if (typeof story === "function") {
-                const resolvedPromise = (await story()).default;
+              else if (typeof meta === "function") {
+                const resolvedPromise = await meta();
             
-                if (resolvedPromise?.component) {
-                  component = resolvedPromise;
+                if (resolvedPromise.default?.component) {
+                  component = resolvedPromise.default;
                 }
               }
             

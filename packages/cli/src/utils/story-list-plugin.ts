@@ -88,9 +88,7 @@ function createVirtualFile(config: FwooshFileDescriptor[]) {
         comment: ${file.comment ? `\`${file.comment}\`` : "undefined"},
         code: \`${file.code}\`,
         component: ${componentName},
-        meta: import('${
-          file.file
-        }').then((module) => module.meta || module.default)
+        meta: '${file.file}'
       }`);
     }
   }
