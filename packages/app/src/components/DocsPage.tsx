@@ -10,6 +10,7 @@ import {
   Spinner,
   PropsTable,
   StyledMarkdown,
+  ErrorBoundary,
 } from "@fwoosh/components";
 import * as Collapsible from "@radix-ui/react-collapsible";
 import { paramCase, headerCase } from "change-case";
@@ -18,7 +19,6 @@ import { StorySidebarChildItem, StoryTreeItem } from "@fwoosh/app/ui";
 import { useHighlightedCode } from "@fwoosh/utils";
 import { MDXProvider } from "@mdx-js/react";
 
-import ErrorBoundary from "./ErrorBoundary";
 import { getStoryGroup, useStoryTree } from "../hooks/useStoryTree";
 import * as styles from "./DocsPage.module.css";
 import { useRender } from "../hooks/useRender";

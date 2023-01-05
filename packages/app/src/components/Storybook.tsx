@@ -10,13 +10,13 @@ import {
   Tabs,
   HeaderBar,
   HeaderTitle,
+  ErrorBoundary,
 } from "@fwoosh/components";
 import { toolbarControls, panels } from "@fwoosh/app/ui";
 import { Outlet, useParams } from "react-router-dom";
 import { useId } from "@radix-ui/react-id";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 
-import ErrorBoundary from "./ErrorBoundary";
 import { StoryIdContext } from "./Story";
 import { StorybookSidebarTree } from "./sidebar/StorybookSidebarTree";
 import { ThemeToggle } from "./ThemeToggle";

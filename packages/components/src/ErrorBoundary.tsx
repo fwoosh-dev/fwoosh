@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 
-import { styled } from "@fwoosh/components";
 import * as React from "react";
+import { styled } from "./stitches";
 
 const ErrorMessage = styled("h1", {
   text: "2xl",
@@ -19,7 +19,7 @@ const ErrorWrapper = styled("div", {
   background: "$primary3",
 });
 
-export default class ErrorBoundary extends React.Component<
+export class ErrorBoundary extends React.Component<
   {},
   { error: Error | undefined }
 > {

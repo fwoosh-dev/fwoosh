@@ -1,9 +1,8 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import { useId } from "@radix-ui/react-id";
 
-import { Spinner, styled } from "@fwoosh/components";
-import ErrorBoundary from "./ErrorBoundary";
+import { styled, ErrorBoundary } from "@fwoosh/components";
 import { useRender } from "../hooks/useRender";
 
 export const StoryIdContext = React.createContext<string | undefined>(
@@ -30,13 +29,11 @@ export const Story = () => {
 
   return (
     <ErrorBoundary key={params.storyId}>
-      <Suspense fallback={<Spinner>Loading story...</Spinner>}>
-        {params.storyId ? (
-          <StoryDiv slug={params.storyId} id={contextId || id} />
-        ) : (
-          <div>Story not found</div>
-        )}
-      </Suspense>
+      {params.storyId ? (
+        <StoryDiv slug={params.storyId} id={contextId || id} />
+      ) : (
+        <div>Story not found</div>
+      )}
     </ErrorBoundary>
   );
 };

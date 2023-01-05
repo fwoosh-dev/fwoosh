@@ -7,4 +7,5 @@ export * from "./PropsTable.js";
 export * from "./HeaderBar.js";
 export * from "./Spinner.js";
 export * from "./Sidebar.js";
+export * from "./ErrorBoundary.js";
 export * from "./StyledMarkdown.js";
