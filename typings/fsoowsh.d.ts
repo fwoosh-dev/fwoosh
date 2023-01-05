@@ -15,7 +15,6 @@ declare module "@fwoosh/app/stories" {
     grouping: string;
     meta: StoryMeta;
     component: any;
-    mdxFile: any;
   }
 
   export type StoryData = BasicStoryData | MDXStoryData;
@@ -59,18 +58,19 @@ declare module "@fwoosh/app/ui" {
 
   import { BasicStoryData, MDXStoryData } from "@fwoosh/app/stories";
 
-  export interface StoryTreeItem {
-    type: "story";
-    story: BasicStoryData;
+  interface BaseTreeItem {
     id: string;
     name: string;
   }
 
-  export interface MDXPageTreeItem {
+  export interface StoryTreeItem extends BaseTreeItem {
+    type: "story";
+    story: BasicStoryData;
+  }
+
+  export interface MDXPageTreeItem extends BaseTreeItem {
     type: "mdx";
-    mdxFile: MDXStoryData;
-    id: string;
-    name: string;
+    story: MDXStoryData;
   }
 
   export type StorySidebarChildItem =
@@ -78,10 +78,8 @@ declare module "@fwoosh/app/ui" {
     | StoryTreeItem
     | MDXPageTreeItem;
 
-  export interface StoryTree {
+  export interface StoryTree extends BaseTreeItem {
     type: "tree";
-    name: string;
-    id: string;
     children: StorySidebarChildItem[];
   }
 

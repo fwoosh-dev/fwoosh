@@ -21,7 +21,7 @@ function getStories() {
             ? {
                 name: level,
                 id: levels.slice(0, index + 1).join("-"),
-                mdxFile: story.mdxFile,
+                story,
                 type: "mdx",
               }
             : {
@@ -72,7 +72,7 @@ function getStories() {
           } else {
             currentItem.children.splice(insertIndex, 0, {
               name: story.title,
-              mdxFile: story.mdxFile,
+              story,
               id: story.slug,
               type: "mdx",
             });
