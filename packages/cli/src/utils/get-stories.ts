@@ -31,20 +31,22 @@ const markdownToHtml = unified()
   .use(rehypeStringify)
   .use(gfm);
 
-export function sanitizeString(str: string) {
+/** Replaces characters in a string that are problematic when inserting into a template string  */
+function sanitizeTemplateString(str: string) {
   return str.replace(/`/g, "\\`").replace(/\${/g, "\\${");
 }
 
-export async function convertMarkdownToHtml(markdown: string) {
-  const html = await markdownToHtml.process(
-    markdown
-      .trim()
-      .split("\n")
-      .map((line) => line.replace(/^\s*\*/, ""))
-      .join("\n")
-  );
+function sanitizeMarkdownString(str: string) {
+  return str
+    .split("\n")
+    .map((i) => i.trim())
+    .map((line) => line.replace(/^\*/, ""))
+    .join("\n");
+}
 
-  return sanitizeString(String(html));
+export async function convertMarkdownToHtml(markdown: string) {
+  const html = await markdownToHtml.process(markdown.trim());
+  return sanitizeTemplateString(String(html));
 }
 
 async function getComment(contents: string, i: number) {
@@ -73,7 +75,9 @@ async function getComment(contents: string, i: number) {
       comment.unshift(contents[i--]);
     }
 
-    return await convertMarkdownToHtml(comment.join(""));
+    return await convertMarkdownToHtml(
+      sanitizeMarkdownString(comment.join(""))
+    );
   }
 }
 
@@ -219,7 +223,7 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
           slug,
           file: fullPath,
           comment: await getComment(contents, nearestExport),
-          code: sanitizeString(code),
+          code: sanitizeTemplateString(code),
         };
       })
     );
