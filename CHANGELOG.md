@@ -1,3 +1,16 @@
+# v0.0.71 (Thu Jan 05 2023)
+
+#### ⚠️ Pushed to `main`
+
+- `fwoosh`
+  - fix navigations causing an error and a reload ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.70 (Thu Jan 05 2023)
 
 #### ⚠️ Pushed to `main`
