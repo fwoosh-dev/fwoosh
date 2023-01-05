@@ -53,7 +53,7 @@ const sharedOptions: Option[] = [
     description: "The amount of logs to print",
     type: String,
     defaultValue: "log",
-    typeLabel: "log | info | debug",
+    typeLabel: "log | info | debug | trace",
   },
 ];
 

@@ -6,5 +6,7 @@ export const log = consola.create({
       ? 3
       : process.env.LOG_LEVEL === "debug"
       ? 4
+      : process.env.LOG_LEVEL === "trace"
+      ? 5
       : 2,
 });
