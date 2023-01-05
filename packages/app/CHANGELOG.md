@@ -1,3 +1,20 @@
+# v0.0.67 (Thu Jan 05 2023)
+
+#### ⚠️ Pushed to `main`
+
+- fix prop tables not being shown ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- switch sorting to websockets to make it really fast ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- more type work ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- simplify code + fix bug ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- simplify logic ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix startup ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.64 (Thu Jan 05 2023)
 
 #### ⚠️ Pushed to `main`

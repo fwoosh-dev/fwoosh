@@ -1,3 +1,15 @@
+# v0.0.67 (Thu Jan 05 2023)
+
+#### ⚠️ Pushed to `main`
+
+- add trace logger option ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.64 (Thu Jan 05 2023)
 
 #### ⚠️ Pushed to `main`

@@ -1,3 +1,27 @@
+# v0.0.67 (Thu Jan 05 2023)
+
+#### ⚠️ Pushed to `main`
+
+- move get-docs to WS ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- improve open flag ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- switch sorting to websockets to make it really fast ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- more type work ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- rename function ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- generate virtual story file less often ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- improve logging ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix always opening ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add "fwoosh dev --open" ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix mangling multiline comments ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix parsing story comments ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add trace logger option ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix startup ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.66 (Thu Jan 05 2023)
 
 #### ⚠️ Pushed to `main`
