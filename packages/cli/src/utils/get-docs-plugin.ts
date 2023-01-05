@@ -1,7 +1,7 @@
 import { endent } from "./endent.js";
 
 /** Generates a react hook that requests docs at runtime. */
-export function getDocsPlugin() {
+export function getDocsPlugin({ port }: { port: number }) {
   const virtualFileId = "@fwoosh/app/docs";
 
   return [
@@ -75,65 +75,72 @@ export function getDocsPlugin() {
       async load(id: string) {
         if (id.includes(virtualFileId)) {
           return endent`
-          import { lazy } from "react";
-          import * as React from "react";
-          import { useQuery } from "react-query";
-          
-          async function resolveComponents(story) {
-            let component;
-
-            // Components declared on the story
-            if (story?.component) {
-              component = story;
-            } 
-            // Resolved lazy component
-            else if (story?.then) {
-              const resolvedPromise = await story;
-          
-              if (resolvedPromise.component) {
-                component = resolvedPromise;
+            import { lazy } from "react";
+            import * as React from "react";
+            import { useQuery } from "react-query";
+            
+            async function resolveComponents(story) {
+              let component;
+            
+              // Components declared on the story
+              if (story?.component) {
+                component = story;
               }
-            }
-            // Unresolved lazy component
-            else if (typeof story === "function") {
-              const resolvedPromise = (await story()).default;
-
-              if (resolvedPromise?.component) {
-                component = resolvedPromise;
-              }
-            }
-          
-            return component
-          }
-          
-          export const useDocs = (key, story) => {
-            const { data } = useQuery(
-              key,
-              async () => {
-                const component = await resolveComponents(story);
-          
-                if (!component?.component) {
-                  return;
+              // Resolved lazy component
+              else if (story?.then) {
+                const resolvedPromise = await story;
+            
+                if (resolvedPromise.component) {
+                  component = resolvedPromise;
                 }
-          
-                const components = Array.isArray(component.component)
-                  ? component.component
-                  : [component.component];
-                const displayedComponents = components.map((c) => c.displayName);
-                const file = components[0].fwoosh_file;
-                const params = new URLSearchParams({ file });
-                const res = await fetch("/get-docs?" + params);
-                const data = await res.json();
-          
-                return data.filter((doc) =>
-                  displayedComponents.includes(doc.displayName)
-                );
-              },
-              { suspense: true }
-            );
-          
-            return data;
-          };
+              }
+              // Unresolved lazy component
+              else if (typeof story === "function") {
+                const resolvedPromise = (await story()).default;
+            
+                if (resolvedPromise?.component) {
+                  component = resolvedPromise;
+                }
+              }
+            
+              return component;
+            }
+            
+            export const useDocs = (key, story) => {
+              const { data } = useQuery(
+                key,
+                async () => {
+                  const component = await resolveComponents(story);
+            
+                  if (!component?.component) {
+                    return;
+                  }
+            
+                  const components = Array.isArray(component.component)
+                    ? component.component
+                    : [component.component];
+                  const displayedComponents = components.map((c) => c.displayName);
+                  const file = components[0].fwoosh_file;
+            
+                  return new Promise((resolve) => {
+                    const socket = new WebSocket("ws://localhost:${port}/get-docs");
+            
+                    socket.addEventListener("open", () => {
+                      socket.send(file);
+                    });
+            
+                    socket.addEventListener("message", (event) => {
+                      resolve(
+                        JSON.parse(event.data).filter((doc) => displayedComponents.includes(doc.displayName))
+                      );
+                    });
+                  });
+                },
+                { suspense: true }
+              );
+            
+              return data;
+            };          
           `;
         }
       },

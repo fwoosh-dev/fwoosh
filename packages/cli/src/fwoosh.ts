@@ -159,7 +159,7 @@ export class Fwoosh {
         }),
         fwooshUiPlugin({ toolbarControls, panels }),
         fwooshConfigPlugin(this.options),
-        getDocsPlugin(),
+        getDocsPlugin({ port }),
         storyListPlugin(this.options),
         renderStoryPlugin(this.hooks.renderStory.call()),
       ],
@@ -208,29 +208,31 @@ export class Fwoosh {
 
     app.head("*", async (_, res) => res.sendStatus(200));
 
-    app.get<{ file: string }>("/get-docs", async (req, res) => {
-      const file = (req.query.file as string)
-        .replace("http://localhost:3000/@fs", "")
-        .replace("/dist/", "/src/")
-        .replace(".js", ".tsx");
+    ws.app.ws("/get-docs", async (ws) => {
+      ws.on("message", async (message: string) => {
+        const file = message
+          .replace("http://localhost:3000/@fs", "")
+          .replace("/dist/", "/src/")
+          .replace(".js", ".tsx");
 
-      const generateDocsStart = performance.now();
-      const docs = this.hooks.generateDocs.call(file);
-      const generateDocsEnd = performance.now();
-      log.info(
-        `Generate docs: ${path.relative(process.cwd(), file)} (${ms(
-          generateDocsEnd - generateDocsStart
-        )})`
-      );
+        const generateDocsStart = performance.now();
+        const docs = this.hooks.generateDocs.call(file);
+        const generateDocsEnd = performance.now();
+        log.info(
+          `Generate docs: ${path.relative(process.cwd(), file)} (${ms(
+            generateDocsEnd - generateDocsStart
+          )})`
+        );
 
-      const docsWithHtmlDescriptions = await Promise.all(
-        docs.map(async (doc) => ({
-          ...doc,
-          description: await convertMarkdownToHtml(doc.description),
-        }))
-      );
+        const docsWithHtmlDescriptions = await Promise.all(
+          docs.map(async (doc) => ({
+            ...doc,
+            description: await convertMarkdownToHtml(doc.description),
+          }))
+        );
 
-      res.json(docsWithHtmlDescriptions);
+        ws.send(JSON.stringify(docsWithHtmlDescriptions));
+      });
     });
 
     app.use(express.json({ limit: "50mb" }));
