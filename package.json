@@ -9,7 +9,7 @@
     "examples/*"
   ],
   "scripts": {
-    "clean": "rimraf '**/tsconfig.tsbuildinfo' && rimraf '**/dist' && rimraf '**/node_modules'",
+    "clean": "rimraf '**/*.tsbuildinfo' && rimraf '**/dist' && rimraf '**/node_modules'",
     "build": "tsc -b tsconfig.dev.json -v && lerna run build",
     "start": "tsc -b tsconfig.dev.json -v --watch",
     "release": "auto shipit"
