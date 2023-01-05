@@ -101,7 +101,7 @@ export const useStoryTree = () => {
       });
 
       socket.addEventListener("message", (event) => {
-        resolve(JSON.parse(event.data));
+        resolve(matchTreeSortingOrder(tree, JSON.parse(event.data)));
       });
     });
   });
