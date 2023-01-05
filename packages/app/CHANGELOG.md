@@ -1,3 +1,15 @@
+# v0.0.70 (Thu Jan 05 2023)
+
+#### ⚠️ Pushed to `main`
+
+- remove nav links ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.69 (Thu Jan 05 2023)
 
 #### ⚠️ Pushed to `main`
