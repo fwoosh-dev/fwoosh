@@ -1,5 +1,6 @@
 import { pascalCase } from "change-case";
 import chokidar from "chokidar";
+import debounce from "lodash.debounce";
 
 import { endent } from "./endent.js";
 import { FwooshOptions, Story } from "../types";
@@ -106,6 +107,13 @@ function createVirtualFile(config: FwooshFileDescriptor[]) {
 /** Plugin that creates a virtual module with references to all the stories */
 export function storyListPlugin(config: FwooshOptions) {
   const virtualFileId = "@fwoosh/app/stories";
+  let file = "";
+
+  async function generateFile() {
+    const stories = await getStories(config);
+    file = createVirtualFile(stories);
+    return file;
+  }
 
   return {
     name: "story-list",
@@ -121,8 +129,11 @@ export function storyListPlugin(config: FwooshOptions) {
     async load(id: string) {
       if (id.includes(virtualFileId)) {
         try {
-          const stories = await getStories(config);
-          return createVirtualFile(stories);
+          if (file) {
+            return file;
+          }
+
+          return await generateFile();
         } catch (e) {
           console.error(e);
           return defaultListModule;
@@ -135,16 +146,20 @@ export function storyListPlugin(config: FwooshOptions) {
       const storyWatcher = chokidar.watch(config.stories, {
         persistent: true,
         ignored: /node_modules/,
+        atomic: true,
+        ignoreInitial: true,
       });
 
-      const reload = (type: string) => async (path: string) => {
-        const mod = await server.moduleGraph.getModuleByUrl(virtualFileId);
+      const reload = (type: string) =>
+        debounce(async (path: string) => {
+          const mod = await server.moduleGraph.getModuleByUrl(virtualFileId);
 
-        if (mod) {
-          log.info(`Reloading, story "${type}" detected:`, path);
-          server.reloadModule(mod);
-        }
-      };
+          if (mod) {
+            log.warn(`Reloading, story "${type}" detected:`, path);
+            await generateFile();
+            await server.reloadModule(mod);
+          }
+        }, 1000);
 
       storyWatcher.on("add", reload("add"));
       storyWatcher.on("change", reload("change"));
