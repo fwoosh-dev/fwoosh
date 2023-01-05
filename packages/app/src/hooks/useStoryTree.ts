@@ -17,19 +17,20 @@ function getStories() {
         currentItem = treeData.find((item) => item.name === level);
 
         if (!currentItem) {
-          currentItem = !("code" in story)
-            ? {
-                name: level,
-                id: levels.slice(0, index + 1).join("-"),
-                story,
-                type: "mdx",
-              }
-            : {
-                name: level,
-                id: levels.slice(0, index + 1).join("-"),
-                children: [],
-                type: "tree",
-              };
+          currentItem =
+            story.type === "mdx"
+              ? {
+                  name: level,
+                  id: levels.slice(0, index + 1).join("-"),
+                  story,
+                  type: "mdx",
+                }
+              : {
+                  name: level,
+                  id: levels.slice(0, index + 1).join("-"),
+                  children: [],
+                  type: "tree",
+                };
           treeData.push(currentItem);
         }
 

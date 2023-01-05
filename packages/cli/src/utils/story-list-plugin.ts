@@ -62,6 +62,7 @@ function createVirtualFile(config: FwooshFileDescriptor[]) {
       `);
 
       fileMap.push(`'${file.meta.title}': {
+        type: 'mdx',
         title: '${file.meta.title}',
         slug: '${file.meta.title}',
         grouping: '${file.meta.title}',
@@ -80,6 +81,7 @@ function createVirtualFile(config: FwooshFileDescriptor[]) {
       `);
 
       fileMap.push(`'${file.slug}': {
+        type: 'basic',
         title: '${file.title}',
         slug: '${file.slug}',
         grouping: '${file.grouping}',

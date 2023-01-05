@@ -1,20 +1,20 @@
 declare module "@fwoosh/app/stories" {
-  export interface BasicStoryData {
+  interface BaseStoryData {
     title: string;
     slug: string;
     grouping: string;
-    code: string;
-    component: any;
-    comment?: string;
     meta: StoryMeta;
+    component: any;
   }
 
-  export interface MDXStoryData {
-    title: string;
-    slug: string;
-    grouping: string;
-    meta: StoryMeta;
-    component: any;
+  export interface BasicStoryData extends BaseStoryData {
+    type: "basic";
+    code: string;
+    comment?: string;
+  }
+
+  export interface MDXStoryData extends BaseStoryData {
+    type: "mdx";
   }
 
   export type StoryData = BasicStoryData | MDXStoryData;
