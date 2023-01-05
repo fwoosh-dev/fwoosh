@@ -175,6 +175,8 @@ export class Fwoosh {
           "fast-deep-equal",
           "fast-deep-equal/react",
           "use-sync-external-store/shim",
+          "consola",
+          "lodash.chunk",
         ],
       },
       server: {

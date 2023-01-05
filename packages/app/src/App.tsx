@@ -17,7 +17,6 @@ import {
   AppWrapper,
   ColorMode,
   ColorModeContext,
-  components,
   getInitialColorMode,
   Spinner,
 } from "@fwoosh/components";
