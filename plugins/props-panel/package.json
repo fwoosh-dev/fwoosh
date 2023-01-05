@@ -1,7 +1,7 @@
 {
   "name": "@fwoosh/props-panel",
   "type": "module",
-  "version": "0.0.68",
+  "version": "0.0.69",
   "description": "Render your props in a panel.",
   "main": "dist/index.js",
   "author": "Andrew Lisowski <lisowski54@gmail.com>",
