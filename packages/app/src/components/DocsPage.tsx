@@ -282,7 +282,9 @@ const MDXOnlyDocsPage = ({ id }: { id: string }) => {
       }
     >
       <MDXPageWrapper>
-        <MDXPage />
+        <PageWrapper>
+          <MDXPage />
+        </PageWrapper>
       </MDXPageWrapper>
     </MDXProvider>
   );
