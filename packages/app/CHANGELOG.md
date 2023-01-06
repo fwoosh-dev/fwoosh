@@ -1,3 +1,19 @@
+# v0.0.74 (Fri Jan 06 2023)
+
+#### ⚠️ Pushed to `main`
+
+- support mdx pages at any level ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- factor out url helper ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add support for mdx only pages in storybook mode ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add page wrapper to mdx pages ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- improve default sorting behavior ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.72 (Thu Jan 05 2023)
 
 #### ⚠️ Pushed to `main`

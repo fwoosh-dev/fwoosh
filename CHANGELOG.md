@@ -1,3 +1,27 @@
+# v0.0.74 (Fri Jan 06 2023)
+
+#### ⚠️ Pushed to `main`
+
+- remove unneeded config ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- update todos ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/utils`
+  - support mdx pages at any level ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`
+  - factor out url helper ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add support for mdx only pages in storybook mode ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add page wrapper to mdx pages ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`
+  - improve default sorting behavior ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `fwoosh`
+  - improve default story glob ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add more logs ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.73 (Fri Jan 06 2023)
 
 #### ⚠️ Pushed to `main`
