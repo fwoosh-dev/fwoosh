@@ -20,12 +20,7 @@ function PropsPanelContent() {
   const [, story] =
     Object.entries(stories).find(([slug]) => slug === params.storyId) || [];
   const key = story?.slug || "none";
-  const docs = useDocs(
-    key,
-    story && "component" in story
-      ? story?.component?._payload?._result
-      : undefined
-  );
+  const docs = useDocs(key, (story?.component as any)._result);
 
   return (
     <Wrapper>
