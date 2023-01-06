@@ -2,18 +2,15 @@
 
 ### Core
 
-- [ ] document fwoosh/components with fwoosh
+- [ ] !!! decorator hook
+- [ ] add cache for docgen
 - [ ] make sidebar and layout pluggable
 - [ ] add theming
-- [ ] decorator hook
-- [ ] pull description from component jsdoc
-- [ ] MDX only pages TOC
-- [ ] config as named export (ex: `export config: FwooshOptions = `)
 - [ ] search
-- [ ] command pallette?
-- [ ] add cache for docgen
 - [ ] build command
+- [ ] command pallette?
 - [ ] hooks for completely custom routes/layouts
+- [ ] config as named export (ex: `export config: FwooshOptions = `)
 - [ ] figure way to use iframe to make media queries and vh working
   - maybe some type of arg on the story
   - defaulting to an iframe is REALLY slow
