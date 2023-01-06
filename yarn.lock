@@ -808,7 +808,6 @@ __metadata:
   dependencies:
     "@fwoosh/components": "link:../../packages/components"
     "@fwoosh/react": "link:../../plugins/react"
-    "@vitejs/plugin-react": ^3.0.0
     fwoosh: "link:../../packages/cli"
   languageName: unknown
   linkType: soft
