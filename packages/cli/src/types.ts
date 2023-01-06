@@ -37,13 +37,13 @@ type ViteConfig = Omit<InlineConfig, "mode" | "root">;
 
 export interface FwooshOptions {
   /** The title for the storybook/docs */
-  title: string;
+  title?: string;
   /** A file that should be loaded for all stories. Typically used to import global CSS */
   setup?: string;
   /** Globs to match story files */
-  stories: string[];
+  stories?: string[];
   /** the directory with the mdx pages */
-  outDir: string;
+  outDir?: string;
   /** Open the browser when running the dev server */
   open?: "storybook" | "docs" | false;
   /** Plugins applied to this fwoosh instance, contains default plugins */
@@ -58,3 +58,5 @@ export interface FwooshOptions {
     b: StorySidebarChildItem
   ) => number;
 }
+
+export type FwooshOptionsLoaded = Required<FwooshOptions>;

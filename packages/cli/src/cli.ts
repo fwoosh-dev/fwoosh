@@ -3,9 +3,15 @@ import ms from "pretty-ms";
 import ora from "ora";
 import { lilconfig } from "lilconfig";
 
-import { FwooshOptions } from "./types.js";
+import { FwooshOptionWithCLIDefaults } from "./fwoosh.js";
 
-const loadEsm = (filepath: string) => import(filepath);
+const loadEsm = (filepath: string) => {
+  return import(filepath);
+};
+
+const typescript = (filepath: string) => {
+  return import(filepath);
+};
 
 const name = "fwoosh";
 const explorer = lilconfig(name, {
@@ -16,7 +22,9 @@ const explorer = lilconfig(name, {
     `.${name}rc.js`,
     `.${name}rc.cjs`,
     `${name}.config.mjs`,
+    // `${name}.config.mts`,
     `${name}.config.js`,
+    // `${name}.config.ts`,
     `${name}.config.json`,
   ],
   loaders: {
@@ -91,7 +99,13 @@ const fwooshCli: MultiCommand = {
 async function run() {
   const start = performance.now();
   const options = app(fwooshCli);
-  const { config = {} } = (await explorer.search()) || {};
+  let { config = {} } = (await explorer.search()) || {};
+
+  if (config.config) {
+    config = config.config;
+  } else if (config.default) {
+    config = config.default;
+  }
 
   if (options) {
     delete options._none;
@@ -106,8 +120,8 @@ async function run() {
         : options?.open === "docs"
         ? "docs"
         : false,
-    ...config.default,
-  } as FwooshOptions;
+    ...config,
+  } as FwooshOptionWithCLIDefaults;
 
   if (config.stories) {
     fwooshOptions.stories = config.stories;

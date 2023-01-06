@@ -15,7 +15,7 @@ import terminalLink from "terminal-link";
 import open from "better-opn";
 
 import { endent } from "./utils/endent.js";
-import type { FwooshHooks, FwooshOptions } from "./types";
+import type { FwooshHooks, FwooshOptions, FwooshOptionsLoaded } from "./types";
 import { storyListPlugin } from "./utils/story-list-plugin.js";
 import { renderStoryPlugin } from "./utils/render-story-plugin.js";
 import { getDocsPlugin } from "./utils/get-docs-plugin.js";
@@ -30,15 +30,19 @@ interface WatchPagesOptions {
   port: number;
 }
 
+export type FwooshOptionWithCLIDefaults = FwooshOptions &
+  Required<Pick<FwooshOptions, "stories" | "outDir">>;
+
 export class Fwoosh {
   /** User's fwoosh options */
-  public options: Required<FwooshOptions>;
+  public options: FwooshOptionsLoaded;
 
   /** Places for plugins to "tap" to add to or modify fwoosh's functionality */
   public hooks: FwooshHooks;
 
-  constructor(options: FwooshOptions) {
+  constructor(options: FwooshOptionWithCLIDefaults) {
     this.options = {
+      title: "Fwoosh",
       setup: "",
       open: false,
       modifyViteConfig: (config) => config,

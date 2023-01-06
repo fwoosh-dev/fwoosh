@@ -3,7 +3,7 @@ import chokidar from "chokidar";
 import debounce from "lodash.debounce";
 
 import { endent } from "./endent.js";
-import { FwooshOptions, Story } from "../types";
+import { FwooshOptionsLoaded, Story } from "../types";
 import {
   FwooshFileDescriptor,
   getStoryData,
@@ -111,7 +111,7 @@ function createVirtualFile(config: FwooshFileDescriptor[]) {
 }
 
 /** Plugin that creates a virtual module with references to all the stories */
-export function storyListPlugin(config: FwooshOptions) {
+export function storyListPlugin(config: FwooshOptionsLoaded) {
   const virtualFileId = "@fwoosh/app/stories";
   let file = "";
 

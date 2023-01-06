@@ -15,9 +15,13 @@ import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
 
-import { FwooshOptions, ResolvedStoryMeta, Story, StoryMeta } from "../types";
-import { endent } from "./endent.js";
 import { chunkPromisesTimes, log } from "@fwoosh/utils";
+import {
+  FwooshOptionsLoaded,
+  ResolvedStoryMeta,
+  Story,
+  StoryMeta,
+} from "../types";
 
 const require = createRequire(import.meta.url);
 
@@ -102,7 +106,7 @@ function getComponentPath(ast: Module, file: string, value: string) {
 export async function getStoryList({
   stories,
   outDir,
-}: Pick<FwooshOptions, "stories" | "outDir">) {
+}: Pick<FwooshOptionsLoaded, "stories" | "outDir">) {
   return await glob(stories, {
     ignore: [`${outDir}/**`, "**/node_modules/**"],
   });
@@ -232,7 +236,7 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
   log.info(`Parse: ${path.basename(file)} (${ms(end - start)})`);
 }
 
-export async function getStoryData({ stories, outDir }: FwooshOptions) {
+export async function getStoryData({ stories, outDir }: FwooshOptionsLoaded) {
   const startFiles = performance.now();
   const files = await getStoryList({ stories, outDir });
   const endFiles = performance.now();
