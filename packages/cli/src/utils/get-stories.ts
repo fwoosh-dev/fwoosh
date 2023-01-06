@@ -9,7 +9,6 @@ import path from "path";
 import { createRequire } from "module";
 import gfm from "remark-gfm";
 import yaml from "js-yaml";
-import shiki from "rehype-shiki-reloaded";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
@@ -22,16 +21,14 @@ import {
   Story,
   StoryMeta,
 } from "../types";
+import { shikiConfig } from "./shiki-config.js";
 
 const require = createRequire(import.meta.url);
 
 const markdownToHtml = unified()
   .use(remarkParse)
   .use(remarkRehype)
-  .use((shiki as any).default, {
-    theme: "github-light",
-    darkTheme: "github-dark",
-  })
+  .use(...shikiConfig)
   .use(rehypeStringify)
   .use(gfm);
 

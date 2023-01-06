@@ -13,6 +13,7 @@ import { log, sortTree } from "@fwoosh/utils";
 import bodyParser from "body-parser";
 import terminalLink from "terminal-link";
 import open from "better-opn";
+import { Pluggable } from "unified";
 
 import { endent } from "./utils/endent.js";
 import type { FwooshHooks, FwooshOptions, FwooshOptionsLoaded } from "./types";
@@ -23,6 +24,7 @@ import { fwooshSetupPlugin } from "./utils/fwoosh-setup-plugin.js";
 import { fwooshConfigPlugin } from "./utils/fwoosh-config-plugin.js";
 import { fwooshUiPlugin } from "./utils/fwoosh-ui-plugin.js";
 import { convertMarkdownToHtml } from "./utils/get-stories.js";
+import { shikiConfig } from "./utils/shiki-config.js";
 
 const require = createRequire(import.meta.url);
 
@@ -174,6 +176,7 @@ export class Fwoosh {
       plugins: [
         mdx({
           remarkPlugins: [remarkFrontmatter],
+          rehypePlugins: [shikiConfig as Pluggable],
           providerImportSource: "@mdx-js/react",
         }),
         fwooshSetupPlugin({ file: this.options.setup }),
