@@ -1,7 +1,6 @@
-import * as React from "react";
 import { stories, StoryData } from "@fwoosh/app/stories";
 import { StorySidebarChildItem, StoryTree } from "@fwoosh/app/ui";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import { matchTreeSortingOrder } from "@fwoosh/utils";
 
 function getStories() {
@@ -58,21 +57,15 @@ function getStories() {
 
         // Push the story as a leaf
         if (index === levels.length - 1 && currentItem) {
-          const folderIndex = currentItem.children.findIndex(
-            (i) => i.type === "tree"
-          );
-          const insertIndex =
-            folderIndex > -1 ? folderIndex : currentItem.children.length;
-
           if ("code" in story) {
-            currentItem.children.splice(insertIndex, 0, {
+            currentItem.children.push({
               name: story.title,
               story,
               id: story.slug,
               type: "story",
             });
           } else {
-            currentItem.children.splice(insertIndex, 0, {
+            currentItem.children.push({
               name: story.title,
               story,
               id: story.slug,

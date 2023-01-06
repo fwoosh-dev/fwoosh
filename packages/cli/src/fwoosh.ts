@@ -48,6 +48,16 @@ export class Fwoosh {
           return 0;
         }
 
+        // Render stories/mdx before trees
+        if (a.type === "tree" && (b.type === "story" || b.type === "mdx")) {
+          return 1;
+        }
+
+        if (b.type === "tree" && (a.type === "story" || a.type === "mdx")) {
+          return -1;
+        }
+
+        // Default to sorting by name
         return a.name.localeCompare(b.name);
       },
       ...options,
