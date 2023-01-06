@@ -92,6 +92,12 @@ async function run() {
   const start = performance.now();
   const options = app(fwooshCli);
   const { config = {} } = (await explorer.search()) || {};
+
+  if (options) {
+    delete options._none;
+    delete options._all;
+  }
+
   const fwooshOptions = {
     ...options,
     open:

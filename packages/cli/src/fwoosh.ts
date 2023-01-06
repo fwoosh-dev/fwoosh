@@ -53,6 +53,9 @@ export class Fwoosh {
       ...options,
       stories: options.stories || ["**/*.stories.@(js|jsx|ts|tsx)"],
     };
+
+    log.info("Loaded options:", this.options);
+
     this.hooks = {
       registerPanel: new SyncWaterfallHook(["panels"]),
       registerToolbarControl: new SyncWaterfallHook(["toolbarControls"]),
@@ -209,6 +212,8 @@ export class Fwoosh {
       root: path.dirname(path.dirname(require.resolve("@fwoosh/app"))),
       ...(await this.options.modifyViteConfig(baseConfig)),
     });
+
+    log.trace("Loaded vite with config:", vite.config);
 
     app.head("*", async (_, res) => res.sendStatus(200));
 
