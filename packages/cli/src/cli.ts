@@ -31,7 +31,7 @@ const storiesOption: Option = {
   type: String,
   defaultOption: true,
   multiple: true,
-  defaultValue: "**/*.stories.{js,jsx,tsx}",
+  defaultValue: "**/*.stories.@(js|jsx|ts|tsx|mdx)",
 };
 
 const sharedOptions: Option[] = [

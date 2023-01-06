@@ -51,7 +51,6 @@ export class Fwoosh {
         return a.name.localeCompare(b.name);
       },
       ...options,
-      stories: options.stories || ["**/*.stories.@(js|jsx|ts|tsx)"],
     };
 
     log.info("Loaded options:", this.options);
