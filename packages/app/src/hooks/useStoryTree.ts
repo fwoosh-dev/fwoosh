@@ -151,6 +151,7 @@ export const hasActiveChild = (tree: StoryTree, slug: string): boolean => {
   return tree.children.some(
     (item) =>
       (item.type === "story" && item.story.slug === slug) ||
+      (item.type === "mdx" && item.story.slug === slug) ||
       (item.type === "tree" && hasActiveChild(item, slug))
   );
 };
