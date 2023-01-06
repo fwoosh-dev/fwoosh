@@ -3,6 +3,7 @@
   "type": "module",
   "version": "0.0.74",
   "description": "A lightening quick component development",
+  "main": "./dist/index.js",
   "exports": {
     ".": "./dist/index.js",
     "./types": "./dist/types.d.ts"

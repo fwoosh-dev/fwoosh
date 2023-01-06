@@ -2,15 +2,31 @@ import { app, MultiCommand, Option } from "command-line-application";
 import ms from "pretty-ms";
 import ora from "ora";
 import { lilconfig } from "lilconfig";
+import { register, RegisterOptions } from "ts-node";
 
 import { FwooshOptionWithCLIDefaults } from "./fwoosh.js";
+import { createRequire } from "module";
+
+const require = createRequire(import.meta.url);
 
 const loadEsm = (filepath: string) => {
   return import(filepath);
 };
 
-const typescript = (filepath: string) => {
-  return import(filepath);
+const loadTypescript = () => {
+  const tsNodeInstance = register({
+    transpileOnly: true,
+  });
+
+  return async (filepath: string, content: string) => {
+    try {
+      tsNodeInstance.compile(content, filepath);
+      return require(filepath);
+    } catch (e) {
+      console.log(e);
+      throw e;
+    }
+  };
 };
 
 const name = "fwoosh";
@@ -22,14 +38,14 @@ const explorer = lilconfig(name, {
     `.${name}rc.js`,
     `.${name}rc.cjs`,
     `${name}.config.mjs`,
-    // `${name}.config.mts`,
     `${name}.config.js`,
-    // `${name}.config.ts`,
+    `${name}.config.ts`,
     `${name}.config.json`,
   ],
   loaders: {
     ".js": loadEsm,
     ".mjs": loadEsm,
+    ".ts": loadTypescript(),
   },
 });
 
@@ -99,13 +115,7 @@ const fwooshCli: MultiCommand = {
 async function run() {
   const start = performance.now();
   const options = app(fwooshCli);
-  let { config = {} } = (await explorer.search()) || {};
-
-  if (config.config) {
-    config = config.config;
-  } else if (config.default) {
-    config = config.default;
-  }
+  const { config = {} } = (await explorer.search()) || {};
 
   if (options) {
     delete options._none;
@@ -120,7 +130,7 @@ async function run() {
         : options?.open === "docs"
         ? "docs"
         : false,
-    ...config,
+    ...(config.config || config.default),
   } as FwooshOptionWithCLIDefaults;
 
   if (config.stories) {

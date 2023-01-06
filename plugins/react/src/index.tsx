@@ -1,5 +1,5 @@
 import { Plugin, Fwoosh } from "fwoosh";
-import docgen from "react-docgen-typescript";
+import * as docgen from "react-docgen-typescript";
 import ts from "typescript";
 
 interface ReactPluginOptions {

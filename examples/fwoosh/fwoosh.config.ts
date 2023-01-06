@@ -1,6 +1,7 @@
+import { FwooshOptions } from "fwoosh";
 import ReactPlugin from "@fwoosh/react";
 
-export default {
+export const config: FwooshOptions = {
   title: "Fwoosh Design System",
   plugins: [
     "@fwoosh/story-description-panel",

@@ -10,7 +10,6 @@
 - [ ] build command
 - [ ] command pallette?
 - [ ] hooks for completely custom routes/layouts
-- [ ] config as named export (ex: `export config: FwooshOptions = `)
 - [ ] figure way to use iframe to make media queries and vh working
   - maybe some type of arg on the story
   - defaulting to an iframe is REALLY slow
