@@ -46,7 +46,7 @@ function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
       ? hasActiveChild(node.data, node.tree.props.selection)
       : false;
 
-  const firstChild = React.useMemo(() => {
+  const firstChildSlug = React.useMemo(() => {
     let currentNode = node.next;
 
     while (currentNode?.next) {
@@ -57,13 +57,19 @@ function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
       currentNode = currentNode.next;
     }
 
-    return currentNode?.data;
+    if (!currentNode || currentNode.data.type === "tree") {
+      return "";
+    }
+
+    return currentNode.data.type === "story"
+      ? currentNode.data.story.slug
+      : `docs/${currentNode.data.story.slug}`;
   }, []);
 
   return (
     <SidebarSectionTitle
       as={Link}
-      to={(firstChild as StoryTreeItem).story.slug}
+      to={firstChildSlug}
       style={finalStyle}
       data-active={isChildActive}
     >
