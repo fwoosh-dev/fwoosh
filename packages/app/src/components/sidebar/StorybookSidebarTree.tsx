@@ -20,7 +20,7 @@ function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
     paddingLeft: (style.paddingLeft as number) + SIDEBAR_ITEM_INDENT,
   };
 
-  if (node.data.type === "story") {
+  if (node.data.type === "story" || node.data.type === "mdx") {
     const slug = ((node.data as unknown) as StoryTreeItem).story.slug;
     const isActive = slug === node.tree.props.selection;
 
@@ -30,7 +30,7 @@ function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
         style={finalStyle}
         aria-selected={isActive}
         as={Link}
-        to={slug}
+        to={node.data.type === "mdx" ? `docs/${slug}` : slug}
         onClick={resetContentScrollPosition}
       >
         <SidebarFolderOpenIndicatorWrapper>
@@ -60,11 +60,11 @@ function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
 }
 
 export const StorybookSidebarTree = () => {
-  const params = useParams<{ storyId: string }>();
+  const params = useParams<{ storyId: string; docsPath: string }>();
   const tree = useStoryTree();
 
   return (
-    <SidebarTree data={tree} activeId={params.storyId}>
+    <SidebarTree data={tree} activeId={params.storyId || params.docsPath}>
       {Node}
     </SidebarTree>
   );

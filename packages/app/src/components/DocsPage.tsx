@@ -14,14 +14,13 @@ import {
 } from "@fwoosh/components";
 import * as Collapsible from "@radix-ui/react-collapsible";
 import { paramCase, headerCase } from "change-case";
-import { stories } from "@fwoosh/app/stories";
 import { StorySidebarChildItem, StoryTreeItem } from "@fwoosh/app/ui";
 import { useHighlightedCode } from "@fwoosh/utils";
-import { MDXProvider } from "@mdx-js/react";
 
 import { getStoryGroup, useStoryTree } from "../hooks/useStoryTree";
 import * as styles from "./DocsPage.module.css";
 import { useRender } from "../hooks/useRender";
+import { MDXPage } from "./MDXPage";
 
 const DocsLayout = styled("div", {
   display: "grid",
@@ -268,28 +267,6 @@ const StoryDocsPage = ({
   );
 };
 
-const MDXPageWrapper = styled("div", {
-  mt: 12,
-  mb: 20,
-});
-
-const MDXOnlyDocsPage = ({ id }: { id: string }) => {
-  const { component: MDXPage } = stories[id];
-  return (
-    <MDXProvider
-      components={
-        components as React.ComponentProps<typeof MDXProvider>["components"]
-      }
-    >
-      <MDXPageWrapper>
-        <PageWrapper>
-          <MDXPage />
-        </PageWrapper>
-      </MDXPageWrapper>
-    </MDXProvider>
-  );
-};
-
 const DocsContent = React.memo(() => {
   const tree = useStoryTree();
   const params = useParams<{ docsPath: string }>();
@@ -313,7 +290,7 @@ const DocsContent = React.memo(() => {
   }
 
   if (firstStory.type === "mdx") {
-    return <MDXOnlyDocsPage id={firstStory.id} />;
+    return <MDXPage id={firstStory.id} />;
   }
 
   return (

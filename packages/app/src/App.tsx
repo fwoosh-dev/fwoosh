@@ -22,6 +22,7 @@ import {
   Spinner,
 } from "@fwoosh/components";
 import { getFirstStory, useStoryTree } from "./hooks/useStoryTree";
+import { StoryWithTools } from "./components/StoryWithTools";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -83,7 +84,11 @@ const router = createBrowserRouter([
           },
           {
             path: ":storyId",
-            element: <Story />,
+            element: <StoryWithTools />,
+          },
+          {
+            path: "docs/:docsPath",
+            element: <DocsPage />,
           },
         ],
       },
