@@ -1,0 +1,147 @@
+---
+title: Configuration
+---
+
+# Configuration
+
+All configuration for fwoosh is done via a fwoosh config file.
+
+The following file are valid configuration files:
+
+- `fwoosh.config.ts`
+- `fwoosh.config.mjs`
+
+## Options
+
+### `title`
+
+Customize the title in the header.
+
+```ts
+export const config: FwooshConfig = {
+  title: "My Design System",
+};
+```
+
+### `stories`
+
+Customize the glob used to match story files.
+
+```ts
+export const config: FwooshConfig = {
+  stories: ["src/design-system/**/*.stories.(mdx|tsx)"],
+};
+```
+
+### `plugins`
+
+Provide an array of plugins to use with fwoosh.
+
+> Most of fwoosh's functionality is provided by plugins so make sure to add a few!
+
+```ts
+export const config: FwooshConfig = {
+  plugins: [
+    // Just list the name of the plugin to use it
+    "@fwoosh/story-description-panel",
+    // Or provide an array with the name and options
+    ["@fwoosh/story-description-panel", { title: "Comment" }],
+  ],
+};
+```
+
+You can also import the plugins directly and use them in your config.
+This provides a better auto-complete experience in your editor.
+
+```ts
+import StoryDescriptionPanel from "@fwoosh/story-description-panel";
+
+export const config: FwooshConfig = {
+  plugins: [
+    new StoryDescriptionPanel({
+      title: "Comment",
+    }),
+  ],
+};
+```
+
+### `outDir`
+
+Customize the directory build output files are put in.
+
+```ts
+export const config: FwooshConfig = {
+  outDir: "dist",
+};
+```
+
+### `setup`
+
+Provide a global setup file for your stories.
+Typically used to import global global assets such as CSS.
+
+```ts
+export const config: FwooshConfig = {
+  setup: "./path/to/setup.ts",
+};
+```
+
+### `open`
+
+Control whether the dev server opens a browser window.
+
+```ts
+export const config: FwooshConfig = {
+  open: "docs", // "storybook" | "docs"
+};
+```
+
+### `modifyViteConfig`
+
+Modify the Vite configuration used to load your fwoosh instance.
+
+```ts
+import tsconfigPaths from "vite-tsconfig-paths";
+
+export const config: FwooshConfig = {
+  modifyViteConfig: (config) => {
+    config.plugins = config.plugins || [];
+    config.plugins.unshift(
+      tsconfigPaths({
+        projects: [path.join(process.cwd(), "tsconfig.dev.json")],
+      })
+    );
+
+    return config;
+  },
+};
+```
+
+### `sortSidebarItems`
+
+Modify the sorting of items in the sidebar.
+
+```ts
+import tsconfigPaths from "vite-tsconfig-paths";
+
+export const config: FwooshConfig = {
+  sortSidebarItems: (a, b) => {
+    // Keep stories sorted by order they were defined
+    if (a.type === "story" && b.type === "story") {
+      return 0;
+    }
+
+    // Render stories/mdx before trees
+    if (a.type === "tree" && (b.type === "story" || b.type === "mdx")) {
+      return 1;
+    }
+
+    if (b.type === "tree" && (a.type === "story" || a.type === "mdx")) {
+      return -1;
+    }
+
+    // Default to sorting by name
+    return a.name.localeCompare(b.name);
+  },
+};
+```

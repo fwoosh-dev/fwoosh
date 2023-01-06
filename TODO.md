@@ -8,6 +8,8 @@
 - [ ] add theming
 - [ ] search
 - [ ] build command
+- [ ] links in markdown
+- [ ] BUG: code previews don't have horizontal scroll
 - [ ] command pallette?
 - [ ] hooks for completely custom routes/layouts
 - [ ] figure way to use iframe to make media queries and vh working

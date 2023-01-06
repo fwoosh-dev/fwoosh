@@ -2,7 +2,7 @@ import { app, MultiCommand, Option } from "command-line-application";
 import ms from "pretty-ms";
 import ora from "ora";
 import { lilconfig } from "lilconfig";
-import { register, RegisterOptions } from "ts-node";
+import { register } from "ts-node";
 
 import { FwooshOptionWithCLIDefaults } from "./fwoosh.js";
 import { createRequire } from "module";
@@ -31,19 +31,8 @@ const loadTypescript = () => {
 
 const name = "fwoosh";
 const explorer = lilconfig(name, {
-  searchPlaces: [
-    "package.json",
-    `.${name}rc`,
-    `.${name}rc.json`,
-    `.${name}rc.js`,
-    `.${name}rc.cjs`,
-    `${name}.config.mjs`,
-    `${name}.config.js`,
-    `${name}.config.ts`,
-    `${name}.config.json`,
-  ],
+  searchPlaces: [`${name}.config.ts`, `${name}.config.mjs`],
   loaders: {
-    ".js": loadEsm,
     ".mjs": loadEsm,
     ".ts": loadTypescript(),
   },
