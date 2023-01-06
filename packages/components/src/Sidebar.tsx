@@ -51,7 +51,6 @@ export const SIDEBAR_ITEM_INDENT = 16;
 export const SidebarFolderOpenIndicatorWrapper = styled("div", {
   height: 16,
   width: 16,
-  padding: 2,
   marginRight: 8,
   display: "flex",
   alignItems: "center",
