@@ -23,6 +23,7 @@ import {
 } from "@fwoosh/components";
 import { getFirstStory, useStoryTree } from "./hooks/useStoryTree";
 import { StoryWithTools } from "./components/StoryWithTools";
+import { convertMetaTitleToUrlParam } from "./utils/url";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -37,7 +38,7 @@ const FirstDocsPage = () => {
 
   return (
     <Navigate
-      to={"/docs/" + getFirstStory(tree).grouping.replace(/\//g, "-")}
+      to={"/docs/" + convertMetaTitleToUrlParam(getFirstStory(tree).grouping)}
     />
   );
 };

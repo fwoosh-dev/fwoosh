@@ -14,11 +14,12 @@ import { StorySidebarChildItem } from "@fwoosh/app/ui";
 import { useStoryTree } from "../../hooks/useStoryTree";
 import { SidebarFolderOpenIndicatorWrapper } from "@fwoosh/components/src";
 import { resetContentScrollPosition, SidebarTree } from "./SidebarTree";
+import { convertMetaTitleToUrlParam } from "../../utils/url";
 
 function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
   const isValidPath = React.useMemo(() => {
     return Object.values(stories).some(
-      (story) => story.grouping.replace(/\//g, "-") === node.data.id
+      (story) => convertMetaTitleToUrlParam(story.grouping) === node.data.id
     );
   }, [node.data.id]);
   const finalStyle = {
