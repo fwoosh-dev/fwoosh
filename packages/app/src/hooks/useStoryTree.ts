@@ -18,7 +18,7 @@ function getStories() {
 
         if (!currentItem) {
           currentItem =
-            story.type === "mdx"
+            story.type === "mdx" && levels.length === 1
               ? {
                   name: level,
                   id: levels.slice(0, index + 1).join("-"),
@@ -44,7 +44,7 @@ function getStories() {
 
         if (childItem && childItem.type === "tree") {
           currentItem = childItem;
-        } else {
+        } else if (story.type !== "mdx" || levels.length > index + 1) {
           const newItem: StoryTree = {
             type: "tree",
             name: level,
@@ -54,25 +54,26 @@ function getStories() {
           currentItem.children.push(newItem);
           currentItem = newItem;
         }
+      }
+    }
 
-        // Push the story as a leaf
-        if (index === levels.length - 1 && currentItem) {
-          if ("code" in story) {
-            currentItem.children.push({
-              name: story.title,
-              story,
-              id: story.slug,
-              type: "story",
-            });
-          } else {
-            currentItem.children.push({
-              name: story.title,
-              story,
-              id: story.slug,
-              type: "mdx",
-            });
-          }
-        }
+    // Push the story as a leaf
+    if (currentItem && currentItem.type === "tree") {
+      if ("code" in story) {
+        currentItem.children.push({
+          name: story.title,
+          story,
+          id: story.slug,
+          type: "story",
+        });
+      } else {
+        const titleParts = story.title.split("/");
+        currentItem.children.push({
+          name: titleParts[titleParts.length - 1],
+          story,
+          id: story.slug,
+          type: "mdx",
+        });
       }
     }
   });

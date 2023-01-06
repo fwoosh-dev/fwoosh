@@ -10,11 +10,11 @@ import {
 import { Link, useParams } from "react-router-dom";
 import { stories } from "@fwoosh/app/stories";
 import { StorySidebarChildItem } from "@fwoosh/app/ui";
+import { SidebarFolderOpenIndicatorWrapper } from "@fwoosh/components";
+import { convertMetaTitleToUrlParam } from "@fwoosh/utils";
 
 import { useStoryTree } from "../../hooks/useStoryTree";
-import { SidebarFolderOpenIndicatorWrapper } from "@fwoosh/components/src";
 import { resetContentScrollPosition, SidebarTree } from "./SidebarTree";
-import { convertMetaTitleToUrlParam } from "../../utils/url";
 
 function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
   const isValidPath = React.useMemo(() => {

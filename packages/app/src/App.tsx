@@ -23,7 +23,7 @@ import {
 } from "@fwoosh/components";
 import { getFirstStory, useStoryTree } from "./hooks/useStoryTree";
 import { StoryWithTools } from "./components/StoryWithTools";
-import { convertMetaTitleToUrlParam } from "./utils/url";
+import { convertMetaTitleToUrlParam } from "@fwoosh/utils";
 
 const queryClient = new QueryClient({
   defaultOptions: {

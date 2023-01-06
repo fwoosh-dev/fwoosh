@@ -10,7 +10,7 @@ import {
   MDXFileDescriptor,
 } from "./get-stories.js";
 import { ViteDevServer } from "vite";
-import { log } from "@fwoosh/utils";
+import { convertMetaTitleToUrlParam, log } from "@fwoosh/utils";
 
 const defaultListModule = endent`
   import { lazy } from "react";
@@ -56,15 +56,16 @@ function createVirtualFile(config: FwooshFileDescriptor[]) {
   for (const file of allFiles) {
     if ("mdxFile" in file) {
       const componentName = getComponentName(file.meta.title);
+      const slug = convertMetaTitleToUrlParam(file.meta.title);
 
       lazyComponents.push(endent`
         const ${componentName} = lazy(() => import('${file.mdxFile}'));
       `);
 
-      fileMap.push(`'${file.meta.title}': {
+      fileMap.push(`'${slug}': {
         type: 'mdx',
         title: '${file.meta.title}',
-        slug: '${file.meta.title}',
+        slug: '${slug}',
         grouping: '${file.meta.title}',
         meta: ${JSON.stringify(file.meta)},
         component: ${componentName},
