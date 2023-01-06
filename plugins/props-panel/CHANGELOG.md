@@ -1,3 +1,15 @@
+# v0.0.73 (Fri Jan 06 2023)
+
+#### ⚠️ Pushed to `main`
+
+- fix props panel displaying nothing ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.58 (Wed Jan 04 2023)
 
 #### ⚠️ Pushed to `main`
