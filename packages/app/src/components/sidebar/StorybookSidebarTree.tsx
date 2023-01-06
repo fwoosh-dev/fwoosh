@@ -46,14 +46,36 @@ function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
       ? hasActiveChild(node.data, node.tree.props.selection)
       : false;
 
+  const firstChild = React.useMemo(() => {
+    let currentNode = node.next;
+
+    while (currentNode?.next) {
+      if (currentNode.data.type !== "tree") {
+        break;
+      }
+
+      currentNode = currentNode.next;
+    }
+
+    return currentNode?.data;
+  }, []);
+
   return (
     <SidebarSectionTitle
+      as={Link}
+      to={(firstChild as StoryTreeItem).story.slug}
       style={finalStyle}
-      as="button"
-      onClick={() => node.toggle()}
       data-active={isChildActive}
     >
-      <SidebarFolderOpenIndicator isOpen={node.isOpen} />
+      <SidebarFolderOpenIndicator
+        as="button"
+        isOpen={node.isOpen}
+        onClick={(e) => {
+          node.toggle();
+          // Prevent parent link from navigating
+          e.preventDefault();
+        }}
+      />
       {node.data.name}
     </SidebarSectionTitle>
   );
