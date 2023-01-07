@@ -29,17 +29,28 @@ type LinkProps = Omit<React.ComponentProps<typeof components.a>, "href"> & {
 
 export const Link = React.forwardRef(
   ({ to, ...props }: LinkProps, ref: React.Ref<HTMLAnchorElement>) => {
-    const storySlug = convertToStorySlug(to);
     const tree = useStoryTree();
-    let docSlug = convertToDocSlug(to);
     const location = useLocation();
+
+    if (!to) {
+      throw new Error('Link "to" prop is required');
+    }
+
+    if (typeof to !== "string") {
+      throw new Error('Link "to" prop must be a string');
+    }
+
+    const [pathname, h] = to.split("#");
+    const hash = h ? `#${h}` : "";
+    const storySlug = convertToStorySlug(pathname);
+    let docSlug = convertToDocSlug(pathname);
     const isStorybook = location.pathname.startsWith("/storybook");
 
     // Check if the link is a story
     if (stories[storySlug]) {
       // If docs/ then match the docs file and add the story as a hash
       if (!isStorybook) {
-        const parts = to.split("/");
+        const parts = pathname.split("/");
         const storyName = parts.pop()!;
         return (
           <components.a
@@ -60,7 +71,7 @@ export const Link = React.forwardRef(
       return (
         <components.a
           ref={ref}
-          href={`${isStorybook ? "/storybook" : ""}/docs/${docSlug}`}
+          href={`${isStorybook ? "/storybook" : ""}/docs/${docSlug}${hash}`}
           {...props}
         />
       );
@@ -71,7 +82,7 @@ export const Link = React.forwardRef(
     //
     // StoryMDX doesn't exist in stories since it a set of stories and has
     // no direct representation.
-    const parts = to.split("/");
+    const parts = pathname.split("/");
     const group = getStoryGroup(tree, parts);
 
     if (group && group[0]) {
@@ -84,8 +95,10 @@ export const Link = React.forwardRef(
             ref={ref}
             href={
               isStorybook
-                ? `/storybook/docs/${slug}#${paramCase(firstStory.title)}`
-                : `/docs/${slug}`
+                ? `/storybook/docs/${slug}#${paramCase(
+                    firstStory.title
+                  )}${hash}`
+                : `/docs/${slug}${hash}`
             }
             {...props}
           />
