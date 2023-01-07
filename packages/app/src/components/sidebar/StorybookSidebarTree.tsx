@@ -11,6 +11,7 @@ import {
 import { Link, useParams } from "react-router-dom";
 import { StorySidebarChildItem, StoryTreeItem } from "@fwoosh/app/ui";
 import { useStoryTree, hasActiveChild } from "@fwoosh/hooks";
+import { capitalCase } from "change-case";
 
 import { SidebarTree } from "./SidebarTree";
 import { resetContentScrollPosition } from "@fwoosh/utils";
@@ -20,6 +21,7 @@ function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
     ...style,
     paddingLeft: (style.paddingLeft as number) + SIDEBAR_ITEM_INDENT,
   };
+  const name = capitalCase(node.data.name);
 
   if (node.data.type === "story" || node.data.type === "mdx") {
     const slug = ((node.data as unknown) as StoryTreeItem).story.slug;
@@ -37,7 +39,7 @@ function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
         <SidebarFolderOpenIndicatorWrapper>
           {isActive && <SidebarActiveDot />}
         </SidebarFolderOpenIndicatorWrapper>
-        {node.data.name}
+        {name}
       </SidebarItem>
     );
   }
@@ -83,7 +85,7 @@ function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
           e.preventDefault();
         }}
       />
-      {node.data.name}
+      {name}
     </SidebarSectionTitle>
   );
 }

@@ -1,7 +1,6 @@
 import { stories, StoryData } from "@fwoosh/app/stories";
 import { StorySidebarChildItem, StoryTree } from "@fwoosh/app/ui";
 import { useQuery } from "react-query";
-import { capitalCase } from "change-case";
 import { matchTreeSortingOrder } from "@fwoosh/utils";
 
 function getStories() {
@@ -12,12 +11,10 @@ function getStories() {
     const levels = grouping.split("/");
     let currentItem: StorySidebarChildItem | undefined;
 
-    for (const [index, level] of levels.entries()) {
-      const name = capitalCase(level);
-
+    for (const [index, name] of levels.entries()) {
       // Set up the root level
       if (!currentItem) {
-        currentItem = treeData.find((item) => item.name === level);
+        currentItem = treeData.find((item) => item.name === name);
 
         if (!currentItem) {
           currentItem =
@@ -42,7 +39,7 @@ function getStories() {
 
       if (currentItem.type === "tree") {
         const childItem = currentItem.children.find(
-          (item) => "name" in item && item.name === level
+          (item) => "name" in item && item.name === name
         );
 
         if (childItem && childItem.type === "tree") {

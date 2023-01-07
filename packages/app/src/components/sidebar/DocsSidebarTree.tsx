@@ -16,10 +16,12 @@ import {
   convertMetaTitleToUrlParam,
 } from "@fwoosh/utils";
 import { useStoryTree } from "@fwoosh/hooks";
+import { capitalCase } from "change-case";
 
 import { SidebarTree } from "./SidebarTree";
 
 function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
+  const name = capitalCase(node.data.name);
   const isValidPath = React.useMemo(() => {
     return Object.values(stories).some(
       (story) => convertMetaTitleToUrlParam(story.grouping) === node.data.id
@@ -47,7 +49,7 @@ function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
         <SidebarFolderOpenIndicatorWrapper>
           {isActive && <SidebarActiveDot />}
         </SidebarFolderOpenIndicatorWrapper>
-        {node.data.name}
+        {name}
       </SidebarItem>
     );
   }
@@ -72,7 +74,7 @@ function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
             e.preventDefault();
           }}
         />
-        {node.data.name}
+        {name}
       </SidebarItem>
     );
   }
@@ -84,7 +86,7 @@ function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
         isOpen={node.isOpen}
         onClick={() => node.toggle()}
       />
-      {node.data.name}
+      {name}
     </SidebarSectionTitle>
   );
 }

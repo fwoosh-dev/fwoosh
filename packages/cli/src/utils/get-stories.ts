@@ -1,6 +1,6 @@
 import swc, { ImportDeclaration, Module } from "@swc/core";
 import { promises as fs } from "fs";
-import { paramCase, capitalCase } from "change-case";
+import { capitalCase } from "change-case";
 import ms from "pretty-ms";
 import { performance } from "perf_hooks";
 
