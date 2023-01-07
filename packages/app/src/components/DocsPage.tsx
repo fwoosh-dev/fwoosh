@@ -70,7 +70,7 @@ const ShowCodeButton = styled("button", {
   color: "$gray10",
 });
 
-const QuickNav = styled("div", {
+const QuickNav = styled("nav", {
   mb: 10,
   position: "sticky",
   top: "$10",
@@ -81,6 +81,13 @@ const QuickNav = styled("div", {
   "@lg": {
     display: "block",
   },
+});
+
+const QuickNavLink = styled("a", {
+  height: "100%",
+  width: "100%",
+  display: "flex",
+  alignItems: "center",
 });
 
 const NavHeader = styled("div", {
@@ -164,15 +171,17 @@ const StoryDiv = React.memo(
 const DocsPropsTable = ({
   story,
   meta,
+  hasTitle,
 }: {
   story: BasicStoryData;
   meta: { component: any };
+  hasTitle?: boolean | string;
 }) => {
   const docs = useDocs(story.slug, meta);
 
   return (
     <div style={{ height: "fit-content" }}>
-      <PropsTable docs={docs} hasTitle />
+      <PropsTable docs={docs} hasTitle={hasTitle} />
     </div>
   );
 };
@@ -204,6 +213,7 @@ const StoryDocsPage = ({
               <DocsPropsTable
                 story={firstStory.story}
                 meta={firstStory.story.meta}
+                hasTitle="props"
               />
             </Suspense>
           </>
@@ -241,6 +251,7 @@ const StoryDocsPage = ({
                     <DocsPropsTable
                       story={story.story}
                       meta={story.story?.component?._payload?._result}
+                      hasTitle={true}
                     />
                   </Suspense>
                 </div>
@@ -253,35 +264,32 @@ const StoryDocsPage = ({
         <NavHeader>
           <NavTitle>Quick nav</NavTitle>
         </NavHeader>
-        <ul>
-          <a href="#intro">
-            <TitleNavItem>Introduction</TitleNavItem>
-          </a>
-          <a href="#props">
-            <TitleNavItem>Properties</TitleNavItem>
-          </a>
-          <a href="#stories">
-            <TitleNavItem>Stories</TitleNavItem>
-          </a>
+        <ol>
+          <TitleNavItem>
+            <QuickNavLink href="#intro">Introduction</QuickNavLink>
+          </TitleNavItem>
+          <TitleNavItem>
+            <QuickNavLink href="#props">Properties</QuickNavLink>
+          </TitleNavItem>
+          <TitleNavItem>
+            <QuickNavLink href="#stories">Stories</QuickNavLink>
+          </TitleNavItem>
           <NavGroup>
             {stories.map((story) => {
               if (story.type === "mdx" || story.type === "tree") {
                 return null;
               }
 
+              const hash = `#${paramCase(story.story.title)}`;
+
               return (
-                <a
-                  key={`#${paramCase(story.story.title)}`}
-                  href={`#${paramCase(story.story.title)}`}
-                >
-                  <TitleNavItem key={story.story.slug}>
-                    {story.story.title}
-                  </TitleNavItem>
-                </a>
+                <TitleNavItem key={hash}>
+                  <QuickNavLink href={hash}>{story.story.title}</QuickNavLink>
+                </TitleNavItem>
               );
             })}
           </NavGroup>
-        </ul>
+        </ol>
       </QuickNav>
     </DocsLayout>
   );
