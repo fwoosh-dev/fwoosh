@@ -1,7 +1,13 @@
 // import { FwooshOptions } from "fwoosh";
 import ReactPlugin from "@fwoosh/react";
 
-const rootOrder = ["Welcome", "Configuration", "Features", "Components"];
+const rootOrder = [
+  "Welcome",
+  "Configuration",
+  "Writing STories",
+  "Features",
+  "Components",
+];
 
 export const config = {
   title: "Fwoosh Design System",

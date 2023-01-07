@@ -8,7 +8,7 @@ import { action } from "@fwoosh/actions";
 
 export const meta: StoryMeta = {
   title: "Components/IconButton",
-  component: [IconButton],
+  component: IconButton,
 };
 
 /**

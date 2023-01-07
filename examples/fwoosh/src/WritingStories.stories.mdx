@@ -1,0 +1,66 @@
+---
+title: Writing Stories
+---
+
+# Writing Stories
+
+> A story captures the rendered state of a UI component.
+> It's a function that returns a component's state given a set of arguments.
+>
+> ~ [Storybook Docs](https://storybook.js.org/docs/react/writing-stories/introduction)
+
+## Creating a Story File
+
+Create a file with the `.stories.tsx` extension that will be matched by your stories glob.
+
+### Define the `meta`
+
+In this file add a `meta` export.
+This is the metadata for your story.
+
+```tsx
+import type { StoryMeta } from "fwoosh";
+
+export const meta: StoryMeta = {
+  title: "Components/Button",
+};
+```
+
+In the above example the title is `Components/Button`.
+This will be used to group stories together in the sidebar.
+In this example the stories for the `Button` component will be grouped under the `Components` section.
+
+> NOTE: Titles can go as deep as you want!
+
+### Write a Story
+
+To write a story you need to export a function that returns a component.
+
+```tsx
+export const Basic = () => {
+  return <Button>Click Me</Button>;
+};
+```
+
+## Advanced Story Configuration
+
+### `component`
+
+The `component` property is used to link a group of stories to a component.
+This is used to generate the documenatin for the properties of the component in the story.
+
+```tsx
+export const meta: StoryMeta = {
+  title: "Components/Button",
+  component: Button,
+};
+```
+
+#### `component` on Story
+
+You can override the `component` property on a story.
+This is useful if you want to generate documentation for components that only appear on a specific story.
+
+```tsx
+Basic.component = OtherButton;
+```

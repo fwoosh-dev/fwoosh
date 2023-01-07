@@ -25,7 +25,7 @@ export const h1 = styled("h1", {
 /** The component used to render a h2 */
 export const h2 = styled("h2", {
   text: "2xl",
-  mt: 6,
+  mt: 12,
   mb: 4,
   pb: 2,
   color: "$gray11",
@@ -46,7 +46,7 @@ export const h2 = styled("h2", {
 export const h3 = styled("h3", {
   text: "xl",
   color: "$gray11",
-  mt: 10,
+  mt: 8,
   mb: 4,
   fontWeight: 500,
   scrollMarginTop: "$4",
