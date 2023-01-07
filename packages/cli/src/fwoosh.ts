@@ -8,12 +8,17 @@ import expressWs from "express-ws";
 import { createRequire } from "module";
 import { SyncBailHook, SyncWaterfallHook } from "tapable";
 import mdx from "@mdx-js/rollup";
-import remarkFrontmatter from "remark-frontmatter";
 import { log, sortTree } from "@fwoosh/utils";
 import bodyParser from "body-parser";
 import terminalLink from "terminal-link";
 import open from "better-opn";
+import { h } from "hastscript";
+import { Element } from "hast";
+
 import { Pluggable } from "unified";
+import remarkFrontmatter from "remark-frontmatter";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeSlug from "rehype-slug";
 
 import { endent } from "./utils/endent.js";
 import type { FwooshHooks, FwooshOptions, FwooshOptionsLoaded } from "./types";
@@ -176,7 +181,33 @@ export class Fwoosh {
       plugins: [
         mdx({
           remarkPlugins: [remarkFrontmatter],
-          rehypePlugins: [shikiConfig as Pluggable],
+          rehypePlugins: [
+            rehypeSlug,
+            [
+              rehypeAutolinkHeadings,
+              {
+                behavior: "before",
+                test: ["h2", "h3", "h4", "h5", "h6"],
+                group() {
+                  return h("div", {
+                    "data-link-group": true,
+                    style: { position: "relative" },
+                  });
+                },
+                properties: {
+                  "data-link-icon": true,
+                },
+                content: (node: Element) =>
+                  h(
+                    "span.visually-hidden",
+                    "Link to the '",
+                    String(node),
+                    "' section"
+                  ),
+              },
+            ],
+            shikiConfig as Pluggable,
+          ],
           providerImportSource: "@mdx-js/react",
         }),
         fwooshSetupPlugin({ file: this.options.setup }),

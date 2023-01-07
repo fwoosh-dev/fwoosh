@@ -21,6 +21,18 @@ import * as styles from "./DocsPage.module.css";
 import { useRender } from "../hooks/useRender";
 import { MDXPage } from "./MDXPage";
 
+const HeaderWrapper = styled("div", {
+  position: "relative",
+});
+
+const HeaderLink = ({ title, id }: { title: React.ReactNode; id: string }) => {
+  return (
+    <a data-link-icon href={`#${id}`} tabIndex={-1}>
+      <span className="visually-hidden">Link to the {title} section</span>
+    </a>
+  );
+};
+
 const DocsLayout = styled("div", {
   display: "grid",
 
@@ -199,7 +211,10 @@ const StoryDocsPage = ({
 
         {stories.length > 0 && (
           <>
-            <components.h2 id="stories">Stories</components.h2>
+            <HeaderWrapper data-link-group>
+              <HeaderLink id="stories" title="Stories" />
+              <components.h2 id="stories">Stories</components.h2>
+            </HeaderWrapper>
             {stories.map((story) => {
               if (story.type === "mdx" || story.type === "tree") {
                 return null;
@@ -207,9 +222,15 @@ const StoryDocsPage = ({
 
               return (
                 <div key={story.story.slug}>
-                  <components.h3 id={paramCase(story.story.title)}>
-                    {story.story.title}
-                  </components.h3>
+                  <HeaderWrapper data-link-group>
+                    <HeaderLink
+                      id={paramCase(story.story.title)}
+                      title={story.story.title}
+                    />
+                    <components.h3 id={paramCase(story.story.title)}>
+                      {story.story.title}
+                    </components.h3>
+                  </HeaderWrapper>
                   {story.story.comment && (
                     <StyledMarkdown>{story.story.comment}</StyledMarkdown>
                   )}

@@ -8,6 +8,39 @@
   margin-left: 1.5rem;
 }
 
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+[data-link-icon] {
+  position: absolute;
+  top: 50%;
+  transform: translate(calc(-100%), -50%);
+  background: url("data:image/svg+xml,%3csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cg stroke='currentColor'%3e%3cpath d='M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71'/%3e%3cpath d='M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71'/%3e%3c/g%3e%3c/svg%3e");
+  height: 16px;
+  width: 22px;
+  padding-right: 6px;
+  background-size: 14px;
+  background-repeat: no-repeat;
+  background-position: 1px center;
+  opacity: 0;
+}
+
+[data-link-icon]:hover,
+[data-link-group]:hover [data-link-icon] {
+  opacity: 1;
+}
+
+[data-color-mode="dark"] [data-link-icon] {
+  filter: invert(1);
+}
+
 html {
   font-family: "Inter", "system-ui";
 }

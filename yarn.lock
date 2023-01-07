@@ -5917,6 +5917,8 @@ __metadata:
     express: ^4.17.3
     express-ws: ^5.0.2
     fast-glob: ^3.2.12
+    hast: ^1.0.0
+    hastscript: ^7.2.0
     js-yaml: ^4.1.0
     lilconfig: ^2.0.5
     lodash.debounce: ^4.0.8
@@ -5924,7 +5926,9 @@ __metadata:
     ora: ^5.3.0
     pretty-ms: ^7.0.1
     react-docgen-typescript: ^2.2.2
+    rehype-autolink-headings: ^6.1.1
     rehype-shiki-reloaded: ^0.0.11
+    rehype-slug: ^5.1.0
     rehype-stringify: ^9.0.3
     remark-frontmatter: ^4.0.1
     remark-gfm: ^3.0.1
@@ -6102,6 +6106,13 @@ __metadata:
   version: 1.4.0
   resolution: "github-slugger@npm:1.4.0"
   checksum: 4f52e7a21f5c6a4c5328f01fe4fe13ae8881fea78bfe31f9e72c4038f97e3e70d52fb85aa7633a52c501dc2486874474d9abd22aa61cbe9b113099a495551c6b
+  languageName: node
+  linkType: hard
+
+"github-slugger@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "github-slugger@npm:2.0.0"
+  checksum: 250375cde2058f21454872c2c79f72c4637340c30c51ff158ca4ec71cbc478f33d54477d787a662f9207aeb095a2060f155bc01f15329ba8a5fb6698e0fc81f8
   languageName: node
   linkType: hard
 
@@ -6325,6 +6336,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"hast-util-parse-selector@npm:^3.0.0":
+  version: 3.1.0
+  resolution: "hast-util-parse-selector@npm:3.1.0"
+  dependencies:
+    "@types/hast": ^2.0.0
+  checksum: 8be1a2334652866b40fde72a8b7d0867a791ce8a70d15fd7bb44b9a4f349913b77999e5add41900466bc9461c6b0fdea391875ef534b33cacf7a2aee9d8e447c
+  languageName: node
+  linkType: hard
+
 "hast-util-to-estree@npm:^2.0.0":
   version: 2.0.2
   resolution: "hast-util-to-estree@npm:2.0.2"
@@ -6385,6 +6405,26 @@ __metadata:
   version: 2.0.0
   resolution: "hast-util-whitespace@npm:2.0.0"
   checksum: abeb5386075bfb0facfce89eed0e13d2cb27a0910cec8fd234b48821a1538387a73fa7f458842e8c404148dc69434acbc10488d75b02817e460652c2c894c024
+  languageName: node
+  linkType: hard
+
+"hast@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "hast@npm:1.0.0"
+  checksum: 3891e00e634172029d92fd49cc3b62ad99b1e6e8833ea626ca5ffe1c5c631a9a52c439e296c7e2984ddcf23b04c8dd1f57fda251996081ccb3dca9ec38cff730
+  languageName: node
+  linkType: hard
+
+"hastscript@npm:^7.2.0":
+  version: 7.2.0
+  resolution: "hastscript@npm:7.2.0"
+  dependencies:
+    "@types/hast": ^2.0.0
+    comma-separated-tokens: ^2.0.0
+    hast-util-parse-selector: ^3.0.0
+    property-information: ^6.0.0
+    space-separated-tokens: ^2.0.0
+  checksum: 928a21576ff7b9a8c945e7940bcbf2d27f770edb4279d4d04b33dc90753e26ca35c1172d626f54afebd377b2afa32331e399feb3eb0f7b91a399dca5927078ae
   languageName: node
   linkType: hard
 
@@ -10123,6 +10163,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rehype-autolink-headings@npm:^6.1.1":
+  version: 6.1.1
+  resolution: "rehype-autolink-headings@npm:6.1.1"
+  dependencies:
+    "@types/hast": ^2.0.0
+    extend: ^3.0.0
+    hast-util-has-property: ^2.0.0
+    hast-util-heading-rank: ^2.0.0
+    hast-util-is-element: ^2.0.0
+    unified: ^10.0.0
+    unist-util-visit: ^4.0.0
+  checksum: 60782fb2e505e70f75b59a3ac43cb5abfeb328485da07b604fcc73d6bc3626e9c3657d536a77c6c6c435b7b3086bae5c7f93d5ded510d74e553fd80fd91c8f97
+  languageName: node
+  linkType: hard
+
 "rehype-shiki-reloaded@npm:^0.0.11":
   version: 0.0.11
   resolution: "rehype-shiki-reloaded@npm:0.0.11"
@@ -10149,6 +10204,21 @@ __metadata:
     unified: ^10.0.0
     unist-util-visit: ^4.0.0
   checksum: 33e6e9419fc8ac54d5bdac736fe788e3b1ae71b10a8bf1ea4be4af17c504afda9ae0438ce827a13cde0fe334725e9624d9fbde2f5d9fc061378ec5f0bb4c247d
+  languageName: node
+  linkType: hard
+
+"rehype-slug@npm:^5.1.0":
+  version: 5.1.0
+  resolution: "rehype-slug@npm:5.1.0"
+  dependencies:
+    "@types/hast": ^2.0.0
+    github-slugger: ^2.0.0
+    hast-util-has-property: ^2.0.0
+    hast-util-heading-rank: ^2.0.0
+    hast-util-to-string: ^2.0.0
+    unified: ^10.0.0
+    unist-util-visit: ^4.0.0
+  checksum: 2a7c17fd74d83040e2f2ed2085b0a3274c19feb2c29eba6553fe007ff887c31f21b8aa6e07eaf59f4de610a5293c6339c59fafa8e231c43949a2f136e6ab6187
   languageName: node
   linkType: hard
 
