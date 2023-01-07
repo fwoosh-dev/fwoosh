@@ -74,7 +74,7 @@ const Table = ({ doc }: TableProps) => {
 
 interface PropsTableProps {
   docs: ReturnType<typeof useDocs>;
-  hasTitle?: boolean;
+  hasTitle?: boolean | string;
 }
 
 export const PropsTable = ({ docs, hasTitle }: PropsTableProps) => {
@@ -86,10 +86,12 @@ export const PropsTable = ({ docs, hasTitle }: PropsTableProps) => {
     return <NoPropMessage>No property documentation found.</NoPropMessage>;
   }
 
+  const titleId = typeof hasTitle === "string" ? hasTitle : undefined;
+
   if (docs.length === 1) {
     return (
       <>
-        {hasTitle && <components.h3>Properties</components.h3>}
+        {hasTitle && <components.h3 id={titleId}>Properties</components.h3>}
         <Table doc={docs[0]} />
       </>
     );
@@ -97,7 +99,7 @@ export const PropsTable = ({ docs, hasTitle }: PropsTableProps) => {
 
   return (
     <>
-      {hasTitle && <components.h3>Properties</components.h3>}
+      {hasTitle && <components.h3 id={titleId}>Properties</components.h3>}
       <Tabs.Root defaultValue={docs?.[0].displayName}>
         <Tabs.List>
           {docs?.map((doc) => (
