@@ -1,4 +1,4 @@
-// import { FwooshOptions } from "fwoosh";
+import { FwooshOptions } from "fwoosh";
 import ReactPlugin from "@fwoosh/react";
 
 const rootOrder = [
@@ -9,8 +9,8 @@ const rootOrder = [
   "Components",
 ];
 
-export const config = {
-  title: "Fwoosh Design System",
+export const config: FwooshOptions = {
+  title: "Fwoosh",
   sortSidebarItems: (a, b) => {
     // Keep stories sorted by order they were defined
     if (a.type === "story" && b.type === "story") {

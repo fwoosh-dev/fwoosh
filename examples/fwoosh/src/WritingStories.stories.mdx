@@ -39,6 +39,9 @@ In this example the stories for the `Button` component will be grouped under the
 To write a story you need to export a function that returns a component.
 
 ```tsx
+/**
+ * Use jsDoc comments to add a description to your story.
+ */
 export const Basic = () => {
   return <Button>Click Me</Button>;
 };
@@ -49,7 +52,7 @@ export const Basic = () => {
 ### `component`
 
 The `component` property is used to link a group of stories to a component.
-This is used to generate the documenatin for the properties of the component in the story.
+This is used to generate the documentation for the properties of the component in the story.
 
 ```tsx
 export const meta: StoryMeta = {

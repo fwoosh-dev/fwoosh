@@ -4,7 +4,7 @@ import type { StoryMeta } from "fwoosh";
 import type { Story } from "@fwoosh/react/dist/types";
 import { styled, Tabs } from "@fwoosh/components";
 
-const Panel = styled("div", { p: 4 });
+const Panel = styled("div", { p: 4, color: "$gray11" });
 
 export const meta: StoryMeta = {
   title: "Components/Tabs",
