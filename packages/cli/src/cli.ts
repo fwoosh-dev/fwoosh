@@ -47,20 +47,14 @@ const storiesOption: Option = {
   defaultValue: "**/*.stories.@(js|jsx|ts|tsx|mdx)",
 };
 
+const outDirOption: Option = {
+  name: "out-dir",
+  description: "The directory that the built website should ",
+  type: String,
+  defaultValue: "./out",
+};
+
 const sharedOptions: Option[] = [
-  storiesOption,
-  {
-    name: "out-dir",
-    description: "The directory that the built website should ",
-    type: String,
-    defaultValue: "./out",
-  },
-  {
-    name: "title",
-    description: "The title for the storybook/docs",
-    type: String,
-    defaultValue: "Component",
-  },
   {
     name: "log-level",
     description: "The amount of logs to print",
@@ -77,13 +71,14 @@ const fwooshCli: MultiCommand = {
     {
       name: "build",
       description: "Do a production build of the website",
-      options: sharedOptions,
+      options: [...sharedOptions, storiesOption, outDirOption],
     },
     {
       name: "dev",
       description: "Start the development server",
       options: [
         ...sharedOptions,
+        storiesOption,
         {
           name: "open",
           type: String,

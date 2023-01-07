@@ -5,6 +5,7 @@ const rootOrder = [
   "Welcome",
   "Configuration",
   "Writing Stories",
+  "CLI Reference",
   "Features",
   "Plugins",
   "Theming",
