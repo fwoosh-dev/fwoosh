@@ -214,24 +214,31 @@ const StoryDocsPage = ({
           <QuickNav.Item>
             <QuickNav.Link href="#props">Properties</QuickNav.Link>
           </QuickNav.Item>
-          <QuickNav.Item>
-            <QuickNav.Link href="#stories">Stories</QuickNav.Link>
-          </QuickNav.Item>
-          <QuickNav.Group>
-            {stories.map((story) => {
-              if (story.type === "mdx" || story.type === "tree") {
-                return null;
-              }
 
-              const hash = `#${paramCase(story.story.title)}`;
+          {stories.length > 0 && (
+            <>
+              <QuickNav.Item>
+                <QuickNav.Link href="#stories">Stories</QuickNav.Link>
+              </QuickNav.Item>
+              <QuickNav.Group>
+                {stories.map((story) => {
+                  if (story.type === "mdx" || story.type === "tree") {
+                    return null;
+                  }
 
-              return (
-                <QuickNav.Item key={hash}>
-                  <QuickNav.Link href={hash}>{story.story.title}</QuickNav.Link>
-                </QuickNav.Item>
-              );
-            })}
-          </QuickNav.Group>
+                  const hash = `#${paramCase(story.story.title)}`;
+
+                  return (
+                    <QuickNav.Item key={hash}>
+                      <QuickNav.Link href={hash}>
+                        {story.story.title}
+                      </QuickNav.Link>
+                    </QuickNav.Item>
+                  );
+                })}
+              </QuickNav.Group>
+            </>
+          )}
         </ol>
       </QuickNav.Root>
     </DocsLayout>
