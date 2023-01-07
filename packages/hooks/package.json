@@ -1,7 +1,7 @@
 {
-  "name": "@fwoosh/utils",
+  "name": "@fwoosh/hooks",
   "type": "module",
-  "version": "0.0.74",
+  "version": "0.0.73",
   "author": "Andrew Lisowski <lisowski54@gmail.com>",
   "repository": "hipstersmoothie/fwoosh",
   "license": "MIT",
@@ -10,9 +10,8 @@
     "access": "public"
   },
   "dependencies": {
-    "change-case": "^4.1.2",
-    "consola": "^2.15.3",
-    "lodash.chunk": "^4.2.0"
+    "@fwoosh/utils": "link:../utils",
+    "react-query": "^3.34.19"
   },
   "devDependencies": {
     "@types/lodash.chunk": "^4.2.7"

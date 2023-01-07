@@ -12,8 +12,8 @@ import { stories } from "@fwoosh/app/stories";
 import { StorySidebarChildItem } from "@fwoosh/app/ui";
 import { SidebarFolderOpenIndicatorWrapper } from "@fwoosh/components";
 import { convertMetaTitleToUrlParam } from "@fwoosh/utils";
+import { useStoryTree } from "@fwoosh/hooks";
 
-import { useStoryTree } from "../../hooks/useStoryTree";
 import { resetContentScrollPosition, SidebarTree } from "./SidebarTree";
 
 function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {

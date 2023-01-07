@@ -5,5 +5,5 @@ export const shikiConfig = [
   {
     theme: "github-light",
     darkTheme: "github-dark",
-  },
+  } satisfies Parameters<typeof shiki>[0],
 ] as const;

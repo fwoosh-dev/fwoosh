@@ -776,6 +776,12 @@ __metadata:
   languageName: node
   linkType: soft
 
+"@fwoosh/components@link:./components::locator=%40fwoosh%2Flink%40workspace%3Apackages%2Flink":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/components@link:./components::locator=%40fwoosh%2Flink%40workspace%3Apackages%2Flink"
+  languageName: node
+  linkType: soft
+
 "@fwoosh/components@workspace:packages/components":
   version: 0.0.0-use.local
   resolution: "@fwoosh/components@workspace:packages/components"
@@ -809,6 +815,32 @@ __metadata:
     "@fwoosh/components": "link:../../packages/components"
     "@fwoosh/react": "link:../../plugins/react"
     fwoosh: "link:../../packages/cli"
+  languageName: unknown
+  linkType: soft
+
+"@fwoosh/hooks@link:./hooks::locator=%40fwoosh%2Flink%40workspace%3Apackages%2Flink":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/hooks@link:./hooks::locator=%40fwoosh%2Flink%40workspace%3Apackages%2Flink"
+  languageName: node
+  linkType: soft
+
+"@fwoosh/hooks@workspace:packages/hooks":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/hooks@workspace:packages/hooks"
+  dependencies:
+    "@fwoosh/utils": "link:../utils"
+    "@types/lodash.chunk": ^4.2.7
+    react-query: ^3.34.19
+  languageName: unknown
+  linkType: soft
+
+"@fwoosh/link@workspace:packages/link":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/link@workspace:packages/link"
+  dependencies:
+    "@fwoosh/components": "link:./components"
+    "@fwoosh/hooks": "link:./hooks"
+    react-router-dom: ^6.6.1
   languageName: unknown
   linkType: soft
 
@@ -888,6 +920,12 @@ __metadata:
   languageName: node
   linkType: soft
 
+"@fwoosh/utils@link:../utils::locator=%40fwoosh%2Fhooks%40workspace%3Apackages%2Fhooks":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/utils@link:../utils::locator=%40fwoosh%2Fhooks%40workspace%3Apackages%2Fhooks"
+  languageName: node
+  linkType: soft
+
 "@fwoosh/utils@link:../utils::locator=fwoosh%40workspace%3Apackages%2Fcli":
   version: 0.0.0-use.local
   resolution: "@fwoosh/utils@link:../utils::locator=fwoosh%40workspace%3Apackages%2Fcli"
@@ -899,6 +937,7 @@ __metadata:
   resolution: "@fwoosh/utils@workspace:packages/utils"
   dependencies:
     "@types/lodash.chunk": ^4.2.7
+    change-case: ^4.1.2
     consola: ^2.15.3
     lodash.chunk: ^4.2.0
   languageName: unknown
@@ -5884,12 +5923,13 @@ __metadata:
     ora: ^5.3.0
     pretty-ms: ^7.0.1
     react-docgen-typescript: ^2.2.2
-    rehype-shiki-reloaded: ^0.0.10
+    rehype-shiki-reloaded: ^0.0.11
     rehype-stringify: ^9.0.3
     remark-frontmatter: ^4.0.1
     remark-gfm: ^3.0.1
     remark-parse: ^10.0.1
     remark-rehype: ^10.1.0
+    shiki: ^0.12.1
     tapable: ^2.2.1
     terminal-link: ^3.0.0
     unified: ^10.1.2
@@ -7088,17 +7128,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsonc-parser@npm:3.2.0":
+"jsonc-parser@npm:3.2.0, jsonc-parser@npm:^3.2.0":
   version: 3.2.0
   resolution: "jsonc-parser@npm:3.2.0"
   checksum: 946dd9a5f326b745aa326d48a7257e3f4a4b62c5e98ec8e49fa2bdd8d96cef7e6febf1399f5c7016114fd1f68a1c62c6138826d5d90bc650448e3cf0951c53c7
-  languageName: node
-  linkType: hard
-
-"jsonc-parser@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "jsonc-parser@npm:3.0.0"
-  checksum: 1df2326f1f9688de30c70ff19c5b2a83ba3b89a1036160da79821d1361090775e9db502dc57a67c11b56e1186fc1ed70b887f25c5febf9a3ec4f91435836c99d
   languageName: node
   linkType: hard
 
@@ -10089,17 +10122,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rehype-shiki-reloaded@npm:^0.0.10":
-  version: 0.0.10
-  resolution: "rehype-shiki-reloaded@npm:0.0.10"
+"rehype-shiki-reloaded@npm:^0.0.11":
+  version: 0.0.11
+  resolution: "rehype-shiki-reloaded@npm:0.0.11"
   dependencies:
     fast-copy: ^2.1.1
     hast-util-to-string: ^1.0.4
-    shiki: ^0.9.2
-    shiki-languages: ^0.2.7
     unist-builder: ^2.0.3
     unist-util-visit: ^2.0.3
-  checksum: ddfa22aa83ab62b371c61cfe87c2bdd3915841197cd56c7328ecc7ef6d1396dc963d21ce899f863d51bc5bd2fa4096931acf28902e87f09af79858960305fdb6
+  peerDependencies:
+    shiki: ">= 0.9"
+  checksum: 6c70f294f71b2c6e9123ff06f062f75d39e369f7856ff9b552c5125008c4da048d561dcb3674c146591ec682082a43e2b9a9f4f9457a44d91cd162c39c28c893
   languageName: node
   linkType: hard
 
@@ -10560,23 +10593,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"shiki-languages@npm:^0.2.7":
-  version: 0.2.7
-  resolution: "shiki-languages@npm:0.2.7"
+"shiki@npm:^0.12.1":
+  version: 0.12.1
+  resolution: "shiki@npm:0.12.1"
   dependencies:
-    vscode-textmate: ^5.2.0
-  checksum: 40bd273cb002a8453680be2bceba847c7bbd2bef9e32a7293b9714257e05b8d033565ca0479654c7e1dbf121f8cd29be7ce2ee7c40555e5aa316d82cdc674004
-  languageName: node
-  linkType: hard
-
-"shiki@npm:^0.9.2":
-  version: 0.9.15
-  resolution: "shiki@npm:0.9.15"
-  dependencies:
-    jsonc-parser: ^3.0.0
-    vscode-oniguruma: ^1.6.1
-    vscode-textmate: 5.2.0
-  checksum: 58d1e3e106320252b67c63dc1269c4b834152e9c675a06a4565ec41db1c93aea2dd94e22640d7ec99334cb47cd41b914642d936577143b689ef2a0db7d938c13
+    jsonc-parser: ^3.2.0
+    vscode-oniguruma: ^1.7.0
+    vscode-textmate: ^8.0.0
+  checksum: a5d78a79d282f5c5168786980c66e82f075e91fa015097456486624fc5775688d685ad9b1972b0617d7f1ef50927d21b61dca476247a6f6c6b7042046e89a979
   languageName: node
   linkType: hard
 
@@ -11883,24 +11907,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vscode-oniguruma@npm:^1.6.1":
-  version: 1.6.2
-  resolution: "vscode-oniguruma@npm:1.6.2"
-  checksum: 6b754acdafd5b68242ea5938bb00a32effc16c77f471d4f0f337d879d0e8e592622998e2441f42d9a7ff799c1593f31c11f26ca8d9bf9917e3ca881d3c1f3e19
+"vscode-oniguruma@npm:^1.7.0":
+  version: 1.7.0
+  resolution: "vscode-oniguruma@npm:1.7.0"
+  checksum: 53519d91d90593e6fb080260892e87d447e9b200c4964d766772b5053f5699066539d92100f77f1302c91e8fc5d9c772fbe40fe4c90f3d411a96d5a9b1e63f42
   languageName: node
   linkType: hard
 
-"vscode-textmate@npm:5.2.0":
-  version: 5.2.0
-  resolution: "vscode-textmate@npm:5.2.0"
-  checksum: 5449b42d451080f6f3649b66948f4b5ee4643c4e88cfe3558a3b31c84c78060cfdd288c4958c1690eaa5cd65d09992fa6b7c3bef9d4aa72b3651054a04624d20
-  languageName: node
-  linkType: hard
-
-"vscode-textmate@npm:^5.2.0":
-  version: 5.5.0
-  resolution: "vscode-textmate@npm:5.5.0"
-  checksum: 6ed57ec36f6fb7934b5dddf749db35cda77018f2332f94749f040f443e55a7897ba1f64cc89721dffd010bef32441cdb92c1dea5d7b24476b012ef5c239f22b1
+"vscode-textmate@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "vscode-textmate@npm:8.0.0"
+  checksum: 127780dfea89559d70b8326df6ec344cfd701312dd7f3f591a718693812b7852c30b6715e3cfc8b3200a4e2515b4c96f0843c0eacc0a3020969b5de262c2a4bb
   languageName: node
   linkType: hard
 

@@ -10,7 +10,7 @@ export const MDXPage = ({ id }: { id: string }) => {
 
   return (
     <MDXProvider components={components as MDXComponents}>
-      <PageWrapper>
+      <PageWrapper css={{ pb: 20 }}>
         <MDXPage />
       </PageWrapper>
     </MDXProvider>

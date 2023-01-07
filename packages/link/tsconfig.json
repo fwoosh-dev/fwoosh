@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "include": ["src/**/*", "../../typings/**/*"],
+  "exclude": ["dist/**/*"],
 
   "compilerOptions": {
     "outDir": "./dist",
@@ -8,12 +9,5 @@
     "composite": true
   },
 
-  "references": [
-    {
-      "path": "../../packages/cli"
-    },
-    {
-      "path": "../../packages/hooks"
-    }
-  ]
+  "references": [{ "path": "../components" }]
 }

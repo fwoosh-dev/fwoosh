@@ -46,7 +46,7 @@ export const h2 = styled("h2", {
 export const h3 = styled("h3", {
   text: "xl",
   color: "$gray11",
-  mt: 6,
+  mt: 10,
   mb: 4,
   fontWeight: 500,
   scrollMarginTop: "$4",
@@ -142,7 +142,7 @@ export const pre = styled("pre", {
   overflow: "hidden",
 });
 
-export const Anchor = styled("a", {
+const Anchor = styled("a", {
   cursor: "pointer",
   color: "$primary10",
   textDecoration: "underline",
@@ -158,11 +158,7 @@ export const a = React.forwardRef(
       return <Anchor ref={ref} href={href} {...props} />;
     }
 
-    return (
-      <Link to={href}>
-        <Anchor ref={ref} {...props} />
-      </Link>
-    );
+    return <Anchor as={Link} to={href} ref={ref} {...props} />;
   }
 );
 

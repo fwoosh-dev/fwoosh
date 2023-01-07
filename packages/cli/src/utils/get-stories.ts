@@ -14,7 +14,7 @@ import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
 
-import { chunkPromisesTimes, log } from "@fwoosh/utils";
+import { chunkPromisesTimes, createStorySlug, log } from "@fwoosh/utils";
 import {
   FwooshOptionsLoaded,
   ResolvedStoryMeta,
@@ -201,7 +201,6 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
     const stories: Story[] = await Promise.all(
       (storiesDeclarations as any).map(async (d: any) => {
         const exportName = d.declaration.declarations[0].id.value;
-        const slug = `${paramCase(meta.title)}--${paramCase(exportName)}`;
         const start = d.span.start + offset - ast.span.start;
         const nearestExport = findExportKeyword(contents, start);
         const code = contents.slice(
@@ -212,7 +211,7 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
         return {
           exportName,
           title: capitalCase(exportName),
-          slug,
+          slug: createStorySlug(meta.title, exportName),
           file: fullPath,
           comment: await getComment(contents, nearestExport),
           code: sanitizeTemplateString(code),

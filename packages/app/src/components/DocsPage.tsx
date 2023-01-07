@@ -13,11 +13,10 @@ import {
   ErrorBoundary,
 } from "@fwoosh/components";
 import * as Collapsible from "@radix-ui/react-collapsible";
-import { paramCase, headerCase } from "change-case";
+import { paramCase, capitalCase } from "change-case";
 import { StorySidebarChildItem, StoryTreeItem } from "@fwoosh/app/ui";
-import { useHighlightedCode } from "@fwoosh/utils";
+import { getStoryGroup, useStoryTree, useHighlightedCode } from "@fwoosh/hooks";
 
-import { getStoryGroup, useStoryTree } from "../hooks/useStoryTree";
 import * as styles from "./DocsPage.module.css";
 import { useRender } from "../hooks/useRender";
 import { MDXPage } from "./MDXPage";
@@ -173,7 +172,7 @@ const StoryDocsPage = ({
 }) => {
   const params = useParams<{ docsPath: string }>();
   const [, ...nameParts] = params.docsPath?.split("-") || [];
-  const name = nameParts.map((p) => headerCase(p)).join(" ");
+  const name = nameParts.map((p) => capitalCase(p)).join(" ");
 
   return (
     <DocsLayout>

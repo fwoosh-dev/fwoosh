@@ -10,8 +10,8 @@ import {
 } from "@fwoosh/components";
 import { Link, useParams } from "react-router-dom";
 import { StorySidebarChildItem, StoryTreeItem } from "@fwoosh/app/ui";
+import { useStoryTree, hasActiveChild } from "@fwoosh/hooks";
 
-import { useStoryTree, hasActiveChild } from "../../hooks/useStoryTree";
 import { resetContentScrollPosition, SidebarTree } from "./SidebarTree";
 
 function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {

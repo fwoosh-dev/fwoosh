@@ -3,6 +3,12 @@
   "include": [],
   "references": [
     {
+      "path": "packages/hooks"
+    },
+    {
+      "path": "packages/link"
+    },
+    {
       "path": "packages/cli"
     },
     {

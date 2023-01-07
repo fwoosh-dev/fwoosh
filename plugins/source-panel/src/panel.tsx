@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { stories } from "@fwoosh/app/stories";
 import { StyledMarkdown, styled } from "@fwoosh/components";
-import { useHighlightedCode } from "@fwoosh/utils";
+import { useHighlightedCode } from "@fwoosh/hooks";
 
 const Panel = styled("div", {
   height: "100%",

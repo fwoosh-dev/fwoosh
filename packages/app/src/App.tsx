@@ -21,7 +21,7 @@ import {
   getInitialColorMode,
   Spinner,
 } from "@fwoosh/components";
-import { getFirstStory, useStoryTree } from "./hooks/useStoryTree";
+import { getFirstStory, useStoryTree } from "@fwoosh/hooks";
 import { StoryWithTools } from "./components/StoryWithTools";
 import { convertMetaTitleToUrlParam } from "@fwoosh/utils";
 
@@ -88,8 +88,13 @@ const router = createBrowserRouter([
             element: <StoryWithTools />,
           },
           {
-            path: "docs/:docsPath",
-            element: <DocsPage />,
+            path: "docs",
+            children: [
+              {
+                path: ":docsPath",
+                element: <DocsPage />,
+              },
+            ],
           },
         ],
       },
