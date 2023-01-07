@@ -40,7 +40,7 @@ function TableOfContents({ data }: { data: MDXStoryData["toc"] }) {
       <QuickNav.Header>
         <QuickNav.Title>Quick nav</QuickNav.Title>
       </QuickNav.Header>
-      {data.length === 1 ? (
+      {data.length === 1 && data[0].depth === 1 ? (
         <ol>
           {data[0].children.map((item) => (
             <TableOfContentsGroup key={item.value + item.depth} entry={item} />
