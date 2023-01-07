@@ -131,8 +131,8 @@ const StoryDocsPage = ({
   stories: [StoryTreeItem, ...StorySidebarChildItem[]];
 }) => {
   const params = useParams<{ docsPath: string }>();
-  const [, ...nameParts] = params.docsPath?.split("-") || [];
-  const name = nameParts.map((p) => titleCase(p)).join(" ");
+  const nameParts = params.docsPath?.split("-") || [];
+  const name = nameParts[nameParts.length - 1];
   const quickNavRef = React.useRef<HTMLDivElement>(null);
 
   useActiveHeader(quickNavRef);
@@ -140,7 +140,7 @@ const StoryDocsPage = ({
   return (
     <DocsLayout>
       <PageWrapper>
-        <components.h1 id="intro">{name}</components.h1>
+        <components.h1 id="intro">{titleCase(name)}</components.h1>
         {firstStory && (
           <>
             {firstStory.story.comment && (
