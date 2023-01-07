@@ -9,6 +9,7 @@ import { MDXStoryData, stories } from "@fwoosh/app/stories";
 import { MDXProvider } from "@mdx-js/react";
 import { MDXPageTreeItem } from "@fwoosh/app/ui";
 import { useQuery } from "react-query";
+import { PageSwitchButton } from "./PageSwitchButtons";
 
 function TableOfContentsGroup({
   entry,
@@ -62,13 +63,12 @@ export const MDXPage = ({ page }: { page: MDXPageTreeItem }) => {
   const { component: MDXPage } = stories[page.id];
   const { data } = useQuery(`toc-${page.id}`, () => page.story.toc);
 
-  console.log({ data });
-
   return (
     <MDXProvider components={components as MDXComponents}>
       <DocsLayout>
-        <PageWrapper css={{ pb: 20 }}>
+        <PageWrapper>
           <MDXPage />
+          <PageSwitchButton current={page.id} />
         </PageWrapper>
         {data && <TableOfContents data={data} />}
       </DocsLayout>

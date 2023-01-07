@@ -5,15 +5,6 @@ import { Tree } from "react-arborist";
 import { TreeProps } from "react-arborist/dist/types/tree-props";
 
 import * as styles from "./SidebarTree.module.css";
-import { CONTENT_ID } from "../../constants";
-
-export function resetContentScrollPosition() {
-  const content = document.querySelector(`#${CONTENT_ID}`);
-
-  if (content) {
-    content.scrollTop = 0;
-  }
-}
 
 const Wrapper = styled("div", {
   height: "100%",

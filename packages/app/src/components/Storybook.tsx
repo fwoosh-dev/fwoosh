@@ -18,7 +18,7 @@ import { StoryIdContext } from "./Story";
 import { StorybookSidebarTree } from "./sidebar/StorybookSidebarTree";
 import { ThemeToggle } from "./ThemeToggle";
 import { config } from "@fwoosh/app/config";
-import { CONTENT_ID } from "../constants";
+import { CONTENT_ID } from "@fwoosh/utils";
 
 const StoryToolbar = styled(Toolbar.Root, {
   display: "flex",

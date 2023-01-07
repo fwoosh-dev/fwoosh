@@ -22,6 +22,7 @@ import { getStoryGroup, useStoryTree, useHighlightedCode } from "@fwoosh/hooks";
 import * as styles from "./DocsPage.module.css";
 import { useRender } from "../hooks/useRender";
 import { MDXPage } from "./MDXPage";
+import { PageSwitchButton } from "./PageSwitchButtons";
 
 const HeaderWrapper = styled("div", {
   position: "relative",
@@ -195,6 +196,7 @@ const StoryDocsPage = ({
             })}
           </>
         )}
+        <PageSwitchButton current={firstStory.id} />
       </PageWrapper>
       <QuickNav.Root>
         <QuickNav.Header>

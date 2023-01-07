@@ -17,7 +17,7 @@ import { StoryTree } from "@fwoosh/app/ui";
 
 import { DocsSidebarTree } from "./sidebar/DocsSidebarTree";
 import { ThemeToggle } from "./ThemeToggle";
-import { CONTENT_ID } from "../constants";
+import { CONTENT_ID } from "@fwoosh/utils";
 
 interface TreeItemProps {
   tree: StoryTree;

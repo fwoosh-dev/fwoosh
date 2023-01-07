@@ -168,3 +168,66 @@ export const hasActiveChild = (tree: StoryTree, slug: string): boolean => {
       (item.type === "tree" && hasActiveChild(item, slug))
   );
 };
+
+const flattenTree = (tree: StorySidebarChildItem[]) => {
+  const flatTree: Record<string, StoryData> = {};
+
+  function flatten(item: StorySidebarChildItem) {
+    if (item.type === "mdx") {
+      flatTree[item.id] = item.story;
+    } else if (item.type === "story") {
+      flatTree[item.id] = item.story;
+    } else if (item.type === "tree") {
+      item.children.forEach(flatten);
+    }
+  }
+
+  tree.forEach(flatten);
+
+  return flatTree;
+};
+
+export const getPreviousStory = (tree: StorySidebarChildItem[], id: string) => {
+  const flatTree = Object.entries(flattenTree(tree));
+  const currentIndex = flatTree.findIndex(([key]) => key === id);
+
+  if (currentIndex === -1) {
+    return undefined;
+  }
+
+  if (currentIndex === 0) {
+    return undefined;
+  }
+
+  return flatTree[currentIndex - 1][1];
+};
+
+export const getNextStory = (
+  tree: StorySidebarChildItem[],
+  id: string,
+  findLastInGroup?: boolean
+) => {
+  const flatTree = Object.entries(flattenTree(tree));
+  let currentIndex = flatTree.findIndex(([key]) => key === id);
+
+  if (findLastInGroup) {
+    while (
+      flatTree[currentIndex + 1] &&
+      flatTree[currentIndex + 1]?.[1].type === "basic" &&
+      flatTree[currentIndex + 1][1].grouping ===
+        flatTree[currentIndex][1].grouping
+    ) {
+      currentIndex++;
+    }
+  }
+
+  if (currentIndex === -1) {
+    return undefined;
+  }
+
+  if (currentIndex === flatTree.length - 1) {
+    return undefined;
+  }
+
+  return flatTree[currentIndex + 1][1];
+};

@@ -1,43 +1,10 @@
-import React, { Suspense } from "react";
-import {
-  Content,
-  SidebarItems,
-  SidebarLayout,
-  Sidebar,
-  styled,
-  Toolbar,
-  Spinner,
-  HeaderBar,
-  HeaderTitle,
-} from "@fwoosh/components";
-import { toolbarControls, panels } from "@fwoosh/app/ui";
-import { Outlet } from "react-router-dom";
-import { useId } from "@radix-ui/react-id";
+import React from "react";
+import { styled } from "@fwoosh/components";
+import { panels } from "@fwoosh/app/ui";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 
-import { Story, StoryIdContext } from "./Story";
-import { StorybookSidebarTree } from "./sidebar/StorybookSidebarTree";
-import { ThemeToggle } from "./ThemeToggle";
-import { config } from "@fwoosh/app/config";
-import { CONTENT_ID } from "../constants";
+import { Story } from "./Story";
 import { ToolPanels } from "./ToolPanels";
-
-const StoryToolbar = styled(Toolbar.Root, {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  gap: 2,
-  flex: 1,
-  height: "$12",
-  flexShrink: 0,
-});
-
-const StoryWrapper = styled("div", {
-  position: "relative",
-  height: "100%",
-  display: "flex",
-  flexDirection: "column",
-});
 
 const PanelContainer = styled("div", {
   height: "100%",

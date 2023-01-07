@@ -12,7 +12,8 @@ import { Link, useParams } from "react-router-dom";
 import { StorySidebarChildItem, StoryTreeItem } from "@fwoosh/app/ui";
 import { useStoryTree, hasActiveChild } from "@fwoosh/hooks";
 
-import { resetContentScrollPosition, SidebarTree } from "./SidebarTree";
+import { SidebarTree } from "./SidebarTree";
+import { resetContentScrollPosition } from "@fwoosh/utils";
 
 function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
   const finalStyle = {

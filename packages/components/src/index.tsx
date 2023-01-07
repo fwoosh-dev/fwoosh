@@ -10,3 +10,4 @@ export * from "./Spinner.js";
 export * from "./Sidebar.js";
 export * from "./ErrorBoundary.js";
 export * from "./StyledMarkdown.js";
+export * from "./icons";
