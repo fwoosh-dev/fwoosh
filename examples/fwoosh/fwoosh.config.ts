@@ -4,9 +4,12 @@ import ReactPlugin from "@fwoosh/react";
 const rootOrder = [
   "Welcome",
   "Configuration",
-  "Writing STories",
+  "Writing Stories",
   "Features",
-  "Components",
+  "Plugins",
+  "Theming",
+  "Plugin API",
+  "Changelog",
 ];
 
 export const config: FwooshOptions = {
@@ -17,6 +20,11 @@ export const config: FwooshOptions = {
       return 0;
     }
 
+    // If both items are in the rootOrder array, sort by the order defined above
+    if (rootOrder.includes(a.name) && rootOrder.includes(b.name)) {
+      return rootOrder.indexOf(a.name) - rootOrder.indexOf(b.name);
+    }
+
     // Render stories/mdx before trees
     if (a.type === "tree" && (b.type === "story" || b.type === "mdx")) {
       return 1;
@@ -24,11 +32,6 @@ export const config: FwooshOptions = {
 
     if (b.type === "tree" && (a.type === "story" || a.type === "mdx")) {
       return -1;
-    }
-
-    // If both items are in the rootOrder array, sort by the order defined above
-    if (rootOrder.includes(a.name) && rootOrder.includes(b.name)) {
-      return rootOrder.indexOf(a.name) - rootOrder.indexOf(b.name);
     }
 
     // Default to sorting by name

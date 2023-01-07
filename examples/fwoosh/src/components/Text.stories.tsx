@@ -5,7 +5,7 @@ import type { Story } from "@fwoosh/react/dist/types";
 import { components } from "@fwoosh/components";
 
 export const meta: StoryMeta = {
-  title: "Components/Text",
+  title: "Theming/Components/Text",
 };
 
 /**

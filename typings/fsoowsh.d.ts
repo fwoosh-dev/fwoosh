@@ -25,7 +25,7 @@ declare module "@fwoosh/app/stories" {
   export interface MdxMeta {
     /** The title used to create the sidebar tree structure. */
     title: string;
-    /** The component docs should be generated for */
+    /** Hide the quick navigation for the page. */
     hideNav?: boolean;
   }
 

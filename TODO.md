@@ -7,6 +7,7 @@
 - [ ] make sidebar and layout pluggable
 - [ ] add theming
 - [ ] search
+- [ ] DOCS MODE: click folder header open first page
 - [ ] build command
   - [ ] error out build when links are broken
   - [ ] resolve all suspenseful data

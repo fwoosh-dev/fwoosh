@@ -2,7 +2,7 @@ import * as React from "react";
 import { CONTENT_ID } from "@fwoosh/utils";
 import { useLocation } from "react-router-dom";
 
-const HEADING_SELECTOR = "h1, h2, h3, h4, h5, h6";
+export const HEADING_SELECTOR = "h1, h2, h3, h4, h5, h6";
 
 export function useActiveHeader(ref: React.RefObject<HTMLElement>) {
   const location = useLocation();

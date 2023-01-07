@@ -7,7 +7,7 @@ import { styled, Tabs } from "@fwoosh/components";
 const Panel = styled("div", { p: 4, color: "$gray11" });
 
 export const meta: StoryMeta = {
-  title: "Components/Tabs",
+  title: "Theming/Components/Tabs",
   component: [Tabs.Root, Tabs.List, Tabs.Trigger, Tabs.Content],
 };
 

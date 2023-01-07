@@ -1,0 +1,47 @@
+---
+title: Features/MDX Pages
+---
+
+# MDX Pages
+
+MDX Pages are a way to create pages that are powered by
+[MDX](https://mdxjs.com/). These pages are ways to include
+documentation and other content that isn't defined via stories.
+
+## Configuration
+
+### Options
+
+Configuration for MDX pages is done via a [yaml](https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html)
+[frontmatter](https://jekyllrb.com/docs/front-matter/) block at the top of the file.
+
+```mdx
+---
+title: Features/MDX Pages
+---
+
+# MDX Pages
+
+Some content.
+```
+
+#### `title`
+
+The title of the page.
+This is used to generate the page's URL and placement in the sidebar.
+
+```mdx
+---
+title: Features/MDX Pages
+---
+```
+
+#### `hideNav`
+
+Hide the quick navigation for the page.
+
+```mdx
+---
+hideNav: Features/MDX Pages
+---
+```

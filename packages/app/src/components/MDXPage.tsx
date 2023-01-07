@@ -10,7 +10,8 @@ import { MDXProvider } from "@mdx-js/react";
 import { MDXPageTreeItem } from "@fwoosh/app/ui";
 import { useQuery } from "react-query";
 import { PageSwitchButton } from "./PageSwitchButtons";
-import { useActiveHeader } from "../hooks/useActiveHeader";
+import { HEADING_SELECTOR, useActiveHeader } from "../hooks/useActiveHeader";
+import { CONTENT_ID } from "@fwoosh/utils";
 
 function TableOfContentsGroup({
   entry,
@@ -37,23 +38,55 @@ function TableOfContentsGroup({
 
 function TableOfContents({ data }: { data: MDXStoryData["toc"] }) {
   const quickNavRef = React.useRef<HTMLDivElement>(null);
+  const [toc, setToc] = React.useState(data);
 
   useActiveHeader(quickNavRef);
+
+  React.useEffect(() => {
+    if (data.length > 0) {
+      return;
+    }
+
+    const content = document.getElementById(CONTENT_ID);
+
+    function getHeadings() {
+      if (!content) {
+        return;
+      }
+
+      const generatedToc = Array.from(
+        content.querySelectorAll(HEADING_SELECTOR)
+      ).map((heading): MDXStoryData["toc"][number] => {
+        return {
+          depth: parseInt(heading.tagName.replace("H", "")),
+          value: heading.textContent || "",
+          children: [],
+          attributes: {
+            id: heading.getAttribute("id") || "",
+          },
+        };
+      });
+
+      setToc(generatedToc);
+    }
+
+    setTimeout(getHeadings, 500);
+  }, [data]);
 
   return (
     <QuickNav.Root ref={quickNavRef}>
       <QuickNav.Header>
         <QuickNav.Title>Quick nav</QuickNav.Title>
       </QuickNav.Header>
-      {data.length === 1 && data[0].depth === 1 ? (
+      {toc.length === 1 && toc[0].depth === 1 ? (
         <ol>
-          {data[0].children.map((item) => (
+          {toc[0].children.map((item) => (
             <TableOfContentsGroup key={item.value + item.depth} entry={item} />
           ))}
         </ol>
       ) : (
         <ol>
-          {data.map((item) => (
+          {toc.map((item) => (
             <TableOfContentsGroup key={item.value + item.depth} entry={item} />
           ))}
         </ol>

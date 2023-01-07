@@ -5,7 +5,7 @@ import type { Story } from "@fwoosh/react/dist/types";
 import { Spinner } from "@fwoosh/components";
 
 export const meta: StoryMeta = {
-  title: "Components/Spinner",
+  title: "Theming/Components/Spinner",
   component: [Spinner],
 };
 
