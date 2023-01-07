@@ -8,6 +8,7 @@
 - [ ] add theming
 - [ ] search
 - [ ] DOCS MODE: click folder header open first page
+- [ ] BUG: detect if there are properties before showing nav item?
 - [ ] build command
   - [ ] error out build when links are broken
   - [ ] resolve all suspenseful data
