@@ -3,6 +3,7 @@ export * from "./stitches";
 export * from "./dark-mode";
 export * as Tabs from "./Tabs.js";
 export * as Toolbar from "./Toolbar.js";
+export * as QuickNav from "./QuickNav.js";
 export * from "./PropsTable.js";
 export * from "./HeaderBar.js";
 export * from "./Spinner.js";

@@ -11,6 +11,8 @@ import {
   PropsTable,
   StyledMarkdown,
   ErrorBoundary,
+  QuickNav,
+  DocsLayout,
 } from "@fwoosh/components";
 import * as Collapsible from "@radix-ui/react-collapsible";
 import { paramCase, capitalCase } from "change-case";
@@ -32,14 +34,6 @@ const HeaderLink = ({ title, id }: { title: React.ReactNode; id: string }) => {
     </a>
   );
 };
-
-const DocsLayout = styled("div", {
-  display: "grid",
-
-  "@lg": {
-    gridTemplateColumns: "1fr minmax(200px, 300px)",
-  },
-});
 
 const StoryPreview = styled("div", {
   border: "1px solid $gray7",
@@ -68,64 +62,6 @@ const ShowCodeButton = styled("button", {
   borderLeft: "1px solid $gray7",
   borderTopLeftRadius: 4,
   color: "$gray10",
-});
-
-const QuickNav = styled("nav", {
-  mb: 10,
-  position: "sticky",
-  top: "$10",
-  height: "fit-content",
-  px: 8,
-  display: "none",
-
-  "@lg": {
-    display: "block",
-  },
-});
-
-const QuickNavLink = styled("a", {
-  height: "100%",
-  width: "100%",
-  display: "flex",
-  alignItems: "center",
-});
-
-const NavHeader = styled("div", {
-  display: "flex",
-  alignItems: "center",
-  px: 2,
-  my: 2,
-});
-
-const NavTitle = styled("h1", {
-  text: "xl",
-  color: "$gray11",
-  flex: 1,
-});
-
-const TitleNavItem = styled("li", {
-  height: "$8",
-  text: "sm",
-  color: "$gray10",
-  display: "flex",
-  alignItems: "center",
-  px: 2,
-
-  "&:hover": {
-    color: "$gray11",
-    backgroundColor: "$gray2",
-  },
-
-  "&:active": {
-    color: "$gray11",
-    backgroundColor: "$gray4",
-  },
-});
-
-const NavGroup = styled("div", {
-  [`&  ${TitleNavItem}`]: {
-    pl: 5,
-  },
 });
 
 const CollapsibleRoot = styled(Collapsible.Root, {
@@ -260,21 +196,21 @@ const StoryDocsPage = ({
           </>
         )}
       </PageWrapper>
-      <QuickNav>
-        <NavHeader>
-          <NavTitle>Quick nav</NavTitle>
-        </NavHeader>
+      <QuickNav.Root>
+        <QuickNav.Header>
+          <QuickNav.Title>Quick nav</QuickNav.Title>
+        </QuickNav.Header>
         <ol>
-          <TitleNavItem>
-            <QuickNavLink href="#intro">Introduction</QuickNavLink>
-          </TitleNavItem>
-          <TitleNavItem>
-            <QuickNavLink href="#props">Properties</QuickNavLink>
-          </TitleNavItem>
-          <TitleNavItem>
-            <QuickNavLink href="#stories">Stories</QuickNavLink>
-          </TitleNavItem>
-          <NavGroup>
+          <QuickNav.Item>
+            <QuickNav.Link href="#intro">Introduction</QuickNav.Link>
+          </QuickNav.Item>
+          <QuickNav.Item>
+            <QuickNav.Link href="#props">Properties</QuickNav.Link>
+          </QuickNav.Item>
+          <QuickNav.Item>
+            <QuickNav.Link href="#stories">Stories</QuickNav.Link>
+          </QuickNav.Item>
+          <QuickNav.Group>
             {stories.map((story) => {
               if (story.type === "mdx" || story.type === "tree") {
                 return null;
@@ -283,14 +219,14 @@ const StoryDocsPage = ({
               const hash = `#${paramCase(story.story.title)}`;
 
               return (
-                <TitleNavItem key={hash}>
-                  <QuickNavLink href={hash}>{story.story.title}</QuickNavLink>
-                </TitleNavItem>
+                <QuickNav.Item key={hash}>
+                  <QuickNav.Link href={hash}>{story.story.title}</QuickNav.Link>
+                </QuickNav.Item>
               );
             })}
-          </NavGroup>
+          </QuickNav.Group>
         </ol>
-      </QuickNav>
+      </QuickNav.Root>
     </DocsLayout>
   );
 };
@@ -318,7 +254,7 @@ const DocsContent = React.memo(() => {
   }
 
   if (firstStory.type === "mdx") {
-    return <MDXPage id={firstStory.id} />;
+    return <MDXPage page={firstStory} />;
   }
 
   return (

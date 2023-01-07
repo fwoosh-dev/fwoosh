@@ -18,7 +18,8 @@ import { Element } from "hast";
 import { Pluggable } from "unified";
 import remarkFrontmatter from "remark-frontmatter";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypeSlug from "rehype-slug";
+import remarkSlug from "remark-slug";
+import { remarkMdxToc } from "remark-mdx-toc";
 
 import { endent } from "./utils/endent.js";
 import type { FwooshHooks, FwooshOptions, FwooshOptionsLoaded } from "./types";
@@ -180,9 +181,8 @@ export class Fwoosh {
     const baseConfig: InlineConfig = {
       plugins: [
         mdx({
-          remarkPlugins: [remarkFrontmatter],
+          remarkPlugins: [remarkFrontmatter, remarkSlug, remarkMdxToc],
           rehypePlugins: [
-            rehypeSlug,
             [
               rehypeAutolinkHeadings,
               {

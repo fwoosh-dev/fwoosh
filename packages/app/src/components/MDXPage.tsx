@@ -1,18 +1,77 @@
 import React from "react";
-import { components, PageWrapper } from "@fwoosh/components";
-import { stories } from "@fwoosh/app/stories";
+import {
+  components,
+  DocsLayout,
+  PageWrapper,
+  QuickNav,
+} from "@fwoosh/components";
+import { MDXStoryData, stories } from "@fwoosh/app/stories";
 import { MDXProvider } from "@mdx-js/react";
+import { MDXPageTreeItem } from "@fwoosh/app/ui";
+import { useQuery } from "react-query";
+
+function TableOfContentsGroup({
+  entry,
+}: {
+  entry: MDXStoryData["toc"][number];
+}) {
+  return (
+    <>
+      <QuickNav.Item>
+        <QuickNav.Link href={`#${entry.attributes.id}`}>
+          {entry.value}
+        </QuickNav.Link>
+      </QuickNav.Item>
+      {entry.children.length > 0 && (
+        <QuickNav.Group>
+          {entry.children.map((item) => (
+            <TableOfContentsGroup key={item.value + item.depth} entry={item} />
+          ))}
+        </QuickNav.Group>
+      )}
+    </>
+  );
+}
+
+function TableOfContents({ data }: { data: MDXStoryData["toc"] }) {
+  return (
+    <QuickNav.Root>
+      <QuickNav.Header>
+        <QuickNav.Title>Quick nav</QuickNav.Title>
+      </QuickNav.Header>
+      {data.length === 1 ? (
+        <ol>
+          {data[0].children.map((item) => (
+            <TableOfContentsGroup key={item.value + item.depth} entry={item} />
+          ))}
+        </ol>
+      ) : (
+        <ol>
+          {data.map((item) => (
+            <TableOfContentsGroup key={item.value + item.depth} entry={item} />
+          ))}
+        </ol>
+      )}
+    </QuickNav.Root>
+  );
+}
 
 type MDXComponents = React.ComponentProps<typeof MDXProvider>["components"];
 
-export const MDXPage = ({ id }: { id: string }) => {
-  const { component: MDXPage } = stories[id];
+export const MDXPage = ({ page }: { page: MDXPageTreeItem }) => {
+  const { component: MDXPage } = stories[page.id];
+  const { data } = useQuery(`toc-${page.id}`, () => page.story.toc);
+
+  console.log({ data });
 
   return (
     <MDXProvider components={components as MDXComponents}>
-      <PageWrapper css={{ pb: 20 }}>
-        <MDXPage />
-      </PageWrapper>
+      <DocsLayout>
+        <PageWrapper css={{ pb: 20 }}>
+          <MDXPage />
+        </PageWrapper>
+        {data && <TableOfContents data={data} />}
+      </DocsLayout>
     </MDXProvider>
   );
 };

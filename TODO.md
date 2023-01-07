@@ -10,7 +10,6 @@
 - [ ] build command
   - [ ] error out build when links are broken
   - [ ] resolve all suspenseful data
-- [ ] links in markdown
 - [ ] BUG: code previews don't have horizontal scroll
 - [ ] command pallette?
 - [ ] hooks for completely custom routes/layouts

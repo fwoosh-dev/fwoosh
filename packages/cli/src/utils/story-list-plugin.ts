@@ -69,6 +69,11 @@ function createVirtualFile(config: FwooshFileDescriptor[]) {
         grouping: '${file.meta.title}',
         meta: ${JSON.stringify(file.meta)},
         component: ${componentName},
+        toc: new Promise(async (resolve) => {
+          // PERF TODO: this happens multiple times
+          const { toc } = await import('${file.mdxFile}')
+          resolve(toc);
+        }),
       }`);
     } else {
       const componentName = getComponentName(file.slug);

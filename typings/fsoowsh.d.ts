@@ -1,4 +1,6 @@
 declare module "@fwoosh/app/stories" {
+  import { TocEntry } from "remark-mdx-toc";
+
   interface BaseStoryData {
     title: string;
     slug: string;
@@ -15,6 +17,7 @@ declare module "@fwoosh/app/stories" {
 
   export interface MDXStoryData extends BaseStoryData {
     type: "mdx";
+    toc: TocEntry[];
   }
 
   export type StoryData = BasicStoryData | MDXStoryData;
