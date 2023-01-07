@@ -24,6 +24,7 @@ import {
 import { getFirstStory, useStoryTree } from "@fwoosh/hooks";
 import { StoryWithTools } from "./components/StoryWithTools";
 import { convertMetaTitleToUrlParam } from "@fwoosh/utils";
+import { ErrorBoundary } from "@fwoosh/components";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -53,10 +54,12 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <AppWrapper>
-        <Outlet />
-        <ScrollRestoration />
-      </AppWrapper>
+      <ErrorBoundary fullScreen>
+        <AppWrapper>
+          <Outlet />
+          <ScrollRestoration />
+        </AppWrapper>
+      </ErrorBoundary>
     ),
     children: [
       {

@@ -19,8 +19,12 @@ const ErrorWrapper = styled("div", {
   background: "$primary3",
 });
 
+interface ErrorBoundaryProps {
+  fullScreen?: boolean;
+}
+
 export class ErrorBoundary extends React.Component<
-  {},
+  ErrorBoundaryProps,
   { error: Error | undefined }
 > {
   constructor(props: any) {
@@ -37,7 +41,9 @@ export class ErrorBoundary extends React.Component<
   render() {
     if (this.state.error) {
       return (
-        <ErrorWrapper>
+        <ErrorWrapper
+          css={this.props.fullScreen ? { height: "100vh", width: "100vw" } : {}}
+        >
           <ErrorMessage>{this.state.error.message}</ErrorMessage>
         </ErrorWrapper>
       );
