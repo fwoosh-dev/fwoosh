@@ -1,3 +1,23 @@
+# v0.0.75 (Sat Jan 07 2023)
+
+#### ⚠️ Pushed to `main`
+
+- fix story matching ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- get quick nav working for mdx pages ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add clickable link to headings ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix docs for components from packages ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add links feature ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- document config options ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- highlight code in mdx ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- support TS configuration ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- support named config export ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.74 (Fri Jan 06 2023)
 
 #### ⚠️ Pushed to `main`

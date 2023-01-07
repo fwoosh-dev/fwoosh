@@ -1,3 +1,15 @@
+# v0.0.75 (Sat Jan 07 2023)
+
+#### ⚠️ Pushed to `main`
+
+- support TS configuration ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.72 (Thu Jan 05 2023)
 
 #### ⚠️ Pushed to `main`

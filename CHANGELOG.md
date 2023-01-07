@@ -1,3 +1,57 @@
+# v0.0.75 (Sat Jan 07 2023)
+
+#### ⚠️ Pushed to `main`
+
+- iterate on docs ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- delete old docs ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/components`
+  - add current heading highlight ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add root error boundary ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/components`
+  - make gutter widths even ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - fix props link ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - fix chevron alignment ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`
+  - improve welcome page ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - semantic html ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - fix first story link to ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - fix active highlight for nested mdx story ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - make sidebar groups open first story/mdx child ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/hooks`
+  - fix story matching ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/components`, `@fwoosh/hooks`, `@fwoosh/utils`
+  - add prev/next page buttons ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/components`
+  - get quick nav working for mdx pages ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`
+  - add clickable link to headings ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/link`
+  - add title hash support for mdx links ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/hooks`, `@fwoosh/link`
+  - fix finding first story in mdx heavy storybook ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `fwoosh`
+  - fix docs for components from packages ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - highlight code in mdx ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - support named config export ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/components`, `@fwoosh/hooks`
+  - more docs ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/hooks`
+  - fix folder name casing ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/components`, `@fwoosh/hooks`, `@fwoosh/link`, `@fwoosh/utils`, `@fwoosh/source-panel`
+  - add links feature ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `fwoosh`, `@fwoosh/story-description-panel`
+  - document config options ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `fwoosh`, `@fwoosh/react`
+  - support TS configuration ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/props-panel`
+  - default to meta.component in props panel ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.74 (Fri Jan 06 2023)
 
 #### ⚠️ Pushed to `main`

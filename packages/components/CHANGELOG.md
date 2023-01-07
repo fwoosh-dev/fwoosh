@@ -1,3 +1,23 @@
+# v0.0.75 (Sat Jan 07 2023)
+
+#### ⚠️ Pushed to `main`
+
+- add current heading highlight ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- make gutter widths even ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add prev/next page buttons ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- get quick nav working for mdx pages ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix props link ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add root error boundary ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- more docs ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add links feature ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix chevron alignment ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.72 (Thu Jan 05 2023)
 
 #### ⚠️ Pushed to `main`

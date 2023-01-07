@@ -1,3 +1,27 @@
+# v0.0.75 (Sat Jan 07 2023)
+
+#### ⚠️ Pushed to `main`
+
+- add current heading highlight ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- improve welcome page ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix story matching ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add prev/next page buttons ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- get quick nav working for mdx pages ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- semantic html ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add clickable link to headings ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix finding first story in mdx heavy storybook ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add root error boundary ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add links feature ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix first story link to ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix active highlight for nested mdx story ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- make sidebar groups open first story/mdx child ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.74 (Fri Jan 06 2023)
 
 #### ⚠️ Pushed to `main`
