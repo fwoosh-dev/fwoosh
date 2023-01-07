@@ -36,18 +36,26 @@ const queryClient = new QueryClient({
 
 const FirstDocsPage = () => {
   const tree = useStoryTree();
+  const firstStory = getFirstStory(tree);
+
+  if (!firstStory) {
+    throw new Error('No stories found. Did you forget to add a "meta" export?');
+  }
 
   return (
-    <Navigate
-      to={"/docs/" + convertMetaTitleToUrlParam(getFirstStory(tree).grouping)}
-    />
+    <Navigate to={"/docs/" + convertMetaTitleToUrlParam(firstStory.grouping)} />
   );
 };
 
 const FirstStory = () => {
   const tree = useStoryTree();
+  const firstStory = getFirstStory(tree);
 
-  return <Navigate to={"/storybook/" + getFirstStory(tree).slug} />;
+  if (!firstStory) {
+    throw new Error('No stories found. Did you forget to add a "meta" export?');
+  }
+
+  return <Navigate to={"/storybook/" + firstStory.slug} />;
 };
 
 const router = createBrowserRouter([

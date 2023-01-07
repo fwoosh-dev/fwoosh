@@ -106,15 +106,25 @@ export const useStoryTree = () => {
   return data;
 };
 
-export const getFirstStory = (tree: StorySidebarChildItem[]): StoryData => {
+export const getFirstStory = (
+  tree: StorySidebarChildItem[]
+): StoryData | undefined => {
   const first = tree[0];
+
+  if (!first) {
+    return undefined;
+  }
 
   if (first.type === "story") {
     return first.story;
   }
 
   if (first.type === "tree") {
-    return getFirstStory(first.children);
+    const child = getFirstStory(first.children);
+
+    if (child) {
+      return child;
+    }
   }
 
   return getFirstStory(tree.slice(1));

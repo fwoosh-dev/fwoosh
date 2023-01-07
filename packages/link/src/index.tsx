@@ -78,17 +78,19 @@ export const Link = React.forwardRef(
       const firstStory = getFirstStory(group);
       const slug = parts.join("-");
 
-      return (
-        <components.a
-          ref={ref}
-          href={
-            isStorybook
-              ? `/storybook/docs/${slug}#${paramCase(firstStory.title)}`
-              : `/docs/${slug}`
-          }
-          {...props}
-        />
-      );
+      if (firstStory) {
+        return (
+          <components.a
+            ref={ref}
+            href={
+              isStorybook
+                ? `/storybook/docs/${slug}#${paramCase(firstStory.title)}`
+                : `/docs/${slug}`
+            }
+            {...props}
+          />
+        );
+      }
     }
 
     console.error({ docSlug, storySlug, stories });
