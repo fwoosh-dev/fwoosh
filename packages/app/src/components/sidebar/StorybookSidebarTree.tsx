@@ -11,7 +11,7 @@ import {
 import { Link, useParams } from "react-router-dom";
 import { StorySidebarChildItem, StoryTreeItem } from "@fwoosh/app/ui";
 import { useStoryTree, hasActiveChild } from "@fwoosh/hooks";
-import { capitalCase } from "change-case";
+import { titleCase } from "title-case";
 
 import { SidebarTree } from "./SidebarTree";
 import { resetContentScrollPosition } from "@fwoosh/utils";
@@ -21,7 +21,7 @@ function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
     ...style,
     paddingLeft: (style.paddingLeft as number) + SIDEBAR_ITEM_INDENT,
   };
-  const name = capitalCase(node.data.name);
+  const name = titleCase(node.data.name);
 
   if (node.data.type === "story" || node.data.type === "mdx") {
     const slug = ((node.data as unknown) as StoryTreeItem).story.slug;

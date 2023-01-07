@@ -15,7 +15,8 @@ import {
   DocsLayout,
 } from "@fwoosh/components";
 import * as Collapsible from "@radix-ui/react-collapsible";
-import { paramCase, capitalCase } from "change-case";
+import { paramCase } from "change-case";
+import { titleCase } from "title-case";
 import { StorySidebarChildItem, StoryTreeItem } from "@fwoosh/app/ui";
 import { getStoryGroup, useStoryTree, useHighlightedCode } from "@fwoosh/hooks";
 
@@ -131,7 +132,7 @@ const StoryDocsPage = ({
 }) => {
   const params = useParams<{ docsPath: string }>();
   const [, ...nameParts] = params.docsPath?.split("-") || [];
-  const name = nameParts.map((p) => capitalCase(p)).join(" ");
+  const name = nameParts.map((p) => titleCase(p)).join(" ");
   const quickNavRef = React.useRef<HTMLDivElement>(null);
 
   useActiveHeader(quickNavRef);

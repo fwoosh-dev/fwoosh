@@ -1,6 +1,6 @@
 import swc, { ImportDeclaration, Module } from "@swc/core";
 import { promises as fs } from "fs";
-import { capitalCase } from "change-case";
+import { titleCase } from "title-case";
 import ms from "pretty-ms";
 import { performance } from "perf_hooks";
 
@@ -209,7 +209,7 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
 
         return {
           exportName,
-          title: capitalCase(exportName),
+          title: titleCase(exportName),
           slug: createStorySlug(meta.title, exportName),
           file: fullPath,
           comment: await getComment(contents, nearestExport),

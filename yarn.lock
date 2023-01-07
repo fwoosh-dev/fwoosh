@@ -758,6 +758,7 @@ __metadata:
     react-resizable-panels: ^0.0.23
     react-router-dom: ^6.6.1
     react-use-measure: ^2.1.1
+    title-case: ^3.0.3
   peerDependencies:
     react: ^16.8 || ^17.0
     react-dom: ^16.8 || ^17.0
@@ -5919,6 +5920,7 @@ __metadata:
     shiki: ^0.12.1
     tapable: ^2.2.1
     terminal-link: ^3.0.0
+    title-case: ^3.0.3
     unified: ^10.1.2
     vite: ^4.0.3
   bin:
@@ -11202,6 +11204,15 @@ __metadata:
   version: 1.4.2
   resolution: "tinycolor2@npm:1.4.2"
   checksum: 57ed262e08815a4ab0ed933edafdbc6555a17081781766149813b44a080ecbe58b3ee281e81c0e75b42e4d41679f138cfa98eabf043f829e0683c04adb12c031
+  languageName: node
+  linkType: hard
+
+"title-case@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "title-case@npm:3.0.3"
+  dependencies:
+    tslib: ^2.0.3
+  checksum: e8b7ea006b53cf3208d278455d9f1e22c409459d7f9878da324fa3b18cc0aef8560924c19c744e870394a5d9cddfdbe029ebae9875909ee7f4fc562e7cbfc53e
   languageName: node
   linkType: hard
 

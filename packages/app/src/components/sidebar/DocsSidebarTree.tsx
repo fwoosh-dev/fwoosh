@@ -16,12 +16,12 @@ import {
   convertMetaTitleToUrlParam,
 } from "@fwoosh/utils";
 import { useStoryTree } from "@fwoosh/hooks";
-import { capitalCase } from "change-case";
+import { titleCase } from "title-case";
 
 import { SidebarTree } from "./SidebarTree";
 
 function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
-  const name = capitalCase(node.data.name);
+  const name = titleCase(node.data.name);
   const isValidPath = React.useMemo(() => {
     return Object.values(stories).some(
       (story) => convertMetaTitleToUrlParam(story.grouping) === node.data.id

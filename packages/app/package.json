@@ -22,7 +22,8 @@
     "react-query": "^3.34.19",
     "react-resizable-panels": "^0.0.23",
     "react-router-dom": "^6.6.1",
-    "react-use-measure": "^2.1.1"
+    "react-use-measure": "^2.1.1",
+    "title-case": "^3.0.3"
   },
   "peerDependencies": {
     "react": "^16.8 || ^17.0",
