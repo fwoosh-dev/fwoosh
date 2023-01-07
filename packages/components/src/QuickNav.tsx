@@ -1,12 +1,14 @@
 import { styled } from "./stitches";
 
 export const Root = styled("nav", {
-  mb: 10,
+  py: 10,
   position: "sticky",
-  top: "$10",
+  top: 0,
   height: "fit-content",
   px: 4,
   display: "none",
+  overflow: "auto",
+  maxHeight: "calc(100vh - $14)",
 
   "@lg": {
     display: "block",
