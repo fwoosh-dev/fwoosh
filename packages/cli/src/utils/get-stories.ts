@@ -144,7 +144,7 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
 
   if (file.endsWith(".mdx")) {
     try {
-      const [, frontmatter] = contents.match(/^---\n(.+)\n---/) || [];
+      const [, frontmatter] = contents.match(/^---\n([^---]+)\n---/) || [];
 
       if (frontmatter) {
         const fileDescriptor: FwooshFileDescriptor = {
