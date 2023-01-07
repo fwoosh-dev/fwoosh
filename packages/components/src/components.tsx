@@ -297,7 +297,7 @@ export const DocsLayout = styled("div", {
   display: "grid",
 
   "@lg": {
-    gridTemplateColumns: "1fr minmax(200px, 300px)",
+    gridTemplateColumns: "1fr minmax(200px, 279px)",
   },
 });
 

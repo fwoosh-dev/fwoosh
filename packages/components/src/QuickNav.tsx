@@ -5,7 +5,7 @@ export const Root = styled("nav", {
   position: "sticky",
   top: "$10",
   height: "fit-content",
-  px: 8,
+  px: 4,
   display: "none",
 
   "@lg": {
