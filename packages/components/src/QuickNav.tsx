@@ -68,4 +68,8 @@ export const Link = styled("a", {
   width: "100%",
   display: "flex",
   alignItems: "center",
+
+  "&[aria-current]": {
+    color: "$gray11",
+  },
 });

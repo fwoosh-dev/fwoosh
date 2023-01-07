@@ -10,6 +10,7 @@ import { MDXProvider } from "@mdx-js/react";
 import { MDXPageTreeItem } from "@fwoosh/app/ui";
 import { useQuery } from "react-query";
 import { PageSwitchButton } from "./PageSwitchButtons";
+import { useActiveHeader } from "../hooks/useActiveHeader";
 
 function TableOfContentsGroup({
   entry,
@@ -35,8 +36,12 @@ function TableOfContentsGroup({
 }
 
 function TableOfContents({ data }: { data: MDXStoryData["toc"] }) {
+  const quickNavRef = React.useRef<HTMLDivElement>(null);
+
+  useActiveHeader(quickNavRef);
+
   return (
-    <QuickNav.Root>
+    <QuickNav.Root ref={quickNavRef}>
       <QuickNav.Header>
         <QuickNav.Title>Quick nav</QuickNav.Title>
       </QuickNav.Header>

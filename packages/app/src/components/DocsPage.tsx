@@ -23,6 +23,7 @@ import * as styles from "./DocsPage.module.css";
 import { useRender } from "../hooks/useRender";
 import { MDXPage } from "./MDXPage";
 import { PageSwitchButton } from "./PageSwitchButtons";
+import { useActiveHeader } from "../hooks/useActiveHeader";
 
 const HeaderWrapper = styled("div", {
   position: "relative",
@@ -131,6 +132,9 @@ const StoryDocsPage = ({
   const params = useParams<{ docsPath: string }>();
   const [, ...nameParts] = params.docsPath?.split("-") || [];
   const name = nameParts.map((p) => capitalCase(p)).join(" ");
+  const quickNavRef = React.useRef<HTMLDivElement>(null);
+
+  useActiveHeader(quickNavRef);
 
   return (
     <DocsLayout>
@@ -198,7 +202,7 @@ const StoryDocsPage = ({
         )}
         <PageSwitchButton current={firstStory.id} />
       </PageWrapper>
-      <QuickNav.Root>
+      <QuickNav.Root ref={quickNavRef}>
         <QuickNav.Header>
           <QuickNav.Title>Quick nav</QuickNav.Title>
         </QuickNav.Header>
