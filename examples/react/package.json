@@ -12,5 +12,5 @@
     "@vitejs/plugin-react": "^3.0.0",
     "fwoosh": "link:../../packages/cli"
   },
-  "version": "0.0.74"
+  "version": "0.0.75"
 }
