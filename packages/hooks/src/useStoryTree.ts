@@ -144,8 +144,12 @@ export const getStoryGroup = (
         (item) => "name" in item && item.name === part
       );
 
-      if (childItem && childItem.type === "tree") {
-        currentItem = childItem;
+      if (childItem) {
+        if (childItem.type === "tree") {
+          currentItem = childItem;
+        } else if (childItem.type === "mdx") {
+          return [childItem];
+        }
       }
     }
   }
