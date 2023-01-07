@@ -96,7 +96,10 @@ function getComponentPath(ast: Module, file: string, value: string) {
 
   // TODO - handle re-exports
   return require.resolve(
-    path.resolve(path.dirname(file), componentImport.source.value)
+    componentImport.source.value.startsWith(".") ||
+      componentImport.source.value.startsWith("/")
+      ? path.resolve(path.dirname(file), componentImport.source.value)
+      : componentImport.source.value
   );
 }
 
