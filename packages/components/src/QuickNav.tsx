@@ -29,7 +29,6 @@ export const Title = styled("h1", {
 export const Item = styled("li", {
   height: "$8",
   text: "sm",
-  color: "$gray10",
   display: "flex",
   alignItems: "center",
   px: 2,
@@ -68,8 +67,10 @@ export const Link = styled("a", {
   width: "100%",
   display: "flex",
   alignItems: "center",
+  color: "$gray9",
 
   "&[aria-current]": {
     color: "$gray11",
+    fontWeight: 500,
   },
 });
