@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { useId } from "@radix-ui/react-id";
-import { BasicStoryData } from "@fwoosh/app/stories";
+import { BasicStoryData, StoryMeta } from "@fwoosh/app/stories";
 import { useDocs } from "@fwoosh/app/docs";
 import {
   components,
@@ -112,7 +112,7 @@ const DocsPropsTable = ({
   hasTitle,
 }: {
   story: BasicStoryData;
-  meta: { component: any };
+  meta: StoryMeta;
   hasTitle?: boolean | string;
 }) => {
   const docs = useDocs(story.slug, meta);

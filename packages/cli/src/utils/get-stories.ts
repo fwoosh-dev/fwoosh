@@ -15,13 +15,9 @@ import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
 
 import { chunkPromisesTimes, createStorySlug, log } from "@fwoosh/utils";
-import {
-  FwooshOptionsLoaded,
-  ResolvedStoryMeta,
-  Story,
-  StoryMeta,
-} from "../types";
+import { FwooshOptionsLoaded, ResolvedStoryMeta, Story } from "../types";
 import { shikiConfig } from "./shiki-config.js";
+import { StoryMeta } from "@fwoosh/app/stories";
 
 const require = createRequire(import.meta.url);
 

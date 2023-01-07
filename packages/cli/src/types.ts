@@ -4,13 +4,7 @@ import { InlineConfig } from "vite";
 import { StorySidebarChildItem } from "@fwoosh/app/ui";
 
 import { Plugin } from "./fwoosh";
-
-export interface StoryMeta {
-  /** The title used to create the sidebar tree structure. */
-  title: string;
-  /** The component docs should be generated for */
-  component?: any;
-}
+import { StoryMeta } from "@fwoosh/app/stories";
 
 export interface ResolvedStoryMeta extends StoryMeta {
   /** The file where the story is defined */

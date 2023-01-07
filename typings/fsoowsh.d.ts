@@ -1,6 +1,13 @@
 declare module "@fwoosh/app/stories" {
   import { TocEntry } from "remark-mdx-toc";
 
+  export interface StoryMeta {
+    /** The title used to create the sidebar tree structure. */
+    title: string;
+    /** The component docs should be generated for */
+    component?: any;
+  }
+
   interface BaseStoryData {
     title: string;
     slug: string;
@@ -15,9 +22,17 @@ declare module "@fwoosh/app/stories" {
     comment?: string;
   }
 
+  export interface MdxMeta {
+    /** The title used to create the sidebar tree structure. */
+    title: string;
+    /** The component docs should be generated for */
+    hideNav?: boolean;
+  }
+
   export interface MDXStoryData extends BaseStoryData {
     type: "mdx";
     toc: TocEntry[];
+    meta: MdxMeta;
   }
 
   export type StoryData = BasicStoryData | MDXStoryData;

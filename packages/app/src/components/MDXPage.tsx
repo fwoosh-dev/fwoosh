@@ -65,18 +65,28 @@ function TableOfContents({ data }: { data: MDXStoryData["toc"] }) {
 type MDXComponents = React.ComponentProps<typeof MDXProvider>["components"];
 
 export const MDXPage = ({ page }: { page: MDXPageTreeItem }) => {
-  const { component: MDXPage } = stories[page.id];
+  const { component: MDXPage, meta } = stories[page.id] as MDXStoryData;
   const { data } = useQuery(`toc-${page.id}`, () => page.story.toc);
+
+  let content = (
+    <PageWrapper>
+      <MDXPage />
+      <PageSwitchButton current={page.id} />
+    </PageWrapper>
+  );
+
+  if (data && !meta.hideNav) {
+    content = (
+      <DocsLayout>
+        {content}
+        {data && !meta.hideNav && <TableOfContents data={data} />}
+      </DocsLayout>
+    );
+  }
 
   return (
     <MDXProvider components={components as MDXComponents}>
-      <DocsLayout>
-        <PageWrapper>
-          <MDXPage />
-          <PageSwitchButton current={page.id} />
-        </PageWrapper>
-        {data && <TableOfContents data={data} />}
-      </DocsLayout>
+      {content}
     </MDXProvider>
   );
 };
