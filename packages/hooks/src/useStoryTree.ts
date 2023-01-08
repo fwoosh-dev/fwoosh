@@ -104,7 +104,8 @@ export const useStoryTree = () => {
 };
 
 export const getFirstStory = (
-  tree: StorySidebarChildItem[]
+  tree: StorySidebarChildItem[],
+  { includeMDX }: { includeMDX?: boolean } = {}
 ): StoryData | undefined => {
   const first = tree[0];
 
@@ -116,15 +117,19 @@ export const getFirstStory = (
     return first.story;
   }
 
+  if (first.type === "mdx" && includeMDX) {
+    return first.story;
+  }
+
   if (first.type === "tree") {
-    const child = getFirstStory(first.children);
+    const child = getFirstStory(first.children, { includeMDX });
 
     if (child) {
       return child;
     }
   }
 
-  return getFirstStory(tree.slice(1));
+  return getFirstStory(tree.slice(1), { includeMDX });
 };
 
 export const getStoryGroup = (

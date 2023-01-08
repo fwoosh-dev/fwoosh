@@ -23,7 +23,7 @@ const loadTypescript = () => {
       tsNodeInstance.compile(content, filepath);
       return require(filepath);
     } catch (e) {
-      console.log(e);
+      console.error(e);
       throw e;
     }
   };

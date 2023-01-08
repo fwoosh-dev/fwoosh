@@ -19,8 +19,12 @@ import { useStoryTree } from "@fwoosh/hooks";
 import { titleCase } from "title-case";
 
 import { SidebarTree } from "./SidebarTree";
+import { getFirstRenderableChild } from "../../hooks/getFirstRenderableChild";
 
 function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
+  const firstChildSlug = getFirstRenderableChild(node, {
+    isStorybook: false,
+  });
   const name = titleCase(node.data.name);
   const isValidPath = React.useMemo(() => {
     return Object.values(stories).some(
@@ -80,11 +84,20 @@ function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
   }
 
   return (
-    <SidebarSectionTitle style={finalStyle} data-active={isChildActive}>
+    <SidebarSectionTitle
+      style={finalStyle}
+      data-active={isChildActive}
+      as={Link}
+      to={firstChildSlug}
+    >
       <SidebarFolderOpenIndicator
         as="button"
         isOpen={node.isOpen}
-        onClick={() => node.toggle()}
+        onClick={(e) => {
+          node.toggle();
+          // Prevent parent link from navigating
+          e.preventDefault();
+        }}
       />
       {name}
     </SidebarSectionTitle>
