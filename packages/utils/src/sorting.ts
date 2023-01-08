@@ -1,4 +1,4 @@
-import { StorySidebarChildItem, StoryTree } from "@fwoosh/app/ui";
+import { StorySidebarChildItem, StoryTree } from "@fwoosh/types";
 
 export function sortTree(
   tree: StorySidebarChildItem[],

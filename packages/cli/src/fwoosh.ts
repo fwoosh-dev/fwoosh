@@ -22,7 +22,13 @@ import remarkSlug from "remark-slug";
 import { remarkMdxToc } from "remark-mdx-toc";
 
 import { endent } from "./utils/endent.js";
-import type { FwooshHooks, FwooshOptions, FwooshOptionsLoaded } from "./types";
+import type {
+  FwooshClass,
+  FwooshHooks,
+  FwooshOptionsLoaded,
+  FwooshOptionWithCLIDefaults,
+  Plugin,
+} from "@fwoosh/types";
 import { storyListPlugin } from "./utils/story-list-plugin.js";
 import { renderStoryPlugin } from "./utils/render-story-plugin.js";
 import { getDocsPlugin } from "./utils/get-docs-plugin/index.js";
@@ -38,10 +44,7 @@ interface WatchPagesOptions {
   port: number;
 }
 
-export type FwooshOptionWithCLIDefaults = FwooshOptions &
-  Required<Pick<FwooshOptions, "stories" | "outDir">>;
-
-export class Fwoosh {
+export class Fwoosh implements FwooshClass {
   /** User's fwoosh options */
   public options: FwooshOptionsLoaded;
 
@@ -336,12 +339,4 @@ export class Fwoosh {
       }
     });
   }
-}
-
-/** A fwoosh plugin */
-export interface Plugin {
-  /** The name of the plugin */
-  name: string;
-  /** Hook into fwoosh */
-  apply(fwoosh: Fwoosh): void;
 }

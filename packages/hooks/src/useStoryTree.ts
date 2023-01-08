@@ -1,6 +1,5 @@
-import { StoryData } from "@fwoosh/types";
 import { stories } from "@fwoosh/app/stories";
-import { StorySidebarChildItem, StoryTree } from "@fwoosh/app/ui";
+import { StorySidebarChildItem, StoryTree, StoryData } from "@fwoosh/types";
 import { useQuery } from "react-query";
 import { matchTreeSortingOrder } from "@fwoosh/utils";
 

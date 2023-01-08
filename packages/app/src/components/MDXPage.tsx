@@ -6,9 +6,8 @@ import {
   QuickNav,
 } from "@fwoosh/components";
 import { stories } from "@fwoosh/app/stories";
-import { MDXStoryData } from "@fwoosh/types";
+import { MDXStoryData, MDXPageTreeItem } from "@fwoosh/types";
 import { MDXProvider } from "@mdx-js/react";
-import { MDXPageTreeItem } from "@fwoosh/app/ui";
 import { useQuery } from "react-query";
 import { PageSwitchButton } from "./PageSwitchButtons";
 import { HEADING_SELECTOR, useActiveHeader } from "../hooks/useActiveHeader";

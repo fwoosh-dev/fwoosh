@@ -17,7 +17,7 @@ import {
 import * as Collapsible from "@radix-ui/react-collapsible";
 import { paramCase } from "change-case";
 import { titleCase } from "title-case";
-import { StorySidebarChildItem, StoryTreeItem } from "@fwoosh/app/ui";
+import { StorySidebarChildItem, StoryTreeItem } from "@fwoosh/types";
 import { getStoryGroup, useStoryTree, useHighlightedCode } from "@fwoosh/hooks";
 
 import * as styles from "./DocsPage.module.css";

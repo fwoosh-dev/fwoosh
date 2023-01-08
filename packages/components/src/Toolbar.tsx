@@ -1,4 +1,3 @@
-import React from "react";
 import * as ToolbarPrimitive from "@radix-ui/react-toolbar";
 import { styled } from "./stitches";
 

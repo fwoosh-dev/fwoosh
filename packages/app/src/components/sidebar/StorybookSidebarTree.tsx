@@ -9,7 +9,7 @@ import {
   SIDEBAR_ITEM_INDENT,
 } from "@fwoosh/components";
 import { Link, useParams } from "react-router-dom";
-import { StorySidebarChildItem, StoryTreeItem } from "@fwoosh/app/ui";
+import { StorySidebarChildItem, StoryTreeItem } from "@fwoosh/types";
 import { useStoryTree, hasActiveChild } from "@fwoosh/hooks";
 import { titleCase } from "title-case";
 

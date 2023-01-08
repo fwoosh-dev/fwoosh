@@ -13,11 +13,11 @@ import {
 import { config } from "@fwoosh/app/config";
 import React from "react";
 import { Outlet, Link, useParams } from "react-router-dom";
-import { StoryTree } from "@fwoosh/app/ui";
+import { StoryTree } from "@fwoosh/types";
+import { CONTENT_ID } from "@fwoosh/utils";
 
 import { DocsSidebarTree } from "./sidebar/DocsSidebarTree";
 import { ThemeToggle } from "./ThemeToggle";
-import { CONTENT_ID } from "@fwoosh/utils";
 
 interface TreeItemProps {
   tree: StoryTree;

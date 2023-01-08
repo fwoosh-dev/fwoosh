@@ -1,4 +1,4 @@
-import { FwooshOptions } from "../types";
+import { FwooshOptions } from "@fwoosh/types";
 import { endent } from "./endent.js";
 
 /** Plugin that injects fwoosh config options into the front-end */

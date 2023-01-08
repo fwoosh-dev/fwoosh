@@ -14,7 +14,7 @@ declare module "@fwoosh/app/render" {
 
 declare module "@fwoosh/app/docs" {
   import type { ComponentDoc } from "react-docgen-typescript";
-  // import { StoryMeta } from "fwoosh";
+  import { StoryMeta } from "@fwoosh/types";
   export function useDocs(key: string, story: StoryMeta): ComponentDoc[];
 }
 
@@ -32,33 +32,4 @@ declare module "@fwoosh/app/ui" {
 
   export const toolbarControls: Array<ToolbarPlugin>;
   export const panels: Array<PanelPlugin>;
-
-  import { BasicStoryData, MDXStoryData } from "@fwoosh/app/stories";
-
-  interface BaseTreeItem {
-    id: string;
-    name: string;
-  }
-
-  export interface StoryTreeItem extends BaseTreeItem {
-    type: "story";
-    story: BasicStoryData;
-  }
-
-  export interface MDXPageTreeItem extends BaseTreeItem {
-    type: "mdx";
-    story: MDXStoryData;
-  }
-
-  export type StorySidebarChildItem =
-    | StoryTree
-    | StoryTreeItem
-    | MDXPageTreeItem;
-
-  export interface StoryTree extends BaseTreeItem {
-    type: "tree";
-    children: StorySidebarChildItem[];
-  }
-
-  export type StorySidebarItem = StoryTree | MDXPageTreeItem;
 }

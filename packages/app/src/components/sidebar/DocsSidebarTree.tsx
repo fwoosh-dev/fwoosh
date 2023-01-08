@@ -9,7 +9,7 @@ import {
 } from "@fwoosh/components";
 import { Link, useParams } from "react-router-dom";
 import { stories } from "@fwoosh/app/stories";
-import { StorySidebarChildItem } from "@fwoosh/app/ui";
+import { StorySidebarChildItem } from "@fwoosh/types";
 import { SidebarFolderOpenIndicatorWrapper } from "@fwoosh/components";
 import {
   resetContentScrollPosition,

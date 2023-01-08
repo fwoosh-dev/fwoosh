@@ -1,12 +1,11 @@
 import { pascalCase } from "change-case";
 import chokidar from "chokidar";
-import { Story } from "@fwoosh/types";
+import { Story, FwooshOptionsLoaded } from "@fwoosh/types";
 import debounce from "lodash.debounce";
 import { ViteDevServer } from "vite";
 import { convertMetaTitleToUrlParam, log } from "@fwoosh/utils";
 
 import { endent } from "./endent.js";
-import { FwooshOptionsLoaded } from "../types";
 import {
   FwooshFileDescriptor,
   getStoryData,

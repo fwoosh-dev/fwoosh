@@ -16,7 +16,7 @@ import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
 
-import { FwooshOptionsLoaded, ResolvedStoryMeta } from "../types";
+import { FwooshOptionsLoaded, ResolvedStoryMeta } from "@fwoosh/types";
 import { shikiConfig } from "./shiki-config.js";
 
 const require = createRequire(import.meta.url);

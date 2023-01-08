@@ -9,5 +9,5 @@
     "composite": true
   },
 
-  "references": [{ "path": "../components" }]
+  "references": [{ "path": "../components" }, { "path": "../hooks" }]
 }

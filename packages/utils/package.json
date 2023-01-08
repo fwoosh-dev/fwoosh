@@ -10,6 +10,7 @@
     "access": "public"
   },
   "dependencies": {
+    "@fwoosh/types": "link:../types",
     "change-case": "^4.1.2",
     "consola": "^2.15.3",
     "lodash.chunk": "^4.2.0"

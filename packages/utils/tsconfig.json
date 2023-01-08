@@ -7,5 +7,7 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "composite": true
-  }
+  },
+
+  "references": [{ "path": "../types" }]
 }

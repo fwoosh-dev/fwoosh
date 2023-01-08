@@ -9,12 +9,5 @@
     "composite": true
   },
 
-  "references": [
-    {
-      "path": "../utils"
-    },
-    {
-      "path": "../types"
-    }
-  ]
+  "references": [{ "path": "../utils" }, { "path": "../types" }]
 }

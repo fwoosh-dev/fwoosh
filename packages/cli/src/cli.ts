@@ -4,7 +4,7 @@ import ora from "ora";
 import { lilconfig } from "lilconfig";
 import { register } from "ts-node";
 
-import { FwooshOptionWithCLIDefaults } from "./fwoosh.js";
+import { FwooshOptionWithCLIDefaults } from "@fwoosh/types";
 import { createRequire } from "module";
 
 const require = createRequire(import.meta.url);
