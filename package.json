@@ -13,7 +13,8 @@
     "build": "tsc -b tsconfig.dev.json -v && lerna run build",
     "start": "tsc -b tsconfig.dev.json -v --watch",
     "release": "auto shipit",
-    "create-package": "node -r esbuild-register scripts/create-package/create-package.ts"
+    "create-package": "node -r esbuild-register scripts/create/create-package.ts",
+    "create-plugin": "node -r esbuild-register scripts/create/create-plugin.ts"
   },
   "devDependencies": {
     "@types/node": "^14.14.31",

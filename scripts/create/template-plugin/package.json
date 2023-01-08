@@ -1,0 +1,22 @@
+{
+  "name": "@fwoosh/{{kebab}}",
+  "main": "dist/index.js",
+  "description": "{{description}}",
+  "version": "{{version}}",
+  "license": "MIT",
+  "author": {
+    "name": "Andrew Lisowski",
+    "email": "lisowski54@gmail.com"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": "hipstersmoothie/fwoosh",
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "fwoosh": ">= 0.x"
+  }
+}

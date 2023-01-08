@@ -17,9 +17,11 @@
     "react-docgen-typescript": "^2.2.2"
   },
   "peerDependencies": {
-    "typescript": "^4"
+    "typescript": "^4",
+    "fwoosh": ">= 0.x"
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+
 }
