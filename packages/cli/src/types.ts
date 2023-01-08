@@ -1,27 +1,18 @@
-import { SyncBailHook, SyncWaterfallHook } from "tapable";
+import { AsyncSeriesBailHook, SyncBailHook, SyncWaterfallHook } from "tapable";
 import type { ComponentDoc } from "react-docgen-typescript";
 import { InlineConfig } from "vite";
 import { StorySidebarChildItem } from "@fwoosh/app/ui";
+import { StoryMeta } from "@fwoosh/types";
 
 import { Plugin } from "./fwoosh";
-import { StoryMeta } from "@fwoosh/app/stories";
 
 export interface ResolvedStoryMeta extends StoryMeta {
   /** The file where the story is defined */
   file?: string;
 }
 
-export interface Story {
-  exportName: string;
-  title: string;
-  slug: string;
-  file: string;
-  code: string;
-  comment?: string;
-}
-
 export interface FwooshHooks {
-  renderStory: SyncBailHook<void, string>;
+  renderStory: AsyncSeriesBailHook<void, Promise<string>>;
   generateDocs: SyncBailHook<string, ComponentDoc[]>;
   registerToolbarControl: SyncWaterfallHook<[string[]]>;
   registerPanel: SyncWaterfallHook<[{ name: string; filepath: string }[]]>;

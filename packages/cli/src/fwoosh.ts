@@ -6,7 +6,7 @@ import { createServer, InlineConfig } from "vite";
 import express from "express";
 import expressWs from "express-ws";
 import { createRequire } from "module";
-import { SyncBailHook, SyncWaterfallHook } from "tapable";
+import { AsyncSeriesBailHook, SyncBailHook, SyncWaterfallHook } from "tapable";
 import mdx from "@mdx-js/rollup";
 import { log, sortTree } from "@fwoosh/utils";
 import bodyParser from "body-parser";
@@ -25,7 +25,7 @@ import { endent } from "./utils/endent.js";
 import type { FwooshHooks, FwooshOptions, FwooshOptionsLoaded } from "./types";
 import { storyListPlugin } from "./utils/story-list-plugin.js";
 import { renderStoryPlugin } from "./utils/render-story-plugin.js";
-import { getDocsPlugin } from "./utils/get-docs-plugin.js";
+import { getDocsPlugin } from "./utils/get-docs-plugin/index.js";
 import { fwooshSetupPlugin } from "./utils/fwoosh-setup-plugin.js";
 import { fwooshConfigPlugin } from "./utils/fwoosh-config-plugin.js";
 import { fwooshUiPlugin } from "./utils/fwoosh-ui-plugin.js";
@@ -80,7 +80,7 @@ export class Fwoosh {
     this.hooks = {
       registerPanel: new SyncWaterfallHook(["panels"]),
       registerToolbarControl: new SyncWaterfallHook(["toolbarControls"]),
-      renderStory: new SyncBailHook(),
+      renderStory: new AsyncSeriesBailHook(),
       generateDocs: new SyncBailHook(["pathToFile"]),
     };
 
@@ -215,7 +215,7 @@ export class Fwoosh {
         fwooshConfigPlugin(this.options),
         getDocsPlugin({ port }),
         storyListPlugin(this.options),
-        renderStoryPlugin(this.hooks.renderStory.call()),
+        renderStoryPlugin(await this.hooks.renderStory.promise()),
       ],
       optimizeDeps: {
         include: [

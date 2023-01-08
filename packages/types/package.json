@@ -1,0 +1,22 @@
+{
+  "name": "@fwoosh/types",
+  "main": "dist/index.js",
+  "description": "",
+  "version": "0.0.74",
+  "license": "MIT",
+  "author": {
+    "name": "Andrew Lisowski",
+    "email": "lisowski54@gmail.com"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": "hipstersmoothie/fwoosh",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "remark-mdx-toc": "^0.3.1"
+  }
+}

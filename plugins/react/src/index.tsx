@@ -1,6 +1,10 @@
 import { Plugin, Fwoosh } from "fwoosh";
 import * as docgen from "react-docgen-typescript";
 import ts from "typescript";
+import { loadVirtualFile } from "@fwoosh/virtual-file";
+import { createRequire } from "module";
+
+const require = createRequire(import.meta.url);
 
 interface ReactPluginOptions {
   tsconfig?: string;
@@ -69,37 +73,7 @@ export default class ReactPlugin implements Plugin {
     });
 
     fwoosh.hooks.renderStory.tap(this.name, () => {
-      return `
-        import React, { Suspense } from "react";
-        import ReactDOM from "react-dom";
-        import { stories } from "@fwoosh/app/stories";
-        import { Spinner, ErrorBoundary } from "@fwoosh/components";
-        
-        export function render(el, slug) {
-          if (!el) {
-            return;
-          }
-          
-          try {
-            ReactDOM.render(
-              React.createElement(
-                ErrorBoundary,
-                {},
-                React.createElement(
-                  Suspense,
-                  {
-                    fallback: React.createElement(Spinner, { deley: 300 }),
-                  },
-                  React.createElement(stories[slug].component)
-                )
-              ),
-              el
-            );
-          } catch (e) {
-            console.error("error", e);
-          }
-        }      
-      `;
+      return loadVirtualFile(require.resolve("./renderStory"));
     });
   }
 }

@@ -2,7 +2,7 @@ import React from "react";
 import { getNextStory, getPreviousStory, useStoryTree } from "@fwoosh/hooks";
 import { ChevronRightIcon, styled } from "@fwoosh/components";
 import { Link, useLocation } from "react-router-dom";
-import { StoryData } from "@fwoosh/app/stories";
+import { StoryData } from "@fwoosh/types";
 import {
   convertMetaTitleToUrlParam,
   resetContentScrollPosition,

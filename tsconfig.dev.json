@@ -43,6 +43,9 @@
     },
     {
       "path": "packages/virtual-file"
+    },
+    {
+      "path": "packages/types"
     }
   ]
 }

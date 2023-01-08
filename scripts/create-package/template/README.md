@@ -1,3 +1,3 @@
-# @fwoosh/{{kebab}}
+# `@fwoosh/{{kebab}}`
 
 {{description}}

@@ -3,6 +3,8 @@ import { promises as fs } from "fs";
 import { titleCase } from "title-case";
 import ms from "pretty-ms";
 import { performance } from "perf_hooks";
+import { Story, StoryMeta } from "@fwoosh/types";
+import { chunkPromisesTimes, createStorySlug, log } from "@fwoosh/utils";
 
 import glob from "fast-glob";
 import path from "path";
@@ -14,10 +16,8 @@ import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
 
-import { chunkPromisesTimes, createStorySlug, log } from "@fwoosh/utils";
-import { FwooshOptionsLoaded, ResolvedStoryMeta, Story } from "../types";
+import { FwooshOptionsLoaded, ResolvedStoryMeta } from "../types";
 import { shikiConfig } from "./shiki-config.js";
-import { StoryMeta } from "@fwoosh/app/stories";
 
 const require = createRequire(import.meta.url);
 

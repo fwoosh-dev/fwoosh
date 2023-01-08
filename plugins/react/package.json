@@ -12,6 +12,7 @@
   "repository": "hipstersmoothie/fwoosh",
   "license": "MIT",
   "dependencies": {
+    "@fwoosh/virtual-file": "link:../../packages/virtual-file",
     "fwoosh": "link:../../packages/cli",
     "react-docgen-typescript": "^2.2.2"
   },

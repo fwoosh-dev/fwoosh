@@ -5,7 +5,8 @@ import {
   PageWrapper,
   QuickNav,
 } from "@fwoosh/components";
-import { MDXStoryData, stories } from "@fwoosh/app/stories";
+import { stories } from "@fwoosh/app/stories";
+import { MDXStoryData } from "@fwoosh/types";
 import { MDXProvider } from "@mdx-js/react";
 import { MDXPageTreeItem } from "@fwoosh/app/ui";
 import { useQuery } from "react-query";
@@ -72,6 +73,10 @@ function TableOfContents({ data }: { data: MDXStoryData["toc"] }) {
 
     setTimeout(getHeadings, 500);
   }, [data]);
+
+  if (!toc.length) {
+    return null;
+  }
 
   return (
     <QuickNav.Root ref={quickNavRef}>
