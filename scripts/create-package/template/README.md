@@ -1,0 +1,3 @@
+# @fwoosh/{{kebab}}
+
+{{description}}

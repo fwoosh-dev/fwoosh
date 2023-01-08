@@ -40,6 +40,9 @@
     },
     {
       "path": "plugins/story-description-panel"
+    },
+    {
+      "path": "packages/virtual-file"
     }
   ]
 }
