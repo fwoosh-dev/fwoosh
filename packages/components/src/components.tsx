@@ -119,6 +119,7 @@ export const InlineCode = styled("code", {
 export const CodeBlock = styled("pre", {
   py: 6,
   px: 4,
+  overflowX: "auto",
 });
 
 /** The component used to render an block of code */

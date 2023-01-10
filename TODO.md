@@ -9,7 +9,6 @@
 - [ ] build command
   - [ ] error out build when links are broken
   - [ ] resolve all suspenseful data
-- [ ] BUG: code previews don't have horizontal scroll
 - [ ] command pallette?
 - [ ] hooks for completely custom routes/layouts
 - [ ] figure way to use iframe to make media queries and vh working
