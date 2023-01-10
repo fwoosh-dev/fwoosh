@@ -1,3 +1,23 @@
+# v0.0.76 (Tue Jan 10 2023)
+
+#### ⚠️ Pushed to `main`
+
+- add component override theming ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- update breakpoint ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add token theming ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- rely on theme more ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix cod preview scrolling ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add more readmes ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- move more types ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix tall quick navs ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- improve quick nav colors ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.75 (Sat Jan 07 2023)
 
 #### ⚠️ Pushed to `main`

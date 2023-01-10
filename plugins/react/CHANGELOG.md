@@ -1,3 +1,21 @@
+# v0.0.76 (Tue Jan 10 2023)
+
+#### ⚠️ Pushed to `main`
+
+- add support for global decorators ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- story + meta decorators ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix error ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add plugin tempalte ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add more readmes ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- improve virtual file loading experience ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add more docs stubs ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.75 (Sat Jan 07 2023)
 
 #### ⚠️ Pushed to `main`

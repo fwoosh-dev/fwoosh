@@ -1,3 +1,68 @@
+# v0.0.76 (Tue Jan 10 2023)
+
+#### ⚠️ Pushed to `main`
+
+- fix build ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add panel tempalte ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add create tool script ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add decorator template ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- refactor create script ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add centered docs and reorganize ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add create package script ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add todo ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- rename file ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/components`, `@fwoosh/styling`, `@fwoosh/types`, `@fwoosh/decorator-centered`, `@fwoosh/panel-actions`, `@fwoosh/panel-props`, `@fwoosh/panel-source`, `@fwoosh/panel-story-description`, `@fwoosh/theme-default`
+  - add component override theming ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/components`
+  - update breakpoint ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - fix cod preview scrolling ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - fix tall quick navs ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - improve quick nav colors ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/components`, `@fwoosh/types`, `@fwoosh/theme-default`
+  - add token theming ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/components`, `@fwoosh/panel-props`
+  - rely on theme more ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/panel-actions`, `@fwoosh/panel-props`, `@fwoosh/panel-source`, `@fwoosh/panel-story-description`, `@fwoosh/tool-measure`, `@fwoosh/tool-zoom`
+  - unify naming scheme ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/types`
+  - adds docs for react hooks ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/decorator-centered`
+  - document decorators ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `fwoosh`, `@fwoosh/decorator-centered`, `@fwoosh/react`
+  - add support for global decorators ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `fwoosh`, `@fwoosh/hooks`, `@fwoosh/types`, `@fwoosh/decorator-centered`, `@fwoosh/react`
+  - story + meta decorators ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/react`
+  - fix error ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add plugin tempalte ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add more docs stubs ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/components`, `@fwoosh/hooks`, `@fwoosh/link`, `@fwoosh/types`, `@fwoosh/utils`, `@fwoosh/react`
+  - add more readmes ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/hooks`
+  - fix docs bug: click folder header open first page ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/components`, `@fwoosh/hooks`, `@fwoosh/link`, `@fwoosh/types`, `@fwoosh/utils`
+  - move more types ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/hooks`, `@fwoosh/types`, `@fwoosh/virtual-file`, `@fwoosh/react`
+  - improve virtual file loading experience ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `fwoosh`
+  - add cli reference ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - fix front matter parsing when there are front multiple things that look like frontmatters ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`
+  - only show stories nav item when there are stories ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - only use last part of slug for docs name ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`
+  - improve docs ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - fix casing of items ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add hideNav option ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/hooks`
+  - fix multiple mdx files not at root ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.75 (Sat Jan 07 2023)
 
 #### ⚠️ Pushed to `main`

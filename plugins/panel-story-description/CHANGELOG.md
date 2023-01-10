@@ -1,3 +1,16 @@
+# v0.0.76 (Tue Jan 10 2023)
+
+#### ⚠️ Pushed to `main`
+
+- add component override theming ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- unify naming scheme ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.75 (Sat Jan 07 2023)
 
 #### ⚠️ Pushed to `main`

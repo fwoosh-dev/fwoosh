@@ -1,3 +1,26 @@
+# v0.0.76 (Tue Jan 10 2023)
+
+#### ⚠️ Pushed to `main`
+
+- add component override theming ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add token theming ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- rely on theme more ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add more readmes ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix docs bug: click folder header open first page ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- move more types ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- improve virtual file loading experience ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- only show stories nav item when there are stories ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- only use last part of slug for docs name ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- improve docs ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix casing of items ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add hideNav option ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.75 (Sat Jan 07 2023)
 
 #### ⚠️ Pushed to `main`
