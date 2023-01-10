@@ -4,8 +4,10 @@ export const HeaderBar = styled("div", {
   height: "$14",
   display: "flex",
   alignItems: "center",
-  borderBottom: "1px solid $gray4",
-  gap: 8,
+  borderWidth: "$sm",
+  borderStyle: "$solid",
+  borderColor: "$gray4",
+  gap: "$2",
   px: 4,
   py: 2,
 });

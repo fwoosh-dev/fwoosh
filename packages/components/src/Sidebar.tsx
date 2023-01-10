@@ -35,12 +35,14 @@ export const SidebarSectionTitle = styled(SidebarItem, {
 
 export const SidebarLayout = styled("div", {
   display: "grid",
-  gridTemplateColumns: "280px 1fr",
+  gridTemplateColumns: "$72 1fr",
   height: "calc(100vh - $14)",
 });
 
 export const Sidebar = styled("div", {
-  borderRight: "1px solid $gray4",
+  borderRightWidth: "$sm",
+  borderRightStyle: "$solid",
+  borderColor: "$gray4",
   minHeight: 0,
   height: "100%",
   overflow: "auto",
@@ -49,8 +51,8 @@ export const Sidebar = styled("div", {
 export const SIDEBAR_ITEM_INDENT = 16;
 
 export const SidebarFolderOpenIndicatorWrapper = styled("div", {
-  height: 16,
-  width: 16,
+  height: "$4",
+  width: "$4",
   marginRight: 8,
   display: "flex",
   alignItems: "center",

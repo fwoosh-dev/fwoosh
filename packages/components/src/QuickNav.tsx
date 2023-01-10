@@ -48,19 +48,19 @@ export const Item = styled("li", {
 
 export const Group = styled("div", {
   [`& ${Item}`]: {
-    paddingLeft: "20px",
+    paddingLeft: "$5",
   },
   [`& & ${Item}`]: {
-    paddingLeft: "40px",
+    paddingLeft: "calc($5 * 2)",
   },
   [`& & & ${Item}`]: {
-    paddingLeft: "60px",
+    paddingLeft: "calc($5 * 3)",
   },
   [`& & & & ${Item}`]: {
-    paddingLeft: "80px",
+    paddingLeft: "calc($5 * 4)",
   },
   [`& & & & & ${Item}`]: {
-    paddingLeft: "100px",
+    paddingLeft: "calc($5 * 5)",
   },
 });
 

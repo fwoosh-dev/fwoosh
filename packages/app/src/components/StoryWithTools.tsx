@@ -8,13 +8,17 @@ import { ToolPanels } from "./ToolPanels";
 
 const PanelContainer = styled("div", {
   height: "100%",
-  borderTop: "1px solid $gray4",
+  borderTopWidth: "$sm",
+  borderTopStyle: "$solid",
+  borderTopColor: "$gray4",
   backgroundColor: "$gray0",
 });
 
 const PanelResizer = styled("div", {
   width: "100%",
-  borderTop: "1px solid transparent",
+  borderTopWidth: "$sm",
+  borderTopStyle: "$solid",
+  borderTopColor: "transparent",
   zIndex: 100,
   position: "relative",
 

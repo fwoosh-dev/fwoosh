@@ -39,10 +39,12 @@ const HeaderLink = ({ title, id }: { title: React.ReactNode; id: string }) => {
 };
 
 const StoryPreview = styled("div", {
-  border: "1px solid $gray7",
+  borderWidth: "$sm",
+  borderStyle: "$solid",
+  borderColor: "$gray7",
   px: 4,
   py: 8,
-  borderRadius: "4px",
+  borderRadius: "$round",
   overflow: "auto",
 
   variants: {
@@ -61,9 +63,12 @@ const ShowCodeButton = styled("button", {
   position: "absolute",
   bottom: 0,
   right: 0,
-  borderTop: "1px solid $gray7",
-  borderLeft: "1px solid $gray7",
-  borderTopLeftRadius: 4,
+  borderTopWidth: "$sm",
+  borderTopStyle: "$solid",
+  borderLeftWidth: "$sm",
+  borderLeftStyle: "$solid",
+  borderColor: "$gray7",
+  borderTopLeftRadius: "$round",
   color: "$gray10",
 });
 

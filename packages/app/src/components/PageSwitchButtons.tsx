@@ -29,7 +29,7 @@ const IconWrapper = styled("div", {
 const NavButton = styled(Link, {
   py: 2,
   px: 4,
-  borderRadius: "4px",
+  borderRadius: "$round",
   color: "$gray11",
   display: "flex",
   alignItems: "center",

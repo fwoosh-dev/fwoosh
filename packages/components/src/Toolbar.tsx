@@ -1,10 +1,5 @@
 import * as ToolbarPrimitive from "@radix-ui/react-toolbar";
-import { styled } from "./stitches";
 
-export const Root = styled(ToolbarPrimitive.Root, {
-  display: "flex",
-  gap: 2,
-});
-
+export const Root = ToolbarPrimitive.Root;
 export const Button = ToolbarPrimitive.Button;
 export const Separator = ToolbarPrimitive.Separator;

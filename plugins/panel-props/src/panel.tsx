@@ -37,8 +37,8 @@ const pulse = keyframes({
 const PlaceholderBox = styled("div", {
   height: "$6",
   width: "100%",
-  borderRadius: "2px",
-  background: " $gray4",
+  borderRadius: "$sm",
+  background: "$gray4",
   position: "relative",
   overflow: "hidden",
 

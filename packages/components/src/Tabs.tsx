@@ -27,7 +27,9 @@ export const Trigger = styled(TabsPrimitive.Trigger, {
 export const List = styled(TabsPrimitive.List, {
   flexShrink: 0,
   display: "flex",
-  borderBottom: `1px solid $gray4`,
+  borderWidth: "$sm",
+  borderStyle: "$solid",
+  borderColor: "$gray4",
   overflow: "auto",
 });
 

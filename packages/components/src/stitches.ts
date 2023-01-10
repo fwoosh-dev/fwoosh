@@ -89,6 +89,16 @@ export const {
     },
     space: space,
     sizes: { ...space, ...sizes },
+    radii: {
+      sm: "2px",
+      round: "4px",
+    },
+    borderWidths: {
+      sm: "1px",
+    },
+    borderStyles: {
+      solid: "solid",
+    },
   },
   media: {
     sm: "(min-width: 640px)",

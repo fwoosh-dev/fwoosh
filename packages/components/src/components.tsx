@@ -30,7 +30,9 @@ export const h2 = styled("h2", {
   pb: 2,
   color: "$gray11",
   fontWeight: 500,
-  borderBottom: "1px solid $gray7",
+  borderBottomWidth: "$sm",
+  borderBottomStyle: "$solid",
+  borderBottomColor: "$gray7",
   scrollMarginTop: "$4",
 
   "@md": {
@@ -202,8 +204,10 @@ export const td = styled("td", {
   py: 4,
   px: 2,
   color: "$gray11",
-  borderBottom: "1px solid",
-  borderTop: "1px solid",
+  borderBottomWidth: "$sm",
+  borderBottomStyle: "$solid",
+  borderTopWidth: "$sm",
+  borderTopStyle: "$solid",
   borderColor: "$gray5",
 
   "&:first-of-type": {
@@ -219,7 +223,9 @@ export const hr = styled("hr", {
   my: 12,
   mx: 20,
   borderTop: "none",
-  borderBottom: "1px solid $gray6",
+  borderBottomWidth: "$sm",
+  borderBottomStyle: "$solid",
+  borderBottomColor: "$gray6",
   listStyle: "disc",
 });
 
@@ -298,7 +304,7 @@ export const DocsLayout = styled("div", {
   display: "grid",
 
   "@lg": {
-    gridTemplateColumns: "1fr minmax(200px, 279px)",
+    gridTemplateColumns: "1fr minmax(200px, $72)",
   },
 });
 

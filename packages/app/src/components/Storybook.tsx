@@ -24,7 +24,7 @@ const StoryToolbar = styled(Toolbar.Root, {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  gap: 2,
+  gap: "$1",
   flex: 1,
   height: "$12",
   flexShrink: 0,
