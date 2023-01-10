@@ -17,7 +17,7 @@ function create() {
       {
         name: "type",
         type: String,
-        typeLabel: "package | plugin | decorator",
+        typeLabel: "package | plugin | decorator | tool",
       },
       {
         name: "name",
@@ -42,7 +42,7 @@ function create() {
   }
 
   const options = result as {
-    type: "package" | "plugin" | "decorator";
+    type: "package" | "plugin" | "decorator" | "tool";
     name: string;
     description?: string;
   };
@@ -56,7 +56,9 @@ function create() {
     __dirname,
     "../..",
     folder,
-    options.type === "decorator" ? `decorator-${kebab}` : kebab
+    ["decorator", "tool"].includes(options.type)
+      ? `${options.type}-${kebab}`
+      : kebab
   );
   const TSCONFIG = path.join(__dirname, "../../tsconfig.dev.json");
 
