@@ -93,7 +93,7 @@ function TableOfContents() {
       getTocs(entries[0].target as HTMLElement);
     });
 
-    mutationObserver.observe(main, { childList: true });
+    mutationObserver.observe(main, { childList: true, subtree: true });
 
     getTocs(main);
 

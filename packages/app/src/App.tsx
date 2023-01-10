@@ -8,6 +8,7 @@ import {
   ScrollRestoration,
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { HelmetProvider } from "react-helmet-async";
 
 import { Story } from "./components/Story";
 import { Storybook } from "./components/Storybook";
@@ -23,6 +24,7 @@ import {
 import { getFirstStory, useStoryTree } from "@fwoosh/hooks";
 import { StoryWithTools } from "./components/StoryWithTools";
 import { convertMetaTitleToUrlParam } from "@fwoosh/utils";
+import { Head } from "./components/Head";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -60,12 +62,15 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <ErrorBoundary fullScreen>
-        <AppWrapper>
-          <Outlet />
-          <ScrollRestoration />
-        </AppWrapper>
-      </ErrorBoundary>
+      <HelmetProvider>
+        <ErrorBoundary fullScreen>
+          <AppWrapper>
+            <Head />
+            <Outlet />
+            <ScrollRestoration />
+          </AppWrapper>
+        </ErrorBoundary>
+      </HelmetProvider>
     ),
     children: [
       {

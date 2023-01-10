@@ -8,6 +8,7 @@
   - [ ] error out build when links are broken
   - [ ] resolve all suspenseful data
 - [ ] command pallette?
+- [ ] add icon + open external links in new tab https://github.com/rehypejs/rehype-external-links
 - [ ] hooks for completely custom routes/layouts
 - [ ] figure way to use iframe to make media queries and vh working
   - maybe some type of arg on the story

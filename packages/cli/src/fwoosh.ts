@@ -20,6 +20,7 @@ import remarkFrontmatter from "remark-frontmatter";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import remarkSlug from "remark-slug";
 import toc from "@jsdevtools/rehype-toc";
+import rehypeInferTitleMeta from "rehype-infer-title-meta";
 
 import { endent } from "./utils/endent.js";
 import type {
@@ -197,6 +198,22 @@ export class Fwoosh implements FwooshClass {
         mdx({
           remarkPlugins: [remarkFrontmatter, remarkSlug],
           rehypePlugins: [
+            rehypeInferTitleMeta,
+            // Inline data from above plugins into the page
+            () => {
+              return (tree, file) => {
+                tree.children.push(
+                  h(
+                    "script",
+                    {
+                      id: "html-metadata",
+                      type: "application/json",
+                    },
+                    JSON.stringify(file.data)
+                  )
+                );
+              };
+            },
             [
               rehypeAutolinkHeadings,
               {
