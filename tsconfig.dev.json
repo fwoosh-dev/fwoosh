@@ -49,6 +49,9 @@
     },
     {
       "path": "plugins/decorator-centered"
+    },
+    {
+      "path": "packages/test"
     }
   ]
 }

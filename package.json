@@ -13,13 +13,15 @@
     "build": "tsc -b tsconfig.dev.json -v && lerna run build",
     "start": "tsc -b tsconfig.dev.json -v --watch",
     "release": "auto shipit",
-    "create-package": "node -r esbuild-register scripts/create/create-package.ts",
-    "create-plugin": "node -r esbuild-register scripts/create/create-plugin.ts"
+    "create": "node -r esbuild-register scripts/create/create.ts",
+    "create:package": "yarn run create --type package",
+    "create:plugin": "yarn run create --type plugin"
   },
   "devDependencies": {
     "@types/node": "^14.14.31",
     "auto": "^10.37.6",
     "copy-template-dir": "^1.4.0",
+    "command-line-application": "^0.10.1",
     "lerna": "^6.1.0",
     "patch-package": "^6.4.7",
     "prettier": "^2.2.1",
