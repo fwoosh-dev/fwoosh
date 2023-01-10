@@ -1,6 +1,7 @@
 {
   "name": "@fwoosh/react-example",
   "private": true,
+  "type": "module",
   "scripts": {
     "fwoosh": "../../packages/cli/bin/fwoosh.js",
     "start": "yarn fwoosh dev",
@@ -9,7 +10,6 @@
   "devDependencies": {
     "@fwoosh/actions": "link:../../plugins/actions",
     "@fwoosh/react": "link:../../plugins/react",
-    "@vitejs/plugin-react": "^3.0.0",
     "fwoosh": "link:../../packages/cli"
   },
   "version": "0.0.75"

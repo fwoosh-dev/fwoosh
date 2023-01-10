@@ -77,3 +77,5 @@ export default class ReactPlugin implements Plugin {
     });
   }
 }
+
+export * from "./types";

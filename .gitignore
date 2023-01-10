@@ -10,6 +10,6 @@ lib/
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
-yarn-error.log
+**/yarn-error.log
 dist/
 .env

@@ -1,7 +1,6 @@
 {
-  "name": "@fwoosh/types",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "name": "@fwoosh/decorator-centered",
+  "main": "dist/react.js",
   "description": "",
   "version": "0.0.74",
   "license": "MIT",
@@ -17,15 +16,10 @@
   "files": [
     "dist"
   ],
-  "scripts": {
-    "build": "tsc -b tsconfig.json"
+  "peerDependencies": {
+    "fwoosh": ">= 0.x"
   },
   "dependencies": {
-    "remark-mdx-toc": "^0.3.1",
-    "tapable": "^2.2.1",
-    "vite": "^4.0.3"
-  },
-  "devDependencies": {
-    "typescript": "^4.9.3"
+    "@fwoosh/components": "link:../../packages/components"
   }
 }

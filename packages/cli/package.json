@@ -17,8 +17,8 @@
   },
   "dependencies": {
     "@fwoosh/app": "link:../app",
-    "@fwoosh/utils": "link:../utils",
     "@fwoosh/types": "link:../types",
+    "@fwoosh/utils": "link:../utils",
     "@fwoosh/virtual-file": "link:../virtual-file",
     "@mdx-js/rollup": "^2.2.1",
     "@swc/core": "^1.3.24",

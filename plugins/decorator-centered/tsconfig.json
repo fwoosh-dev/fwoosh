@@ -6,9 +6,11 @@
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./src",
-    "incremental": true,
     "composite": true
   },
 
-  "references": [{ "path": "../utils" }, { "path": "../types" }]
+  "references": [
+    { "path": "../../packages/cli" },
+    { "path": "../../packages/components" }
+  ]
 }

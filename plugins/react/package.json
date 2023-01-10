@@ -4,10 +4,6 @@
   "version": "0.0.75",
   "description": "A lightening quick component development",
   "main": "./dist/index.js",
-  "exports": {
-    ".": "./dist/index.js",
-    "./types": "./dist/types.d.ts"
-  },
   "author": "Andrew Lisowski <lisowski54@gmail.com>",
   "repository": "hipstersmoothie/fwoosh",
   "license": "MIT",
@@ -17,8 +13,8 @@
     "react-docgen-typescript": "^2.2.2"
   },
   "peerDependencies": {
-    "typescript": "^4",
-    "fwoosh": ">= 0.x"
+    "fwoosh": ">= 0.x",
+    "typescript": "^4"
   },
   "publishConfig": {
     "access": "public"

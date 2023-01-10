@@ -723,6 +723,8 @@ __metadata:
     "@fwoosh/components": "link:../../packages/components"
     "@types/node": ^14.14.31
     fwoosh: "link:../../packages/cli"
+  peerDependencies:
+    fwoosh: ">= 0.x"
   languageName: unknown
   linkType: soft
 
@@ -771,6 +773,12 @@ __metadata:
   languageName: node
   linkType: soft
 
+"@fwoosh/components@link:../../packages/components::locator=%40fwoosh%2Fdecorator-centered%40workspace%3Aplugins%2Fdecorator-centered":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/components@link:../../packages/components::locator=%40fwoosh%2Fdecorator-centered%40workspace%3Aplugins%2Fdecorator-centered"
+  languageName: node
+  linkType: soft
+
 "@fwoosh/components@link:../../packages/components::locator=%40fwoosh%2Ffwoosh-example%40workspace%3Aexamples%2Ffwoosh":
   version: 0.0.0-use.local
   resolution: "@fwoosh/components@link:../../packages/components::locator=%40fwoosh%2Ffwoosh-example%40workspace%3Aexamples%2Ffwoosh"
@@ -795,6 +803,16 @@ __metadata:
     react: ^17.0.1
   peerDependencies:
     react: ^16.8 || ^17.0
+  languageName: unknown
+  linkType: soft
+
+"@fwoosh/decorator-centered@workspace:plugins/decorator-centered":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/decorator-centered@workspace:plugins/decorator-centered"
+  dependencies:
+    "@fwoosh/components": "link:../../packages/components"
+  peerDependencies:
+    fwoosh: ">= 0.x"
   languageName: unknown
   linkType: soft
 
@@ -841,6 +859,8 @@ __metadata:
   dependencies:
     "@types/node": ^14.14.31
     fwoosh: "link:../../packages/cli"
+  peerDependencies:
+    fwoosh: ">= 0.x"
   languageName: unknown
   linkType: soft
 
@@ -850,6 +870,8 @@ __metadata:
   dependencies:
     "@types/node": ^14.14.31
     fwoosh: "link:../../packages/cli"
+  peerDependencies:
+    fwoosh: ">= 0.x"
   languageName: unknown
   linkType: soft
 
@@ -884,6 +906,7 @@ __metadata:
     fwoosh: "link:../../packages/cli"
     react-docgen-typescript: ^2.2.2
   peerDependencies:
+    fwoosh: ">= 0.x"
     typescript: ^4
   languageName: unknown
   linkType: soft
@@ -894,6 +917,8 @@ __metadata:
   dependencies:
     "@types/node": ^14.14.31
     fwoosh: "link:../../packages/cli"
+  peerDependencies:
+    fwoosh: ">= 0.x"
   languageName: unknown
   linkType: soft
 
@@ -903,6 +928,8 @@ __metadata:
   dependencies:
     "@types/node": ^14.14.31
     fwoosh: "link:../../packages/cli"
+  peerDependencies:
+    fwoosh: ">= 0.x"
   languageName: unknown
   linkType: soft
 
@@ -918,12 +945,19 @@ __metadata:
   languageName: node
   linkType: soft
 
+"@fwoosh/types@link:../types::locator=fwoosh%40workspace%3Apackages%2Fcli":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/types@link:../types::locator=fwoosh%40workspace%3Apackages%2Fcli"
+  languageName: node
+  linkType: soft
+
 "@fwoosh/types@workspace:packages/types":
   version: 0.0.0-use.local
   resolution: "@fwoosh/types@workspace:packages/types"
   dependencies:
     remark-mdx-toc: ^0.3.1
     tapable: ^2.2.1
+    typescript: ^4.9.3
     vite: ^4.0.3
   languageName: unknown
   linkType: soft
@@ -978,6 +1012,8 @@ __metadata:
   dependencies:
     "@types/node": ^14.14.31
     fwoosh: "link:../../packages/cli"
+  peerDependencies:
+    fwoosh: ">= 0.x"
   languageName: unknown
   linkType: soft
 
@@ -6181,6 +6217,7 @@ __metadata:
   resolution: "fwoosh@workspace:packages/cli"
   dependencies:
     "@fwoosh/app": "link:../app"
+    "@fwoosh/types": "link:../types"
     "@fwoosh/utils": "link:../utils"
     "@fwoosh/virtual-file": "link:../virtual-file"
     "@mdx-js/rollup": ^2.2.1
