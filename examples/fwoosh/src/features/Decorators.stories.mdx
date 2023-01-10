@@ -1,0 +1,51 @@
+---
+title: Features/Decorators
+---
+
+import { Link } from "@fwoosh/link";
+
+# Decorators
+
+A decorator is a wrapper around a story that effects layout, supplies data, or whatever else you want.
+
+## Configuration
+
+### Story Level
+
+You can define add a decorator to a specific story.
+The decorator will only be used for this story.
+
+```tsx
+import { Story } from "@fwoosh/react";
+import { centered } from "@fwoosh/decorator-centered";
+
+export const Example: Story = () => <div>Foo</div>;
+
+Example.decorator = [centered];
+```
+
+### File Level
+
+If you add the decorator to the `meta` object, it will be applied to all stories in the file.
+
+```tsx
+import { centered } from "@fwoosh/decorator-centered";
+
+export const meta: StoryMeta = {
+  title: "Components/Example",
+  component: Example,
+  decorators: [centered],
+};
+```
+
+### Global
+
+You can also add a decorator to all stories in your project.
+To do this export a `decorators` array from your <Link to="Configuration#setup">setup file</Link>.
+
+```tsx
+import { centered } from "@fwoosh/decorator-centered";
+import { Decorator } from "@fwoosh/react";
+
+export const decorators: Decorator[] = [centered];
+```

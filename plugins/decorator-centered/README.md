@@ -19,7 +19,7 @@ This decorator work at the story level:
 ```tsx
 import { centered } from "@fwoosh/decorator-centered";
 
-export const Example = () => <div>Foo</div>;
+export const Example: Story = () => <div>Foo</div>;
 
 Example.decorator = [centered];
 ```
