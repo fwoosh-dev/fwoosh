@@ -8,15 +8,15 @@
     { "path": "packages/app/tsconfig.build.json" },
     { "path": "packages/components" },
     { "path": "packages/utils" },
-    { "path": "plugins/react" },
-    { "path": "plugins/zoom" },
+    { "path": "packages/types" },
+    { "path": "packages/virtual-file" },
+    { "path": "plugins/decorator-centered" },
     { "path": "plugins/panel-actions" },
     { "path": "plugins/panel-props" },
     { "path": "plugins/panel-source" },
+    { "path": "plugins/panel-story-description" },
+    { "path": "plugins/react" },
     { "path": "plugins/tool-measure" },
-    { "path": "plugins/story-description-panel" },
-    { "path": "packages/virtual-file" },
-    { "path": "packages/types" },
-    { "path": "plugins/decorator-centered" }
+    { "path": "plugins/tool-zoom" }
   ]
 }
