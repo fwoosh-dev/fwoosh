@@ -17,7 +17,7 @@ function create() {
       {
         name: "type",
         type: String,
-        typeLabel: "package | plugin | decorator | tool",
+        typeLabel: "package | plugin | decorator | tool | panel",
       },
       {
         name: "name",
@@ -42,7 +42,7 @@ function create() {
   }
 
   const options = result as {
-    type: "package" | "plugin" | "decorator" | "tool";
+    type: "package" | "plugin" | "decorator" | "tool" | "panel";
     name: string;
     description?: string;
   };
@@ -56,7 +56,7 @@ function create() {
     __dirname,
     "../..",
     folder,
-    ["decorator", "tool"].includes(options.type)
+    ["decorator", "tool", "panel"].includes(options.type)
       ? `${options.type}-${kebab}`
       : kebab
   );
