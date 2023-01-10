@@ -6,18 +6,14 @@ import {
   QuickNav,
 } from "@fwoosh/components";
 import { stories } from "@fwoosh/app/stories";
-import { MDXStoryData, MDXPageTreeItem } from "@fwoosh/types";
+import { MDXStoryData, MDXPageTreeItem, TocEntry } from "@fwoosh/types";
 import { MDXProvider } from "@mdx-js/react";
 import { useQuery } from "react-query";
 import { PageSwitchButton } from "./PageSwitchButtons";
-import { HEADING_SELECTOR, useActiveHeader } from "../hooks/useActiveHeader";
-import { CONTENT_ID } from "@fwoosh/utils";
+import { useActiveHeader } from "../hooks/useActiveHeader";
+import { useLocation } from "react-router-dom";
 
-function TableOfContentsGroup({
-  entry,
-}: {
-  entry: MDXStoryData["toc"][number];
-}) {
+function TableOfContentsGroup({ entry }: { entry: TocEntry }) {
   return (
     <>
       <QuickNav.Item>
@@ -36,42 +32,75 @@ function TableOfContentsGroup({
   );
 }
 
-function TableOfContents({ data }: { data: MDXStoryData["toc"] }) {
+function getTocFromNav(el: HTMLElement, level: number) {
+  const items = Array.from(
+    el.querySelectorAll<HTMLElement>(`.toc-level-${level} > .toc-item`)
+  );
+
+  return items.map((item) => {
+    const anchor = item.querySelector<HTMLAnchorElement>(
+      "a"
+    ) as HTMLAnchorElement;
+    const href = anchor.getAttribute("href");
+    let id = "";
+
+    if (href) {
+      const hrefUrl = new URL(href, window.location.href);
+      id = hrefUrl.hash.replace("#", "");
+    }
+
+    const entry: TocEntry = {
+      value: anchor.text,
+      attributes: {
+        id: id,
+      },
+      children: getTocFromNav(item, level + 1),
+      depth: level,
+    };
+
+    return entry;
+  });
+}
+
+function TableOfContents() {
   const quickNavRef = React.useRef<HTMLDivElement>(null);
-  const [toc, setToc] = React.useState(data);
+  const [toc, setToc] = React.useState<TocEntry[]>([]);
+  const location = useLocation();
 
   useActiveHeader(quickNavRef);
 
   React.useEffect(() => {
-    if (data.length > 0) {
+    const main = document.querySelector<HTMLElement>("main");
+
+    if (!main) {
       return;
     }
 
-    const content = document.getElementById(CONTENT_ID);
+    function getTocs(el: HTMLElement) {
+      const navs = Array.from(el.querySelectorAll<HTMLElement>("nav.toc"));
 
-    function getHeadings() {
-      if (!content) {
-        return;
+      for (const nav of navs) {
+        const toc = getTocFromNav(nav, 1);
+
+        if (toc.length) {
+          setToc(toc);
+          break;
+        }
       }
-
-      const generatedToc = Array.from(
-        content.querySelectorAll(HEADING_SELECTOR)
-      ).map((heading): MDXStoryData["toc"][number] => {
-        return {
-          depth: parseInt(heading.tagName.replace("H", "")),
-          value: heading.textContent || "",
-          children: [],
-          attributes: {
-            id: heading.getAttribute("id") || "",
-          },
-        };
-      });
-
-      setToc(generatedToc);
     }
 
-    setTimeout(getHeadings, 500);
-  }, [data]);
+    const mutationObserver = new MutationObserver((entries) => {
+      getTocs(entries[0].target as HTMLElement);
+    });
+
+    mutationObserver.observe(main, { childList: true });
+
+    getTocs(main);
+
+    return () => {
+      mutationObserver.disconnect();
+    };
+  }, [location]);
 
   if (!toc.length) {
     return null;
@@ -82,19 +111,9 @@ function TableOfContents({ data }: { data: MDXStoryData["toc"] }) {
       <QuickNav.Header>
         <QuickNav.Title>Quick nav</QuickNav.Title>
       </QuickNav.Header>
-      {toc.length === 1 && toc[0].depth === 1 ? (
-        <ol>
-          {toc[0].children.map((item) => (
-            <TableOfContentsGroup key={item.value + item.depth} entry={item} />
-          ))}
-        </ol>
-      ) : (
-        <ol>
-          {toc.map((item) => (
-            <TableOfContentsGroup key={item.value + item.depth} entry={item} />
-          ))}
-        </ol>
-      )}
+      {toc.map((item) => (
+        <TableOfContentsGroup key={item.value + item.depth} entry={item} />
+      ))}
     </QuickNav.Root>
   );
 }
@@ -103,7 +122,7 @@ type MDXComponents = React.ComponentProps<typeof MDXProvider>["components"];
 
 export const MDXPage = ({ page }: { page: MDXPageTreeItem }) => {
   const { component: MDXPage, meta } = stories[page.id] as MDXStoryData;
-  const { data } = useQuery(`toc-${page.id}`, () => page.story.toc);
+  const { data } = useQuery(`toc-${page.id}`, () => []);
 
   let content = (
     <PageWrapper>
@@ -116,7 +135,7 @@ export const MDXPage = ({ page }: { page: MDXPageTreeItem }) => {
     content = (
       <DocsLayout>
         {content}
-        {data && !meta.hideNav && <TableOfContents data={data} />}
+        {data && !meta.hideNav && <TableOfContents />}
       </DocsLayout>
     );
   }

@@ -41,6 +41,10 @@
   filter: invert(1);
 }
 
+nav.toc {
+  display: none;
+}
+
 html {
   font-family: "Inter", "system-ui";
 }

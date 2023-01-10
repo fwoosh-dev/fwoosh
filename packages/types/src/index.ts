@@ -1,4 +1,3 @@
-import { TocEntry } from "remark-mdx-toc";
 import { InlineConfig } from "vite";
 import { AsyncSeriesBailHook, SyncBailHook, SyncWaterfallHook } from "tapable";
 import type { ComponentDoc } from "react-docgen-typescript";
@@ -52,9 +51,17 @@ export interface MdxMeta {
   hideNav?: boolean;
 }
 
+export interface TocEntry {
+  depth: number;
+  value: string;
+  attributes: {
+    [key: string]: string;
+  };
+  children: TocEntry[];
+}
+
 export interface MDXStoryData extends BaseStoryData {
   type: "mdx";
-  toc: TocEntry[];
   meta: MdxMeta;
 }
 

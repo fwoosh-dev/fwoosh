@@ -19,7 +19,7 @@ import { Pluggable } from "unified";
 import remarkFrontmatter from "remark-frontmatter";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import remarkSlug from "remark-slug";
-import { remarkMdxToc } from "remark-mdx-toc";
+import toc from "@jsdevtools/rehype-toc";
 
 import { endent } from "./utils/endent.js";
 import type {
@@ -191,16 +191,17 @@ export class Fwoosh implements FwooshClass {
 
     const toolbarControls = this.hooks.registerToolbarControl.call([]);
     const panels = this.hooks.registerPanel.call([]);
+    const includedHeadings = ["h2", "h3", "h4", "h5", "h6"];
     const baseConfig: InlineConfig = {
       plugins: [
         mdx({
-          remarkPlugins: [remarkFrontmatter, remarkSlug, remarkMdxToc],
+          remarkPlugins: [remarkFrontmatter, remarkSlug],
           rehypePlugins: [
             [
               rehypeAutolinkHeadings,
               {
                 behavior: "before",
-                test: ["h2", "h3", "h4", "h5", "h6"],
+                test: includedHeadings,
                 group() {
                   return h("div", {
                     "data-link-group": true,
@@ -220,6 +221,12 @@ export class Fwoosh implements FwooshClass {
               },
             ],
             shikiConfig as Pluggable,
+            [
+              toc,
+              {
+                headings: includedHeadings,
+              },
+            ],
           ],
           providerImportSource: "@mdx-js/react",
         }),

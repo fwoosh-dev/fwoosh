@@ -20,7 +20,7 @@ export const Content = styled("div", {
   overflowY: "auto",
 });
 
-export const PageWrapper = styled("div", {
+export const PageWrapper = styled("main", {
   mt: 10,
   mb: 28,
   mx: "auto",
