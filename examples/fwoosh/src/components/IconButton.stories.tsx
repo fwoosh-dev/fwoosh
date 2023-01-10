@@ -4,7 +4,7 @@ import { Plus } from "react-feather";
 
 import type { Story } from "@fwoosh/react/dist/types";
 import { IconButton } from "@fwoosh/components";
-import { action } from "@fwoosh/actions";
+import { action } from "@fwoosh/panel-actions";
 
 export const meta: StoryMeta = {
   title: "Theming/Components/IconButton",

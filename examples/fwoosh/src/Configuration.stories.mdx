@@ -43,9 +43,9 @@ Provide an array of plugins to use with fwoosh.
 export const config: FwooshConfig = {
   plugins: [
     // Just list the name of the plugin to use it
-    "@fwoosh/story-description-panel",
+    "@fwoosh/panel-story-description",
     // Or provide an array with the name and options
-    ["@fwoosh/story-description-panel", { title: "Comment" }],
+    ["@fwoosh/panel-story-description", { title: "Comment" }],
   ],
 };
 ```
@@ -54,7 +54,7 @@ You can also import the plugins directly and use them in your config.
 This provides a better auto-complete experience in your editor.
 
 ```ts
-import StoryDescriptionPanel from "@fwoosh/story-description-panel";
+import StoryDescriptionPanel from "@fwoosh/panel-story-description";
 
 export const config: FwooshConfig = {
   plugins: [

@@ -1,14 +1,14 @@
 {
-  "name": "@fwoosh/zoom",
+  "name": "@fwoosh/panel-props",
   "type": "module",
   "version": "0.0.75",
-  "description": "Toolbar plugin to controls the zoom level of the story.",
+  "description": "Render your props in a panel.",
   "main": "dist/index.js",
   "author": "Andrew Lisowski <lisowski54@gmail.com>",
   "repository": "hipstersmoothie/fwoosh",
   "license": "MIT",
   "dependencies": {
-    "@fwoosh/components": "link:../../packages/components"
+    "fwoosh": "link:../../packages/cli"
   },
   "devDependencies": {
     "@types/node": "^14.14.31"

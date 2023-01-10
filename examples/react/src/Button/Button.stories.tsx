@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { Story, StoryMeta } from "@fwoosh/react";
-import { action } from "@fwoosh/actions";
+import { action } from "@fwoosh/panel-actions";
 
 import { Button } from "./Button";
 

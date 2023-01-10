@@ -1,5 +1,5 @@
 {
-  "name": "@fwoosh/source-panel",
+  "name": "@fwoosh/panel-story-description",
   "type": "module",
   "version": "0.0.75",
   "description": "Render your stories source code in a panel.",

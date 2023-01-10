@@ -2,10 +2,8 @@
 
 ### Core
 
-- [ ] add cache for docgen
 - [ ] make sidebar and layout pluggable
 - [ ] add theming
-- [ ] rename actions to actions-panel
 - [ ] search
 - [ ] BUG: detect if there are properties before showing nav item?
 - [ ] build command

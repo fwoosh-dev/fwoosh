@@ -1,16 +1,14 @@
 {
-  "name": "@fwoosh/actions",
+  "name": "@fwoosh/tool-zoom",
   "type": "module",
   "version": "0.0.75",
-  "description": "Log callback values from story interactions",
+  "description": "Toolbar plugin to controls the zoom level of the story.",
   "main": "dist/index.js",
   "author": "Andrew Lisowski <lisowski54@gmail.com>",
   "repository": "hipstersmoothie/fwoosh",
   "license": "MIT",
   "dependencies": {
-    "@devtools-ds/object-inspector": "^1.2.1",
-    "@fwoosh/components": "link:../../packages/components",
-    "fwoosh": "link:../../packages/cli"
+    "@fwoosh/components": "link:../../packages/components"
   },
   "devDependencies": {
     "@types/node": "^14.14.31"

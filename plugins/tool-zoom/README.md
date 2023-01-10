@@ -1,4 +1,4 @@
-# `@fwoosh/zoom`
+# `@fwoosh/tool-zoom`
 
 Zoom the story in/out.
 
@@ -7,15 +7,15 @@ Zoom the story in/out.
 To use this plugin first install the package:
 
 ```sh
-npm i --save-dev @fwoosh/zoom
+npm i --save-dev @fwoosh/tool-zoom
 # or
-yarn add -D @fwoosh/zoom
+yarn add -D @fwoosh/tool-zoom
 ```
 
 Then add it to your `fwoosh.config.ts`:
 
 ```ts
 export const config: FwooshConfig = {
-  plugins: ["@fwoosh/zoom"],
+  plugins: ["@fwoosh/tool-zoom"],
 };
 ```

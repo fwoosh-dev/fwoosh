@@ -20,8 +20,8 @@
   "devDependencies": {
     "@types/node": "^14.14.31",
     "auto": "^10.37.6",
-    "copy-template-dir": "^1.4.0",
     "command-line-application": "^0.10.1",
+    "copy-template-dir": "^1.4.0",
     "lerna": "^6.1.0",
     "patch-package": "^6.4.7",
     "prettier": "^2.2.1",

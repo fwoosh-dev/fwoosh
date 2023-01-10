@@ -39,12 +39,12 @@ export const config: FwooshOptions = {
     return a.name.localeCompare(b.name);
   },
   plugins: [
-    "@fwoosh/story-description-panel",
-    "@fwoosh/props-panel",
-    "@fwoosh/source-panel",
-    "@fwoosh/actions",
-    "@fwoosh/zoom",
-    "@fwoosh/measure",
+    "@fwoosh/panel-story-description",
+    "@fwoosh/panel-props",
+    "@fwoosh/panel-source",
+    "@fwoosh/panel-actions",
+    "@fwoosh/tool-zoom",
+    "@fwoosh/tool-measure",
     new ReactPlugin({
       docgenOptions: {
         propFilter: (prop) => {

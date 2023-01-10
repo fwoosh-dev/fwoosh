@@ -1,8 +1,8 @@
 {
-  "name": "@fwoosh/props-panel",
+  "name": "@fwoosh/tool-measure",
   "type": "module",
   "version": "0.0.75",
-  "description": "Render your props in a panel.",
+  "description": "Toolbar plugin to visualize the box model of a story",
   "main": "dist/index.js",
   "author": "Andrew Lisowski <lisowski54@gmail.com>",
   "repository": "hipstersmoothie/fwoosh",

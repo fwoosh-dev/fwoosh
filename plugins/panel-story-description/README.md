@@ -1,4 +1,4 @@
-# `@fwoosh/story-description-panel`
+# `@fwoosh/panel-story-description`
 
 Display your story's jsDoc description as a panel in the storybook.
 
@@ -7,15 +7,15 @@ Display your story's jsDoc description as a panel in the storybook.
 To use this plugin first install the package:
 
 ```sh
-npm i --save-dev @fwoosh/story-description-panel
+npm i --save-dev @fwoosh/panel-story-description
 # or
-yarn add -D @fwoosh/story-description-panel
+yarn add -D @fwoosh/panel-story-description
 ```
 
 Then add it to your `fwoosh.config.ts`:
 
 ```ts
 export const config: FwooshConfig = {
-  plugins: ["@fwoosh/story-description-panel"],
+  plugins: ["@fwoosh/panel-story-description"],
 };
 ```

@@ -883,7 +883,7 @@
 - add license ([@hipstersmoothie](https://github.com/hipstersmoothie))
 - update lerna ([@hipstersmoothie](https://github.com/hipstersmoothie))
 - update auto ([@hipstersmoothie](https://github.com/hipstersmoothie))
-- `@fwoosh/app`, `fwoosh`, `@fwoosh/components`, `@fwoosh/actions`, `@fwoosh/measure`, `@fwoosh/props-panel`, `@fwoosh/react`, `@fwoosh/source-panel`, `@fwoosh/story-description-panel`, `@fwoosh/zoom`
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/components`, `@fwoosh/actions`, `@fwoosh/tool-measure`, `@fwoosh/props-panel`, `@fwoosh/react`, `@fwoosh/source-panel`, `@fwoosh/story-description-panel`, `@fwoosh/zoom`
   - add publish config ([@hipstersmoothie](https://github.com/hipstersmoothie))
 
 #### Authors: 1
@@ -902,7 +902,7 @@
 - add license ([@hipstersmoothie](https://github.com/hipstersmoothie))
 - update lerna ([@hipstersmoothie](https://github.com/hipstersmoothie))
 - update auto ([@hipstersmoothie](https://github.com/hipstersmoothie))
-- `@fwoosh/app`, `fwoosh`, `@fwoosh/components`, `@fwoosh/actions`, `@fwoosh/measure`, `@fwoosh/props-panel`, `@fwoosh/react`, `@fwoosh/source-panel`, `@fwoosh/story-description-panel`, `@fwoosh/zoom`
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/components`, `@fwoosh/actions`, `@fwoosh/tool-measure`, `@fwoosh/props-panel`, `@fwoosh/react`, `@fwoosh/source-panel`, `@fwoosh/story-description-panel`, `@fwoosh/zoom`
   - add publish config ([@hipstersmoothie](https://github.com/hipstersmoothie))
 
 #### Authors: 1

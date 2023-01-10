@@ -1,8 +1,8 @@
 {
-  "name": "@fwoosh/measure",
+  "name": "@fwoosh/panel-source",
   "type": "module",
   "version": "0.0.75",
-  "description": "Toolbar plugin to visualize the box model of a story",
+  "description": "Render your stories source code in a panel.",
   "main": "dist/index.js",
   "author": "Andrew Lisowski <lisowski54@gmail.com>",
   "repository": "hipstersmoothie/fwoosh",
