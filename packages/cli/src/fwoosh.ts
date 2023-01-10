@@ -51,7 +51,7 @@ export class Fwoosh implements FwooshClass {
   /** Places for plugins to "tap" to add to or modify fwoosh's functionality */
   public hooks: FwooshHooks;
 
-  constructor(options: FwooshOptionWithCLIDefaults) {
+  constructor({ theme, ...options }: FwooshOptionWithCLIDefaults) {
     this.options = {
       title: "Fwoosh",
       setup: "",
@@ -77,6 +77,14 @@ export class Fwoosh implements FwooshClass {
       },
       ...options,
     };
+
+    if (theme) {
+      if (typeof theme === "object") {
+        this.options.theme = theme;
+      } else {
+        this.options.theme = require(theme);
+      }
+    }
 
     log.info("Loaded options:", this.options);
 

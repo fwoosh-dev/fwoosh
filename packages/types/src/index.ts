@@ -2,6 +2,7 @@ import { TocEntry } from "remark-mdx-toc";
 import { InlineConfig } from "vite";
 import { AsyncSeriesBailHook, SyncBailHook, SyncWaterfallHook } from "tapable";
 import type { ComponentDoc } from "react-docgen-typescript";
+import { CreateStitches } from "@stitches/react";
 
 export interface Story {
   /** The exported name of the story */
@@ -121,6 +122,15 @@ export interface FwooshHooks {
   registerPanel: SyncWaterfallHook<[{ name: string; filepath: string }[]]>;
 }
 
+export type Theme = NonNullable<
+  NonNullable<Parameters<CreateStitches>[0]>["theme"]
+>;
+
+export type ThemeObject = {
+  light: Theme;
+  dark: Theme;
+};
+
 export interface FwooshOptions {
   /** The title for the storybook/docs */
   title?: string;
@@ -143,17 +153,20 @@ export interface FwooshOptions {
     a: StorySidebarChildItem,
     b: StorySidebarChildItem
   ) => number;
+  /** Customize the theme tokens used to render the website */
+  theme?: string | ThemeObject;
 }
 
 export type FwooshOptionWithCLIDefaults = FwooshOptions &
   Required<Pick<FwooshOptions, "stories" | "outDir">>;
 
-export type FwooshOptionsLoaded = Required<FwooshOptions>;
+export type FwooshOptionsLoaded = Required<Omit<FwooshOptions, "theme">> & {
+  theme?: ThemeObject;
+};
 
 export interface FwooshClass {
   /** User's fwoosh options */
   options: FwooshOptionsLoaded;
-
   /** Places for plugins to "tap" to add to or modify fwoosh's functionality */
   hooks: FwooshHooks;
 }

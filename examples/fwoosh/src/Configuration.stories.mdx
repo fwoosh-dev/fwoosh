@@ -2,6 +2,8 @@
 title: Configuration
 ---
 
+import { Link } from "@fwoosh/link";
+
 # Configuration
 
 All configuration for fwoosh is done via a fwoosh config file.
@@ -85,6 +87,36 @@ export const config: FwooshConfig = {
   setup: "./path/to/setup.ts",
 };
 ```
+
+### `theme`
+
+Override values in the default theme.
+Fwoosh uses [stitches](https://stitches.dev/docs/tokens) for styling refer to their docs and the [default theme]() for available values.
+
+You can either define the theme directly in your `fwoosh.config.ts`:
+
+```ts
+export const config: FwooshConfig = {
+  theme: {
+    light: {
+      // values
+    },
+    dark: {
+      // value
+    },
+  },
+};
+```
+
+You can also use a path or a package name for configuring the theme.
+
+```ts
+export const config: FwooshConfig = {
+  theme: "@my-company/fwoosh-theme",
+};
+```
+
+Visit the <Link to="Theming/Introduction">theming docs</Link> for more information about theming.
 
 ### `open`
 

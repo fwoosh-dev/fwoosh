@@ -646,6 +646,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@fwoosh/theme-default@workspace:plugins/theme-default":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/theme-default@workspace:plugins/theme-default"
+  dependencies:
+    "@fwoosh/types": "link:../../packages/types"
+  peerDependencies:
+    fwoosh: ">= 0.x"
+  languageName: unknown
+  linkType: soft
+
 "@fwoosh/tool-measure@workspace:plugins/tool-measure":
   version: 0.0.0-use.local
   resolution: "@fwoosh/tool-measure@workspace:plugins/tool-measure"
@@ -666,6 +676,12 @@ __metadata:
   peerDependencies:
     fwoosh: ">= 0.x"
   languageName: unknown
+  linkType: soft
+
+"@fwoosh/types@link:../../packages/types::locator=%40fwoosh%2Ftheme-default%40workspace%3Aplugins%2Ftheme-default":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/types@link:../../packages/types::locator=%40fwoosh%2Ftheme-default%40workspace%3Aplugins%2Ftheme-default"
+  languageName: node
   linkType: soft
 
 "@fwoosh/types@link:../types::locator=%40fwoosh%2Fhooks%40workspace%3Apackages%2Fhooks":

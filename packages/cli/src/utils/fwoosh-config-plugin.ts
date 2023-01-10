@@ -21,6 +21,7 @@ export function fwooshConfigPlugin(config: FwooshOptions) {
         return endent`
           export const config = {
             title: "${config.title}",
+            theme: ${JSON.stringify(config.theme)},
           }
         `;
       }

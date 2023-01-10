@@ -4,8 +4,10 @@ declare module "@fwoosh/app/stories" {
 }
 
 declare module "@fwoosh/app/config" {
-  // import { FwooshOptions } from "fwoosh";
-  export const config: Pick<FwooshOptions, "title">;
+  import { FwooshOptions, ThemeObject } from "@fwoosh/types";
+  export const config: Pick<FwooshOptions, "title"> & {
+    theme: ThemeObject;
+  };
 }
 
 declare module "@fwoosh/app/render" {

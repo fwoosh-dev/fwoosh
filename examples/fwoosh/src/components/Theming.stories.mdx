@@ -2,10 +2,58 @@
 title: Theming/Introduction
 ---
 
+import { Link } from "@fwoosh/link";
+
 # Theming
 
-TODO
+Fwoosh aims to be very flexible in regards to theming.
+
+There are two main ways to theme Fwoosh:
+
+1. Providing custom theme tokens
+2. Overriding components
 
 ## Tokens
 
-## Full Control
+Tokens are the building blocks of a theme.
+They are used to define colors, fonts, spacing, and other design decisions.
+
+You can customize the token values used by Fwoosh by using the <Link to="Configuration#theme">theme options</Link>
+
+A theme simply sets the values of the tokens used by Fwoosh.
+
+> NOTE: For colors we suggest you use [Radix colors](https://www.radix-ui.com/colors)
+
+```tsx
+import { Theme } from "@fwoosh/types";
+import { slate, blue, blueDark, slateDark } from "@radix-ui/colors";
+
+export const light: Theme = {
+  colors: {
+    // Use a blue-ish tinted grey for the greys
+    ...(Object.fromEntries(
+      Object.values(slate).map((color, index) => [`gray${index}`, color])
+    ) as Record<string, string>),
+    // Use blue as the primary color
+    ...(Object.fromEntries(
+      Object.values(blue).map((color, index) => [`primary${index}`, color])
+    ) as Record<string, string>),
+  },
+};
+
+// Configure the dark mode variants of the above
+export const dark: Theme = {
+  colors: {
+    ...(Object.fromEntries(
+      Object.values(slateDark).map((color, index) => [`gray${index}`, color])
+    ) as Record<string, string>),
+    ...(Object.fromEntries(
+      Object.values(blueDark).map((color, index) => [`primary${index}`, color])
+    ) as Record<string, string>),
+  },
+};
+```
+
+## Component Overrides
+
+TODO

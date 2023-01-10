@@ -1,0 +1,20 @@
+{
+  "name": "@fwoosh/theme-default",
+  "type": "module",
+  "version": "0.0.74",
+  "description": "The default theme for fwoosh",
+  "main": "dist/index.js",
+  "author": "Andrew Lisowski <lisowski54@gmail.com>",
+  "repository": "hipstersmoothie/fwoosh",
+  "license": "MIT",
+  "dependencies": {
+    "@radix-ui/colors": "^0.1.8",
+    "@fwoosh/types": "link:../../packages/types"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "fwoosh": ">= 0.x"
+  }
+}

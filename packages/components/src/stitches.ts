@@ -1,5 +1,6 @@
 import { createStitches } from "@stitches/react";
-import { mauve, pink, mauveDark, pinkDark } from "@radix-ui/colors";
+import { light, dark } from "@fwoosh/theme-default";
+import { config } from "@fwoosh/app/config";
 
 type TextSize =
   | "xs"
@@ -54,20 +55,6 @@ const space = {
   auto: "auto",
 };
 
-const sizes = {
-  xs: "20rem",
-  sm: "24rem",
-  md: "28rem",
-  lg: "32rem",
-  xl: "36rem",
-  "2xl": "42rem",
-  "3xl": "48rem",
-  "4xl": "56rem",
-  "5xl": "64rem",
-  "6xl": "72rem",
-  "7xl": "80rem",
-};
-
 export const {
   styled,
   css,
@@ -76,30 +63,8 @@ export const {
   getCssText,
   theme,
   createTheme,
-  config,
 } = createStitches({
-  theme: {
-    colors: {
-      ...(Object.fromEntries(
-        Object.values(mauve).map((color, index) => [`gray${index}`, color])
-      ) as Record<string, string>),
-      ...(Object.fromEntries(
-        Object.values(pink).map((color, index) => [`primary${index}`, color])
-      ) as Record<string, string>),
-    },
-    space: space,
-    sizes: { ...space, ...sizes },
-    radii: {
-      sm: "2px",
-      round: "4px",
-    },
-    borderWidths: {
-      sm: "1px",
-    },
-    borderStyles: {
-      solid: "solid",
-    },
-  },
+  theme: { ...light, ...config.theme?.light },
   media: {
     sm: "(min-width: 640px)",
     md: "(min-width: 768px)",
@@ -238,13 +203,4 @@ export const {
   },
 });
 
-export const darkTheme = createTheme({
-  colors: {
-    ...(Object.fromEntries(
-      Object.values(mauveDark).map((color, index) => [`gray${index}`, color])
-    ) as Record<string, string>),
-    ...(Object.fromEntries(
-      Object.values(pinkDark).map((color, index) => [`primary${index}`, color])
-    ) as Record<string, string>),
-  },
-});
+export const darkTheme = createTheme({ ...dark, ...config.theme?.dark });

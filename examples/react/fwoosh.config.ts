@@ -5,6 +5,7 @@ import ReactPlugin from "@fwoosh/react";
 export const config: FwooshOptions = {
   title: "@fwoosh/react",
   setup: path.resolve("./config/fwoosh-setup.ts"),
+  theme: path.resolve("./config/fwoosh-theme.ts"),
   plugins: [
     "@fwoosh/panel-props",
     "@fwoosh/panel-source",
