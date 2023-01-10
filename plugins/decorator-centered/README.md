@@ -35,3 +35,12 @@ export const meta: StoryMeta = {
   decorators: [centered],
 };
 ```
+
+And globally in a setup file:
+
+```tsx
+import { centered } from "@fwoosh/decorator-centered";
+import { Decorator } from "@fwoosh/react";
+
+export const decorators: Decorator[] = [centered];
+```

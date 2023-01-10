@@ -16,11 +16,13 @@ function useDecorators(story: StoryData) {
         story.meta,
         story.component._payload._result,
       ]);
-      const storyComponent = storyComponentImport.default;
+      const storyComponent =
+        storyComponentImport.default || storyComponentImport;
 
       setDecorators([
-        ...((meta as StoryMeta).decorators || []),
-        ...(storyComponent.decorators || []),
+        ...(storyComponent.decorators || []).reverse(),
+        ...((meta as StoryMeta).decorators || []).reverse(),
+        ...((window as any).__FWOOSH_DECORATORS__ || []).reverse(),
       ]);
     }
 

@@ -1,7 +1,6 @@
 import * as React from "react";
 import type { Story, StoryMeta } from "@fwoosh/react";
 import { action } from "@fwoosh/actions";
-import { centered } from "@fwoosh/decorator-centered";
 
 import { Button } from "./Button";
 
@@ -20,8 +19,6 @@ export const meta: StoryMeta = {
 export const Playground: Story = () => {
   return <Button onClick={action("onClick")}>Click me</Button>;
 };
-
-Playground.decorators = [centered];
 
 /**
  * A button can be disabled.

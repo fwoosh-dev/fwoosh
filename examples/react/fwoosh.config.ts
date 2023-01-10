@@ -1,8 +1,10 @@
 import { FwooshOptions } from "fwoosh";
+import path from "path";
 import ReactPlugin from "@fwoosh/react";
 
 export const config: FwooshOptions = {
   title: "@fwoosh/react",
+  setup: path.resolve("./config/fwoosh-setup.ts"),
   plugins: [
     "@fwoosh/props-panel",
     "@fwoosh/source-panel",

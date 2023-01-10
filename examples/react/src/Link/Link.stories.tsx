@@ -1,13 +1,11 @@
 import * as React from "react";
 import type { Story, StoryMeta } from "@fwoosh/react";
-import { centered } from "@fwoosh/decorator-centered";
 
 import { Link } from "./Link";
 
 export const meta: StoryMeta = {
   title: "Components/Link",
   component: Link,
-  decorators: [centered],
 };
 
 /**

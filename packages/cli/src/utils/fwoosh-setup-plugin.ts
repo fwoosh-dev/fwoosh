@@ -1,3 +1,5 @@
+import { endent } from "./endent.js";
+
 /** Plugin that injects fwoosh config options into the front-end */
 export function fwooshSetupPlugin({ file }: { file: string }) {
   const virtualFileId = "@fwoosh/app/setup";
@@ -15,7 +17,19 @@ export function fwooshSetupPlugin({ file }: { file: string }) {
 
     async load(id: string) {
       if (id.includes(virtualFileId)) {
-        return file ? `import "${file}"` : "";
+        if (!file) {
+          return "";
+        }
+
+        return endent`
+          import("${file}").then(mod => {
+            if (mod.decorators) {
+              window.__FWOOSH_DECORATORS__ = mod.decorators;
+            }
+          })
+
+          import "${file}"
+        `;
       }
       return;
     },
