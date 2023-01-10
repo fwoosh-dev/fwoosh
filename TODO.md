@@ -2,7 +2,6 @@
 
 ### Core
 
-- [ ] !!! decorator hook
 - [ ] add cache for docgen
 - [ ] make sidebar and layout pluggable
 - [ ] add theming

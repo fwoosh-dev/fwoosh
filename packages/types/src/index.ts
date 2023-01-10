@@ -4,11 +4,17 @@ import { AsyncSeriesBailHook, SyncBailHook, SyncWaterfallHook } from "tapable";
 import type { ComponentDoc } from "react-docgen-typescript";
 
 export interface Story {
+  /** The exported name of the story */
   exportName: string;
+  /** A human readable title for the story */
   title: string;
+  /** A unique identifier for the story */
   slug: string;
+  /** The file where the story is defined */
   file: string;
+  /** The code that defines the story */
   code: string;
+  /** The jsDoc comment above the story */
   comment?: string;
 }
 
@@ -84,9 +90,34 @@ export type StorySidebarItem = StoryTree | MDXPageTreeItem;
 type ViteConfig = Omit<InlineConfig, "mode" | "root">;
 
 export interface FwooshHooks {
+  /**
+   * This hooks is what powers the main experience in fwoosh.
+   * It is responsible for returning a function that is used to
+   * render a story.
+   *
+   * It should return the contents of a virtual file that implements
+   * rendering a story.
+   */
   renderStory: AsyncSeriesBailHook<void, Promise<string>>;
+  /**
+   * This hook registers a function for documentation generation.
+   * Given a file path it should return docs for all the components
+   * in that file. That information is then consumed throughout the app.
+   */
   generateDocs: SyncBailHook<string, ComponentDoc[]>;
+  /**
+   * Register a tool in the storybook toolbar.
+   *
+   * It should add a path to the array of strings to the
+   * The file should export a react component that acts as the toolbar control.
+   */
   registerToolbarControl: SyncWaterfallHook<[string[]]>;
+  /**
+   * Register a panel in the storybook panels.
+   *
+   * It should add a path + title to the array. The title is used
+   * for the text of the Tab trigger.
+   */
   registerPanel: SyncWaterfallHook<[{ name: string; filepath: string }[]]>;
 }
 

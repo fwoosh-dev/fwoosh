@@ -4,4 +4,180 @@ title: Plugin API/Introduction
 
 # Plugin API
 
-TODO
+Plugins provide most of the functionality in fwoosh.
+Creating plugins is an easy way to customize the website output by fwoosh.
+
+## Hooks
+
+Plugins in fwoosh are created via the hooks API.
+Each one of these hooks can be "tapped" to modify the functionality in fwoosh.
+
+### `renderStory`
+
+This hooks is what powers the main experience in fwoosh.
+It is responsible for returning a function that is used to
+render a story.
+
+It should return the contents of a virtual file that implements
+rendering a story.
+
+Here is a simplified examples of what a react plugin might look like:
+
+```tsx
+import { Plugin, Fwoosh } from "fwoosh";
+import { createRequire } from "module";
+
+export default class ReactPlugin implements Plugin {
+  name = "react";
+
+  apply(fwoosh: Fwoosh) {
+    fwoosh.hooks.renderStory.tap(
+      this.name,
+      () => `
+        import React, { Suspense } from "react";
+        import ReactDOM from "react-dom";
+        import { stories } from "@fwoosh/app/stories";
+        import { Spinner } from "@fwoosh/components";
+        
+        export function render(el, slug) {
+          if (!el) {
+            return;
+          }
+
+          const Component = stories[slug].component
+          
+          try {
+            ReactDOM.render(
+              <Suspense fallback={<Spinner delay={300} />}>
+                <Component />
+              </Suspense>
+              el
+            );
+          } catch (e) {
+            console.log("error", e);
+          }
+        }   
+      `
+    );
+  }
+}
+```
+
+### `generateDocs`
+
+This hook registers a function for documentation generation.
+Given a file path it should return docs for all the components
+in that file. That information is then consumed throughout the app.
+
+```tsx
+import { Plugin, Fwoosh } from "fwoosh";
+import { createRequire } from "module";
+
+export default class ReactPlugin implements Plugin {
+  name = "react";
+
+  apply(fwoosh: Fwoosh) {
+    fwoosh.hooks.generateDocs.tap(this.name, (filepath) => {
+      return generateDocs(filepath);
+    });
+  }
+}
+```
+
+### `registerToolbarControl`
+
+This hooks registers a tool in the top toolbar of the storybook.
+
+```tsx
+import { Plugin, Fwoosh } from "fwoosh";
+import { createRequire } from "module";
+
+export default class MaximizePlugin implements Plugin {
+  name = "maximize";
+
+  apply(fwoosh: Fwoosh) {
+    fwoosh.hooks.registerToolbarControl.tap(this.name, (controls) => {
+      return [...controls, require.resolve("./toolbar")];
+    });
+  }
+}
+```
+
+The file should export a react component that acts as the toolbar control.
+Here is a simple plugin that maximizes the page when clicked.
+
+**`toolbar.tsx`:**
+
+```tsx
+import React from "react";
+import { IconButton, Toolbar } from "@fwoosh/components";
+
+export default function MaximizeControl() {
+  return (
+    <Toolbar.Button asChild={true}>
+      <IconButton
+        aria-label="Maximize story"
+        title="Maximize"
+        onClick={() => window.fullscreen()}
+      >
+        <Maximize />
+      </IconButton>
+    </Toolbar.Button>
+  );
+}
+```
+
+### `registerPanel`
+
+This hooks registers a panel in the storybook.
+Panels are great for showing detailed information or controls for a particular story.
+
+It should add a path + title to the array.
+The title is used for the text of the Tab trigger.
+
+```tsx
+import { Plugin, Fwoosh } from "fwoosh";
+import { createRequire } from "module";
+
+export default class DescriptionPanelPlugin implements Plugin {
+  name = "description-panel";
+
+  apply(fwoosh: Fwoosh) {
+    fwoosh.hooks.registerPanel.tap(this.name, (panels) => {
+      return [
+        ...panels,
+        { name: this.options.title, filepath: require.resolve("./panel") },
+      ];
+    });
+  }
+}
+```
+
+The file should export a react component that renders the panel.
+Here is a simplified version of the plugin that display's each stories comment as a panel.
+
+**`panel.tsx`:**
+
+```tsx
+import React from "react";
+import { StyledMarkdown, styled, components } from "@fwoosh/components";
+import { useParams } from "react-router-dom";
+import { stories } from "@fwoosh/app/stories";
+
+const Panel = styled("div", {
+  height: "100%",
+  width: "100%",
+  px: 4,
+});
+
+export default function DescriptionPanel() {
+  const params = useParams<{ storyId: string }>();
+  const story = Object.values(stories).find((s) => s.slug === params.storyId);
+
+  return (
+    <Panel>
+      <StyledMarkdown>{story.comment}</StyledMarkdown>
+    </Panel>
+  );
+}
+```
