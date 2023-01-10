@@ -2,13 +2,8 @@ import * as React from "react";
 import { useParams } from "react-router-dom";
 import { useDocs } from "@fwoosh/app/docs";
 import { stories } from "@fwoosh/app/stories";
-import {
-  PropsTable,
-  styled,
-  components,
-  DelayedRender,
-  keyframes,
-} from "@fwoosh/components";
+import { PropsTable, components, DelayedRender } from "@fwoosh/components";
+import { styled, keyframes } from "@fwoosh/styling";
 
 const Wrapper = styled("div", {
   px: 4,

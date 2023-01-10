@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import { Sun, Moon } from "react-feather";
-import {
-  getInitialColorMode,
-  setColorMode,
-  darkTheme,
-  IconButton,
-} from "@fwoosh/components";
+import { IconButton } from "@fwoosh/components";
+import { getInitialColorMode, setColorMode, darkTheme } from "@fwoosh/styling";
 
 export const ThemeToggle = () => {
   const [theme, setTheme] = useState(getInitialColorMode());

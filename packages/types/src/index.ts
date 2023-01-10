@@ -155,14 +155,19 @@ export interface FwooshOptions {
   ) => number;
   /** Customize the theme tokens used to render the website */
   theme?: string | ThemeObject;
+  /** Override any component from @fwoosh/components and take full control of the UI. */
+  componentOverrides?: string;
 }
 
 export type FwooshOptionWithCLIDefaults = FwooshOptions &
   Required<Pick<FwooshOptions, "stories" | "outDir">>;
 
-export type FwooshOptionsLoaded = Required<Omit<FwooshOptions, "theme">> & {
-  theme?: ThemeObject;
-};
+export type FwooshOptionsLoaded = Required<
+  Omit<FwooshOptions, "theme" | "componentOverrides">
+> &
+  Pick<FwooshOptions, "componentOverrides"> & {
+    theme?: ThemeObject;
+  };
 
 export interface FwooshClass {
   /** User's fwoosh options */

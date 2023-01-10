@@ -14,17 +14,15 @@ import { Storybook } from "./components/Storybook";
 import { Docs } from "./components/Docs";
 import { DocsPage } from "./components/DocsPage";
 import "./index.css";
+import { AppWrapper, Spinner, ErrorBoundary } from "@fwoosh/components";
 import {
-  AppWrapper,
   ColorMode,
   ColorModeContext,
   getInitialColorMode,
-  Spinner,
-} from "@fwoosh/components";
+} from "@fwoosh/styling";
 import { getFirstStory, useStoryTree } from "@fwoosh/hooks";
 import { StoryWithTools } from "./components/StoryWithTools";
 import { convertMetaTitleToUrlParam } from "@fwoosh/utils";
-import { ErrorBoundary } from "@fwoosh/components";
 
 const queryClient = new QueryClient({
   defaultOptions: {

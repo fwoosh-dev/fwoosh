@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 
 import * as React from "react";
-import { styled } from "./stitches";
+import { styled } from "@fwoosh/styling";
 
 const ErrorMessage = styled("h1", {
   text: "2xl",

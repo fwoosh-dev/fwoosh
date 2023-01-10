@@ -8,8 +8,8 @@
   "repository": "hipstersmoothie/fwoosh",
   "license": "MIT",
   "dependencies": {
-    "@radix-ui/colors": "^0.1.8",
-    "@fwoosh/types": "link:../../packages/types"
+    "@fwoosh/types": "link:../../packages/types",
+    "@radix-ui/colors": "^0.1.8"
   },
   "publishConfig": {
     "access": "public"

@@ -9,5 +9,5 @@
     "composite": true
   },
 
-  "references": [{ "path": "../styling" }]
+  "references": [{ "path": "../../plugins/theme-default" }]
 }

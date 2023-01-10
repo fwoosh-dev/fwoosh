@@ -3,6 +3,8 @@ declare module "@fwoosh/app/stories" {
   export const stories: Stories;
 }
 
+declare module "@fwoosh/app/overrides";
+
 declare module "@fwoosh/app/config" {
   import { FwooshOptions, ThemeObject } from "@fwoosh/types";
   export const config: Pick<FwooshOptions, "title"> & {

@@ -37,6 +37,7 @@ import { fwooshConfigPlugin } from "./utils/fwoosh-config-plugin.js";
 import { fwooshUiPlugin } from "./utils/fwoosh-ui-plugin.js";
 import { convertMarkdownToHtml } from "./utils/get-stories.js";
 import { shikiConfig } from "./utils/shiki-config.js";
+import { componentOverridePlugin } from "./utils/component-override-plugins.js";
 
 const require = createRequire(import.meta.url);
 
@@ -53,6 +54,7 @@ export class Fwoosh implements FwooshClass {
 
   constructor({ theme, ...options }: FwooshOptionWithCLIDefaults) {
     this.options = {
+      componentOverrides: undefined,
       title: "Fwoosh",
       setup: "",
       open: false,
@@ -227,6 +229,7 @@ export class Fwoosh implements FwooshClass {
         getDocsPlugin({ port }),
         storyListPlugin(this.options),
         renderStoryPlugin(await this.hooks.renderStory.promise()),
+        componentOverridePlugin(this.options),
       ],
       optimizeDeps: {
         include: [

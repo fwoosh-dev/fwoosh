@@ -1,4 +1,4 @@
-import { styled } from "./stitches";
+import { styled } from "@fwoosh/styling";
 
 export const HeaderBar = styled("div", {
   height: "$14",

@@ -1,4 +1,4 @@
-import { styled } from "./stitches";
+import { styled } from "@fwoosh/styling";
 
 export const Root = styled("nav", {
   py: 10,

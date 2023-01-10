@@ -440,7 +440,6 @@ __metadata:
   dependencies:
     "@fwoosh/utils": "link:../utils"
     "@mdx-js/react": ^2.2.1
-    "@radix-ui/colors": ^0.1.8
     "@radix-ui/react-collapsible": ^1.0.1
     "@radix-ui/react-id": ^1.0.0
     "@types/dlv": ^1.1.2
@@ -501,6 +500,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fwoosh/components@workspace:packages/components"
   dependencies:
+    "@fwoosh/styling": "link:../styling"
     "@radix-ui/react-tabs": ^1.0.1
     "@radix-ui/react-toolbar": ^1.0.1
     "@stitches/react": ^1.2.8
@@ -646,11 +646,37 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@fwoosh/styling@link:../styling::locator=%40fwoosh%2Fcomponents%40workspace%3Apackages%2Fcomponents":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/styling@link:../styling::locator=%40fwoosh%2Fcomponents%40workspace%3Apackages%2Fcomponents"
+  languageName: node
+  linkType: soft
+
+"@fwoosh/styling@workspace:packages/styling":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/styling@workspace:packages/styling"
+  dependencies:
+    "@fwoosh/theme-default": "link:../../plugins/theme-default"
+    "@stitches/react": ^1.2.8
+    "@types/react": ^17.0.2
+    react: ^17.0.1
+  peerDependencies:
+    react: ^16.8 || ^17.0
+  languageName: unknown
+  linkType: soft
+
+"@fwoosh/theme-default@link:../../plugins/theme-default::locator=%40fwoosh%2Fstyling%40workspace%3Apackages%2Fstyling":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/theme-default@link:../../plugins/theme-default::locator=%40fwoosh%2Fstyling%40workspace%3Apackages%2Fstyling"
+  languageName: node
+  linkType: soft
+
 "@fwoosh/theme-default@workspace:plugins/theme-default":
   version: 0.0.0-use.local
   resolution: "@fwoosh/theme-default@workspace:plugins/theme-default"
   dependencies:
     "@fwoosh/types": "link:../../packages/types"
+    "@radix-ui/colors": ^0.1.8
   peerDependencies:
     fwoosh: ">= 0.x"
   languageName: unknown

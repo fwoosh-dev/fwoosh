@@ -1,6 +1,6 @@
 import * as React from "react";
+import { styled } from "@fwoosh/styling";
 
-import { styled } from "./stitches";
 import ChevronRightIcon from "./icons/ChevronRightIcon";
 
 export const SidebarItems = styled("ul", {

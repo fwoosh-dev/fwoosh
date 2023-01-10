@@ -1,7 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { stories } from "@fwoosh/app/stories";
-import { StyledMarkdown, styled } from "@fwoosh/components";
+import { StyledMarkdown } from "@fwoosh/components";
+import { styled } from "@fwoosh/styling";
 import { useHighlightedCode } from "@fwoosh/hooks";
 
 const Panel = styled("div", {

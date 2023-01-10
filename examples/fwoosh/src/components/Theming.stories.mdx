@@ -56,4 +56,29 @@ export const dark: Theme = {
 
 ## Component Overrides
 
-TODO
+Fwoosh offers the ability to take full control of most presentation and layout component in the UI.
+
+You can add component overrides to Fwoosh by using the <Link to="Configuration#componentOverrides">`componentOverrides` options</Link>.
+
+```ts
+export const config: FwooshConfig = {
+  componentOverrides: "./path/to/componentOverrides.tsx",
+};
+```
+
+Once you have that configured create the file that contains your overrides.
+
+```tsx
+import * as React from "react";
+
+export const Spinner = () => <div>loading</div>;
+
+export const h1 = (props: React.ComponentProps<"h1">) => {
+  return <h1 style={{ color: "red", fontSize: 40 }} {...props} />;
+};
+```
+
+Now whenever the UI wants to render one of these components fwoosh will instead
+use you override.
+
+For a full list of what to override view [`@fwoosh/components/src/index.ts`](https://github.com/hipstersmoothie/fwoosh/blob/main/packages/components/src/index.tsx).

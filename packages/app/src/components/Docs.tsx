@@ -7,9 +7,9 @@ import {
   HeaderBar,
   HeaderTitle,
   SidebarSectionTitle,
-  styled,
   Spinner,
 } from "@fwoosh/components";
+import { styled } from "@fwoosh/styling";
 import { config } from "@fwoosh/app/config";
 import React from "react";
 import { Outlet, Link, useParams } from "react-router-dom";

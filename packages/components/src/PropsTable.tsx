@@ -1,9 +1,10 @@
 import React from "react";
 import { useDocs } from "@fwoosh/app/docs";
+import { styled } from "@fwoosh/styling";
+
+import { StyledMarkdown } from "./StyledMarkdown.js";
 import { components } from "./components.js";
 import * as Tabs from "./Tabs.js";
-import { styled } from "./stitches.js";
-import { StyledMarkdown } from "./StyledMarkdown.js";
 
 const NoPropMessage = styled(components.p, {
   color: "$gray10",
@@ -72,7 +73,7 @@ const Table = ({ doc }: TableProps) => {
   );
 };
 
-interface PropsTableProps {
+export interface PropsTableProps {
   docs: ReturnType<typeof useDocs>;
   hasTitle?: boolean | string;
 }

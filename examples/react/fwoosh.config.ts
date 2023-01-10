@@ -6,6 +6,7 @@ export const config: FwooshOptions = {
   title: "@fwoosh/react",
   setup: path.resolve("./config/fwoosh-setup.ts"),
   theme: path.resolve("./config/fwoosh-theme.ts"),
+  componentOverrides: path.resolve("./config/fwoosh-overrides.tsx"),
   plugins: [
     "@fwoosh/panel-props",
     "@fwoosh/panel-source",

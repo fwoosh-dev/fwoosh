@@ -4,12 +4,12 @@ import {
   SidebarItems,
   SidebarLayout,
   Sidebar,
-  styled,
   Toolbar,
   Spinner,
   HeaderBar,
   HeaderTitle,
 } from "@fwoosh/components";
+import { styled } from "@fwoosh/styling";
 import { toolbarControls } from "@fwoosh/app/ui";
 import { Outlet, useParams } from "react-router-dom";
 import { useId } from "@radix-ui/react-id";

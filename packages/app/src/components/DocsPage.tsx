@@ -3,10 +3,10 @@ import { useLocation, useParams } from "react-router-dom";
 import { useId } from "@radix-ui/react-id";
 import { BasicStoryData, StoryMeta } from "@fwoosh/types";
 import { useDocs } from "@fwoosh/app/docs";
+import { styled } from "@fwoosh/styling";
 import {
   components,
   PageWrapper,
-  styled,
   Spinner,
   PropsTable,
   StyledMarkdown,

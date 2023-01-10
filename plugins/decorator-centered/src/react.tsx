@@ -1,4 +1,4 @@
-import { styled } from "@fwoosh/components";
+import { styled } from "@fwoosh/styling";
 import * as React from "react";
 
 const Center = styled("div", {

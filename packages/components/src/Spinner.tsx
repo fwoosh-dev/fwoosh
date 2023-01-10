@@ -1,5 +1,5 @@
 import * as React from "react";
-import { keyframes, styled } from "./stitches";
+import { keyframes, styled } from "@fwoosh/styling";
 
 const spin = keyframes({
   from: {

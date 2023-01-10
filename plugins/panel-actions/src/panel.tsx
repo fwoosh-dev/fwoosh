@@ -2,7 +2,7 @@ import React from "react";
 import { ObjectInspector } from "@devtools-ds/object-inspector";
 import { firefox } from "@devtools-ds/themes";
 import { useId } from "@radix-ui/react-id";
-import { ColorModeContext, styled } from "@fwoosh/components";
+import { ColorModeContext, styled } from "@fwoosh/styling";
 import { useParams } from "react-router-dom";
 
 import { setAddAction } from ".";

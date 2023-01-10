@@ -1,5 +1,6 @@
 import * as React from "react";
-import { SidebarItem, SIDEBAR_ITEM_INDENT, styled } from "@fwoosh/components";
+import { styled } from "@fwoosh/styling";
+import { SidebarItem, SIDEBAR_ITEM_INDENT } from "@fwoosh/components";
 import useMeasure from "react-use-measure";
 import { Tree } from "react-arborist";
 import { TreeProps } from "react-arborist/dist/types/tree-props";

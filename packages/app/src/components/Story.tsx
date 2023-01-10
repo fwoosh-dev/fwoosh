@@ -2,7 +2,8 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useId } from "@radix-ui/react-id";
 
-import { styled, ErrorBoundary } from "@fwoosh/components";
+import { styled } from "@fwoosh/styling";
+import { ErrorBoundary } from "@fwoosh/components";
 import { useRender } from "../hooks/useRender";
 
 export const StoryIdContext = React.createContext<string | undefined>(

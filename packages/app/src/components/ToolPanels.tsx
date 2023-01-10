@@ -1,6 +1,7 @@
 import React, { Suspense, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { styled, Spinner, Tabs, ErrorBoundary } from "@fwoosh/components";
+import { styled } from "@fwoosh/styling";
+import { Spinner, Tabs, ErrorBoundary } from "@fwoosh/components";
 import { panels } from "@fwoosh/app/ui";
 
 import { StoryIdContext } from "./Story";

@@ -116,7 +116,22 @@ export const config: FwooshConfig = {
 };
 ```
 
-Visit the <Link to="Theming/Introduction">theming docs</Link> for more information about theming.
+Visit the <Link to="Theming/Introduction#tokens">theming docs</Link> for more information about theming.
+
+### `componentOverrides`
+
+Override a host of presentation and layout components.
+
+> BEWARE! This is a powerful API, make sure you look up what the base component is
+> doing before overriding it.
+
+```ts
+export const config: FwooshConfig = {
+  componentOverrides: "./path/to/componentOverrides.tsx",
+};
+```
+
+Visit the <Link to="Theming/Introduction#component-overrides">override docs</Link> for more information about overriding components.
 
 ### `open`
 

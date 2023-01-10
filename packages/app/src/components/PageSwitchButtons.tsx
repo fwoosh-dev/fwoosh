@@ -1,6 +1,7 @@
 import React from "react";
 import { getNextStory, getPreviousStory, useStoryTree } from "@fwoosh/hooks";
-import { ChevronRightIcon, styled } from "@fwoosh/components";
+import { styled } from "@fwoosh/styling";
+import { ChevronRightIcon } from "@fwoosh/components";
 import { Link, useLocation } from "react-router-dom";
 import { StoryData } from "@fwoosh/types";
 import {

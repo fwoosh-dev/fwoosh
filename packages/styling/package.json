@@ -1,0 +1,31 @@
+{
+  "name": "@fwoosh/styling",
+  "main": "dist/index.js",
+  "type": "module",
+  "description": "Utility functions to help style UI build for fwoosh.",
+  "version": "0.0.74",
+  "license": "MIT",
+  "author": {
+    "name": "Andrew Lisowski",
+    "email": "lisowski54@gmail.com"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": "hipstersmoothie/fwoosh",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@fwoosh/theme-default": "link:../../plugins/theme-default",
+    "@stitches/react": "^1.2.8"
+  },
+  "peerDependencies": {
+    "react": "^16.8 || ^17.0"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.2",
+    "react": "^17.0.1"
+  }
+}
