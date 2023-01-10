@@ -303,7 +303,7 @@ export const IconButton = styled("button", {
 export const DocsLayout = styled("div", {
   display: "grid",
 
-  "@lg": {
+  "@xl": {
     gridTemplateColumns: "1fr minmax(200px, $72)",
   },
 });
