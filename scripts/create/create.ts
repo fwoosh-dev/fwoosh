@@ -17,7 +17,7 @@ function create() {
       {
         name: "type",
         type: String,
-        typeLabel: "package | plugin",
+        typeLabel: "package | plugin | decorator",
       },
       {
         name: "name",
@@ -42,7 +42,7 @@ function create() {
   }
 
   const options = result as {
-    type: "package" | "plugin";
+    type: "package" | "plugin" | "decorator";
     name: string;
     description?: string;
   };
@@ -52,7 +52,12 @@ function create() {
   const inDir = path.join(__dirname, "templates", options.type);
   const kebab = paramCase(options.name);
   const folder = options.type === "package" ? "packages" : "plugins";
-  const outDir = path.join(__dirname, "../..", folder, kebab);
+  const outDir = path.join(
+    __dirname,
+    "../..",
+    folder,
+    options.type === "decorator" ? `decorator-${kebab}` : kebab
+  );
   const TSCONFIG = path.join(__dirname, "../../tsconfig.dev.json");
 
   fs.mkdirSync(outDir);
