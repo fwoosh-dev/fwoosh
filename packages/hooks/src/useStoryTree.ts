@@ -5,6 +5,7 @@ import { matchTreeSortingOrder } from "@fwoosh/utils";
 
 function getStories() {
   const treeData: StorySidebarChildItem[] = [];
+  console.log({ stories });
 
   Object.values(stories).forEach((story) => {
     const { grouping } = story;

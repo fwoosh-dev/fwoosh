@@ -2,7 +2,7 @@ import * as React from "react";
 
 import logo from "../public/logo.svg";
 import logoDark from "../public/logo-dark.svg";
-import { styled } from "@fwoosh/components/src";
+import { styled } from "@fwoosh/styling";
 
 const LightLogo = styled("img", {
   '[data-color-mode="dark"] &': {

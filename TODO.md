@@ -2,8 +2,6 @@
 
 ### Core
 
-- [ ] make sidebar and layout pluggable
-- [ ] add theming
 - [ ] search
 - [ ] BUG: detect if there are properties before showing nav item?
 - [ ] build command

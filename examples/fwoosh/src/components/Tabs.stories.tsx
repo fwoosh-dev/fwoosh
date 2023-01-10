@@ -2,7 +2,8 @@ import * as React from "react";
 import type { StoryMeta } from "fwoosh";
 
 import type { Story } from "@fwoosh/react/dist/types";
-import { styled, Tabs } from "@fwoosh/components";
+import { styled } from "@fwoosh/styling";
+import { Tabs } from "@fwoosh/components";
 
 const Panel = styled("div", { p: 4, color: "$gray11" });
 

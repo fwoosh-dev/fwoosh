@@ -15,7 +15,7 @@ import {
   IconButton as IconButtonDefault,
   Logo as LogoDefault,
   PageWrapper as PageWrapperDefault,
-} from "./Layout";
+} from "./Layout.js";
 import {
   Sidebar as SidebarDefault,
   SidebarActiveDot as SidebarActiveDotDefault,
@@ -27,13 +27,13 @@ import {
   SidebarLayout as SidebarLayoutDefault,
   SidebarSectionTitle as SidebarSectionTitleDefault,
 } from "./Sidebar.js";
-import { ChevronRightIcon as ChevronRightIconDefault } from "./icons";
-import * as ToolbarDefault from "./Toolbar";
+import { ChevronRightIcon as ChevronRightIconDefault } from "./icons/index.js";
+import * as ToolbarDefault from "./Toolbar.js";
 import * as TabsDefault from "./Tabs.js";
 import * as QuickNavDefault from "./QuickNav.js";
-import { Components, components as componentsDefault } from "./components";
+import type { Components } from "./components.js";
+import { components as componentsDefault } from "./components.js";
 
-console.log(overrides.h1);
 const components = {
   h1: (overrides.h1 || componentsDefault.h1) as typeof componentsDefault["h1"],
   h2: (overrides.h2 || componentsDefault.h2) as typeof componentsDefault["h2"],
