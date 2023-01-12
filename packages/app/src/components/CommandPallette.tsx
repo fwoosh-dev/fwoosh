@@ -3,6 +3,8 @@ import { Command } from "@fwoosh/components";
 import { headerCase } from "change-case";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useStoryTree } from "@fwoosh/hooks";
+import commandScore from "command-score";
+import { Interweave } from "interweave";
 import {
   MDXPageTreeItem,
   StoryData,
@@ -11,6 +13,66 @@ import {
 } from "@fwoosh/types";
 import useMousetrap from "react-hook-mousetrap";
 import { Bookmark, Code } from "react-feather";
+
+const CommandPalletteContext = React.createContext<{
+  search: string;
+}>({
+  search: "",
+});
+
+function StoryCommandTreeChild({
+  groupName,
+  item,
+  onNavigate,
+}: {
+  groupName: string;
+  item: MDXPageTreeItem | StoryTreeItem;
+  onNavigate: (story: StoryData) => void;
+}) {
+  const { search } = React.useContext(CommandPalletteContext);
+  const parts = item.story.grouping.split("/");
+
+  if (item.type === "mdx") {
+    if (parts[0] === groupName) {
+      parts.shift();
+    }
+    const pageName = parts.pop()!;
+    const newGrouping = parts.join(" / ");
+
+    return (
+      <Command.Item
+        key={item.story.slug}
+        value={item.story.title}
+        grouping={newGrouping}
+        title={pageName}
+        onSelect={() => onNavigate(item.story)}
+        icon={<Bookmark />}
+      />
+    );
+  }
+
+  const hasContentMatch =
+    search && item.story.comment && item.story.comment.includes(search);
+
+  parts.shift();
+
+  return (
+    <Command.Item
+      key={item.story.slug}
+      value={`${item.story.grouping}#${item.story.title}|||${item.story.comment}`}
+      grouping={parts.join(" / ")}
+      title={
+        hasContentMatch && item.story.comment ? (
+          <Interweave content={item.story.comment} />
+        ) : (
+          item.story.title
+        )
+      }
+      onSelect={() => onNavigate(item.story)}
+      icon={<Code />}
+    />
+  );
+}
 
 function StoryCommandTree({
   tree,
@@ -24,7 +86,6 @@ function StoryCommandTree({
     const toProcess = [...tree.children];
 
     while (toProcess.length > 0) {
-      console.log(toProcess);
       const currentItem = toProcess.shift();
 
       if (currentItem) {
@@ -42,37 +103,12 @@ function StoryCommandTree({
   return (
     <Command.Group heading={<Command.Heading>{tree.name}</Command.Heading>}>
       {items.map((item) => {
-        const parts = item.story.grouping.split("/");
-
-        if (item.type === "mdx") {
-          if (parts[0] === tree.name) {
-            parts.shift();
-          }
-          const pageName = parts.pop()!;
-          const newGrouping = parts.join(" / ");
-
-          return (
-            <Command.Item
-              key={item.story.slug}
-              value={item.story.title}
-              grouping={newGrouping}
-              title={pageName}
-              onSelect={() => onNavigate(item.story)}
-              icon={<Bookmark />}
-            />
-          );
-        }
-
-        parts.shift();
-
         return (
-          <Command.Item
+          <StoryCommandTreeChild
             key={item.story.slug}
-            value={`${item.story.grouping}#${item.story.title}`}
-            grouping={parts.join(" / ")}
-            title={item.story.title}
-            onSelect={() => onNavigate(item.story)}
-            icon={<Code />}
+            groupName={tree.name}
+            item={item}
+            onNavigate={onNavigate}
           />
         );
       })}
@@ -112,44 +148,54 @@ export function CommandPallette() {
   useMousetrap("meta+k", () => openSet(true));
 
   return (
-    <Command.Dialog open={open} onOpenChange={openSet} loop>
-      <Command.Content>
-        <Command.Input
-          placeholder="Search documentation and stories..."
-          value={value}
-          onValueChange={valueSet}
-        />
+    <Command.Dialog
+      open={open}
+      onOpenChange={openSet}
+      loop={true}
+      filter={(value, search) => {
+        const [slug, content] = value.split("|||");
 
-        <Command.List>
-          <Command.Empty>No results found.</Command.Empty>
-          {!value && <Command.Heading>Jump to a page</Command.Heading>}
-          {tree.map((item) => {
-            if (item.type === "tree") {
+        if (content && content.includes(search)) {
+          return 1;
+        }
+
+        return commandScore(slug, search);
+      }}
+    >
+      <CommandPalletteContext.Provider value={{ search: value }}>
+        <Command.Content>
+          <Command.Input
+            placeholder="Search documentation and stories..."
+            value={value}
+            onValueChange={valueSet}
+          />
+
+          <Command.List>
+            <Command.Empty>No results found.</Command.Empty>
+            {!value && <Command.Heading>Jump to a page</Command.Heading>}
+            {tree.map((item) => {
+              if (item.type === "tree") {
+                return (
+                  <StoryCommandTree
+                    key={item.id}
+                    tree={item}
+                    onNavigate={onNavigate}
+                  />
+                );
+              }
+
               return (
-                <StoryCommandTree
-                  key={item.id}
-                  tree={item}
+                <StoryCommandTreeChild
+                  key={item.story.slug}
+                  item={item}
+                  groupName=""
                   onNavigate={onNavigate}
                 />
               );
-            }
-
-            return (
-              <Command.Item
-                key={item.story.slug}
-                value={
-                  item.type === "mdx"
-                    ? item.story.grouping
-                    : `${item.story.grouping}#${item.story.slug}`
-                }
-                title={item.story.title}
-                onSelect={() => onNavigate(item.story)}
-                icon={item.type === "mdx" ? <Bookmark /> : <Code />}
-              />
-            );
-          })}
-        </Command.List>
-      </Command.Content>
+            })}
+          </Command.List>
+        </Command.Content>
+      </CommandPalletteContext.Provider>
     </Command.Dialog>
   );
 }

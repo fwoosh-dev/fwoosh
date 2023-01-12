@@ -78,15 +78,20 @@ const StyledItem = styled(Command.Item, {
   display: "flex",
   alignItems: "center",
   gap: "$1",
-  mx: 2,
-  my: 1,
-  borderRadius: "$sm",
   cursor: "pointer",
   color: "$gray11",
   text: "sm",
+  zIndex: 0,
+  px: 2,
+  position: "relative",
 
-  "&[aria-selected]": {
+  "&[aria-selected]:before": {
+    position: "absolute",
+    inset: "0 $2",
     background: "$gray3",
+    content: "",
+    borderRadius: "$sm",
+    zIndex: -1,
   },
 });
 
@@ -99,10 +104,10 @@ const ItemIcon = styled("div", {
   p: 2,
 });
 const RightIcon = styled(ItemIcon, {
-  display: "none",
+  opacity: 0,
 
   [`${StyledItem}[aria-selected] &`]: {
-    display: "flex",
+    opacity: 1,
   },
 });
 const StyledItemText = styled("div", {
@@ -122,9 +127,12 @@ const ItemGrouping = styled("div", {
 });
 const ItemTitle = styled("div");
 
-type ItemProps = Omit<React.ComponentProps<typeof StyledItem>, "children"> & {
+type ItemProps = Omit<
+  React.ComponentProps<typeof StyledItem>,
+  "children" | "title"
+> & {
   grouping?: string;
-  title: string;
+  title: React.ReactNode;
   icon?: React.ReactNode;
 };
 
