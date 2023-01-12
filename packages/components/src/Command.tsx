@@ -80,7 +80,6 @@ const StyledItem = styled(Command.Item, {
   gap: "$1",
   cursor: "pointer",
   color: "$gray11",
-  text: "sm",
   zIndex: 0,
   px: 2,
   position: "relative",

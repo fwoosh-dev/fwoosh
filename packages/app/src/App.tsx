@@ -20,6 +20,7 @@ import {
   ColorMode,
   ColorModeContext,
   getInitialColorMode,
+  globalCss,
 } from "@fwoosh/styling";
 import { getFirstStory, useStoryTree } from "@fwoosh/hooks";
 import { StoryWithTools } from "./components/StoryWithTools";
@@ -136,8 +137,14 @@ const router = createBrowserRouter([
   },
 ]);
 
+const globalStyles = globalCss({
+  mark: { background: "$primary6" },
+});
+
 export const App = () => {
   const [colorMode, colorModeSet] = React.useState<ColorMode | undefined>();
+
+  globalStyles();
 
   React.useEffect(() => {
     colorModeSet(getInitialColorMode());

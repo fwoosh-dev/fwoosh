@@ -31,6 +31,44 @@ function StoryCommandTreeChild({
 }) {
   const { search } = React.useContext(CommandPalletteContext);
   const parts = item.story.grouping.split("/");
+  const highlightedSearchResult = React.useMemo(() => {
+    if (!search || item.type !== "story" || !item.story.comment) {
+      return;
+    }
+
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(item.story.comment, "text/html");
+    const matches = doc.evaluate(
+      // TODO get the actual text element
+      `//p[contains(., '${search}')]`,
+      doc,
+      null,
+      XPathResult.ORDERED_NODE_ITERATOR_TYPE,
+      null
+    );
+
+    let match = matches.iterateNext();
+
+    const textNodeIndex = Array.from(match?.childNodes || []).findIndex((n) =>
+      n.textContent?.includes(search)
+    );
+
+    if (match && textNodeIndex !== -1) {
+      const [before, after] =
+        match.childNodes[textNodeIndex].textContent?.split(search) || [];
+
+      const beforeNode = document.createTextNode(before);
+      const afterNode = document.createTextNode(after);
+      const highlightNode = document.createElement("mark");
+      highlightNode.textContent = search;
+
+      match.replaceChild(afterNode, match.childNodes[textNodeIndex]);
+      match.insertBefore(highlightNode, afterNode);
+      match.insertBefore(beforeNode, highlightNode);
+
+      return (match as HTMLElement).innerHTML;
+    }
+  }, [search, item]);
 
   if (item.type === "mdx") {
     if (parts[0] === groupName) {
@@ -51,10 +89,11 @@ function StoryCommandTreeChild({
     );
   }
 
-  const hasContentMatch =
-    search && item.story.comment && item.story.comment.includes(search);
-
   parts.shift();
+
+  if (highlightedSearchResult) {
+    parts.push(item.story.title);
+  }
 
   return (
     <Command.Item
@@ -62,8 +101,8 @@ function StoryCommandTreeChild({
       value={`${item.story.grouping}#${item.story.title}|||${item.story.comment}`}
       grouping={parts.join(" / ")}
       title={
-        hasContentMatch && item.story.comment ? (
-          <Interweave content={item.story.comment} />
+        highlightedSearchResult ? (
+          <Interweave content={highlightedSearchResult} />
         ) : (
           item.story.title
         )
@@ -143,6 +182,7 @@ export function CommandPallette() {
 
     navigate(url);
     openSet(false);
+    valueSet("");
   }, []);
 
   useMousetrap("meta+k", () => openSet(true));
