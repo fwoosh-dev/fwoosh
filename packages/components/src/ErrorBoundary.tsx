@@ -21,6 +21,7 @@ const ErrorWrapper = styled("div", {
 
 interface ErrorBoundaryProps {
   fullScreen?: boolean;
+  children: React.ReactNode;
 }
 
 export class ErrorBoundary extends React.Component<

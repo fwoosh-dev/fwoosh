@@ -31,6 +31,7 @@ import { ChevronRightIcon as ChevronRightIconDefault } from "./icons/index.js";
 import * as ToolbarDefault from "./Toolbar.js";
 import * as TabsDefault from "./Tabs.js";
 import * as QuickNavDefault from "./QuickNav.js";
+import * as CommandDefault from "./Command.js";
 import type { Components } from "./components.js";
 import { components as componentsDefault } from "./components.js";
 
@@ -84,6 +85,29 @@ const Toolbar = {
     ToolbarDefault.Button) as typeof ToolbarDefault.Button,
   Separator: (overrides.Toolbar?.Separator ||
     ToolbarDefault.Separator) as typeof ToolbarDefault.Separator,
+};
+
+const Command = {
+  Dialog: (overrides.Command?.Dialog ||
+    CommandDefault.Dialog) as typeof CommandDefault.Dialog,
+  Content: (overrides.Command?.Content ||
+    CommandDefault.Content) as typeof CommandDefault.Content,
+  Group: (overrides.Command?.Group ||
+    CommandDefault.Group) as typeof CommandDefault.Group,
+  Separator: (overrides.Command?.Separator ||
+    CommandDefault.Separator) as typeof CommandDefault.Separator,
+  Empty: (overrides.Command?.Empty ||
+    CommandDefault.Empty) as typeof CommandDefault.Empty,
+  Input: (overrides.Command?.Input ||
+    CommandDefault.Input) as typeof CommandDefault.Input,
+  Item: (overrides.Command?.Item ||
+    CommandDefault.Item) as typeof CommandDefault.Item,
+  List: (overrides.Command?.List ||
+    CommandDefault.List) as typeof CommandDefault.List,
+  Loading: (overrides.Command?.Loading ||
+    CommandDefault.Loading) as typeof CommandDefault.Loading,
+  Heading: (overrides.Command?.Heading ||
+    CommandDefault.Heading) as typeof CommandDefault.Heading,
 };
 
 const Tabs = {
@@ -165,4 +189,5 @@ export {
   PageWrapper,
   Components,
   components,
+  Command,
 };

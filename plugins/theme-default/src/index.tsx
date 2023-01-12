@@ -54,14 +54,17 @@ const sizes = {
   "7xl": "80rem",
 };
 
-export const light: Theme = {
+type Gray = `gray${0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11}`
+type Primary = `primary${0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11}`
+
+export const light = {
   colors: {
     ...(Object.fromEntries(
       Object.values(mauve).map((color, index) => [`gray${index}`, color])
-    ) as Record<string, string>),
+    ) as Record<Gray, string>),
     ...(Object.fromEntries(
       Object.values(pink).map((color, index) => [`primary${index}`, color])
-    ) as Record<string, string>),
+    ) as Record<Primary, string>),
   },
   space: space,
   sizes: { ...space, ...sizes },
@@ -75,15 +78,15 @@ export const light: Theme = {
   borderStyles: {
     solid: "solid",
   },
-};
+} satisfies Theme;
 
-export const dark: Theme = {
+export const dark = {
   colors: {
-    ...(Object.fromEntries(
+    ...Object.fromEntries(
       Object.values(mauveDark).map((color, index) => [`gray${index}`, color])
-    ) as Record<string, string>),
-    ...(Object.fromEntries(
+    ),
+    ...Object.fromEntries(
       Object.values(pinkDark).map((color, index) => [`primary${index}`, color])
-    ) as Record<string, string>),
+    ),
   },
-};
+} satisfies Theme;

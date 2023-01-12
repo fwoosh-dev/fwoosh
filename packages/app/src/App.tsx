@@ -25,6 +25,7 @@ import { getFirstStory, useStoryTree } from "@fwoosh/hooks";
 import { StoryWithTools } from "./components/StoryWithTools";
 import { convertMetaTitleToUrlParam } from "@fwoosh/utils";
 import { Head } from "./components/Head";
+import { CommandPallette } from "./components/CommandPallette";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -68,6 +69,7 @@ const router = createBrowserRouter([
             <Head />
             <Outlet />
             <ScrollRestoration />
+            <CommandPallette />
           </AppWrapper>
         </ErrorBoundary>
       </HelmetProvider>
