@@ -1,3 +1,20 @@
+# v0.0.78 (Fri Jan 13 2023)
+
+#### ⚠️ Pushed to `main`
+
+- `@fwoosh/app`, `@fwoosh/link`, `@fwoosh/panel-source`
+  - fix more deps ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/panel-source`
+  - add missing deps ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/react`
+  - fix types export ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.77 (Fri Jan 13 2023)
 
 #### ⚠️ Pushed to `main`
