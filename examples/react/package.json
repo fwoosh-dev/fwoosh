@@ -1,7 +1,6 @@
 {
   "name": "@fwoosh/react-example",
   "private": true,
-  "type": "module",
   "scripts": {
     "fwoosh": "../../packages/cli/bin/fwoosh.js",
     "start": "yarn fwoosh dev",
@@ -12,5 +11,8 @@
     "@fwoosh/react": "link:../../plugins/react",
     "fwoosh": "link:../../packages/cli"
   },
-  "version": "0.0.80"
+  "version": "0.0.79",
+  "dependencies": {
+    "react": "^17"
+  }
 }

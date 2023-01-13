@@ -3,9 +3,9 @@ import { ObjectInspector } from "@devtools-ds/object-inspector";
 import { firefox } from "@devtools-ds/themes";
 import { useId } from "@radix-ui/react-id";
 import { ColorModeContext, styled } from "@fwoosh/styling";
-import { useParams } from "react-router-dom";
 
 import { setAddAction } from ".";
+import { useStoryId } from "@fwoosh/hooks";
 
 type Action = [string, number, any[]];
 
@@ -30,7 +30,7 @@ const createShareState = () => {
 
   return () => {
     const [currentActions, currentActionsSet] = React.useState(actions);
-    const params = useParams<{ storyId: string }>();
+    const storyId = useStoryId();
     const id = useId();
 
     React.useEffect(() => {
@@ -41,14 +41,14 @@ const createShareState = () => {
     }, [id]);
 
     React.useEffect(() => {
-      if (params.storyId !== slug) {
+      if (storyId !== slug) {
         clearActions();
       }
 
-      if (params.storyId) {
-        slug = params.storyId;
+      if (storyId) {
+        slug = storyId;
       }
-    }, [params.storyId]);
+    }, [storyId]);
 
     return currentActions;
   };

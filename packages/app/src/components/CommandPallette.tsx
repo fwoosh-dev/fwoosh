@@ -157,7 +157,7 @@ function StoryCommandTree({
 
 export function CommandPallette() {
   const tree = useStoryTree();
-  const [open, openSet] = React.useState(true);
+  const [open, openSet] = React.useState(false);
   const [value, valueSet] = React.useState("");
   const navigate = useNavigate();
   const location = useLocation();

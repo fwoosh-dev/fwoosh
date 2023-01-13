@@ -6,7 +6,12 @@ import { createServer, InlineConfig } from "vite";
 import express from "express";
 import expressWs from "express-ws";
 import { createRequire } from "module";
-import { AsyncSeriesBailHook, SyncBailHook, SyncWaterfallHook } from "tapable";
+import {
+  AsyncSeriesBailHook,
+  AsyncSeriesWaterfallHook,
+  SyncBailHook,
+  SyncWaterfallHook,
+} from "tapable";
 import mdx from "@mdx-js/rollup";
 import { log, sortTree } from "@fwoosh/utils";
 import bodyParser from "body-parser";
@@ -96,6 +101,7 @@ export class Fwoosh implements FwooshClass {
       registerToolbarControl: new SyncWaterfallHook(["toolbarControls"]),
       renderStory: new AsyncSeriesBailHook(),
       generateDocs: new SyncBailHook(["pathToFile"]),
+      modifyViteConfig: new AsyncSeriesWaterfallHook(["config"]),
     };
 
     this.hooks.registerPanel.intercept({
@@ -256,25 +262,7 @@ export class Fwoosh implements FwooshClass {
         componentOverridePlugin(this.options),
       ],
       optimizeDeps: {
-        include: [
-          "react",
-          "react-dom",
-          "prop-types",
-          "@devtools-ds/themes",
-          "@devtools-ds/tree",
-          "@devtools-ds/object-inspector",
-          "escape-html",
-          "react-router",
-          "react-router-dom",
-          "debounce",
-          "react/jsx-runtime",
-          "hoist-non-react-statics",
-          "fast-deep-equal",
-          "fast-deep-equal/react",
-          "use-sync-external-store/shim",
-          "consola",
-          "lodash.chunk",
-        ],
+        entries: [require.resolve("@fwoosh/app/index.html")],
       },
       server: {
         port,
@@ -292,10 +280,11 @@ export class Fwoosh implements FwooshClass {
       },
     };
 
+    const viteConfig = await this.hooks.modifyViteConfig.promise(baseConfig);
     const vite = await createServer({
       mode: "development",
       root: path.dirname(path.dirname(require.resolve("@fwoosh/app"))),
-      ...(await this.options.modifyViteConfig(baseConfig)),
+      ...(await this.options.modifyViteConfig(viteConfig)),
     });
 
     log.trace("Loaded vite with config:", vite.config);

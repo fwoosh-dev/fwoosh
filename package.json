@@ -22,7 +22,7 @@
     "auto": "^10.37.6",
     "command-line-application": "^0.10.1",
     "copy-template-dir": "^1.4.0",
-    "lerna": "^6.1.0",
+    "lerna": "^6.4.1",
     "patch-package": "^6.4.7",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Command } from "cmdk";
+import { Command } from "@alisowski/cmdk";
 import { styled } from "@fwoosh/styling";
 import { ChevronRightIcon } from ".";
 
