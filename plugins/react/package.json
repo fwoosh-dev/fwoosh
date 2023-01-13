@@ -9,6 +9,7 @@
   "license": "MIT",
   "dependencies": {
     "@fwoosh/virtual-file": "link:../../packages/virtual-file",
+    "@vitejs/plugin-react": "^3.0.1",
     "fwoosh": "link:../../packages/cli",
     "react-docgen-typescript": "^2.2.2"
   },

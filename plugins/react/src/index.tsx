@@ -3,6 +3,7 @@ import * as docgen from "react-docgen-typescript";
 import ts from "typescript";
 import { loadVirtualFile } from "@fwoosh/virtual-file";
 import { createRequire } from "module";
+import react from "@vitejs/plugin-react";
 
 const require = createRequire(import.meta.url);
 
@@ -74,6 +75,11 @@ export default class ReactPlugin implements Plugin {
 
     fwoosh.hooks.renderStory.tap(this.name, () => {
       return loadVirtualFile(require.resolve("./renderStory"));
+    });
+
+    fwoosh.hooks.modifyViteConfig.tap(this.name, (config) => {
+      config.plugins?.push(react());
+      return config;
     });
   }
 }
