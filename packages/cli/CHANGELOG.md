@@ -1,3 +1,15 @@
+# v0.0.80 (Fri Jan 13 2023)
+
+#### ⚠️ Pushed to `main`
+
+- add chokidar ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.77 (Fri Jan 13 2023)
 
 #### ⚠️ Pushed to `main`
