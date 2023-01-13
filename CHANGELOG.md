@@ -1,3 +1,31 @@
+# v0.0.77 (Fri Jan 13 2023)
+
+#### ⚠️ Pushed to `main`
+
+- remove canary script ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- change action name ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add canary script ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `fwoosh`
+  - add perf import ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`
+  - add ts-node ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - dynamic title for each page ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/components`
+  - implement story comment search ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add story comment search ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/components`, `@fwoosh/hooks`, `@fwoosh/styling`, `@fwoosh/theme-default`
+  - add command palette and story switching ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/components`, `@fwoosh/hooks`, `@fwoosh/types`
+  - switch to rehype toc so that we also parse markdown headings ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `fwoosh`, `@fwoosh/components`, `@fwoosh/hooks`
+  - fix errors ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.76 (Tue Jan 10 2023)
 
 #### ⚠️ Pushed to `main`

@@ -1,3 +1,17 @@
+# v0.0.77 (Fri Jan 13 2023)
+
+#### ⚠️ Pushed to `main`
+
+- add command palette and story switching ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- switch to rehype toc so that we also parse markdown headings ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix errors ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.76 (Tue Jan 10 2023)
 
 #### ⚠️ Pushed to `main`

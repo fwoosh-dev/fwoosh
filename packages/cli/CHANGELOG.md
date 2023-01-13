@@ -1,3 +1,19 @@
+# v0.0.77 (Fri Jan 13 2023)
+
+#### ⚠️ Pushed to `main`
+
+- add perf import ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add ts-node ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- dynamic title for each page ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- switch to rehype toc so that we also parse markdown headings ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix errors ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.76 (Tue Jan 10 2023)
 
 #### ⚠️ Pushed to `main`
