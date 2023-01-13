@@ -9,11 +9,8 @@
   },
 
   "references": [
-    {
-      "path": "../../packages/cli"
-    },
-    {
-      "path": "../../packages/components"
-    }
+    { "path": "../../packages/cli" },
+    { "path": "../../packages/hooks" },
+    { "path": "../../packages/components" }
   ]
 }

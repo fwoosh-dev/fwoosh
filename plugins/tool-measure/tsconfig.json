@@ -9,8 +9,7 @@
   },
 
   "references": [
-    {
-      "path": "../../packages/cli"
-    }
+    { "path": "../../packages/cli" },
+    { "path": "../../packages/hooks" }
   ]
 }

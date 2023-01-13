@@ -1,5 +1,4 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 import { useId } from "@radix-ui/react-id";
 
 import { styled } from "@fwoosh/styling";
@@ -7,6 +6,7 @@ import { ErrorBoundary } from "@fwoosh/components";
 import { useRender } from "../hooks/useRender";
 import { stories } from "@fwoosh/app/stories";
 import { Helmet } from "react-helmet-async";
+import { useStoryId } from "@fwoosh/hooks";
 
 export const StoryIdContext = React.createContext<string | undefined>(
   undefined
@@ -38,14 +38,14 @@ const StoryDiv = React.memo(({ slug, id }: { slug: string; id: string }) => {
 });
 
 export const Story = () => {
-  const params = useParams<{ storyId: string }>();
+  const storyId = useStoryId();
   const contextId = React.useContext(StoryIdContext);
   const id = useId();
 
   return (
-    <ErrorBoundary key={params.storyId}>
-      {params.storyId ? (
-        <StoryDiv slug={params.storyId} id={contextId || id} />
+    <ErrorBoundary key={storyId}>
+      {storyId ? (
+        <StoryDiv slug={storyId} id={contextId || id} />
       ) : (
         <div>Story not found</div>
       )}

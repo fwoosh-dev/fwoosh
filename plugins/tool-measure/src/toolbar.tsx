@@ -1,7 +1,7 @@
 import React from "react";
-import { IconButton, Toolbar } from "@fwoosh/components";
+import { IconButton } from "@fwoosh/components";
+import { useStoryId } from "@fwoosh/hooks";
 import { DivideSquare, XSquare } from "react-feather";
-import { useParams } from "react-router-dom";
 
 import { findAndDrawElement } from "./box-model/visualizer";
 import { destroy, init, rescale, clear } from "./box-model/canvas";
@@ -12,14 +12,14 @@ export default function MeasureControl({
   storyPreviewId: string;
 }) {
   const [on, onSet] = React.useState(false);
-  const params = useParams<{ storyId: string }>();
+  const storyId = useStoryId();
   const label = on ? "Turn off measure" : "Turn on measure";
 
   const onToggle = React.useCallback(() => {
     onSet((o) => !o);
   }, []);
 
-  React.useEffect(clear, [params.storyId]);
+  React.useEffect(clear, [storyId]);
 
   React.useEffect(() => {
     const onMouseOver = (event: MouseEvent) => {

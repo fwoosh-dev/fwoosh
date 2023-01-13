@@ -12,12 +12,13 @@ import {
 import { styled } from "@fwoosh/styling";
 import { config } from "@fwoosh/app/config";
 import React from "react";
-import { Outlet, Link, useParams } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import { StoryTree } from "@fwoosh/types";
 import { CONTENT_ID } from "@fwoosh/utils";
 
 import { DocsSidebarTree } from "./sidebar/DocsSidebarTree";
 import { ThemeToggle } from "./ThemeToggle";
+import { useDocsPath } from "@fwoosh/hooks";
 
 interface TreeItemProps {
   tree: StoryTree;
@@ -29,7 +30,7 @@ const Split = styled("div", {
 });
 
 const TreeItem = ({ tree, path = [] }: TreeItemProps) => {
-  const params = useParams<{ docsPath: string }>();
+  const docsPath = useDocsPath();
 
   return (
     <>
@@ -41,7 +42,7 @@ const TreeItem = ({ tree, path = [] }: TreeItemProps) => {
           <React.Fragment key={`group-${pathString}`}>
             {Array.isArray(items) ? (
               <Link key={pathString} to={pathString}>
-                <SidebarItem aria-selected={pathString === params.docsPath}>
+                <SidebarItem aria-selected={pathString === docsPath}>
                   {title}
                 </SidebarItem>
               </Link>

@@ -1,8 +1,8 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 import { stories } from "@fwoosh/app/stories";
 import { StyledMarkdown, components } from "@fwoosh/components";
 import { styled } from "@fwoosh/styling";
+import { useStoryId } from "@fwoosh/hooks";
 
 const Panel = styled("div", {
   height: "100%",
@@ -15,8 +15,8 @@ const NoDescriptionMessage = styled(components.p, {
 });
 
 export default function DescriptionPanel() {
-  const params = useParams<{ storyId: string }>();
-  const story = Object.values(stories).find((s) => s.slug === params.storyId);
+  const storyId = useStoryId();
+  const story = Object.values(stories).find((s) => s.slug === storyId);
 
   if (!story || !("comment" in story) || !story.comment) {
     return (

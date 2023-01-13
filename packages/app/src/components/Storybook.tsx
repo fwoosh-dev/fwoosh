@@ -11,7 +11,7 @@ import {
 } from "@fwoosh/components";
 import { styled } from "@fwoosh/styling";
 import { toolbarControls } from "@fwoosh/app/ui";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useId } from "@radix-ui/react-id";
 
 import { StoryIdContext } from "./Story";
@@ -19,6 +19,7 @@ import { StorybookSidebarTree } from "./sidebar/StorybookSidebarTree";
 import { ThemeToggle } from "./ThemeToggle";
 import { config } from "@fwoosh/app/config";
 import { CONTENT_ID } from "@fwoosh/utils";
+import { useStoryId } from "@fwoosh/hooks";
 
 const StoryToolbar = styled(Toolbar.Root, {
   display: "flex",
@@ -42,14 +43,14 @@ const Split = styled("div", {
 });
 
 export const Storybook = () => {
-  const params = useParams<{ storyId: string }>();
+  const storyId = useStoryId();
   const id = useId();
 
   return (
     <StoryIdContext.Provider value={id}>
       <HeaderBar>
         <HeaderTitle>{config.title}</HeaderTitle>
-        {toolbarControls.length > 0 && params.storyId ? (
+        {toolbarControls.length > 0 && storyId ? (
           <StoryToolbar>
             <Suspense fallback={<Spinner size={5} />}>
               {toolbarControls.map((Control) => (

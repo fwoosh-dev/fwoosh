@@ -1,10 +1,10 @@
 import React, { Suspense, useContext } from "react";
-import { useParams } from "react-router-dom";
 import { styled } from "@fwoosh/styling";
 import { Spinner, Tabs, ErrorBoundary } from "@fwoosh/components";
 import { panels } from "@fwoosh/app/ui";
 
 import { StoryIdContext } from "./Story";
+import { useStoryId } from "@fwoosh/hooks";
 
 const TabsList = styled(Tabs.List, {
   height: "$12",
@@ -17,7 +17,7 @@ const TabContent = styled(Tabs.Content, {
 
 export const ToolPanels = () => {
   const id = useContext(StoryIdContext);
-  const params = useParams<{ storyId: string }>();
+  const storyId = useStoryId();
 
   return (
     <Tabs.Root defaultValue={panels[0]?.componentName}>
@@ -38,7 +38,7 @@ export const ToolPanels = () => {
 
       {panels.map((Panel) => (
         <TabContent
-          key={`content-${Panel.componentName}-${params.storyId}`}
+          key={`content-${Panel.componentName}-${storyId}`}
           value={Panel.componentName}
         >
           <ErrorBoundary>

@@ -1,9 +1,9 @@
 import * as React from "react";
-import { useParams } from "react-router-dom";
 import { useDocs } from "@fwoosh/app/docs";
 import { stories } from "@fwoosh/app/stories";
 import { PropsTable, components, DelayedRender } from "@fwoosh/components";
 import { styled, keyframes } from "@fwoosh/styling";
+import { useStoryId } from "@fwoosh/hooks";
 
 const Wrapper = styled("div", {
   px: 4,
@@ -11,9 +11,9 @@ const Wrapper = styled("div", {
 });
 
 function PropsPanelContent() {
-  const params = useParams<{ storyId: string }>();
+  const storyId = useStoryId();
   const [, story] =
-    Object.entries(stories).find(([slug]) => slug === params.storyId) || [];
+    Object.entries(stories).find(([slug]) => slug === storyId) || [];
   const key = story?.slug || "none";
   const docs = useDocs(key, (story?.component as any)._result || story?.meta);
 

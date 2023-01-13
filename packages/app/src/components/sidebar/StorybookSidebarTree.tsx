@@ -7,9 +7,14 @@ import {
   SidebarSectionTitle,
   SIDEBAR_ITEM_INDENT,
 } from "@fwoosh/components";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { StoryTreeItem } from "@fwoosh/types";
-import { useStoryTree, hasActiveChild } from "@fwoosh/hooks";
+import {
+  useStoryTree,
+  hasActiveChild,
+  useStoryId,
+  useDocsPath,
+} from "@fwoosh/hooks";
 import { titleCase } from "title-case";
 
 import { SidebarTree } from "./SidebarTree";
@@ -17,11 +22,12 @@ import { resetContentScrollPosition } from "@fwoosh/utils";
 import { getFirstRenderableChild } from "../../hooks/getFirstRenderableChild";
 
 export const StorybookSidebarTree = () => {
-  const params = useParams<{ storyId: string; docsPath: string }>();
+  const storyId = useStoryId();
+  const docsPath = useDocsPath();
   const tree = useStoryTree();
 
   return (
-    <SidebarTree data={tree} activeId={params.storyId || params.docsPath}>
+    <SidebarTree data={tree} activeId={storyId || docsPath}>
       {({ node, style }) => {
         const finalStyle = {
           ...style,

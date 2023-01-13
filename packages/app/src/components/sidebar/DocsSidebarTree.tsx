@@ -7,7 +7,7 @@ import {
   SidebarSectionTitle,
   SIDEBAR_ITEM_INDENT,
 } from "@fwoosh/components";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { stories } from "@fwoosh/app/stories";
 import { StorySidebarChildItem } from "@fwoosh/types";
 import { SidebarFolderOpenIndicatorWrapper } from "@fwoosh/components";
@@ -15,7 +15,7 @@ import {
   resetContentScrollPosition,
   convertMetaTitleToUrlParam,
 } from "@fwoosh/utils";
-import { useStoryTree } from "@fwoosh/hooks";
+import { useDocsPath, useStoryTree } from "@fwoosh/hooks";
 import { titleCase } from "title-case";
 
 import { SidebarTree } from "./SidebarTree";
@@ -125,11 +125,11 @@ function filterOutStories(tree: StorySidebarChildItem[]) {
 }
 
 export const DocsSidebarTree = () => {
-  const params = useParams<{ docsPath: string }>();
+  const docsPath = useDocsPath();
   const tree = useStoryTree();
 
   return (
-    <SidebarTree data={filterOutStories(tree)} activeId={params.docsPath}>
+    <SidebarTree data={filterOutStories(tree)} activeId={docsPath}>
       {Node}
     </SidebarTree>
   );

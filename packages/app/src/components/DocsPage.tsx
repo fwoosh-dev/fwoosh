@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useId } from "@radix-ui/react-id";
 import { BasicStoryData, StoryMeta } from "@fwoosh/types";
 import { useDocs } from "@fwoosh/app/docs";
@@ -18,7 +18,12 @@ import * as Collapsible from "@radix-ui/react-collapsible";
 import { paramCase } from "change-case";
 import { titleCase } from "title-case";
 import { StorySidebarChildItem, StoryTreeItem } from "@fwoosh/types";
-import { getStoryGroup, useStoryTree, useHighlightedCode } from "@fwoosh/hooks";
+import {
+  getStoryGroup,
+  useStoryTree,
+  useHighlightedCode,
+  useDocsPath,
+} from "@fwoosh/hooks";
 
 import * as styles from "./DocsPage.module.css";
 import { useRender } from "../hooks/useRender";
@@ -135,8 +140,8 @@ const StoryDocsPage = ({
 }: {
   stories: [StoryTreeItem, ...StorySidebarChildItem[]];
 }) => {
-  const params = useParams<{ docsPath: string }>();
-  const nameParts = params.docsPath?.split("-") || [];
+  const docsPath = useDocsPath();
+  const nameParts = docsPath?.split("-") || [];
   const name = nameParts[nameParts.length - 1];
   const quickNavRef = React.useRef<HTMLDivElement>(null);
 
@@ -252,21 +257,21 @@ const StoryDocsPage = ({
 
 const DocsContent = React.memo(() => {
   const tree = useStoryTree();
-  const params = useParams<{ docsPath: string }>();
+  const docsPath = useDocsPath();
   const [firstStory, ...restStories] = React.useMemo(() => {
-    if (!params.docsPath) {
+    if (!docsPath) {
       return [];
     }
 
-    const path = params.docsPath.split("-");
+    const path = docsPath.split("-");
     const story = getStoryGroup(tree, path);
 
     if (!story) {
-      throw new Error(`Could not find documentation page: ${params.docsPath}`);
+      throw new Error(`Could not find documentation page: ${docsPath}`);
     }
 
     return story;
-  }, [params.docsPath]);
+  }, [docsPath]);
 
   if (!firstStory) {
     return null;

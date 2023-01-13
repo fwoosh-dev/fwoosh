@@ -10,6 +10,7 @@
   "dependencies": {
     "@devtools-ds/object-inspector": "^1.2.1",
     "@fwoosh/components": "link:../../packages/components",
+    "@fwoosh/hooks": "link:../../packages/hooks",
     "fwoosh": "link:../../packages/cli"
   },
   "devDependencies": {
