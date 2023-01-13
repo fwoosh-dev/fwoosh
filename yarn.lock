@@ -730,6 +730,7 @@ __metadata:
   dependencies:
     "@types/node": ^14.14.31
     fwoosh: "link:../../packages/cli"
+    react-feather: ^2.0.10
   peerDependencies:
     fwoosh: ">= 0.x"
   languageName: unknown
@@ -741,6 +742,7 @@ __metadata:
   dependencies:
     "@fwoosh/components": "link:../../packages/components"
     "@types/node": ^14.14.31
+    react-feather: ^2.0.10
   peerDependencies:
     fwoosh: ">= 0.x"
   languageName: unknown
