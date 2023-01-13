@@ -1,3 +1,4 @@
+import { performance } from "perf_hooks";
 import { app, MultiCommand, Option } from "command-line-application";
 import ms from "pretty-ms";
 import ora from "ora";
