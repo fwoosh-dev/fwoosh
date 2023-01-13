@@ -225,10 +225,12 @@ export class Fwoosh implements FwooshClass {
               {
                 behavior: "before",
                 test: includedHeadings,
-                group() {
+                group(el: any) {
                   return h("div", {
                     "data-link-group": true,
                     style: { position: "relative" },
+                    "data-level": parseInt(el.tagName.replace("h", "")),
+                    "data-level-id": el.properties.id,
                   });
                 },
                 properties: {

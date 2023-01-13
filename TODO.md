@@ -7,6 +7,7 @@
 - [ ] build command
   - [ ] error out build when links are broken
   - [ ] resolve all suspenseful data
+- [ ] Figure out how to get react plugin renderer to use different react than app
 - [ ] add icon + open external links in new tab https://github.com/rehypejs/rehype-external-links
 - [ ] hooks for completely custom routes/layouts
 - [ ] figure way to use iframe to make media queries and vh working
