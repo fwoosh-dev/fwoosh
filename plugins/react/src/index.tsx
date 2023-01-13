@@ -78,4 +78,4 @@ export default class ReactPlugin implements Plugin {
   }
 }
 
-export * from "./types";
+export * from "./types.js";
