@@ -59,7 +59,7 @@
     "title-case": "^3.0.3",
     "ts-node": "^10",
     "unified": "^10.1.2",
-    "vite": "^4.0.3"
+    "vite": "^4.0.4"
   },
   "publishConfig": {
     "access": "public"
