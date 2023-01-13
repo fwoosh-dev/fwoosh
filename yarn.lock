@@ -608,6 +608,7 @@ __metadata:
     "@devtools-ds/object-inspector": ^1.2.1
     "@fwoosh/components": "link:../../packages/components"
     "@fwoosh/hooks": "link:../../packages/hooks"
+    "@radix-ui/react-id": ^1.0.0
     "@types/node": ^14.14.31
     fwoosh: "link:../../packages/cli"
   peerDependencies:
