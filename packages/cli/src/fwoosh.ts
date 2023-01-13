@@ -133,7 +133,7 @@ export class Fwoosh implements FwooshClass {
     });
   }
 
-  loadPlugins = async () => {
+  async loadPlugins() {
     const plugins: Plugin[] = [];
 
     await Promise.all(
@@ -177,28 +177,13 @@ export class Fwoosh implements FwooshClass {
     plugins.forEach((plugin) => {
       plugin.apply(this);
     });
-  };
-
-  /** Clean up all the output files */
-  async clean() {
-    await Promise.all([
-      fs.rm(this.options.outDir, { recursive: true, force: true }),
-    ]);
   }
 
-  /** Do a production build of the website */
-  async build() {
-    console.log("TODO");
-  }
-
-  /** Start the development server */
-  async dev({ port }: WatchPagesOptions = { port: 3000 }) {
-    const app = express();
-    const ws = expressWs(app);
-
+  async getViteConfig({ port }: WatchPagesOptions = { port: 3000 }) {
     const toolbarControls = this.hooks.registerToolbarControl.call([]);
     const panels = this.hooks.registerPanel.call([]);
     const includedHeadings = ["h2", "h3", "h4", "h5", "h6"];
+
     const baseConfig: InlineConfig = {
       plugins: [
         mdx({
@@ -282,11 +267,34 @@ export class Fwoosh implements FwooshClass {
       },
     };
 
-    const viteConfig = await this.hooks.modifyViteConfig.promise(baseConfig);
+    const configWithPluginModifications = await this.hooks.modifyViteConfig.promise(
+      baseConfig
+    );
+
+    return this.options.modifyViteConfig(configWithPluginModifications);
+  }
+
+  /** Clean up all the output files */
+  async clean() {
+    await Promise.all([
+      fs.rm(this.options.outDir, { recursive: true, force: true }),
+    ]);
+  }
+
+  /** Do a production build of the website */
+  async build() {
+    console.log("TODO");
+  }
+
+  /** Start the development server */
+  async dev({ port }: WatchPagesOptions = { port: 3000 }) {
+    const app = express();
+    const ws = expressWs(app);
+    const viteConfig = await this.getViteConfig({ port });
     const vite = await createServer({
       mode: "development",
       root: path.dirname(path.dirname(require.resolve("@fwoosh/app"))),
-      ...(await this.options.modifyViteConfig(viteConfig)),
+      ...viteConfig,
     });
 
     log.trace("Loaded vite with config:", vite.config);
