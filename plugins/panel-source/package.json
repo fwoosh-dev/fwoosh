@@ -8,6 +8,7 @@
   "repository": "hipstersmoothie/fwoosh",
   "license": "MIT",
   "dependencies": {
+    "@fwoosh/hooks": "link:./hooks",
     "fwoosh": "link:../../packages/cli"
   },
   "devDependencies": {
