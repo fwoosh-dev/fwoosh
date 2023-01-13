@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "@fwoosh/components": "link:../../packages/components",
+    "@fwoosh/panel-actions": "link:../../plugins/panel-actions",
     "@fwoosh/react": "link:../../plugins/react",
     "fwoosh": "link:../../packages/cli"
   },
