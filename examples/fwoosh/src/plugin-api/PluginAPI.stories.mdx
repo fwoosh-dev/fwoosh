@@ -181,3 +181,23 @@ export default function DescriptionPanel() {
   );
 }
 ```
+
+### `modifyViteConfig`
+
+Modify the Vite configuration used to load your fwoosh instance.
+
+```tsx
+import { Plugin, Fwoosh } from "fwoosh";
+import { createRequire } from "module";
+
+export default class DescriptionPanelPlugin implements Plugin {
+  name = "description-panel";
+
+  apply(fwoosh: Fwoosh) {
+    fwoosh.hooks.modifyViteConfig.tap(this.name, (config) => {
+      config.plugins.push({});
+      return config;
+    });
+  }
+}
+```

@@ -1,5 +1,10 @@
 import { InlineConfig } from "vite";
-import { AsyncSeriesBailHook, SyncBailHook, SyncWaterfallHook } from "tapable";
+import {
+  AsyncSeriesBailHook,
+  AsyncSeriesWaterfallHook,
+  SyncBailHook,
+  SyncWaterfallHook,
+} from "tapable";
 import type { ComponentDoc } from "react-docgen-typescript";
 import { CreateStitches } from "@stitches/react";
 
@@ -127,6 +132,10 @@ export interface FwooshHooks {
    * for the text of the Tab trigger.
    */
   registerPanel: SyncWaterfallHook<[{ name: string; filepath: string }[]]>;
+  /**
+   * Modify the Vite configuration used to load your fwoosh instance.
+   */
+  modifyViteConfig: AsyncSeriesWaterfallHook<[ViteConfig]>;
 }
 
 export type Theme = NonNullable<
