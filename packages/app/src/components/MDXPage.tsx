@@ -10,8 +10,9 @@ import { MDXStoryData, MDXPageTreeItem, TocEntry } from "@fwoosh/types";
 import { MDXProvider } from "@mdx-js/react";
 import { useQuery } from "react-query";
 import { PageSwitchButton } from "./PageSwitchButtons";
-import { useActiveHeader } from "../hooks/useActiveHeader";
+import { useActiveHeader, HEADING_SELECTOR } from "../hooks/useActiveHeader";
 import { useLocation } from "react-router-dom";
+import { CONTENT_ID } from "@fwoosh/utils";
 
 function TableOfContentsGroup({ entry }: { entry: TocEntry }) {
   return (
@@ -118,15 +119,142 @@ function TableOfContents() {
   );
 }
 
+function getHeadingLevel(node: Element) {
+  let lvl: string;
+
+  if (node.nodeName.match(/^H\d$/)) {
+    lvl = node.nodeName.replace("H", "");
+  } else {
+    lvl = node.getAttribute("data-level") || "";
+  }
+
+  if (!lvl) {
+    return;
+  }
+
+  return parseInt(lvl);
+}
+
+const getHeadingsBeforeNextHeading = (node: Element, lvl: number) => {
+  const titles: any[] = [];
+
+  while (node.nextElementSibling) {
+    node = node.nextElementSibling;
+
+    const headingLevel = getHeadingLevel(node);
+
+    if (headingLevel === lvl) {
+      break;
+    }
+
+    if (headingLevel === lvl + 1) {
+      titles.push(node);
+    }
+  }
+
+  return titles;
+};
+
+const getContentBeforeNextHeading = (node: Element) => {
+  let content = "";
+
+  while (node.nextElementSibling) {
+    node = node.nextElementSibling;
+    const headingLevel = getHeadingLevel(node);
+
+    if (typeof headingLevel !== "undefined") {
+      break;
+    }
+
+    if (node.nodeName === "PRE" || node.nodeName === "SCRIPT") {
+      continue;
+    }
+
+    content += `\n${node.textContent}`;
+  }
+
+  return content.trim();
+};
+
+export interface SearchData {
+  path: string[];
+  url: string;
+  content: string;
+}
+
+const buildSearchIndex = (
+  parents: string[],
+  node: HTMLHeadingElement
+): SearchData[] => {
+  const lvl = getHeadingLevel(node);
+  const nextHeadings = lvl ? getHeadingsBeforeNextHeading(node, lvl) : [];
+  const path = [
+    ...parents,
+    node.querySelector(HEADING_SELECTOR)?.textContent || node.textContent || "",
+  ];
+  const id = node.getAttribute("data-level-id");
+  const currentNode = {
+    path,
+    url: `${location.pathname}${id ? `#${id}` : ""}`,
+    content: getContentBeforeNextHeading(node),
+  };
+
+  return [
+    currentNode,
+    ...nextHeadings.reduce(
+      (acc, heading) => [...acc, ...buildSearchIndex(path, heading)],
+      []
+    ),
+  ];
+};
+
 type MDXComponents = React.ComponentProps<typeof MDXProvider>["components"];
 
+declare global {
+  interface Window {
+    FWOOSH_SEARCH_INDEX: Record<string, SearchData[]>;
+  }
+}
+
 export const MDXPage = ({ page }: { page: MDXPageTreeItem }) => {
-  const { component: MDXPage, meta } = stories[page.id] as MDXStoryData;
+  const { component: MDXPage, meta, slug } = stories[page.id] as MDXStoryData;
+  // TODO
   const { data } = useQuery(`toc-${page.id}`, () => []);
+
+  React.useEffect(() => {
+    const [lvl0, ...rest] = meta.title.split("/");
+    // The leaf story name we don't care about. Instead we'll use
+    // the H1 from the MDX page.
+    rest.pop();
+    let lvl1 = rest.join(" / ");
+
+    const headingNodes = document
+      ?.getElementById(CONTENT_ID)
+      ?.querySelectorAll<HTMLHeadingElement>(HEADING_SELECTOR);
+
+    if (!headingNodes) {
+      return;
+    }
+
+    const headings = Array.from(headingNodes);
+    const levels = [lvl0];
+
+    if (lvl1) {
+      levels.push(lvl1);
+    }
+
+    if (!window.FWOOSH_SEARCH_INDEX) {
+      window.FWOOSH_SEARCH_INDEX = {};
+    }
+
+    window.FWOOSH_SEARCH_INDEX[slug] = buildSearchIndex(levels, headings[0]);
+  }, [meta, slug]);
 
   let content = (
     <PageWrapper>
-      <MDXPage />
+      <div>
+        <MDXPage />
+      </div>
       <PageSwitchButton current={page.id} />
     </PageWrapper>
   );

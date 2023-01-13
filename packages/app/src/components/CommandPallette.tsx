@@ -13,12 +13,72 @@ import {
 } from "@fwoosh/types";
 import useMousetrap from "react-hook-mousetrap";
 import { Bookmark, Code } from "react-feather";
+import { SearchData } from "./MDXPage";
 
 const CommandPalletteContext = React.createContext<{
   search: string;
 }>({
   search: "",
 });
+
+function highlightSearchResult(text: string, search: string) {
+  console.log("highlightSearchResult");
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(text, "text/html");
+  const matches = doc.evaluate(
+    // TODO get the actual text element
+    `//p[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '${search.toLowerCase()}')]`,
+    doc,
+    null,
+    XPathResult.ORDERED_NODE_ITERATOR_TYPE,
+    null
+  );
+
+  let match = matches.iterateNext();
+
+  let textNodeIndex = Array.from(match?.childNodes || []).findIndex((n) =>
+    n.textContent?.toLowerCase()?.includes(search?.toLowerCase())
+  );
+
+  while (match && match.childNodes[textNodeIndex]) {
+    const searchIndex = match.childNodes[textNodeIndex].textContent
+      ?.toLowerCase()
+      ?.indexOf(search?.toLowerCase());
+
+    if (searchIndex === -1 || typeof searchIndex === "undefined") {
+      break;
+    }
+
+    const before = match.childNodes[textNodeIndex].textContent!.slice(
+      0,
+      searchIndex
+    );
+    const after = match.childNodes[textNodeIndex].textContent!.slice(
+      searchIndex + search.length
+    );
+
+    const beforeNode = document.createTextNode(before);
+    const afterNode = document.createTextNode(after);
+    const highlightNode = document.createElement("mark");
+    highlightNode.textContent = match.childNodes[
+      textNodeIndex
+    ].textContent!.slice(searchIndex, searchIndex + search.length);
+
+    match.replaceChild(afterNode, match.childNodes[textNodeIndex]);
+    match.insertBefore(highlightNode, afterNode);
+    match.insertBefore(beforeNode, highlightNode);
+
+    textNodeIndex = Array.from(match.childNodes).findIndex(
+      (n) =>
+        n === afterNode &&
+        n.textContent?.toLowerCase()?.includes(search?.toLowerCase())
+    );
+  }
+
+  if (match) {
+    return (match as HTMLElement).innerHTML;
+  }
+}
 
 function StoryCommandTreeChild({
   groupName,
@@ -36,38 +96,7 @@ function StoryCommandTreeChild({
       return;
     }
 
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(item.story.comment, "text/html");
-    const matches = doc.evaluate(
-      // TODO get the actual text element
-      `//p[contains(., '${search}')]`,
-      doc,
-      null,
-      XPathResult.ORDERED_NODE_ITERATOR_TYPE,
-      null
-    );
-
-    let match = matches.iterateNext();
-
-    const textNodeIndex = Array.from(match?.childNodes || []).findIndex((n) =>
-      n.textContent?.includes(search)
-    );
-
-    if (match && textNodeIndex !== -1) {
-      const [before, after] =
-        match.childNodes[textNodeIndex].textContent?.split(search) || [];
-
-      const beforeNode = document.createTextNode(before);
-      const afterNode = document.createTextNode(after);
-      const highlightNode = document.createElement("mark");
-      highlightNode.textContent = search;
-
-      match.replaceChild(afterNode, match.childNodes[textNodeIndex]);
-      match.insertBefore(highlightNode, afterNode);
-      match.insertBefore(beforeNode, highlightNode);
-
-      return (match as HTMLElement).innerHTML;
-    }
+    return highlightSearchResult(item.story.comment, search);
   }, [search, item]);
 
   if (item.type === "mdx") {
@@ -80,7 +109,7 @@ function StoryCommandTreeChild({
     return (
       <Command.Item
         key={item.story.slug}
-        value={item.story.title}
+        value={item.story.title.toLowerCase()}
         grouping={newGrouping}
         title={pageName}
         onSelect={() => onNavigate(item.story)}
@@ -98,7 +127,9 @@ function StoryCommandTreeChild({
   return (
     <Command.Item
       key={item.story.slug}
-      value={`${item.story.grouping}#${item.story.title}|||${item.story.comment}`}
+      value={`${item.story.grouping}#${
+        item.story.title
+      }|||${item.story.comment?.toLowerCase()}`}
       grouping={parts.join(" / ")}
       title={
         highlightedSearchResult ? (
@@ -109,6 +140,34 @@ function StoryCommandTreeChild({
       }
       onSelect={() => onNavigate(item.story)}
       icon={<Code />}
+    />
+  );
+}
+
+function MDXContentMatch({
+  data,
+  onNavigate,
+}: {
+  data: SearchData;
+  onNavigate: () => void;
+}) {
+  const { search } = React.useContext(CommandPalletteContext);
+  const highlightedSearchResult = React.useMemo(() => {
+    return highlightSearchResult(`<p>${data.content}</p>`, search);
+  }, [search, data.content]);
+
+  if (!data.content || !highlightedSearchResult) {
+    return null;
+  }
+
+  return (
+    <Command.Item
+      key={data.url}
+      value={data.content.toLowerCase()}
+      grouping={data.path.join(" / ")}
+      title={<Interweave content={highlightedSearchResult} />}
+      onSelect={onNavigate}
+      icon={<Bookmark />}
     />
   );
 }
@@ -195,7 +254,7 @@ export function CommandPallette() {
       filter={(value, search) => {
         const [slug, content] = value.split("|||");
 
-        if (content && content.includes(search)) {
+        if (content && content.toLowerCase().includes(search.toLowerCase())) {
           return 1;
         }
 
@@ -212,6 +271,26 @@ export function CommandPallette() {
 
           <Command.List>
             <Command.Empty>No results found.</Command.Empty>
+
+            {value && (
+              <Command.Group
+                heading={<Command.Heading>Results</Command.Heading>}
+              >
+                {Object.values(window.FWOOSH_SEARCH_INDEX).map((data) => {
+                  return data.map((item) => (
+                    <MDXContentMatch
+                      key={item.url}
+                      data={item}
+                      onNavigate={() => {
+                        navigate(item.url);
+                        openSet(false);
+                        valueSet("");
+                      }}
+                    />
+                  ));
+                })}
+              </Command.Group>
+            )}
             {!value && <Command.Heading>Jump to a page</Command.Heading>}
             {tree.map((item) => {
               if (item.type === "tree") {
