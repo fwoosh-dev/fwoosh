@@ -23,7 +23,7 @@
   "dependencies": {
     "remark-mdx-toc": "^0.3.1",
     "tapable": "^2.2.1",
-    "vite": "^4.0.3"
+    "vite": "^4.0.4"
   },
   "devDependencies": {
     "typescript": "^4.9.3"
