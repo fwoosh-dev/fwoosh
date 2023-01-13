@@ -7,18 +7,22 @@
   "license": "MIT",
   "main": "dist/index.js",
   "dependencies": {
+    "@alisowski/cmdk": "^0.1.20",
     "@fwoosh/styling": "link:../styling",
     "@radix-ui/react-tabs": "^1.0.1",
     "@radix-ui/react-toolbar": "^1.0.1",
     "@stitches/react": "^1.2.8",
-    "cmdk": "^0.1.21",
     "interweave": "^13.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "react-router-dom": "^6.6.1"
   },
+  "peerDependencies": {
+    "react": "^16.8 || ^17.0 || ^18.0",
+    "react-dom": "^16.8 || ^17.0 || ^18.0"
+  },
   "devDependencies": {
-    "@types/react": "^18.0.26"
+    "@types/react": "^18.0.26",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "publishConfig": {
     "access": "public"

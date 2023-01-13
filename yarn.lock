@@ -5,6 +5,20 @@ __metadata:
   version: 6
   cacheKey: 8
 
+"@alisowski/cmdk@npm:^0.1.20":
+  version: 0.1.23
+  resolution: "@alisowski/cmdk@npm:0.1.23"
+  dependencies:
+    "@radix-ui/react-dialog": 1.0.0
+    "@radix-ui/react-id": ^1.0.0
+    command-score: 0.1.2
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: b36720052b28481cdf06a0a299a2d57c1f610f5bb1c013f4ed2430d167f3da687a742b4c78f5ea69f012a031779d5e93a7e5f4a75b61ff8ad443e54c8953e83e
+  languageName: node
+  linkType: hard
+
 "@ampproject/remapping@npm:^2.1.0":
   version: 2.2.0
   resolution: "@ampproject/remapping@npm:2.2.0"
@@ -731,6 +745,9 @@ __metadata:
     react-router-dom: ^6.6.1
     react-use-measure: ^2.1.1
     title-case: ^3.0.3
+  peerDependencies:
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
   languageName: unknown
   linkType: soft
 
@@ -768,16 +785,19 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fwoosh/components@workspace:packages/components"
   dependencies:
+    "@alisowski/cmdk": ^0.1.20
     "@fwoosh/styling": "link:../styling"
     "@radix-ui/react-tabs": ^1.0.1
     "@radix-ui/react-toolbar": ^1.0.1
     "@stitches/react": ^1.2.8
     "@types/react": ^18.0.26
-    cmdk: ^0.1.21
     interweave: ^13.0.0
     react: ^18.2.0
     react-dom: ^18.2.0
     react-router-dom: ^6.6.1
+  peerDependencies:
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
   languageName: unknown
   linkType: soft
 
@@ -846,8 +866,12 @@ __metadata:
     "@types/lodash.chunk": ^4.2.7
     change-case: ^4.1.2
     react: ^18.2.0
+    react-dom: ^18.2.0
     react-query: ^3.39.2
     react-router-dom: ^6.6.1
+  peerDependencies:
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
   languageName: unknown
   linkType: soft
 
@@ -857,7 +881,12 @@ __metadata:
   dependencies:
     "@fwoosh/components": "link:./components"
     "@fwoosh/hooks": "link:../hooks"
+    react: ^18.2.0
+    react-dom: ^18.2.0
     react-router-dom: ^6.6.1
+  peerDependencies:
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
   languageName: unknown
   linkType: soft
 
@@ -883,8 +912,10 @@ __metadata:
     "@radix-ui/react-id": ^1.0.0
     "@types/node": ^14.14.31
     fwoosh: "link:../../packages/cli"
+    react: ^18.2.0
   peerDependencies:
     fwoosh: ">= 0.x"
+    react: ^16.8 || ^17.0 || ^18.0
   languageName: unknown
   linkType: soft
 
@@ -956,10 +987,14 @@ __metadata:
     fwoosh: "link:../../packages/cli"
     react: ^17
     react-docgen-typescript: ^2.2.2
+    typescript: ^4.9.3
+    vite: ^4.0.4
   peerDependencies:
     fwoosh: ">= 0.x"
     react: ^16.8 || ^17.0 || ^18.0
-    typescript: ^4
+  dependenciesMeta:
+    typescript:
+      optional: true
   languageName: unknown
   linkType: soft
 
@@ -977,6 +1012,8 @@ __metadata:
     "@stitches/react": ^1.2.8
     "@types/dlv": ^1.1.2
     react: ^18.2.0
+  peerDependencies:
+    react: ^16.8 || ^17.0 || ^18.0
   languageName: unknown
   linkType: soft
 
@@ -1003,9 +1040,11 @@ __metadata:
   dependencies:
     "@types/node": ^14.14.31
     fwoosh: "link:../../packages/cli"
+    react: ^18.2.0
     react-feather: ^2.0.10
   peerDependencies:
     fwoosh: ">= 0.x"
+    react: ^16.8 || ^17.0 || ^18.0
   languageName: unknown
   linkType: soft
 
@@ -1015,9 +1054,11 @@ __metadata:
   dependencies:
     "@fwoosh/components": "link:../../packages/components"
     "@types/node": ^14.14.31
+    react: ^18.2.0
     react-feather: ^2.0.10
   peerDependencies:
     fwoosh: ">= 0.x"
+    react: ^16.8 || ^17.0 || ^18.0
   languageName: unknown
   linkType: soft
 
@@ -4769,19 +4810,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cmdk@npm:^0.1.21":
-  version: 0.1.21
-  resolution: "cmdk@npm:0.1.21"
-  dependencies:
-    "@radix-ui/react-dialog": 1.0.0
-    command-score: 0.1.2
-  peerDependencies:
-    react: ^18.0.0
-    react-dom: ^18.0.0
-  checksum: e0f52a06b345199cd3399ba846d2d8dce24741e8efaea28e315169e0d082934915af47bfe454b92703d0c98e582e30cb83804416686a4f0abc156abe3f8bd442
-  languageName: node
-  linkType: hard
-
 "collection-visit@npm:^1.0.0":
   version: 1.0.0
   resolution: "collection-visit@npm:1.0.0"
@@ -6625,8 +6653,12 @@ __metadata:
     terminal-link: ^3.0.0
     title-case: ^3.0.3
     ts-node: ^10
+    typescript: ^4
     unified: ^10.1.2
     vite: ^4.0.4
+  dependenciesMeta:
+    typescript:
+      optional: true
   bin:
     fwoosh: bin/fwoosh.js
   languageName: unknown
@@ -12934,6 +12966,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"typescript@npm:^4":
+  version: 4.9.4
+  resolution: "typescript@npm:4.9.4"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: e782fb9e0031cb258a80000f6c13530288c6d63f1177ed43f770533fdc15740d271554cdae86701c1dd2c83b082cea808b07e97fd68b38a172a83dbf9e0d0ef9
+  languageName: node
+  linkType: hard
+
 "typescript@patch:typescript@^3 || ^4#~builtin<compat/typescript>, typescript@patch:typescript@^4.9.3#~builtin<compat/typescript>":
   version: 4.9.3
   resolution: "typescript@patch:typescript@npm%3A4.9.3#~builtin<compat/typescript>::version=4.9.3&hash=bda367"
@@ -12941,6 +12983,16 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: ef65c22622d864497d0a0c5db693523329b3284c15fe632e93ad9aa059e8dc38ef3bd767d6f26b1e5ecf9446f49bd0f6c4e5714a2eeaf352805dc002479843d1
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@^4#~builtin<compat/typescript>":
+  version: 4.9.4
+  resolution: "typescript@patch:typescript@npm%3A4.9.4#~builtin<compat/typescript>::version=4.9.4&hash=bda367"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 37f6e2c3c5e2aa5934b85b0fddbf32eeac8b1bacf3a5b51d01946936d03f5377fe86255d4e5a4ae628fd0cd553386355ad362c57f13b4635064400f3e8e05b9d
   languageName: node
   linkType: hard
 
