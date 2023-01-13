@@ -1,3 +1,16 @@
+# v0.0.81 (Fri Jan 13 2023)
+
+#### ⚠️ Pushed to `main`
+
+- move react back to peer ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- move react to non peer dep ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.79 (Fri Jan 13 2023)
 
 #### ⚠️ Pushed to `main`

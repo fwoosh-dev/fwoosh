@@ -1,3 +1,40 @@
+# v0.0.81 (Fri Jan 13 2023)
+
+#### ⚠️ Pushed to `main`
+
+- update lock ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/components`, `@fwoosh/hooks`, `@fwoosh/link`, `@fwoosh/types`, `@fwoosh/panel-actions`, `@fwoosh/react`, `@fwoosh/tool-measure`, `@fwoosh/tool-zoom`
+  - Merge branch 'canary' ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/components`, `@fwoosh/hooks`, `@fwoosh/link`, `@fwoosh/styling`, `@fwoosh/panel-actions`, `@fwoosh/react`, `@fwoosh/tool-measure`, `@fwoosh/tool-zoom`
+  - move react back to peer ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/react`
+  - add vite react plugin ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `fwoosh`, `@fwoosh/types`
+  - add modifyViteConfig hook ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `fwoosh`
+  - fix build ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - fix optimize deps ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - update include and exclude ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/types`
+  - upgrade vite ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/panel-actions`
+  - fix actions panel ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add missing dep ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`
+  - close command pallette ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/tool-measure`, `@fwoosh/tool-zoom`
+  - add missing deps ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/components`
+  - add missing dep ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/components`, `@fwoosh/hooks`, `@fwoosh/styling`, `@fwoosh/react`
+  - move react to non peer dep ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.80 (Fri Jan 13 2023)
 
 #### ⚠️ Pushed to `main`

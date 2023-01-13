@@ -1,3 +1,16 @@
+# v0.0.81 (Fri Jan 13 2023)
+
+#### ⚠️ Pushed to `main`
+
+- add modifyViteConfig hook ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- upgrade vite ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.77 (Fri Jan 13 2023)
 
 #### ⚠️ Pushed to `main`
