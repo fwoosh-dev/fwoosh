@@ -531,6 +531,7 @@ __metadata:
   resolution: "@fwoosh/fwoosh-example@workspace:examples/fwoosh"
   dependencies:
     "@fwoosh/components": "link:../../packages/components"
+    "@fwoosh/panel-actions": "link:../../plugins/panel-actions"
     "@fwoosh/react": "link:../../plugins/react"
     fwoosh: "link:../../packages/cli"
   languageName: unknown
@@ -593,6 +594,12 @@ __metadata:
     "@fwoosh/hooks": "link:../hooks"
     react-router-dom: ^6.6.1
   languageName: unknown
+  linkType: soft
+
+"@fwoosh/panel-actions@link:../../plugins/panel-actions::locator=%40fwoosh%2Ffwoosh-example%40workspace%3Aexamples%2Ffwoosh":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/panel-actions@link:../../plugins/panel-actions::locator=%40fwoosh%2Ffwoosh-example%40workspace%3Aexamples%2Ffwoosh"
+  languageName: node
   linkType: soft
 
 "@fwoosh/panel-actions@link:../../plugins/panel-actions::locator=%40fwoosh%2Freact-example%40workspace%3Aexamples%2Freact":
