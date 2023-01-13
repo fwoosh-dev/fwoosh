@@ -438,7 +438,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fwoosh/app@workspace:packages/app"
   dependencies:
-    "@fwoosh/hooks": "link:./hooks"
+    "@fwoosh/hooks": "link:../hooks"
     "@fwoosh/utils": "link:../utils"
     "@mdx-js/react": ^2.2.1
     "@radix-ui/react-collapsible": ^1.0.1
@@ -539,21 +539,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fwoosh/hooks@link:./hooks::locator=%40fwoosh%2Fapp%40workspace%3Apackages%2Fapp":
+"@fwoosh/hooks@link:../../packages/hooks::locator=%40fwoosh%2Fpanel-source%40workspace%3Aplugins%2Fpanel-source":
   version: 0.0.0-use.local
-  resolution: "@fwoosh/hooks@link:./hooks::locator=%40fwoosh%2Fapp%40workspace%3Apackages%2Fapp"
+  resolution: "@fwoosh/hooks@link:../../packages/hooks::locator=%40fwoosh%2Fpanel-source%40workspace%3Aplugins%2Fpanel-source"
   languageName: node
   linkType: soft
 
-"@fwoosh/hooks@link:./hooks::locator=%40fwoosh%2Flink%40workspace%3Apackages%2Flink":
+"@fwoosh/hooks@link:../hooks::locator=%40fwoosh%2Fapp%40workspace%3Apackages%2Fapp":
   version: 0.0.0-use.local
-  resolution: "@fwoosh/hooks@link:./hooks::locator=%40fwoosh%2Flink%40workspace%3Apackages%2Flink"
+  resolution: "@fwoosh/hooks@link:../hooks::locator=%40fwoosh%2Fapp%40workspace%3Apackages%2Fapp"
   languageName: node
   linkType: soft
 
-"@fwoosh/hooks@link:./hooks::locator=%40fwoosh%2Fpanel-source%40workspace%3Aplugins%2Fpanel-source":
+"@fwoosh/hooks@link:../hooks::locator=%40fwoosh%2Flink%40workspace%3Apackages%2Flink":
   version: 0.0.0-use.local
-  resolution: "@fwoosh/hooks@link:./hooks::locator=%40fwoosh%2Fpanel-source%40workspace%3Aplugins%2Fpanel-source"
+  resolution: "@fwoosh/hooks@link:../hooks::locator=%40fwoosh%2Flink%40workspace%3Apackages%2Flink"
   languageName: node
   linkType: soft
 
@@ -573,7 +573,7 @@ __metadata:
   resolution: "@fwoosh/link@workspace:packages/link"
   dependencies:
     "@fwoosh/components": "link:./components"
-    "@fwoosh/hooks": "link:./hooks"
+    "@fwoosh/hooks": "link:../hooks"
     react-router-dom: ^6.6.1
   languageName: unknown
   linkType: soft
@@ -612,7 +612,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fwoosh/panel-source@workspace:plugins/panel-source"
   dependencies:
-    "@fwoosh/hooks": "link:./hooks"
+    "@fwoosh/hooks": "link:../../packages/hooks"
     "@types/node": ^14.14.31
     fwoosh: "link:../../packages/cli"
   peerDependencies:
