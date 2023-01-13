@@ -256,9 +256,14 @@ export class Fwoosh implements FwooshClass {
         componentOverridePlugin(this.options),
       ],
       optimizeDeps: {
+        exclude: ["@fwoosh/components"],
         include: [
+          "react-helmet-async",
+          "command-score",
+          "mousetrap",
           "react",
           "react-dom",
+          "react-dom/client",
           "prop-types",
           "@devtools-ds/themes",
           "@devtools-ds/tree",

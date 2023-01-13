@@ -14,7 +14,6 @@ export const meta: StoryMeta = {
  * A button that only displays an icon.
  */
 export const Basic: Story = () => {
-  console.log("here", action);
   return (
     <IconButton title="Add" onClick={action("onClick")}>
       <Plus />
