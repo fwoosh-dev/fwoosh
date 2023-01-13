@@ -12,14 +12,12 @@
     "@radix-ui/react-toolbar": "^1.0.1",
     "@stitches/react": "^1.2.8",
     "cmdk": "^0.1.21",
-    "interweave": "^13.0.0"
-  },
-  "peerDependencies": {
-    "react": "^16.8 || ^17.0 || ^18.0"
+    "interweave": "^13.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.0.26",
-    "react": "^18.2.0"
+    "@types/react": "^18.0.26"
   },
   "publishConfig": {
     "access": "public"

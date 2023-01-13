@@ -19,13 +19,10 @@
   ],
   "dependencies": {
     "@fwoosh/theme-default": "link:../../plugins/theme-default",
-    "@stitches/react": "^1.2.8"
-  },
-  "peerDependencies": {
-    "react": "^16.8 || ^17.0 || ^18.0"
+    "@stitches/react": "^1.2.8",
+    "react": "^18.2.0"
   },
   "devDependencies": {
-    "@types/dlv": "^1.1.2",
-    "react": "^18.2.0"
+    "@types/dlv": "^1.1.2"
   }
 }
