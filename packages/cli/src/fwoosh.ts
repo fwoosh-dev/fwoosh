@@ -281,6 +281,7 @@ export class Fwoosh implements FwooshClass {
       ],
       optimizeDeps: {
         entries: [require.resolve("@fwoosh/app/index.html")],
+        exclude: ["@fwoosh/*"],
         include: depsToOptimize,
       },
       build: {
@@ -294,7 +295,6 @@ export class Fwoosh implements FwooshClass {
           strict: false,
         },
       },
-      // assetsInclude: ["**/*.html"],
       define: {
         "process.env": {
           LOG_LEVEL: "process.env.LOG_LEVEL",
@@ -331,6 +331,7 @@ export class Fwoosh implements FwooshClass {
     const vite = await createServer({
       mode: "development",
       ...viteConfig,
+      assetsInclude: ["**/*.html"],
     });
 
     log.trace("Loaded vite with config:", vite.config);

@@ -36,88 +36,29 @@ import type { Components } from "./components.js";
 import { components as componentsDefault } from "./components.js";
 
 const components = {
-  h1: (overrides.h1 || componentsDefault.h1) as typeof componentsDefault["h1"],
-  h2: (overrides.h2 || componentsDefault.h2) as typeof componentsDefault["h2"],
-  h3: (overrides.h3 || componentsDefault.h3) as typeof componentsDefault["h3"],
-  h4: (overrides.h4 || componentsDefault.h4) as typeof componentsDefault["h4"],
-  h5: (overrides.h5 || componentsDefault.h5) as typeof componentsDefault["h5"],
-  h6: (overrides.h6 || componentsDefault.h6) as typeof componentsDefault["h6"],
-  hr: (overrides.hr || componentsDefault.hr) as typeof componentsDefault["hr"],
-  p: (overrides.p || componentsDefault.p) as typeof componentsDefault["p"],
-  code: (overrides.code ||
-    componentsDefault.code) as typeof componentsDefault["code"],
-  pre: (overrides.pre ||
-    componentsDefault.pre) as typeof componentsDefault["pre"],
-  a: (overrides.a || componentsDefault.a) as typeof componentsDefault["a"],
-  ul: (overrides.ul || componentsDefault.ul) as typeof componentsDefault["ul"],
-  ol: (overrides.ol || componentsDefault.ol) as typeof componentsDefault["ol"],
-  li: (overrides.li || componentsDefault.li) as typeof componentsDefault["li"],
-  blockquote: (overrides.blockquote ||
-    componentsDefault.blockquote) as typeof componentsDefault["blockquote"],
-  table: (overrides.table ||
-    componentsDefault.table) as typeof componentsDefault["table"],
-  th: (overrides.th || componentsDefault.th) as typeof componentsDefault["th"],
-  tr: (overrides.tr || componentsDefault.tr) as typeof componentsDefault["tr"],
-  td: (overrides.td || componentsDefault.td) as typeof componentsDefault["td"],
-  img: (overrides.img ||
-    componentsDefault.img) as typeof componentsDefault["img"],
-};
+  ...componentsDefault,
+  ...overrides,
+} as typeof componentsDefault;
 
 const QuickNav = {
-  Root: (overrides.QuickNavDefault?.Root ||
-    QuickNavDefault.Root) as typeof QuickNavDefault.Root,
-  Header: (overrides.QuickNavDefault?.Header ||
-    QuickNavDefault.Header) as typeof QuickNavDefault.Header,
-  Title: (overrides.QuickNavDefault?.Title ||
-    QuickNavDefault.Title) as typeof QuickNavDefault.Title,
-  Item: (overrides.QuickNavDefault?.Item ||
-    QuickNavDefault.Item) as typeof QuickNavDefault.Item,
-  Group: (overrides.QuickNavDefault?.Group ||
-    QuickNavDefault.Group) as typeof QuickNavDefault.Group,
-  Link: (overrides.QuickNavDefault?.Link ||
-    QuickNavDefault.Link) as typeof QuickNavDefault.Link,
-};
+  ...QuickNavDefault,
+  ...overrides.QuickNav,
+} as typeof QuickNavDefault;
 
 const Toolbar = {
-  Root: (overrides.Toolbar?.Root ||
-    ToolbarDefault.Root) as typeof ToolbarDefault.Root,
-  Button: (overrides.Toolbar?.Button ||
-    ToolbarDefault.Button) as typeof ToolbarDefault.Button,
-  Separator: (overrides.Toolbar?.Separator ||
-    ToolbarDefault.Separator) as typeof ToolbarDefault.Separator,
-};
+  ...ToolbarDefault,
+  ...overrides.Toolbar,
+} as typeof ToolbarDefault;
 
 const Command = {
-  Dialog: (overrides.Command?.Dialog ||
-    CommandDefault.Dialog) as typeof CommandDefault.Dialog,
-  Content: (overrides.Command?.Content ||
-    CommandDefault.Content) as typeof CommandDefault.Content,
-  Group: (overrides.Command?.Group ||
-    CommandDefault.Group) as typeof CommandDefault.Group,
-  Separator: (overrides.Command?.Separator ||
-    CommandDefault.Separator) as typeof CommandDefault.Separator,
-  Empty: (overrides.Command?.Empty ||
-    CommandDefault.Empty) as typeof CommandDefault.Empty,
-  Input: (overrides.Command?.Input ||
-    CommandDefault.Input) as typeof CommandDefault.Input,
-  Item: (overrides.Command?.Item ||
-    CommandDefault.Item) as typeof CommandDefault.Item,
-  List: (overrides.Command?.List ||
-    CommandDefault.List) as typeof CommandDefault.List,
-  Loading: (overrides.Command?.Loading ||
-    CommandDefault.Loading) as typeof CommandDefault.Loading,
-  Heading: (overrides.Command?.Heading ||
-    CommandDefault.Heading) as typeof CommandDefault.Heading,
-};
+  ...CommandDefault,
+  ...overrides.Command,
+} as typeof CommandDefault;
 
 const Tabs = {
-  Root: (overrides.Tabs?.Root || TabsDefault.Root) as typeof TabsDefault.Root,
-  List: (overrides.Tabs?.List || TabsDefault.List) as typeof TabsDefault.List,
-  Content: (overrides.Tabs?.Content ||
-    TabsDefault.Content) as typeof TabsDefault.Content,
-  Trigger: (overrides.Tabs?.Trigger ||
-    TabsDefault.Trigger) as typeof TabsDefault.Trigger,
-};
+  ...TabsDefault,
+  ...overrides.Tabs,
+} as typeof TabsDefault;
 
 const ChevronRightIcon = overrides.ChevronRightIcon || ChevronRightIconDefault;
 

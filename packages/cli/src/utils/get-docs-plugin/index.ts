@@ -23,8 +23,7 @@ export function getDocsPlugin({ port }: { port: number }) {
 
       transform(src: string, id: string) {
         if (
-          !id.includes("vite") &&
-          !id.includes("node_modules/@fwoosh") &&
+          !id.includes("node_modules") &&
           !id.endsWith(".css.js") &&
           !id.includes(".stories.") &&
           (id.endsWith(".js") ||

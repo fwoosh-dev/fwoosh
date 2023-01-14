@@ -70,7 +70,9 @@ const router = createBrowserRouter([
             <Head />
             <Outlet />
             <ScrollRestoration />
-            <CommandPallette />
+            <React.Suspense>
+              <CommandPallette />
+            </React.Suspense>
           </AppWrapper>
         </ErrorBoundary>
       </HelmetProvider>
