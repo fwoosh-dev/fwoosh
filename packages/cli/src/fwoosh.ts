@@ -2,7 +2,7 @@ import { promises as fs } from "fs";
 import ms from "pretty-ms";
 import boxen from "boxen";
 import path from "path";
-import { createServer, InlineConfig } from "vite";
+import { createServer, InlineConfig, build } from "vite";
 import express from "express";
 import expressWs from "express-ws";
 import { createRequire } from "module";
@@ -49,6 +49,10 @@ const require = createRequire(import.meta.url);
 
 interface WatchPagesOptions {
   port: number;
+}
+
+interface BuildOptions {
+  outDir: string;
 }
 
 export class Fwoosh implements FwooshClass {
@@ -179,12 +183,39 @@ export class Fwoosh implements FwooshClass {
     });
   }
 
-  async getViteConfig({ port }: WatchPagesOptions = { port: 3000 }) {
+  async getViteConfig({
+    port = 3000,
+    outDir,
+  }: Partial<WatchPagesOptions> & Partial<BuildOptions> = {}) {
     const toolbarControls = this.hooks.registerToolbarControl.call([]);
     const panels = this.hooks.registerPanel.call([]);
     const includedHeadings = ["h2", "h3", "h4", "h5", "h6"];
+    const depsToOptimize = [
+      "react-helmet-async",
+      "command-score",
+      "mousetrap",
+      "react",
+      "react-dom",
+      "react-dom/client",
+      "prop-types",
+      "@devtools-ds/themes",
+      "@devtools-ds/tree",
+      "@devtools-ds/object-inspector",
+      "escape-html",
+      "react-router",
+      "react-router-dom",
+      "debounce",
+      "react/jsx-runtime",
+      "hoist-non-react-statics",
+      "fast-deep-equal",
+      "fast-deep-equal/react",
+      "use-sync-external-store/shim",
+      "consola",
+      "lodash.chunk",
+    ];
 
     const baseConfig: InlineConfig = {
+      root: path.dirname(path.dirname(require.resolve("@fwoosh/app"))),
       plugins: [
         mdx({
           remarkPlugins: [remarkFrontmatter, remarkSlug],
@@ -250,6 +281,11 @@ export class Fwoosh implements FwooshClass {
       ],
       optimizeDeps: {
         entries: [require.resolve("@fwoosh/app/index.html")],
+        include: depsToOptimize,
+      },
+      build: {
+        outDir,
+        emptyOutDir: true,
       },
       server: {
         port,
@@ -258,7 +294,7 @@ export class Fwoosh implements FwooshClass {
           strict: false,
         },
       },
-      assetsInclude: ["**/*.html"],
+      // assetsInclude: ["**/*.html"],
       define: {
         "process.env": {
           LOG_LEVEL: "process.env.LOG_LEVEL",
@@ -282,8 +318,9 @@ export class Fwoosh implements FwooshClass {
   }
 
   /** Do a production build of the website */
-  async build() {
-    console.log("TODO");
+  async build({ outDir }: BuildOptions) {
+    const config = await this.getViteConfig({ outDir });
+    const output = await build({ ...config, mode: "production" });
   }
 
   /** Start the development server */
@@ -293,7 +330,6 @@ export class Fwoosh implements FwooshClass {
     const viteConfig = await this.getViteConfig({ port });
     const vite = await createServer({
       mode: "development",
-      root: path.dirname(path.dirname(require.resolve("@fwoosh/app"))),
       ...viteConfig,
     });
 
