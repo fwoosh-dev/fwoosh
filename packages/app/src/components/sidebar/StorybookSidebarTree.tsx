@@ -15,7 +15,7 @@ import {
   useStoryId,
   useDocsPath,
 } from "@fwoosh/hooks";
-import { titleCase } from "title-case";
+import { capitalCase } from "change-case";
 
 import { SidebarTree } from "./SidebarTree";
 import { resetContentScrollPosition } from "@fwoosh/utils";
@@ -33,9 +33,9 @@ export const StorybookSidebarTree = () => {
           ...style,
           paddingLeft: (style.paddingLeft as number) + SIDEBAR_ITEM_INDENT,
         };
-        const name = titleCase(node.data.name);
+        const name = capitalCase(node.data.name);
 
-        if (node.data.type === "story" || node.data.type === "mdx") {
+        if (node.data.type === "story") {
           const slug = ((node.data as unknown) as StoryTreeItem).story.slug;
           const isActive = slug === node.tree.props.selection;
 
@@ -45,7 +45,7 @@ export const StorybookSidebarTree = () => {
               style={finalStyle}
               aria-selected={isActive}
               as={Link}
-              to={node.data.type === "mdx" ? `docs/${slug}` : slug}
+              to={node.data.story.type === "mdx" ? `docs/${slug}` : slug}
               onClick={resetContentScrollPosition}
             >
               <SidebarFolderOpenIndicatorWrapper>

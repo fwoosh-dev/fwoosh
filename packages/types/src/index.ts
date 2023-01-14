@@ -81,24 +81,22 @@ interface BaseTreeItem {
   name: string;
 }
 
-export interface StoryTreeItem extends BaseTreeItem {
+export interface StoryBasicTreeItem extends BaseTreeItem {
   type: "story";
   story: BasicStoryData;
 }
 
-export interface MDXPageTreeItem extends BaseTreeItem {
-  type: "mdx";
-  story: MDXStoryData;
+export interface StoryTreeItem extends BaseTreeItem {
+  type: "story";
+  story: BasicStoryData | MDXStoryData;
 }
 
-export type StorySidebarChildItem = StoryTree | StoryTreeItem | MDXPageTreeItem;
+export type StorySidebarChildItem = StoryTree | StoryTreeItem;
 
 export interface StoryTree extends BaseTreeItem {
   type: "tree";
   children: StorySidebarChildItem[];
 }
-
-export type StorySidebarItem = StoryTree | MDXPageTreeItem;
 
 type ViteConfig = Omit<InlineConfig, "mode" | "root">;
 

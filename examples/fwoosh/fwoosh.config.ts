@@ -16,22 +16,22 @@ const rootOrder = [
 export const config: FwooshOptions = {
   title: "Fwoosh",
   sortSidebarItems: (a, b) => {
-    // Keep stories sorted by order they were defined
-    if (a.type === "story" && b.type === "story") {
-      return 0;
-    }
-
     // If both items are in the rootOrder array, sort by the order defined above
     if (rootOrder.includes(a.name) && rootOrder.includes(b.name)) {
       return rootOrder.indexOf(a.name) - rootOrder.indexOf(b.name);
     }
 
+    // Keep stories sorted by order they were defined
+    if (a.type === "story" && b.type === "story") {
+      return 0;
+    }
+
     // Render stories/mdx before trees
-    if (a.type === "tree" && (b.type === "story" || b.type === "mdx")) {
+    if (a.type === "tree" && b.type === "story") {
       return 1;
     }
 
-    if (b.type === "tree" && (a.type === "story" || a.type === "mdx")) {
+    if (b.type === "tree" && a.type === "story") {
       return -1;
     }
 

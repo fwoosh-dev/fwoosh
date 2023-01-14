@@ -1,6 +1,8 @@
 declare module "@fwoosh/app/stories" {
-  import { Stories } from "@fwoosh/types";
+  import { Stories, StorySidebarChildItem } from "@fwoosh/types";
   export const stories: Stories;
+  export const order: StorySidebarChildItem[];
+  export const tree: StorySidebarChildItem[];
 }
 
 declare module "@fwoosh/app/overrides";

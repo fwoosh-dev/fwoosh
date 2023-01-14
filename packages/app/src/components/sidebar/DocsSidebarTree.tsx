@@ -37,8 +37,8 @@ function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
   };
 
   if (
-    node.data.type === "mdx" ||
-    (node.data.type === "tree" && node.data.children.length === 0)
+    (node.data.type === "tree" && node.data.children.length === 0) ||
+    (node.data.type === "story" && node.data.story.type === "mdx")
   ) {
     const isActive = node.data.id === node.tree.props.selection;
 
@@ -109,11 +109,10 @@ function filterOutStories(tree: StorySidebarChildItem[]) {
 
   for (const item of tree) {
     if (item.type === "story") {
-      continue;
-    }
+      if (item.story.type === "mdx") {
+        filteredTree.push(item);
+      }
 
-    if (item.type === "mdx") {
-      filteredTree.push(item);
       continue;
     }
 

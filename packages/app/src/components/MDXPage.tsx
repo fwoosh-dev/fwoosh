@@ -6,7 +6,7 @@ import {
   QuickNav,
 } from "@fwoosh/components";
 import { stories } from "@fwoosh/app/stories";
-import { MDXStoryData, MDXPageTreeItem, TocEntry } from "@fwoosh/types";
+import { MDXStoryData, StoryTreeItem, TocEntry } from "@fwoosh/types";
 import { MDXProvider } from "@mdx-js/react";
 import { useQuery } from "react-query";
 import { PageSwitchButton } from "./PageSwitchButtons";
@@ -216,7 +216,7 @@ declare global {
   }
 }
 
-export const MDXPage = ({ page }: { page: MDXPageTreeItem }) => {
+export const MDXPage = ({ page }: { page: StoryTreeItem }) => {
   const { component: MDXPage, meta, slug } = stories[page.id] as MDXStoryData;
   // TODO
   const { data } = useQuery(`toc-${page.id}`, () => []);

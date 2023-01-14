@@ -35,7 +35,7 @@ import type {
   FwooshOptionWithCLIDefaults,
   Plugin,
 } from "@fwoosh/types";
-import { storyListPlugin } from "./utils/story-list-plugin.js";
+import { storyListPlugin } from "./utils/story-list-plugin/index.js";
 import { renderStoryPlugin } from "./utils/render-story-plugin.js";
 import { getDocsPlugin } from "./utils/get-docs-plugin/index.js";
 import { fwooshSetupPlugin } from "./utils/fwoosh-setup-plugin.js";
@@ -76,11 +76,11 @@ export class Fwoosh implements FwooshClass {
         }
 
         // Render stories/mdx before trees
-        if (a.type === "tree" && (b.type === "story" || b.type === "mdx")) {
+        if (a.type === "tree" && b.type === "story") {
           return 1;
         }
 
-        if (b.type === "tree" && (a.type === "story" || a.type === "mdx")) {
+        if (b.type === "tree" && a.type === "story") {
           return -1;
         }
 
@@ -186,7 +186,9 @@ export class Fwoosh implements FwooshClass {
   async getViteConfig({
     port = 3000,
     outDir,
-  }: Partial<WatchPagesOptions> & Partial<BuildOptions> = {}) {
+    mode,
+  }: Partial<WatchPagesOptions> &
+    Partial<BuildOptions> & { mode: "development" | "production" }) {
     const toolbarControls = this.hooks.registerToolbarControl.call([]);
     const panels = this.hooks.registerPanel.call([]);
     const includedHeadings = ["h2", "h3", "h4", "h5", "h6"];
@@ -214,7 +216,10 @@ export class Fwoosh implements FwooshClass {
       "lodash.chunk",
     ];
 
+    process.env.NODE_ENV = mode;
+
     const baseConfig: InlineConfig = {
+      mode,
       root: path.dirname(path.dirname(require.resolve("@fwoosh/app"))),
       plugins: [
         mdx({
@@ -319,17 +324,19 @@ export class Fwoosh implements FwooshClass {
 
   /** Do a production build of the website */
   async build({ outDir }: BuildOptions) {
-    const config = await this.getViteConfig({ outDir });
-    const output = await build({ ...config, mode: "production" });
+    const config = await this.getViteConfig({ outDir, mode: "production" });
+    const output = await build(config);
   }
 
   /** Start the development server */
   async dev({ port }: WatchPagesOptions = { port: 3000 }) {
     const app = express();
     const ws = expressWs(app);
-    const viteConfig = await this.getViteConfig({ port });
-    const vite = await createServer({
+    const viteConfig = await this.getViteConfig({
       mode: "development",
+      port,
+    });
+    const vite = await createServer({
       ...viteConfig,
       assetsInclude: ["**/*.html"],
     });

@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { useLocation } from "react-router-dom";
 import { useId } from "@radix-ui/react-id";
-import { BasicStoryData, StoryMeta } from "@fwoosh/types";
+import { BasicStoryData, StoryBasicTreeItem, StoryMeta } from "@fwoosh/types";
 import { useDocs } from "@fwoosh/app/docs";
 import { styled } from "@fwoosh/styling";
 import {
@@ -138,7 +138,7 @@ const DocsPropsTable = ({
 const StoryDocsPage = ({
   stories: [firstStory, ...stories],
 }: {
-  stories: [StoryTreeItem, ...StorySidebarChildItem[]];
+  stories: [StoryBasicTreeItem, ...StorySidebarChildItem[]];
 }) => {
   const docsPath = useDocsPath();
   const nameParts = docsPath?.split("-") || [];
@@ -178,7 +178,7 @@ const StoryDocsPage = ({
               <components.h2 id="stories">Stories</components.h2>
             </HeaderWrapper>
             {stories.map((story) => {
-              if (story.type === "mdx" || story.type === "tree") {
+              if (story.type === "tree" || story.story.type === "mdx") {
                 return null;
               }
 
@@ -232,7 +232,7 @@ const StoryDocsPage = ({
               </QuickNav.Item>
               <QuickNav.Group>
                 {stories.map((story) => {
-                  if (story.type === "mdx" || story.type === "tree") {
+                  if (story.type === "tree" || story.story.type === "mdx") {
                     return null;
                   }
 
@@ -277,12 +277,14 @@ const DocsContent = React.memo(() => {
     return null;
   }
 
-  if (firstStory.type === "mdx") {
+  if (firstStory.type === "story" && firstStory.story.type === "mdx") {
     return <MDXPage page={firstStory} />;
   }
 
   return (
-    <StoryDocsPage stories={[firstStory as StoryTreeItem, ...restStories]} />
+    <StoryDocsPage
+      stories={[firstStory as StoryBasicTreeItem, ...restStories]}
+    />
   );
 });
 
