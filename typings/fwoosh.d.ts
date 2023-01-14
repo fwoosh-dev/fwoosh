@@ -21,7 +21,7 @@ declare module "@fwoosh/app/render" {
 declare module "@fwoosh/app/docs" {
   import type { ComponentDoc } from "react-docgen-typescript";
   import { StoryMeta } from "@fwoosh/types";
-  export function useDocs(key: string, story: StoryMeta): ComponentDoc[];
+  export function useDocgen(key: string, story: StoryMeta): ComponentDoc[];
 }
 
 declare module "@fwoosh/app/ui" {

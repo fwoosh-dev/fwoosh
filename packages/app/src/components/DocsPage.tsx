@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import { useLocation } from "react-router-dom";
 import { useId } from "@radix-ui/react-id";
 import { BasicStoryData, StoryBasicTreeItem, StoryMeta } from "@fwoosh/types";
-import { useDocs } from "@fwoosh/app/docs";
+import { useDocgen } from "@fwoosh/app/docs";
 import { styled } from "@fwoosh/styling";
 import {
   components,
@@ -126,7 +126,7 @@ const DocsPropsTable = ({
   meta: StoryMeta;
   hasTitle?: boolean | string;
 }) => {
-  const docs = useDocs(story.slug, meta);
+  const docs = useDocgen(story.slug, meta);
 
   return (
     <div style={{ height: "fit-content" }}>

@@ -42,7 +42,7 @@ async function resolveComponents(meta: UnresolvedMeta) {
   return component;
 }
 
-export const useDocs = (key: string, story: Story) => {
+export const useDocgen = (key: string, story: Story) => {
   const { data } = useQuery(
     key,
     async () => {

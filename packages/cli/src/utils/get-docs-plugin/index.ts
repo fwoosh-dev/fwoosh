@@ -1,5 +1,6 @@
 import { loadVirtualFile } from "@fwoosh/virtual-file";
 import { createRequire } from "module";
+import { ViteDevServer } from "vite";
 
 import { endent } from "../endent.js";
 
@@ -78,7 +79,7 @@ export function getDocsPlugin({ port }: { port: number }) {
 
       async load(id: string) {
         if (id.includes(virtualFileId)) {
-          return loadVirtualFile(require.resolve("./useDocs.js"), {
+          return loadVirtualFile(require.resolve("./useDocgen.js"), {
             GET_DOCS_PORT: port,
           });
         }
