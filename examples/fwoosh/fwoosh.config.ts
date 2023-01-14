@@ -15,6 +15,7 @@ const rootOrder = [
 
 export const config: FwooshOptions = {
   title: "Fwoosh",
+  docgen: { include: ["**/packages/components/**/*"] },
   sortSidebarItems: (a, b) => {
     // If both items are in the rootOrder array, sort by the order defined above
     if (rootOrder.includes(a.name) && rootOrder.includes(b.name)) {

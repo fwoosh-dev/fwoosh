@@ -1,37 +1,60 @@
+import { ComponentDoc, FwooshOptions } from "@fwoosh/types";
+import { log } from "@fwoosh/utils";
 import { loadVirtualFile } from "@fwoosh/virtual-file";
 import { createRequire } from "module";
-import { ViteDevServer } from "vite";
+import micromatch from "micromatch";
 
 import { endent } from "../endent.js";
+import { convertMarkdownToHtml } from "../get-stories.js";
 
 const require = createRequire(import.meta.url);
 
 /** Generates a react hook that requests docs at runtime. */
-export function getDocsPlugin({ port }: { port: number }) {
+export function getDocsPlugin({
+  port,
+  generateDocs,
+  include,
+}: {
+  include?: string[];
+  port: number;
+  generateDocs: (id: string) => Promise<ComponentDoc[]>;
+}) {
   const virtualFileId = "@fwoosh/app/docs";
 
   return [
     {
       name: "inject-get-file",
 
-      resolveId(id: string) {
-        if (id.includes(virtualFileId)) {
-          return virtualFileId;
-        }
+      async transform(src: string, id: string) {
+        const isIncluded = include
+          ? ["!**/*.stories.*", ...include].every((glob) =>
+              micromatch.isMatch(id, glob)
+            )
+          : !id.includes("vite") &&
+            !id.includes("node_modules/@fwoosh") &&
+            !id.endsWith(".css.js") &&
+            !id.includes(".stories.") &&
+            (id.endsWith(".js") ||
+              id.endsWith(".jsx") ||
+              id.endsWith(".ts") ||
+              id.endsWith(".tsx"));
 
-        return null;
-      },
+        if (isIncluded) {
+          let docgen = "undefined";
 
-      transform(src: string, id: string) {
-        if (
-          !id.includes("node_modules") &&
-          !id.endsWith(".css.js") &&
-          !id.includes(".stories.") &&
-          (id.endsWith(".js") ||
-            id.endsWith(".jsx") ||
-            id.endsWith(".ts") ||
-            id.endsWith(".tsx"))
-        ) {
+          if (process.env.NODE_ENV === "production") {
+            const docs = await generateDocs(
+              id.replace("/dist/", "/src/").replace(".js", ".tsx")
+            );
+            const docsWithHtmlDescriptions = await Promise.all(
+              docs.map(async (doc) => ({
+                ...doc,
+                description: await convertMarkdownToHtml(doc.description),
+              }))
+            );
+            docgen = JSON.stringify(docsWithHtmlDescriptions);
+          }
+
           return (
             src +
             "\n" +
@@ -47,6 +70,7 @@ export function getDocsPlugin({ port }: { port: number }) {
                 ) {
                   ex.fwoosh_file = "${id}";
                   ex.displayName = name;
+                  ex.fwoosh_docgen = ${JSON.stringify(docgen)};
                 } else if (
                   typeof ex === "object" && ex !== null && 
                   Object.values(ex).length > 0 && 

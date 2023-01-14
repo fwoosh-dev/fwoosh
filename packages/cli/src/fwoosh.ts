@@ -9,7 +9,6 @@ import { createRequire } from "module";
 import {
   AsyncSeriesBailHook,
   AsyncSeriesWaterfallHook,
-  SyncBailHook,
   SyncWaterfallHook,
 } from "tapable";
 import mdx from "@mdx-js/rollup";
@@ -64,6 +63,7 @@ export class Fwoosh implements FwooshClass {
 
   constructor({ theme, ...options }: FwooshOptionWithCLIDefaults) {
     this.options = {
+      docgen: {},
       componentOverrides: undefined,
       title: "Fwoosh",
       setup: "",
@@ -104,7 +104,7 @@ export class Fwoosh implements FwooshClass {
       registerPanel: new SyncWaterfallHook(["panels"]),
       registerToolbarControl: new SyncWaterfallHook(["toolbarControls"]),
       renderStory: new AsyncSeriesBailHook(),
-      generateDocs: new SyncBailHook(["pathToFile"]),
+      generateDocs: new AsyncSeriesBailHook(["pathToFile"]),
       modifyViteConfig: new AsyncSeriesWaterfallHook(["config"]),
     };
 
@@ -279,7 +279,11 @@ export class Fwoosh implements FwooshClass {
         fwooshSetupPlugin({ file: this.options.setup }),
         fwooshUiPlugin({ toolbarControls, panels }),
         fwooshConfigPlugin(this.options),
-        getDocsPlugin({ port }),
+        getDocsPlugin({
+          port,
+          generateDocs: (file) => this.hooks.generateDocs.promise(file),
+          ...this.options.docgen,
+        }),
         storyListPlugin(this.options),
         renderStoryPlugin(await this.hooks.renderStory.promise()),
         componentOverridePlugin(this.options),
@@ -301,10 +305,7 @@ export class Fwoosh implements FwooshClass {
         },
       },
       define: {
-        "process.env": {
-          LOG_LEVEL: "process.env.LOG_LEVEL",
-          FWOOSH_PORT: port,
-        },
+        "process.env.LOG_LEVEL": `"${process.env.LOG_LEVEL}"`,
       },
     };
 
@@ -353,7 +354,7 @@ export class Fwoosh implements FwooshClass {
           .replace(".js", ".tsx");
 
         const generateDocsStart = performance.now();
-        const docs = this.hooks.generateDocs.call(file);
+        const docs = await this.hooks.generateDocs.promise(file);
         const generateDocsEnd = performance.now();
         log.info(
           `Generate docs: ${path.relative(process.cwd(), file)} (${ms(

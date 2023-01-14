@@ -58,6 +58,13 @@ export const useDocgen = (key: string, story: Story) => {
       const displayedComponents = components.map((c) => c.displayName);
       const file = components[0].fwoosh_file;
 
+      if (components[0].fwoosh_docgen) {
+        const docgen = JSON.parse(components[0].fwoosh_docgen);
+        return docgen.filter((doc: { displayName: string }) =>
+          displayedComponents.includes(doc.displayName)
+        );
+      }
+
       return new Promise((resolve) => {
         const socket = new WebSocket(
           "ws://localhost:process.env.GET_DOCS_PORT/get-docs"
