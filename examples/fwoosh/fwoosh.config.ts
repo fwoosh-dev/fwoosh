@@ -57,4 +57,11 @@ export const config: FwooshOptions = {
       },
     }),
   ],
+  modifyViteConfig: (config) => {
+    if (process.env.NODE_ENV === "production") {
+      config.base = "/fwoosh/";
+    }
+
+    return config;
+  },
 };
