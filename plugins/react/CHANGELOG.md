@@ -1,3 +1,15 @@
+# v0.0.82 (Sun Jan 15 2023)
+
+#### ⚠️ Pushed to `main`
+
+- improve first story in docs page causing jump ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.81 (Fri Jan 13 2023)
 
 #### ⚠️ Pushed to `main`

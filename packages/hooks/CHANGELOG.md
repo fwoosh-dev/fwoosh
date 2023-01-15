@@ -1,3 +1,16 @@
+# v0.0.82 (Sun Jan 15 2023)
+
+#### ⚠️ Pushed to `main`
+
+- highlight code at build time in prod mode ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- embed sort order in build instead of using websocket (makes build simpler) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.81 (Fri Jan 13 2023)
 
 #### ⚠️ Pushed to `main`

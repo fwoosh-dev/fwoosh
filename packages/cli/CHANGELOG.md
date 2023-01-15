@@ -1,3 +1,23 @@
+# v0.0.82 (Sun Jan 15 2023)
+
+#### ⚠️ Pushed to `main`
+
+- factor out getConfig function ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- set up mdx searching ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- improve first story in docs page causing jump ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- build time docs ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- rename to useDocgen ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- highlight code at build time in prod mode ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- embed sort order in build instead of using websocket (makes build simpler) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- got build to pass - still doens't work ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- working ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.81 (Fri Jan 13 2023)
 
 #### ⚠️ Pushed to `main`
