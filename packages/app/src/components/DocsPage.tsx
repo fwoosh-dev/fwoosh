@@ -217,48 +217,52 @@ const StoryDocsPage = ({
   return (
     <DocsLayout>
       <PageWrapper style={{ position: "relative" }}>
-        <components.h1 id="intro">{titleCase(name)}</components.h1>
-        {docsIntro}
-        {stories.length > 0 && (
-          <>
-            <HeaderWrapper data-link-group>
-              <HeaderLink id="stories" title="Stories" />
-              <components.h2 id="stories">Stories</components.h2>
-            </HeaderWrapper>
-            {stories.map((story) => {
-              if (story.type === "tree" || story.story.type === "mdx") {
-                return null;
-              }
+        <div>
+          <components.h1 id="intro">{titleCase(name)}</components.h1>
+          {docsIntro}
+          {stories.length > 0 && (
+            <>
+              <HeaderWrapper data-link-group>
+                <HeaderLink id="stories" title="Stories" />
+                <components.h2 id="stories">Stories</components.h2>
+              </HeaderWrapper>
+              {stories.map((story) => {
+                if (story.type === "tree" || story.story.type === "mdx") {
+                  return null;
+                }
 
-              return (
-                <div key={story.story.slug}>
-                  <HeaderWrapper data-link-group>
-                    <HeaderLink
-                      id={paramCase(story.story.title)}
-                      title={story.story.title}
-                    />
-                    <components.h3 id={paramCase(story.story.title)}>
-                      {story.story.title}
-                    </components.h3>
-                  </HeaderWrapper>
-                  {story.story.comment && (
-                    <StyledMarkdown>{story.story.comment}</StyledMarkdown>
-                  )}
-                  <StoryDiv slug={story.story.slug} code={story.story.code} />
-                  <Suspense
-                    fallback={<Spinner style={{ height: 200 }} delay={2000} />}
-                  >
-                    <DocsPropsTable
-                      story={story.story}
-                      meta={story.story?.component?._payload?._result}
-                      hasTitle={true}
-                    />
-                  </Suspense>
-                </div>
-              );
-            })}
-          </>
-        )}
+                return (
+                  <div key={story.story.slug}>
+                    <HeaderWrapper data-link-group>
+                      <HeaderLink
+                        id={paramCase(story.story.title)}
+                        title={story.story.title}
+                      />
+                      <components.h3 id={paramCase(story.story.title)}>
+                        {story.story.title}
+                      </components.h3>
+                    </HeaderWrapper>
+                    {story.story.comment && (
+                      <StyledMarkdown>{story.story.comment}</StyledMarkdown>
+                    )}
+                    <StoryDiv slug={story.story.slug} code={story.story.code} />
+                    <Suspense
+                      fallback={
+                        <Spinner style={{ height: 200 }} delay={2000} />
+                      }
+                    >
+                      <DocsPropsTable
+                        story={story.story}
+                        meta={story.story?.component?._payload?._result}
+                        hasTitle={true}
+                      />
+                    </Suspense>
+                  </div>
+                );
+              })}
+            </>
+          )}
+        </div>
         <PageSwitchButton current={firstStory.id} />
       </PageWrapper>
       <QuickNav.Root ref={quickNavRef}>
