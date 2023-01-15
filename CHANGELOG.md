@@ -1,3 +1,18 @@
+# v0.0.84 (Sun Jan 15 2023)
+
+#### ⚠️ Pushed to `main`
+
+- use basname option ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- document docgen ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/types`
+  - add basename option ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.83 (Sun Jan 15 2023)
 
 #### ⚠️ Pushed to `main`
