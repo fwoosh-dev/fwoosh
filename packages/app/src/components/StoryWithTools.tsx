@@ -5,6 +5,8 @@ import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 
 import { Story } from "./Story";
 import { ToolPanels } from "./ToolPanels";
+import { ErrorBoundary } from "@fwoosh/components";
+import { useStoryId } from "@fwoosh/hooks";
 
 const PanelContainer = styled("div", {
   height: "100%",
@@ -38,6 +40,7 @@ const PanelResizer = styled("div", {
 });
 
 export const StoryWithTools = () => {
+  const storyId = useStoryId();
   const storyPaneSize = React.useMemo(() => {
     if (localStorage.getItem("fwoosh:storyPaneSize")) {
       return Number(localStorage.getItem("fwoosh:storyPaneSize"));
@@ -49,15 +52,17 @@ export const StoryWithTools = () => {
     localStorage.setItem("fwoosh:storyPaneSize", String(size));
   }, []);
 
+  let content = <Story />;
+
   if (panels.length > 0) {
-    return (
+    content = (
       <PanelGroup direction="vertical">
         <Panel
           maxSize={75}
           defaultSize={storyPaneSize}
           onResize={storyPaneSizeSet}
         >
-          <Story />
+          {content}
         </Panel>
         <PanelResizeHandle>
           <PanelResizer />
@@ -71,5 +76,5 @@ export const StoryWithTools = () => {
     );
   }
 
-  return <Story />;
+  return <ErrorBoundary key={storyId}>{content}</ErrorBoundary>;
 };

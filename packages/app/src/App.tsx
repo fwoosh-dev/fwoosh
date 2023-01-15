@@ -93,7 +93,11 @@ const router = createBrowserRouter(
         },
         {
           path: "story/:storyId",
-          element: <Story />,
+          element: (
+            <ErrorBoundary>
+              <Story />
+            </ErrorBoundary>
+          ),
         },
         {
           path: "storybook",

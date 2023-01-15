@@ -2,7 +2,6 @@ import React from "react";
 import { useId } from "@radix-ui/react-id";
 
 import { styled } from "@fwoosh/styling";
-import { ErrorBoundary } from "@fwoosh/components";
 import { useRender } from "../hooks/useRender";
 import { stories } from "@fwoosh/app/stories";
 import { Helmet } from "react-helmet-async";
@@ -43,12 +42,12 @@ export const Story = () => {
   const id = useId();
 
   return (
-    <ErrorBoundary key={storyId}>
+    <>
       {storyId ? (
         <StoryDiv slug={storyId} id={contextId || id} />
       ) : (
         <div>Story not found</div>
       )}
-    </ErrorBoundary>
+    </>
   );
 };
