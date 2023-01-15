@@ -15,6 +15,7 @@ const rootOrder = [
 
 export const config: FwooshOptions = {
   title: "Fwoosh",
+  basename: "/fwoosh",
   docgen: { include: ["**/packages/components/**/*"] },
   sortSidebarItems: (a, b) => {
     // If both items are in the rootOrder array, sort by the order defined above
@@ -57,11 +58,4 @@ export const config: FwooshOptions = {
       },
     }),
   ],
-  modifyViteConfig: (config) => {
-    if (process.env.NODE_ENV === "production") {
-      config.base = "/fwoosh/";
-    }
-
-    return config;
-  },
 };
