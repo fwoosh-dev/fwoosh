@@ -11,13 +11,28 @@ Synopsis
 
 Commands
 
-  build   Do a production build of the website
   dev     Start the development server
+  build   Do a production build of the website
+  serve   Run a server a production build of the website
   clean   Clean up all the output files
 
 Global Options
 
   -h, --help    Display the help output
+```
+
+## `dev`
+
+Start the development server
+
+```sh
+Options
+
+  --stories string[]                       Globs to match story files
+  --log-level log | info | debug | trace   The amount of logs to print
+  --open storybook | docs                  Open the browser to the dev
+                                           server
+  -h, --help                               Display the help output
 ```
 
 ## `build`
@@ -34,18 +49,15 @@ Options
   -h, --help                               Display the help output
 ```
 
-## `dev`
+## `serve`
 
-Start the development server
+Run a server for the production build of the website.
 
 ```sh
 Options
 
-  --stories string[]                       Globs to match story files
-  --log-level log | info | debug | trace   The amount of logs to print
-  --open storybook | docs                  Open the browser to the dev
-                                           server
-  -h, --help                               Display the help output
+  --open storybook | docs   Open the browser to the dev server
+  -h, --help                Display the help output
 ```
 
 ## `clean`

@@ -17,7 +17,8 @@
     "@types/js-yaml": "^4.0.5",
     "@types/lodash.debounce": "^4.0.7",
     "@types/micromatch": "^4.0.2",
-    "@types/node": "^14.14.31"
+    "@types/node": "^14.14.31",
+    "@types/serve-handler": "^6.1.1"
   },
   "dependencies": {
     "@fwoosh/app": "link:../app",
@@ -56,6 +57,7 @@
     "remark-rehype": "^10.1.0",
     "remark-slug": "^7.0.1",
     "rollup": "^3.7.0",
+    "serve-handler": "^6.1.5",
     "shiki": "^0.12.1",
     "tapable": "^2.2.1",
     "terminal-link": "^3.0.0",

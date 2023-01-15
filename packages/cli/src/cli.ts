@@ -56,6 +56,14 @@ const outDirOption: Option = {
   defaultValue: "./out",
 };
 
+const openOption: Option = {
+  name: "open",
+  type: String,
+  description: "Open the browser to the dev server",
+  defaultValue: false,
+  typeLabel: "storybook | docs",
+};
+
 const sharedOptions: Option[] = [
   {
     name: "log-level",
@@ -71,24 +79,19 @@ const fwooshCli: MultiCommand = {
   description: "A lightening quick component development",
   commands: [
     {
+      name: "dev",
+      description: "Start the development server",
+      options: [...sharedOptions, storiesOption, openOption],
+    },
+    {
       name: "build",
       description: "Do a production build of the website",
       options: [...sharedOptions, storiesOption, outDirOption],
     },
     {
-      name: "dev",
-      description: "Start the development server",
-      options: [
-        ...sharedOptions,
-        storiesOption,
-        {
-          name: "open",
-          type: String,
-          description: "Open the browser to the dev server",
-          defaultValue: false,
-          typeLabel: "storybook | docs",
-        },
-      ],
+      name: "serve",
+      description: "Run a server for the production build of the website",
+      options: [openOption],
     },
     {
       name: "clean",
@@ -131,16 +134,19 @@ async function run() {
   // Dynamic import so we can set env vars before loading
   const { Fwoosh } = await import("./fwoosh.js");
   const fwoosh = new Fwoosh(fwooshOptions);
+  const outDir = path.join(dir, "out");
 
   await fwoosh.loadPlugins();
 
   if (options) {
     if (options._command === "build") {
       await fwoosh.clean();
-      await fwoosh.build({ outDir: path.join(dir, "out") });
+      await fwoosh.build({ outDir });
     } else if (options._command === "clean") {
       await fwoosh.clean();
       ora("").succeed("Cleaned output files.");
+    } else if (options._command === "serve") {
+      await fwoosh.serve({ outDir });
     } else {
       await fwoosh.dev();
     }

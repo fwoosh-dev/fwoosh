@@ -19,6 +19,8 @@ import open from "better-opn";
 import { h } from "hastscript";
 import { Element } from "hast";
 import { visit } from "unist-util-visit";
+import handler from "serve-handler";
+import http from "http";
 
 import { Pluggable } from "unified";
 import remarkFrontmatter from "remark-frontmatter";
@@ -56,6 +58,24 @@ interface WatchPagesOptions {
 
 interface BuildOptions {
   outDir: string;
+}
+
+interface ServeOptions {
+  outDir: string;
+  open?: boolean;
+}
+
+function printBox(message: string) {
+  console.log(
+    boxen(message, {
+      padding: 1,
+      margin: 1,
+      borderStyle: "round",
+      borderColor: "green",
+      titleAlignment: "center",
+      textAlignment: "center",
+    })
+  );
 }
 
 export class Fwoosh implements FwooshClass {
@@ -404,6 +424,39 @@ export class Fwoosh implements FwooshClass {
     const output = await build(config);
   }
 
+  /** Run a server a production build of the website */
+  async serve({ outDir }: ServeOptions) {
+    const server = http.createServer((request, response) => {
+      return handler(request, response, {
+        public: outDir,
+        rewrites: [
+          {
+            source: "fwoosh/assets/:id",
+            destination: "assets/:id",
+          },
+          {
+            source: "!assets/**",
+            destination: "index.html",
+          },
+        ],
+      });
+    });
+
+    server.listen(3000, () => {
+      const url = `http://localhost:${path.join(
+        `${3000}`,
+        this.options.basename,
+        "storybook"
+      )}`;
+
+      printBox(`fwoosh served at ${url}`);
+
+      if (this.options.open) {
+        open(url);
+      }
+    });
+  }
+
   /** Start the development server */
   async dev({ port }: WatchPagesOptions = { port: 3000 }) {
     const app = express();
@@ -476,16 +529,7 @@ export class Fwoosh implements FwooshClass {
     app.use(vite.middlewares);
 
     app.listen(port, async () => {
-      console.log(
-        boxen(`fwoosh served at http://localhost:${port}/storybook`, {
-          padding: 1,
-          margin: 1,
-          borderStyle: "round",
-          borderColor: "green",
-          titleAlignment: "center",
-          textAlignment: "center",
-        })
-      );
+      printBox(`fwoosh served at http://localhost:${port}/storybook`);
 
       if (this.options.open) {
         process.env.OPEN_MATCH_HOST_ONLY = "true";
