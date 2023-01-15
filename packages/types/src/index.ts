@@ -181,6 +181,16 @@ export interface FwooshOptions {
     /** Include globs */
     include?: string[];
   };
+  /**
+   * Base path to load assets from.
+   * If you serve your website from a subdirectory you'll need to set this.
+   *
+   * @example
+   *
+   * // If you serve your website from https://example.com/docs
+   * // You'll need to set this to "/docs"
+   */
+  basename?: string;
 }
 
 export type FwooshOptionWithCLIDefaults = FwooshOptions &

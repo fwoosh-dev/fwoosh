@@ -204,3 +204,16 @@ export const config: FwooshConfig = {
   docgen: { include: ["**/packages/components/**/*"] },
 };
 ```
+
+### `basename`
+
+Base path to load assets from.
+If you serve your website from a subdirectory you'll need to set this.
+
+For example if you serve your website from https://example.com/docs:
+
+```ts
+export const config: FwooshConfig = {
+  basePath: "/docs",
+};
+```

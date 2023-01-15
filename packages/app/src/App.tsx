@@ -60,84 +60,89 @@ const FirstStory = () => {
   return <Navigate to={"/storybook/" + firstStory.slug} />;
 };
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: (
-      <HelmetProvider>
-        <ErrorBoundary fullScreen>
-          <AppWrapper>
-            <Head />
-            <Outlet />
-            <ScrollRestoration />
-            <React.Suspense>
-              <CommandPallette />
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: (
+        <HelmetProvider>
+          <ErrorBoundary fullScreen>
+            <AppWrapper>
+              <Head />
+              <Outlet />
+              <ScrollRestoration />
+              <React.Suspense>
+                <CommandPallette />
+              </React.Suspense>
+            </AppWrapper>
+          </ErrorBoundary>
+        </HelmetProvider>
+      ),
+      children: [
+        {
+          index: true,
+          element: (
+            <React.Suspense fallback={<Spinner delay={2000} />}>
+              <FirstDocsPage />
             </React.Suspense>
-          </AppWrapper>
-        </ErrorBoundary>
-      </HelmetProvider>
-    ),
-    children: [
-      {
-        index: true,
-        element: (
-          <React.Suspense fallback={<Spinner delay={2000} />}>
-            <FirstDocsPage />
-          </React.Suspense>
-        ),
-      },
-      {
-        path: "story/:storyId",
-        element: <Story />,
-      },
-      {
-        path: "storybook",
-        element: <Storybook />,
-        children: [
-          {
-            index: true,
-            element: (
-              <React.Suspense fallback={<Spinner delay={2000} />}>
-                <FirstStory />
-              </React.Suspense>
-            ),
-          },
-          {
-            path: ":storyId",
-            element: <StoryWithTools />,
-          },
-          {
-            path: "docs",
-            children: [
-              {
-                path: ":docsPath",
-                element: <DocsPage />,
-              },
-            ],
-          },
-        ],
-      },
-      {
-        path: "docs",
-        element: <Docs />,
-        children: [
-          {
-            index: true,
-            element: (
-              <React.Suspense fallback={<Spinner delay={2000} />}>
-                <FirstDocsPage />
-              </React.Suspense>
-            ),
-          },
-          {
-            path: ":docsPath",
-            element: <DocsPage />,
-          },
-        ],
-      },
-    ],
-  },
-]);
+          ),
+        },
+        {
+          path: "story/:storyId",
+          element: <Story />,
+        },
+        {
+          path: "storybook",
+          element: <Storybook />,
+          children: [
+            {
+              index: true,
+              element: (
+                <React.Suspense fallback={<Spinner delay={2000} />}>
+                  <FirstStory />
+                </React.Suspense>
+              ),
+            },
+            {
+              path: ":storyId",
+              element: <StoryWithTools />,
+            },
+            {
+              path: "docs",
+              children: [
+                {
+                  path: ":docsPath",
+                  element: <DocsPage />,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          path: "docs",
+          element: <Docs />,
+          children: [
+            {
+              index: true,
+              element: (
+                <React.Suspense fallback={<Spinner delay={2000} />}>
+                  <FirstDocsPage />
+                </React.Suspense>
+              ),
+            },
+            {
+              path: ":docsPath",
+              element: <DocsPage />,
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  {
+    basename: process.env.FWOOSH_BASE_NAME,
+  }
+);
 
 const globalStyles = globalCss({
   mark: { background: "$primary6" },
