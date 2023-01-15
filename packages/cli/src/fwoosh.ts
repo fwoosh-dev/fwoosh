@@ -222,7 +222,7 @@ export class Fwoosh implements FwooshClass {
     const baseConfig: InlineConfig = {
       mode,
       root: path.dirname(path.dirname(require.resolve("@fwoosh/app"))),
-      base: this.options.basename,
+      base: mode === "production" ? this.options.basename : "/",
       plugins: [
         mdx({
           remarkPlugins: [remarkFrontmatter, remarkSlug],
@@ -328,7 +328,9 @@ export class Fwoosh implements FwooshClass {
       },
       define: {
         "process.env.LOG_LEVEL": `"${process.env.LOG_LEVEL}"`,
-        "process.env.FWOOSH_BASE_NAME": `"${this.options.basename}"`,
+        "process.env.FWOOSH_BASE_NAME": `"${
+          mode === "production" ? this.options.basename : "/"
+        }"`,
       },
     };
 
