@@ -192,3 +192,15 @@ export const config: FwooshConfig = {
   },
 };
 ```
+
+### `docgen`
+
+Generate docs for only these files.
+This is only needed during build time where we generate docs for all files.
+During dev we only generate docs for the component that's being viewed.
+
+```ts
+export const config: FwooshConfig = {
+  docgen: { include: ["**/packages/components/**/*"] },
+};
+```
