@@ -52,6 +52,8 @@ export const getStoryGroup = (
         } else if (childItem.story.type === "mdx") {
           return [childItem];
         }
+      } else {
+        throw new Error(`Could not find page "${path.join("-")}"`);
       }
     }
   }
