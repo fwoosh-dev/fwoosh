@@ -2,11 +2,12 @@ import { InlineConfig } from "vite";
 import {
   AsyncSeriesBailHook,
   AsyncSeriesWaterfallHook,
-  SyncBailHook,
   SyncWaterfallHook,
 } from "tapable";
 import type { ComponentDoc } from "react-docgen-typescript";
 import { CreateStitches } from "@stitches/react";
+
+export type { ComponentDoc } from "react-docgen-typescript";
 
 export interface Story {
   /** The exported name of the story */
@@ -81,24 +82,22 @@ interface BaseTreeItem {
   name: string;
 }
 
-export interface StoryTreeItem extends BaseTreeItem {
+export interface StoryBasicTreeItem extends BaseTreeItem {
   type: "story";
   story: BasicStoryData;
 }
 
-export interface MDXPageTreeItem extends BaseTreeItem {
-  type: "mdx";
-  story: MDXStoryData;
+export interface StoryTreeItem extends BaseTreeItem {
+  type: "story";
+  story: BasicStoryData | MDXStoryData;
 }
 
-export type StorySidebarChildItem = StoryTree | StoryTreeItem | MDXPageTreeItem;
+export type StorySidebarChildItem = StoryTree | StoryTreeItem;
 
 export interface StoryTree extends BaseTreeItem {
   type: "tree";
   children: StorySidebarChildItem[];
 }
-
-export type StorySidebarItem = StoryTree | MDXPageTreeItem;
 
 type ViteConfig = Omit<InlineConfig, "mode" | "root">;
 
@@ -117,7 +116,7 @@ export interface FwooshHooks {
    * Given a file path it should return docs for all the components
    * in that file. That information is then consumed throughout the app.
    */
-  generateDocs: SyncBailHook<string, ComponentDoc[]>;
+  generateDocs: AsyncSeriesBailHook<string, ComponentDoc[]>;
   /**
    * Register a tool in the storybook toolbar.
    *
@@ -173,6 +172,15 @@ export interface FwooshOptions {
   theme?: string | ThemeObject;
   /** Override any component from @fwoosh/components and take full control of the UI. */
   componentOverrides?: string;
+  /**
+   * Generate docs for only these files.
+   * This is only needed during build time where we generate docs for all files.
+   * During dev we only generate docs for the component that's being viewed.
+   */
+  docgen?: {
+    /** Include globs */
+    include?: string[];
+  };
 }
 
 export type FwooshOptionWithCLIDefaults = FwooshOptions &

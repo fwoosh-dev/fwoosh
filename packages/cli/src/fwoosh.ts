@@ -2,14 +2,13 @@ import { promises as fs } from "fs";
 import ms from "pretty-ms";
 import boxen from "boxen";
 import path from "path";
-import { createServer, InlineConfig } from "vite";
+import { createServer, InlineConfig, build } from "vite";
 import express from "express";
 import expressWs from "express-ws";
 import { createRequire } from "module";
 import {
   AsyncSeriesBailHook,
   AsyncSeriesWaterfallHook,
-  SyncBailHook,
   SyncWaterfallHook,
 } from "tapable";
 import mdx from "@mdx-js/rollup";
@@ -35,7 +34,7 @@ import type {
   FwooshOptionWithCLIDefaults,
   Plugin,
 } from "@fwoosh/types";
-import { storyListPlugin } from "./utils/story-list-plugin.js";
+import { storyListPlugin } from "./utils/story-list-plugin/index.js";
 import { renderStoryPlugin } from "./utils/render-story-plugin.js";
 import { getDocsPlugin } from "./utils/get-docs-plugin/index.js";
 import { fwooshSetupPlugin } from "./utils/fwoosh-setup-plugin.js";
@@ -51,6 +50,10 @@ interface WatchPagesOptions {
   port: number;
 }
 
+interface BuildOptions {
+  outDir: string;
+}
+
 export class Fwoosh implements FwooshClass {
   /** User's fwoosh options */
   public options: FwooshOptionsLoaded;
@@ -60,6 +63,7 @@ export class Fwoosh implements FwooshClass {
 
   constructor({ theme, ...options }: FwooshOptionWithCLIDefaults) {
     this.options = {
+      docgen: {},
       componentOverrides: undefined,
       title: "Fwoosh",
       setup: "",
@@ -72,11 +76,11 @@ export class Fwoosh implements FwooshClass {
         }
 
         // Render stories/mdx before trees
-        if (a.type === "tree" && (b.type === "story" || b.type === "mdx")) {
+        if (a.type === "tree" && b.type === "story") {
           return 1;
         }
 
-        if (b.type === "tree" && (a.type === "story" || a.type === "mdx")) {
+        if (b.type === "tree" && a.type === "story") {
           return -1;
         }
 
@@ -100,7 +104,7 @@ export class Fwoosh implements FwooshClass {
       registerPanel: new SyncWaterfallHook(["panels"]),
       registerToolbarControl: new SyncWaterfallHook(["toolbarControls"]),
       renderStory: new AsyncSeriesBailHook(),
-      generateDocs: new SyncBailHook(["pathToFile"]),
+      generateDocs: new AsyncSeriesBailHook(["pathToFile"]),
       modifyViteConfig: new AsyncSeriesWaterfallHook(["config"]),
     };
 
@@ -179,12 +183,44 @@ export class Fwoosh implements FwooshClass {
     });
   }
 
-  async getViteConfig({ port }: WatchPagesOptions = { port: 3000 }) {
+  async getViteConfig({
+    port = 3000,
+    outDir,
+    mode,
+  }: Partial<WatchPagesOptions> &
+    Partial<BuildOptions> & { mode: "development" | "production" }) {
     const toolbarControls = this.hooks.registerToolbarControl.call([]);
     const panels = this.hooks.registerPanel.call([]);
     const includedHeadings = ["h2", "h3", "h4", "h5", "h6"];
+    const depsToOptimize = [
+      "react-helmet-async",
+      "command-score",
+      "mousetrap",
+      "react",
+      "react-dom",
+      "react-dom/client",
+      "prop-types",
+      "@devtools-ds/themes",
+      "@devtools-ds/tree",
+      "@devtools-ds/object-inspector",
+      "escape-html",
+      "react-router",
+      "react-router-dom",
+      "debounce",
+      "react/jsx-runtime",
+      "hoist-non-react-statics",
+      "fast-deep-equal",
+      "fast-deep-equal/react",
+      "use-sync-external-store/shim",
+      "consola",
+      "lodash.chunk",
+    ];
+
+    process.env.NODE_ENV = mode;
 
     const baseConfig: InlineConfig = {
+      mode,
+      root: path.dirname(path.dirname(require.resolve("@fwoosh/app"))),
       plugins: [
         mdx({
           remarkPlugins: [remarkFrontmatter, remarkSlug],
@@ -243,13 +279,23 @@ export class Fwoosh implements FwooshClass {
         fwooshSetupPlugin({ file: this.options.setup }),
         fwooshUiPlugin({ toolbarControls, panels }),
         fwooshConfigPlugin(this.options),
-        getDocsPlugin({ port }),
+        getDocsPlugin({
+          port,
+          generateDocs: (file) => this.hooks.generateDocs.promise(file),
+          ...this.options.docgen,
+        }),
         storyListPlugin(this.options),
         renderStoryPlugin(await this.hooks.renderStory.promise()),
         componentOverridePlugin(this.options),
       ],
       optimizeDeps: {
         entries: [require.resolve("@fwoosh/app/index.html")],
+        exclude: ["@fwoosh/*"],
+        include: depsToOptimize,
+      },
+      build: {
+        outDir,
+        emptyOutDir: true,
       },
       server: {
         port,
@@ -258,12 +304,8 @@ export class Fwoosh implements FwooshClass {
           strict: false,
         },
       },
-      assetsInclude: ["**/*.html"],
       define: {
-        "process.env": {
-          LOG_LEVEL: "process.env.LOG_LEVEL",
-          FWOOSH_PORT: port,
-        },
+        "process.env.LOG_LEVEL": `"${process.env.LOG_LEVEL}"`,
       },
     };
 
@@ -282,19 +324,22 @@ export class Fwoosh implements FwooshClass {
   }
 
   /** Do a production build of the website */
-  async build() {
-    console.log("TODO");
+  async build({ outDir }: BuildOptions) {
+    const config = await this.getViteConfig({ outDir, mode: "production" });
+    const output = await build(config);
   }
 
   /** Start the development server */
   async dev({ port }: WatchPagesOptions = { port: 3000 }) {
     const app = express();
     const ws = expressWs(app);
-    const viteConfig = await this.getViteConfig({ port });
-    const vite = await createServer({
+    const viteConfig = await this.getViteConfig({
       mode: "development",
-      root: path.dirname(path.dirname(require.resolve("@fwoosh/app"))),
+      port,
+    });
+    const vite = await createServer({
       ...viteConfig,
+      assetsInclude: ["**/*.html"],
     });
 
     log.trace("Loaded vite with config:", vite.config);
@@ -309,7 +354,7 @@ export class Fwoosh implements FwooshClass {
           .replace(".js", ".tsx");
 
         const generateDocsStart = performance.now();
-        const docs = this.hooks.generateDocs.call(file);
+        const docs = await this.hooks.generateDocs.promise(file);
         const generateDocsEnd = performance.now();
         log.info(
           `Generate docs: ${path.relative(process.cwd(), file)} (${ms(

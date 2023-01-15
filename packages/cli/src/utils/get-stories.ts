@@ -18,6 +18,7 @@ import rehypeStringify from "rehype-stringify";
 
 import { FwooshOptionsLoaded, ResolvedStoryMeta } from "@fwoosh/types";
 import { shikiConfig } from "./shiki-config.js";
+import { endent } from "./endent.js";
 
 const require = createRequire(import.meta.url);
 
@@ -213,7 +214,15 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
           slug: createStorySlug(meta.title, exportName),
           file: fullPath,
           comment: await getComment(contents, nearestExport),
-          code: sanitizeTemplateString(code),
+          code: sanitizeTemplateString(
+            process.env.NODE_ENV === "production"
+              ? await convertMarkdownToHtml(endent`
+                  \`\`\`tsx
+                  ${code}
+                  \`\`\`
+                `)
+              : code
+          ),
         };
       })
     );

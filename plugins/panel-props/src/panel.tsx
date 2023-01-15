@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useDocs } from "@fwoosh/app/docs";
+import { useDocgen } from "@fwoosh/app/docs";
 import { stories } from "@fwoosh/app/stories";
 import { PropsTable, components, DelayedRender } from "@fwoosh/components";
 import { styled, keyframes } from "@fwoosh/styling";
@@ -15,7 +15,7 @@ function PropsPanelContent() {
   const [, story] =
     Object.entries(stories).find(([slug]) => slug === storyId) || [];
   const key = story?.slug || "none";
-  const docs = useDocs(key, (story?.component as any)._result || story?.meta);
+  const docs = useDocgen(key, (story?.component as any)._result || story?.meta);
 
   return (
     <Wrapper>

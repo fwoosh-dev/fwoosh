@@ -87,6 +87,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@auto-it/gh-pages@npm:^10.37.6":
+  version: 10.37.6
+  resolution: "@auto-it/gh-pages@npm:10.37.6"
+  dependencies:
+    "@auto-it/core": 10.37.6
+    endent: ^2.1.0
+    fp-ts: ^2.5.3
+    io-ts: ^2.1.2
+    push-dir: ^0.4.1
+    tslib: 2.1.0
+  checksum: 7c0327b49dfcaa3050f79bde85acff9b709a0c41da6efaa0d2a69eeedef4b44b082a311b03c6c63406dba12b23cd211044f724d2924adcafdd6859ccb13fa992
+  languageName: node
+  linkType: hard
+
 "@auto-it/npm@npm:10.37.6":
   version: 10.37.6
   resolution: "@auto-it/npm@npm:10.37.6"
@@ -3306,6 +3320,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/braces@npm:*":
+  version: 3.0.1
+  resolution: "@types/braces@npm:3.0.1"
+  checksum: 3749f7673a03d498ddb2f199b222bb403e53e78ac05a599c757c2049703ece802602c78640af0ff826be0fd2ea8b03daff04ce18806ed739592302195b7a569b
+  languageName: node
+  linkType: hard
+
 "@types/command-line-args@npm:^5.0.0":
   version: 5.0.0
   resolution: "@types/command-line-args@npm:5.0.0"
@@ -3500,6 +3521,15 @@ __metadata:
   version: 2.0.1
   resolution: "@types/mdx@npm:2.0.1"
   checksum: 521ee9f976af45859a4dd60b159e1cc09109de49ec5570fe70f34cddb0a7b5472b87c1bea743429270398207a997821dec34fd7bd63cbc2a1e5f2f6c701dd1c2
+  languageName: node
+  linkType: hard
+
+"@types/micromatch@npm:^4.0.2":
+  version: 4.0.2
+  resolution: "@types/micromatch@npm:4.0.2"
+  dependencies:
+    "@types/braces": "*"
+  checksum: 6c678e9c625d5b422c6d2c1001da1c502ecc4457248343bbd324b79fd798a6563e336a4d79630d80e8202312013dd7cf8b4440afa644d04477abd26fde6fba24
   languageName: node
   linkType: hard
 
@@ -6441,6 +6471,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "fwoosh-monorepo@workspace:."
   dependencies:
+    "@auto-it/gh-pages": ^10.37.6
     "@types/node": ^14.14.31
     auto: ^10.37.6
     command-line-application: ^0.10.1
@@ -6523,6 +6554,7 @@ __metadata:
     "@types/express-ws": ^3.0.1
     "@types/js-yaml": ^4.0.5
     "@types/lodash.debounce": ^4.0.7
+    "@types/micromatch": ^4.0.2
     "@types/node": ^14.14.31
     better-opn: ^3.0.2
     boxen: ^6.2.1
@@ -6540,6 +6572,7 @@ __metadata:
     js-yaml: ^4.1.0
     lilconfig: ^2.0.5
     lodash.debounce: ^4.0.8
+    micromatch: ^4.0.5
     ora: ^5.3.0
     pretty-ms: ^7.0.1
     rehype-autolink-headings: ^6.1.1
@@ -9252,7 +9285,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"micromatch@npm:^4.0.4":
+"micromatch@npm:^4.0.4, micromatch@npm:^4.0.5":
   version: 4.0.5
   resolution: "micromatch@npm:4.0.5"
   dependencies:
@@ -10750,6 +10783,17 @@ __metadata:
     end-of-stream: ^1.1.0
     once: ^1.3.1
   checksum: e42e9229fba14732593a718b04cb5e1cfef8254544870997e0ecd9732b189a48e1256e4e5478148ecb47c8511dca2b09eae56b4d0aad8009e6fac8072923cfc9
+  languageName: node
+  linkType: hard
+
+"push-dir@npm:^0.4.1":
+  version: 0.4.1
+  resolution: "push-dir@npm:0.4.1"
+  dependencies:
+    minimist: ^1.2.0
+  bin:
+    push-dir: bin/push-dir.js
+  checksum: b35b2f5c883903510297f2ce28f172f0c5206adea79506ec4dbbe5b4b055c3c0c0c98761201d79ad3b4791eaa03b69602b3e4cc9656e98e5af47de1f612c4f17
   languageName: node
   linkType: hard
 

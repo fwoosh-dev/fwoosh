@@ -2,6 +2,7 @@ import { performance } from "perf_hooks";
 import { app, MultiCommand, Option } from "command-line-application";
 import ms from "pretty-ms";
 import ora from "ora";
+import path from "path";
 import { lilconfig } from "lilconfig";
 import { register } from "ts-node";
 
@@ -100,7 +101,8 @@ const fwooshCli: MultiCommand = {
 async function run() {
   const start = performance.now();
   const options = app(fwooshCli);
-  const { config = {} } = (await explorer.search()) || {};
+  const { config = {}, filepath } = (await explorer.search()) || {};
+  const dir = path.dirname(filepath || process.cwd());
 
   if (options) {
     delete options._none;
@@ -135,7 +137,7 @@ async function run() {
   if (options) {
     if (options._command === "build") {
       await fwoosh.clean();
-      await fwoosh.build();
+      await fwoosh.build({ outDir: path.join(dir, "out") });
     } else if (options._command === "clean") {
       await fwoosh.clean();
       ora("").succeed("Cleaned output files.");

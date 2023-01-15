@@ -5,12 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useStoryTree } from "@fwoosh/hooks";
 import commandScore from "command-score";
 import { Interweave } from "interweave";
-import {
-  MDXPageTreeItem,
-  StoryData,
-  StoryTree,
-  StoryTreeItem,
-} from "@fwoosh/types";
+import { StoryData, StoryTree, StoryTreeItem } from "@fwoosh/types";
 import useMousetrap from "react-hook-mousetrap";
 import { Bookmark, Code } from "react-feather";
 import { SearchData } from "./MDXPage";
@@ -22,7 +17,6 @@ const CommandPalletteContext = React.createContext<{
 });
 
 function highlightSearchResult(text: string, search: string) {
-  console.log("highlightSearchResult");
   const parser = new DOMParser();
   const doc = parser.parseFromString(text, "text/html");
   const matches = doc.evaluate(
@@ -86,20 +80,20 @@ function StoryCommandTreeChild({
   onNavigate,
 }: {
   groupName: string;
-  item: MDXPageTreeItem | StoryTreeItem;
+  item: StoryTreeItem;
   onNavigate: (story: StoryData) => void;
 }) {
   const { search } = React.useContext(CommandPalletteContext);
   const parts = item.story.grouping.split("/");
   const highlightedSearchResult = React.useMemo(() => {
-    if (!search || item.type !== "story" || !item.story.comment) {
+    if (!search || item.story.type !== "basic" || !item.story.comment) {
       return;
     }
 
     return highlightSearchResult(item.story.comment, search);
   }, [search, item]);
 
-  if (item.type === "mdx") {
+  if (item.story.type === "mdx") {
     if (parts[0] === groupName) {
       parts.shift();
     }
@@ -180,7 +174,7 @@ function StoryCommandTree({
   onNavigate: (story: StoryData) => void;
 }) {
   const items = React.useMemo(() => {
-    const allChildren: (StoryTreeItem | MDXPageTreeItem)[] = [];
+    const allChildren: StoryTreeItem[] = [];
     const toProcess = [...tree.children];
 
     while (toProcess.length > 0) {

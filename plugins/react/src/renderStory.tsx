@@ -51,21 +51,32 @@ function App({ slug }: AppProps) {
     content = <Component />;
   }
 
-  return (
-    <Suspense fallback={<Spinner delay={300} />}>
-      <ErrorBoundary>{content}</ErrorBoundary>
-    </Suspense>
-  );
+  return content;
 }
 
-export function render(el: Element, slug: string) {
+export function render(
+  el: Element,
+  slug: string,
+  onStart: () => void,
+  onComplete: () => void
+) {
   if (!el) {
     return;
   }
 
+  function Fallback() {
+    React.useEffect(() => {
+      onStart();
+      return () => {
+        onComplete();
+      };
+    });
+    return <Spinner delay={300} />;
+  }
+
   try {
     ReactDOM.render(
-      <Suspense fallback={<Spinner delay={300} />}>
+      <Suspense fallback={<Fallback />}>
         <ErrorBoundary>
           <App slug={slug} />
         </ErrorBoundary>

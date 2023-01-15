@@ -7,6 +7,9 @@ export const config: FwooshOptions = {
   setup: path.resolve("./config/fwoosh-setup.ts"),
   theme: path.resolve("./config/fwoosh-theme.ts"),
   componentOverrides: path.resolve("./config/fwoosh-overrides.tsx"),
+  docgen: {
+    include: ["**/src/**/*.{ts,tsx}"],
+  },
   plugins: [
     "@fwoosh/panel-props",
     "@fwoosh/panel-source",

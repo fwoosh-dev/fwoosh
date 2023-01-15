@@ -70,7 +70,9 @@ const router = createBrowserRouter([
             <Head />
             <Outlet />
             <ScrollRestoration />
-            <CommandPallette />
+            <React.Suspense>
+              <CommandPallette />
+            </React.Suspense>
           </AppWrapper>
         </ErrorBoundary>
       </HelmetProvider>
@@ -139,6 +141,7 @@ const router = createBrowserRouter([
 
 const globalStyles = globalCss({
   mark: { background: "$primary6" },
+  html: { background: "$gray1" },
 });
 
 export const App = () => {

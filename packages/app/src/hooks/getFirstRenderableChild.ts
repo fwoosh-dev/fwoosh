@@ -23,12 +23,12 @@ export const getFirstRenderableChild = (
   }
 
   if (isStorybook) {
-    return currentNode.data.type === "story"
+    return currentNode.data.story.type === "basic"
       ? currentNode.data.story.slug
       : `docs/${currentNode.data.story.slug}`;
   }
 
-  return currentNode.data.type === "story"
+  return currentNode.data.story.type === "basic"
     ? "?"
     : `${currentNode.data.story.slug}`;
 };

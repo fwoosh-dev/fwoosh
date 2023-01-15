@@ -42,7 +42,7 @@ async function resolveComponents(meta: UnresolvedMeta) {
   return component;
 }
 
-export const useDocs = (key: string, story: Story) => {
+export const useDocgen = (key: string, story: Story) => {
   const { data } = useQuery(
     key,
     async () => {
@@ -57,6 +57,16 @@ export const useDocs = (key: string, story: Story) => {
         : [component.component];
       const displayedComponents = components.map((c) => c.displayName);
       const file = components[0].fwoosh_file;
+
+      if (
+        components[0].fwoosh_docgen &&
+        components[0].fwoosh_docgen !== "undefined"
+      ) {
+        const docgen = JSON.parse(components[0].fwoosh_docgen);
+        return docgen.filter((doc: { displayName: string }) =>
+          displayedComponents.includes(doc.displayName)
+        );
+      }
 
       return new Promise((resolve) => {
         const socket = new WebSocket(

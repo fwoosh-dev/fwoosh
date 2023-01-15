@@ -1,8 +1,8 @@
 import React, { Suspense } from "react";
 import { useLocation } from "react-router-dom";
 import { useId } from "@radix-ui/react-id";
-import { BasicStoryData, StoryMeta } from "@fwoosh/types";
-import { useDocs } from "@fwoosh/app/docs";
+import { BasicStoryData, StoryBasicTreeItem, StoryMeta } from "@fwoosh/types";
+import { useDocgen } from "@fwoosh/app/docs";
 import { styled } from "@fwoosh/styling";
 import {
   components,
@@ -95,24 +95,48 @@ const StoryCode = React.memo(({ code }: { code: string }) => {
   );
 });
 
+const OverlaySpinner = styled("div", {
+  background: "$gray1",
+  position: "absolute",
+  inset: 0,
+  zIndex: 100000,
+});
+
 const StoryDiv = React.memo(
-  ({ slug, code }: { slug: string; code: string }) => {
+  ({
+    slug,
+    code,
+    showSpinnerWhileLoading,
+  }: {
+    slug: string;
+    code: string;
+    showSpinnerWhileLoading?: boolean;
+  }) => {
     const id = useId();
     const [codeShowing, codeShowingSet] = React.useState(false);
-    const ref = useRender({ id, slug });
+    const { ref, hasRendered } = useRender({ id, slug });
 
     return (
-      <CollapsibleRoot open={codeShowing} onOpenChange={codeShowingSet}>
-        <StoryPreview state={codeShowing ? "open" : undefined} ref={ref} />
-        <Collapsible.Trigger asChild={true}>
-          <ShowCodeButton>{codeShowing ? "Hide" : "Show"} code</ShowCodeButton>
-        </Collapsible.Trigger>
-        <Collapsible.Content>
-          <Suspense fallback={<Spinner delay={2000} />}>
-            <StoryCode code={code} />
-          </Suspense>
-        </Collapsible.Content>
-      </CollapsibleRoot>
+      <>
+        <CollapsibleRoot open={codeShowing} onOpenChange={codeShowingSet}>
+          <StoryPreview state={codeShowing ? "open" : undefined} ref={ref} />
+          <Collapsible.Trigger asChild={true}>
+            <ShowCodeButton>
+              {codeShowing ? "Hide" : "Show"} code
+            </ShowCodeButton>
+          </Collapsible.Trigger>
+          <Collapsible.Content>
+            <Suspense fallback={<Spinner delay={2000} />}>
+              <StoryCode code={code} />
+            </Suspense>
+          </Collapsible.Content>
+        </CollapsibleRoot>
+        {showSpinnerWhileLoading && !hasRendered && (
+          <OverlaySpinner>
+            <Spinner delay={2000} />
+          </OverlaySpinner>
+        )}
+      </>
     );
   }
 );
@@ -126,7 +150,7 @@ const DocsPropsTable = ({
   meta: StoryMeta;
   hasTitle?: boolean | string;
 }) => {
-  const docs = useDocs(story.slug, meta);
+  const docs = useDocgen(story.slug, meta);
 
   return (
     <div style={{ height: "fit-content" }}>
@@ -138,39 +162,55 @@ const DocsPropsTable = ({
 const StoryDocsPage = ({
   stories: [firstStory, ...stories],
 }: {
-  stories: [StoryTreeItem, ...StorySidebarChildItem[]];
+  stories: [StoryBasicTreeItem, ...StorySidebarChildItem[]];
 }) => {
   const docsPath = useDocsPath();
   const nameParts = docsPath?.split("-") || [];
   const name = nameParts[nameParts.length - 1];
   const quickNavRef = React.useRef<HTMLDivElement>(null);
 
+  let docsIntro: React.ReactNode = null;
+
+  if (firstStory) {
+    const introProps = (
+      <DocsPropsTable
+        story={firstStory.story}
+        meta={firstStory.story.meta}
+        hasTitle="props"
+      />
+    );
+
+    docsIntro = (
+      <>
+        {firstStory.story.comment && (
+          <StyledMarkdown>{firstStory.story.comment}</StyledMarkdown>
+        )}
+        <StoryDiv
+          slug={firstStory.story.slug}
+          code={firstStory.story.code}
+          key={firstStory.story.slug}
+          showSpinnerWhileLoading={true}
+        />
+        {process.env.NODE_ENV === "production" ? (
+          // In prod we want the whole page to render before showing so it jumps less
+          // since all the data is already inlined though should be fast.
+          introProps
+        ) : (
+          <Suspense fallback={<Spinner style={{ height: 200 }} />}>
+            {introProps}
+          </Suspense>
+        )}
+      </>
+    );
+  }
+
   useActiveHeader(quickNavRef);
 
   return (
     <DocsLayout>
-      <PageWrapper>
+      <PageWrapper style={{ position: "relative" }}>
         <components.h1 id="intro">{titleCase(name)}</components.h1>
-        {firstStory && (
-          <>
-            {firstStory.story.comment && (
-              <StyledMarkdown>{firstStory.story.comment}</StyledMarkdown>
-            )}
-            <StoryDiv
-              slug={firstStory.story.slug}
-              code={firstStory.story.code}
-              key={firstStory.story.slug}
-            />
-            <Suspense fallback={<Spinner style={{ height: 200 }} />}>
-              <DocsPropsTable
-                story={firstStory.story}
-                meta={firstStory.story.meta}
-                hasTitle="props"
-              />
-            </Suspense>
-          </>
-        )}
-
+        {docsIntro}
         {stories.length > 0 && (
           <>
             <HeaderWrapper data-link-group>
@@ -178,7 +218,7 @@ const StoryDocsPage = ({
               <components.h2 id="stories">Stories</components.h2>
             </HeaderWrapper>
             {stories.map((story) => {
-              if (story.type === "mdx" || story.type === "tree") {
+              if (story.type === "tree" || story.story.type === "mdx") {
                 return null;
               }
 
@@ -232,7 +272,7 @@ const StoryDocsPage = ({
               </QuickNav.Item>
               <QuickNav.Group>
                 {stories.map((story) => {
-                  if (story.type === "mdx" || story.type === "tree") {
+                  if (story.type === "tree" || story.story.type === "mdx") {
                     return null;
                   }
 
@@ -277,12 +317,14 @@ const DocsContent = React.memo(() => {
     return null;
   }
 
-  if (firstStory.type === "mdx") {
+  if (firstStory.type === "story" && firstStory.story.type === "mdx") {
     return <MDXPage page={firstStory} />;
   }
 
   return (
-    <StoryDocsPage stories={[firstStory as StoryTreeItem, ...restStories]} />
+    <StoryDocsPage
+      stories={[firstStory as StoryBasicTreeItem, ...restStories]}
+    />
   );
 });
 

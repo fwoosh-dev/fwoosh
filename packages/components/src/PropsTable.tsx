@@ -1,5 +1,5 @@
 import React from "react";
-import { useDocs } from "@fwoosh/app/docs";
+import { useDocgen } from "@fwoosh/app/docs";
 import { styled } from "@fwoosh/styling";
 
 import { StyledMarkdown } from "./StyledMarkdown.js";
@@ -11,7 +11,7 @@ const NoPropMessage = styled(components.p, {
 });
 
 interface TableProps {
-  doc: ReturnType<typeof useDocs>[number];
+  doc: ReturnType<typeof useDocgen>[number];
 }
 
 const Table = ({ doc }: TableProps) => {
@@ -74,7 +74,7 @@ const Table = ({ doc }: TableProps) => {
 };
 
 export interface PropsTableProps {
-  docs: ReturnType<typeof useDocs>;
+  docs: ReturnType<typeof useDocgen>;
   hasTitle?: boolean | string;
 }
 

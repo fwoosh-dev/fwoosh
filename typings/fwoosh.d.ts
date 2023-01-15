@@ -1,6 +1,8 @@
 declare module "@fwoosh/app/stories" {
-  import { Stories } from "@fwoosh/types";
+  import { Stories, StorySidebarChildItem } from "@fwoosh/types";
   export const stories: Stories;
+  export const order: StorySidebarChildItem[];
+  export const tree: StorySidebarChildItem[];
 }
 
 declare module "@fwoosh/app/overrides";
@@ -13,13 +15,18 @@ declare module "@fwoosh/app/config" {
 }
 
 declare module "@fwoosh/app/render" {
-  export function render(id: Element, slug: string): void;
+  export function render(
+    id: Element,
+    slug: string,
+    onStart?: () => void,
+    onComplete?: () => void
+  ): void;
 }
 
 declare module "@fwoosh/app/docs" {
   import type { ComponentDoc } from "react-docgen-typescript";
   import { StoryMeta } from "@fwoosh/types";
-  export function useDocs(key: string, story: StoryMeta): ComponentDoc[];
+  export function useDocgen(key: string, story: StoryMeta): ComponentDoc[];
 }
 
 declare module "@fwoosh/app/ui" {
