@@ -18,6 +18,7 @@
     "create:plugin": "yarn run create --type plugin"
   },
   "devDependencies": {
+    "@auto-it/gh-pages": "^10.37.6",
     "@types/node": "^14.14.31",
     "auto": "^10.37.6",
     "command-line-application": "^0.10.1",
@@ -34,7 +35,14 @@
   "auto": {
     "plugins": [
       "npm",
-      "released"
+      "released",
+      [
+        "gh-pages",
+        {
+          "buildCommand": "cd examples/fwoosh && yarn fwoosh build",
+          "dir": "./examples/fwoosh/out"
+        }
+      ]
     ]
   },
   "packageManager": "yarn@3.2.0"
