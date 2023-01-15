@@ -57,6 +57,10 @@ const FirstStory = () => {
     throw new Error('No stories found. Did you forget to add a "meta" export?');
   }
 
+  if (firstStory.type === "mdx") {
+    return <Navigate to={"/storybook/docs/" + firstStory.slug} />;
+  }
+
   return <Navigate to={"/storybook/" + firstStory.slug} />;
 };
 
