@@ -289,6 +289,26 @@ export class Fwoosh implements FwooshClass {
         storyListPlugin(this.options),
         renderStoryPlugin(await this.hooks.renderStory.promise()),
         componentOverridePlugin(this.options),
+        {
+          name: "fwoosh:404",
+          enforce: "post",
+          writeBundle: async () => {
+            if (!outDir) {
+              return;
+            }
+
+            const pathOf404 = path.join(outDir, "404.html");
+            const contentsOf404 = await fs.readFile(pathOf404, "utf8");
+
+            await fs.writeFile(
+              pathOf404,
+              contentsOf404.replace(
+                "process.env.FWOOSH_PATH_SEGMENTS_TO_KEEP",
+                String(this.options.basename.split("/").filter(Boolean).length)
+              )
+            );
+          },
+        },
       ],
       optimizeDeps: {
         entries: [require.resolve("@fwoosh/app/index.html")],
