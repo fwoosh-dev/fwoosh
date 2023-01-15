@@ -1,3 +1,16 @@
+# v0.0.85 (Sun Jan 15 2023)
+
+#### ⚠️ Pushed to `main`
+
+- `@fwoosh/app`, `fwoosh`
+  - add SPA redirects for gh-pages ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.84 (Sun Jan 15 2023)
 
 #### ⚠️ Pushed to `main`
