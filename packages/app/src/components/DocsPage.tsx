@@ -17,7 +17,7 @@ import {
 import * as Collapsible from "@radix-ui/react-collapsible";
 import { paramCase } from "change-case";
 import { titleCase } from "title-case";
-import { StorySidebarChildItem, StoryTreeItem } from "@fwoosh/types";
+import { StorySidebarChildItem } from "@fwoosh/types";
 import {
   getStoryGroup,
   useStoryTree,
@@ -33,6 +33,12 @@ import { useActiveHeader } from "../hooks/useActiveHeader";
 
 const HeaderWrapper = styled("div", {
   position: "relative",
+});
+
+const CollapsibleContent = styled(Collapsible.Content, {
+  "& pre": {
+    margin: 0,
+  },
 });
 
 const HeaderLink = ({ title, id }: { title: React.ReactNode; id: string }) => {
@@ -79,6 +85,8 @@ const ShowCodeButton = styled("button", {
 
 const CollapsibleRoot = styled(Collapsible.Root, {
   position: "relative",
+  mt: 8,
+  mb: 12,
 });
 
 const StoryCode = React.memo(({ code }: { code: string }) => {
@@ -125,11 +133,11 @@ const StoryDiv = React.memo(
               {codeShowing ? "Hide" : "Show"} code
             </ShowCodeButton>
           </Collapsible.Trigger>
-          <Collapsible.Content>
+          <CollapsibleContent>
             <Suspense fallback={<Spinner delay={2000} />}>
               <StoryCode code={code} />
             </Suspense>
-          </Collapsible.Content>
+          </CollapsibleContent>
         </CollapsibleRoot>
         {showSpinnerWhileLoading && !hasRendered && (
           <OverlaySpinner>

@@ -28,8 +28,6 @@ export const PageWrapper = styled("main", {
   minWidth: 0,
   minHeight: "100%",
   height: "fit-content",
-  display: "flex",
-  flexDirection: "column",
 });
 
 export const IconButton = styled("button", {
