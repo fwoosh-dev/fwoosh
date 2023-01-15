@@ -145,32 +145,47 @@ const StoryDocsPage = ({
   const name = nameParts[nameParts.length - 1];
   const quickNavRef = React.useRef<HTMLDivElement>(null);
 
+  let docsIntro: React.ReactNode = null;
+
+  if (firstStory) {
+    const introProps = (
+      <DocsPropsTable
+        story={firstStory.story}
+        meta={firstStory.story.meta}
+        hasTitle="props"
+      />
+    );
+
+    docsIntro = (
+      <>
+        {firstStory.story.comment && (
+          <StyledMarkdown>{firstStory.story.comment}</StyledMarkdown>
+        )}
+        <StoryDiv
+          slug={firstStory.story.slug}
+          code={firstStory.story.code}
+          key={firstStory.story.slug}
+        />
+        {process.env.NODE_ENV === "production" ? (
+          // In prod we want the whole page to render before showing so it jumps less
+          // since all the data is already inlined though should be fast.
+          introProps
+        ) : (
+          <Suspense fallback={<Spinner style={{ height: 200 }} />}>
+            {introProps}
+          </Suspense>
+        )}
+      </>
+    );
+  }
+
   useActiveHeader(quickNavRef);
 
   return (
     <DocsLayout>
       <PageWrapper>
         <components.h1 id="intro">{titleCase(name)}</components.h1>
-        {firstStory && (
-          <>
-            {firstStory.story.comment && (
-              <StyledMarkdown>{firstStory.story.comment}</StyledMarkdown>
-            )}
-            <StoryDiv
-              slug={firstStory.story.slug}
-              code={firstStory.story.code}
-              key={firstStory.story.slug}
-            />
-            <Suspense fallback={<Spinner style={{ height: 200 }} />}>
-              <DocsPropsTable
-                story={firstStory.story}
-                meta={firstStory.story.meta}
-                hasTitle="props"
-              />
-            </Suspense>
-          </>
-        )}
-
+        {docsIntro}
         {stories.length > 0 && (
           <>
             <HeaderWrapper data-link-group>
