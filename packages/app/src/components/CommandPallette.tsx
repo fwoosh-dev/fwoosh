@@ -2,7 +2,7 @@ import * as React from "react";
 import { Command } from "@fwoosh/components";
 import { headerCase } from "change-case";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useStoryTree } from "@fwoosh/hooks";
+import { tree } from "@fwoosh/app/stories";
 import commandScore from "command-score";
 import { Interweave } from "interweave";
 import { StoryData, StoryTree, StoryTreeItem } from "@fwoosh/types";
@@ -209,7 +209,6 @@ function StoryCommandTree({
 }
 
 export function CommandPallette() {
-  const tree = useStoryTree();
   const [open, openSet] = React.useState(false);
   const [value, valueSet] = React.useState("");
   const navigate = useNavigate();

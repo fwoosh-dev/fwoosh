@@ -6592,6 +6592,7 @@ __metadata:
     ts-node: ^10
     typescript: ^4
     unified: ^10.1.2
+    unist-util-visit: ^4.1.1
     vite: ^4.0.4
   dependenciesMeta:
     typescript:
@@ -13156,7 +13157,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unist-util-visit@npm:^4.1.0":
+"unist-util-visit@npm:^4.1.0, unist-util-visit@npm:^4.1.1":
   version: 4.1.1
   resolution: "unist-util-visit@npm:4.1.1"
   dependencies:

@@ -18,12 +18,9 @@ import * as Collapsible from "@radix-ui/react-collapsible";
 import { paramCase } from "change-case";
 import { titleCase } from "title-case";
 import { StorySidebarChildItem } from "@fwoosh/types";
-import {
-  getStoryGroup,
-  useStoryTree,
-  useHighlightedCode,
-  useDocsPath,
-} from "@fwoosh/hooks";
+import { getStoryGroup } from "@fwoosh/utils";
+import { tree } from "@fwoosh/app/stories";
+import { useHighlightedCode, useDocsPath } from "@fwoosh/hooks";
 
 import * as styles from "./DocsPage.module.css";
 import { useRender } from "../hooks/useRender";
@@ -308,7 +305,6 @@ const StoryDocsPage = ({
 };
 
 const DocsContent = React.memo(() => {
-  const tree = useStoryTree();
   const docsPath = useDocsPath();
   const [firstStory, ...restStories] = React.useMemo(() => {
     if (!docsPath) {

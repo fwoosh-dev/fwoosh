@@ -9,22 +9,17 @@ import {
 } from "@fwoosh/components";
 import { Link } from "react-router-dom";
 import { StoryTreeItem } from "@fwoosh/types";
-import {
-  useStoryTree,
-  hasActiveChild,
-  useStoryId,
-  useDocsPath,
-} from "@fwoosh/hooks";
+import { tree } from "@fwoosh/app/stories";
+import { useStoryId, useDocsPath } from "@fwoosh/hooks";
 import { capitalCase } from "change-case";
 
 import { SidebarTree } from "./SidebarTree";
-import { resetContentScrollPosition } from "@fwoosh/utils";
+import { hasActiveChild, resetContentScrollPosition } from "@fwoosh/utils";
 import { getFirstRenderableChild } from "../../hooks/getFirstRenderableChild";
 
 export const StorybookSidebarTree = () => {
   const storyId = useStoryId();
   const docsPath = useDocsPath();
-  const tree = useStoryTree();
 
   return (
     <SidebarTree data={tree} activeId={storyId || docsPath}>

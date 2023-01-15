@@ -12,12 +12,13 @@ import {
   SyncWaterfallHook,
 } from "tapable";
 import mdx from "@mdx-js/rollup";
-import { log, sortTree } from "@fwoosh/utils";
+import { checkLink, log, sortTree } from "@fwoosh/utils";
 import bodyParser from "body-parser";
 import terminalLink from "terminal-link";
 import open from "better-opn";
 import { h } from "hastscript";
 import { Element } from "hast";
+import { visit } from "unist-util-visit";
 
 import { Pluggable } from "unified";
 import remarkFrontmatter from "remark-frontmatter";
@@ -34,7 +35,10 @@ import type {
   FwooshOptionWithCLIDefaults,
   Plugin,
 } from "@fwoosh/types";
-import { storyListPlugin } from "./utils/story-list-plugin/index.js";
+import {
+  createVirtualStoriesFile,
+  storyListPlugin,
+} from "./utils/story-list-plugin/index.js";
 import { renderStoryPlugin } from "./utils/render-story-plugin.js";
 import { getDocsPlugin } from "./utils/get-docs-plugin/index.js";
 import { fwooshSetupPlugin } from "./utils/fwoosh-setup-plugin.js";
@@ -241,6 +245,52 @@ export class Fwoosh implements FwooshClass {
                     JSON.stringify(file.data)
                   )
                 );
+              };
+            },
+            // Check validity of links during build
+            () => {
+              if (mode !== "production") {
+                return () => {};
+              }
+
+              const storiesPromise = createVirtualStoriesFile(this.options);
+
+              return async (tree, file) => {
+                const stories = await storiesPromise;
+                const errors: string[] = [];
+
+                visit(
+                  tree,
+                  "mdxJsxTextElement",
+                  (node: {
+                    name: string;
+                    attributes: { name: string; value: string }[];
+                  }) => {
+                    if (node.name !== "Link") {
+                      return;
+                    }
+
+                    const to = node.attributes.find(
+                      (attr) => attr.name === "to"
+                    )?.value;
+
+                    if (!to) {
+                      throw new Error('Link is missing a "to" attribute');
+                    }
+
+                    try {
+                      checkLink(to, stories.fileMap, stories.tree);
+                    } catch (error) {
+                      errors.push((error as Error).message);
+                    }
+                  }
+                );
+
+                if (errors.length) {
+                  console.log(`\nFound invalid links in: ${file.path}\n`);
+                  console.log(errors.join("\n"));
+                  process.exit(1);
+                }
               };
             },
             [

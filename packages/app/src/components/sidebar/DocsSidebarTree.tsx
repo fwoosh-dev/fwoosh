@@ -15,7 +15,8 @@ import {
   resetContentScrollPosition,
   convertMetaTitleToUrlParam,
 } from "@fwoosh/utils";
-import { useDocsPath, useStoryTree } from "@fwoosh/hooks";
+import { tree } from "@fwoosh/app/stories";
+import { useDocsPath } from "@fwoosh/hooks";
 import { titleCase } from "title-case";
 
 import { SidebarTree } from "./SidebarTree";
@@ -125,7 +126,6 @@ function filterOutStories(tree: StorySidebarChildItem[]) {
 
 export const DocsSidebarTree = () => {
   const docsPath = useDocsPath();
-  const tree = useStoryTree();
 
   return (
     <SidebarTree data={filterOutStories(tree)} activeId={docsPath}>

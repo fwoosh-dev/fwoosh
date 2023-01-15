@@ -62,6 +62,7 @@
     "title-case": "^3.0.3",
     "ts-node": "^10",
     "unified": "^10.1.2",
+    "unist-util-visit": "^4.1.1",
     "vite": "^4.0.4"
   },
   "publishConfig": {

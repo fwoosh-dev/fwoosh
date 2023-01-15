@@ -23,9 +23,9 @@ import {
   getInitialColorMode,
   globalCss,
 } from "@fwoosh/styling";
-import { getFirstStory, useStoryTree } from "@fwoosh/hooks";
+import { tree } from "@fwoosh/app/stories";
 import { StoryWithTools } from "./components/StoryWithTools";
-import { convertMetaTitleToUrlParam } from "@fwoosh/utils";
+import { getFirstStory, convertMetaTitleToUrlParam } from "@fwoosh/utils";
 import { Head } from "./components/Head";
 import { CommandPallette } from "./components/CommandPallette";
 
@@ -38,7 +38,6 @@ const queryClient = new QueryClient({
 });
 
 const FirstDocsPage = () => {
-  const tree = useStoryTree();
   const firstStory = getFirstStory(tree);
 
   if (!firstStory) {
@@ -51,7 +50,6 @@ const FirstDocsPage = () => {
 };
 
 const FirstStory = () => {
-  const tree = useStoryTree();
   const firstStory = getFirstStory(tree);
 
   if (!firstStory) {

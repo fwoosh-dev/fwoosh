@@ -43,7 +43,7 @@ function stringifyStories(
 }
 
 /** Creates an array of all the stories included in the fwoosh config */
-async function createVirtualFile(config: FwooshOptionsLoaded) {
+export async function createVirtualStoriesFile(config: FwooshOptionsLoaded) {
   const stories = await getStoryData(config);
   const allFiles = stories.flatMap<MDXFileDescriptor | StoryWithGrouping>(
     (file) => {
@@ -157,7 +157,7 @@ async function createVirtualFile(config: FwooshOptionsLoaded) {
     `\nexport const stories = ${stringifyStories(fileMap)}` +
     `\nexport const tree = matchTreeSortingOrder(getStoryTree(stories), order);`;
 
-  return file;
+  return { file, fileMap, tree };
 }
 
 /** Plugin that creates a virtual module with references to all the stories */
@@ -183,7 +183,8 @@ export function storyListPlugin(config: FwooshOptionsLoaded) {
             return file;
           }
 
-          return await createVirtualFile(config);
+          const virtualFile = await createVirtualStoriesFile(config);
+          return virtualFile.file;
         } catch (e) {
           console.error(e);
           return defaultListModule;
@@ -206,7 +207,6 @@ export function storyListPlugin(config: FwooshOptionsLoaded) {
 
           if (mod) {
             log.warn(`Reloading, story "${type}" detected:`, path);
-            await createVirtualFile(config);
             await server.reloadModule(mod);
           }
         }, 1000);

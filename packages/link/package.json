@@ -12,6 +12,7 @@
   "dependencies": {
     "@fwoosh/components": "link:./components",
     "@fwoosh/hooks": "link:../hooks",
+    "@fwoosh/utils": "link:../utils",
     "react-router-dom": "^6.6.1"
   },
   "peerDependencies": {

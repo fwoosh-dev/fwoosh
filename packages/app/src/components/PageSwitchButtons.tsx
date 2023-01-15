@@ -1,5 +1,6 @@
 import React from "react";
-import { getNextStory, getPreviousStory, useStoryTree } from "@fwoosh/hooks";
+
+import { tree } from "@fwoosh/app/stories";
 import { styled } from "@fwoosh/styling";
 import { ChevronRightIcon } from "@fwoosh/components";
 import { Link, useLocation } from "react-router-dom";
@@ -7,6 +8,8 @@ import { StoryData } from "@fwoosh/types";
 import {
   convertMetaTitleToUrlParam,
   resetContentScrollPosition,
+  getNextStory,
+  getPreviousStory,
 } from "@fwoosh/utils";
 
 const Wrapper = styled("div", {
@@ -111,7 +114,6 @@ interface PageSwitchButtonProps {
 }
 
 export function PageSwitchButton({ current }: PageSwitchButtonProps) {
-  const tree = useStoryTree();
   const location = useLocation();
   const isStorybook = location.pathname.startsWith("/storybook");
   const { prev, next } = React.useMemo(() => {

@@ -1,9 +1,4 @@
-import { tree } from "@fwoosh/app/stories";
 import { StorySidebarChildItem, StoryTree, StoryData } from "@fwoosh/types";
-
-export const useStoryTree = () => {
-  return tree;
-};
 
 export const getFirstStory = (
   tree: StorySidebarChildItem[]
