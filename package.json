@@ -39,7 +39,6 @@
       [
         "gh-pages",
         {
-          "buildCommand": "cd examples/fwoosh && yarn fwoosh build",
           "dir": "./examples/fwoosh/out"
         }
       ]
