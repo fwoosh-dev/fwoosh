@@ -21,13 +21,15 @@ export const Content = styled("div", {
 });
 
 export const PageWrapper = styled("main", {
-  mt: 10,
-  mb: 28,
+  padding: "$12 $8 $16",
   mx: "auto",
-  px: 8,
   maxWidth: "$4xl",
   width: "100%",
   minWidth: 0,
+  minHeight: "100%",
+  height: "fit-content",
+  display: "flex",
+  flexDirection: "column",
 });
 
 export const IconButton = styled("button", {
@@ -51,6 +53,7 @@ export const IconButton = styled("button", {
 
 export const DocsLayout = styled("div", {
   display: "grid",
+  height: "100%",
 
   "@xl": {
     gridTemplateColumns: "1fr minmax(200px, $72)",

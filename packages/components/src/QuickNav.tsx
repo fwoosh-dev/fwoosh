@@ -10,7 +10,7 @@ export const Root = styled("nav", {
   overflow: "auto",
   maxHeight: "calc(100vh - $14)",
 
-  "@lg": {
+  "@xl": {
     display: "block",
   },
 });

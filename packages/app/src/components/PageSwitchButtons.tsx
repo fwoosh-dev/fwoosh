@@ -11,8 +11,19 @@ import {
 
 const Wrapper = styled("div", {
   display: "flex",
+  flexDirection: "column",
+  justifyContent: "flex-end",
+  flex: 1,
+  mt: 16,
+});
+
+const ButtonRow = styled("div", {
+  display: "flex",
   alignItems: "center",
-  py: 10,
+  borderTopWidth: "$sm",
+  borderTopStyle: "solid",
+  borderTopColor: "$gray7",
+  pt: 10,
 });
 
 const Split = styled("div", {
@@ -130,31 +141,33 @@ export function PageSwitchButton({ current }: PageSwitchButtonProps) {
 
   return (
     <Wrapper>
-      {prev && (
-        <NavButton
-          to={getUrl(prev)}
-          style={{ paddingLeft: 4 }}
-          onClick={resetContentScrollPosition}
-        >
-          <IconWrapper>
-            <ChevronRightIcon style={{ transform: "rotate(180deg)" }} />
-          </IconWrapper>
-          <StoryTitle renderStoryNames={isStorybook} story={prev} />
-        </NavButton>
-      )}
-      <Split />
-      {next && (
-        <NavButton
-          to={getUrl(next)}
-          style={{ paddingRight: 4, textAlign: "right" }}
-          onClick={resetContentScrollPosition}
-        >
-          <StoryTitle renderStoryNames={isStorybook} story={next} />
-          <IconWrapper>
-            <ChevronRightIcon />
-          </IconWrapper>
-        </NavButton>
-      )}
+      <ButtonRow>
+        {prev && (
+          <NavButton
+            to={getUrl(prev)}
+            style={{ paddingLeft: 4 }}
+            onClick={resetContentScrollPosition}
+          >
+            <IconWrapper>
+              <ChevronRightIcon style={{ transform: "rotate(180deg)" }} />
+            </IconWrapper>
+            <StoryTitle renderStoryNames={isStorybook} story={prev} />
+          </NavButton>
+        )}
+        <Split />
+        {next && (
+          <NavButton
+            to={getUrl(next)}
+            style={{ paddingRight: 4, textAlign: "right" }}
+            onClick={resetContentScrollPosition}
+          >
+            <StoryTitle renderStoryNames={isStorybook} story={next} />
+            <IconWrapper>
+              <ChevronRightIcon />
+            </IconWrapper>
+          </NavButton>
+        )}
+      </ButtonRow>
     </Wrapper>
   );
 }
