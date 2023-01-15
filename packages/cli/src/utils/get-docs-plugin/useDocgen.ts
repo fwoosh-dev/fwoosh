@@ -58,7 +58,10 @@ export const useDocgen = (key: string, story: Story) => {
       const displayedComponents = components.map((c) => c.displayName);
       const file = components[0].fwoosh_file;
 
-      if (components[0].fwoosh_docgen) {
+      if (
+        components[0].fwoosh_docgen &&
+        components[0].fwoosh_docgen !== "undefined"
+      ) {
         const docgen = JSON.parse(components[0].fwoosh_docgen);
         return docgen.filter((doc: { displayName: string }) =>
           displayedComponents.includes(doc.displayName)

@@ -8,6 +8,7 @@ interface UseRenderOptions {
 }
 
 export const useRender = ({ id, slug }: UseRenderOptions) => {
+  const [hasRendered, setHasRendered] = React.useState(false);
   const ref = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
@@ -20,8 +21,14 @@ export const useRender = ({ id, slug }: UseRenderOptions) => {
     }
 
     ref.current.id = id;
-    render(ref.current, slug);
+    setHasRendered(true);
+    render(
+      ref.current,
+      slug,
+      () => setHasRendered(false),
+      () => setHasRendered(true)
+    );
   }, [id, slug]);
 
-  return ref;
+  return { ref, hasRendered };
 };

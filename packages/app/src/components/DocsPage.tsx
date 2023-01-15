@@ -95,24 +95,48 @@ const StoryCode = React.memo(({ code }: { code: string }) => {
   );
 });
 
+const OverlaySpinner = styled("div", {
+  background: "$gray1",
+  position: "absolute",
+  inset: 0,
+  zIndex: 100000,
+});
+
 const StoryDiv = React.memo(
-  ({ slug, code }: { slug: string; code: string }) => {
+  ({
+    slug,
+    code,
+    showSpinnerWhileLoading,
+  }: {
+    slug: string;
+    code: string;
+    showSpinnerWhileLoading?: boolean;
+  }) => {
     const id = useId();
     const [codeShowing, codeShowingSet] = React.useState(false);
-    const ref = useRender({ id, slug });
+    const { ref, hasRendered } = useRender({ id, slug });
 
     return (
-      <CollapsibleRoot open={codeShowing} onOpenChange={codeShowingSet}>
-        <StoryPreview state={codeShowing ? "open" : undefined} ref={ref} />
-        <Collapsible.Trigger asChild={true}>
-          <ShowCodeButton>{codeShowing ? "Hide" : "Show"} code</ShowCodeButton>
-        </Collapsible.Trigger>
-        <Collapsible.Content>
-          <Suspense fallback={<Spinner delay={2000} />}>
-            <StoryCode code={code} />
-          </Suspense>
-        </Collapsible.Content>
-      </CollapsibleRoot>
+      <>
+        <CollapsibleRoot open={codeShowing} onOpenChange={codeShowingSet}>
+          <StoryPreview state={codeShowing ? "open" : undefined} ref={ref} />
+          <Collapsible.Trigger asChild={true}>
+            <ShowCodeButton>
+              {codeShowing ? "Hide" : "Show"} code
+            </ShowCodeButton>
+          </Collapsible.Trigger>
+          <Collapsible.Content>
+            <Suspense fallback={<Spinner delay={2000} />}>
+              <StoryCode code={code} />
+            </Suspense>
+          </Collapsible.Content>
+        </CollapsibleRoot>
+        {showSpinnerWhileLoading && !hasRendered && (
+          <OverlaySpinner>
+            <Spinner delay={2000} />
+          </OverlaySpinner>
+        )}
+      </>
     );
   }
 );
@@ -165,6 +189,7 @@ const StoryDocsPage = ({
           slug={firstStory.story.slug}
           code={firstStory.story.code}
           key={firstStory.story.slug}
+          showSpinnerWhileLoading={true}
         />
         {process.env.NODE_ENV === "production" ? (
           // In prod we want the whole page to render before showing so it jumps less
@@ -183,7 +208,7 @@ const StoryDocsPage = ({
 
   return (
     <DocsLayout>
-      <PageWrapper>
+      <PageWrapper style={{ position: "relative" }}>
         <components.h1 id="intro">{titleCase(name)}</components.h1>
         {docsIntro}
         {stories.length > 0 && (

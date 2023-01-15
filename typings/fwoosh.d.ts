@@ -15,7 +15,12 @@ declare module "@fwoosh/app/config" {
 }
 
 declare module "@fwoosh/app/render" {
-  export function render(id: Element, slug: string): void;
+  export function render(
+    id: Element,
+    slug: string,
+    onStart?: () => void,
+    onComplete?: () => void
+  ): void;
 }
 
 declare module "@fwoosh/app/docs" {
