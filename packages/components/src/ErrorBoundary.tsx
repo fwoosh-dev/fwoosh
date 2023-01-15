@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { styled } from "@fwoosh/styling";
+import { ErrorResponse } from "@remix-run/router";
 
 const ErrorMessage = styled("h1", {
   text: "2xl",
@@ -21,16 +22,17 @@ const ErrorWrapper = styled("div", {
 
 interface ErrorBoundaryProps {
   fullScreen?: boolean;
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  error?: Error | ErrorResponse;
 }
 
 export class ErrorBoundary extends React.Component<
   ErrorBoundaryProps,
-  { error: Error | undefined }
+  { error: Error | ErrorResponse | undefined }
 > {
   constructor(props: any) {
     super(props);
-    this.state = { error: undefined };
+    this.state = { error: props.error };
   }
 
   static getDerivedStateFromError(error: Error) {
@@ -40,15 +42,30 @@ export class ErrorBoundary extends React.Component<
   componentDidCatch() {}
 
   render() {
-    if (this.state.error) {
-      return (
-        <ErrorWrapper
-          css={this.props.fullScreen ? { height: "100vh", width: "100vw" } : {}}
-        >
-          <ErrorMessage>{this.state.error.message}</ErrorMessage>
-        </ErrorWrapper>
+    if (!this.state.error) {
+      return this.props.children;
+    }
+
+    let content: React.ReactNode = null;
+
+    if (this.state.error instanceof Error) {
+      content = <ErrorMessage>{this.state.error.message}</ErrorMessage>;
+    } else {
+      const { status, statusText } = this.state.error;
+
+      content = (
+        <ErrorMessage>
+          {status} {statusText}
+        </ErrorMessage>
       );
     }
-    return this.props.children;
+
+    return (
+      <ErrorWrapper
+        css={this.props.fullScreen ? { height: "100vh", width: "100vw" } : {}}
+      >
+        {content}
+      </ErrorWrapper>
+    );
   }
 }

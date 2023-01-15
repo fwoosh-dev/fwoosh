@@ -6,6 +6,7 @@ import {
   Outlet,
   RouterProvider,
   ScrollRestoration,
+  useRouteError,
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { HelmetProvider } from "react-helmet-async";
@@ -64,10 +65,16 @@ const FirstStory = () => {
   return <Navigate to={"/storybook/" + firstStory.slug} />;
 };
 
+function RouteError() {
+  const error = useRouteError();
+  return <ErrorBoundary error={error as Error} />;
+}
+
 const router = createBrowserRouter(
   [
     {
       path: "/",
+      errorElement: <RouteError />,
       element: (
         <HelmetProvider>
           <ErrorBoundary fullScreen>
@@ -155,6 +162,7 @@ const router = createBrowserRouter(
 const globalStyles = globalCss({
   mark: { background: "$primary6" },
   html: { background: "$gray1" },
+  "html, body, #root": { height: "100%" },
 });
 
 export const App = () => {

@@ -2,7 +2,7 @@ import { styled } from "@fwoosh/styling";
 
 export const AppWrapper = styled("div", {
   background: "$gray1",
-  minHeight: "100vh",
+  height: "100%",
   fontFamily: "Inter, system-ui",
 
   "@supports (font-variation-settings: normal)": {
