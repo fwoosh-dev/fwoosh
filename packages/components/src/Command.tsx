@@ -7,11 +7,6 @@ export const Dialog = styled(Command.Dialog, {
   background: "rgba(0, 0, 0, 0.5)",
   position: "fixed",
   inset: "0",
-  fontFamily: "Inter, system-ui",
-
-  "@supports (font-variation-settings: normal)": {
-    fontFamily: "Inter Var, system-ui",
-  },
 });
 export const Content = styled("div", {
   background: "$gray1",

@@ -45,6 +45,6 @@ nav.toc {
   display: none;
 }
 
-body {
-  font-family: "Inter", sans-serif;
+html {
+  font-family: Inter, sans-serif;
 }

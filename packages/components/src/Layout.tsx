@@ -3,11 +3,6 @@ import { styled } from "@fwoosh/styling";
 export const AppWrapper = styled("div", {
   background: "$gray1",
   height: "100%",
-  fontFamily: "Inter, system-ui",
-
-  "@supports (font-variation-settings: normal)": {
-    fontFamily: "Inter Var, system-ui",
-  },
 });
 
 export const Logo = styled("div", {
