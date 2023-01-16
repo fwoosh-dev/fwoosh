@@ -1,5 +1,4 @@
 import * as React from "react";
-import path from "path";
 import { SearchData } from "@fwoosh/utils";
 
 export function ProductionSearchIndex() {
@@ -12,7 +11,11 @@ export function ProductionSearchIndex() {
       window.FWOOSH_SEARCH_INDEX = {};
     }
 
-    fetch(path.join(process.env.FWOOSH_BASE_NAME || "/", "search-index.json"))
+    fetch(
+      process.env.FWOOSH_BASE_NAME
+        ? `${process.env.FWOOSH_BASE_NAME}/search-index.json}`
+        : "search-index.json"
+    )
       .then((res) => res.json())
       .then((data) => {
         Object.entries(data).forEach(([key, value]) => {

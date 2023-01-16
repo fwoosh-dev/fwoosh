@@ -456,13 +456,13 @@ export class Fwoosh implements FwooshClass {
           searchData[slug as string] = data;
         });
 
-        await page.goto(
-          `http://localhost:3000${path.join(
-            this.options.basename,
-            "docs",
-            file.slug
-          )}`
-        );
+        const url = `http://localhost:3000${path.join(
+          this.options.basename,
+          "docs",
+          file.slug
+        )}`;
+
+        await page.goto(url);
 
         // This makes use wait for the page to load
         await main.evaluate(async () => {});
