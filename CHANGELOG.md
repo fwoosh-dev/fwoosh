@@ -1,3 +1,16 @@
+# v0.0.91 (Mon Jan 16 2023)
+
+#### ⚠️ Pushed to `main`
+
+- `@fwoosh/app`
+  - click overlay to close command pallette ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.90 (Mon Jan 16 2023)
 
 #### ⚠️ Pushed to `main`
