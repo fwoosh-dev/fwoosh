@@ -21,6 +21,7 @@ import { Element } from "hast";
 import { visit } from "unist-util-visit";
 import handler from "serve-handler";
 import http from "http";
+import { chromium } from "playwright";
 
 import { Pluggable } from "unified";
 import remarkFrontmatter from "remark-frontmatter";
@@ -421,11 +422,69 @@ export class Fwoosh implements FwooshClass {
   /** Do a production build of the website */
   async build({ outDir }: BuildOptions) {
     const config = await this.getViteConfig({ outDir, mode: "production" });
-    const output = await build(config);
+
+    await build(config);
+
+    this.serve({ outDir }, async (server) => {
+      const stories = await createVirtualStoriesFile(this.options);
+      const mdx = Object.values(stories.fileMap).filter(
+        (i) => i.type === "mdx"
+      );
+
+      log.log("Building search data for MDX files...");
+
+      const browser = await chromium.launch();
+      const searchData: Record<string, any> = {};
+
+      for (const file of mdx) {
+        log.info("Building search data:", file.title);
+        const page = await browser.newPage();
+        const main = page.locator("main");
+
+        page.on("console", async (msg) => {
+          const msgArgs = msg.args();
+
+          const firstMsg = await msgArgs[0].jsonValue();
+
+          if (firstMsg !== "window.FWOOSH_SEARCH_INDEX") {
+            return;
+          }
+
+          const slug = await msgArgs[1].jsonValue();
+          const data = await msgArgs[2].jsonValue();
+
+          searchData[slug as string] = data;
+        });
+
+        await page.goto(
+          `http://localhost:3000${path.join(
+            this.options.basename,
+            "docs",
+            file.slug
+          )}`
+        );
+
+        // This makes use wait for the page to load
+        await main.evaluate(async () => {});
+      }
+
+      await browser.close();
+      server.close();
+
+      await fs.writeFile(
+        path.join(outDir, "search.json"),
+        JSON.stringify(searchData)
+      );
+
+      log.success("Build complete!");
+    });
   }
 
   /** Run a server a production build of the website */
-  async serve({ outDir }: ServeOptions) {
+  async serve(
+    { outDir }: ServeOptions,
+    onReady?: (server: http.Server) => void
+  ) {
     const server = http.createServer((request, response) => {
       return handler(request, response, {
         public: outDir,
@@ -454,6 +513,8 @@ export class Fwoosh implements FwooshClass {
       if (this.options.open) {
         open(url);
       }
+
+      onReady?.(server);
     });
   }
 

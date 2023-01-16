@@ -1,4 +1,4 @@
-export const CONTENT_ID = "content-scroll-area";
+import { CONTENT_ID } from "./constants.js";
 
 export function resetContentScrollPosition() {
   const content = document.querySelector(`#${CONTENT_ID}`);

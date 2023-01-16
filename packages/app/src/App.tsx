@@ -28,6 +28,7 @@ import { StoryWithTools } from "./components/StoryWithTools";
 import { getFirstStory, convertMetaTitleToUrlParam } from "@fwoosh/utils";
 import { Head } from "./components/Head";
 import { CommandPallette } from "./components/CommandPallette";
+import { ProductionSearchIndex } from "./components/ProductionSearchIndex";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -76,6 +77,7 @@ const router = createBrowserRouter(
       element: (
         <HelmetProvider>
           <ErrorBoundary fullScreen>
+            <ProductionSearchIndex />
             <AppWrapper>
               <Head />
               <Outlet />

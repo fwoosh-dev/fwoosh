@@ -8,7 +8,7 @@ import { Interweave } from "interweave";
 import { StoryData, StoryTree, StoryTreeItem } from "@fwoosh/types";
 import useMousetrap from "react-hook-mousetrap";
 import { Bookmark, Code } from "react-feather";
-import { SearchData } from "./MDXPage";
+import { SearchData } from "@fwoosh/utils";
 
 const CommandPalletteContext = React.createContext<{
   search: string;
@@ -103,7 +103,7 @@ function StoryCommandTreeChild({
     return (
       <Command.Item
         key={item.story.slug}
-        value={item.story.title.toLowerCase()}
+        value={`${newGrouping}-${item.story.title.toLowerCase()}`}
         grouping={newGrouping}
         title={pageName}
         onSelect={() => onNavigate(item.story)}
@@ -154,11 +154,13 @@ function MDXContentMatch({
     return null;
   }
 
+  const grouping = data.path.join(" / ");
+
   return (
     <Command.Item
       key={data.url}
-      value={data.content.toLowerCase()}
-      grouping={data.path.join(" / ")}
+      value={`${grouping}-${data.content.toLowerCase()}`}
+      grouping={grouping}
       title={<Interweave content={highlightedSearchResult} />}
       onSelect={onNavigate}
       icon={<Bookmark />}
@@ -275,7 +277,11 @@ export function CommandPallette() {
                       key={item.url}
                       data={item}
                       onNavigate={() => {
-                        navigate(item.url);
+                        const url = item.url.replace(
+                          process.env.FWOOSH_BASE_NAME || "",
+                          ""
+                        );
+                        navigate(url);
                         openSet(false);
                         valueSet("");
                       }}
