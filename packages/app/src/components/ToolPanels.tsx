@@ -5,6 +5,10 @@ import { panels } from "@fwoosh/app/ui";
 
 import { StoryIdContext } from "./Story";
 import { useStoryId } from "@fwoosh/hooks";
+import { ParameterContext } from "@fwoosh/hooks";
+import { stories } from "@fwoosh/app/stories";
+import { useQuery } from "react-query";
+import { resolveStoryMeta } from "@fwoosh/utils";
 
 const TabsList = styled(Tabs.List, {
   height: "$12",
@@ -18,36 +22,48 @@ const TabContent = styled(Tabs.Content, {
 export const ToolPanels = () => {
   const id = useContext(StoryIdContext);
   const storyId = useStoryId();
+  const story = storyId ? stories[storyId] : undefined;
+
+  const { data: parameters } = useQuery(`params-${storyId}`, async () => {
+    const meta = await resolveStoryMeta(story?.meta);
+
+    return {
+      ...meta?.parameters,
+      ...story?.component?._payload?._result?.default?.parameters,
+    };
+  });
 
   return (
-    <Tabs.Root defaultValue={panels[0]?.componentName}>
-      <TabsList>
-        <Suspense fallback={<Spinner delay={3000} size={5} />}>
-          {panels.map((Panel) => {
-            return (
-              <Tabs.Trigger
-                key={`trigger-${Panel.componentName}`}
-                value={Panel.componentName}
-              >
-                <Panel.displayName />
-              </Tabs.Trigger>
-            );
-          })}
-        </Suspense>
-      </TabsList>
+    <ParameterContext.Provider value={parameters}>
+      <Tabs.Root defaultValue={panels[0]?.componentName}>
+        <TabsList>
+          <Suspense fallback={<Spinner delay={3000} size={5} />}>
+            {panels.map((Panel) => {
+              return (
+                <Tabs.Trigger
+                  key={`trigger-${Panel.componentName}`}
+                  value={Panel.componentName}
+                >
+                  <Panel.displayName />
+                </Tabs.Trigger>
+              );
+            })}
+          </Suspense>
+        </TabsList>
 
-      {panels.map((Panel) => (
-        <TabContent
-          key={`content-${Panel.componentName}-${storyId}`}
-          value={Panel.componentName}
-        >
-          <ErrorBoundary>
-            <Suspense fallback={<Spinner />}>
-              <Panel storyPreviewId={id} />
-            </Suspense>
-          </ErrorBoundary>
-        </TabContent>
-      ))}
-    </Tabs.Root>
+        {panels.map((Panel) => (
+          <TabContent
+            key={`content-${Panel.componentName}-${storyId}`}
+            value={Panel.componentName}
+          >
+            <ErrorBoundary>
+              <Suspense fallback={<Spinner />}>
+                <Panel storyPreviewId={id} />
+              </Suspense>
+            </ErrorBoundary>
+          </TabContent>
+        ))}
+      </Tabs.Root>
+    </ParameterContext.Provider>
   );
 };
