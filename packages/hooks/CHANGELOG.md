@@ -1,3 +1,16 @@
+# v0.0.86 (Mon Jan 16 2023)
+
+#### ⚠️ Pushed to `main`
+
+- detect invalid links during build ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add error for bad path ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.82 (Sun Jan 15 2023)
 
 #### ⚠️ Pushed to `main`

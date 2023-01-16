@@ -1,3 +1,24 @@
+# v0.0.86 (Mon Jan 16 2023)
+
+#### ⚠️ Pushed to `main`
+
+- scroll to has after loading mdx page ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- move more styles into app ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- build all search pages at build time ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- detect invalid links during build ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- set up root error element ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- move error boundary ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix first story redirect ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix margin collapse ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix show code button in wrong place ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix page switch buttons to bottom ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.85 (Sun Jan 15 2023)
 
 #### ⚠️ Pushed to `main`

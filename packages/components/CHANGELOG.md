@@ -1,3 +1,19 @@
+# v0.0.86 (Mon Jan 16 2023)
+
+#### ⚠️ Pushed to `main`
+
+- fix sticky quick nav ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- set up root error element ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix margin collapse ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix show code button in wrong place ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix page switch buttons to bottom ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.82 (Sun Jan 15 2023)
 
 #### ⚠️ Pushed to `main`

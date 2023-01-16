@@ -1,3 +1,16 @@
+# v0.0.86 (Mon Jan 16 2023)
+
+#### ⚠️ Pushed to `main`
+
+- build all search pages at build time ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- detect invalid links during build ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.76 (Tue Jan 10 2023)
 
 #### ⚠️ Pushed to `main`
