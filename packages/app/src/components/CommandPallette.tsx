@@ -271,7 +271,7 @@ export function CommandPallette() {
               <Command.Group
                 heading={<Command.Heading>Results</Command.Heading>}
               >
-                {Object.values(window.FWOOSH_SEARCH_INDEX).map((data) => {
+                {Object.values(window.FWOOSH_SEARCH_INDEX || {}).map((data) => {
                   return data.map((item) => (
                     <MDXContentMatch
                       key={item.url}
