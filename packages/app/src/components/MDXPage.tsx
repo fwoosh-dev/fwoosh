@@ -133,6 +133,7 @@ declare global {
 }
 
 export const MDXPage = ({ page }: { page: StoryTreeItem }) => {
+  const location = useLocation();
   const { component: MDXPage, meta, slug } = stories[page.id] as MDXStoryData;
   // TODO
   const { data } = useQuery(`toc-${page.id}`, () => []);
@@ -175,6 +176,10 @@ export const MDXPage = ({ page }: { page: StoryTreeItem }) => {
       );
     }
   }, [meta, slug]);
+
+  React.useLayoutEffect(() => {
+    location.hash && document.querySelector(location.hash)?.scrollIntoView();
+  }, []);
 
   let content = (
     <PageWrapper>
