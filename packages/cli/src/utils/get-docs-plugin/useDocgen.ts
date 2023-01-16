@@ -1,52 +1,12 @@
-import { Story, StoryMeta } from "@fwoosh/types";
+import { Story } from "@fwoosh/types";
 import { useQuery } from "react-query";
-
-type UnresolvedMeta =
-  | undefined
-  | StoryMeta
-  | Promise<StoryMeta>
-  | (() => Promise<{ default?: StoryMeta }>);
-
-function isStoryMeta(meta: UnresolvedMeta): meta is StoryMeta {
-  return meta && "component" in meta && meta.component;
-}
-
-async function resolveComponents(meta: UnresolvedMeta) {
-  let component;
-
-  if (!meta) {
-    return;
-  }
-
-  // Components declared on the meta
-  if (isStoryMeta(meta)) {
-    component = meta;
-  }
-  // Resolved lazy component
-  else if (meta instanceof Promise) {
-    const resolvedPromise = await meta;
-
-    if (resolvedPromise.component) {
-      component = resolvedPromise;
-    }
-  }
-  // Unresolved lazy component
-  else if (typeof meta === "function") {
-    const resolvedPromise = await meta();
-
-    if (resolvedPromise.default?.component) {
-      component = resolvedPromise.default;
-    }
-  }
-
-  return component;
-}
+import { resolveStoryMeta } from "@fwoosh/utils";
 
 export const useDocgen = (key: string, story: Story) => {
   const { data } = useQuery(
     key,
     async () => {
-      const component = await resolveComponents(story);
+      const component = await resolveStoryMeta(story);
 
       if (!component?.component) {
         return;
@@ -58,6 +18,7 @@ export const useDocgen = (key: string, story: Story) => {
       const displayedComponents = components.map((c) => c.displayName);
       const file = components[0].fwoosh_file;
 
+      // In prod the docgen will be inlined into the component
       if (
         components[0].fwoosh_docgen &&
         components[0].fwoosh_docgen !== "undefined"
@@ -68,6 +29,7 @@ export const useDocgen = (key: string, story: Story) => {
         );
       }
 
+      // In dev we generate props only as necassary to be quicker
       return new Promise((resolve) => {
         const socket = new WebSocket(
           "ws://localhost:process.env.GET_DOCS_PORT/get-docs"
