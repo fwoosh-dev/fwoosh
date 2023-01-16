@@ -1,0 +1,27 @@
+{
+  "name": "@fwoosh/panel-designs",
+  "type": "module",
+  "main": "dist/index.js",
+  "description": "Display your designs for you component right along with your stories",
+  "version": "0.0.91",
+  "license": "MIT",
+  "author": {
+    "name": "Andrew Lisowski",
+    "email": "lisowski54@gmail.com"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": "hipstersmoothie/fwoosh",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@fwoosh/styling": "link:../../packages/styling",
+    "@fwoosh/hooks": "link:../../packages/hooks"
+  },
+  "peerDependencies": {
+    "fwoosh": ">= 0.x"
+  }
+}

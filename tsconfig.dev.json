@@ -52,6 +52,9 @@
     },
     {
       "path": "packages/test"
+    },
+    {
+      "path": "plugins/panel-designs"
     }
   ]
 }

@@ -11,6 +11,7 @@ export const config: FwooshOptions = {
     include: ["**/src/**/*.{ts,tsx}"],
   },
   plugins: [
+    "@fwoosh/panel-designs",
     "@fwoosh/panel-props",
     "@fwoosh/panel-source",
     "@fwoosh/panel-actions",

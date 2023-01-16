@@ -849,6 +849,12 @@ __metadata:
   languageName: node
   linkType: soft
 
+"@fwoosh/hooks@link:../../packages/hooks::locator=%40fwoosh%2Fpanel-designs%40workspace%3Aplugins%2Fpanel-designs":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/hooks@link:../../packages/hooks::locator=%40fwoosh%2Fpanel-designs%40workspace%3Aplugins%2Fpanel-designs"
+  languageName: node
+  linkType: soft
+
 "@fwoosh/hooks@link:../../packages/hooks::locator=%40fwoosh%2Fpanel-props%40workspace%3Aplugins%2Fpanel-props":
   version: 0.0.0-use.local
   resolution: "@fwoosh/hooks@link:../../packages/hooks::locator=%40fwoosh%2Fpanel-props%40workspace%3Aplugins%2Fpanel-props"
@@ -938,6 +944,16 @@ __metadata:
   peerDependencies:
     fwoosh: ">= 0.x"
     react: ^16.8 || ^17.0 || ^18.0
+  languageName: unknown
+  linkType: soft
+
+"@fwoosh/panel-designs@workspace:plugins/panel-designs":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/panel-designs@workspace:plugins/panel-designs"
+  dependencies:
+    "@fwoosh/hooks": "link:../../packages/hooks"
+  peerDependencies:
+    fwoosh: ">= 0.x"
   languageName: unknown
   linkType: soft
 

@@ -1,11 +1,11 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { styled } from "@fwoosh/styling";
 import { panels } from "@fwoosh/app/ui";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 
 import { Story } from "./Story";
 import { ToolPanels } from "./ToolPanels";
-import { ErrorBoundary, Spinner } from "@fwoosh/components";
+import { ErrorBoundary } from "@fwoosh/components";
 import { useStoryId } from "@fwoosh/hooks";
 
 const PanelContainer = styled("div", {
@@ -76,9 +76,5 @@ export const StoryWithTools = () => {
     );
   }
 
-  return (
-    <Suspense fallback={<Spinner delay={3000} />}>
-      <ErrorBoundary key={storyId}>{content}</ErrorBoundary>
-    </Suspense>
-  );
+  return <ErrorBoundary key={storyId}>{content}</ErrorBoundary>;
 };

@@ -1,6 +1,5 @@
 {
   "name": "@fwoosh/react-example",
-  "type": "module",
   "private": true,
   "scripts": {
     "fwoosh": "../../packages/cli/bin/fwoosh.js",

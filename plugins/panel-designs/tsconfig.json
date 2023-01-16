@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "include": ["src/**/*", "../../typings/**/*"],
+  "exclude": ["dist/**/*"],
 
   "compilerOptions": {
     "outDir": "./dist",
@@ -9,17 +10,9 @@
   },
 
   "references": [
-    {
-      "path": "../../packages/types"
-    },
-    {
-      "path": "../../packages/cli"
-    },
-    {
-      "path": "../../packages/types"
-    },
-    {
-      "path": "../../packages/virtual-file"
-    }
+    { "path": "../../packages/styling" },
+    { "path": "../../packages/cli" },
+    { "path": "../../packages/hooks" },
+    { "path": "../../packages/components" }
   ]
 }

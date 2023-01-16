@@ -1,12 +1,16 @@
 import * as React from "react";
-import type { Story, StoryMeta } from "@fwoosh/react";
+import type { StoryMeta, Story } from "@fwoosh/react";
 import { action } from "@fwoosh/panel-actions";
+import type { DesignsPanelParameters } from "@fwoosh/panel-designs";
 
 import { Button } from "./Button";
 
-export const meta: StoryMeta = {
+export const meta: StoryMeta<DesignsPanelParameters> = {
   title: "Components/Button",
   component: Button,
+  parameters: {
+    design: "https://www.figma.com/file/LKQ4FJ4bTnCSjedbRpk931/Sample-File",
+  },
 };
 
 /**
@@ -16,7 +20,7 @@ export const meta: StoryMeta = {
  *
  * > Even quote things!
  */
-export const Playground: Story = () => {
+export const Playground: Story<DesignsPanelParameters> = () => {
   return <Button onClick={action("onClick")}>Click me</Button>;
 };
 
