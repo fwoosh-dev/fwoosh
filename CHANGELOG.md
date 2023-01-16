@@ -1,3 +1,18 @@
+# v0.0.89 (Mon Jan 16 2023)
+
+#### ⚠️ Pushed to `main`
+
+- `@fwoosh/app`
+  - fix search index path ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/components`
+  - lighter font ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.88 (Mon Jan 16 2023)
 
 #### ⚠️ Pushed to `main`
