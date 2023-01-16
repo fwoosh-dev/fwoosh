@@ -1,5 +1,6 @@
 {
   "name": "@fwoosh/decorator-{{kebab}}",
+  "type": "module",
   "main": "dist/index.js",
   "description": "{{description}}",
   "version": "{{version}}",

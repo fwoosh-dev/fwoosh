@@ -52,14 +52,10 @@ function create() {
   const inDir = path.join(__dirname, "templates", options.type);
   const kebab = paramCase(options.name);
   const folder = options.type === "package" ? "packages" : "plugins";
-  const outDir = path.join(
-    __dirname,
-    "../..",
-    folder,
-    ["decorator", "tool", "panel"].includes(options.type)
-      ? `${options.type}-${kebab}`
-      : kebab
-  );
+  const packageName = ["decorator", "tool", "panel"].includes(options.type)
+    ? `${options.type}-${kebab}`
+    : kebab;
+  const outDir = path.join(__dirname, "../..", folder, packageName);
   const TSCONFIG = path.join(__dirname, "../../tsconfig.dev.json");
 
   fs.mkdirSync(outDir);
@@ -83,7 +79,7 @@ function create() {
     createdFiles.forEach((filePath) =>
       log.log(`Created ${path.relative(outDir, filePath)}`)
     );
-    log.success(`Created @auto-it/${kebab} package!`);
+    log.success(`Created @auto-it/${packageName} package!`);
   });
 
   fs.readFile(TSCONFIG, "utf8", (err, data) => {
@@ -94,7 +90,7 @@ function create() {
     const json = JSON.parse(data);
 
     json.references.push({
-      path: path.join(folder, kebab),
+      path: path.join(folder, packageName),
     });
 
     fs.writeFileSync(TSCONFIG, JSON.stringify(json, null, 2));
