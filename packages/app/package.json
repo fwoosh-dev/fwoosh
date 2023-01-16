@@ -6,6 +6,7 @@
   "license": "MIT",
   "main": "dist/index.js",
   "dependencies": {
+    "@fontsource/inter": "^4.5.14",
     "@fwoosh/hooks": "link:../hooks",
     "@fwoosh/utils": "link:../utils",
     "@mdx-js/react": "^2.2.1",
@@ -18,7 +19,6 @@
     "dlv": "^1.1.3",
     "dset": "^3.1.1",
     "fast-deep-equal": "^3.1.3",
-    "inter-ui": "^3.19.3",
     "interweave": "^13.0.0",
     "react-arborist": "^2.1.1",
     "react-feather": "^2.0.10",

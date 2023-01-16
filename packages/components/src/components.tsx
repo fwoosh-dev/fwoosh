@@ -139,7 +139,7 @@ export const pre = styled("pre", {
   marginBottom: "1.5rem",
   border: "1px solid $gray6",
   textAlign: "left",
-  fontWeight: 300,
+  fontWeight: 400,
   color: "$gray10",
   my: 6,
   overflow: "hidden",
@@ -189,7 +189,7 @@ export const th = styled("th", {
   pb: 4,
   px: 2,
   textAlign: "left",
-  fontWeight: 300,
+  fontWeight: 400,
   color: "$gray10",
   text: "xs",
 

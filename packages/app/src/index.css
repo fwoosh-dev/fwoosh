@@ -45,12 +45,6 @@ nav.toc {
   display: none;
 }
 
-html {
-  font-family: "Inter", "system-ui";
-}
-
-@supports (font-variation-settings: normal) {
-  html {
-    font-family: "Inter var", "system-ui";
-  }
+body {
+  font-family: "Inter", sans-serif;
 }
