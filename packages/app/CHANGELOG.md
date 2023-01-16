@@ -1,3 +1,15 @@
+# v0.0.88 (Mon Jan 16 2023)
+
+#### ⚠️ Pushed to `main`
+
+- lighter font ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.87 (Mon Jan 16 2023)
 
 #### ⚠️ Pushed to `main`
