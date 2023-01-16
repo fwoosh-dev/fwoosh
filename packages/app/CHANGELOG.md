@@ -1,3 +1,17 @@
+# v0.0.87 (Mon Jan 16 2023)
+
+#### ⚠️ Pushed to `main`
+
+- fix build ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- load search index from basename ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix crash ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.86 (Mon Jan 16 2023)
 
 #### ⚠️ Pushed to `main`
