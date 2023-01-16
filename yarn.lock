@@ -1005,6 +1005,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fwoosh/react@workspace:plugins/react"
   dependencies:
+    "@fwoosh/types": "link:../../packages/types"
     "@fwoosh/virtual-file": "link:../../packages/virtual-file"
     "@vitejs/plugin-react": ^3.0.1
     fwoosh: "link:../../packages/cli"
@@ -1093,6 +1094,12 @@ __metadata:
     fwoosh: ">= 0.x"
     react: ^16.8 || ^17.0 || ^18.0
   languageName: unknown
+  linkType: soft
+
+"@fwoosh/types@link:../../packages/types::locator=%40fwoosh%2Freact%40workspace%3Aplugins%2Freact":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/types@link:../../packages/types::locator=%40fwoosh%2Freact%40workspace%3Aplugins%2Freact"
+  languageName: node
   linkType: soft
 
 "@fwoosh/types@link:../../packages/types::locator=%40fwoosh%2Ftheme-default%40workspace%3Aplugins%2Ftheme-default":
