@@ -13,8 +13,8 @@ export function ProductionSearchIndex() {
 
     fetch(
       process.env.FWOOSH_BASE_NAME
-        ? `${process.env.FWOOSH_BASE_NAME}/search-index.json}`
-        : "search-index.json"
+        ? `${process.env.FWOOSH_BASE_NAME}/search.json}`
+        : "search.json"
     )
       .then((res) => res.json())
       .then((data) => {
