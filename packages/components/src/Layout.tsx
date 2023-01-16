@@ -53,7 +53,8 @@ export const IconButton = styled("button", {
 
 export const DocsLayout = styled("div", {
   display: "grid",
-  height: "100%",
+  height: "fit-content",
+  minHeight: "100%",
 
   "@xl": {
     gridTemplateColumns: "1fr minmax(200px, $72)",
