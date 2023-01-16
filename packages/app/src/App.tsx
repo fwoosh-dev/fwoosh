@@ -29,6 +29,7 @@ import { getFirstStory, convertMetaTitleToUrlParam } from "@fwoosh/utils";
 import { Head } from "./components/Head";
 import { CommandPallette } from "./components/CommandPallette";
 import { ProductionSearchIndex } from "./components/ProductionSearchIndex";
+import { darkTheme } from "@fwoosh/styling";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -163,6 +164,18 @@ const globalStyles = globalCss({
   mark: { background: "$primary6" },
   html: { background: "$gray1" },
   "html, body, #root": { height: "100%" },
+
+  ".syntax-dark": {
+    display: "none",
+  },
+
+  [`.${darkTheme} .syntax-light`]: {
+    display: "none",
+  },
+
+  [`.${darkTheme} .syntax-dark`]: {
+    display: "block",
+  },
 });
 
 export const App = () => {

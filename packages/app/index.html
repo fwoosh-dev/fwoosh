@@ -38,29 +38,10 @@
   <body>
     <script type="module">
       import { getInitialColorMode, darkTheme } from "@fwoosh/styling";
-      const initialColorMode = getInitialColorMode();
 
-      if (initialColorMode === "dark") {
+      if (getInitialColorMode() === "dark") {
         document.body.classList.add(darkTheme);
       }
-
-      const style = document.createElement("style");
-      style.appendChild(
-        document.createTextNode(`
-          .syntax-dark {
-            display: none;
-          }
-
-          .${darkTheme} .syntax-light {
-            display: none;
-          }
-
-          .${darkTheme} .syntax-dark {
-            display: block;
-          }
-        `)
-      );
-      document.head.append(style);
     </script>
     <div id="root"></div>
     <script type="module" src="/dist/index.js"></script>
