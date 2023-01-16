@@ -11,7 +11,7 @@
     "@fwoosh/react": "link:../../plugins/react",
     "fwoosh": "link:../../packages/cli"
   },
-  "version": "0.0.87",
+  "version": "0.0.88",
   "dependencies": {
     "react": "^17"
   }
