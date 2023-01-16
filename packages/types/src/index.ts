@@ -29,11 +29,15 @@ export interface ResolvedStoryMeta extends StoryMeta {
   file?: string;
 }
 
-export interface StoryMeta {
+export type StoryParameters = Record<string, any>;
+
+export interface StoryMeta<P extends StoryParameters = StoryParameters> {
   /** The title used to create the sidebar tree structure. */
   title: string;
   /** The component docs should be generated for */
   component?: any;
+  /** Parameters for addons rendered with all the stories in the file */
+  parameters?: P;
 }
 
 interface BaseStoryData {

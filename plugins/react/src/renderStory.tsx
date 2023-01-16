@@ -7,7 +7,7 @@ import type { Story as ReactStory, StoryMeta } from "./types";
 
 function useDecorators(story: StoryData) {
   const [decorators, setDecorators] = React.useState<
-    ReactStory["decorators"]
+    ReactStory<any>["decorators"]
   >();
 
   React.useLayoutEffect(() => {
@@ -21,7 +21,7 @@ function useDecorators(story: StoryData) {
 
       setDecorators([
         ...(storyComponent.decorators || []).reverse(),
-        ...((meta as StoryMeta).decorators || []).reverse(),
+        ...((meta as StoryMeta<any>).decorators || []).reverse(),
         ...((window as any).__FWOOSH_DECORATORS__ || []).reverse(),
       ]);
     }
