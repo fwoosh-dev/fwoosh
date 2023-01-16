@@ -255,9 +255,10 @@ export function CommandPallette() {
 
         return commandScore(slug, search);
       }}
+      onClick={() => openSet(false)}
     >
       <CommandPalletteContext.Provider value={{ search: value }}>
-        <Command.Content>
+        <Command.Content onClick={(e) => e.stopPropagation()}>
           <Command.Input
             placeholder="Search documentation and stories..."
             value={value}
