@@ -2,21 +2,56 @@
   "files": [],
   "include": [],
   "references": [
-    { "path": "packages/hooks" },
-    { "path": "packages/link" },
-    { "path": "packages/cli" },
-    { "path": "packages/app/tsconfig.build.json" },
-    { "path": "packages/components" },
-    { "path": "packages/utils" },
-    { "path": "packages/types" },
-    { "path": "packages/virtual-file" },
-    { "path": "plugins/decorator-centered" },
-    { "path": "plugins/panel-actions" },
-    { "path": "plugins/panel-props" },
-    { "path": "plugins/panel-source" },
-    { "path": "plugins/panel-story-description" },
-    { "path": "plugins/react" },
-    { "path": "plugins/tool-measure" },
-    { "path": "plugins/tool-zoom" }
+    {
+      "path": "packages/hooks"
+    },
+    {
+      "path": "packages/link"
+    },
+    {
+      "path": "packages/cli"
+    },
+    {
+      "path": "packages/app/tsconfig.build.json"
+    },
+    {
+      "path": "packages/components"
+    },
+    {
+      "path": "packages/utils"
+    },
+    {
+      "path": "packages/types"
+    },
+    {
+      "path": "packages/virtual-file"
+    },
+    {
+      "path": "plugins/decorator-centered"
+    },
+    {
+      "path": "plugins/panel-actions"
+    },
+    {
+      "path": "plugins/panel-props"
+    },
+    {
+      "path": "plugins/panel-source"
+    },
+    {
+      "path": "plugins/panel-story-description"
+    },
+    {
+      "path": "plugins/react"
+    },
+    {
+      "path": "plugins/tool-measure"
+    },
+    {
+      "path": "plugins/tool-zoom"
+    },
+    {
+      "path": "packages/test"
+    }
   ]
 }

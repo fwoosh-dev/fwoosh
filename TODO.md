@@ -20,12 +20,6 @@
 - [ ] component theme addon
 - [ ] figma addon
 
-### Packages
-
-- [ ] automated testing utils
-  - [ ] get all stories
-  - [ ] screen shots
-
 ### Exploration
 
 - [ ] Browse popular storybook plugins for inspiration

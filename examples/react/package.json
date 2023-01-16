@@ -1,14 +1,17 @@
 {
   "name": "@fwoosh/react-example",
+  "type": "module",
   "private": true,
   "scripts": {
     "fwoosh": "../../packages/cli/bin/fwoosh.js",
     "start": "yarn fwoosh dev",
-    "build": "yarn fwoosh build"
+    "build": "yarn fwoosh build",
+    "test": "playwright test"
   },
   "devDependencies": {
     "@fwoosh/panel-actions": "link:../../plugins/panel-actions",
     "@fwoosh/react": "link:../../plugins/react",
+    "@playwright/test": "^1.29.2",
     "fwoosh": "link:../../packages/cli"
   },
   "version": "0.0.91",

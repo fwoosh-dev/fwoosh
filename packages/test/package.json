@@ -1,0 +1,25 @@
+{
+  "name": "@fwoosh/test",
+  "main": "dist/index.js",
+  "type": "module",
+  "description": "Function for testing stories in a fwoosh storybook with playwright.",
+  "version": "0.0.90",
+  "license": "MIT",
+  "author": {
+    "name": "Andrew Lisowski",
+    "email": "lisowski54@gmail.com"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": "hipstersmoothie/fwoosh",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@fwoosh/utils": "link:../utils",
+    "@playwright/test": "^1.29.2",
+    "playwright": "^1.29.2"
+  }
+}
