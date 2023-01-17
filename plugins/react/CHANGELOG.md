@@ -1,3 +1,17 @@
+# v0.0.92 (Tue Jan 17 2023)
+
+#### ⚠️ Pushed to `main`
+
+- set up designs plugin and use ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add type support for params ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix deps ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.82 (Sun Jan 15 2023)
 
 #### ⚠️ Pushed to `main`

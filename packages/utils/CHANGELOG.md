@@ -1,3 +1,15 @@
+# v0.0.92 (Tue Jan 17 2023)
+
+#### ⚠️ Pushed to `main`
+
+- move resolve meta into util ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.86 (Mon Jan 16 2023)
 
 #### ⚠️ Pushed to `main`

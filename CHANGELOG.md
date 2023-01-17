@@ -1,3 +1,37 @@
+# v0.0.92 (Tue Jan 17 2023)
+
+#### ⚠️ Pushed to `main`
+
+- update todos ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- udpate lock ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix create script ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add todos ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/panel-designs`
+  - update lock ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add no designs message ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/types`, `@fwoosh/panel-actions`, `@fwoosh/panel-designs`, `@fwoosh/panel-props`, `@fwoosh/panel-source`, `@fwoosh/panel-story-description`
+  - add panel disabling ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/types`, `@fwoosh/panel-designs`
+  - add panel hiding and docs for params ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/panel-designs`, `@fwoosh/react`
+  - set up designs plugin and use ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`
+  - pass down decorators over context ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/hooks`, `@fwoosh/types`, `@fwoosh/react`
+  - add type support for params ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/react`
+  - fix deps ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `fwoosh`, `@fwoosh/utils`
+  - move resolve meta into util ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/test`
+  - add test package ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.91 (Mon Jan 16 2023)
 
 #### ⚠️ Pushed to `main`

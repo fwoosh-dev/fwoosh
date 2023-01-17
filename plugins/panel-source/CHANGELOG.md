@@ -1,3 +1,15 @@
+# v0.0.92 (Tue Jan 17 2023)
+
+#### ⚠️ Pushed to `main`
+
+- add panel disabling ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.79 (Fri Jan 13 2023)
 
 #### ⚠️ Pushed to `main`

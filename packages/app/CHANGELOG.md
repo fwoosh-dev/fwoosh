@@ -1,3 +1,18 @@
+# v0.0.92 (Tue Jan 17 2023)
+
+#### ⚠️ Pushed to `main`
+
+- add panel disabling ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add panel hiding and docs for params ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- set up designs plugin and use ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- pass down decorators over context ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.91 (Mon Jan 16 2023)
 
 #### ⚠️ Pushed to `main`
