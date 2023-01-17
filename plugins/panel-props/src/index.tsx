@@ -18,7 +18,11 @@ export default class PropsPanel implements Plugin {
     fwoosh.hooks.registerPanel.tap(this.name, (panels) => {
       return [
         ...panels,
-        { name: "Properties", filepath: require.resolve("./panel") },
+        {
+          name: "Properties",
+          paramKey: this.name,
+          filepath: require.resolve("./panel"),
+        },
       ];
     });
   }

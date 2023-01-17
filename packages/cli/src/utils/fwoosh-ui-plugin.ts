@@ -6,7 +6,8 @@ function lazyLoadComponents(
   imports: {
     name?: string;
     filepath: string;
-    hideWithoutParams?: string | false;
+    paramKey?: string;
+    hideWithoutParams?: boolean;
   }[]
 ) {
   const names: string[] = [];
@@ -25,11 +26,8 @@ function lazyLoadComponents(
       ${name}.displayName = React.lazy(() => import('${i.filepath}').then(m => {
         return { default: m.Name || (() => '${name}') };
       }));
-      ${
-        i.hideWithoutParams
-          ? `${name}.hideWithoutParams = "${i.hideWithoutParams}";`
-          : ""
-      }
+      ${i.paramKey ? `${name}.paramKey = "${i.paramKey}";` : ""}
+      ${i.hideWithoutParams ? `${name}.hideWithoutParams = true;` : ""}
     `;
   });
 

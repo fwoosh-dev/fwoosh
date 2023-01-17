@@ -38,19 +38,22 @@ const ToolPanelsContent = () => {
     { suspense: false }
   );
 
+  const shownPanel = panels.filter((Panel) => {
+    const paramValue = parameters?.[Panel.paramKey];
+
+    if ((Panel.hideWithoutParams && !paramValue) || paramValue === false) {
+      return false;
+    }
+
+    return true;
+  });
+
   return (
     <ParameterContext.Provider value={parameters}>
       <Tabs.Root defaultValue={panels[0]?.componentName}>
         <TabsList>
           <Suspense fallback={<Spinner delay={3000} size={5} />}>
-            {panels.map((Panel) => {
-              if (
-                Panel.hideWithoutParams &&
-                !parameters?.[Panel.hideWithoutParams]
-              ) {
-                return null;
-              }
-
+            {shownPanel.map((Panel) => {
               return (
                 <Tabs.Trigger
                   key={`trigger-${Panel.componentName}`}
@@ -63,14 +66,7 @@ const ToolPanelsContent = () => {
           </Suspense>
         </TabsList>
 
-        {panels.map((Panel) => {
-          if (
-            Panel.hideWithoutParams &&
-            !parameters?.[Panel.hideWithoutParams]
-          ) {
-            return null;
-          }
-
+        {shownPanel.map((Panel) => {
           return (
             <TabContent
               key={`content-${Panel.componentName}-${storyId}`}

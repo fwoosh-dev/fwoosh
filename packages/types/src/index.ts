@@ -108,7 +108,8 @@ type ViteConfig = Omit<InlineConfig, "mode" | "root">;
 export interface FwooshPanel {
   name: string;
   filepath: string;
-  hideWithoutParams?: string | false;
+  paramKey: string;
+  hideWithoutParams?: boolean;
 }
 
 export interface FwooshHooks {

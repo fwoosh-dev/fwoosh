@@ -4,8 +4,8 @@
 
 - [ ] BUG: panel resizer resets in built website on nav
 - [ ] BUG: detect if there are properties before showing nav item?
-- [ ] FEATURE: disable panel for story/stories
 - [ ] FEATURE: embed panels in docs view easily
+- [ ] FEATURE: sync active panel across navigation
 - [ ] BUG: quick nav sticky position
 - [ ] Figure out how to get react plugin renderer to use different react than app
 - [ ] add icon + open external links in new tab https://github.com/rehypejs/rehype-external-links
@@ -23,7 +23,6 @@
 - [ ] Axe addon
 - [ ] measure addon
 - [ ] component theme addon
-- [ ] figma addon
 
 ### Exploration
 

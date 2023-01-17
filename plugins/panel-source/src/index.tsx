@@ -18,7 +18,11 @@ export default class SourcePanel implements Plugin {
     fwoosh.hooks.registerPanel.tap(this.name, (panels) => {
       return [
         ...panels,
-        { name: "Source", filepath: require.resolve("./panel") },
+        {
+          name: "Source",
+          paramKey: this.name,
+          filepath: require.resolve("./panel"),
+        },
       ];
     });
   }

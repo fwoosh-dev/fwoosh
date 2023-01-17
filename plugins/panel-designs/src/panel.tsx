@@ -9,7 +9,7 @@ const Iframe = styled("iframe", {
   height: "100%",
 });
 
-export function Preview({ src }: { src: string }) {
+function Preview({ src }: { src: string }) {
   const [url, setUrl] = React.useState<string | undefined>(undefined);
   const [loaded, setLoaded] = React.useState(false);
 
@@ -39,7 +39,7 @@ export function Preview({ src }: { src: string }) {
   return <Iframe src={url} onLoad={() => setLoaded(true)} />;
 }
 
-export const Empty = styled("div", {
+const Empty = styled("div", {
   color: "$gray8",
   p: 4,
 });

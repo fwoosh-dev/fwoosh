@@ -3,14 +3,14 @@ import { createRequire } from "module";
 
 const require = createRequire(import.meta.url);
 
-interface PropsPanelOptions {}
+interface ActionsPanelOptions {}
 
-export default class PropsPanel implements Plugin {
-  name = "props-panel";
+export default class ActionsPanel implements Plugin {
+  name = "actions-panel";
 
-  private options: PropsPanelOptions;
+  private options: ActionsPanelOptions;
 
-  constructor(options: PropsPanelOptions) {
+  constructor(options: ActionsPanelOptions) {
     this.options = options;
   }
 
@@ -18,7 +18,11 @@ export default class PropsPanel implements Plugin {
     fwoosh.hooks.registerPanel.tap(this.name, (panels) => {
       return [
         ...panels,
-        { name: "Actions", filepath: require.resolve("./panel") },
+        {
+          name: "Actions",
+          paramKey: this.name,
+          filepath: require.resolve("./panel"),
+        },
       ];
     });
   }

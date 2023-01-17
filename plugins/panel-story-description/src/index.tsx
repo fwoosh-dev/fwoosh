@@ -9,7 +9,7 @@ interface StoryDescriptionPanelOptions {
 }
 
 export default class StoryDescriptionPanel implements Plugin {
-  name = "source-panel";
+  name = "story-description-panel";
 
   private options: StoryDescriptionPanelOptions;
 
@@ -23,7 +23,11 @@ export default class StoryDescriptionPanel implements Plugin {
     fwoosh.hooks.registerPanel.tap(this.name, (panels) => {
       return [
         ...panels,
-        { name: this.options.title, filepath: require.resolve("./panel") },
+        {
+          name: this.options.title,
+          paramKey: this.name,
+          filepath: require.resolve("./panel"),
+        },
       ];
     });
   }

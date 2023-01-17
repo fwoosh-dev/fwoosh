@@ -35,12 +35,16 @@ export const Playground: Story<DesignsPanelParameters> = () => {
  * }
  * ```
  */
-export const WithDisabled: Story = () => {
+export const WithDisabled: Story<DesignsPanelParameters> = () => {
   return (
     <Button disabled onClick={action("onClick")}>
       Click me
     </Button>
   );
+};
+
+WithDisabled.parameters = {
+  designs: false,
 };
 
 /** Add custom styles to a button */

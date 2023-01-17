@@ -38,6 +38,7 @@ declare module "@fwoosh/app/ui" {
   interface PanelPlugin {
     ({ storyPreviewId: string }): JSX.Element;
     componentName: string;
+    paramKey: string;
     hideWithoutParams?: string | false;
     displayName: () => JSX.Element;
   }

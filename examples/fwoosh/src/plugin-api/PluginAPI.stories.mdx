@@ -146,7 +146,11 @@ export default class DescriptionPanelPlugin implements Plugin {
     fwoosh.hooks.registerPanel.tap(this.name, (panels) => {
       return [
         ...panels,
-        { name: this.options.title, filepath: require.resolve("./panel") },
+        {
+          name: this.options.title,
+          paramKey: this.name,
+          filepath: require.resolve("./panel"),
+        },
       ];
     });
   }
@@ -202,6 +206,7 @@ export default class DescriptionPlugin implements Plugin {
         {
           name: this.options.title,
           filepath: require.resolve("./panel"),
+          paramKey: this.name,
           hideWithoutParams: true,
         },
       ];

@@ -22,8 +22,9 @@ export default class Designs implements Plugin {
         ...panels,
         {
           name: "Designs",
+          paramKey: this.name,
           filepath: require.resolve("./panel"),
-          hideWithoutParams: this.options.hideWithoutParams ? this.name : false,
+          hideWithoutParams: this.options.hideWithoutParams,
         },
       ];
     });
