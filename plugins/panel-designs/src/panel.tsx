@@ -39,11 +39,16 @@ export function Preview({ src }: { src: string }) {
   return <Iframe src={url} onLoad={() => setLoaded(true)} />;
 }
 
+export const Empty = styled("div", {
+  color: "$gray8",
+  p: 4,
+});
+
 export default function DesignsPanel(props: any) {
   const params = useParameters() as DesignsPanelParameters;
 
   if (!params.design) {
-    return null;
+    return <Empty>No designs configured for this story.</Empty>;
   }
 
   return (
