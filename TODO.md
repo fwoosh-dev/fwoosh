@@ -2,9 +2,7 @@
 
 ### Core
 
-- [ ] parameters
 - [ ] BUG: panel resizer resets in built website on nav
-- [ ] BUG: panel (source) has wrong spacing
 - [ ] BUG: detect if there are properties before showing nav item?
 - [ ] Figure out how to get react plugin renderer to use different react than app
 - [ ] add icon + open external links in new tab https://github.com/rehypejs/rehype-external-links
