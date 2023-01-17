@@ -6,6 +6,7 @@
 - [ ] BUG: detect if there are properties before showing nav item?
 - [ ] FEATURE: disable panel for story/stories
 - [ ] FEATURE: embed panels in docs view easily
+- [ ] BUG: quick nav sticky position
 - [ ] Figure out how to get react plugin renderer to use different react than app
 - [ ] add icon + open external links in new tab https://github.com/rehypejs/rehype-external-links
 - [ ] hooks for completely custom routes

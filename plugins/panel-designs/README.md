@@ -19,3 +19,40 @@ export const config: FwooshConfig = {
   plugins: ["@fwoosh/panel-designs`"],
 };
 ```
+
+## Usage
+
+To use this plugin you can either configure a link to your design in the file meta:
+
+```tsx
+export const meta: StoryMeta = {
+  parameters: {
+    designs: "https://figma.com/file/ASDF",
+  },
+};
+```
+
+or directly on a story:
+
+```tsx
+export const BasicStory = () => {};
+
+BasicStory.parameters = {
+  designs: "https://figma.com/file/ASDF",
+};
+```
+
+## Options
+
+### `hideWithoutParams`
+
+Only show the panel if there are parameters configured for the story.
+
+```tsx
+import { FwooshOptions } from "fwoosh";
+import DesignsPanel from "@fwoosh/panel-designs";
+
+export const config: FwooshOptions = {
+  plugins: [new DesignsPanel({ hideWithoutParams: true })],
+};
+```

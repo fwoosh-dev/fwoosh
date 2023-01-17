@@ -43,29 +43,47 @@ const ToolPanelsContent = () => {
       <Tabs.Root defaultValue={panels[0]?.componentName}>
         <TabsList>
           <Suspense fallback={<Spinner delay={3000} size={5} />}>
-            {panels.map((Panel) => (
-              <Tabs.Trigger
-                key={`trigger-${Panel.componentName}`}
-                value={Panel.componentName}
-              >
-                <Panel.displayName />
-              </Tabs.Trigger>
-            ))}
+            {panels.map((Panel) => {
+              if (
+                Panel.hideWithoutParams &&
+                !parameters?.[Panel.hideWithoutParams]
+              ) {
+                return null;
+              }
+
+              return (
+                <Tabs.Trigger
+                  key={`trigger-${Panel.componentName}`}
+                  value={Panel.componentName}
+                >
+                  <Panel.displayName />
+                </Tabs.Trigger>
+              );
+            })}
           </Suspense>
         </TabsList>
 
-        {panels.map((Panel) => (
-          <TabContent
-            key={`content-${Panel.componentName}-${storyId}`}
-            value={Panel.componentName}
-          >
-            <ErrorBoundary>
-              <Suspense fallback={<Spinner />}>
-                <Panel storyPreviewId={id} />
-              </Suspense>
-            </ErrorBoundary>
-          </TabContent>
-        ))}
+        {panels.map((Panel) => {
+          if (
+            Panel.hideWithoutParams &&
+            !parameters?.[Panel.hideWithoutParams]
+          ) {
+            return null;
+          }
+
+          return (
+            <TabContent
+              key={`content-${Panel.componentName}-${storyId}`}
+              value={Panel.componentName}
+            >
+              <ErrorBoundary>
+                <Suspense fallback={<Spinner />}>
+                  <Panel storyPreviewId={id} />
+                </Suspense>
+              </ErrorBoundary>
+            </TabContent>
+          );
+        })}
       </Tabs.Root>
     </ParameterContext.Provider>
   );

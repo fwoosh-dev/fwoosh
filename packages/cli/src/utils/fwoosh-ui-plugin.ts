@@ -1,7 +1,14 @@
 import { endent } from "./endent.js";
 import { pascalCase } from "change-case";
+import { FwooshPanel } from "@fwoosh/types";
 
-function lazyLoadComponents(imports: { name?: string; filepath: string }[]) {
+function lazyLoadComponents(
+  imports: {
+    name?: string;
+    filepath: string;
+    hideWithoutParams?: string | false;
+  }[]
+) {
   const names: string[] = [];
   const components = imports.map((i) => {
     const name = i.name || pascalCase(i.filepath);
@@ -18,6 +25,11 @@ function lazyLoadComponents(imports: { name?: string; filepath: string }[]) {
       ${name}.displayName = React.lazy(() => import('${i.filepath}').then(m => {
         return { default: m.Name || (() => '${name}') };
       }));
+      ${
+        i.hideWithoutParams
+          ? `${name}.hideWithoutParams = "${i.hideWithoutParams}";`
+          : ""
+      }
     `;
   });
 
@@ -29,7 +41,7 @@ export function fwooshUiPlugin({
   panels,
   toolbarControls,
 }: {
-  panels: { name: string; filepath: string }[];
+  panels: FwooshPanel[];
   toolbarControls: string[];
 }) {
   const virtualFileId = "@fwoosh/app/ui";

@@ -1,0 +1,72 @@
+---
+title: Plugins/Introduction
+---
+
+import { Link } from "@fwoosh/link";
+
+# Plugins
+
+Plugins are a way to extend the functionality of your fwoosh application.
+
+There are four types of plugins:
+
+- Renderer - Add the ability to render stories for a specific framework
+- Panel - Add a tool panel to the `/storybook` view
+- Tool - Add a toolbar tool to the `/storybook` view
+- Decorators - Common wrappers for stories (<Link to="Features/Decorators">Read more</Link>)
+
+## Configuration
+
+Plugins are configured in the `fwoosh.config.ts` file.
+
+```ts
+export const config: FwooshConfig = {
+  plugins: [
+    // Just list the name of the plugin to use it
+    "@fwoosh/panel-story-description",
+    // Or provide an array with the name and options
+    ["@fwoosh/panel-story-description", { title: "Comment" }],
+  ],
+};
+```
+
+You can also import the plugins directly and use them in your config.
+This provides a better auto-complete experience in your editor.
+
+```ts
+import StoryDescriptionPanel from "@fwoosh/panel-story-description";
+
+export const config: FwooshConfig = {
+  plugins: [
+    new StoryDescriptionPanel({
+      title: "Comment",
+    }),
+  ],
+};
+```
+
+## Parameters
+
+Plugins can also be configured using parameters.
+
+Parameters can be configured in a story file's `meta` object.
+This will set the parameter for all stories in the file.
+
+```tsx
+export const meta: StoryMeta = {
+  parameters: {
+    PLUGIN: "OPTION",
+  },
+};
+```
+
+or directly on a story.
+This will set the parameter for that specific story.
+
+```tsx
+export const BasicStory = () => {};
+
+BasicStory.parameters = {
+  PLUGIN: "OPTION",
+};
+```

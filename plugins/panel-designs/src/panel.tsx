@@ -44,16 +44,16 @@ export const Empty = styled("div", {
   p: 4,
 });
 
-export default function DesignsPanel(props: any) {
+export default function DesignsPanel() {
   const params = useParameters() as DesignsPanelParameters;
 
-  if (!params.design) {
+  if (!params.designs) {
     return <Empty>No designs configured for this story.</Empty>;
   }
 
   return (
     <Preview
-      src={`https://www.figma.com/embed?embed_host=astra&url=${params.design}`}
+      src={`https://www.figma.com/embed?embed_host=astra&url=${params.designs}`}
     />
   );
 }

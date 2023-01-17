@@ -9,7 +9,7 @@ export const meta: StoryMeta<DesignsPanelParameters> = {
   title: "Components/Button",
   component: Button,
   parameters: {
-    design: "https://www.figma.com/file/LKQ4FJ4bTnCSjedbRpk931/Sample-File",
+    designs: "https://www.figma.com/file/LKQ4FJ4bTnCSjedbRpk931/Sample-File",
   },
 };
 

@@ -1,6 +1,7 @@
 import { FwooshOptions } from "fwoosh";
 import path from "path";
 import ReactPlugin from "@fwoosh/react";
+import DesignsPanel from "@fwoosh/panel-designs";
 
 export const config: FwooshOptions = {
   title: "@fwoosh/react",
@@ -11,7 +12,7 @@ export const config: FwooshOptions = {
     include: ["**/src/**/*.{ts,tsx}"],
   },
   plugins: [
-    "@fwoosh/panel-designs",
+    new DesignsPanel({ hideWithoutParams: true }),
     "@fwoosh/panel-props",
     "@fwoosh/panel-source",
     "@fwoosh/panel-actions",

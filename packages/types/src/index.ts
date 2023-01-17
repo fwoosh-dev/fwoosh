@@ -105,6 +105,12 @@ export interface StoryTree extends BaseTreeItem {
 
 type ViteConfig = Omit<InlineConfig, "mode" | "root">;
 
+export interface FwooshPanel {
+  name: string;
+  filepath: string;
+  hideWithoutParams?: string | false;
+}
+
 export interface FwooshHooks {
   /**
    * This hooks is what powers the main experience in fwoosh.
@@ -134,7 +140,7 @@ export interface FwooshHooks {
    * It should add a path + title to the array. The title is used
    * for the text of the Tab trigger.
    */
-  registerPanel: SyncWaterfallHook<[{ name: string; filepath: string }[]]>;
+  registerPanel: SyncWaterfallHook<[FwooshPanel[]]>;
   /**
    * Modify the Vite configuration used to load your fwoosh instance.
    */

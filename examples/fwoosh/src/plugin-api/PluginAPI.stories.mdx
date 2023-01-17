@@ -182,6 +182,34 @@ export default function DescriptionPanel() {
 }
 ```
 
+#### `hideWithoutParams`
+
+You can configure a panel to only show when a story has parameters.
+
+Now the following panel will only be shown when the story has a `description` parameter.
+
+```tsx
+import { Plugin, Fwoosh } from "fwoosh";
+import { createRequire } from "module";
+
+export default class DescriptionPlugin implements Plugin {
+  name = "description";
+
+  apply(fwoosh: Fwoosh) {
+    fwoosh.hooks.registerPanel.tap(this.name, (panels) => {
+      return [
+        ...panels,
+        {
+          name: this.options.title,
+          filepath: require.resolve("./panel"),
+          hideWithoutParams: true,
+        },
+      ];
+    });
+  }
+}
+```
+
 ### `modifyViteConfig`
 
 Modify the Vite configuration used to load your fwoosh instance.
