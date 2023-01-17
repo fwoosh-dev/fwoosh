@@ -155,7 +155,7 @@ export class Fwoosh implements FwooshClass {
           result
             .map((i, index) => {
               const indent = index === 0 ? " " : "  ";
-              return `${indent}-  ${terminalLink(i, i)}`;
+              return `${indent}-  ${terminalLink(i.name, i.filepath)}`;
             })
             .join("\n")
         );

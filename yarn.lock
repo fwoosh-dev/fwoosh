@@ -1091,6 +1091,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@fwoosh/tool-github@workspace:plugins/tool-github":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/tool-github@workspace:plugins/tool-github"
+  peerDependencies:
+    fwoosh: ">= 0.x"
+  languageName: unknown
+  linkType: soft
+
 "@fwoosh/tool-measure@workspace:plugins/tool-measure":
   version: 0.0.0-use.local
   resolution: "@fwoosh/tool-measure@workspace:plugins/tool-measure"

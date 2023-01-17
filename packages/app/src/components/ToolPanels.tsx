@@ -8,6 +8,7 @@ import { ParameterContext, useStoryId } from "@fwoosh/hooks";
 import { stories } from "@fwoosh/app/stories";
 import { useQuery } from "react-query";
 import { resolveStoryMeta } from "@fwoosh/utils";
+import { useParameters } from "../hooks/useParameters";
 
 const TabsList = styled(Tabs.List, {
   height: "$12",
@@ -23,23 +24,12 @@ const TabContent = styled(Tabs.Content, {
 const ToolPanelsContent = () => {
   const id = useContext(StoryIdContext);
   const storyId = useStoryId();
-  const story = storyId ? stories[storyId] : undefined;
-
-  const { data: parameters } = useQuery(
-    `params-${storyId}`,
-    async () => {
-      const meta = await resolveStoryMeta(story?.meta);
-
-      return {
-        ...meta?.parameters,
-        ...story?.component?._payload?._result?.default?.parameters,
-      };
-    },
-    { suspense: false }
-  );
+  const parameters = useParameters();
 
   const shownPanel = panels.filter((Panel) => {
-    const paramValue = parameters?.[Panel.paramKey];
+    const paramValue = Panel.paramKey
+      ? parameters?.[Panel.paramKey]
+      : undefined;
 
     if ((Panel.hideWithoutParams && !paramValue) || paramValue === false) {
       return false;

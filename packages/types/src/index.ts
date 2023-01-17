@@ -105,11 +105,17 @@ export interface StoryTree extends BaseTreeItem {
 
 type ViteConfig = Omit<InlineConfig, "mode" | "root">;
 
-export interface FwooshPanel {
+interface FwooshTool {
   name: string;
   filepath: string;
-  paramKey: string;
+  paramKey?: string;
   hideWithoutParams?: boolean;
+}
+
+export type FwooshPanel = FwooshTool;
+
+export interface FwooshToolbarButton extends FwooshTool {
+  scope: "story" | "global";
 }
 
 export interface FwooshHooks {
@@ -134,7 +140,7 @@ export interface FwooshHooks {
    * It should add a path to the array of strings to the
    * The file should export a react component that acts as the toolbar control.
    */
-  registerToolbarControl: SyncWaterfallHook<[string[]]>;
+  registerToolbarControl: SyncWaterfallHook<[FwooshToolbarButton[]]>;
   /**
    * Register a panel in the storybook panels.
    *

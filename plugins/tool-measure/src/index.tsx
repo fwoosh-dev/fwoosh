@@ -16,7 +16,14 @@ export default class MeasurePlugin implements Plugin {
 
   apply(fwoosh: Fwoosh) {
     fwoosh.hooks.registerToolbarControl.tap(this.name, (controls) => {
-      return [...controls, require.resolve("./toolbar")];
+      return [
+        ...controls,
+        {
+          name: this.name,
+          filepath: require.resolve("./toolbar"),
+          scope: "story",
+        },
+      ];
     });
   }
 }

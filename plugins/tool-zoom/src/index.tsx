@@ -19,7 +19,14 @@ export default class ZoomPlugin implements Plugin {
 
   apply(fwoosh: Fwoosh) {
     fwoosh.hooks.registerToolbarControl.tap(this.name, (controls) => {
-      return [...controls, require.resolve("./toolbar")];
+      return [
+        ...controls,
+        {
+          name: "zoom",
+          filepath: require.resolve("./toolbar"),
+          scope: "story",
+        },
+      ];
     });
   }
 }

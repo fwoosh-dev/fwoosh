@@ -34,13 +34,16 @@ declare module "@fwoosh/app/ui" {
     ({ storyPreviewId: string }): JSX.Element;
     componentName: string;
     displayName: string;
+    paramKey?: string;
+    scope: "story" | "global";
+    hideWithoutParams?: string | false;
   }
   interface PanelPlugin {
     ({ storyPreviewId: string }): JSX.Element;
     componentName: string;
-    paramKey: string;
-    hideWithoutParams?: string | false;
     displayName: () => JSX.Element;
+    paramKey?: string;
+    hideWithoutParams?: string | false;
   }
 
   export const toolbarControls: Array<ToolbarPlugin>;

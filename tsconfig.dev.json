@@ -55,6 +55,9 @@
     },
     {
       "path": "plugins/panel-designs"
+    },
+    {
+      "path": "plugins/tool-github"
     }
   ]
 }

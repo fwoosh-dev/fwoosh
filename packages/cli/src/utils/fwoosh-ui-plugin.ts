@@ -1,12 +1,13 @@
 import { endent } from "./endent.js";
 import { pascalCase } from "change-case";
-import { FwooshPanel } from "@fwoosh/types";
+import { FwooshPanel, FwooshToolbarButton } from "@fwoosh/types";
 
 function lazyLoadComponents(
   imports: {
     name?: string;
     filepath: string;
     paramKey?: string;
+    scope?: "global" | "story";
     hideWithoutParams?: boolean;
   }[]
 ) {
@@ -28,6 +29,7 @@ function lazyLoadComponents(
       }));
       ${i.paramKey ? `${name}.paramKey = "${i.paramKey}";` : ""}
       ${i.hideWithoutParams ? `${name}.hideWithoutParams = true;` : ""}
+      ${i.scope ? `${name}.scope = "${i.scope}";` : ""}
     `;
   });
 
@@ -40,7 +42,7 @@ export function fwooshUiPlugin({
   toolbarControls,
 }: {
   panels: FwooshPanel[];
-  toolbarControls: string[];
+  toolbarControls: FwooshToolbarButton[];
 }) {
   const virtualFileId = "@fwoosh/app/ui";
 
@@ -57,9 +59,7 @@ export function fwooshUiPlugin({
 
     async load(id: string) {
       if (id.includes(virtualFileId)) {
-        const toolbar = lazyLoadComponents(
-          toolbarControls.map((filepath) => ({ filepath }))
-        );
+        const toolbar = lazyLoadComponents(toolbarControls);
         const panel = lazyLoadComponents(panels);
 
         return endent`
