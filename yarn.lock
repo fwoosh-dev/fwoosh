@@ -952,6 +952,7 @@ __metadata:
   resolution: "@fwoosh/panel-designs@workspace:plugins/panel-designs"
   dependencies:
     "@fwoosh/hooks": "link:../../packages/hooks"
+    "@fwoosh/styling": "link:../../packages/styling"
   peerDependencies:
     fwoosh: ">= 0.x"
   languageName: unknown
@@ -1036,6 +1037,12 @@ __metadata:
     typescript:
       optional: true
   languageName: unknown
+  linkType: soft
+
+"@fwoosh/styling@link:../../packages/styling::locator=%40fwoosh%2Fpanel-designs%40workspace%3Aplugins%2Fpanel-designs":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/styling@link:../../packages/styling::locator=%40fwoosh%2Fpanel-designs%40workspace%3Aplugins%2Fpanel-designs"
+  languageName: node
   linkType: soft
 
 "@fwoosh/styling@link:../styling::locator=%40fwoosh%2Fcomponents%40workspace%3Apackages%2Fcomponents":
