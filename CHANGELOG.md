@@ -1,3 +1,16 @@
+# v0.0.94 (Fri Jan 20 2023)
+
+#### ⚠️ Pushed to `main`
+
+- `fwoosh`, `@fwoosh/types`
+  - add ability to fallback to default sorting ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.93 (Fri Jan 20 2023)
 
 #### ⚠️ Pushed to `main`
