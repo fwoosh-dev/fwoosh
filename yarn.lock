@@ -1051,6 +1051,12 @@ __metadata:
   languageName: node
   linkType: soft
 
+"@fwoosh/styling@link:../../packages/styling::locator=%40fwoosh%2Ftool-github%40workspace%3Aplugins%2Ftool-github":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/styling@link:../../packages/styling::locator=%40fwoosh%2Ftool-github%40workspace%3Aplugins%2Ftool-github"
+  languageName: node
+  linkType: soft
+
 "@fwoosh/styling@link:../styling::locator=%40fwoosh%2Fcomponents%40workspace%3Apackages%2Fcomponents":
   version: 0.0.0-use.local
   resolution: "@fwoosh/styling@link:../styling::locator=%40fwoosh%2Fcomponents%40workspace%3Apackages%2Fcomponents"
@@ -1102,6 +1108,7 @@ __metadata:
   resolution: "@fwoosh/tool-github@workspace:plugins/tool-github"
   dependencies:
     "@fwoosh/hooks": "link:../../packages/hooks"
+    "@fwoosh/styling": "link:../../packages/styling"
     "@types/parse-github-url": ^1.0.0
     parse-github-url: ^1.0.2
     react-feather: ^2.0.10
@@ -6609,6 +6616,7 @@ __metadata:
     auto: ^10.37.6
     command-line-application: ^0.10.1
     copy-template-dir: ^1.4.0
+    endent: ^2.1.0
     fwoosh: "link:./packages/cli"
     lerna: ^6.4.1
     patch-package: ^6.4.7

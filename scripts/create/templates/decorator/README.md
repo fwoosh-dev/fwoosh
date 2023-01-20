@@ -1,4 +1,4 @@
-# `@fwoosh/decorator-{{kebab}}`
+# `@fwoosh/{{kebab}}`
 
 {{description}}
 
@@ -7,9 +7,9 @@
 To use this decorator install the package.
 
 ```sh
-npm i --save-dev @fwoosh/decorator-{{kebab}}`
+npm i --save-dev @fwoosh/{{kebab}}`
 # or
-yarn add -D @fwoosh/decorator-{{kebab}}`
+yarn add -D @fwoosh/{{kebab}}`
 ```
 
 ## Usage
@@ -17,7 +17,7 @@ yarn add -D @fwoosh/decorator-{{kebab}}`
 This decorator work at the story level:
 
 ```tsx
-import { centered } from "@fwoosh/decorator-{{kebab}}";
+import { centered } from "@fwoosh/{{kebab}}";
 
 export const Example: Story = () => <div>Foo</div>;
 
@@ -27,7 +27,7 @@ Example.decorator = [centered];
 At the file level:
 
 ```tsx
-import { centered } from "@fwoosh/decorator-{{kebab}}";
+import { centered } from "@fwoosh/{{kebab}}";
 
 export const meta: StoryMeta = {
   title: "Components/Example",
@@ -39,7 +39,7 @@ export const meta: StoryMeta = {
 And globally in a setup file:
 
 ```tsx
-import { centered } from "@fwoosh/decorator-{{kebab}}";
+import { centered } from "@fwoosh/{{kebab}}";
 import { Decorator } from "@fwoosh/react";
 
 export const decorators: Decorator[] = [centered];

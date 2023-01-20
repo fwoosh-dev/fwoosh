@@ -7,6 +7,7 @@ import { paramCase, pascalCase } from "change-case";
 import { titleCase } from "title-case";
 import { log } from "@fwoosh/utils";
 import { app } from "command-line-application";
+import endent from "endent";
 
 function create() {
   const result = app({
@@ -50,12 +51,12 @@ function create() {
     fs.readFileSync(path.join(__dirname, "../../lerna.json"), "utf8")
   );
   const inDir = path.join(__dirname, "templates", options.type);
-  const kebab = paramCase(options.name);
+  const isPlugin = ["decorator", "tool", "panel"].includes(options.type);
+  const kebab = paramCase(
+    isPlugin ? `${options.type}-${options.name}` : options.name
+  );
   const folder = options.type === "package" ? "packages" : "plugins";
-  const packageName = ["decorator", "tool", "panel"].includes(options.type)
-    ? `${options.type}-${kebab}`
-    : kebab;
-  const outDir = path.join(__dirname, "../..", folder, packageName);
+  const outDir = path.join(__dirname, "../..", folder, kebab);
   const TSCONFIG = path.join(__dirname, "../../tsconfig.dev.json");
 
   fs.mkdirSync(outDir);
@@ -79,7 +80,7 @@ function create() {
     createdFiles.forEach((filePath) =>
       log.log(`Created ${path.relative(outDir, filePath)}`)
     );
-    log.success(`Created @auto-it/${packageName} package!`);
+    log.success(`Created @auto-it/${kebab} package!`);
   });
 
   fs.readFile(TSCONFIG, "utf8", (err, data) => {
@@ -90,12 +91,33 @@ function create() {
     const json = JSON.parse(data);
 
     json.references.push({
-      path: path.join(folder, packageName),
+      path: path.join(folder, kebab),
     });
 
     fs.writeFileSync(TSCONFIG, JSON.stringify(json, null, 2));
     log.success(`Updated tsconfig.dev.json!`);
   });
+
+  if (isPlugin) {
+    const storyFile = path.join(
+      __dirname,
+      "../../examples/fwoosh/src/plugins",
+      `${kebab}.stories.tsx`
+    );
+
+    fs.writeFileSync(
+      storyFile,
+      endent`
+        ---
+        title: Plugins/${pascalCase(options.type)}/${pascalCase(options.name)}
+        ---
+        
+        import README from "../../../../plugins/${kebab}/README.md";
+        
+        <README />
+      `
+    );
+  }
 }
 
 create();

@@ -1,5 +1,5 @@
 {
-  "name": "@fwoosh/tool-{{kebab}}",
+  "name": "@fwoosh/{{kebab}}",
   "type": "module",
   "main": "dist/index.js",
   "description": "{{description}}",
