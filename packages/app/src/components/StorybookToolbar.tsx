@@ -14,7 +14,16 @@ const StoryToolbar = styled(Toolbar.Root, {
   alignItems: "center",
   justifyContent: "center",
   gap: "$1",
+  height: "$12",
+  flexShrink: 0,
+});
+
+const GlobalToolbar = styled(Toolbar.Root, {
   flex: 1,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-end",
+  gap: "$1",
   height: "$12",
   flexShrink: 0,
 });
@@ -41,11 +50,16 @@ export const StorybookToolbar = () => {
   const storyControls = activeControls.filter((Control) => {
     return Control.scope === "story";
   });
+  const globalControls = activeControls.filter((Control) => {
+    return Control.scope === "global";
+  });
 
   return (
     <HeaderBar>
       <HeaderTitle>{config.title}</HeaderTitle>
-      {storyControls && storyId ? (
+      <GlobalToolbar />
+
+      {storyId ? (
         <StoryToolbar>
           <Suspense fallback={<Spinner size={5} />}>
             {storyControls.map((Control) => (
@@ -56,7 +70,18 @@ export const StorybookToolbar = () => {
       ) : (
         <Split />
       )}
-      <ThemeToggle />
+
+      <GlobalToolbar>
+        <Suspense fallback={<Spinner size={5} />}>
+          {globalControls.map((Control) => (
+            <Control key={Control.componentName} storyPreviewId={id} />
+          ))}
+        </Suspense>
+
+        <Toolbar.Button asChild>
+          <ThemeToggle />
+        </Toolbar.Button>
+      </GlobalToolbar>
     </HeaderBar>
   );
 };
