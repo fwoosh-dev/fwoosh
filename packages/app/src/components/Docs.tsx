@@ -1,33 +1,25 @@
+import React from "react";
 import {
   Content,
   Sidebar,
   SidebarItem,
   SidebarItems,
   SidebarLayout,
-  HeaderBar,
-  HeaderTitle,
   SidebarSectionTitle,
   Spinner,
 } from "@fwoosh/components";
-import { styled } from "@fwoosh/styling";
-import { config } from "@fwoosh/app/config";
-import React from "react";
 import { Outlet, Link } from "react-router-dom";
 import { StoryTree } from "@fwoosh/types";
 import { CONTENT_ID } from "@fwoosh/utils";
+import { useDocsPath } from "@fwoosh/hooks";
 
 import { DocsSidebarTree } from "./sidebar/DocsSidebarTree";
-import { ThemeToggle } from "./ThemeToggle";
-import { useDocsPath } from "@fwoosh/hooks";
+import { DocsToolbar } from "./DocsToolbar";
 
 interface TreeItemProps {
   tree: StoryTree;
   path?: string[];
 }
-
-const Split = styled("div", {
-  flex: 1,
-});
 
 const TreeItem = ({ tree, path = [] }: TreeItemProps) => {
   const docsPath = useDocsPath();
@@ -62,11 +54,7 @@ const TreeItem = ({ tree, path = [] }: TreeItemProps) => {
 export const Docs = () => {
   return (
     <>
-      <HeaderBar>
-        <HeaderTitle>{config.title}</HeaderTitle>
-        <Split />
-        <ThemeToggle />
-      </HeaderBar>
+      <DocsToolbar />
       <SidebarLayout>
         <Sidebar>
           <SidebarItems>
