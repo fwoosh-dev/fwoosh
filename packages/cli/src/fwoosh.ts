@@ -95,7 +95,16 @@ export class Fwoosh implements FwooshClass {
       open: false,
       basename: "/",
       modifyViteConfig: (config) => config,
+      ...options,
       sortSidebarItems: (a, b) => {
+        const userSort = options.sortSidebarItems
+          ? options.sortSidebarItems(a, b)
+          : undefined;
+
+        if (typeof userSort === "number") {
+          return userSort;
+        }
+
         // Keep stories sorted by order they were defined
         if (a.type === "story" && b.type === "story") {
           return 0;
@@ -113,7 +122,6 @@ export class Fwoosh implements FwooshClass {
         // Default to sorting by name
         return a.name.localeCompare(b.name);
       },
-      ...options,
     };
 
     if (theme) {

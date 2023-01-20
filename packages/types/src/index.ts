@@ -184,7 +184,7 @@ export interface FwooshOptions {
   sortSidebarItems?: (
     a: StorySidebarChildItem,
     b: StorySidebarChildItem
-  ) => number;
+  ) => number | undefined;
   /** Customize the theme tokens used to render the website */
   theme?: string | ThemeObject;
   /** Override any component from @fwoosh/components and take full control of the UI. */
@@ -218,6 +218,12 @@ export type FwooshOptionsLoaded = Required<
 > &
   Pick<FwooshOptions, "componentOverrides"> & {
     theme?: ThemeObject;
+  } & {
+    /** Modify the sorting of items in the sidebar */
+    sortSidebarItems?: (
+      a: StorySidebarChildItem,
+      b: StorySidebarChildItem
+    ) => number;
   };
 
 export interface FwooshClass {

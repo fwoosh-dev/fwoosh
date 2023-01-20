@@ -147,22 +147,11 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export const config: FwooshConfig = {
   sortSidebarItems: (a, b) => {
-    // Keep stories sorted by order they were defined
-    if (a.type === "story" && b.type === "story") {
-      return 0;
+    if (a.name.include("TEST") || b.name.include("TEST")) {
+      return a.name.localeCompare(b.name);
     }
 
-    // Render stories/mdx before trees
-    if (a.type === "tree" && (b.type === "story" || b.type === "mdx")) {
-      return 1;
-    }
-
-    if (b.type === "tree" && (a.type === "story" || a.type === "mdx")) {
-      return -1;
-    }
-
-    // Default to sorting by name
-    return a.name.localeCompare(b.name);
+    // Return undefined to fall back to default sorting
   },
 };
 ```
