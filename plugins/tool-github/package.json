@@ -1,0 +1,31 @@
+{
+  "name": "@fwoosh/tool-github",
+  "type": "module",
+  "main": "dist/index.js",
+  "description": "Add a button to open the websites GitHub repo.",
+  "version": "0.0.91",
+  "license": "MIT",
+  "author": {
+    "name": "Andrew Lisowski",
+    "email": "lisowski54@gmail.com"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": "hipstersmoothie/fwoosh",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@fwoosh/hooks": "link:../../packages/hooks",
+    "parse-github-url": "^1.0.2",
+    "react-feather": "^2.0.10"
+  },
+  "peerDependencies": {
+    "fwoosh": ">= 0.x"
+  },
+  "devDependencies": {
+    "@types/parse-github-url": "^1.0.0"
+  }
+}

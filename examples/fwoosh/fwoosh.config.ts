@@ -1,5 +1,7 @@
 import { FwooshOptions } from "fwoosh";
+
 import ReactPlugin from "@fwoosh/react";
+import GitHubPlugin from "@fwoosh/tool-github";
 
 const rootOrder = [
   "Welcome",
@@ -47,6 +49,7 @@ export const config: FwooshOptions = {
     "@fwoosh/panel-actions",
     "@fwoosh/tool-zoom",
     "@fwoosh/tool-measure",
+    new GitHubPlugin({ repo: "fwooshjs/fwoosh" }),
     new ReactPlugin({
       docgenOptions: {
         propFilter: (prop) => {

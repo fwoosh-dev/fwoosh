@@ -873,6 +873,12 @@ __metadata:
   languageName: node
   linkType: soft
 
+"@fwoosh/hooks@link:../../packages/hooks::locator=%40fwoosh%2Ftool-github%40workspace%3Aplugins%2Ftool-github":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/hooks@link:../../packages/hooks::locator=%40fwoosh%2Ftool-github%40workspace%3Aplugins%2Ftool-github"
+  languageName: node
+  linkType: soft
+
 "@fwoosh/hooks@link:../hooks::locator=%40fwoosh%2Fapp%40workspace%3Apackages%2Fapp":
   version: 0.0.0-use.local
   resolution: "@fwoosh/hooks@link:../hooks::locator=%40fwoosh%2Fapp%40workspace%3Apackages%2Fapp"
@@ -1094,6 +1100,11 @@ __metadata:
 "@fwoosh/tool-github@workspace:plugins/tool-github":
   version: 0.0.0-use.local
   resolution: "@fwoosh/tool-github@workspace:plugins/tool-github"
+  dependencies:
+    "@fwoosh/hooks": "link:../../packages/hooks"
+    "@types/parse-github-url": ^1.0.0
+    parse-github-url: ^1.0.2
+    react-feather: ^2.0.10
   peerDependencies:
     fwoosh: ">= 0.x"
   languageName: unknown
@@ -3660,6 +3671,15 @@ __metadata:
   version: 2.4.1
   resolution: "@types/normalize-package-data@npm:2.4.1"
   checksum: e87bccbf11f95035c89a132b52b79ce69a1e3652fe55962363063c9c0dae0fe2477ebc585e03a9652adc6f381d24ba5589cc5e51849df4ced3d3e004a7d40ed5
+  languageName: node
+  linkType: hard
+
+"@types/parse-github-url@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@types/parse-github-url@npm:1.0.0"
+  dependencies:
+    "@types/node": "*"
+  checksum: 2af53d425e70331e345d2a15c23c554d9f576d0bf9aa28e260a49ff626d2cfa35dcae7b54b03dd884c21d6a259f8089540b43a8c887632a8341070d07b7bf849
   languageName: node
   linkType: hard
 
@@ -10506,7 +10526,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"parse-github-url@npm:1.0.2":
+"parse-github-url@npm:1.0.2, parse-github-url@npm:^1.0.2":
   version: 1.0.2
   resolution: "parse-github-url@npm:1.0.2"
   bin:
