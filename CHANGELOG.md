@@ -1,3 +1,26 @@
+# v0.0.93 (Fri Jan 20 2023)
+
+#### ⚠️ Pushed to `main`
+
+- `@fwoosh/tool-github`
+  - organize docs more ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add github plugin ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/tool-github`
+  - fix dark mode attach ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`
+  - show global tools on docs mode ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add support for global toolbar buttons ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `fwoosh`
+  - fix bug with spaceing in names ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/types`, `@fwoosh/tool-measure`, `@fwoosh/tool-zoom`
+  - refactor toolbar plugin config ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.92 (Tue Jan 17 2023)
 
 #### ⚠️ Pushed to `main`

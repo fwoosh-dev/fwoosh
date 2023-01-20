@@ -1,3 +1,16 @@
+# v0.0.93 (Fri Jan 20 2023)
+
+#### ⚠️ Pushed to `main`
+
+- fix bug with spaceing in names ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- refactor toolbar plugin config ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.92 (Tue Jan 17 2023)
 
 #### ⚠️ Pushed to `main`

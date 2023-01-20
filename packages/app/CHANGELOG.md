@@ -1,3 +1,18 @@
+# v0.0.93 (Fri Jan 20 2023)
+
+#### ⚠️ Pushed to `main`
+
+- fix dark mode attach ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- show global tools on docs mode ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add support for global toolbar buttons ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- refactor toolbar plugin config ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.92 (Tue Jan 17 2023)
 
 #### ⚠️ Pushed to `main`
