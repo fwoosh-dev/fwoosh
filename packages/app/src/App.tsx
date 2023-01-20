@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { HelmetProvider } from "react-helmet-async";
+import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 
 import { Story } from "./components/Story";
 import { Storybook } from "./components/Storybook";
@@ -76,19 +77,21 @@ const router = createBrowserRouter(
       path: "/",
       errorElement: <RouteError />,
       element: (
-        <HelmetProvider>
-          <ErrorBoundary fullScreen>
-            <ProductionSearchIndex />
-            <AppWrapper>
-              <Head />
-              <Outlet />
-              <ScrollRestoration />
-              <React.Suspense>
-                <CommandPallette />
-              </React.Suspense>
-            </AppWrapper>
-          </ErrorBoundary>
-        </HelmetProvider>
+        <TooltipPrimitive.Provider>
+          <HelmetProvider>
+            <ErrorBoundary fullScreen>
+              <ProductionSearchIndex />
+              <AppWrapper>
+                <Head />
+                <Outlet />
+                <ScrollRestoration />
+                <React.Suspense>
+                  <CommandPallette />
+                </React.Suspense>
+              </AppWrapper>
+            </ErrorBoundary>
+          </HelmetProvider>
+        </TooltipPrimitive.Provider>
       ),
       children: [
         {

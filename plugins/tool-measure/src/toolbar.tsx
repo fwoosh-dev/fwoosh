@@ -1,5 +1,5 @@
 import React from "react";
-import { IconButton } from "@fwoosh/components";
+import { IconButton, Tooltip, Toolbar } from "@fwoosh/components";
 import { useStoryId } from "@fwoosh/hooks";
 import { DivideSquare, XSquare } from "react-feather";
 
@@ -53,8 +53,12 @@ export default function MeasureControl({
   }, [on, storyPreviewId]);
 
   return (
-    <IconButton onClick={onToggle} aria-label={label} title={label}>
-      {on ? <XSquare /> : <DivideSquare />}
-    </IconButton>
+    <Tooltip message={label}>
+      <Toolbar.Button asChild={true}>
+        <IconButton onClick={onToggle}>
+          {on ? <XSquare /> : <DivideSquare />}
+        </IconButton>
+      </Toolbar.Button>
+    </Tooltip>
   );
 }

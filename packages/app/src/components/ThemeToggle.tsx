@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Sun, Moon } from "react-feather";
-import { IconButton } from "@fwoosh/components";
+import { IconButton, Tooltip } from "@fwoosh/components";
 import { getInitialColorMode, setColorMode, darkTheme } from "@fwoosh/styling";
 
 export const ThemeToggle = React.forwardRef(
@@ -25,15 +25,11 @@ export const ThemeToggle = React.forwardRef(
     }, [theme]);
 
     return (
-      <IconButton
-        ref={ref}
-        {...props}
-        onClick={onToggleTheme}
-        aria-label={ariaLabel}
-        title={ariaLabel}
-      >
-        {theme === "dark" ? <Moon /> : <Sun />}
-      </IconButton>
+      <Tooltip message={ariaLabel}>
+        <IconButton ref={ref} {...props} onClick={onToggleTheme}>
+          {theme === "dark" ? <Moon /> : <Sun />}
+        </IconButton>
+      </Tooltip>
     );
   }
 );

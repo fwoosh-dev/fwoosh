@@ -7,7 +7,7 @@
 - [ ] FEATURE: embed panels in docs view easily
 - [ ] FEATURE: sync active panel across navigation
 - [ ] FEATURE: cmdk switch between storybook and docs mode
-- [ ] ENHANCEMENT: Design system tooltip component
+- [ ] EXPLORATION: Infinite canvas page
 - [ ] BUG: quick nav sticky position
 - [ ] Figure out how to get react plugin renderer to use different react than app
 - [ ] add icon + open external links in new tab https://github.com/rehypejs/rehype-external-links

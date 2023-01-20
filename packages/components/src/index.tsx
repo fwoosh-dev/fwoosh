@@ -32,6 +32,7 @@ import * as ToolbarDefault from "./Toolbar.js";
 import * as TabsDefault from "./Tabs.js";
 import * as QuickNavDefault from "./QuickNav.js";
 import * as CommandDefault from "./Command.js";
+import { Tooltip as TooltipDefault } from "./Tooltip.js";
 import type { Components } from "./components.js";
 import { components as componentsDefault } from "./components.js";
 
@@ -77,6 +78,7 @@ const IconButton = (overrides.IconButton ||
 const Logo = (overrides.Logo || LogoDefault) as typeof LogoDefault;
 const PageWrapper = (overrides.PageWrapper ||
   PageWrapperDefault) as typeof PageWrapperDefault;
+const Tooltip = (overrides.Tooltip || TooltipDefault) as typeof TooltipDefault;
 
 const HeaderBar = (overrides.HeaderBar ||
   HeaderBarDefault) as typeof HeaderBarDefault;
@@ -131,4 +133,5 @@ export {
   Components,
   components,
   Command,
+  Tooltip,
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { IconButton, Toolbar } from "@fwoosh/components";
+import { IconButton, Toolbar, Tooltip } from "@fwoosh/components";
 import { ZoomIn, ZoomOut, Maximize } from "react-feather";
 
 export default function ZoomControl({
@@ -35,33 +35,27 @@ export default function ZoomControl({
 
   return (
     <>
-      <Toolbar.Button asChild={true}>
-        <IconButton
-          onClick={increaseZoom}
-          aria-label={zoomInLabel}
-          title={zoomInLabel}
-        >
-          <ZoomIn />
-        </IconButton>
-      </Toolbar.Button>
-      <Toolbar.Button asChild={true}>
-        <IconButton
-          onClick={decreaseZoom}
-          aria-label={zoomOutLabel}
-          title={zoomOutLabel}
-        >
-          <ZoomOut />
-        </IconButton>
-      </Toolbar.Button>
-      <Toolbar.Button asChild={true}>
-        <IconButton
-          onClick={resetZoom}
-          aria-label={zoomResetLabel}
-          title={zoomResetLabel}
-        >
-          <Maximize />
-        </IconButton>
-      </Toolbar.Button>
+      <Tooltip message={zoomInLabel}>
+        <Toolbar.Button asChild={true}>
+          <IconButton onClick={increaseZoom}>
+            <ZoomIn />
+          </IconButton>
+        </Toolbar.Button>
+      </Tooltip>
+      <Tooltip message={zoomOutLabel}>
+        <Toolbar.Button asChild={true}>
+          <IconButton onClick={decreaseZoom}>
+            <ZoomOut />
+          </IconButton>
+        </Toolbar.Button>
+      </Tooltip>
+      <Tooltip message={zoomResetLabel}>
+        <Toolbar.Button asChild={true}>
+          <IconButton onClick={resetZoom}>
+            <Maximize />
+          </IconButton>
+        </Toolbar.Button>
+      </Tooltip>
     </>
   );
 }
