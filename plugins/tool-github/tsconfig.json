@@ -12,6 +12,7 @@
   "references": [
     { "path": "../../packages/cli" },
     { "path": "../../packages/components" },
-    { "path": "../../packages/hooks" }
+    { "path": "../../packages/hooks" },
+    { "path": "../../packages/styling" }
   ]
 }

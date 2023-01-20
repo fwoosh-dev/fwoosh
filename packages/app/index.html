@@ -36,13 +36,7 @@
     <!-- End Single Page Apps for GitHub Pages -->
   </head>
   <body>
-    <script type="module">
-      import { getInitialColorMode, darkTheme } from "@fwoosh/styling";
-
-      if (getInitialColorMode() === "dark") {
-        document.body.classList.add(darkTheme);
-      }
-    </script>
+    <script type="module" src="/dist/attach-dark-mode.js"></script>
     <div id="root"></div>
     <script type="module" src="/dist/index.js"></script>
   </body>
