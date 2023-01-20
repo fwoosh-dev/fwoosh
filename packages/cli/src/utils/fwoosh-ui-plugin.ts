@@ -13,7 +13,7 @@ function lazyLoadComponents(
 ) {
   const names: string[] = [];
   const components = imports.map((i) => {
-    const name = i.name || pascalCase(i.filepath);
+    const name = i.name ? i.name.replace(/ /g, "") : pascalCase(i.filepath);
     names.push(name);
 
     return endent`
