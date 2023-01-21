@@ -3,7 +3,7 @@
   "main": "dist/index.js",
   "type": "module",
   "description": "Function for testing stories in a fwoosh storybook with playwright.",
-  "version": "0.0.94",
+  "version": "0.0.95",
   "license": "MIT",
   "author": {
     "name": "Andrew Lisowski",
