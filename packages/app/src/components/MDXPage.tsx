@@ -164,7 +164,8 @@ export const MDXPage = ({ page }: { page: StoryTreeItem }) => {
       window.FWOOSH_SEARCH_INDEX = {};
     }
 
-    window.FWOOSH_SEARCH_INDEX[slug] = buildSearchIndex(levels, headings[0]);
+    window.FWOOSH_SEARCH_INDEX[slug] =
+      headings.length > 0 ? buildSearchIndex(levels, headings[0]) : [];
 
     if (process.env.NODE_ENV === "production") {
       // This log is used to communicate the search index to the
