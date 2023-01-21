@@ -9,9 +9,10 @@
   "dependencies": {
     "@alisowski/cmdk": "^0.1.20",
     "@fwoosh/styling": "link:../styling",
-    "@radix-ui/react-tabs": "^1.0.1",
-    "@radix-ui/react-toolbar": "^1.0.1",
-    "@radix-ui/react-tooltip": "^1.0.1",
+    "@radix-ui/react-dropdown-menu": "^2.0.2",
+    "@radix-ui/react-tabs": "^1.0.2",
+    "@radix-ui/react-toolbar": "^1.0.2",
+    "@radix-ui/react-tooltip": "^1.0.3",
     "@stitches/react": "^1.2.8",
     "interweave": "^13.0.0",
     "react-router-dom": "^6.6.1"
