@@ -11,10 +11,7 @@ export const meta: StoryMeta = {
 
 type CheckedState = boolean | "indeterminate";
 
-/**
- * All the Headings.
- */
-export const Headings: Story = () => {
+export const Basis: Story = () => {
   const [bookmarksChecked, setBookmarksChecked] = React.useState<CheckedState>(
     true
   );

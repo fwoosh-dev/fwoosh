@@ -33,6 +33,7 @@ import * as TabsDefault from "./Tabs.js";
 import * as QuickNavDefault from "./QuickNav.js";
 import * as CommandDefault from "./Command.js";
 import * as DropdownMenuDefault from "./DropdownMenu.js";
+import * as SelectDefault from "./Select.js";
 import { Tooltip as TooltipDefault } from "./Tooltip.js";
 import type { Components } from "./components.js";
 import { components as componentsDefault } from "./components.js";
@@ -41,6 +42,11 @@ const components = {
   ...componentsDefault,
   ...overrides,
 } as typeof componentsDefault;
+
+const Select = {
+  ...SelectDefault,
+  ...overrides.Select,
+} as typeof SelectDefault;
 
 const DropdownMenu = {
   ...DropdownMenuDefault,
@@ -141,4 +147,5 @@ export {
   Command,
   Tooltip,
   DropdownMenu,
+  Select,
 };
