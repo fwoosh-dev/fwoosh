@@ -1,21 +1,21 @@
 import React, { Suspense, useContext } from "react";
-import { Toolbar, Spinner, HeaderBar, HeaderTitle } from "@fwoosh/components";
-import { config } from "@fwoosh/app/config";
-import { useStoryId } from "@fwoosh/hooks";
+import { Toolbar, Spinner } from "@fwoosh/components";
+import { ParameterContext, useStoryId } from "@fwoosh/hooks";
 
 import { ThemeToggle } from "./ThemeToggle";
 import { useToolbarControls } from "../hooks/useToolbarControls";
 import { GlobalToolbar, StoryToolbar } from "./toolbar";
 import { StoryIdContext } from "./Story";
+import { useParameters } from "../hooks/useParameters";
 
 export const StorybookToolbar = () => {
   const storyId = useStoryId();
   const id = useContext(StoryIdContext);
   const { storyControls, globalControls } = useToolbarControls();
+  const parameters = useParameters();
 
   return (
-    <HeaderBar>
-      <HeaderTitle>{config.title}</HeaderTitle>
+    <ParameterContext.Provider value={parameters}>
       <GlobalToolbar />
 
       {storyId && (
@@ -39,6 +39,6 @@ export const StorybookToolbar = () => {
           <ThemeToggle />
         </Toolbar.Button>
       </GlobalToolbar>
-    </HeaderBar>
+    </ParameterContext.Provider>
   );
 };
