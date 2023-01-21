@@ -4,11 +4,7 @@ import { Spinner, Tabs, ErrorBoundary } from "@fwoosh/components";
 import { panels } from "@fwoosh/app/ui";
 
 import { StoryIdContext } from "./Story";
-import { ParameterContext, useStoryId } from "@fwoosh/hooks";
-import { stories } from "@fwoosh/app/stories";
-import { useQuery } from "react-query";
-import { resolveStoryMeta } from "@fwoosh/utils";
-import { useParameters } from "../hooks/useParameters";
+import { useParameters, useStoryId } from "@fwoosh/hooks";
 
 const TabsList = styled(Tabs.List, {
   height: "$12",
@@ -39,39 +35,37 @@ const ToolPanelsContent = () => {
   });
 
   return (
-    <ParameterContext.Provider value={parameters}>
-      <Tabs.Root defaultValue={panels[0]?.componentName}>
-        <TabsList>
-          <Suspense fallback={<Spinner delay={3000} size={5} />}>
-            {shownPanel.map((Panel) => {
-              return (
-                <Tabs.Trigger
-                  key={`trigger-${Panel.componentName}`}
-                  value={Panel.componentName}
-                >
-                  <Panel.displayName />
-                </Tabs.Trigger>
-              );
-            })}
-          </Suspense>
-        </TabsList>
+    <Tabs.Root defaultValue={panels[0]?.componentName}>
+      <TabsList>
+        <Suspense fallback={<Spinner delay={3000} size={5} />}>
+          {shownPanel.map((Panel) => {
+            return (
+              <Tabs.Trigger
+                key={`trigger-${Panel.componentName}`}
+                value={Panel.componentName}
+              >
+                <Panel.displayName />
+              </Tabs.Trigger>
+            );
+          })}
+        </Suspense>
+      </TabsList>
 
-        {shownPanel.map((Panel) => {
-          return (
-            <TabContent
-              key={`content-${Panel.componentName}-${storyId}`}
-              value={Panel.componentName}
-            >
-              <ErrorBoundary>
-                <Suspense fallback={<Spinner />}>
-                  <Panel storyPreviewId={id} />
-                </Suspense>
-              </ErrorBoundary>
-            </TabContent>
-          );
-        })}
-      </Tabs.Root>
-    </ParameterContext.Provider>
+      {shownPanel.map((Panel) => {
+        return (
+          <TabContent
+            key={`content-${Panel.componentName}-${storyId}`}
+            value={Panel.componentName}
+          >
+            <ErrorBoundary>
+              <Suspense fallback={<Spinner />}>
+                <Panel storyPreviewId={id} />
+              </Suspense>
+            </ErrorBoundary>
+          </TabContent>
+        );
+      })}
+    </Tabs.Root>
   );
 };
 

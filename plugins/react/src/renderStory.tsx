@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
-import { StoryData } from "@fwoosh/types";
+import { StoryData, StoryParameters } from "@fwoosh/types";
 import { stories } from "@fwoosh/app/stories";
 import { Spinner, ErrorBoundary, Tooltip } from "@fwoosh/components";
 import type { Decorator, Story as ReactStory, StoryMeta } from "./types";
@@ -39,9 +39,10 @@ function useDecorators(story: StoryData) {
 
 interface AppProps {
   slug: string;
+  params: StoryParameters;
 }
 
-function App({ slug }: AppProps) {
+function App({ slug, params }: AppProps) {
   const story = stories[slug];
   const decorators = useDecorators(story);
 
@@ -49,7 +50,7 @@ function App({ slug }: AppProps) {
 
   if (decorators?.length) {
     for (const decorator of decorators) {
-      content = decorator(content, slug);
+      content = decorator(content, slug, params);
     }
   }
 
@@ -61,6 +62,7 @@ function App({ slug }: AppProps) {
 export function render(
   el: Element,
   slug: string,
+  params: StoryParameters,
   onStart: () => void,
   onComplete: () => void
 ) {
@@ -83,7 +85,7 @@ export function render(
       <TooltipPrimitive.Provider>
         <Suspense fallback={<Fallback />}>
           <ErrorBoundary>
-            <App slug={slug} />
+            <App slug={slug} params={params} />
           </ErrorBoundary>
         </Suspense>
       </TooltipPrimitive.Provider>,

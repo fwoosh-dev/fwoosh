@@ -15,9 +15,12 @@ declare module "@fwoosh/app/config" {
 }
 
 declare module "@fwoosh/app/render" {
+  import { StoryParameters } from "@fwoosh/types";
+
   export function render(
     id: Element,
     slug: string,
+    params: StoryParameters,
     onStart?: () => void,
     onComplete?: () => void
   ): void;

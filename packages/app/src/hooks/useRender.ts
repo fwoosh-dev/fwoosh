@@ -1,6 +1,7 @@
 import React from "react";
 import { render } from "@fwoosh/app/render";
 import { stories } from "@fwoosh/app/stories";
+import { useParameters } from "@fwoosh/hooks";
 
 interface UseRenderOptions {
   id: string;
@@ -10,6 +11,7 @@ interface UseRenderOptions {
 export const useRender = ({ id, slug }: UseRenderOptions) => {
   const [hasRendered, setHasRendered] = React.useState(false);
   const ref = React.useRef<HTMLDivElement>(null);
+  const parameters = useParameters();
 
   React.useEffect(() => {
     if (!id || !ref.current) {
@@ -25,10 +27,11 @@ export const useRender = ({ id, slug }: UseRenderOptions) => {
     render(
       ref.current,
       slug,
+      parameters,
       () => setHasRendered(false),
       () => setHasRendered(true)
     );
-  }, [id, slug]);
+  }, [id, parameters, slug]);
 
   return { ref, hasRendered };
 };

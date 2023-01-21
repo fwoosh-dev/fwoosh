@@ -14,6 +14,8 @@ import { StoryIdContext } from "./Story";
 import { StorybookSidebarTree } from "./sidebar/StorybookSidebarTree";
 import { CONTENT_ID } from "@fwoosh/utils";
 import { StorybookToolbar } from "./StorybookToolbar";
+import { useParameters } from "../hooks/useParameters";
+import { ParameterContext } from "@fwoosh/hooks";
 
 const StoryWrapper = styled("div", {
   position: "relative",
@@ -24,25 +26,28 @@ const StoryWrapper = styled("div", {
 
 export const Storybook = () => {
   const id = useId();
+  const parameters = useParameters();
 
   return (
-    <StoryIdContext.Provider value={id}>
-      <StorybookToolbar />
+    <ParameterContext.Provider value={parameters}>
+      <StoryIdContext.Provider value={id}>
+        <StorybookToolbar />
 
-      <SidebarLayout>
-        <Sidebar>
-          <SidebarItems>
-            <React.Suspense fallback={<Spinner delay={2000} size={8} />}>
-              <StorybookSidebarTree />
-            </React.Suspense>
-          </SidebarItems>
-        </Sidebar>
-        <Content id={CONTENT_ID}>
-          <StoryWrapper>
-            <Outlet />
-          </StoryWrapper>
-        </Content>
-      </SidebarLayout>
-    </StoryIdContext.Provider>
+        <SidebarLayout>
+          <Sidebar>
+            <SidebarItems>
+              <React.Suspense fallback={<Spinner delay={2000} size={8} />}>
+                <StorybookSidebarTree />
+              </React.Suspense>
+            </SidebarItems>
+          </Sidebar>
+          <Content id={CONTENT_ID}>
+            <StoryWrapper>
+              <Outlet />
+            </StoryWrapper>
+          </Content>
+        </SidebarLayout>
+      </StoryIdContext.Provider>
+    </ParameterContext.Provider>
   );
 };

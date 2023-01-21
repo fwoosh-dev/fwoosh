@@ -112,7 +112,11 @@ const router = createBrowserRouter(
         },
         {
           path: "storybook",
-          element: <Storybook />,
+          element: (
+            <React.Suspense fallback={<Spinner delay={2000} />}>
+              <Storybook />
+            </React.Suspense>
+          ),
           children: [
             {
               index: true,

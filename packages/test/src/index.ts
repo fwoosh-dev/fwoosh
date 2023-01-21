@@ -59,7 +59,6 @@ export class Storybook {
       storyName
     )}`;
 
-    console.log(url);
     await this.page.goto(url);
   }
 }
