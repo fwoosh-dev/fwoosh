@@ -120,11 +120,7 @@ const router = createBrowserRouter(
           children: [
             {
               index: true,
-              element: (
-                <React.Suspense fallback={<Spinner delay={2000} />}>
-                  <FirstStory />
-                </React.Suspense>
-              ),
+              element: <FirstStory />,
             },
             {
               path: ":storyId",
@@ -143,15 +139,15 @@ const router = createBrowserRouter(
         },
         {
           path: "docs",
-          element: <Docs />,
+          element: (
+            <React.Suspense fallback={<Spinner delay={2000} />}>
+              <Docs />
+            </React.Suspense>
+          ),
           children: [
             {
               index: true,
-              element: (
-                <React.Suspense fallback={<Spinner delay={2000} />}>
-                  <FirstDocsPage />
-                </React.Suspense>
-              ),
+              element: <FirstDocsPage />,
             },
             {
               path: ":docsPath",
