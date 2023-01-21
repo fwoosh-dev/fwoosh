@@ -9,7 +9,7 @@ const Center = styled("div", {
   justifyContent: "center",
 });
 
-export const centered = (Story: () => any) => {
+export const centered = (Story: () => any) => () => {
   return (
     <Center>
       <Story />

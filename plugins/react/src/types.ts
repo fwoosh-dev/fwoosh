@@ -2,7 +2,10 @@ import * as React from "react";
 import { StoryMeta as BaseStoryMeta, StoryParameters } from "@fwoosh/types";
 
 type Component = React.FunctionComponent<any> | React.ClassicComponent<any>;
-export type Decorator = (story: () => JSX.Element) => JSX.Element;
+export type Decorator = (
+  story: () => JSX.Element,
+  slug: string
+) => () => JSX.Element;
 
 export interface Story<P extends StoryParameters = StoryParameters> {
   (): JSX.Element;

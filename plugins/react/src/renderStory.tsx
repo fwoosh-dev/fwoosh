@@ -40,18 +40,17 @@ function App({ slug }: AppProps) {
   const story = stories[slug];
   const decorators = useDecorators(story);
 
-  let content: JSX.Element | null = null;
+  let content = story.component;
 
   if (decorators?.length) {
     for (const decorator of decorators) {
-      content = decorator(story.component);
+      content = decorator(content, slug);
     }
-  } else {
-    const Component = story.component;
-    content = <Component />;
   }
 
-  return content;
+  const Component = content;
+
+  return <Component />;
 }
 
 export function render(
