@@ -1,3 +1,44 @@
+# v0.0.95 (Sat Jan 21 2023)
+
+#### ⚠️ Pushed to `main`
+
+- fix lock file ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix creating docs file for new package ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `fwoosh`, `@fwoosh/types`
+  - add option to skip indexing on mdx page ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/tool-viewport`
+  - fix lock file ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`
+  - fix sidebar rerendering ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - factor out story docs page ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add another suspense boundary ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - fix pages with no heading ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/pages`
+  - add fwoosh/pages ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/types`
+  - add fullPage option ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/hooks`, `@fwoosh/tool-viewport`
+  - Viewports tool ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/test`, `@fwoosh/react`
+  - pass params to more of the storybook ui and through to renderer ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/react`
+  - let decorators render tooltips ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - fix decorator order switching ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/components`
+  - add select component ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - fix menu overflow ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add dropdown component ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/decorator-centered`, `@fwoosh/react`
+  - fix rendering multiple decorators ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/components`, `@fwoosh/tool-github`, `@fwoosh/tool-measure`, `@fwoosh/tool-zoom`
+  - add tooltip ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.94 (Fri Jan 20 2023)
 
 #### ⚠️ Pushed to `main`

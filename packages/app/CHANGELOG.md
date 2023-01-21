@@ -1,3 +1,23 @@
+# v0.0.95 (Sat Jan 21 2023)
+
+#### ⚠️ Pushed to `main`
+
+- fix sidebar rerendering ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add fwoosh/pages ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- factor out story docs page ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add fullPage option ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add another suspense boundary ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix pages with no heading ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- pass params to more of the storybook ui and through to renderer ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix rendering multiple decorators ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add tooltip ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.93 (Fri Jan 20 2023)
 
 #### ⚠️ Pushed to `main`

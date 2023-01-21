@@ -1,3 +1,18 @@
+# v0.0.95 (Sat Jan 21 2023)
+
+#### ⚠️ Pushed to `main`
+
+- add select component ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix menu overflow ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add dropdown component ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add tooltip ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.89 (Mon Jan 16 2023)
 
 #### ⚠️ Pushed to `main`

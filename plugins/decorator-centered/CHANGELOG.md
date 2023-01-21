@@ -1,3 +1,15 @@
+# v0.0.95 (Sat Jan 21 2023)
+
+#### ⚠️ Pushed to `main`
+
+- fix rendering multiple decorators ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.75 (Tue Jan 10 2023)
 
 #### ⚠️ Pushed to `main`
