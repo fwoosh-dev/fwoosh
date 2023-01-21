@@ -23,6 +23,8 @@ const slideLeftAndFade = keyframes({
 
 const contentStyles = {
   minWidth: 220,
+  maxHeight: "80vh",
+  overflow: "auto",
   backgroundColor: "$gray0",
   borderRadius: "$round",
   padding: "$2 0",
