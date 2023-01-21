@@ -391,7 +391,7 @@ export class Fwoosh implements FwooshClass {
       ],
       optimizeDeps: {
         entries: [require.resolve("@fwoosh/app/index.html")],
-        exclude: ["@fwoosh/*"],
+        exclude: ["@fwoosh/*", "@fwoosh/components"],
         include: depsToOptimize,
       },
       build: {
@@ -410,6 +410,22 @@ export class Fwoosh implements FwooshClass {
         "process.env.FWOOSH_BASE_NAME": `"${
           mode === "production" ? this.options.basename : "/"
         }"`,
+      },
+      resolve: {
+        alias: [
+          {
+            find: "react-router",
+            replacement: require.resolve("react-router", {
+              paths: [require.resolve("@fwoosh/app")],
+            }),
+          },
+          {
+            find: "react-router-dom",
+            replacement: require.resolve("react-router-dom", {
+              paths: [require.resolve("@fwoosh/app")],
+            }),
+          },
+        ],
       },
     };
 
