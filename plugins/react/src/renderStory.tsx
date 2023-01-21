@@ -2,8 +2,9 @@ import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import { StoryData } from "@fwoosh/types";
 import { stories } from "@fwoosh/app/stories";
-import { Spinner, ErrorBoundary } from "@fwoosh/components";
+import { Spinner, ErrorBoundary, Tooltip } from "@fwoosh/components";
 import type { Decorator, Story as ReactStory, StoryMeta } from "./types";
+import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 
 function reverse<T>(arr: T[]) {
   return arr.slice().reverse();
@@ -79,11 +80,13 @@ export function render(
 
   try {
     ReactDOM.render(
-      <Suspense fallback={<Fallback />}>
-        <ErrorBoundary>
-          <App slug={slug} />
-        </ErrorBoundary>
-      </Suspense>,
+      <TooltipPrimitive.Provider>
+        <Suspense fallback={<Fallback />}>
+          <ErrorBoundary>
+            <App slug={slug} />
+          </ErrorBoundary>
+        </Suspense>
+      </TooltipPrimitive.Provider>,
       el
     );
   } catch (e) {
