@@ -436,7 +436,9 @@ export class Fwoosh implements FwooshClass {
     this.serve({ outDir }, async (server) => {
       const stories = await createVirtualStoriesFile(this.options);
       const mdx = Object.values(stories.fileMap).filter(
-        (i) => i.type === "mdx"
+        (i) =>
+          i.type === "mdx" &&
+          !JSON.parse((i.meta as unknown) as string).skipIndex
       );
 
       log.log("Building search data for MDX files...");
@@ -451,6 +453,10 @@ export class Fwoosh implements FwooshClass {
 
         page.on("console", async (msg) => {
           const msgArgs = msg.args();
+
+          if (msgArgs.length !== 3) {
+            return;
+          }
 
           const firstMsg = await msgArgs[0].jsonValue();
 

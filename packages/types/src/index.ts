@@ -61,6 +61,8 @@ export interface MdxMeta {
   hideNav?: boolean;
   /** Render just the mdx without any wrapper */
   fullPage?: boolean;
+  /** Don't create a search index for this page */
+  skipIndex?: boolean;
 }
 
 export interface TocEntry {
