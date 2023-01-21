@@ -1,6 +1,7 @@
 import * as React from "react";
 import type { StoryMeta, Story } from "@fwoosh/react";
 import { action } from "@fwoosh/panel-actions";
+import { ViewportParameters } from "@fwoosh/tool-viewport";
 import type { DesignsPanelParameters } from "@fwoosh/panel-designs";
 
 import { Button } from "./Button";
@@ -48,7 +49,7 @@ WithDisabled.parameters = {
 };
 
 /** Add custom styles to a button */
-export const WithStyle: Story = () => {
+export const WithStyle: Story<ViewportParameters> = () => {
   return (
     <Button variant="destructive" onClick={action("onClick")}>
       Click me
@@ -56,7 +57,19 @@ export const WithStyle: Story = () => {
   );
 };
 
+WithStyle.parameters = {
+  viewport: {
+    defaultSize: "iPhone SE",
+  },
+};
+
 /** Add custom styles to a button */
-export const WithoutStyle: Story = () => {
+export const WithoutStyle: Story<ViewportParameters> = () => {
   return <button onClick={action("onClick")}>Click me</button>;
+};
+
+WithoutStyle.parameters = {
+  viewport: {
+    defaultSize: ["iPhone SE", "Pixel 5"],
+  },
 };

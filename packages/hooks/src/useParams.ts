@@ -12,6 +12,6 @@ export function useDocsPath() {
 
 export const ParameterContext = React.createContext<StoryParameters>({});
 
-export function useParameters() {
-  return React.useContext(ParameterContext);
+export function useParameters<T = StoryParameters>() {
+  return React.useContext(ParameterContext) as T;
 }

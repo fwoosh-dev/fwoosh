@@ -58,6 +58,9 @@
     },
     {
       "path": "plugins/tool-github"
+    },
+    {
+      "path": "plugins/tool-viewport"
     }
   ]
 }

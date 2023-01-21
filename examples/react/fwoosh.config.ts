@@ -18,6 +18,7 @@ export const config: FwooshOptions = {
     "@fwoosh/panel-actions",
     "@fwoosh/tool-zoom",
     "@fwoosh/tool-measure",
+    "@fwoosh/tool-viewport",
     new ReactPlugin({
       docgenOptions: {
         propFilter: (prop) => {

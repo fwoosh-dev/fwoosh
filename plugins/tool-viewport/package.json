@@ -1,0 +1,28 @@
+{
+  "name": "@fwoosh/tool-viewport",
+  "type": "module",
+  "main": "dist/index.js",
+  "description": "Render your stories at different viewport sizes",
+  "version": "0.0.94",
+  "license": "MIT",
+  "author": {
+    "name": "Andrew Lisowski",
+    "email": "lisowski54@gmail.com"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": "hipstersmoothie/fwoosh",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@fwoosh/hooks": "../../packages/hooks",
+    "devices-viewport-size": "^1.0.4",
+    "react-feather": "^2.0.10"
+  },
+  "peerDependencies": {
+    "fwoosh": ">= 0.x"
+  }
+}
