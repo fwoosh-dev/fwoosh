@@ -102,7 +102,7 @@ function create() {
     const storyFile = path.join(
       __dirname,
       "../../examples/fwoosh/src/plugins",
-      `${kebab}.stories.tsx`
+      `${kebab}.stories.mdx`
     );
 
     fs.writeFileSync(
