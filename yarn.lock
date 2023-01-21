@@ -757,6 +757,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fwoosh/app@link:../../packages/app::locator=%40fwoosh%2Fpages%40workspace%3Aplugins%2Fpages":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/app@link:../../packages/app::locator=%40fwoosh%2Fpages%40workspace%3Aplugins%2Fpages"
+  languageName: node
+  linkType: soft
+
 "@fwoosh/app@link:../app::locator=fwoosh%40workspace%3Apackages%2Fcli":
   version: 0.0.0-use.local
   resolution: "@fwoosh/app@link:../app::locator=fwoosh%40workspace%3Apackages%2Fcli"
@@ -811,6 +817,12 @@ __metadata:
 "@fwoosh/components@link:../../packages/components::locator=%40fwoosh%2Ffwoosh-example%40workspace%3Aexamples%2Ffwoosh":
   version: 0.0.0-use.local
   resolution: "@fwoosh/components@link:../../packages/components::locator=%40fwoosh%2Ffwoosh-example%40workspace%3Aexamples%2Ffwoosh"
+  languageName: node
+  linkType: soft
+
+"@fwoosh/components@link:../../packages/components::locator=%40fwoosh%2Fpages%40workspace%3Aplugins%2Fpages":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/components@link:../../packages/components::locator=%40fwoosh%2Fpages%40workspace%3Aplugins%2Fpages"
   languageName: node
   linkType: soft
 
@@ -874,7 +886,6 @@ __metadata:
     "@fwoosh/panel-actions": "link:../../plugins/panel-actions"
     "@fwoosh/react": "link:../../plugins/react"
     fwoosh: "link:../../packages/cli"
-    react-zoom-pan-pinch: ^2.2.0
   languageName: unknown
   linkType: soft
 
@@ -969,6 +980,27 @@ __metadata:
     react-dom: ^18.2.0
     react-router-dom: ^6.6.1
   peerDependencies:
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
+  languageName: unknown
+  linkType: soft
+
+"@fwoosh/pages@workspace:plugins/pages":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/pages@workspace:plugins/pages"
+  dependencies:
+    "@fwoosh/app": "link:../../packages/app"
+    "@fwoosh/components": "link:../../packages/components"
+    "@fwoosh/styling": "link:../../packages/styling"
+    "@fwoosh/types": "link:../../packages/types"
+    "@types/react": ^18.0.26
+    react: ^18.2.0
+    react-dom: ^18.2.0
+    react-feather: ^2.0.10
+    react-router-dom: ^6.6.1
+    react-zoom-pan-pinch: ^2.2.0
+  peerDependencies:
+    fwoosh: ">= 0.x"
     react: ^16.8 || ^17.0 || ^18.0
     react-dom: ^16.8 || ^17.0 || ^18.0
   languageName: unknown
@@ -1095,6 +1127,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@fwoosh/styling@link:../../packages/styling::locator=%40fwoosh%2Fpages%40workspace%3Aplugins%2Fpages":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/styling@link:../../packages/styling::locator=%40fwoosh%2Fpages%40workspace%3Aplugins%2Fpages"
+  languageName: node
+  linkType: soft
+
 "@fwoosh/styling@link:../../packages/styling::locator=%40fwoosh%2Fpanel-designs%40workspace%3Aplugins%2Fpanel-designs":
   version: 0.0.0-use.local
   resolution: "@fwoosh/styling@link:../../packages/styling::locator=%40fwoosh%2Fpanel-designs%40workspace%3Aplugins%2Fpanel-designs"
@@ -1205,6 +1243,12 @@ __metadata:
     fwoosh: ">= 0.x"
     react: ^16.8 || ^17.0 || ^18.0
   languageName: unknown
+  linkType: soft
+
+"@fwoosh/types@link:../../packages/types::locator=%40fwoosh%2Fpages%40workspace%3Aplugins%2Fpages":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/types@link:../../packages/types::locator=%40fwoosh%2Fpages%40workspace%3Aplugins%2Fpages"
+  languageName: node
   linkType: soft
 
 "@fwoosh/types@link:../../packages/types::locator=%40fwoosh%2Freact%40workspace%3Aplugins%2Freact":

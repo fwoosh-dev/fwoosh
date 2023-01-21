@@ -1,0 +1,32 @@
+{
+  "name": "@fwoosh/pages",
+  "type": "module",
+  "version": "0.0.94",
+  "description": "Useful extra pages for fwoosh websites.",
+  "main": "dist/index.js",
+  "author": "Andrew Lisowski <lisowski54@gmail.com>",
+  "repository": "hipstersmoothie/fwoosh",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@fwoosh/app": "link:../../packages/app",
+    "@fwoosh/components": "link:../../packages/components",
+    "@fwoosh/styling": "link:../../packages/styling",
+    "@fwoosh/types": "link:../../packages/types",
+    "react-feather": "^2.0.10",
+    "react-router-dom": "^6.6.1",
+    "react-zoom-pan-pinch": "^2.2.0"
+  },
+  "peerDependencies": {
+    "fwoosh": ">= 0.x",
+    "react": "^16.8 || ^17.0 || ^18.0",
+    "react-dom": "^16.8 || ^17.0 || ^18.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.26",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
