@@ -182,16 +182,20 @@ export const MDXPage = ({ page }: { page: StoryTreeItem }) => {
     location.hash && document.querySelector(location.hash)?.scrollIntoView();
   }, []);
 
-  let content = (
-    <PageWrapper>
-      <div>
-        <MDXPage />
-      </div>
-      <PageSwitchButton current={page.id} />
-    </PageWrapper>
-  );
+  const hasWrapper =
+    !("fullPage" in page.story.meta) || page.story.meta.fullPage !== true;
+  let content = <MDXPage />;
 
-  if (data && !meta.hideNav) {
+  if (hasWrapper) {
+    content = (
+      <PageWrapper>
+        <div>{content}</div>
+        <PageSwitchButton current={page.id} />
+      </PageWrapper>
+    );
+  }
+
+  if (data && hasWrapper && !meta.hideNav) {
     content = (
       <DocsLayout>
         {content}
