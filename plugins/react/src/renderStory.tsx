@@ -3,7 +3,11 @@ import ReactDOM from "react-dom";
 import { StoryData } from "@fwoosh/types";
 import { stories } from "@fwoosh/app/stories";
 import { Spinner, ErrorBoundary } from "@fwoosh/components";
-import type { Story as ReactStory, StoryMeta } from "./types";
+import type { Decorator, Story as ReactStory, StoryMeta } from "./types";
+
+function reverse<T>(arr: T[]) {
+  return arr.slice().reverse();
+}
 
 function useDecorators(story: StoryData) {
   const [decorators, setDecorators] = React.useState<
@@ -20,9 +24,9 @@ function useDecorators(story: StoryData) {
         storyComponentImport.default || storyComponentImport;
 
       setDecorators([
-        ...(storyComponent.decorators || []).reverse(),
-        ...((meta as StoryMeta<any>).decorators || []).reverse(),
-        ...((window as any).__FWOOSH_DECORATORS__ || []).reverse(),
+        ...reverse<Decorator>(storyComponent.decorators || []),
+        ...reverse<Decorator>((meta as StoryMeta<any>).decorators || []),
+        ...reverse<Decorator>((window as any).__FWOOSH_DECORATORS__ || []),
       ]);
     }
 
