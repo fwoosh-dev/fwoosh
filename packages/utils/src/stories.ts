@@ -1,7 +1,8 @@
 import { StorySidebarChildItem, StoryTree, StoryData } from "@fwoosh/types";
 
 export const getFirstStory = (
-  tree: StorySidebarChildItem[]
+  tree: StorySidebarChildItem[],
+  { mdx }: { mdx?: boolean } = {}
 ): StoryData | undefined => {
   const first = tree[0];
 
@@ -9,7 +10,7 @@ export const getFirstStory = (
     return undefined;
   }
 
-  if (first.type === "story") {
+  if (first.type === "story" && (first.story.type === "basic" || mdx)) {
     return first.story;
   }
 

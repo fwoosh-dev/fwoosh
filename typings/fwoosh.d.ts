@@ -3,13 +3,17 @@ declare module "@fwoosh/app/stories" {
   export const stories: Stories;
   export const order: StorySidebarChildItem[];
   export const tree: StorySidebarChildItem[];
+  export const workbenchTree: StorySidebarChildItem[];
 }
 
 declare module "@fwoosh/app/overrides";
 
 declare module "@fwoosh/app/config" {
   import { FwooshOptions, ThemeObject } from "@fwoosh/types";
-  export const config: Pick<FwooshOptions, "title"> & {
+  export const config: Pick<
+    FwooshOptions,
+    "title" | "includeMdxInWorkbench"
+  > & {
     theme: ThemeObject;
   };
 }

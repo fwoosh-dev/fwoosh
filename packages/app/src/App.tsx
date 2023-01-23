@@ -31,6 +31,7 @@ import { Head } from "./components/Head";
 import { CommandPallette } from "./components/CommandPallette";
 import { ProductionSearchIndex } from "./components/ProductionSearchIndex";
 import { darkTheme } from "@fwoosh/styling";
+import { config } from "@fwoosh/app/config";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -41,7 +42,7 @@ const queryClient = new QueryClient({
 });
 
 const FirstDocsPage = () => {
-  const firstStory = getFirstStory(tree);
+  const firstStory = getFirstStory(tree, { mdx: true });
 
   if (!firstStory) {
     throw new Error('No stories found. Did you forget to add a "meta" export?');
@@ -53,7 +54,7 @@ const FirstDocsPage = () => {
 };
 
 const FirstStory = () => {
-  const firstStory = getFirstStory(tree);
+  const firstStory = getFirstStory(tree, { mdx: config.includeMdxInWorkbench });
 
   if (!firstStory) {
     throw new Error('No stories found. Did you forget to add a "meta" export?');

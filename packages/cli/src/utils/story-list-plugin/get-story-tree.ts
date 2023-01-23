@@ -1,6 +1,23 @@
 import { StorySidebarChildItem, StoryTree, Stories } from "@fwoosh/types";
 
-export function getStoryTree(stories: Stories) {
+function removeEmptyTrees(
+  items: StorySidebarChildItem[]
+): StorySidebarChildItem[] {
+  return items.filter((i) => {
+    if (i.type === "story") {
+      return true;
+    }
+
+    const filteredChildren = removeEmptyTrees(i.children);
+
+    return filteredChildren.length > 0;
+  });
+}
+
+export function getStoryTree(
+  stories: Stories,
+  { includeMDX = true }: { includeMDX?: boolean } = {}
+) {
   const treeData: StorySidebarChildItem[] = [];
 
   Object.values(stories).forEach((story) => {
@@ -14,21 +31,27 @@ export function getStoryTree(stories: Stories) {
         currentItem = treeData.find((item) => item.name === name);
 
         if (!currentItem) {
-          currentItem =
-            story.type === "mdx" && levels.length === 1
-              ? {
-                  name,
-                  id: levels.slice(0, index + 1).join("-"),
-                  story,
-                  type: "story",
-                }
-              : {
-                  name,
-                  id: levels.slice(0, index + 1).join("-"),
-                  children: [],
-                  type: "tree",
-                };
-          treeData.push(currentItem);
+          if (story.type === "mdx" && levels.length === 1) {
+            if (includeMDX) {
+              currentItem = {
+                name,
+                id: levels.slice(0, index + 1).join("-"),
+                story,
+                type: "story",
+              };
+            }
+          } else {
+            currentItem = {
+              name,
+              id: levels.slice(0, index + 1).join("-"),
+              children: [],
+              type: "tree",
+            };
+          }
+
+          if (currentItem) {
+            treeData.push(currentItem);
+          }
         }
 
         continue;
@@ -41,7 +64,10 @@ export function getStoryTree(stories: Stories) {
 
         if (childItem && childItem.type === "tree") {
           currentItem = childItem;
-        } else if (story.type !== "mdx" || levels.length > index + 1) {
+        } else if (
+          story.type !== "mdx" ||
+          (includeMDX && levels.length > index + 1)
+        ) {
           const newItem: StoryTree = {
             type: "tree",
             name,
@@ -63,7 +89,7 @@ export function getStoryTree(stories: Stories) {
           id: story.slug,
           type: "story",
         });
-      } else {
+      } else if (includeMDX) {
         const titleParts = story.title.split("/");
         currentItem.children.push({
           name: titleParts[titleParts.length - 1],
@@ -75,5 +101,5 @@ export function getStoryTree(stories: Stories) {
     }
   });
 
-  return treeData;
+  return removeEmptyTrees(treeData);
 }

@@ -9,7 +9,7 @@ import {
 } from "@fwoosh/components";
 import { Link } from "react-router-dom";
 import { StoryTreeItem } from "@fwoosh/types";
-import { tree } from "@fwoosh/app/stories";
+import { workbenchTree } from "@fwoosh/app/stories";
 import { useStoryId, useDocsPath } from "@fwoosh/hooks";
 import { capitalCase } from "change-case";
 
@@ -22,7 +22,7 @@ export const WorkbenchSidebarTree = () => {
   const docsPath = useDocsPath();
 
   return (
-    <SidebarTree data={tree} activeId={storyId || docsPath}>
+    <SidebarTree data={workbenchTree} activeId={storyId || docsPath}>
       {({ node, style }) => {
         const finalStyle = {
           ...style,
@@ -40,7 +40,7 @@ export const WorkbenchSidebarTree = () => {
               style={finalStyle}
               aria-selected={isActive}
               as={Link}
-              to={node.data.story.type === "mdx" ? `docs/${slug}` : slug}
+              to={slug}
               onClick={resetContentScrollPosition}
             >
               <SidebarFolderOpenIndicatorWrapper>

@@ -212,6 +212,11 @@ export interface FwooshOptions {
    * // You'll need to set this to "/docs"
    */
   basename?: string;
+  /**
+   * By default we don't show the docs in workbench mode.
+   * If you want to see the mdx content in workbench mode set this to true
+   */
+  includeMdxInWorkbench?: boolean;
 }
 
 export type FwooshOptionWithCLIDefaults = FwooshOptions &

@@ -155,7 +155,10 @@ export async function createVirtualStoriesFile(config: FwooshOptionsLoaded) {
     ${lazyComponents.join("")}
   ` +
     `\nexport const stories = ${stringifyStories(fileMap)}` +
-    `\nexport const tree = matchTreeSortingOrder(getStoryTree(stories), order);`;
+    `\nexport const tree = matchTreeSortingOrder(getStoryTree(stories), order);` +
+    `\nexport const workbenchTree = matchTreeSortingOrder(getStoryTree(stories, { includeMDX: ${Boolean(
+      config.includeMdxInWorkbench
+    )} }), order);`;
 
   return { file, fileMap, tree };
 }
