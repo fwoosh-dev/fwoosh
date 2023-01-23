@@ -77,17 +77,23 @@ export const Spinner = ({
   children,
   ...props
 }: SpinnerProps) => {
+  const [show, setShow] = React.useState(false);
+
+  React.useEffect(() => {
+    const timeout = setTimeout(() => setShow(true), delay);
+    return () => clearTimeout(timeout);
+  }, [delay]);
+
   return (
-    <DelayedRender delay={delay}>
-      <Wrapper {...props}>
-        <SpinnerComponent
-          css={{
-            width: `$${size}`,
-            height: `$${size}`,
-          }}
-        />
-        {children && <Message>{children}</Message>}
-      </Wrapper>
-    </DelayedRender>
+    <Wrapper {...props}>
+      <SpinnerComponent
+        css={{
+          opacity: show ? 1 : 0,
+          width: `$${size}`,
+          height: `$${size}`,
+        }}
+      />
+      {children && <Message>{children}</Message>}
+    </Wrapper>
   );
 };

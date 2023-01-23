@@ -67,7 +67,7 @@ export const hasActiveChild = (tree: StoryTree, slug: string): boolean => {
   );
 };
 
-const flattenTree = (tree: StorySidebarChildItem[]) => {
+export const flattenTree = (tree: StorySidebarChildItem[]) => {
   const flatTree: Record<string, StoryData> = {};
 
   function flatten(item: StorySidebarChildItem) {

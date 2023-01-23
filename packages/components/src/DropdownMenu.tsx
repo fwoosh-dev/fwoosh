@@ -30,6 +30,7 @@ const contentStyles = {
   padding: "$2 0",
   boxShadow:
     "0px 10px 38px -10px rgba(22, 23, 24, 0.35), 0px 10px 20px -15px rgba(22, 23, 24, 0.2)",
+  zIndex: 1000,
   animationDuration: "400ms",
   animationTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
   willChange: "transform, opacity",

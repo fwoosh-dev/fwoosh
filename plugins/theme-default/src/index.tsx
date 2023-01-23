@@ -54,8 +54,8 @@ const sizes = {
   "7xl": "80rem",
 };
 
-type Gray = `gray${0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11}`
-type Primary = `primary${0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11}`
+type Gray = `gray${0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11}`;
+type Primary = `primary${0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11}`;
 
 export const light = {
   colors: {

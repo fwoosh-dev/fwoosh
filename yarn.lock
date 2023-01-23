@@ -744,6 +744,9 @@ __metadata:
     "@radix-ui/react-collapsible": ^1.0.1
     "@radix-ui/react-id": ^1.0.0
     "@radix-ui/react-tooltip": ^1.0.1
+    "@state-designer/react": ^3.0.0
+    "@tldraw/core": ^1.21.0
+    "@tldraw/vec": ^1.8.0
     "@types/dlv": ^1.1.2
     "@types/react": ^18.0.26
     "@types/react-dom": ^18.0.10
@@ -755,6 +758,7 @@ __metadata:
     dset: ^3.1.1
     fast-deep-equal: ^3.1.3
     interweave: ^13.0.0
+    potpack: ^2.0.0
     react: ^18.2.0
     react-arborist: ^2.1.1
     react-dom: ^18.2.0
@@ -931,12 +935,6 @@ __metadata:
     "@fwoosh/components": "link:./components"
     "@fwoosh/hooks": "link:../hooks"
     "@fwoosh/utils": "link:../utils"
-    react: ^18.2.0
-    react-dom: ^18.2.0
-    react-router-dom: ^6.6.1
-  peerDependencies:
-    react: ^16.8 || ^17.0 || ^18.0
-    react-dom: ^16.8 || ^17.0 || ^18.0
   languageName: unknown
   linkType: soft
 
@@ -1240,6 +1238,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fwoosh/types@workspace:packages/types"
   dependencies:
+    react-docgen-typescript: ^2.2.2
     remark-mdx-toc: ^0.3.1
     tapable: ^2.2.1
     typescript: ^4.9.3
@@ -3503,6 +3502,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@state-designer/core@npm:latest":
+  version: 3.0.0
+  resolution: "@state-designer/core@npm:3.0.0"
+  dependencies:
+    immer: ^9.0.6
+    nanoid: ^3.1.30
+  checksum: 21efbc63b7562fd39e657baae97294bf82beb648d57caf9792c975fb6e14b8ed5ce7000a7ef193d25222d345036d68d47f1d9f6e3f274e665471f388ebfb284f
+  languageName: node
+  linkType: hard
+
+"@state-designer/react@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@state-designer/react@npm:3.0.0"
+  dependencies:
+    "@state-designer/core": latest
+  peerDependencies:
+    react: ">=16.8"
+    react-dom: ^16.8 || ^17.0
+  checksum: bd091a98b99dad4fd4416672ff43cad43906ef17bdde8858b04d285b7db40f211433bdedfa92563660b3c73a52342f86e5bb7c1835b2e48676a344a188c0c1c4
+  languageName: node
+  linkType: hard
+
 "@stitches/react@npm:^1.2.8":
   version: 1.2.8
   resolution: "@stitches/react@npm:1.2.8"
@@ -3618,6 +3639,37 @@ __metadata:
     "@swc/core-win32-x64-msvc":
       optional: true
   checksum: 1e43612e65bd223e32db59497ea0bd1345a6da6ae1c4bb42556f1948da1175035c92b7a2b4dda76bfd4f7b229e885756cd9ec36af876e4e3da3f48cb4ba2fa0d
+  languageName: node
+  linkType: hard
+
+"@tldraw/core@npm:^1.21.0":
+  version: 1.21.0
+  resolution: "@tldraw/core@npm:1.21.0"
+  dependencies:
+    "@tldraw/intersect": ^1.8.0
+    "@tldraw/vec": ^1.8.0
+    "@use-gesture/react": ^10.2.19
+    perfect-freehand: ^1.1.0
+  peerDependencies:
+    react: ">=16.8"
+    react-dom: ">=16.8"
+  checksum: 6a68f1f13062501aab3bb07913d978df7c4d36bba34652c47bc7071b50915fecb3cf9c9f6981c2a6afd424fee840fc1448b4d0d8415244544de8b126aca44849
+  languageName: node
+  linkType: hard
+
+"@tldraw/intersect@npm:^1.8.0":
+  version: 1.8.0
+  resolution: "@tldraw/intersect@npm:1.8.0"
+  dependencies:
+    "@tldraw/vec": ^1.8.0
+  checksum: 6174a58bac58f3248963034192aea3bd9656038d3b55c54e2cd6a7a2e9f9b5a227b692dfafb32beb9873189e7c35638f933ca788b190fbbb1b0a4e0003a81ac2
+  languageName: node
+  linkType: hard
+
+"@tldraw/vec@npm:^1.8.0":
+  version: 1.8.0
+  resolution: "@tldraw/vec@npm:1.8.0"
+  checksum: 634272918be6c01607693316d407ccdb779b4ca69f920791905887d32067b5a9f84e020e407c323cf123da404a98cc004006b2dac4d874f376a486303bd3fc9a
   languageName: node
   linkType: hard
 
@@ -3996,6 +4048,24 @@ __metadata:
   version: 0.30.13
   resolution: "@unocss/reset@npm:0.30.13"
   checksum: 8f68e2dbb8213376632dd12d224ecea954fd6616206dcb11695ad85336f2d857126dcc47a498d7039f63a09a2380e6ad1cbc4894f48387ef4987cf6a06620d53
+  languageName: node
+  linkType: hard
+
+"@use-gesture/core@npm:10.2.23":
+  version: 10.2.23
+  resolution: "@use-gesture/core@npm:10.2.23"
+  checksum: 2516eb82ee3355b40f1e4eb6fb218082f8196486245a6794d10e13a3698b7d3a7501c57a1e8f61c9958105ee80255b266618242fdc80056f7ab6d62ae1ef2169
+  languageName: node
+  linkType: hard
+
+"@use-gesture/react@npm:^10.2.19":
+  version: 10.2.23
+  resolution: "@use-gesture/react@npm:10.2.23"
+  dependencies:
+    "@use-gesture/core": 10.2.23
+  peerDependencies:
+    react: ">= 16.8.0"
+  checksum: 44127907ecc5b87296d14cd0cc86b6031d87ee11ae98df33810e4d986aa58290ec48624010776eeb50c13f2ad62b3439a549c02fba4cef5913b6c8b21b72222e
   languageName: node
   linkType: hard
 
@@ -7612,6 +7682,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"immer@npm:^9.0.6":
+  version: 9.0.18
+  resolution: "immer@npm:9.0.18"
+  checksum: 85b3153dd01fce73c40591d0d6d7cd95878dab49f8ec4744c044adac05e0dab847b30c26259c478a5f87f974897be6df2780ff5bf86c8a0a27578fdeb300eb10
+  languageName: node
+  linkType: hard
+
 "import-cwd@npm:^3.0.0":
   version: 3.0.0
   resolution: "import-cwd@npm:3.0.0"
@@ -9786,7 +9863,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^3.3.4":
+"nanoid@npm:^3.1.30, nanoid@npm:^3.3.4":
   version: 3.3.4
   resolution: "nanoid@npm:3.3.4"
   bin:
@@ -10731,6 +10808,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"perfect-freehand@npm:^1.1.0":
+  version: 1.2.0
+  resolution: "perfect-freehand@npm:1.2.0"
+  checksum: 03900c103170c68a495e5b4f0609d8375dd26d61a797ffb190c7436274c6a2f4011c21de2bdf420ab324350945dddbdf9c201312388a6e875dfbb88b328d91ae
+  languageName: node
+  linkType: hard
+
 "periscopic@npm:^3.0.0":
   version: 3.0.4
   resolution: "periscopic@npm:3.0.4"
@@ -10837,6 +10921,13 @@ __metadata:
     picocolors: ^1.0.0
     source-map-js: ^1.0.2
   checksum: e39ac60ccd1542d4f9d93d894048aac0d686b3bb38e927d8386005718e6793dbbb46930f0a523fe382f1bbd843c6d980aaea791252bf5e176180e5a4336d9679
+  languageName: node
+  linkType: hard
+
+"potpack@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "potpack@npm:2.0.0"
+  checksum: 6dd41692349936b436c29c28cf9ff1268c03ed6ec96c4384b2d9eb95e58e422fab75d428648f475507dd167934984d1002df2010b83e5747b5c358bea371e8f7
   languageName: node
   linkType: hard
 

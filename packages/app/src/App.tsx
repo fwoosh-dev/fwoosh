@@ -32,6 +32,7 @@ import { CommandPallette } from "./components/CommandPallette";
 import { ProductionSearchIndex } from "./components/ProductionSearchIndex";
 import { darkTheme } from "@fwoosh/styling";
 import { config } from "@fwoosh/app/config";
+import { WorkbenchCanvas } from "./components/canvas/WorkbenchCanvas";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -149,6 +150,15 @@ const router = createBrowserRouter(
             {
               path: ":docsPath",
               element: <DocsPage />,
+            },
+          ],
+        },
+        {
+          path: "canvas",
+          children: [
+            {
+              path: "workbench/:storyId?",
+              element: <WorkbenchCanvas />,
             },
           ],
         },
