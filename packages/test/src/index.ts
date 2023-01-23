@@ -43,7 +43,7 @@ declare global {
   }
 }
 
-export class Storybook {
+export class Workbench {
   readonly page: Page;
 
   constructor(page: Page) {
@@ -64,17 +64,17 @@ export class Storybook {
 }
 
 type ElectronTestFixtures = {
-  storybook: Storybook;
+  workbench: Workbench;
   page: Page;
 };
 
 export { expect } from "@playwright/test";
 
 export const electronFixtures: Fixtures<ElectronTestFixtures> = {
-  storybook: async ({ page }, use) => {
-    const storybook = new Storybook(page);
+  workbench: async ({ page }, use) => {
+    const workbench = new Workbench(page);
 
-    await use(storybook);
+    await use(workbench);
   },
 };
 

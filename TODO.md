@@ -6,7 +6,7 @@
 - [ ] BUG: detect if there are properties before showing nav item?
 - [ ] FEATURE: embed panels in docs view easily
 - [ ] FEATURE: sync active panel across navigation
-- [ ] FEATURE: cmdk switch between storybook and docs mode
+- [ ] FEATURE: cmdk switch between workbench and docs mode
 - [ ] EXPLORATION: Infinite canvas page
 - [ ] BUG: quick nav sticky position
 - [ ] Figure out how to get react plugin renderer to use different react than app

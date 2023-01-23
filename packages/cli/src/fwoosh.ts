@@ -429,9 +429,8 @@ export class Fwoosh implements FwooshClass {
       },
     };
 
-    const configWithPluginModifications = await this.hooks.modifyViteConfig.promise(
-      baseConfig
-    );
+    const configWithPluginModifications =
+      await this.hooks.modifyViteConfig.promise(baseConfig);
 
     return this.options.modifyViteConfig(configWithPluginModifications);
   }
@@ -453,8 +452,7 @@ export class Fwoosh implements FwooshClass {
       const stories = await createVirtualStoriesFile(this.options);
       const mdx = Object.values(stories.fileMap).filter(
         (i) =>
-          i.type === "mdx" &&
-          !JSON.parse((i.meta as unknown) as string).skipIndex
+          i.type === "mdx" && !JSON.parse(i.meta as unknown as string).skipIndex
       );
 
       log.log("Building search data for MDX files...");
@@ -535,7 +533,7 @@ export class Fwoosh implements FwooshClass {
       const url = `http://localhost:${path.join(
         `${3000}`,
         this.options.basename,
-        "storybook"
+        "workbench"
       )}`;
 
       printBox(`fwoosh served at ${url}`);
@@ -620,7 +618,7 @@ export class Fwoosh implements FwooshClass {
     app.use(vite.middlewares);
 
     app.listen(port, async () => {
-      printBox(`fwoosh served at http://localhost:${port}/storybook`);
+      printBox(`fwoosh served at http://localhost:${port}/workbench`);
 
       if (this.options.open) {
         process.env.OPEN_MATCH_HOST_ONLY = "true";

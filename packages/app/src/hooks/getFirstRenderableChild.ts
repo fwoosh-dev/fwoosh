@@ -3,14 +3,14 @@ import { NodeApi } from "react-arborist";
 
 export const getFirstRenderableChild = (
   node: NodeApi<StorySidebarChildItem>,
-  { isStorybook }: { isStorybook: boolean }
+  { isWorkbench }: { isWorkbench: boolean }
 ) => {
   let currentNode = node.next;
 
   while (currentNode?.next) {
     if (
       currentNode.data.type !== "tree" ||
-      (!isStorybook && currentNode.data.children.length > 0)
+      (!isWorkbench && currentNode.data.children.length > 0)
     ) {
       break;
     }
@@ -22,7 +22,7 @@ export const getFirstRenderableChild = (
     return "";
   }
 
-  if (isStorybook) {
+  if (isWorkbench) {
     return currentNode.data.story.type === "basic"
       ? currentNode.data.story.slug
       : `docs/${currentNode.data.story.slug}`;

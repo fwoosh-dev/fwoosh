@@ -1,6 +1,6 @@
 # `@fwoosh/panel-props`
 
-Display your components properties as a panel in the storybook.
+Display your components properties as a panel in the workbench.
 
 ## Installation
 

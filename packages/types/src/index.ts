@@ -139,14 +139,14 @@ export interface FwooshHooks {
    */
   generateDocs: AsyncSeriesBailHook<string, ComponentDoc[]>;
   /**
-   * Register a tool in the storybook toolbar.
+   * Register a tool in the toolbar.
    *
    * It should add a path to the array of strings to the
    * The file should export a react component that acts as the toolbar control.
    */
   registerToolbarControl: SyncWaterfallHook<[FwooshToolbarButton[]]>;
   /**
-   * Register a panel in the storybook panels.
+   * Register a panel in the workbench.
    *
    * It should add a path + title to the array. The title is used
    * for the text of the Tab trigger.
@@ -168,7 +168,7 @@ export type ThemeObject = {
 };
 
 export interface FwooshOptions {
-  /** The title for the storybook/docs */
+  /** The title for the website */
   title?: string;
   /** A file that should be loaded for all stories. Typically used to import global CSS */
   setup?: string;
@@ -177,7 +177,7 @@ export interface FwooshOptions {
   /** the directory with the mdx pages */
   outDir?: string;
   /** Open the browser when running the dev server */
-  open?: "storybook" | "docs" | false;
+  open?: "workbench" | "docs" | false;
   /** Plugins applied to this fwoosh instance, contains default plugins */
   plugins: Array<
     string | [name: string, options: Record<string, unknown>] | Plugin

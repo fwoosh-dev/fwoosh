@@ -1,6 +1,6 @@
 # `@fwoosh/hooks`
 
-Useful hooks to consume storybook state for plugins and fwoosh internals.
+Useful hooks to consume fwoosh state for plugins and fwoosh internals.
 
 ## Installation
 

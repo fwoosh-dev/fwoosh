@@ -13,12 +13,12 @@ import { Outlet } from "react-router-dom";
 import { useId } from "@radix-ui/react-id";
 
 import { StoryIdContext } from "./Story";
-import { StorybookSidebarTree } from "./sidebar/StorybookSidebarTree";
+import { WorkbenchSidebarTree } from "./sidebar/WorkbenchSidebarTree";
 import { CONTENT_ID } from "@fwoosh/utils";
-import { StorybookToolbar } from "./StorybookToolbar";
 import { useParameters } from "../hooks/useParameters";
 import { ParameterContext } from "@fwoosh/hooks";
 import { config } from "@fwoosh/app/config";
+import { ToolbarControls } from "./toolbar";
 
 const StoryWrapper = styled("div", {
   position: "relative",
@@ -41,7 +41,7 @@ const StoryWrapperWithParams = () => {
   );
 };
 
-export const Storybook = () => {
+export const Workbench = () => {
   const id = useId();
 
   return (
@@ -49,7 +49,7 @@ export const Storybook = () => {
       <HeaderBar>
         <HeaderTitle>{config.title}</HeaderTitle>
         <React.Suspense fallback={<Spinner delay={2000} size={5} />}>
-          <StorybookToolbar />
+          <ToolbarControls />
         </React.Suspense>
       </HeaderBar>
 
@@ -57,7 +57,7 @@ export const Storybook = () => {
         <Sidebar>
           <SidebarItems>
             <React.Suspense fallback={<Spinner delay={2000} size={8} />}>
-              <StorybookSidebarTree />
+              <WorkbenchSidebarTree />
             </React.Suspense>
           </SidebarItems>
         </Sidebar>

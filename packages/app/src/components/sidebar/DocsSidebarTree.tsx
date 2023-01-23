@@ -24,7 +24,7 @@ import { getFirstRenderableChild } from "../../hooks/getFirstRenderableChild";
 
 function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
   const firstChildSlug = getFirstRenderableChild(node, {
-    isStorybook: false,
+    isWorkbench: false,
   });
   const name = titleCase(node.data.name);
   const isValidPath = React.useMemo(() => {

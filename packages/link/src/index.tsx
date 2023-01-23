@@ -11,20 +11,20 @@ type LinkProps = Omit<React.ComponentProps<typeof components.a>, "href"> & {
 export const Link = React.forwardRef(
   ({ to, ...props }: LinkProps, ref: React.Ref<HTMLAnchorElement>) => {
     const location = useLocation();
-    const isStorybook = location.pathname.startsWith("/storybook");
+    const isWorkbench = location.pathname.startsWith("/workbench");
     const [, hash] = to.split("#");
     const story = checkLink(to, stories, tree);
 
-    if (story.type === "basic" && isStorybook) {
+    if (story.type === "basic" && isWorkbench) {
       return (
-        <components.a ref={ref} href={`/storybook/${story.slug}`} {...props} />
+        <components.a ref={ref} href={`/workbench/${story.slug}`} {...props} />
       );
     }
 
     return (
       <components.a
         ref={ref}
-        href={`${isStorybook ? "/storybook" : ""}/docs/${story.grouping.replace(
+        href={`${isWorkbench ? "/workbench" : ""}/docs/${story.grouping.replace(
           /\//g,
           "-"
         )}#${hash}`}

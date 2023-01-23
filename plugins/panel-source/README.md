@@ -1,6 +1,6 @@
 # `@fwoosh/panel-source`
 
-Display your components source as a panel in the storybook.
+Display your component's source as a panel in the workbench.
 
 ## Installation
 

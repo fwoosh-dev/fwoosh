@@ -44,8 +44,8 @@ Once you have `@fwoosh/test` configured you can start writing tests.
 import { expect, test } from "@fwoosh/test";
 
 test.describe.parallel("Button", () => {
-  test("should be clickable", async ({ page, storybook }) => {
-    await storybook.goto("Components/Button/Playground");
+  test("should be clickable", async ({ page, workbench }) => {
+    await workbench.goto("Components/Button/Playground");
 
     const button = page.locator("text=Click me");
 
@@ -60,8 +60,8 @@ or if you have lots of tests for the same story:
 ```tsx
 import { expect, test } from "@fwoosh/test";
 
-test.beforeEach(async ({ storybook }) => {
-  await storybook.goto("Components/Button/Playground");
+test.beforeEach(async ({ workbench }) => {
+  await workbench.goto("Components/Button/Playground");
 });
 
 test.describe.parallel("Button", () => {

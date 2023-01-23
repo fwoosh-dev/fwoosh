@@ -4,11 +4,11 @@ import { ParameterContext, useStoryId } from "@fwoosh/hooks";
 
 import { ThemeToggle } from "./ThemeToggle";
 import { useToolbarControls } from "../hooks/useToolbarControls";
-import { GlobalToolbar, StoryToolbar } from "./toolbar";
+import { GlobalToolbar, ToolbarControls } from "./toolbar";
 import { StoryIdContext } from "./Story";
 import { useParameters } from "../hooks/useParameters";
 
-export const StorybookToolbar = () => {
+export const WorkbenchToolbar = () => {
   const storyId = useStoryId();
   const id = useContext(StoryIdContext);
   const { storyControls, globalControls } = useToolbarControls();
@@ -19,13 +19,13 @@ export const StorybookToolbar = () => {
       <GlobalToolbar />
 
       {storyId && (
-        <StoryToolbar>
+        <ToolbarControls>
           <Suspense fallback={<Spinner size={5} />}>
             {storyControls.map((Control) => (
               <Control key={Control.componentName} storyPreviewId={id} />
             ))}
           </Suspense>
-        </StoryToolbar>
+        </ToolbarControls>
       )}
 
       <GlobalToolbar>

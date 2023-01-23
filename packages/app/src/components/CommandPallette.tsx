@@ -215,16 +215,16 @@ export function CommandPallette() {
   const [value, valueSet] = React.useState("");
   const navigate = useNavigate();
   const location = useLocation();
-  const isStorybook = location.pathname.startsWith("/storybook");
+  const isWorkbench = location.pathname.startsWith("/workbench");
 
   const onNavigate = React.useCallback((story: StoryData) => {
     let url = "";
 
-    if (isStorybook) {
+    if (isWorkbench) {
       if (story.type === "basic") {
-        url = `/storybook/${story.slug}`;
+        url = `/workbench/${story.slug}`;
       } else {
-        url = `/storybook/docs/${story.slug}`;
+        url = `/workbench/docs/${story.slug}`;
       }
     } else {
       url = `/docs/${story.grouping.replace(/\//g, "-")}`;

@@ -1,6 +1,6 @@
 # `@fwoosh/tool-measure`
 
-Add a storybook toolbar that measures the box model in the stoary as you hover.
+Add a workbench toolbar that measures the box model in the story as you hover.
 
 ## Installation
 

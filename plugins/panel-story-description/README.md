@@ -1,6 +1,6 @@
 # `@fwoosh/panel-story-description`
 
-Display your story's jsDoc description as a panel in the storybook.
+Display your story's jsDoc description as a panel in the workbench.
 
 ## Installation
 

@@ -13,7 +13,7 @@ import { HelmetProvider } from "react-helmet-async";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 
 import { Story } from "./components/Story";
-import { Storybook } from "./components/Storybook";
+import { Workbench } from "./components/Workbench";
 import { Docs } from "./components/Docs";
 import { DocsPage } from "./components/DocsPage";
 import "./index.css";
@@ -60,10 +60,10 @@ const FirstStory = () => {
   }
 
   if (firstStory.type === "mdx") {
-    return <Navigate to={"/storybook/docs/" + firstStory.slug} />;
+    return <Navigate to={"/workbench/docs/" + firstStory.slug} />;
   }
 
-  return <Navigate to={"/storybook/" + firstStory.slug} />;
+  return <Navigate to={"/workbench/" + firstStory.slug} />;
 };
 
 function RouteError() {
@@ -111,8 +111,8 @@ const router = createBrowserRouter(
           ),
         },
         {
-          path: "storybook",
-          element: <Storybook />,
+          path: "workbench",
+          element: <Workbench />,
           children: [
             {
               index: true,

@@ -58,7 +58,7 @@ export const List = () => {
               <Grouping>{grouping.replace(/\//g, " / ")}</Grouping> {title}
               <Split />
               <Tooltip message="Open story">
-                <IconButton as={Link} to={`/storybook/${slug}`}>
+                <IconButton as={Link} to={`/workbench/${slug}`}>
                   <ExternalLink />
                 </IconButton>
               </Tooltip>

@@ -2,7 +2,7 @@
 
 A component to help linking between pages in your fwoosh website.
 
-Sometimes you want to link to another page in your storybook.
+Sometimes you want to link to another page in your website.
 You can do this by using the following syntax:
 
 ```tsx
@@ -73,7 +73,7 @@ You can link to it from another page:
 <Link to="Components/Button">Go to path</Link>
 ```
 
-> NOTE: In storybook mode this will link to the first story,
+> NOTE: In workbench mode this will link to the first story,
 > and in docs mode will link to the story's generated docs page.
 
 ### Specific Story

@@ -23,7 +23,6 @@ function Preview({ src }: { src: string }) {
   // statement in the Fulscreen API spec).
   // This side-effect delays the loading of an iframe contents by one frame to
   // make sure the contents gets updated attributes.
-  // https://github.com/pocka/storybook-addon-designs/issues/77
   React.useEffect(() => {
     const handle = requestAnimationFrame(() => {
       setUrl(src);

@@ -115,21 +115,21 @@ interface PageSwitchButtonProps {
 
 export function PageSwitchButton({ current }: PageSwitchButtonProps) {
   const location = useLocation();
-  const isStorybook = location.pathname.startsWith("/storybook");
+  const isWorkbench = location.pathname.startsWith("/workbench");
   const { prev, next } = React.useMemo(() => {
     return {
       prev: getPreviousStory(tree, current),
-      next: getNextStory(tree, current, !isStorybook),
+      next: getNextStory(tree, current, !isWorkbench),
     };
-  }, [tree, isStorybook]);
+  }, [tree, isWorkbench]);
   const getUrl = React.useCallback(
     (data: StoryData) => {
-      if (isStorybook) {
+      if (isWorkbench) {
         if (data.type === "mdx") {
-          return `/storybook/docs/${data.slug}`;
+          return `/workbench/docs/${data.slug}`;
         }
 
-        return `/storybook/${data.slug}`;
+        return `/workbench/${data.slug}`;
       }
 
       if (data.type === "mdx") {
@@ -138,7 +138,7 @@ export function PageSwitchButton({ current }: PageSwitchButtonProps) {
 
       return `/docs/${convertMetaTitleToUrlParam(data.grouping)}`;
     },
-    [isStorybook]
+    [isWorkbench]
   );
 
   return (
@@ -153,7 +153,7 @@ export function PageSwitchButton({ current }: PageSwitchButtonProps) {
             <IconWrapper>
               <ChevronRightIcon style={{ transform: "rotate(180deg)" }} />
             </IconWrapper>
-            <StoryTitle renderStoryNames={isStorybook} story={prev} />
+            <StoryTitle renderStoryNames={isWorkbench} story={prev} />
           </NavButton>
         )}
         <Split />
@@ -163,7 +163,7 @@ export function PageSwitchButton({ current }: PageSwitchButtonProps) {
             style={{ paddingRight: 4, textAlign: "right" }}
             onClick={resetContentScrollPosition}
           >
-            <StoryTitle renderStoryNames={isStorybook} story={next} />
+            <StoryTitle renderStoryNames={isWorkbench} story={next} />
             <IconWrapper>
               <ChevronRightIcon />
             </IconWrapper>

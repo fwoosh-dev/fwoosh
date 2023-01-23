@@ -17,7 +17,7 @@ import { SidebarTree } from "./SidebarTree";
 import { hasActiveChild, resetContentScrollPosition } from "@fwoosh/utils";
 import { getFirstRenderableChild } from "../../hooks/getFirstRenderableChild";
 
-export const StorybookSidebarTree = () => {
+export const WorkbenchSidebarTree = () => {
   const storyId = useStoryId();
   const docsPath = useDocsPath();
 
@@ -31,7 +31,7 @@ export const StorybookSidebarTree = () => {
         const name = capitalCase(node.data.name);
 
         if (node.data.type === "story") {
-          const slug = ((node.data as unknown) as StoryTreeItem).story.slug;
+          const slug = (node.data as unknown as StoryTreeItem).story.slug;
           const isActive = slug === node.tree.props.selection;
 
           return (
@@ -57,7 +57,7 @@ export const StorybookSidebarTree = () => {
             : false;
 
         const firstChildSlug = getFirstRenderableChild(node, {
-          isStorybook: true,
+          isWorkbench: true,
         });
 
         return (

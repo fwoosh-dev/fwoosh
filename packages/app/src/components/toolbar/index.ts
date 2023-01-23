@@ -1,7 +1,7 @@
 import { Toolbar } from "@fwoosh/components";
 import { styled } from "@fwoosh/styling";
 
-export const StoryToolbar = styled(Toolbar.Root, {
+export const ToolbarControls = styled(Toolbar.Root, {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",

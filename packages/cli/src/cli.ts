@@ -61,7 +61,7 @@ const openOption: Option = {
   type: String,
   description: "Open the browser to the dev server",
   defaultValue: false,
-  typeLabel: "storybook | docs",
+  typeLabel: "workbench | docs",
 };
 
 const sharedOptions: Option[] = [
@@ -115,8 +115,8 @@ async function run() {
   const fwooshOptions = {
     ...options,
     open:
-      options?.open === "storybook" || options?.open === null
-        ? "storybook"
+      options?.open === "workbench" || options?.open === null
+        ? "workbench"
         : options?.open === "docs"
         ? "docs"
         : false,
