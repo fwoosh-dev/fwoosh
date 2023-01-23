@@ -11,6 +11,7 @@ import {
   getNextStory,
   getPreviousStory,
 } from "@fwoosh/utils";
+import { useIsWorkbench } from "@fwoosh/hooks";
 
 const Wrapper = styled("div", {
   display: "flex",
@@ -114,8 +115,7 @@ interface PageSwitchButtonProps {
 }
 
 export function PageSwitchButton({ current }: PageSwitchButtonProps) {
-  const location = useLocation();
-  const isWorkbench = location.pathname.startsWith("/workbench");
+  const isWorkbench = useIsWorkbench();
   const { prev, next } = React.useMemo(() => {
     return {
       prev: getPreviousStory(tree, current),

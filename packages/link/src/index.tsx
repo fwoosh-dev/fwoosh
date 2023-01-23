@@ -2,7 +2,7 @@ import * as React from "react";
 import { stories, tree } from "@fwoosh/app/stories";
 import { checkLink } from "@fwoosh/utils";
 import { components } from "@fwoosh/components";
-import { useLocation } from "react-router-dom";
+import { useIsWorkbench } from "@fwoosh/hooks";
 
 type LinkProps = Omit<React.ComponentProps<typeof components.a>, "href"> & {
   to: string;
@@ -10,8 +10,7 @@ type LinkProps = Omit<React.ComponentProps<typeof components.a>, "href"> & {
 
 export const Link = React.forwardRef(
   ({ to, ...props }: LinkProps, ref: React.Ref<HTMLAnchorElement>) => {
-    const location = useLocation();
-    const isWorkbench = location.pathname.startsWith("/workbench");
+    const isWorkbench = useIsWorkbench();
     const [, hash] = to.split("#");
     const story = checkLink(to, stories, tree);
 

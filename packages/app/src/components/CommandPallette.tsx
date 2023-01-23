@@ -7,8 +7,9 @@ import commandScore from "command-score";
 import { Interweave } from "interweave";
 import { StoryData, StoryTree, StoryTreeItem } from "@fwoosh/types";
 import useMousetrap from "react-hook-mousetrap";
-import { Bookmark, Code } from "react-feather";
+import { ArrowRight, Bookmark, Code } from "react-feather";
 import { SearchData } from "@fwoosh/utils";
+import { useIsWorkbench } from "@fwoosh/hooks";
 
 const CommandPalletteContext = React.createContext<{
   search: string;
@@ -210,12 +211,21 @@ function StoryCommandTree({
   );
 }
 
+function SwitchCommand() {
+  return (
+    <Command.Item
+      title="Open story in docs"
+      // onSelect={() => onNavigate(item.story)}
+      icon={<ArrowRight />}
+    />
+  );
+}
+
 export function CommandPallette() {
   const [open, openSet] = React.useState(false);
   const [value, valueSet] = React.useState("");
   const navigate = useNavigate();
-  const location = useLocation();
-  const isWorkbench = location.pathname.startsWith("/workbench");
+  const isWorkbench = useIsWorkbench();
 
   const onNavigate = React.useCallback((story: StoryData) => {
     let url = "";
@@ -267,6 +277,12 @@ export function CommandPallette() {
 
           <Command.List>
             <Command.Empty>No results found.</Command.Empty>
+
+            <Command.Item
+              title="Open story in docs"
+              // onSelect={() => onNavigate(item.story)}
+              icon={<ArrowRight />}
+            />
 
             {value && (
               <Command.Group
