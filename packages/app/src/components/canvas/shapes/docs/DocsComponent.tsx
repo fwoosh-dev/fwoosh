@@ -9,7 +9,8 @@ import { IconButton, Spinner, Tooltip } from "@fwoosh/components";
 import { DocsShape } from "./DocsShape";
 import { machine } from "../../machine";
 import { ExternalLink } from "react-feather";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useStoryId } from "@fwoosh/hooks";
 
 const ItemWrapper = styled("div", {
   borderRadius: "$round",
@@ -47,9 +48,11 @@ const StoryWrapper = styled("div", {
 });
 
 export const DocsComponent = TLShapeUtil.Component<DocsShape, HTMLDivElement>(
-  ({ shape, events }, ref) => {
+  ({ shape, events, bounds: windowBounds }, ref) => {
     const item = flattenTree(tree)[shape.id];
     const [measureRef, bounds] = useMeasure();
+    const location = useLocation();
+    const storyId = useStoryId();
 
     if (!item) {
       return (
@@ -68,12 +71,26 @@ export const DocsComponent = TLShapeUtil.Component<DocsShape, HTMLDivElement>(
         width: bounds.width,
         height: bounds.height,
       });
+
+      if (shape.id === storyId) {
+        console.log({ windowBounds });
+        machine.send("CENTER_SHAPE", {
+          id: storyId,
+          client: windowBounds,
+        });
+      }
     }
 
     return (
       <HTMLContainer ref={ref} {...events}>
         <React.Suspense fallback={<Spinner delay={1000} />}>
-          <ItemWrapper ref={measureRef}>
+          <ItemWrapper
+            ref={measureRef}
+            css={{
+              borderWidth: location.pathname.includes(slug) ? 4 : undefined,
+              borderColor: "$gray8",
+            }}
+          >
             <StoryTitle>
               <Grouping>{groups[groups.length - 1]}</Grouping> {title}
               <Split />

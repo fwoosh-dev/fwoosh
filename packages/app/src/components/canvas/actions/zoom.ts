@@ -51,3 +51,28 @@ export const panCamera: Action = (data, payload: TLPointerInfo) => {
   const { point, zoom } = data.pageState.camera;
   data.pageState.camera.point = Vec.sub(point, Vec.div(payload.delta, zoom));
 };
+
+interface CenterShapePayload {
+  id: string;
+  client: {
+    height: number;
+    width: number;
+  };
+}
+
+export const centerShape: Action = (data, payload: CenterShapePayload) => {
+  const shape = data.page.shapes[payload.id];
+
+  const halfShape = Vec.div(shape.size, 2);
+  const centerOfShape = Vec.add(shape.point, halfShape);
+  const centerOfViewport = Vec.div(
+    [payload.client.width, payload.client.height],
+    2
+  );
+
+  data.pageState.camera.zoom = 1;
+  data.pageState.camera.point = Vec.add(
+    Vec.mul(centerOfShape, -1),
+    centerOfViewport
+  );
+};

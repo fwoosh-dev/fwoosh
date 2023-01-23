@@ -13,11 +13,30 @@ import { WorkbenchSidebarTree } from "../sidebar/WorkbenchSidebarTree";
 import { machine } from "./machine";
 import { Canvas } from "./Canvas";
 import { INITIAL_WORKBENCH_PAGE } from "./constants";
+import { useDidChange, useStoryId } from "@fwoosh/hooks";
 
 machine.data = INITIAL_WORKBENCH_PAGE;
 
 export function WorkbenchCanvas() {
   const appState = useStateDesigner(machine);
+  const storyId = useStoryId();
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    requestAnimationFrame(() => {
+      if (!containerRef.current) {
+        return;
+      }
+
+      // machine.send("CENTER_SHAPE", {
+      //   id: storyId,
+      //   client: {
+      //     height: containerRef.current.clientHeight,
+      //     width: containerRef.current.clientWidth,
+      //   },
+      // });
+    });
+  }, [storyId]);
 
   return (
     <>
@@ -30,7 +49,7 @@ export function WorkbenchCanvas() {
             </React.Suspense>
           </SidebarItems>
         </Sidebar>
-        <Content>
+        <Content ref={containerRef}>
           <Canvas appState={appState} />
         </Content>
       </SidebarLayout>

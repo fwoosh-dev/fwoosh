@@ -12,6 +12,8 @@ export const machine = createState({
     PINCHED: "pinchCamera",
     ZOOMED_IN: "zoomIn",
     ZOOMED_OUT: "zoomOut",
+    CENTER_SHAPE: "centerShape",
+    UPDATE_DIMENSIONS: "updateDimensions",
     // RESIZED: "setViewport",
     // RESET: {
     //   do: "loadNewDocument",
@@ -21,7 +23,6 @@ export const machine = createState({
     //   do: "loadDocument",
     //   to: "select.idle",
     // },
-    UPDATE_DIMENSIONS: "updateDimensions",
   },
   initial: "select",
   states: {
