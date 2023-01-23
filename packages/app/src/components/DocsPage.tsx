@@ -2,29 +2,13 @@ import React, { Suspense } from "react";
 import { useLocation } from "react-router-dom";
 import { StoryBasicTreeItem } from "@fwoosh/types";
 import { Spinner, ErrorBoundary } from "@fwoosh/components";
-import { getStoryGroup } from "@fwoosh/utils";
-import { tree } from "@fwoosh/app/stories";
-import { useDocsPath } from "@fwoosh/hooks";
 
 import { MDXPage } from "./MDXPage";
 import { StoryDocsPage } from "./StoryDocsPage";
+import { useDocsStoryGroup } from "../hooks/useDocsStoryGroup";
 
 const DocsContent = React.memo(() => {
-  const docsPath = useDocsPath();
-  const [firstStory, ...restStories] = React.useMemo(() => {
-    if (!docsPath) {
-      return [];
-    }
-
-    const path = docsPath.split("-");
-    const story = getStoryGroup(tree, path);
-
-    if (!story) {
-      throw new Error(`Could not find documentation page: ${docsPath}`);
-    }
-
-    return story;
-  }, [docsPath]);
+  const [firstStory, ...restStories] = useDocsStoryGroup();
 
   if (!firstStory) {
     return null;

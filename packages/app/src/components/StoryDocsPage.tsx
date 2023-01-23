@@ -13,7 +13,7 @@ import {
   DocsLayout,
 } from "@fwoosh/components";
 import * as Collapsible from "@radix-ui/react-collapsible";
-import { paramCase } from "change-case";
+import { capitalCase, paramCase } from "change-case";
 import { titleCase } from "title-case";
 import { StorySidebarChildItem } from "@fwoosh/types";
 import { useHighlightedCode, useDocsPath } from "@fwoosh/hooks";
@@ -295,7 +295,7 @@ export const StoryDocsPage = ({
                   return (
                     <QuickNav.Item key={hash}>
                       <QuickNav.Link href={hash}>
-                        {story.story.title}
+                        {capitalCase(story.story.title)}
                       </QuickNav.Link>
                     </QuickNav.Item>
                   );

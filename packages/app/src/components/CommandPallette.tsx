@@ -1,15 +1,17 @@
 import * as React from "react";
 import { Command } from "@fwoosh/components";
-import { headerCase } from "change-case";
-import { useLocation, useNavigate } from "react-router-dom";
-import { tree } from "@fwoosh/app/stories";
+import { capitalCase, headerCase, paramCase } from "change-case";
+import { useNavigate } from "react-router-dom";
+import { stories, tree } from "@fwoosh/app/stories";
 import commandScore from "command-score";
 import { Interweave } from "interweave";
 import { StoryData, StoryTree, StoryTreeItem } from "@fwoosh/types";
 import useMousetrap from "react-hook-mousetrap";
 import { ArrowRight, Bookmark, Code } from "react-feather";
 import { SearchData } from "@fwoosh/utils";
-import { useIsWorkbench } from "@fwoosh/hooks";
+import { useDocsPath, useIsWorkbench, useStoryId } from "@fwoosh/hooks";
+import { convertMetaTitleToUrlParam } from "@fwoosh/utils";
+import { useDocsStoryGroup } from "../hooks/useDocsStoryGroup";
 
 const CommandPalletteContext = React.createContext<{
   search: string;
@@ -211,14 +213,60 @@ function StoryCommandTree({
   );
 }
 
-function SwitchCommand() {
+function SwitchToWorkbenchCommand({ onClose }: { onClose: () => void }) {
+  const group = useDocsStoryGroup();
+  const navigate = useNavigate();
+
   return (
-    <Command.Item
-      title="Open story in docs"
-      // onSelect={() => onNavigate(item.story)}
-      icon={<ArrowRight />}
-    />
+    <Command.Group heading={<Command.Heading>Open workbench</Command.Heading>}>
+      {group.map((item) => {
+        return (
+          <Command.Item
+            key={item.id}
+            title={`Open "${capitalCase(item.name)}" story in workbench`}
+            icon={<ArrowRight />}
+            onSelect={() => {
+              if (item.type === "story") {
+                navigate(`/workbench/${item.story.slug}`);
+                onClose();
+              }
+            }}
+          />
+        );
+      })}
+    </Command.Group>
   );
+}
+
+function SwitchCommand({ onClose }: { onClose: () => void }) {
+  const storyId = useStoryId();
+  const docsPath = useDocsPath();
+  const navigate = useNavigate();
+
+  if (storyId) {
+    const story = stories[storyId];
+
+    return (
+      <Command.Item
+        title="Open story in docs"
+        icon={<ArrowRight />}
+        onSelect={() => {
+          navigate(
+            `/docs/${convertMetaTitleToUrlParam(story.grouping)}#${paramCase(
+              story.title
+            )}`
+          );
+          onClose();
+        }}
+      />
+    );
+  }
+
+  if (docsPath) {
+    return <SwitchToWorkbenchCommand onClose={onClose} />;
+  }
+
+  return null;
 }
 
 export function CommandPallette() {
@@ -227,27 +275,35 @@ export function CommandPallette() {
   const navigate = useNavigate();
   const isWorkbench = useIsWorkbench();
 
-  const onNavigate = React.useCallback((story: StoryData) => {
-    let url = "";
-
-    if (isWorkbench) {
-      if (story.type === "basic") {
-        url = `/workbench/${story.slug}`;
-      } else {
-        url = `/workbench/docs/${story.slug}`;
-      }
-    } else {
-      url = `/docs/${story.grouping.replace(/\//g, "-")}`;
-
-      if (story.type === "basic") {
-        url += `#${headerCase(story.title.replace(/\s/g, "-")).toLowerCase()}`;
-      }
-    }
-
-    navigate(url);
+  const onClose = React.useCallback(() => {
     openSet(false);
     valueSet("");
   }, []);
+  const onNavigate = React.useCallback(
+    (story: StoryData) => {
+      let url = "";
+
+      if (isWorkbench) {
+        if (story.type === "basic") {
+          url = `/workbench/${story.slug}`;
+        } else {
+          url = `/workbench/docs/${story.slug}`;
+        }
+      } else {
+        url = `/docs/${story.grouping.replace(/\//g, "-")}`;
+
+        if (story.type === "basic") {
+          url += `#${headerCase(
+            story.title.replace(/\s/g, "-")
+          ).toLowerCase()}`;
+        }
+      }
+
+      navigate(url);
+      onClose();
+    },
+    [onClose]
+  );
 
   useMousetrap("meta+k", () => openSet(true));
 
@@ -278,11 +334,7 @@ export function CommandPallette() {
           <Command.List>
             <Command.Empty>No results found.</Command.Empty>
 
-            <Command.Item
-              title="Open story in docs"
-              // onSelect={() => onNavigate(item.story)}
-              icon={<ArrowRight />}
-            />
+            <SwitchCommand onClose={onClose} />
 
             {value && (
               <Command.Group

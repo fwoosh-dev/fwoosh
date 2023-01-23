@@ -35,7 +35,7 @@ export function useActiveHeader(ref: React.RefObject<HTMLElement>) {
       },
       {
         threshold: [0.5, 1],
-        rootMargin: "100px 0px",
+        rootMargin: "200px 0px",
       }
     );
 
