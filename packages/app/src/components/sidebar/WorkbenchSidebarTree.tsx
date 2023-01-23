@@ -7,7 +7,7 @@ import {
   SidebarSectionTitle,
   SIDEBAR_ITEM_INDENT,
 } from "@fwoosh/components";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { StoryTreeItem } from "@fwoosh/types";
 import { workbenchTree } from "@fwoosh/app/stories";
 import { useStoryId, useDocsPath } from "@fwoosh/hooks";
@@ -20,6 +20,8 @@ import { getFirstRenderableChild } from "../../hooks/getFirstRenderableChild";
 export const WorkbenchSidebarTree = () => {
   const storyId = useStoryId();
   const docsPath = useDocsPath();
+  const location = useLocation();
+  const isCanvas = location.pathname.includes("/canvas/");
 
   return (
     <SidebarTree data={workbenchTree} activeId={storyId || docsPath}>
@@ -40,7 +42,7 @@ export const WorkbenchSidebarTree = () => {
               style={finalStyle}
               aria-selected={isActive}
               as={Link}
-              to={slug}
+              to={isCanvas ? `/canvas/workbench/${slug}` : slug}
               onClick={resetContentScrollPosition}
             >
               <SidebarFolderOpenIndicatorWrapper>

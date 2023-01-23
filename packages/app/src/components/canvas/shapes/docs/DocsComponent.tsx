@@ -62,7 +62,7 @@ export const DocsComponent = TLShapeUtil.Component<DocsShape, HTMLDivElement>(
     const { component: Component, grouping, slug, title } = item;
     const groups = grouping.split("/");
 
-    if (shape.size[1] === 0 && bounds.height > 0) {
+    if (!shape.size[1]) {
       machine.send("UPDATE_DIMENSIONS", {
         id: shape.id,
         width: bounds.width,
@@ -72,23 +72,23 @@ export const DocsComponent = TLShapeUtil.Component<DocsShape, HTMLDivElement>(
 
     return (
       <HTMLContainer ref={ref} {...events}>
-        <ItemWrapper ref={measureRef}>
-          <StoryTitle>
-            <Grouping>{groups[groups.length - 1]}</Grouping> {title}
-            <Split />
-            <Tooltip message="Open story">
-              <IconButton as={Link} to={`/workbench/${slug}`}>
-                <ExternalLink />
-              </IconButton>
-            </Tooltip>
-          </StoryTitle>
+        <React.Suspense fallback={<Spinner delay={1000} />}>
+          <ItemWrapper ref={measureRef}>
+            <StoryTitle>
+              <Grouping>{groups[groups.length - 1]}</Grouping> {title}
+              <Split />
+              <Tooltip message="Open story">
+                <IconButton as={Link} to={`/workbench/${slug}`}>
+                  <ExternalLink />
+                </IconButton>
+              </Tooltip>
+            </StoryTitle>
 
-          <StoryWrapper>
-            <React.Suspense fallback={<Spinner delay={1000} />}>
+            <StoryWrapper>
               <Component />
-            </React.Suspense>
-          </StoryWrapper>
-        </ItemWrapper>
+            </StoryWrapper>
+          </ItemWrapper>
+        </React.Suspense>
       </HTMLContainer>
     );
   }

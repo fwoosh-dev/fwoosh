@@ -3,6 +3,7 @@
 ### Core
 
 - [ ] BUG: panel resizer resets in built website on nav
+- [ ] make hot reloading in canvas mode work better
 - [ ] BUG: detect if there are properties before showing nav item?
 - [ ] FEATURE: embed panels in docs view easily
 - [ ] FEATURE: sync active panel across navigation

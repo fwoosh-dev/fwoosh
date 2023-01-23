@@ -10,7 +10,7 @@ export const ToolbarControls = styled(Toolbar.Root, {
   flexShrink: 0,
 });
 
-export const GlobalToolbar = styled(Toolbar.Root, {
+export const GlobalToolbarControls = styled(Toolbar.Root, {
   flex: 1,
   display: "flex",
   alignItems: "center",
