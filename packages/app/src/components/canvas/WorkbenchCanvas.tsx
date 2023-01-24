@@ -23,13 +23,15 @@ export function WorkbenchCanvas() {
   const containerRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    machine.send("CENTER_SHAPE", {
-      id: storyId,
-      client: {
-        height: containerRef.current?.clientHeight,
-        width: containerRef.current?.clientWidth,
-      },
-    });
+    if (storyId) {
+      machine.send("CENTER_SHAPE", {
+        id: storyId,
+        client: {
+          height: containerRef.current?.clientHeight,
+          width: containerRef.current?.clientWidth,
+        },
+      });
+    }
   }, [storyId]);
 
   return (
