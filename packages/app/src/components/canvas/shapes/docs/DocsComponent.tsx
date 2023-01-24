@@ -93,8 +93,9 @@ export const DocsComponent = TLShapeUtil.Component<DocsShape, HTMLDivElement>(
           <ItemWrapper
             ref={measureRef}
             css={{
-              borderWidth: location.pathname.includes(slug) ? 4 : undefined,
-              borderColor: "$gray8",
+              boxShadow: location.pathname.includes(slug)
+                ? "0 0 0 4px $colors$gray8"
+                : undefined,
             }}
           >
             <StoryTitle as={Link} to={`/canvas/workbench/${slug}`}>
