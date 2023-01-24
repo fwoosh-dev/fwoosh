@@ -1,3 +1,18 @@
+# v0.0.97 (Tue Jan 24 2023)
+
+#### ⚠️ Pushed to `main`
+
+- fix build ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- remove rsync ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix root canvas route ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- switch to box shadow for active story ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.96 (Tue Jan 24 2023)
 
 #### ⚠️ Pushed to `main`

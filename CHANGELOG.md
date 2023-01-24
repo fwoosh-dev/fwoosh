@@ -1,3 +1,26 @@
+# v0.0.97 (Tue Jan 24 2023)
+
+#### ⚠️ Pushed to `main`
+
+- give token release rights ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- reset change ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- switch to GH_TOKEN ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix link ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- remove basename ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add description ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- change copy ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`
+  - fix build ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - remove rsync ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - fix root canvas route ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - switch to box shadow for active story ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.96 (Tue Jan 24 2023)
 
 #### ⚠️ Pushed to `main`
