@@ -247,18 +247,28 @@ function SwitchCommand({ onClose }: { onClose: () => void }) {
     const story = stories[storyId];
 
     return (
-      <Command.Item
-        title="Open story in docs"
-        icon={<ArrowRight />}
-        onSelect={() => {
-          navigate(
-            `/docs/${convertMetaTitleToUrlParam(story.grouping)}#${paramCase(
-              story.title
-            )}`
-          );
-          onClose();
-        }}
-      />
+      <>
+        <Command.Item
+          title="Open story in docs"
+          icon={<ArrowRight />}
+          onSelect={() => {
+            navigate(
+              `/docs/${convertMetaTitleToUrlParam(story.grouping)}#${paramCase(
+                story.title
+              )}`
+            );
+            onClose();
+          }}
+        />
+        <Command.Item
+          title="Open story in canvas"
+          icon={<ArrowRight />}
+          onSelect={() => {
+            navigate(`/canvas/workbench/${story.slug}`);
+            onClose();
+          }}
+        />
+      </>
     );
   }
 
