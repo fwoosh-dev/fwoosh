@@ -40,7 +40,6 @@ function sortBasedOnOrder(
 
 export const config: FwooshOptions = {
   title: "Fwoosh",
-  basename: "/fwoosh",
   docgen: { include: ["**/packages/components/**/*"] },
   sortSidebarItems: (a, b) => {
     const rootSort = sortBasedOnOrder(a, b, rootOrder);
