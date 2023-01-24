@@ -12,6 +12,20 @@ import { SearchData } from "@fwoosh/utils";
 import { useDocsPath, useIsWorkbench, useStoryId } from "@fwoosh/hooks";
 import { convertMetaTitleToUrlParam } from "@fwoosh/utils";
 import { useDocsStoryGroup } from "../hooks/useDocsStoryGroup";
+import { styled } from "@fwoosh/styling";
+
+const LeftHeading = styled("span", {
+  flex: 1,
+});
+
+const Grouping = styled("span", {
+  text: "xs",
+  background: "$gray4",
+  borderRadius: "$round",
+  p: 1,
+  mr: 2,
+  color: "$gray9",
+});
 
 const CommandPalletteContext = React.createContext<{
   search: string;
@@ -216,18 +230,63 @@ function StoryCommandTree({
 function SwitchToWorkbenchCommand({ onClose }: { onClose: () => void }) {
   const group = useDocsStoryGroup();
   const navigate = useNavigate();
+  const [hasMetaHeld, setHasMetaHeld] = React.useState(false);
+
+  React.useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.metaKey) {
+        setHasMetaHeld(true);
+      }
+    }
+
+    function handleKeyUp(event: KeyboardEvent) {
+      if (!event.metaKey) {
+        setHasMetaHeld(false);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+    };
+  }, []);
 
   return (
-    <Command.Group heading={<Command.Heading>Open workbench</Command.Heading>}>
+    <Command.Group
+      heading={
+        <Command.Heading>
+          <LeftHeading>Open story</LeftHeading>
+          <span>hold META to open canvas</span>
+        </Command.Heading>
+      }
+    >
       {group.map((item) => {
+        const groups =
+          item.type === "story" ? item.story.grouping.split("/") : [];
+
         return (
           <Command.Item
             key={item.id}
-            title={`Open "${capitalCase(item.name)}" story in workbench`}
+            title={
+              <>
+                {item.type === "story" && (
+                  <Grouping>{groups[groups.length - 1]}</Grouping>
+                )}
+                <span>{item.name}</span>
+              </>
+            }
             icon={<ArrowRight />}
             onSelect={() => {
               if (item.type === "story") {
-                navigate(`/workbench/${item.story.slug}`);
+                if (hasMetaHeld) {
+                  navigate(`/canvas/workbench/${item.story.slug}`);
+                } else {
+                  navigate(`/workbench/${item.story.slug}`);
+                }
+
                 onClose();
               }
             }}
@@ -249,7 +308,7 @@ function SwitchCommand({ onClose }: { onClose: () => void }) {
     return (
       <>
         <Command.Item
-          title="Open story in docs"
+          title="Switch to docs"
           icon={<ArrowRight />}
           onSelect={() => {
             navigate(
@@ -261,7 +320,7 @@ function SwitchCommand({ onClose }: { onClose: () => void }) {
           }}
         />
         <Command.Item
-          title="Open story in canvas"
+          title="Switch to canvas"
           icon={<ArrowRight />}
           onSelect={() => {
             navigate(`/canvas/workbench/${story.slug}`);

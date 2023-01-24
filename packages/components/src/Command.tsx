@@ -4,6 +4,7 @@ import { styled } from "@fwoosh/styling";
 import { ChevronRightIcon } from ".";
 
 export const Dialog = styled(Command.Dialog, {
+  zIndex: 100,
   background: "rgba(0, 0, 0, 0.5)",
   position: "fixed",
   inset: "0",

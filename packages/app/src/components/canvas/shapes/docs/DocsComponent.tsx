@@ -91,7 +91,7 @@ export const DocsComponent = TLShapeUtil.Component<DocsShape, HTMLDivElement>(
               borderColor: "$gray8",
             }}
           >
-            <StoryTitle>
+            <StoryTitle as={Link} to={`/canvas/workbench/${slug}`}>
               <Grouping>{groups[groups.length - 1]}</Grouping> {title}
               <Split />
               <Tooltip message="Open story">
