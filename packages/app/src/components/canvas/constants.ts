@@ -9,6 +9,7 @@ import type {
 } from "@tldraw/core";
 import { StorySidebarChildItem } from "@fwoosh/types";
 import { Shape, shapeUtils } from "./shapes";
+import { createContext } from "react";
 
 export const VERSION = 1;
 export const PERSIST_DATA = true;
@@ -114,3 +115,9 @@ export type AppData = typeof INITIAL_DATA;
 export type Action = S.Action<AppData>;
 
 export type Condition = S.Condition<AppData>;
+
+export const CanvasContext = createContext<{
+  containerRef: React.MutableRefObject<HTMLDivElement | null>;
+}>({
+  containerRef: { current: null },
+});

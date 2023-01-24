@@ -11,6 +11,7 @@ import { machine } from "../../machine";
 import { ExternalLink } from "react-feather";
 import { Link, useLocation } from "react-router-dom";
 import { useStoryId } from "@fwoosh/hooks";
+import { CanvasContext } from "../../constants";
 
 const ItemWrapper = styled("div", {
   borderRadius: "$round",
@@ -48,11 +49,12 @@ const StoryWrapper = styled("div", {
 });
 
 export const DocsComponent = TLShapeUtil.Component<DocsShape, HTMLDivElement>(
-  ({ shape, events, bounds: windowBounds }, ref) => {
+  ({ shape, events }, ref) => {
     const item = flattenTree(tree)[shape.id];
     const [measureRef, bounds] = useMeasure();
     const location = useLocation();
     const storyId = useStoryId();
+    const { containerRef } = React.useContext(CanvasContext);
 
     if (!item) {
       return (
@@ -65,7 +67,7 @@ export const DocsComponent = TLShapeUtil.Component<DocsShape, HTMLDivElement>(
     const { component: Component, grouping, slug, title } = item;
     const groups = grouping.split("/");
 
-    if (!shape.size[1]) {
+    if (!shape.size[1] && bounds.height > 0) {
       machine.send("UPDATE_DIMENSIONS", {
         id: shape.id,
         width: bounds.width,
@@ -73,10 +75,14 @@ export const DocsComponent = TLShapeUtil.Component<DocsShape, HTMLDivElement>(
       });
 
       if (shape.id === storyId) {
-        console.log({ windowBounds });
-        machine.send("CENTER_SHAPE", {
-          id: storyId,
-          client: windowBounds,
+        requestAnimationFrame(() => {
+          machine.send("CENTER_SHAPE", {
+            id: storyId,
+            client: {
+              height: containerRef.current?.clientHeight,
+              width: containerRef.current?.clientWidth,
+            },
+          });
         });
       }
     }

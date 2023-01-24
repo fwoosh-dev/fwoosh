@@ -12,8 +12,8 @@ import { DocsToolbar } from "../DocsToolbar";
 import { WorkbenchSidebarTree } from "../sidebar/WorkbenchSidebarTree";
 import { machine } from "./machine";
 import { Canvas } from "./Canvas";
-import { INITIAL_WORKBENCH_PAGE } from "./constants";
-import { useDidChange, useStoryId } from "@fwoosh/hooks";
+import { CanvasContext, INITIAL_WORKBENCH_PAGE } from "./constants";
+import { useStoryId } from "@fwoosh/hooks";
 
 machine.data = INITIAL_WORKBENCH_PAGE;
 
@@ -23,23 +23,17 @@ export function WorkbenchCanvas() {
   const containerRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    requestAnimationFrame(() => {
-      if (!containerRef.current) {
-        return;
-      }
-
-      // machine.send("CENTER_SHAPE", {
-      //   id: storyId,
-      //   client: {
-      //     height: containerRef.current.clientHeight,
-      //     width: containerRef.current.clientWidth,
-      //   },
-      // });
+    machine.send("CENTER_SHAPE", {
+      id: storyId,
+      client: {
+        height: containerRef.current?.clientHeight,
+        width: containerRef.current?.clientWidth,
+      },
     });
   }, [storyId]);
 
   return (
-    <>
+    <CanvasContext.Provider value={{ containerRef }}>
       <DocsToolbar />
       <SidebarLayout>
         <Sidebar>
@@ -53,6 +47,6 @@ export function WorkbenchCanvas() {
           <Canvas appState={appState} />
         </Content>
       </SidebarLayout>
-    </>
+    </CanvasContext.Provider>
   );
 }
