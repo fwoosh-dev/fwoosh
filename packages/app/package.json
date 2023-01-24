@@ -44,12 +44,13 @@
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "sync-glob": "^1.4.0"
   },
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
-    "build": "rsync -a --prune-empty-dirs --include '*/' --include '*.css' --exclude '*' src/ dist/"
+    "build": "sync-glob 'src/**/*.css' dist -s"
   }
 }
