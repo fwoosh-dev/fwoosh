@@ -1,5 +1,7 @@
 # fwoosh
 
+A super quick storybook.
+
 ```bash
 yarn
 # Start build watcher for fwoosh packages
