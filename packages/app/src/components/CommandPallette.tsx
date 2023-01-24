@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Command } from "@fwoosh/components";
 import { capitalCase, headerCase, paramCase } from "change-case";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { stories, tree } from "@fwoosh/app/stories";
 import commandScore from "command-score";
 import { Interweave } from "interweave";
@@ -301,6 +301,8 @@ function SwitchCommand({ onClose }: { onClose: () => void }) {
   const storyId = useStoryId();
   const docsPath = useDocsPath();
   const navigate = useNavigate();
+  const location = useLocation();
+  const isCanvas = location.pathname.startsWith("/canvas/");
 
   if (storyId) {
     const story = stories[storyId];
@@ -319,14 +321,25 @@ function SwitchCommand({ onClose }: { onClose: () => void }) {
             onClose();
           }}
         />
-        <Command.Item
-          title="Switch to canvas"
-          icon={<ArrowRight />}
-          onSelect={() => {
-            navigate(`/canvas/workbench/${story.slug}`);
-            onClose();
-          }}
-        />
+        {isCanvas ? (
+          <Command.Item
+            title="Switch to workbench"
+            icon={<ArrowRight />}
+            onSelect={() => {
+              navigate(`/workbench/${story.slug}`);
+              onClose();
+            }}
+          />
+        ) : (
+          <Command.Item
+            title="Switch to canvas"
+            icon={<ArrowRight />}
+            onSelect={() => {
+              navigate(`/canvas/workbench/${story.slug}`);
+              onClose();
+            }}
+          />
+        )}
       </>
     );
   }
