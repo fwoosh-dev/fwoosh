@@ -1,3 +1,17 @@
+# v0.0.96 (Tue Jan 24 2023)
+
+#### ⚠️ Pushed to `main`
+
+- default to not showing docs pages in workbench mode ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- Rename storybook to workbench ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix build ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.95 (Sat Jan 21 2023)
 
 #### ⚠️ Pushed to `main`

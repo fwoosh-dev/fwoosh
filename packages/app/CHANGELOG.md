@@ -1,3 +1,26 @@
+# v0.0.96 (Tue Jan 24 2023)
+
+#### ⚠️ Pushed to `main`
+
+- fix shape centering based one route ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add switch to wrokbench ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add commands to open canvas ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add open in canvas command ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- working on nav ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- improve canvas first render ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add gutter ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- basic canvas mode working ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add commands to switch between modes ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- factor out useIsWorkbench ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- default to not showing docs pages in workbench mode ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- Rename storybook to workbench ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.95 (Sat Jan 21 2023)
 
 #### ⚠️ Pushed to `main`

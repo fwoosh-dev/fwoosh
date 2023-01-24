@@ -1,3 +1,38 @@
+# v0.0.96 (Tue Jan 24 2023)
+
+#### ⚠️ Pushed to `main`
+
+- iterate on description ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`
+  - fix shape centering based one route ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add switch to wrokbench ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add open in canvas command ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - improve canvas first render ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add gutter ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add commands to switch between modes ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/components`
+  - add commands to open canvas ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/hooks`
+  - working on nav ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/components`, `@fwoosh/utils`, `@fwoosh/pages`, `@fwoosh/theme-default`
+  - basic canvas mode working ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/hooks`, `@fwoosh/link`
+  - factor out useIsWorkbench ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/types`, `@fwoosh/utils`
+  - default to not showing docs pages in workbench mode ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/hooks`, `@fwoosh/link`, `@fwoosh/test`, `@fwoosh/types`, `@fwoosh/pages`, `@fwoosh/panel-designs`, `@fwoosh/panel-props`, `@fwoosh/panel-source`, `@fwoosh/panel-story-description`, `@fwoosh/tool-measure`
+  - Rename storybook to workbench ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/types`
+  - fix build ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `fwoosh`
+  - ensure 1 instance of react-router ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.95 (Sat Jan 21 2023)
 
 #### ⚠️ Pushed to `main`
