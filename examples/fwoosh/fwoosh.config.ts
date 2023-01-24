@@ -61,7 +61,7 @@ export const config: FwooshOptions = {
     "@fwoosh/panel-actions",
     "@fwoosh/tool-zoom",
     "@fwoosh/tool-measure",
-    new GitHubPlugin({ repo: "fwooshjs/fwoosh" }),
+    new GitHubPlugin({ repo: "fwoosh-dev/fwoosh" }),
     new ReactPlugin({
       docgenOptions: {
         propFilter: (prop) => {
