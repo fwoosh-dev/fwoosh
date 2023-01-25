@@ -24,8 +24,8 @@ export const SNAP_DISTANCE = 5;
 function convertShapesToPotpackData(data: Shape[]) {
   return data.map((i) => {
     return {
-      h: i.size[1],
-      w: i.size[0],
+      h: i.size[1] + 16,
+      w: i.size[0] + 16,
       x: i.point[0],
       y: i.point[1],
       id: i.id,
