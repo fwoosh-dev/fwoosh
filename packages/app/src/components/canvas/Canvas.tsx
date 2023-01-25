@@ -8,7 +8,28 @@ import {
 } from "@tldraw/core";
 import { machine } from "./machine.js";
 import { shapeUtils } from "./shapes";
-import { css } from "@fwoosh/styling";
+import { css, styled } from "@fwoosh/styling";
+import { IconButton, Tooltip } from "@fwoosh/components";
+import { Minus, Plus } from "react-feather";
+
+const Wrapper = styled("div", {
+  position: "relative",
+  height: "100%",
+  width: "100%",
+});
+
+const ViewControls = styled("div", {
+  position: "absolute",
+  top: 0,
+  right: 0,
+  display: "flex",
+  alignItems: "center",
+  flexDirection: "column",
+  gap: "$2",
+  margin: "$3",
+  pointerEvents: "auto",
+  zIndex: 100,
+});
 
 const onPinch: TLPinchEventHandler = (info, e) => {
   machine.send("PINCHED", info);
@@ -20,6 +41,14 @@ const onPan: TLWheelEventHandler = (info, e) => {
 
 const layout = () => {
   machine.send("LAYOUT_BOXES");
+};
+
+const zoomIn = () => {
+  machine.send("ZOOMED_IN");
+};
+
+const zoomOut = () => {
+  machine.send("ZOOMED_OUT");
 };
 
 const onKeyDown: TLKeyboardEventHandler = (key, info, e) => {
@@ -97,17 +126,32 @@ export const Canvas = React.memo(
     }, []);
 
     return (
-      <Renderer
-        containerRef={containerRef}
-        theme={{ background: "transparent" }}
-        page={appState.data.page}
-        pageState={appState.data.pageState}
-        shapeUtils={shapeUtils}
-        onKeyDown={onKeyDown}
-        onKeyUp={onKeyUp}
-        onPinch={onPinch}
-        onPan={onPan}
-      />
+      <Wrapper>
+        <Renderer
+          containerRef={containerRef}
+          theme={{ background: "transparent" }}
+          page={appState.data.page}
+          pageState={appState.data.pageState}
+          shapeUtils={shapeUtils}
+          onKeyDown={onKeyDown}
+          onKeyUp={onKeyUp}
+          onPinch={onPinch}
+          onPan={onPan}
+        />
+
+        <ViewControls>
+          <Tooltip message="Zoom in">
+            <IconButton onClick={zoomIn}>
+              <Plus />
+            </IconButton>
+          </Tooltip>
+          <Tooltip message="Zoom out">
+            <IconButton onClick={zoomOut}>
+              <Minus />
+            </IconButton>
+          </Tooltip>
+        </ViewControls>
+      </Wrapper>
     );
   }
 );
