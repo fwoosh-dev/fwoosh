@@ -223,7 +223,8 @@ export const INITIAL_DATA = {
     snapLines: [] as TLSnapLine[],
   },
   meta: {
-    isDarkMode: false,
+    storyId: "",
+    containerRef: { current: null },
   },
   performanceMode: undefined as TLPerformanceMode | undefined,
 };
@@ -252,3 +253,8 @@ export const CanvasContext = createContext<{
 }>({
   containerRef: { current: null },
 });
+
+export type CanvasMeta = {
+  storyId: string | undefined;
+  containerRef: React.MutableRefObject<HTMLElement | null>;
+};

@@ -11,6 +11,7 @@ import { shapeUtils } from "./shapes";
 import { css, styled } from "@fwoosh/styling";
 import { IconButton, Tooltip } from "@fwoosh/components";
 import { Minus, Plus } from "react-feather";
+import { useStoryId } from "@fwoosh/hooks";
 
 const Wrapper = styled("div", {
   position: "relative",
@@ -77,10 +78,6 @@ const onKeyDown: TLKeyboardEventHandler = (key, info, e) => {
   }
 };
 
-const canvasStyles = css({
-  background: "$gray0",
-});
-
 const onKeyUp: TLKeyboardEventHandler = (key, info, e) => {
   switch (key) {
     case "Alt":
@@ -96,6 +93,7 @@ const onKeyUp: TLKeyboardEventHandler = (key, info, e) => {
 export const Canvas = React.memo(
   ({ appState }: { appState: typeof machine }) => {
     const containerRef = React.useRef<HTMLDivElement>(null);
+    const storyId = useStoryId();
 
     // Prevent browser from navigating back/forward when
     // the user scrolls left/right on the timeline.
@@ -126,9 +124,8 @@ export const Canvas = React.memo(
     }, []);
 
     return (
-      <Wrapper>
+      <Wrapper ref={containerRef}>
         <Renderer
-          containerRef={containerRef}
           theme={{ background: "transparent" }}
           page={appState.data.page}
           pageState={appState.data.pageState}
@@ -137,6 +134,7 @@ export const Canvas = React.memo(
           onKeyUp={onKeyUp}
           onPinch={onPinch}
           onPan={onPan}
+          meta={{ storyId, containerRef }}
         />
 
         <ViewControls>
