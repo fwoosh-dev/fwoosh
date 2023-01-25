@@ -17,6 +17,10 @@ const onPan: TLWheelEventHandler = (info, e) => {
   machine.send("PANNED", info);
 };
 
+const layout = () => {
+  machine.send("LAYOUT_BOXES");
+};
+
 const onKeyDown: TLKeyboardEventHandler = (key, info, e) => {
   switch (key) {
     case "Alt":
@@ -80,6 +84,11 @@ export const Canvas = React.memo(
       return () => {
         document.removeEventListener("wheel", cancelZoom);
       };
+    }, []);
+
+    React.useEffect(() => {
+      const timeout = setTimeout(layout, 2000);
+      return () => clearTimeout(timeout);
     }, []);
 
     return (

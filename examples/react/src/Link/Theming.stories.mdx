@@ -1,0 +1,84 @@
+---
+title: Introduction
+---
+
+import { Link } from "@fwoosh/link";
+
+# Theming
+
+Fwoosh aims to be very flexible in regards to theming.
+
+There are two main ways to theme Fwoosh:
+
+1. Providing custom theme tokens
+2. Overriding components
+
+## Tokens
+
+Tokens are the building blocks of a theme.
+They are used to define colors, fonts, spacing, and other design decisions.
+
+You can customize the token values used by Fwoosh by using the <Link to="Configuration#theme">theme options</Link>
+
+A theme simply sets the values of the tokens used by Fwoosh.
+
+> NOTE: For colors we suggest you use [Radix colors](https://www.radix-ui.com/colors)
+
+```tsx
+import { Theme } from "@fwoosh/types";
+import { slate, blue, blueDark, slateDark } from "@radix-ui/colors";
+
+export const light: Theme = {
+  colors: {
+    // Use a blue-ish tinted grey for the greys
+    ...(Object.fromEntries(
+      Object.values(slate).map((color, index) => [`gray${index}`, color])
+    ) as Record<string, string>),
+    // Use blue as the primary color
+    ...(Object.fromEntries(
+      Object.values(blue).map((color, index) => [`primary${index}`, color])
+    ) as Record<string, string>),
+  },
+};
+
+// Configure the dark mode variants of the above
+export const dark: Theme = {
+  colors: {
+    ...(Object.fromEntries(
+      Object.values(slateDark).map((color, index) => [`gray${index}`, color])
+    ) as Record<string, string>),
+    ...(Object.fromEntries(
+      Object.values(blueDark).map((color, index) => [`primary${index}`, color])
+    ) as Record<string, string>),
+  },
+};
+```
+
+## Component Overrides
+
+Fwoosh offers the ability to take full control of most presentation and layout component in the UI.
+
+You can add component overrides to Fwoosh by using the <Link to="Configuration#componentOverrides">`componentOverrides` options</Link>.
+
+```ts
+export const config: FwooshConfig = {
+  componentOverrides: "./path/to/componentOverrides.tsx",
+};
+```
+
+Once you have that configured create the file that contains your overrides.
+
+```tsx
+import * as React from "react";
+
+export const Spinner = () => <div>loading</div>;
+
+export const h1 = (props: React.ComponentProps<"h1">) => {
+  return <h1 style={{ color: "red", fontSize: 40 }} {...props} />;
+};
+```
+
+Now whenever the UI wants to render one of these components fwoosh will instead
+use you override.
+
+For a full list of what to override view [`@fwoosh/components/src/index.ts`](https://github.com/hipstersmoothie/fwoosh/blob/main/packages/components/src/index.tsx).

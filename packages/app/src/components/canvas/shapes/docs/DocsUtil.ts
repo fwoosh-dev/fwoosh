@@ -1,5 +1,4 @@
 import { TLBounds, TLShapeUtil, Utils } from "@tldraw/core";
-import { nanoid } from "nanoid";
 
 import { DocsComponent } from "./DocsComponent.js";
 import { DocsIndicator } from "./DocsIndicator.js";
@@ -26,14 +25,15 @@ export class DocsUtil extends TLShapeUtil<DocsShape, HTMLDivElement> {
   };
 
   getShape = (
-    props: Pick<DocsShape, "name" | "id" | "childIndex">
+    props: Pick<DocsShape, "name" | "id" | "childIndex" | "grouping">
   ): DocsShape => {
     return {
       ...props,
       type: "docs",
       parentId: "canvas",
-      size: [0, 0],
+      size: [200, 100],
       point: [0, 0],
+      hasBeenMeasured: false,
       rotation: 0,
     };
   };

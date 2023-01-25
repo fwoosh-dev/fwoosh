@@ -13,6 +13,7 @@ export const machine = createState({
     ZOOMED_IN: "zoomIn",
     ZOOMED_OUT: "zoomOut",
     CENTER_SHAPE: "centerShape",
+    LAYOUT_BOXES: "layoutBoxes",
     UPDATE_DIMENSIONS: "updateDimensions",
     // RESIZED: "setViewport",
     // RESET: {

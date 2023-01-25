@@ -1,5 +1,4 @@
-import type { Action } from "../constants";
-import potpack from "potpack";
+import { Action, packTree } from "../constants";
 
 interface UpdateDimensionsPayload {
   id: string;
@@ -13,21 +12,14 @@ export const updateDimensions: Action = (
 ) => {
   Object.assign(data.page.shapes[payload.id], {
     size: [payload.width, payload.height],
+    hasBeenMeasured: true,
+  });
+};
+
+export const layoutBoxes: Action = (data) => {
+  Object.values(data.page.shapes).forEach((shape) => {
+    shape.point = [0, 0];
   });
 
-  const shapes = Object.values(data.page.shapes).map((i) => {
-    return {
-      h: i.size[1] + 16,
-      w: i.size[0] + 16,
-      x: i.point[0],
-      y: i.point[1],
-      id: i.id,
-    };
-  });
-
-  potpack(shapes);
-
-  shapes.forEach((i) => {
-    data.page.shapes[i.id].point = [i.x, i.y];
-  });
+  packTree(data.tree, data.page.shapes);
 };

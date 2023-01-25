@@ -67,7 +67,7 @@ export const DocsComponent = TLShapeUtil.Component<DocsShape, HTMLDivElement>(
     const { component: Component, grouping, slug, title } = item;
     const groups = grouping.split("/");
 
-    if (!shape.size[1] && bounds.height > 0) {
+    if (!shape.hasBeenMeasured && bounds.height > 0) {
       machine.send("UPDATE_DIMENSIONS", {
         id: shape.id,
         width: bounds.width,
