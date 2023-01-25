@@ -15,7 +15,6 @@ const GroupWrapper = styled("div", {
 
 export const GroupComponent = TLShapeUtil.Component<GroupShape, HTMLDivElement>(
   ({ shape, events }, ref) => {
-    console.log("GROUP", shape);
     return (
       <HTMLContainer ref={ref} {...events}>
         <GroupWrapper>{shape.id}</GroupWrapper>

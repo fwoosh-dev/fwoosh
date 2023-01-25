@@ -62,29 +62,18 @@ export function packShapesIntoGroups(
       }
       continue;
     } else {
-      console.log(
-        JSON.parse(JSON.stringify(item.children, null, 2)),
-        JSON.parse(JSON.stringify(shapes, null, 2))
-      );
       const childrenBoxes = packShapesIntoGroups(item.children, shapes);
       const group = shapes[item.id];
       const data = convertShapesToPotpackData(childrenBoxes);
 
       potpack(data);
 
-      console.log({ data });
       data.forEach((i) => {
         const shape = shapes[i.id];
 
         const oldPoint = shape.point;
         shape.point = [i.x, i.y];
         const moveDistance = Vec.sub(shape.point, oldPoint);
-
-        console.log({
-          moveDistance,
-          oldPoint: [oldPoint[0], oldPoint[1]],
-          newPoint: [shape.point[0], shape.point[1]],
-        });
 
         if (shape.type === "group") {
           updateChildPositions(shape, shapes, moveDistance);
@@ -246,8 +235,6 @@ export const INITIAL_WORKBENCH_PAGE = {
     shapes: createShapesForTree(tree, {}, { shape: "workbench" }),
   },
 };
-
-console.log("DEBUG START", tree, INITIAL_WORKBENCH_PAGE.page.shapes);
 
 export type AppDocument = {
   id: string;
