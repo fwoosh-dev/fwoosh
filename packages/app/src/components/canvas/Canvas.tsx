@@ -8,6 +8,7 @@ import {
 } from "@tldraw/core";
 import { machine } from "./machine.js";
 import { shapeUtils } from "./shapes";
+import { css } from "@fwoosh/styling";
 
 const onPinch: TLPinchEventHandler = (info, e) => {
   machine.send("PINCHED", info);
@@ -46,6 +47,10 @@ const onKeyDown: TLKeyboardEventHandler = (key, info, e) => {
     }
   }
 };
+
+const canvasStyles = css({
+  background: "$gray0",
+});
 
 const onKeyUp: TLKeyboardEventHandler = (key, info, e) => {
   switch (key) {
@@ -94,6 +99,7 @@ export const Canvas = React.memo(
     return (
       <Renderer
         containerRef={containerRef}
+        theme={{ background: "transparent" }}
         page={appState.data.page}
         pageState={appState.data.pageState}
         shapeUtils={shapeUtils}

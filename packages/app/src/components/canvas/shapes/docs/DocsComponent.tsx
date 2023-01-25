@@ -30,6 +30,7 @@ const StoryTitle = styled("div", {
   display: "flex",
   alignItems: "center",
   text: "sm",
+  color: "$gray11",
 });
 
 const Split = styled("div", {
