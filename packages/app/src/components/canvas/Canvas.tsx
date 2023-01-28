@@ -95,36 +95,10 @@ export const Canvas = React.memo(
     const containerRef = React.useRef<HTMLDivElement>(null);
     const storyId = useStoryId();
 
-    // Prevent browser from navigating back/forward when
-    // the user scrolls left/right on the timeline.
-    React.useEffect(() => {
-      const { current } = containerRef;
-
-      if (!current) {
-        return;
-      }
-
-      function cancelZoom(e: WheelEvent) {
-        e.preventDefault();
-      }
-
-      // We need to use the `passive: false` option to prevent the default
-      // behavior of the event. Without this the browser will still zoom
-      // in/out on the page.
-      document.addEventListener("wheel", cancelZoom, { passive: false });
-
-      return () => {
-        document.removeEventListener("wheel", cancelZoom);
-      };
-    }, []);
-
     React.useEffect(() => {
       const timeout = setTimeout(layout, 5000);
       return () => clearTimeout(timeout);
     }, []);
-
-    console.log("TREE", appState.data.meta.tree);
-    console.log("SHAPES", appState.data.page.shapes);
 
     return (
       <Wrapper ref={containerRef}>
