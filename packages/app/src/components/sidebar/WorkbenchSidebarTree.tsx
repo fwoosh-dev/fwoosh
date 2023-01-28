@@ -65,7 +65,9 @@ export const WorkbenchSidebarTree = () => {
         return (
           <SidebarSectionTitle
             as={Link}
-            to={firstChildSlug}
+            to={
+              isCanvas ? `/canvas/workbench/${firstChildSlug}` : firstChildSlug
+            }
             style={finalStyle}
             data-active={isChildActive}
           >
