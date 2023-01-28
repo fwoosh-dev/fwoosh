@@ -12,18 +12,10 @@ export const machine = createState({
     PINCHED: "pinchCamera",
     ZOOMED_IN: "zoomIn",
     ZOOMED_OUT: "zoomOut",
+    ZOOMED_RESET: "zoomReset",
     CENTER_SHAPE: "centerShape",
     LAYOUT_BOXES: "layoutBoxes",
     UPDATE_DIMENSIONS: "updateDimensions",
-    // RESIZED: "setViewport",
-    // RESET: {
-    //   do: "loadNewDocument",
-    //   to: "select.idle",
-    // },
-    // LOADED_DOCUMENT: {
-    //   do: "loadDocument",
-    //   to: "select.idle",
-    // },
   },
   initial: "select",
   states: {

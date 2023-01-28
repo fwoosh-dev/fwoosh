@@ -10,7 +10,7 @@ import { machine } from "./machine.js";
 import { shapeUtils } from "./shapes";
 import { styled } from "@fwoosh/styling";
 import { IconButton, Tooltip } from "@fwoosh/components";
-import { Minus, Plus } from "react-feather";
+import { Minus, Plus, RotateCw } from "react-feather";
 import { useStoryId } from "@fwoosh/hooks";
 
 const Wrapper = styled("div", {
@@ -27,9 +27,11 @@ const ViewControls = styled("div", {
   alignItems: "center",
   flexDirection: "column",
   gap: "$2",
-  margin: "$3",
+  margin: "$3 $2",
   pointerEvents: "auto",
   zIndex: 100,
+  background: "$gray0",
+  padding: "$2",
 });
 
 const onPinch: TLPinchEventHandler = (info, e) => {
@@ -50,6 +52,10 @@ const zoomIn = () => {
 
 const zoomOut = () => {
   machine.send("ZOOMED_OUT");
+};
+
+const zoomReset = () => {
+  machine.send("ZOOMED_RESET");
 };
 
 const onKeyDown: TLKeyboardEventHandler = (key, info, e) => {
@@ -115,14 +121,19 @@ export const Canvas = React.memo(
         />
 
         <ViewControls>
-          <Tooltip message="Zoom in">
+          <Tooltip side="left" message="Zoom in">
             <IconButton onClick={zoomIn}>
               <Plus />
             </IconButton>
           </Tooltip>
-          <Tooltip message="Zoom out">
+          <Tooltip side="left" message="Zoom out">
             <IconButton onClick={zoomOut}>
               <Minus />
+            </IconButton>
+          </Tooltip>
+          <Tooltip side="left" message="Reset zoom">
+            <IconButton onClick={zoomReset}>
+              <RotateCw />
             </IconButton>
           </Tooltip>
         </ViewControls>
