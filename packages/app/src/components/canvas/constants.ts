@@ -10,7 +10,7 @@ import {
 } from "@tldraw/core";
 import { StorySidebarChildItem, StoryTree } from "@fwoosh/types";
 
-import { Shape, shapeUtils } from "./shapes";
+import { Shape, shapeUtils } from "./shapes/index.js";
 import { createGroup } from "./utils";
 
 export const VERSION = 1;
@@ -18,6 +18,12 @@ export const PERSIST_DATA = true;
 export const FIT_TO_SCREEN_PADDING = 100;
 export const BINDING_PADDING = 12;
 export const SNAP_DISTANCE = 5;
+
+declare global {
+  interface Window {
+    FWOOSH_CANVAS_SHAPES: Record<string, Shape>;
+  }
+}
 
 function createShapesForTree(
   items: StorySidebarChildItem[],
@@ -88,7 +94,9 @@ function createShapesForTree(
 
 export const INITIAL_PAGE: TLPage<Shape, TLBinding> = {
   id: "canvas",
-  shapes: createShapesForTree(tree, {}, { shape: "docs" }),
+  shapes: window.FWOOSH_CANVAS_SHAPES
+    ? window.FWOOSH_CANVAS_SHAPES
+    : createShapesForTree(tree, {}, { shape: "docs" }),
   bindings: {},
 };
 
@@ -96,7 +104,7 @@ export const INITIAL_PAGE_STATE: TLPageState = {
   id: "page1",
   selectedIds: [],
   camera: {
-    point: [0, 0],
+    point: [100, 100],
     zoom: 1,
   },
   brush: null,
@@ -126,7 +134,9 @@ export const INITIAL_WORKBENCH_PAGE = {
   ...INITIAL_DATA,
   page: {
     ...INITIAL_PAGE,
-    shapes: createShapesForTree(tree, {}, { shape: "workbench" }),
+    shapes: window.FWOOSH_CANVAS_SHAPES
+      ? window.FWOOSH_CANVAS_SHAPES
+      : createShapesForTree(tree, {}, { shape: "workbench" }),
   },
 };
 
@@ -151,4 +161,5 @@ export type CanvasMeta = {
   storyId: string | undefined;
   containerRef: React.MutableRefObject<HTMLElement | null>;
   tree: typeof tree;
+  hasMeasured: boolean;
 };

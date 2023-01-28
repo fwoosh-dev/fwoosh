@@ -6,5 +6,4 @@ export interface GroupShape extends TLShape {
   stories: string[];
   contentSize: number[];
   size: number[];
-  hasBeenMeasured: boolean;
 }

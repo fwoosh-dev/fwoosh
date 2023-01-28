@@ -66,17 +66,17 @@ const Story = React.memo(
     item,
     storyId,
     shape,
+    hasMeasured,
   }: {
     item: StoryData;
-    hasBeenMeasured: boolean;
     shape: DocsShape;
   } & CanvasMeta) => {
-    const { component: Component, grouping, slug, title } = item;
+    const { grouping, slug, title } = item;
     const groups = grouping.split("/");
     const [measureRef, bounds] = useMeasure();
 
     React.useEffect(() => {
-      if (bounds.height > 0 && shape.size[0] == 0) {
+      if (!hasMeasured && bounds.height > 0 && shape.size[0] == 0) {
         const timeout = setTimeout(() => {
           machine.send("UPDATE_DIMENSIONS", {
             id: item.slug,
@@ -133,12 +133,7 @@ export const DocsComponent = TLShapeUtil.Component<
 
   return (
     <HTMLContainer ref={ref} {...events}>
-      <Story
-        item={item}
-        {...meta}
-        hasBeenMeasured={shape.hasBeenMeasured}
-        shape={shape}
-      />
+      <Story item={item} {...meta} shape={shape} />
     </HTMLContainer>
   );
 });

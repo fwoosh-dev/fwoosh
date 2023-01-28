@@ -463,28 +463,8 @@ export class Fwoosh implements FwooshClass {
 
       for (const file of mdx) {
         log.info("Building search data:", file.title);
+
         const page = await browser.newPage();
-        const main = page.locator("main");
-
-        page.on("console", async (msg) => {
-          const msgArgs = msg.args();
-
-          if (msgArgs.length !== 3) {
-            return;
-          }
-
-          const firstMsg = await msgArgs[0].jsonValue();
-
-          if (firstMsg !== "window.FWOOSH_SEARCH_INDEX") {
-            return;
-          }
-
-          const slug = await msgArgs[1].jsonValue();
-          const data = await msgArgs[2].jsonValue();
-
-          searchData[slug as string] = data;
-        });
-
         const url = `http://localhost:3000${path.join(
           this.options.basename,
           "docs",
@@ -494,16 +474,77 @@ export class Fwoosh implements FwooshClass {
         await page.goto(url);
 
         // This makes use wait for the page to load
-        await main.evaluate(async () => {});
-      }
+        await new Promise<void>((res) => {
+          page.on("console", async (msg) => {
+            const msgArgs = msg.args();
 
-      await browser.close();
-      server.close();
+            if (msgArgs.length !== 3) {
+              return;
+            }
+
+            const firstMsg = await msgArgs[0].jsonValue();
+
+            if (firstMsg !== "window.FWOOSH_SEARCH_INDEX") {
+              return;
+            }
+
+            const slug = await msgArgs[1].jsonValue();
+            const data = await msgArgs[2].jsonValue();
+
+            searchData[slug as string] = data;
+            res();
+          });
+        });
+      }
 
       await fs.writeFile(
         path.join(outDir, "search.json"),
         JSON.stringify(searchData)
       );
+
+      log.log("Measuring stories and documentation in canvas...");
+
+      const canvas = await browser.newPage();
+
+      await canvas.evaluate(() => {
+        // @ts-ignore
+        window.isMeasuring = true;
+      });
+
+      const [shapes] = await Promise.all([
+        new Promise<Record<string, unknown>>((res) => {
+          canvas.on("console", async (msg) => {
+            const msgArgs = msg.args();
+
+            if (msgArgs.length !== 2) {
+              return;
+            }
+
+            const firstMsg = await msgArgs[0].jsonValue();
+
+            if (firstMsg !== "window.FWOOSH_CANVAS_SHAPE") {
+              return;
+            }
+
+            const data = await msgArgs[1].jsonValue();
+            res(data);
+          });
+        }),
+        canvas.goto(
+          `http://localhost:3000${path.join(
+            this.options.basename,
+            "canvas/workbench"
+          )}`
+        ),
+      ]);
+
+      await fs.writeFile(
+        path.join(outDir, "assets", "shapes.js"),
+        `window.FWOOSH_CANVAS_SHAPES = ${JSON.stringify(shapes)};`
+      );
+
+      await browser.close();
+      server.close();
 
       log.success("Build complete!");
     });

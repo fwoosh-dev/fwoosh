@@ -20,7 +20,6 @@ export function createGroup(
     stories: [],
     size: [0, 0],
     contentSize: [0, 0],
-    hasBeenMeasured: false,
     point: [0, 0],
   };
 }

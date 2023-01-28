@@ -7,7 +7,7 @@ import {
   TLWheelEventHandler,
 } from "@tldraw/core";
 import { machine } from "./machine.js";
-import { shapeUtils } from "./shapes";
+import { shapeUtils } from "./shapes/index.js";
 import { styled } from "@fwoosh/styling";
 import { IconButton, Spinner, Tooltip } from "@fwoosh/components";
 import { Minus, Plus, RotateCw } from "react-feather";
@@ -107,17 +107,28 @@ const onKeyUp: TLKeyboardEventHandler = (key, info, e) => {
 
 export const Canvas = React.memo(
   ({ appState }: { appState: typeof machine }) => {
-    const [isLoading, setIsLoading] = React.useState(true);
+    const hasMeasured = Object.values(appState.data.page.shapes)[0].size[0] > 0;
+    const [isLoading, setIsLoading] = React.useState(!hasMeasured);
     const containerRef = React.useRef<HTMLDivElement>(null);
     const storyId = useStoryId();
 
     React.useEffect(() => {
+      if (hasMeasured) {
+        return;
+      }
+
       const timeout = setTimeout(() => {
         layout();
         setIsLoading(false);
       }, 5000);
       return () => clearTimeout(timeout);
     }, []);
+
+    if (isLoading === false) {
+      // This log is used to communicate the search index to the
+      // built app.
+      console.log("window.FWOOSH_CANVAS_SHAPE", appState.data.page.shapes);
+    }
 
     return (
       <Wrapper ref={containerRef}>
@@ -130,7 +141,7 @@ export const Canvas = React.memo(
           onKeyUp={onKeyUp}
           onPinch={onPinch}
           onPan={onPan}
-          meta={{ storyId, containerRef }}
+          meta={{ storyId, containerRef, hasMeasured }}
         />
 
         <ViewControls>

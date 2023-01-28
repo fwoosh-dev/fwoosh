@@ -126,15 +126,16 @@ const headings = [
 
 const StoryGroup = React.memo(function StoryGroup({
   shape,
+  hasMeasured,
   ...props
-}: { shape: GroupShape; hasBeenMeasured: boolean } & CanvasMeta) {
+}: { shape: GroupShape } & CanvasMeta) {
   const [measureRef, bounds] = useMeasure();
   const groups = shape.name.split("-");
   const lastGroup = groups.length - 1;
   const hasChildren = shape.stories.length > 0;
 
   React.useEffect(() => {
-    if (bounds.height > 0 && shape.size[0] == 0) {
+    if (!hasMeasured && bounds.height > 0 && shape.size[0] == 0) {
       const timeout = setTimeout(() => {
         machine.send("UPDATE_DIMENSIONS", {
           id: shape.id,

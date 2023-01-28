@@ -21,6 +21,9 @@ export function ProductionSearchIndex() {
         Object.entries(data).forEach(([key, value]) => {
           window.FWOOSH_SEARCH_INDEX[key] = value as SearchData[];
         });
+      })
+      .catch((err) => {
+        console.error(err);
       });
   }, []);
 
