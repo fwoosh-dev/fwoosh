@@ -7,7 +7,7 @@ import type { DesignsPanelParameters } from "@fwoosh/panel-designs";
 import { Button } from "./Button";
 
 export const meta: StoryMeta<DesignsPanelParameters> = {
-  title: "Components/Button",
+  title: "Components/Button/Button",
   component: Button,
   parameters: {
     designs: "https://www.figma.com/file/LKQ4FJ4bTnCSjedbRpk931/Sample-File",

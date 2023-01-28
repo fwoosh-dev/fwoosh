@@ -12,6 +12,7 @@
     "clean": "rimraf '**/*.tsbuildinfo' && rimraf '**/dist' && rimraf '**/node_modules'",
     "build": "tsc -b tsconfig.dev.json -v && lerna run build --concurrency 1",
     "start": "tsc -b tsconfig.dev.json -v --watch",
+    "test": "vitest",
     "release": "auto shipit",
     "create": "node -r esbuild-register scripts/create/create.ts",
     "create:package": "yarn run create --type package",
@@ -31,7 +32,8 @@
     "typescript": "^4.9.3"
   },
   "dependencies": {
-    "fwoosh": "link:./packages/cli"
+    "fwoosh": "link:./packages/cli",
+    "vitest": "^0.28.3"
   },
   "auto": {
     "plugins": [

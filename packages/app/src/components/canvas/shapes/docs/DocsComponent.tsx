@@ -2,7 +2,6 @@ import { flattenTree } from "@fwoosh/utils";
 import { HTMLContainer, TLShapeUtil } from "@tldraw/core";
 import * as React from "react";
 import useMeasure from "react-use-measure";
-import { tree } from "@fwoosh/app/stories";
 import { styled } from "@fwoosh/styling";
 import { IconButton, Spinner, Tooltip } from "@fwoosh/components";
 
@@ -52,9 +51,9 @@ const StoryWrapper = styled("div", {
 const Story = React.memo(
   ({
     item,
-    containerRef,
     hasBeenMeasured,
     storyId,
+    tree,
   }: {
     item: StoryData;
     hasBeenMeasured: boolean;
@@ -64,21 +63,26 @@ const Story = React.memo(
     const [measureRef, bounds] = useMeasure();
 
     if (!hasBeenMeasured && bounds.height > 0) {
+      console.log("UPDATE_DIMENSIONS", {
+        id: item.slug,
+        width: bounds.width,
+        height: bounds.height,
+      });
       machine.send("UPDATE_DIMENSIONS", {
         id: item.slug,
         width: bounds.width,
         height: bounds.height,
       });
 
-      if (item.slug === storyId) {
-        machine.send("CENTER_SHAPE", {
-          id: item.slug,
-          client: {
-            height: containerRef.current?.clientHeight,
-            width: containerRef.current?.clientWidth,
-          },
-        });
-      }
+      // if (item.slug === storyId) {
+      //   machine.send("CENTER_SHAPE", {
+      //     id: item.slug,
+      //     client: {
+      //       height: containerRef.current?.clientHeight,
+      //       width: containerRef.current?.clientWidth,
+      //     },
+      //   });
+      // }
     }
 
     return (
@@ -101,6 +105,7 @@ const Story = React.memo(
           </StoryTitle>
 
           <StoryWrapper>
+            {/* todo need to use story component that render stories elsewhere */}
             <Component />
           </StoryWrapper>
         </ItemWrapper>
@@ -109,14 +114,12 @@ const Story = React.memo(
   }
 );
 
-const flatTree = flattenTree(tree);
-
 export const DocsComponent = TLShapeUtil.Component<
   DocsShape,
   HTMLDivElement,
   CanvasMeta
 >(({ shape, events, meta }, ref) => {
-  const item = flatTree[shape.id];
+  const item = flattenTree(meta.tree)[shape.id];
 
   if (!item) {
     return (

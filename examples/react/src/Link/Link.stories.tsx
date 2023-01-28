@@ -4,7 +4,7 @@ import type { Story, StoryMeta } from "@fwoosh/react";
 import { Link } from "./Link";
 
 export const meta: StoryMeta = {
-  title: "Components/Link",
+  title: "Components/Button/Link",
   component: Link,
 };
 

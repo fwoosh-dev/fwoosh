@@ -6,7 +6,7 @@ import { IconButton } from "@fwoosh/components";
 import { action } from "@fwoosh/panel-actions";
 
 export const meta: StoryMeta = {
-  title: "Components/IconButton",
+  title: "Components/Button/IconButton",
   component: IconButton,
 };
 

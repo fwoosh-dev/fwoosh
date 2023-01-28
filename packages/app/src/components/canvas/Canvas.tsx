@@ -119,9 +119,11 @@ export const Canvas = React.memo(
     }, []);
 
     React.useEffect(() => {
-      const timeout = setTimeout(layout, 2000);
+      const timeout = setTimeout(layout, 5000);
       return () => clearTimeout(timeout);
     }, []);
+
+    console.log("SHAPES", appState.data.page.shapes);
 
     return (
       <Wrapper ref={containerRef}>
