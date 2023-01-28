@@ -9,10 +9,12 @@ import * as React from "react";
 import { ExternalLink } from "react-feather";
 import { Link } from "react-router-dom";
 import useMeasure from "react-use-measure";
+import { useId } from "@radix-ui/react-id";
+
 import { CanvasMeta } from "../../constants";
 import { machine } from "../../machine";
-
 import { GroupShape } from "./GroupShape";
+import { useRender } from "../../../../hooks/useRender";
 
 const GroupWrapper = styled("div", {
   pointerEvents: "auto",
@@ -60,13 +62,20 @@ const StoryList = styled("div", {
   gap: "$4",
 });
 
+const StoryDiv = React.memo(({ story }: { story: StoryData }) => {
+  const id = useId();
+  const { ref } = useRender({ id, slug: story.slug });
+
+  return <div ref={ref} />;
+});
+
 const Story = ({
   item,
   storyId,
 }: {
   item: StoryData;
 } & Pick<CanvasMeta, "storyId">) => {
-  const { component: Component, grouping, slug, title } = item;
+  const { grouping, slug, title } = item;
   const groups = grouping.split("/");
 
   return (
@@ -88,8 +97,7 @@ const Story = ({
         </StoryTitle>
 
         <StoryWrapper>
-          {/* todo need to use story component that render stories elsewhere */}
-          <Component />
+          <StoryDiv story={item} />
         </StoryWrapper>
       </ItemWrapper>
     </React.Suspense>
