@@ -1,5 +1,5 @@
 import { Action } from "../constants";
-import { packTree } from "../utils";
+import { packShapesIntoGroups } from "../utils";
 
 interface UpdateDimensionsPayload {
   id: string;
@@ -28,6 +28,8 @@ export const updateDimensions: Action = (
 export const layoutBoxes: Action = (data) => {
   Object.values(data.page.shapes).forEach((shape) => {
     shape.point = [0, 0];
+    shape.size = "contentSize" in shape ? shape.contentSize : shape.size;
   });
-  packTree(data.meta.tree, data.page.shapes);
+
+  packShapesIntoGroups(data.meta.tree, data.page.shapes);
 };

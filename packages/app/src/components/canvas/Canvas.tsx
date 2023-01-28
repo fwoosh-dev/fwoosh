@@ -8,7 +8,7 @@ import {
 } from "@tldraw/core";
 import { machine } from "./machine.js";
 import { shapeUtils } from "./shapes";
-import { css, styled } from "@fwoosh/styling";
+import { styled } from "@fwoosh/styling";
 import { IconButton, Tooltip } from "@fwoosh/components";
 import { Minus, Plus } from "react-feather";
 import { useStoryId } from "@fwoosh/hooks";
@@ -123,6 +123,7 @@ export const Canvas = React.memo(
       return () => clearTimeout(timeout);
     }, []);
 
+    console.log("TREE", appState.data.meta.tree);
     console.log("SHAPES", appState.data.page.shapes);
 
     return (

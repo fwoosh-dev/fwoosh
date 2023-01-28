@@ -6,7 +6,7 @@ import { Check, MoreHorizontal, ExternalLink } from "react-feather";
 import { DropdownMenu, IconButton, ChevronRightIcon } from "@fwoosh/components";
 
 export const meta: StoryMeta = {
-  title: "Components/DropdownMenu",
+  title: "Components/Buttons/DropdownMenu",
 };
 
 type CheckedState = boolean | "indeterminate";

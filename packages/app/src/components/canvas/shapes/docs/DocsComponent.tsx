@@ -63,11 +63,6 @@ const Story = React.memo(
     const [measureRef, bounds] = useMeasure();
 
     if (!hasBeenMeasured && bounds.height > 0) {
-      console.log("UPDATE_DIMENSIONS", {
-        id: item.slug,
-        width: bounds.width,
-        height: bounds.height,
-      });
       machine.send("UPDATE_DIMENSIONS", {
         id: item.slug,
         width: bounds.width,

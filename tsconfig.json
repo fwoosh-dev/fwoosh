@@ -18,6 +18,7 @@
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "types": ["vite/client", "node"],
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "resolveJsonModule": true
   }
 }

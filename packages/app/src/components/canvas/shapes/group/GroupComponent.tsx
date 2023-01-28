@@ -94,40 +94,50 @@ const Story = ({
   );
 };
 
+const placeholder = (
+  <div
+    style={{
+      height: 100,
+      width: 100,
+      marginBottom: 8,
+      background: "red",
+    }}
+  />
+);
+
 const StoryGroup = React.memo(function StoryGroup({
   shape,
   ...props
 }: { shape: GroupShape; hasBeenMeasured: boolean } & CanvasMeta) {
   const [measureRef, bounds] = useMeasure();
+  const groups = shape.name.split("-");
 
   React.useEffect(() => {
-    if (bounds.height > 0) {
-      machine.send("UPDATE_DIMENSIONS", {
-        id: shape.id,
-        width: bounds.width,
-        height: bounds.height,
-      });
+    if (bounds.height > 0 && shape.size[0] == 0) {
+      const timeout = setTimeout(() => {
+        console.log("UPDATE_DIMENSIONS", {
+          id: shape.id,
+          width: bounds.width,
+          height: bounds.height,
+        });
+        machine.send("UPDATE_DIMENSIONS", {
+          id: shape.id,
+          width: bounds.width,
+          height: bounds.height,
+        });
+      }, 2000);
+      return () => clearTimeout(timeout);
     }
   }, [bounds.height, bounds.width, shape.id]);
 
   return (
     <GroupWrapper ref={measureRef}>
-      {shape.name && (
-        <components.h3 css={{ marginTop: "$2", padding: "0 $1" }}>
-          {shape.name}
-        </components.h3>
-      )}
+      <components.h3 css={{ marginTop: "$2", padding: "0 $1" }}>
+        {groups[groups.length - 1]}
+      </components.h3>
 
       {shape.stories.map((story) => (
-        <div
-          style={{
-            height: 100,
-            width: 100,
-            marginBottom: 8,
-            background: "red",
-          }}
-        />
-        // <Story key={story} item={flatTree[story]} {...props} />
+        <Story key={story} item={flatTree[story]} {...props} />
       ))}
     </GroupWrapper>
   );

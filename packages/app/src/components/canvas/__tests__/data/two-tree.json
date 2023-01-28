@@ -1,0 +1,260 @@
+{
+  "tree": [
+    {
+      "name": "Components",
+      "id": "Components",
+      "children": [
+        {
+          "type": "tree",
+          "name": "Button",
+          "id": "Components-Button",
+          "children": [
+            {
+              "type": "tree",
+              "name": "Button",
+              "id": "Components-Button-Button",
+              "children": [
+                {
+                  "name": "Playground",
+                  "story": {
+                    "type": "basic",
+                    "title": "Playground",
+                    "slug": "components-button-button--playground",
+                    "grouping": "Components/Button/Button",
+                    "comment": "<p>The default story.</p>\n<p>Describe you <strong>stories</strong> with the <em>full power of markdown</em>!</p>\n<blockquote>\n<p>Even quote things!</p>\n</blockquote>",
+                    "code": "export const Playground: Story<DesignsPanelParameters> = () => {\n  return <Button onClick={action(\"onClick\")}>Click me</Button>;\n};",
+                    "component": {
+                      "_payload": {
+                        "_status": 1,
+                        "_result": {}
+                      }
+                    },
+                    "meta": {}
+                  },
+                  "id": "components-button-button--playground",
+                  "type": "story"
+                },
+                {
+                  "name": "WithDisabled",
+                  "story": {
+                    "type": "basic",
+                    "title": "WithDisabled",
+                    "slug": "components-button-button--with-disabled",
+                    "grouping": "Components/Button/Button",
+                    "comment": "<p>A button can be disabled.</p>\n<pre><code class=\"language-tsx syntax-light\" style=\"background: #ffffff\"><span style=\"color: #24292F;\">console.</span><span style=\"color: #8250DF;\">log</span><span style=\"color: #24292F;\">(</span><span style=\"color: #0A3069;\">\"Woah!\"</span><span style=\"color: #24292F;\">);</span>\n\n<span style=\"color: #CF222E;\">const</span><span style=\"color: #24292F;\"> </span><span style=\"color: #8250DF;\">Example</span><span style=\"color: #24292F;\"> </span><span style=\"color: #CF222E;\">=</span><span style=\"color: #24292F;\"> () </span><span style=\"color: #CF222E;\">=></span><span style=\"color: #24292F;\"> {</span>\n<span style=\"color: #24292F;\">  </span><span style=\"color: #CF222E;\">return</span><span style=\"color: #24292F;\"> &#x3C;</span><span style=\"color: #116329;\">Button</span><span style=\"color: #24292F;\"> </span><span style=\"color: #0550AE;\">disabled</span><span style=\"color: #24292F;\">>Click me&#x3C;/</span><span style=\"color: #116329;\">Button</span><span style=\"color: #24292F;\">>;</span>\n<span style=\"color: #24292F;\">}</span>\n</code><code class=\"language-tsx syntax-light syntax-dark\" style=\"background: #ffffff;background: #0d1117\"><span style=\"color: #C9D1D9;\">console.</span><span style=\"color: #D2A8FF;\">log</span><span style=\"color: #C9D1D9;\">(</span><span style=\"color: #A5D6FF;\">\"Woah!\"</span><span style=\"color: #C9D1D9;\">);</span>\n\n<span style=\"color: #FF7B72;\">const</span><span style=\"color: #C9D1D9;\"> </span><span style=\"color: #D2A8FF;\">Example</span><span style=\"color: #C9D1D9;\"> </span><span style=\"color: #FF7B72;\">=</span><span style=\"color: #C9D1D9;\"> () </span><span style=\"color: #FF7B72;\">=></span><span style=\"color: #C9D1D9;\"> {</span>\n<span style=\"color: #C9D1D9;\">  </span><span style=\"color: #FF7B72;\">return</span><span style=\"color: #C9D1D9;\"> &#x3C;</span><span style=\"color: #7EE787;\">Button</span><span style=\"color: #C9D1D9;\"> </span><span style=\"color: #79C0FF;\">disabled</span><span style=\"color: #C9D1D9;\">>Click me&#x3C;/</span><span style=\"color: #7EE787;\">Button</span><span style=\"color: #C9D1D9;\">>;</span>\n<span style=\"color: #C9D1D9;\">}</span>\n</code></pre>",
+                    "code": "export const WithDisabled: Story<DesignsPanelParameters> = () => {\n  return (\n    <Button disabled onClick={action(\"onClick\")}>\n      Click me\n    </Button>\n  );\n};",
+                    "component": {
+                      "_payload": {
+                        "_status": 1,
+                        "_result": {}
+                      }
+                    },
+                    "meta": {}
+                  },
+                  "id": "components-button-button--with-disabled",
+                  "type": "story"
+                },
+                {
+                  "name": "WithStyle",
+                  "story": {
+                    "type": "basic",
+                    "title": "WithStyle",
+                    "slug": "components-button-button--with-style",
+                    "grouping": "Components/Button/Button",
+                    "comment": "<p>Add custom styles to a button</p>",
+                    "code": "export const WithStyle: Story<ViewportParameters> = () => {\n  return (\n    <Button variant=\"destructive\" onClick={action(\"onClick\")}>\n      Click me\n    </Button>\n  );\n};",
+                    "component": {
+                      "_payload": {
+                        "_status": 1,
+                        "_result": {}
+                      }
+                    },
+                    "meta": {}
+                  },
+                  "id": "components-button-button--with-style",
+                  "type": "story"
+                },
+                {
+                  "name": "WithoutStyle",
+                  "story": {
+                    "type": "basic",
+                    "title": "WithoutStyle",
+                    "slug": "components-button-button--without-style",
+                    "grouping": "Components/Button/Button",
+                    "comment": "<p>Add custom styles to a button</p>",
+                    "code": "export const WithoutStyle: Story<ViewportParameters> = () => {\n  return <button onClick={action(\"onClick\")}>Click me</button>;\n};",
+                    "component": {
+                      "_payload": {
+                        "_status": 1,
+                        "_result": {}
+                      }
+                    },
+                    "meta": {}
+                  },
+                  "id": "components-button-button--without-style",
+                  "type": "story"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tree",
+          "name": "Text",
+          "id": "Components-Text",
+          "children": [
+            {
+              "name": "Headings",
+              "story": {
+                "type": "basic",
+                "title": "Headings",
+                "slug": "components-text--headings",
+                "grouping": "Components/Text",
+                "comment": "<p>All the Headings.</p>",
+                "code": "export const Headings: Story = () => {\n  return (\n    <>\n      <components.h1>Heading Level 1</components.h1>\n      <components.h2>Heading Level 2</components.h2>\n      <components.h3>Heading Level 3</components.h3>\n      <components.h4>Heading Level 4</components.h4>\n      <components.h5>Heading Level 5</components.h5>\n      <components.h6>Heading Level 6</components.h6>\n    </>\n  );\n};",
+                "component": {
+                  "_payload": {
+                    "_status": 1,
+                    "_result": {}
+                  }
+                },
+                "meta": {}
+              },
+              "id": "components-text--headings",
+              "type": "story"
+            },
+            {
+              "name": "UnorderedList",
+              "story": {
+                "type": "basic",
+                "title": "UnorderedList",
+                "slug": "components-text--unordered-list",
+                "grouping": "Components/Text",
+                "comment": "<p>An unordered list of items.</p>",
+                "code": "export const UnorderedList: Story = () => {\n  return (\n    <components.ul>\n      <components.li>A list</components.li>\n      <components.li>Of unordered</components.li>\n      <components.li>Items</components.li>\n    </components.ul>\n  );\n};",
+                "component": {
+                  "_payload": {
+                    "_status": 1,
+                    "_result": {}
+                  }
+                },
+                "meta": {}
+              },
+              "id": "components-text--unordered-list",
+              "type": "story"
+            },
+            {
+              "name": "OrderedList",
+              "story": {
+                "type": "basic",
+                "title": "OrderedList",
+                "slug": "components-text--ordered-list",
+                "grouping": "Components/Text",
+                "comment": "<p>An ordered list of items.</p>",
+                "code": "export const OrderedList: Story = () => {\n  return (\n    <components.ol>\n      <components.li>A list</components.li>\n      <components.li>Of ordered</components.li>\n      <components.li>Items</components.li>\n    </components.ol>\n  );\n};",
+                "component": {
+                  "_payload": {
+                    "_status": 1,
+                    "_result": {}
+                  }
+                },
+                "meta": {}
+              },
+              "id": "components-text--ordered-list",
+              "type": "story"
+            },
+            {
+              "name": "Anchor",
+              "story": {
+                "type": "basic",
+                "title": "Anchor",
+                "slug": "components-text--anchor",
+                "grouping": "Components/Text",
+                "comment": "<p>Use a blockquote to quote text or call out important information.</p>",
+                "code": "export const Anchor: Story = () => {\n  return (\n    <components.p>\n      Text{\" \"}\n      <components.a href=\"https://www.google.com\">with a link</components.a>\n    </components.p>\n  );\n};",
+                "component": {
+                  "_payload": {
+                    "_status": 1,
+                    "_result": {}
+                  }
+                },
+                "meta": {}
+              },
+              "id": "components-text--anchor",
+              "type": "story"
+            }
+          ]
+        }
+      ],
+      "type": "tree"
+    }
+  ],
+  "shapes": {
+    "Components": {
+      "name": "Components",
+      "id": "Components",
+      "children": ["Components-Button", "Components-Text"],
+      "type": "group",
+      "childIndex": 0,
+      "parentId": "canvas",
+      "rotation": 0,
+      "stories": [],
+      "size": [148.421875, 70],
+      "contentSize": [148.421875, 70],
+      "hasBeenMeasured": true,
+      "point": [0, 0]
+    },
+    "Components-Button": {
+      "type": "group",
+      "name": "Components-Button",
+      "id": "Components-Button",
+      "children": ["Components-Button-Button"],
+      "childIndex": 0,
+      "parentId": "canvas",
+      "rotation": 0,
+      "stories": [],
+      "size": [89.7265625, 70],
+      "contentSize": [89.7265625, 70],
+      "hasBeenMeasured": true,
+      "point": [0, 0]
+    },
+    "Components-Button-Button": {
+      "type": "group",
+      "name": "Components-Button-Button",
+      "id": "Components-Button-Button",
+      "children": [],
+      "childIndex": 0,
+      "parentId": "canvas",
+      "rotation": 0,
+      "stories": [
+        "components-button-button--playground",
+        "components-button-button--with-disabled",
+        "components-button-button--with-style",
+        "components-button-button--without-style"
+      ],
+      "size": [267.4765625, 516],
+      "contentSize": [267.4765625, 516],
+      "hasBeenMeasured": true,
+      "point": [0, 0]
+    },
+    "Components-Text": {
+      "type": "group",
+      "name": "Components-Text",
+      "id": "Components-Text",
+      "children": [],
+      "childIndex": 1,
+      "parentId": "canvas",
+      "rotation": 0,
+      "stories": [
+        "components-text--headings",
+        "components-text--unordered-list",
+        "components-text--ordered-list",
+        "components-text--anchor"
+      ],
+      "size": [350.015625, 1059],
+      "contentSize": [350.015625, 1059],
+      "hasBeenMeasured": true,
+      "point": [0, 0]
+    }
+  }
+}

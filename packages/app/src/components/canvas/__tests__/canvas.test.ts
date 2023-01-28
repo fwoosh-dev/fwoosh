@@ -1,6 +1,8 @@
-import { expect, describe, it, vi } from "vitest";
+import { expect, describe, it } from "vitest";
 
-import { createGroup, packShapesIntoGroups } from "./utils";
+import twoTree from "./data/two-tree.json";
+
+import { createGroup, packShapesIntoGroups } from "../utils";
 
 describe("packShapesIntoGroups", () => {
   it("it should group two shapes", () => {
@@ -229,5 +231,10 @@ describe("packShapesIntoGroups", () => {
     );
 
     expect(shapes).toMatchSnapshot();
+  });
+
+  it.only("it should work long and wide children", () => {
+    packShapesIntoGroups(twoTree.tree as any, twoTree.shapes as any);
+    expect(twoTree.shapes).toMatchSnapshot();
   });
 });
