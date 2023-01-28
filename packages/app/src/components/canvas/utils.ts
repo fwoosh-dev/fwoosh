@@ -62,13 +62,21 @@ function updateChildPositions(
   shapes: Record<string, Shape>,
   moveDistance: number[]
 ) {
+  console.log("UPDATE_CHILDREN", group.children);
   group.children.forEach((child) => {
     const childShape = shapes[child];
+
+    console.log({ childShape });
 
     if (!childShape) {
       return;
     }
 
+    console.log("UPDATE_CHILD", {
+      from: childShape.point,
+      moveDistance,
+      to: Vec.add(childShape.point, moveDistance),
+    });
     childShape.point = Vec.add(childShape.point, moveDistance);
 
     /// BUG it doesn't seem to update the nested group position
@@ -94,6 +102,8 @@ function packGroup(
     // Make the point below the groups content if it has it
     shape.point = Vec.add([i.x, i.y], offset);
     const moveDistance = Vec.sub(shape.point, oldPoint);
+
+    console.log("UPDATE", shape.type);
 
     if (shape.type === "group") {
       updateChildPositions(shape, shapes, moveDistance);
@@ -138,8 +148,7 @@ export function packShapesIntoGroups(
       const bounds = Utils.getCommonBounds(childBounds);
 
       if (bounds) {
-        shape.size = [bounds.width, shape.contentSize[1] + bounds.height];
-        console.log("UPDATE GROUP SIZE", JSON.stringify(shape, null, 2));
+        shape.size = [bounds.width, bounds.height];
       }
 
       boxes.push(shape);
