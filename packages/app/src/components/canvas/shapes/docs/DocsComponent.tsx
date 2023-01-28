@@ -33,6 +33,9 @@ const StoryTitle = styled("div", {
   alignItems: "center",
   text: "sm",
   color: "$gray11",
+  overflow: "hidden",
+  borderTopRightRadius: "$round",
+  borderTopLeftRadius: "$round",
 });
 
 const Split = styled("div", {
