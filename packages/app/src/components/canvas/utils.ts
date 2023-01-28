@@ -57,6 +57,7 @@ function convertShapesToPotpackData(data: Shape[]) {
   });
 }
 
+/** Recursively move all the shapes in a group. */
 function updateChildPositions(
   group: GroupShape,
   shapes: Record<string, Shape>,
@@ -78,6 +79,13 @@ function updateChildPositions(
   });
 }
 
+/**
+ * Pack the groups into a square shape and update the position of the
+ * children to be relative to the group.
+ *
+ * Optionally pass an offset to the group position to account for
+ * the groups itself having a content size.
+ */
 function packGroup(
   boxes: GroupShape[],
   shapes: Record<string, Shape>,
@@ -103,6 +111,15 @@ function packGroup(
   return data;
 }
 
+/**
+ * Iterates over the tree and take items with type="tree" and
+ * packs them into groups.
+ *
+ * It will then update the size of the group to fit the children
+ * so that the group can be used as a container for the children.
+ * This container is then used to pack those groups into bigger and
+ * bigger groups.
+ */
 export function packShapesIntoGroups(
   items: StorySidebarChildItem[],
   shapes: Record<string, Shape>
@@ -134,7 +151,6 @@ export function packShapesIntoGroups(
         const shape = shapes[i.id];
         return getBounds[shape.type](shape as any);
       });
-      // why are x and y so high?
       const bounds = Utils.getCommonBounds(childBounds);
 
       if (bounds) {
