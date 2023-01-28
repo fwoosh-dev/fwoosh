@@ -129,6 +129,10 @@ export function packShapesIntoGroups(
   for (const item of items) {
     const shape = shapes[item.id];
 
+    if (!shape) {
+      continue;
+    }
+
     if (item.type === "story") {
       if (item.story.type === "basic") {
         boxes.push(shapes[item.id]);

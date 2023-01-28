@@ -46,7 +46,6 @@ function createShapesForTree(
         ...item,
         childIndex,
         grouping: item.story.grouping.split("/"),
-        // size: [800, 400], // TODO for prod we should inject actual size so we don't have to render multiple times
       });
     } else if (item.type === "tree") {
       const storyChildren = item.children.filter(
@@ -57,31 +56,29 @@ function createShapesForTree(
         childIndex: index,
       });
 
-      acc[item.id] = group;
+      const treeChildren: StorySidebarChildItem[] = [];
 
-      // PROBLEM: when there are both stories and groups, the stories are overlapping the groups
-
-      storyChildren.forEach((child, index) => {
-        if (child.type === "story" && child.story.type === "basic") {
-          acc[child.id] = shapeUtils.docs.getShape({
-            ...child,
-            childIndex: index,
-            grouping: child.story.grouping.split("/"),
-            // size: [800, 400], // TODO for prod we should inject actual size so we don't have to render multiple times
-          });
-          group.stories.push(child.id);
+      item.children.forEach((child, index) => {
+        if (child.type === "story") {
+          if (child.story.type === "basic") {
+            acc[child.id] = shapeUtils.docs.getShape({
+              ...child,
+              childIndex: index,
+              grouping: child.story.grouping.split("/"),
+            });
+            group.stories.push(child.id);
+          }
+        } else {
+          group.childIds.push(child.id);
+          treeChildren.push(child);
         }
       });
 
-      const otherChildren = item.children.filter(
-        (child): child is StoryTree => child.type === "tree"
-      );
+      createShapesForTree(treeChildren, acc, options);
 
-      otherChildren.forEach((child) => {
-        group.childIds.push(child.id);
-      });
-
-      createShapesForTree(otherChildren, acc, options);
+      if (group.stories.length > 0 || group.childIds.some((id) => acc[id])) {
+        acc[item.id] = group;
+      }
     }
 
     return acc;
