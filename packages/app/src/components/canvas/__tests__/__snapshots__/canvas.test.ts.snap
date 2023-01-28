@@ -23,7 +23,7 @@ exports[`packShapesIntoGroups > it should work long and wide children 1`] = `
     "rotation": 0,
     "size": [
       633.4921875,
-      1145,
+      1059,
     ],
     "stories": [],
     "type": "group",
@@ -48,7 +48,7 @@ exports[`packShapesIntoGroups > it should work long and wide children 1`] = `
     "rotation": 0,
     "size": [
       267.4765625,
-      602,
+      516,
     ],
     "stories": [],
     "type": "group",
@@ -65,8 +65,8 @@ exports[`packShapesIntoGroups > it should work long and wide children 1`] = `
     "name": "Components-Button-Button",
     "parentId": "canvas",
     "point": [
-      366.015625,
-      172,
+      0,
+      86,
     ],
     "rotation": 0,
     "size": [

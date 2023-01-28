@@ -46,7 +46,7 @@ export const getBounds = {
 };
 
 function convertShapesToPotpackData(data: Shape[]) {
-  return data.map((i) => {
+  return data.filter(Boolean).map((i) => {
     return {
       h: i.size[1] + 16,
       w: i.size[0] + 16,
@@ -63,7 +63,7 @@ function updateChildPositions(
   shapes: Record<string, Shape>,
   moveDistance: number[]
 ) {
-  const children = [...group.childIds, ...group.stories];
+  const children = [...(group.childIds || []), ...group.stories];
 
   children.forEach((child) => {
     const childShape = shapes[child];
