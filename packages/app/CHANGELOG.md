@@ -1,3 +1,15 @@
+# v0.0.105 (Sat Jan 28 2023)
+
+#### ⚠️ Pushed to `main`
+
+- don't render tree groups if they're empty ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.104 (Sat Jan 28 2023)
 
 #### ⚠️ Pushed to `main`
