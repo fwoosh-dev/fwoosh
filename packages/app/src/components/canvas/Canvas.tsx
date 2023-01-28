@@ -9,9 +9,18 @@ import {
 import { machine } from "./machine.js";
 import { shapeUtils } from "./shapes";
 import { styled } from "@fwoosh/styling";
-import { IconButton, Tooltip } from "@fwoosh/components";
+import { IconButton, Spinner, Tooltip } from "@fwoosh/components";
 import { Minus, Plus, RotateCw } from "react-feather";
 import { useStoryId } from "@fwoosh/hooks";
+
+const Loading = styled("div", {
+  position: "absolute",
+  height: "100%",
+  width: "100%",
+  background: "$gray0",
+  zIndex: 1000000,
+  inset: 0,
+});
 
 const Wrapper = styled("div", {
   position: "relative",
@@ -98,11 +107,15 @@ const onKeyUp: TLKeyboardEventHandler = (key, info, e) => {
 
 export const Canvas = React.memo(
   ({ appState }: { appState: typeof machine }) => {
+    const [isLoading, setIsLoading] = React.useState(true);
     const containerRef = React.useRef<HTMLDivElement>(null);
     const storyId = useStoryId();
 
     React.useEffect(() => {
-      const timeout = setTimeout(layout, 5000);
+      const timeout = setTimeout(() => {
+        layout();
+        setIsLoading(false);
+      }, 5000);
       return () => clearTimeout(timeout);
     }, []);
 
@@ -137,6 +150,13 @@ export const Canvas = React.memo(
             </IconButton>
           </Tooltip>
         </ViewControls>
+        {isLoading && (
+          <Loading>
+            <Spinner delay={0} size={8}>
+              Measuring canvas...
+            </Spinner>
+          </Loading>
+        )}
       </Wrapper>
     );
   }
