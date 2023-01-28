@@ -1,3 +1,43 @@
+# v0.0.104 (Sat Jan 28 2023)
+
+#### ⚠️ Pushed to `main`
+
+- remove file ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- remove todo file and move to issues ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`
+  - build time shapes ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`
+  - fix tests ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - improve loading behavior ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add reset zoom and style controls more ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - fix clicking group in canvas mode ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - fix corners ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - switch back to story nodes ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - cleanup ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - render stories correnctly ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - fix double render ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - slightly improve layout ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - get tree sorting workig ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - fix height bug ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add some tests and fix 1 nested group ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - improve canvas perf further ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - improve perf ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - remove logs ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add zoom controls ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - fix dark mode ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - add some spacing ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - 1 level of grouping working ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/tool-viewport`
+  - Merge branch 'groups' ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/tool-viewport`
+  - format ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.97 (Tue Jan 24 2023)
 
 #### ⚠️ Pushed to `main`
