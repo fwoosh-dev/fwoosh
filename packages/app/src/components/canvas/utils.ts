@@ -63,7 +63,9 @@ function updateChildPositions(
   shapes: Record<string, Shape>,
   moveDistance: number[]
 ) {
-  group.childIds.forEach((child) => {
+  const children = [...group.childIds, ...group.stories];
+
+  children.forEach((child) => {
     const childShape = shapes[child];
 
     if (!childShape) {
@@ -72,7 +74,6 @@ function updateChildPositions(
 
     childShape.point = Vec.add(childShape.point, moveDistance);
 
-    /// BUG it doesn't seem to update the nested group position
     if (childShape.type === "group") {
       updateChildPositions(childShape, shapes, moveDistance);
     }
@@ -87,7 +88,7 @@ function updateChildPositions(
  * the groups itself having a content size.
  */
 function packGroup(
-  boxes: GroupShape[],
+  boxes: Shape[],
   shapes: Record<string, Shape>,
   offset: number[] = [0, 0]
 ) {
@@ -124,27 +125,28 @@ export function packShapesIntoGroups(
   items: StorySidebarChildItem[],
   shapes: Record<string, Shape>
 ) {
-  const boxes: GroupShape[] = [];
+  const boxes: Shape[] = [];
 
   for (const item of items) {
     const shape = shapes[item.id];
 
-    if (!shape || shape.type === "docs" || item.type === "story") {
-      // if (item.story.type === "basic") {
-      //   // boxes.push(shapes[item.id]);
-      // }
+    if (item.type === "story") {
+      if (item.story.type === "basic") {
+        boxes.push(shapes[item.id]);
+      }
       continue;
     } else {
       const childrenBoxes = packShapesIntoGroups(item.children, shapes);
+      const hasChildren =
+        ("childIds" in shape && shape.childIds.length > 0) ||
+        ("stories" in shape && shape.stories.length > 0);
       const data = packGroup(
         [
-          ...(shape.childIds.length > 0
-            ? [{ ...shape, size: shape.contentSize }]
-            : []),
+          ...(hasChildren ? [{ ...shape, size: shape.contentSize }] : []),
           ...childrenBoxes,
         ],
         shapes,
-        [0, shape.contentSize[1] + 16]
+        [0, "contentSize" in shape ? shape.contentSize[1] + 16 : 0]
       );
 
       const childBounds = data.map((i) => {

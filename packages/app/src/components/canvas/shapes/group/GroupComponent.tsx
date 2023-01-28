@@ -149,24 +149,12 @@ const StoryGroup = React.memo(function StoryGroup({
   const Heading = headings[lastGroup];
 
   return (
-    <GroupWrapper
-      ref={measureRef}
-      style={{ width: hasChildren ? undefined : "100%" }}
-    >
-      <Heading
-        css={{
-          margin:
-            lastGroup > 1
-              ? `0 0 $4 0 !important`
-              : hasChildren
-              ? `$4 0 !important`
-              : `$4 0 0 0 !important`,
-        }}
-      >
+    <GroupWrapper ref={measureRef} style={{ width: "100%" }}>
+      <Heading css={{ margin: `$4 0 0 0 !important` }}>
         {groups[lastGroup]}
       </Heading>
 
-      {hasChildren && (
+      {false && hasChildren && (
         <StoryList>
           {shape.stories.map((story) => (
             <Story key={story} item={flatTree[story]} {...props} />

@@ -57,12 +57,12 @@ function createShapesForTree(
 
       storyChildren.forEach((child, index) => {
         if (child.type === "story" && child.story.type === "basic") {
-          // acc[child.id] = shapeUtils.docs.getShape({
-          //   ...child,
-          //   childIndex: index,
-          //   grouping: child.story.grouping.split("/"),
-          //   // size: [800, 400], // TODO for prod we should inject actual size so we don't have to render multiple times
-          // });
+          acc[child.id] = shapeUtils.docs.getShape({
+            ...child,
+            childIndex: index,
+            grouping: child.story.grouping.split("/"),
+            // size: [800, 400], // TODO for prod we should inject actual size so we don't have to render multiple times
+          });
           group.stories.push(child.id);
         }
       });

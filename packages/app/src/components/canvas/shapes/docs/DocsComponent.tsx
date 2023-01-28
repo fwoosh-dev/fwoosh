@@ -11,6 +11,9 @@ import { ExternalLink } from "react-feather";
 import { Link } from "react-router-dom";
 import { CanvasMeta } from "../../constants";
 import { StoryData } from "@fwoosh/types";
+import { tree } from "@fwoosh/app/stories";
+import { useId } from "@radix-ui/react-id";
+import { useRender } from "../../../../hooks/useRender";
 
 const ItemWrapper = styled("div", {
   borderRadius: "$round",
@@ -48,37 +51,39 @@ const StoryWrapper = styled("div", {
   width: "max-content",
 });
 
+const StoryDiv = React.memo(({ story }: { story: StoryData }) => {
+  const id = useId();
+  const { ref } = useRender({ id, slug: story.slug });
+
+  return <div ref={ref} />;
+});
+
 const Story = React.memo(
   ({
     item,
-    hasBeenMeasured,
     storyId,
-    tree,
+    shape,
   }: {
     item: StoryData;
     hasBeenMeasured: boolean;
+    shape: DocsShape;
   } & CanvasMeta) => {
     const { component: Component, grouping, slug, title } = item;
     const groups = grouping.split("/");
     const [measureRef, bounds] = useMeasure();
 
-    if (!hasBeenMeasured && bounds.height > 0) {
-      machine.send("UPDATE_DIMENSIONS", {
-        id: item.slug,
-        width: bounds.width,
-        height: bounds.height,
-      });
-
-      // if (item.slug === storyId) {
-      //   machine.send("CENTER_SHAPE", {
-      //     id: item.slug,
-      //     client: {
-      //       height: containerRef.current?.clientHeight,
-      //       width: containerRef.current?.clientWidth,
-      //     },
-      //   });
-      // }
-    }
+    React.useEffect(() => {
+      if (bounds.height > 0 && shape.size[0] == 0) {
+        const timeout = setTimeout(() => {
+          machine.send("UPDATE_DIMENSIONS", {
+            id: item.slug,
+            width: bounds.width,
+            height: bounds.height,
+          });
+        }, 2000);
+        return () => clearTimeout(timeout);
+      }
+    }, [bounds.height, bounds.width, item.slug, shape.size[0]]);
 
     return (
       <React.Suspense fallback={<Spinner delay={1000} />}>
@@ -100,8 +105,7 @@ const Story = React.memo(
           </StoryTitle>
 
           <StoryWrapper>
-            {/* todo need to use story component that render stories elsewhere */}
-            <Component />
+            <StoryDiv story={item} />
           </StoryWrapper>
         </ItemWrapper>
       </React.Suspense>
@@ -114,7 +118,7 @@ export const DocsComponent = TLShapeUtil.Component<
   HTMLDivElement,
   CanvasMeta
 >(({ shape, events, meta }, ref) => {
-  const item = flattenTree(meta.tree)[shape.id];
+  const item = flattenTree(tree)[shape.id];
 
   if (!item) {
     return (
@@ -126,7 +130,12 @@ export const DocsComponent = TLShapeUtil.Component<
 
   return (
     <HTMLContainer ref={ref} {...events}>
-      <Story item={item} {...meta} hasBeenMeasured={shape.hasBeenMeasured} />;
+      <Story
+        item={item}
+        {...meta}
+        hasBeenMeasured={shape.hasBeenMeasured}
+        shape={shape}
+      />
     </HTMLContainer>
   );
 });

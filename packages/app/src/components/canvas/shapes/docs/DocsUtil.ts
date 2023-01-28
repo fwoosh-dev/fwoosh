@@ -31,7 +31,7 @@ export class DocsUtil extends TLShapeUtil<DocsShape, HTMLDivElement> {
       ...props,
       type: "docs",
       parentId: "canvas",
-      size: [200, 100],
+      size: [0, 0],
       point: [0, 0],
       hasBeenMeasured: false,
       rotation: 0,
