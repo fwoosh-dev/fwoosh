@@ -8,6 +8,31 @@ import {
 } from "@tldraw/core";
 import { machine } from "./machine.js";
 import { shapeUtils } from "./shapes";
+import { styled } from "@fwoosh/styling";
+import { IconButton, Tooltip } from "@fwoosh/components";
+import { Minus, Plus, RotateCw } from "react-feather";
+import { useStoryId } from "@fwoosh/hooks";
+
+const Wrapper = styled("div", {
+  position: "relative",
+  height: "100%",
+  width: "100%",
+});
+
+const ViewControls = styled("div", {
+  position: "absolute",
+  top: 0,
+  right: 0,
+  display: "flex",
+  alignItems: "center",
+  flexDirection: "column",
+  gap: "$2",
+  margin: "$3 $2",
+  pointerEvents: "auto",
+  zIndex: 100,
+  background: "$gray0",
+  padding: "$2",
+});
 
 const onPinch: TLPinchEventHandler = (info, e) => {
   machine.send("PINCHED", info);
@@ -15,6 +40,22 @@ const onPinch: TLPinchEventHandler = (info, e) => {
 
 const onPan: TLWheelEventHandler = (info, e) => {
   machine.send("PANNED", info);
+};
+
+const layout = () => {
+  machine.send("LAYOUT_BOXES");
+};
+
+const zoomIn = () => {
+  machine.send("ZOOMED_IN");
+};
+
+const zoomOut = () => {
+  machine.send("ZOOMED_OUT");
+};
+
+const zoomReset = () => {
+  machine.send("ZOOMED_RESET");
 };
 
 const onKeyDown: TLKeyboardEventHandler = (key, info, e) => {
@@ -58,41 +99,45 @@ const onKeyUp: TLKeyboardEventHandler = (key, info, e) => {
 export const Canvas = React.memo(
   ({ appState }: { appState: typeof machine }) => {
     const containerRef = React.useRef<HTMLDivElement>(null);
+    const storyId = useStoryId();
 
-    // Prevent browser from navigating back/forward when
-    // the user scrolls left/right on the timeline.
     React.useEffect(() => {
-      const { current } = containerRef;
-
-      if (!current) {
-        return;
-      }
-
-      function cancelZoom(e: WheelEvent) {
-        e.preventDefault();
-      }
-
-      // We need to use the `passive: false` option to prevent the default
-      // behavior of the event. Without this the browser will still zoom
-      // in/out on the page.
-      document.addEventListener("wheel", cancelZoom, { passive: false });
-
-      return () => {
-        document.removeEventListener("wheel", cancelZoom);
-      };
+      const timeout = setTimeout(layout, 5000);
+      return () => clearTimeout(timeout);
     }, []);
 
     return (
-      <Renderer
-        containerRef={containerRef}
-        page={appState.data.page}
-        pageState={appState.data.pageState}
-        shapeUtils={shapeUtils}
-        onKeyDown={onKeyDown}
-        onKeyUp={onKeyUp}
-        onPinch={onPinch}
-        onPan={onPan}
-      />
+      <Wrapper ref={containerRef}>
+        <Renderer
+          theme={{ background: "transparent" }}
+          page={appState.data.page}
+          pageState={appState.data.pageState}
+          shapeUtils={shapeUtils}
+          onKeyDown={onKeyDown}
+          onKeyUp={onKeyUp}
+          onPinch={onPinch}
+          onPan={onPan}
+          meta={{ storyId, containerRef }}
+        />
+
+        <ViewControls>
+          <Tooltip side="left" message="Zoom in">
+            <IconButton onClick={zoomIn}>
+              <Plus />
+            </IconButton>
+          </Tooltip>
+          <Tooltip side="left" message="Zoom out">
+            <IconButton onClick={zoomOut}>
+              <Minus />
+            </IconButton>
+          </Tooltip>
+          <Tooltip side="left" message="Reset zoom">
+            <IconButton onClick={zoomReset}>
+              <RotateCw />
+            </IconButton>
+          </Tooltip>
+        </ViewControls>
+      </Wrapper>
     );
   }
 );

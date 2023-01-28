@@ -141,43 +141,39 @@ function ViewportSize({
   );
 }
 
-export const viewport = (
-  Story: () => any,
-  slug: string,
-  params: StoryParameters
-) => () => {
-  const pathname =
-    typeof window !== "undefined" ? window.location.pathname : "";
-  const isStory = pathname.includes("/story/");
-  const [currentSizes, setCurrentSizes] = useCurrentSize(
-    params?.viewport?.defaultSize
-  );
+export const viewport =
+  (Story: () => any, slug: string, params: StoryParameters) => () => {
+    const pathname =
+      typeof window !== "undefined" ? window.location.pathname : "";
+    const isStory = pathname.includes("/story/");
+    const [currentSizes, setCurrentSizes] = useCurrentSize(
+      params?.viewport?.defaultSize
+    );
 
-  if (isStory || currentSizes.length === 0) {
-    return <Story />;
-  }
+    if (isStory || currentSizes.length === 0) {
+      return <Story />;
+    }
 
-  return (
-    <Wrapper>
-      {currentSizes.map((size, index) => (
-        <ViewportSize
-          key={size.name}
-          size={size}
-          slug={slug}
-          onSizeChange={(size) => {
-            let newSizes = [...currentSizes];
+    return (
+      <Wrapper>
+        {currentSizes.map((size, index) => (
+          <ViewportSize
+            key={size.name}
+            size={size}
+            slug={slug}
+            onSizeChange={(size) => {
+              let newSizes = [...currentSizes];
 
-            if (size) {
-              newSizes[index] = size;
-            } else {
-              newSizes.splice(index, 1);
-            }
+              if (size) {
+                newSizes[index] = size;
+              } else {
+                newSizes.splice(index, 1);
+              }
 
-            console.log({ currentSizes, newSizes, size });
-            setCurrentSizes(newSizes);
-          }}
-        />
-      ))}
-    </Wrapper>
-  );
-};
+              setCurrentSizes(newSizes);
+            }}
+          />
+        ))}
+      </Wrapper>
+    );
+  };

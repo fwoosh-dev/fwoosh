@@ -3,6 +3,10 @@ import Vec from "@tldraw/vec";
 import type { Action } from "../constants";
 import { mutables } from "../mutables.js";
 
+export const zoomReset: Action = (data) => {
+  data.pageState.camera.zoom = 1;
+};
+
 export const zoomIn: Action = (data) => {
   const { camera } = data.pageState;
   const i = Math.round((data.pageState.camera.zoom * 100) / 25);

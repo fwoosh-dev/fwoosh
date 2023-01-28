@@ -1,0 +1,113 @@
+// Vitest Snapshot v1
+
+exports[`packShapesIntoGroups > it should work long and wide children 1`] = `
+{
+  "Components": {
+    "childIndex": 0,
+    "children": [
+      "Components-Button",
+      "Components-Text",
+    ],
+    "contentSize": [
+      148.421875,
+      70,
+    ],
+    "hasBeenMeasured": true,
+    "id": "Components",
+    "name": "Components",
+    "parentId": "canvas",
+    "point": [
+      0,
+      0,
+    ],
+    "rotation": 0,
+    "size": [
+      633.4921875,
+      1145,
+    ],
+    "stories": [],
+    "type": "group",
+  },
+  "Components-Button": {
+    "childIndex": 0,
+    "children": [
+      "Components-Button-Button",
+    ],
+    "contentSize": [
+      89.7265625,
+      70,
+    ],
+    "hasBeenMeasured": true,
+    "id": "Components-Button",
+    "name": "Components-Button",
+    "parentId": "canvas",
+    "point": [
+      366.015625,
+      86,
+    ],
+    "rotation": 0,
+    "size": [
+      267.4765625,
+      602,
+    ],
+    "stories": [],
+    "type": "group",
+  },
+  "Components-Button-Button": {
+    "childIndex": 0,
+    "children": [],
+    "contentSize": [
+      267.4765625,
+      516,
+    ],
+    "hasBeenMeasured": true,
+    "id": "Components-Button-Button",
+    "name": "Components-Button-Button",
+    "parentId": "canvas",
+    "point": [
+      366.015625,
+      172,
+    ],
+    "rotation": 0,
+    "size": [
+      267.4765625,
+      516,
+    ],
+    "stories": [
+      "components-button-button--playground",
+      "components-button-button--with-disabled",
+      "components-button-button--with-style",
+      "components-button-button--without-style",
+    ],
+    "type": "group",
+  },
+  "Components-Text": {
+    "childIndex": 1,
+    "children": [],
+    "contentSize": [
+      350.015625,
+      1059,
+    ],
+    "hasBeenMeasured": true,
+    "id": "Components-Text",
+    "name": "Components-Text",
+    "parentId": "canvas",
+    "point": [
+      0,
+      86,
+    ],
+    "rotation": 0,
+    "size": [
+      350.015625,
+      1059,
+    ],
+    "stories": [
+      "components-text--headings",
+      "components-text--unordered-list",
+      "components-text--ordered-list",
+      "components-text--anchor",
+    ],
+    "type": "group",
+  },
+}
+`;

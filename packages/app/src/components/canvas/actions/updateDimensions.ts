@@ -1,5 +1,5 @@
-import type { Action } from "../constants";
-import potpack from "potpack";
+import { Action } from "../constants";
+import { packShapesIntoGroups } from "../utils";
 
 interface UpdateDimensionsPayload {
   id: string;
@@ -11,23 +11,25 @@ export const updateDimensions: Action = (
   data,
   payload: UpdateDimensionsPayload
 ) => {
-  Object.assign(data.page.shapes[payload.id], {
+  const shape = data.page.shapes[payload.id];
+
+  Object.assign(shape, {
     size: [payload.width, payload.height],
+    hasBeenMeasured: true,
   });
 
-  const shapes = Object.values(data.page.shapes).map((i) => {
-    return {
-      h: i.size[1] + 16,
-      w: i.size[0] + 16,
-      x: i.point[0],
-      y: i.point[1],
-      id: i.id,
-    };
+  if (shape.type === "group") {
+    Object.assign(shape, {
+      contentSize: [payload.width, payload.height],
+    });
+  }
+};
+
+export const layoutBoxes: Action = (data) => {
+  Object.values(data.page.shapes).forEach((shape) => {
+    shape.point = [0, 0];
+    shape.size = "contentSize" in shape ? shape.contentSize : shape.size;
   });
 
-  potpack(shapes);
-
-  shapes.forEach((i) => {
-    data.page.shapes[i.id].point = [i.x, i.y];
-  });
+  packShapesIntoGroups(data.meta.tree, data.page.shapes);
 };

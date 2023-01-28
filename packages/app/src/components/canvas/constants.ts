@@ -1,15 +1,17 @@
+import { createContext } from "react";
 import { tree } from "@fwoosh/app/stories";
 import type { S } from "@state-designer/react";
-import type {
+import {
   TLBinding,
   TLPage,
   TLPageState,
   TLPerformanceMode,
   TLSnapLine,
 } from "@tldraw/core";
-import { StorySidebarChildItem } from "@fwoosh/types";
+import { StorySidebarChildItem, StoryTree } from "@fwoosh/types";
+
 import { Shape, shapeUtils } from "./shapes";
-import { createContext } from "react";
+import { createGroup } from "./utils";
 
 export const VERSION = 1;
 export const PERSIST_DATA = true;
@@ -22,7 +24,7 @@ function createShapesForTree(
   map: Record<string, Shape> = {},
   options: { shape: "docs" | "workbench" }
 ): Record<string, Shape> {
-  return items.reduce((acc, item, index) => {
+  const shapes = items.reduce((acc, item, index) => {
     if (item.name === "Canvas" || item.name === "Changelog") {
       return acc;
     }
@@ -37,30 +39,51 @@ function createShapesForTree(
       acc[item.id] = shapeUtils.docs.getShape({
         ...item,
         childIndex,
+        grouping: item.story.grouping.split("/"),
         // size: [800, 400], // TODO for prod we should inject actual size so we don't have to render multiple times
       });
     } else if (item.type === "tree") {
       const storyChildren = item.children.filter(
         (child) => child.type === "story" && child.story.type === "basic"
       );
+      const group = createGroup({
+        id: item.id,
+        childIndex: index,
+      });
+
+      acc[item.id] = group;
+
+      // PROBLEM: when there are both stories and groups, the stories are overlapping the groups
 
       storyChildren.forEach((child, index) => {
-        acc[child.id] = shapeUtils.docs.getShape({
-          ...child,
-          childIndex: index,
-          // size: [800, 400], // TODO for prod we should inject actual size so we don't have to render multiple times
-        });
+        if (child.type === "story" && child.story.type === "basic") {
+          acc[child.id] = shapeUtils.docs.getShape({
+            ...child,
+            childIndex: index,
+            grouping: child.story.grouping.split("/"),
+            // size: [800, 400], // TODO for prod we should inject actual size so we don't have to render multiple times
+          });
+          group.stories.push(child.id);
+        }
       });
 
       const otherChildren = item.children.filter(
-        (child) => !(child.type === "story" && child.story.type === "basic")
+        (child): child is StoryTree => child.type === "tree"
       );
+
+      otherChildren.forEach((child) => {
+        group.childIds.push(child.id);
+      });
 
       createShapesForTree(otherChildren, acc, options);
     }
 
     return acc;
   }, map);
+
+  // packShapesIntoGroups(items, shapes);
+
+  return shapes;
 }
 
 export const INITIAL_PAGE: TLPage<Shape, TLBinding> = {
@@ -92,7 +115,9 @@ export const INITIAL_DATA = {
     snapLines: [] as TLSnapLine[],
   },
   meta: {
-    isDarkMode: false,
+    storyId: "",
+    containerRef: { current: null },
+    tree,
   },
   performanceMode: undefined as TLPerformanceMode | undefined,
 };
@@ -121,3 +146,9 @@ export const CanvasContext = createContext<{
 }>({
   containerRef: { current: null },
 });
+
+export type CanvasMeta = {
+  storyId: string | undefined;
+  containerRef: React.MutableRefObject<HTMLElement | null>;
+  tree: typeof tree;
+};
