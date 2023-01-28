@@ -47,7 +47,7 @@ function createShapesForTree(
         (child) => child.type === "story" && child.story.type === "basic"
       );
       const group = createGroup({
-        ...item,
+        id: item.id,
         childIndex: index,
       });
 
@@ -72,7 +72,7 @@ function createShapesForTree(
       );
 
       otherChildren.forEach((child) => {
-        group.children.push(child.id);
+        group.childIds.push(child.id);
       });
 
       createShapesForTree(otherChildren, acc, options);

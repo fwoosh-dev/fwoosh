@@ -16,7 +16,7 @@ export function createGroup(
     type: "group",
     parentId: "canvas",
     rotation: 0,
-    children: [],
+    childIds: [],
     stories: [],
     size: [0, 0],
     contentSize: [0, 0],
@@ -63,7 +63,7 @@ function updateChildPositions(
   shapes: Record<string, Shape>,
   moveDistance: number[]
 ) {
-  group.children.forEach((child) => {
+  group.childIds.forEach((child) => {
     const childShape = shapes[child];
 
     if (!childShape) {
@@ -138,7 +138,7 @@ export function packShapesIntoGroups(
       const childrenBoxes = packShapesIntoGroups(item.children, shapes);
       const data = packGroup(
         [
-          ...(shape.children.length > 0
+          ...(shape.childIds.length > 0
             ? [{ ...shape, size: shape.contentSize }]
             : []),
           ...childrenBoxes,
