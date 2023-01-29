@@ -41,7 +41,7 @@ export function getGroupBounds(shape: GroupShape): TLBounds {
 
 export const getBounds = {
   group: getGroupBounds,
-  docs: getGroupBounds,
+  story: getGroupBounds,
 };
 
 function convertShapesToPotpackData(data: Shape[]) {

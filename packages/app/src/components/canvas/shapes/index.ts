@@ -1,11 +1,11 @@
-import { DocsShape, DocsUtil } from "./docs";
+import { StoryShape, StoryUtil } from "./story";
 import { GroupShape, GroupUtil } from "./group";
 
-export * from "./docs";
+export * from "./story";
 
-export type Shape = DocsShape | GroupShape;
+export type Shape = StoryShape | GroupShape;
 
 export const shapeUtils = {
-  docs: new DocsUtil(),
+  story: new StoryUtil(),
   group: new GroupUtil(),
 };

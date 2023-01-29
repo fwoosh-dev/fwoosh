@@ -8,14 +8,13 @@ import { HTMLContainer, TLShapeUtil } from "@tldraw/core";
 import * as React from "react";
 import { ExternalLink } from "react-feather";
 import { Link } from "react-router-dom";
-import useMeasure from "react-use-measure";
 import { useId } from "@radix-ui/react-id";
 
 import { CanvasMeta } from "../../constants";
-import { machine } from "../../machine";
 import { GroupShape } from "./GroupShape";
 import { useRender } from "../../../../hooks/useRender";
 import { StoryDocsPageContent } from "../../../StoryDocsPage";
+import { useShapeMeasure } from "../useShapeMeasure";
 
 const GroupWrapper = styled("div", {
   pointerEvents: "auto",
@@ -130,7 +129,6 @@ const StoryGroup = React.memo(function StoryGroup({
   mode,
   ...props
 }: { shape: GroupShape } & CanvasMeta) {
-  const [measureRef, bounds] = useMeasure();
   const groups = shape.name.split("-");
   const lastGroup = groups.length - 1;
   const Heading = headings[lastGroup];
@@ -149,36 +147,11 @@ const StoryGroup = React.memo(function StoryGroup({
     };
   }, [shape.stories]);
 
-  React.useEffect(() => {
-    if (shape.visibility === "measuring" && bounds.height > 0) {
-      console.log("UPDATE_DIMENSIONS", {
-        id: shape.id,
-        width: bounds.width,
-        height: bounds.height,
-      });
-      machine.send("UPDATE_DIMENSIONS", {
-        id: shape.id,
-        width: bounds.width,
-        height: bounds.height,
-      });
-    }
-  }, [bounds.height, bounds.width, shape.id, shape.visibility]);
+  const measureRef = useShapeMeasure(shape);
 
   if (shape.visibility === "hidden") {
     return null;
   }
-
-  if (shape.visibility === "measuring") {
-    console.log("measuring", shape);
-  }
-
-  // if (mode === "docs" && stories.length > 0) {
-  //   return (
-  //     <GroupWrapper ref={measureRef}>
-  //       <StoryDocsPage name={groups[lastGroup]} stories={stories} />
-  //     </GroupWrapper>
-  //   );
-  // }
 
   if (mode === "docs") {
     return (
@@ -234,7 +207,9 @@ export const GroupComponent = TLShapeUtil.Component<GroupShape, HTMLDivElement>(
   ({ shape, events, meta }, ref) => {
     return (
       <HTMLContainer ref={ref} {...events}>
-        <StoryGroup {...meta} shape={shape} />
+        {shape.visibility !== "hidden" && (
+          <StoryGroup {...meta} shape={shape} />
+        )}
       </HTMLContainer>
     );
   }

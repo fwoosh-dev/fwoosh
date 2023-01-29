@@ -114,11 +114,13 @@ export const Canvas = React.memo(
   }) => {
     const containerRef = React.useRef<HTMLDivElement>(null);
     const storyId = useStoryId();
-    const hasMeasured = Object.values(appState.data.page.shapes).every(
-      (s) => s.visibility === "visible"
+    const toMeasure = Object.values(appState.data.page.shapes).length;
+    const hasMeasured = Object.values(appState.data.page.shapes).filter(
+      (s) => s.size[0] > 0
     );
+    const doneMeasuring = hasMeasured.length === toMeasure;
 
-    if (hasMeasured === true) {
+    if (doneMeasuring) {
       // This log is used to communicate the search index to the
       // built app.
       console.log("window.FWOOSH_CANVAS_SHAPE", appState.data.page.shapes);
@@ -160,13 +162,13 @@ export const Canvas = React.memo(
               </IconButton>
             </Tooltip>
           </ViewControls>
-          {!hasMeasured && (
+          {/* {!doneMeasuring && (
             <Loading>
-              <Spinner delay={0} size={8}>
-                Measuring canvas...
+              <Spinner delay={500} size={8}>
+                Measuring shapes ({hasMeasured.length + 1} / {toMeasure})
               </Spinner>
             </Loading>
-          )}
+          )} */}
         </Wrapper>
       </MDXProvider>
     );

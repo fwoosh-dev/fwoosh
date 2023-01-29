@@ -43,21 +43,17 @@ export const updateDimensions: Action = (
       visibility: "measuring",
     });
   } else {
-    console.log("Done measuring");
     Object.values(data.page.shapes).forEach((shape) => {
       shape.point = [0, 0];
       shape.size = "contentSize" in shape ? shape.contentSize : shape.size;
     });
 
     packShapesIntoGroups(data.meta.tree, data.page.shapes);
-    console.log("Done packing");
 
     Object.values(data.page.shapes).forEach((shape) => {
       Object.assign(shape, {
         visibility: "visible",
       });
     });
-
-    console.log("Done set all visible");
   }
 };

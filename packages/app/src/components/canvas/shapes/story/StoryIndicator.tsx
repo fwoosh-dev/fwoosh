@@ -1,8 +1,8 @@
 import { TLShapeUtil } from "@tldraw/core";
 import * as React from "react";
-import type { DocsShape } from "./DocsShape.js";
+import type { StoryShape } from "./StoryShape.js";
 
-export const DocsIndicator = TLShapeUtil.Indicator<DocsShape>(({ shape }) => {
+export const StoryIndicator = TLShapeUtil.Indicator<StoryShape>(({ shape }) => {
   return (
     <rect
       fill="none"

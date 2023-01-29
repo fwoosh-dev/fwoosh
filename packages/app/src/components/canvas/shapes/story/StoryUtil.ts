@@ -1,15 +1,15 @@
 import { TLBounds, TLShapeUtil, Utils } from "@tldraw/core";
 
-import { DocsComponent } from "./DocsComponent.js";
-import { DocsIndicator } from "./DocsIndicator.js";
-import type { DocsShape } from "./DocsShape.js";
+import { StoryComponent } from "./StoryComponent.js";
+import { StoryIndicator } from "./StoryIndicator.js";
+import type { StoryShape } from "./StoryShape.js";
 
-export class DocsUtil extends TLShapeUtil<DocsShape, HTMLDivElement> {
-  Component = DocsComponent;
+export class StoryUtil extends TLShapeUtil<StoryShape, HTMLDivElement> {
+  Component = StoryComponent;
 
-  Indicator = DocsIndicator;
+  Indicator = StoryIndicator;
 
-  getBounds = (shape: DocsShape): TLBounds => {
+  getBounds = (shape: StoryShape): TLBounds => {
     const [width, height] = shape.size;
 
     const bounds = {
@@ -25,11 +25,11 @@ export class DocsUtil extends TLShapeUtil<DocsShape, HTMLDivElement> {
   };
 
   getShape = (
-    props: Pick<DocsShape, "name" | "id" | "childIndex" | "grouping">
-  ): DocsShape => {
+    props: Pick<StoryShape, "name" | "id" | "childIndex" | "grouping">
+  ): StoryShape => {
     return {
       ...props,
-      type: "docs",
+      type: "story",
       parentId: "canvas",
       size: [0, 0],
       point: [0, 0],

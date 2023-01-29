@@ -1,12 +1,10 @@
 import { flattenTree } from "@fwoosh/utils";
 import { HTMLContainer, TLShapeUtil } from "@tldraw/core";
 import * as React from "react";
-import useMeasure from "react-use-measure";
 import { styled } from "@fwoosh/styling";
 import { IconButton, Spinner, Tooltip } from "@fwoosh/components";
 
-import { DocsShape } from "./DocsShape";
-import { machine } from "../../machine";
+import { StoryShape } from "./StoryShape";
 import { ExternalLink } from "react-feather";
 import { Link } from "react-router-dom";
 import { CanvasMeta } from "../../constants";
@@ -14,6 +12,7 @@ import { StoryData } from "@fwoosh/types";
 import { tree } from "@fwoosh/app/stories";
 import { useId } from "@radix-ui/react-id";
 import { useRender } from "../../../../hooks/useRender";
+import { useShapeMeasure } from "../useShapeMeasure";
 
 const ItemWrapper = styled("div", {
   borderRadius: "$round",
@@ -54,13 +53,6 @@ const StoryWrapper = styled("div", {
   width: "max-content",
 });
 
-const StoryDiv = React.memo(({ story }: { story: StoryData }) => {
-  const id = useId();
-  const { ref } = useRender({ id, slug: story.slug });
-
-  return <div ref={ref} />;
-});
-
 const Story = React.memo(
   ({
     item,
@@ -68,24 +60,13 @@ const Story = React.memo(
     shape,
   }: {
     item: StoryData;
-    shape: DocsShape;
+    shape: StoryShape;
   } & CanvasMeta) => {
     const { grouping, slug, title } = item;
     const groups = grouping.split("/");
-    const [measureRef, bounds] = useMeasure();
-
-    React.useEffect(() => {
-      if (bounds.height > 0 && shape.size[0] == 0) {
-        const timeout = setTimeout(() => {
-          machine.send("UPDATE_DIMENSIONS", {
-            id: item.slug,
-            width: bounds.width,
-            height: bounds.height,
-          });
-        }, 8_000);
-        return () => clearTimeout(timeout);
-      }
-    }, [bounds.height, bounds.width, item.slug, shape.size[0]]);
+    const id = useId();
+    const { ref, hasRendered } = useRender({ id, slug: item.slug });
+    const measureRef = useShapeMeasure(shape, hasRendered);
 
     return (
       <React.Suspense fallback={<Spinner delay={1000} />}>
@@ -107,7 +88,7 @@ const Story = React.memo(
           </StoryTitle>
 
           <StoryWrapper>
-            <StoryDiv story={item} />
+            <div ref={ref} />
           </StoryWrapper>
         </ItemWrapper>
       </React.Suspense>
@@ -115,8 +96,8 @@ const Story = React.memo(
   }
 );
 
-export const DocsComponent = TLShapeUtil.Component<
-  DocsShape,
+export const StoryComponent = TLShapeUtil.Component<
+  StoryShape,
   HTMLDivElement,
   CanvasMeta
 >(({ shape, events, meta }, ref) => {
@@ -132,7 +113,9 @@ export const DocsComponent = TLShapeUtil.Component<
 
   return (
     <HTMLContainer ref={ref} {...events}>
-      <Story item={item} {...meta} shape={shape} />
+      {shape.visibility !== "hidden" && (
+        <Story item={item} {...meta} shape={shape} />
+      )}
     </HTMLContainer>
   );
 });

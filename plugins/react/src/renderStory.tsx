@@ -11,9 +11,8 @@ function reverse<T>(arr: T[]) {
 }
 
 function useDecorators(story: StoryData) {
-  const [decorators, setDecorators] = React.useState<
-    ReactStory<any>["decorators"]
-  >();
+  const [decorators, setDecorators] =
+    React.useState<ReactStory<any>["decorators"]>();
 
   React.useLayoutEffect(() => {
     async function getDecorators() {
@@ -73,11 +72,15 @@ export function render(
   function Fallback() {
     React.useEffect(() => {
       onStart();
-      return () => {
-        onComplete();
-      };
     });
     return <Spinner delay={300} />;
+  }
+
+  function OnStart() {
+    React.useEffect(() => {
+      onComplete();
+    });
+    return <></>;
   }
 
   try {
@@ -87,6 +90,7 @@ export function render(
           <ErrorBoundary>
             <App slug={slug} params={params} />
           </ErrorBoundary>
+          <OnStart />
         </Suspense>
       </TooltipPrimitive.Provider>,
       el

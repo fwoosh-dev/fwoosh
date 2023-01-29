@@ -93,7 +93,9 @@ export const Spinner = ({
           height: `$${size}`,
         }}
       />
-      {children && <Message>{children}</Message>}
+      {children && (
+        <Message css={{ opacity: show ? 1 : 0 }}>{children}</Message>
+      )}
     </Wrapper>
   );
 };

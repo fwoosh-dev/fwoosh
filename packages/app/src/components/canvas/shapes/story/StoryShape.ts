@@ -1,7 +1,7 @@
 import type { TLShape } from "@tldraw/core";
 
-export interface DocsShape extends TLShape {
-  type: "docs";
+export interface StoryShape extends TLShape {
+  type: "story";
   grouping: string[];
   size: number[];
   visibility: "hidden" | "measuring" | "visible";

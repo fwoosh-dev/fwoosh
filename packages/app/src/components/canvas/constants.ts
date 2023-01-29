@@ -45,7 +45,7 @@ function createShapesForTree(
 
       // Only show render stories as nodes in workbench mode
       if (options.shape === "workbench") {
-        acc[item.id] = shapeUtils.docs.getShape({
+        acc[item.id] = shapeUtils.story.getShape({
           ...item,
           childIndex,
           grouping: item.story.grouping.split("/"),
@@ -62,7 +62,7 @@ function createShapesForTree(
       item.children.forEach((child, index) => {
         if (child.type === "story") {
           if (child.story.type === "basic" && options.shape === "workbench") {
-            acc[child.id] = shapeUtils.docs.getShape({
+            acc[child.id] = shapeUtils.story.getShape({
               ...child,
               childIndex: index,
               grouping: child.story.grouping.split("/"),

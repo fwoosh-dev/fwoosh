@@ -32,8 +32,6 @@ export function DocsCanvas() {
     }
   }, [storyId]);
 
-  console.log(appState.data.page.shapes);
-
   return (
     <CanvasContext.Provider value={{ containerRef }}>
       <DocsToolbar />
