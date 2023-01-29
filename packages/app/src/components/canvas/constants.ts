@@ -12,6 +12,7 @@ import { StorySidebarChildItem, StoryTree } from "@fwoosh/types";
 
 import { Shape, shapeUtils } from "./shapes/index.js";
 import { createGroup } from "./utils";
+import { GroupShape } from "./shapes/group/GroupShape.js";
 
 export const VERSION = 1;
 export const PERSIST_DATA = true;
@@ -42,15 +43,15 @@ function createShapesForTree(
         return acc;
       }
 
-      acc[item.id] = shapeUtils.docs.getShape({
-        ...item,
-        childIndex,
-        grouping: item.story.grouping.split("/"),
-      });
+      // Only show render stories as nodes in workbench mode
+      if (options.shape === "workbench") {
+        acc[item.id] = shapeUtils.docs.getShape({
+          ...item,
+          childIndex,
+          grouping: item.story.grouping.split("/"),
+        });
+      }
     } else if (item.type === "tree") {
-      const storyChildren = item.children.filter(
-        (child) => child.type === "story" && child.story.type === "basic"
-      );
       const group = createGroup({
         id: item.id,
         childIndex: index,
@@ -60,13 +61,25 @@ function createShapesForTree(
 
       item.children.forEach((child, index) => {
         if (child.type === "story") {
-          if (child.story.type === "basic") {
+          if (child.story.type === "basic" && options.shape === "workbench") {
             acc[child.id] = shapeUtils.docs.getShape({
               ...child,
               childIndex: index,
               grouping: child.story.grouping.split("/"),
             });
             group.stories.push(child.id);
+            return;
+          }
+
+          if (child.story.type === "basic" && options.shape === "docs") {
+            group.stories.push(child.id);
+            return;
+          }
+
+          if (child.story.type === "mdx" && options.shape === "docs") {
+            // ???
+            group.stories.push(child.id);
+            return;
           }
         } else {
           group.childIds.push(child.id);
@@ -123,6 +136,7 @@ export const INITIAL_DATA = {
     storyId: "",
     containerRef: { current: null },
     tree,
+    hasMeasured: false,
   },
   performanceMode: undefined as TLPerformanceMode | undefined,
 };
@@ -158,5 +172,5 @@ export type CanvasMeta = {
   storyId: string | undefined;
   containerRef: React.MutableRefObject<HTMLElement | null>;
   tree: typeof tree;
-  hasMeasured: boolean;
+  mode: "docs" | "workbench";
 };

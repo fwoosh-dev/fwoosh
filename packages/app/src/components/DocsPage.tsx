@@ -6,9 +6,13 @@ import { Spinner, ErrorBoundary } from "@fwoosh/components";
 import { MDXPage } from "./MDXPage";
 import { StoryDocsPage } from "./StoryDocsPage";
 import { useDocsStoryGroup } from "../hooks/useDocsStoryGroup";
+import { useDocsPath } from "@fwoosh/hooks";
 
 const DocsContent = React.memo(() => {
   const [firstStory, ...restStories] = useDocsStoryGroup();
+  const docsPath = useDocsPath();
+  const nameParts = docsPath?.split("-") || [];
+  const name = nameParts[nameParts.length - 1];
 
   if (!firstStory) {
     return null;
@@ -20,6 +24,7 @@ const DocsContent = React.memo(() => {
 
   return (
     <StoryDocsPage
+      name={name}
       stories={[firstStory as StoryBasicTreeItem, ...restStories]}
     />
   );

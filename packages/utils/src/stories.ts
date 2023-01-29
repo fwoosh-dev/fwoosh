@@ -83,6 +83,22 @@ export const flattenTree = (tree: StorySidebarChildItem[]) => {
   return flatTree;
 };
 
+export const flattenTreeItems = (tree: StorySidebarChildItem[]) => {
+  const flatTree: Record<string, StorySidebarChildItem> = {};
+
+  function flatten(item: StorySidebarChildItem) {
+    if (item.type === "story") {
+      flatTree[item.id] = item;
+    } else if (item.type === "tree") {
+      item.children.forEach(flatten);
+    }
+  }
+
+  tree.forEach(flatten);
+
+  return flatTree;
+};
+
 export const getPreviousStory = (tree: StorySidebarChildItem[], id: string) => {
   const flatTree = Object.entries(flattenTree(tree));
   const currentIndex = flatTree.findIndex(([key]) => key === id);

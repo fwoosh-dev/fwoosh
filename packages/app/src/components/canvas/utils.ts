@@ -5,7 +5,6 @@ import { StorySidebarChildItem } from "@fwoosh/types";
 
 import { GroupShape } from "./shapes/group";
 import { Shape } from "./shapes";
-import { group } from "console";
 
 export function createGroup(
   props: Pick<GroupShape, "id" | "childIndex">
@@ -20,6 +19,7 @@ export function createGroup(
     stories: [],
     size: [0, 0],
     contentSize: [0, 0],
+    visibility: "hidden",
     point: [0, 0],
   };
 }

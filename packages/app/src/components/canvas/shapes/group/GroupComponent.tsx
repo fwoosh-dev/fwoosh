@@ -1,8 +1,8 @@
 import { tree } from "@fwoosh/app/stories";
-import { IconButton, Spinner, Tooltip } from "@fwoosh/components";
+import { IconButton, PageWrapper, Spinner, Tooltip } from "@fwoosh/components";
 import { styled } from "@fwoosh/styling";
-import { StoryData } from "@fwoosh/types/src";
-import { flattenTree } from "@fwoosh/utils";
+import { StoryTreeItem, StoryData } from "@fwoosh/types";
+import { flattenTree, flattenTreeItems } from "@fwoosh/utils";
 import { components } from "@fwoosh/components";
 import { HTMLContainer, TLShapeUtil } from "@tldraw/core";
 import * as React from "react";
@@ -15,6 +15,7 @@ import { CanvasMeta } from "../../constants";
 import { machine } from "../../machine";
 import { GroupShape } from "./GroupShape";
 import { useRender } from "../../../../hooks/useRender";
+import { StoryDocsPageContent } from "../../../StoryDocsPage";
 
 const GroupWrapper = styled("div", {
   pointerEvents: "auto",
@@ -126,43 +127,104 @@ const headings = [
 
 const StoryGroup = React.memo(function StoryGroup({
   shape,
-  hasMeasured,
+  mode,
   ...props
 }: { shape: GroupShape } & CanvasMeta) {
   const [measureRef, bounds] = useMeasure();
   const groups = shape.name.split("-");
   const lastGroup = groups.length - 1;
-  const hasChildren = shape.stories.length > 0;
-
-  React.useEffect(() => {
-    if (!hasMeasured && bounds.height > 0 && shape.size[0] == 0) {
-      const timeout = setTimeout(() => {
-        machine.send("UPDATE_DIMENSIONS", {
-          id: shape.id,
-          width: bounds.width,
-          height: bounds.height,
-        });
-      }, 2000);
-      return () => clearTimeout(timeout);
-    }
-  }, [bounds.height, bounds.width, shape.id]);
-
   const Heading = headings[lastGroup];
 
-  return (
-    <GroupWrapper ref={measureRef} style={{ width: "100%" }}>
-      <Heading css={{ margin: `$4 0 0 0 !important` }}>
-        {groups[lastGroup]}
-      </Heading>
+  const { basicStories, mdxStories } = React.useMemo(() => {
+    const flatTree = flattenTreeItems(tree);
+    const stories = shape.stories.map((id) => flatTree[id]);
 
-      {false && hasChildren && (
-        <StoryList>
-          {shape.stories.map((story) => (
-            <Story key={story} item={flatTree[story]} {...props} />
-          ))}
-        </StoryList>
-      )}
-    </GroupWrapper>
+    return {
+      basicStories: stories.filter(
+        (s) => s.type === "story" && s.story.type === "basic"
+      ),
+      mdxStories: stories.filter(
+        (s): s is StoryTreeItem => s.type === "story" && s.story.type === "mdx"
+      ),
+    };
+  }, [shape.stories]);
+
+  React.useEffect(() => {
+    if (shape.visibility === "measuring" && bounds.height > 0) {
+      console.log("UPDATE_DIMENSIONS", {
+        id: shape.id,
+        width: bounds.width,
+        height: bounds.height,
+      });
+      machine.send("UPDATE_DIMENSIONS", {
+        id: shape.id,
+        width: bounds.width,
+        height: bounds.height,
+      });
+    }
+  }, [bounds.height, bounds.width, shape.id, shape.visibility]);
+
+  if (shape.visibility === "hidden") {
+    return null;
+  }
+
+  if (shape.visibility === "measuring") {
+    console.log("measuring", shape);
+  }
+
+  // if (mode === "docs" && stories.length > 0) {
+  //   return (
+  //     <GroupWrapper ref={measureRef}>
+  //       <StoryDocsPage name={groups[lastGroup]} stories={stories} />
+  //     </GroupWrapper>
+  //   );
+  // }
+
+  if (mode === "docs") {
+    return (
+      <React.Suspense fallback={<Spinner />}>
+        <GroupWrapper ref={measureRef}>
+          {basicStories.length === 0 && (
+            <Heading css={{ margin: `$4 0 0 0 !important` }}>
+              {groups[lastGroup]}
+            </Heading>
+          )}
+
+          {basicStories.length > 0 && (
+            <StoryDocsPageContent
+              name={groups[lastGroup]}
+              stories={basicStories}
+            />
+          )}
+
+          {mdxStories.length > 0 && (
+            <StoryList>
+              {mdxStories.map((story) => {
+                if (story.story.type === "mdx") {
+                  return (
+                    <PageWrapper>
+                      <story.story.component />
+                    </PageWrapper>
+                  );
+                }
+
+                return null;
+              })}
+            </StoryList>
+          )}
+        </GroupWrapper>
+      </React.Suspense>
+    );
+  }
+
+  return (
+    <React.Suspense fallback={<Spinner />}>
+      <GroupWrapper ref={measureRef} style={{ width: "100%" }}>
+        <Heading css={{ margin: `$4 0 0 0 !important` }}>
+          {groups[lastGroup]}
+        </Heading>
+      </GroupWrapper>
+    </React.Suspense>
   );
 });
 

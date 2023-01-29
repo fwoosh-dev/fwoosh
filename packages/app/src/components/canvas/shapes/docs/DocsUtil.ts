@@ -33,6 +33,7 @@ export class DocsUtil extends TLShapeUtil<DocsShape, HTMLDivElement> {
       parentId: "canvas",
       size: [0, 0],
       point: [0, 0],
+      visibility: "hidden",
       rotation: 0,
     };
   };

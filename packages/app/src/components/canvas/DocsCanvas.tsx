@@ -9,18 +9,14 @@ import * as React from "react";
 import { useStateDesigner } from "@state-designer/react";
 
 import { DocsToolbar } from "../DocsToolbar";
-import { WorkbenchSidebarTree } from "../sidebar/WorkbenchSidebarTree";
 import { machine } from "./machine";
 import { Canvas } from "./Canvas";
-import { CanvasContext, INITIAL_WORKBENCH_PAGE } from "./constants";
+import { CanvasContext } from "./constants";
 import { useStoryId } from "@fwoosh/hooks";
+import { DocsSidebarTree } from "../sidebar/DocsSidebarTree";
 
-export function WorkbenchCanvas() {
-  const modifiedMachine = React.useMemo(() => {
-    machine.data = INITIAL_WORKBENCH_PAGE;
-    return machine;
-  }, []);
-  const appState = useStateDesigner(modifiedMachine);
+export function DocsCanvas() {
+  const appState = useStateDesigner(machine);
   const storyId = useStoryId();
   const containerRef = React.useRef<HTMLDivElement>(null);
 
@@ -36,6 +32,8 @@ export function WorkbenchCanvas() {
     }
   }, [storyId]);
 
+  console.log(appState.data.page.shapes);
+
   return (
     <CanvasContext.Provider value={{ containerRef }}>
       <DocsToolbar />
@@ -43,12 +41,12 @@ export function WorkbenchCanvas() {
         <Sidebar>
           <SidebarItems>
             <React.Suspense fallback={<Spinner delay={2000} size={8} />}>
-              <WorkbenchSidebarTree />
+              <DocsSidebarTree />
             </React.Suspense>
           </SidebarItems>
         </Sidebar>
         <Content ref={containerRef}>
-          <Canvas appState={appState} mode="workbench" />
+          <Canvas appState={appState} mode="docs" />
         </Content>
       </SidebarLayout>
     </CanvasContext.Provider>

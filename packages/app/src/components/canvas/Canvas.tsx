@@ -9,9 +9,10 @@ import {
 import { machine } from "./machine.js";
 import { shapeUtils } from "./shapes/index.js";
 import { styled } from "@fwoosh/styling";
-import { IconButton, Spinner, Tooltip } from "@fwoosh/components";
+import { components, IconButton, Spinner, Tooltip } from "@fwoosh/components";
 import { Minus, Plus, RotateCw } from "react-feather";
 import { useStoryId } from "@fwoosh/hooks";
+import { MDXProvider } from "@mdx-js/react";
 
 const Loading = styled("div", {
   position: "absolute",
@@ -49,10 +50,6 @@ const onPinch: TLPinchEventHandler = (info, e) => {
 
 const onPan: TLWheelEventHandler = (info, e) => {
   machine.send("PANNED", info);
-};
-
-const layout = () => {
-  machine.send("LAYOUT_BOXES");
 };
 
 const zoomIn = () => {
@@ -105,70 +102,73 @@ const onKeyUp: TLKeyboardEventHandler = (key, info, e) => {
   }
 };
 
+type MDXComponents = React.ComponentProps<typeof MDXProvider>["components"];
+
 export const Canvas = React.memo(
-  ({ appState }: { appState: typeof machine }) => {
-    const hasMeasured = Object.values(appState.data.page.shapes)[0].size[0] > 0;
-    const [isLoading, setIsLoading] = React.useState(!hasMeasured);
+  ({
+    appState,
+    mode,
+  }: {
+    appState: typeof machine;
+    mode: "docs" | "workbench";
+  }) => {
     const containerRef = React.useRef<HTMLDivElement>(null);
     const storyId = useStoryId();
+    const hasMeasured = Object.values(appState.data.page.shapes).every(
+      (s) => s.visibility === "visible"
+    );
 
-    React.useEffect(() => {
-      if (hasMeasured) {
-        return;
-      }
-
-      const timeout = setTimeout(() => {
-        layout();
-        setIsLoading(false);
-      }, 5000);
-      return () => clearTimeout(timeout);
-    }, []);
-
-    if (isLoading === false) {
+    if (hasMeasured === true) {
       // This log is used to communicate the search index to the
       // built app.
       console.log("window.FWOOSH_CANVAS_SHAPE", appState.data.page.shapes);
     }
 
-    return (
-      <Wrapper ref={containerRef}>
-        <Renderer
-          theme={{ background: "transparent" }}
-          page={appState.data.page}
-          pageState={appState.data.pageState}
-          shapeUtils={shapeUtils}
-          onKeyDown={onKeyDown}
-          onKeyUp={onKeyUp}
-          onPinch={onPinch}
-          onPan={onPan}
-          meta={{ storyId, containerRef, hasMeasured }}
-        />
+    React.useEffect(() => {
+      machine.send("START_MEASURE");
+    }, []);
 
-        <ViewControls>
-          <Tooltip side="left" message="Zoom in">
-            <IconButton onClick={zoomIn}>
-              <Plus />
-            </IconButton>
-          </Tooltip>
-          <Tooltip side="left" message="Zoom out">
-            <IconButton onClick={zoomOut}>
-              <Minus />
-            </IconButton>
-          </Tooltip>
-          <Tooltip side="left" message="Reset zoom">
-            <IconButton onClick={zoomReset}>
-              <RotateCw />
-            </IconButton>
-          </Tooltip>
-        </ViewControls>
-        {isLoading && (
-          <Loading>
-            <Spinner delay={0} size={8}>
-              Measuring canvas...
-            </Spinner>
-          </Loading>
-        )}
-      </Wrapper>
+    return (
+      <MDXProvider components={components as MDXComponents}>
+        <Wrapper ref={containerRef}>
+          <Renderer
+            theme={{ background: "transparent" }}
+            page={appState.data.page}
+            pageState={appState.data.pageState}
+            shapeUtils={shapeUtils}
+            onKeyDown={onKeyDown}
+            onKeyUp={onKeyUp}
+            onPinch={onPinch}
+            onPan={onPan}
+            meta={{ storyId, containerRef, mode }}
+          />
+
+          <ViewControls>
+            <Tooltip side="left" message="Zoom in">
+              <IconButton onClick={zoomIn}>
+                <Plus />
+              </IconButton>
+            </Tooltip>
+            <Tooltip side="left" message="Zoom out">
+              <IconButton onClick={zoomOut}>
+                <Minus />
+              </IconButton>
+            </Tooltip>
+            <Tooltip side="left" message="Reset zoom">
+              <IconButton onClick={zoomReset}>
+                <RotateCw />
+              </IconButton>
+            </Tooltip>
+          </ViewControls>
+          {!hasMeasured && (
+            <Loading>
+              <Spinner delay={0} size={8}>
+                Measuring canvas...
+              </Spinner>
+            </Loading>
+          )}
+        </Wrapper>
+      </MDXProvider>
     );
   }
 );

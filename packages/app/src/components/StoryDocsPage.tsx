@@ -160,7 +160,7 @@ const DocsPropsTable = ({
 };
 
 interface PageContentProps {
-  stories: [StoryBasicTreeItem, ...StorySidebarChildItem[]];
+  stories: StorySidebarChildItem[];
 }
 
 export const PageContent = ({
@@ -168,7 +168,11 @@ export const PageContent = ({
 }: PageContentProps) => {
   let docsIntro: React.ReactNode = null;
 
-  if (firstStory) {
+  if (
+    firstStory &&
+    firstStory.type === "story" &&
+    firstStory.story.type === "basic"
+  ) {
     const introProps = (
       <DocsPropsTable
         story={firstStory.story}
@@ -248,25 +252,39 @@ export const PageContent = ({
   );
 };
 
-export const StoryDocsPage = ({
+export const StoryDocsPageContent = ({
+  name,
   stories: [firstStory, ...stories],
-}: PageContentProps) => {
+  children,
+}: PageContentProps & { name: string; children?: React.ReactNode }) => {
   const quickNavRef = React.useRef<HTMLDivElement>(null);
-  const docsPath = useDocsPath();
-  const nameParts = docsPath?.split("-") || [];
-  const name = nameParts[nameParts.length - 1];
+
+  useActiveHeader(quickNavRef);
+
+  return (
+    <PageWrapper style={{ position: "relative" }}>
+      <div>
+        <components.h1 id="intro">{titleCase(name)}</components.h1>
+        <PageContent stories={[firstStory, ...stories]} />
+      </div>
+      {children}
+    </PageWrapper>
+  );
+};
+
+export const StoryDocsPage = ({
+  name,
+  stories: [firstStory, ...stories],
+}: PageContentProps & { name: string }) => {
+  const quickNavRef = React.useRef<HTMLDivElement>(null);
 
   useActiveHeader(quickNavRef);
 
   return (
     <DocsLayout>
-      <PageWrapper style={{ position: "relative" }}>
-        <div>
-          <components.h1 id="intro">{titleCase(name)}</components.h1>
-          <PageContent stories={[firstStory, ...stories]} />
-        </div>
+      <StoryDocsPageContent name={name} stories={[firstStory, ...stories]}>
         <PageSwitchButton current={firstStory.id} />
-      </PageWrapper>
+      </StoryDocsPageContent>
       <QuickNav.Root ref={quickNavRef}>
         <QuickNav.Header>
           <QuickNav.Title>Quick nav</QuickNav.Title>

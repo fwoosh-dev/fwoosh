@@ -1,5 +1,15 @@
 import { Action } from "../constants";
+import { machine } from "../machine";
 import { packShapesIntoGroups } from "../utils";
+
+/** Kicks off measuring each object 1 by 1 */
+export const startMeasure: Action = (data) => {
+  const firstShape = Object.values(data.page.shapes)[0];
+
+  Object.assign(firstShape, {
+    visibility: "measuring",
+  });
+};
 
 interface UpdateDimensionsPayload {
   id: string;
@@ -15,7 +25,7 @@ export const updateDimensions: Action = (
 
   Object.assign(shape, {
     size: [payload.width, payload.height],
-    hasBeenMeasured: true,
+    visibility: "hidden",
   });
 
   if (shape.type === "group") {
@@ -23,13 +33,31 @@ export const updateDimensions: Action = (
       contentSize: [payload.width, payload.height],
     });
   }
-};
 
-export const layoutBoxes: Action = (data) => {
-  Object.values(data.page.shapes).forEach((shape) => {
-    shape.point = [0, 0];
-    shape.size = "contentSize" in shape ? shape.contentSize : shape.size;
-  });
+  const keys = Object.keys(data.page.shapes);
+  const index = keys.indexOf(payload.id);
+  const nextShape = data.page.shapes[keys[index + 1]];
 
-  packShapesIntoGroups(data.meta.tree, data.page.shapes);
+  if (nextShape) {
+    Object.assign(nextShape, {
+      visibility: "measuring",
+    });
+  } else {
+    console.log("Done measuring");
+    Object.values(data.page.shapes).forEach((shape) => {
+      shape.point = [0, 0];
+      shape.size = "contentSize" in shape ? shape.contentSize : shape.size;
+    });
+
+    packShapesIntoGroups(data.meta.tree, data.page.shapes);
+    console.log("Done packing");
+
+    Object.values(data.page.shapes).forEach((shape) => {
+      Object.assign(shape, {
+        visibility: "visible",
+      });
+    });
+
+    console.log("Done set all visible");
+  }
 };

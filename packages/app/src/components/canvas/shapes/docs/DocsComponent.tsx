@@ -66,7 +66,6 @@ const Story = React.memo(
     item,
     storyId,
     shape,
-    hasMeasured,
   }: {
     item: StoryData;
     shape: DocsShape;
@@ -76,14 +75,14 @@ const Story = React.memo(
     const [measureRef, bounds] = useMeasure();
 
     React.useEffect(() => {
-      if (!hasMeasured && bounds.height > 0 && shape.size[0] == 0) {
+      if (bounds.height > 0 && shape.size[0] == 0) {
         const timeout = setTimeout(() => {
           machine.send("UPDATE_DIMENSIONS", {
             id: item.slug,
             width: bounds.width,
             height: bounds.height,
           });
-        }, 2000);
+        }, 8_000);
         return () => clearTimeout(timeout);
       }
     }, [bounds.height, bounds.width, item.slug, shape.size[0]]);
