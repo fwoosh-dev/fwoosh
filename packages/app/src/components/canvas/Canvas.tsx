@@ -162,13 +162,13 @@ export const Canvas = React.memo(
               </IconButton>
             </Tooltip>
           </ViewControls>
-          {/* {!doneMeasuring && (
+          {!doneMeasuring && (
             <Loading>
               <Spinner delay={500} size={8}>
                 Measuring shapes ({hasMeasured.length + 1} / {toMeasure})
               </Spinner>
             </Loading>
-          )} */}
+          )}
         </Wrapper>
       </MDXProvider>
     );

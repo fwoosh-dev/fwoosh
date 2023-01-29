@@ -147,7 +147,8 @@ const StoryGroup = React.memo(function StoryGroup({
     };
   }, [shape.stories]);
 
-  const measureRef = useShapeMeasure(shape);
+  const id = `group-${shape.id}`;
+  const measureRef = useShapeMeasure(shape, id);
 
   if (shape.visibility === "hidden") {
     return null;
@@ -155,49 +156,43 @@ const StoryGroup = React.memo(function StoryGroup({
 
   if (mode === "docs") {
     return (
-      <React.Suspense fallback={<Spinner />}>
-        <GroupWrapper ref={measureRef}>
-          {basicStories.length === 0 && (
-            <Heading css={{ margin: `$4 0 0 0 !important` }}>
-              {groups[lastGroup]}
-            </Heading>
-          )}
+      <GroupWrapper id={id} data-here ref={measureRef}>
+        {basicStories.length === 0 && (
+          <Heading css={{ margin: `$4 0 0 0 !important` }}>
+            {groups[lastGroup]}
+          </Heading>
+        )}
+        {basicStories.length > 0 && (
+          <StoryDocsPageContent
+            name={groups[lastGroup]}
+            stories={basicStories}
+          />
+        )}
+        {mdxStories.length > 0 && (
+          <StoryList>
+            {mdxStories.map((story) => {
+              if (story.story.type === "mdx") {
+                return (
+                  <PageWrapper>
+                    <story.story.component />
+                  </PageWrapper>
+                );
+              }
 
-          {basicStories.length > 0 && (
-            <StoryDocsPageContent
-              name={groups[lastGroup]}
-              stories={basicStories}
-            />
-          )}
-
-          {mdxStories.length > 0 && (
-            <StoryList>
-              {mdxStories.map((story) => {
-                if (story.story.type === "mdx") {
-                  return (
-                    <PageWrapper>
-                      <story.story.component />
-                    </PageWrapper>
-                  );
-                }
-
-                return null;
-              })}
-            </StoryList>
-          )}
-        </GroupWrapper>
-      </React.Suspense>
+              return null;
+            })}
+          </StoryList>
+        )}
+      </GroupWrapper>
     );
   }
 
   return (
-    <React.Suspense fallback={<Spinner />}>
-      <GroupWrapper ref={measureRef} style={{ width: "100%" }}>
-        <Heading css={{ margin: `$4 0 0 0 !important` }}>
-          {groups[lastGroup]}
-        </Heading>
-      </GroupWrapper>
-    </React.Suspense>
+    <GroupWrapper id={id} ref={measureRef} style={{ width: "100%" }}>
+      <Heading css={{ margin: `$4 0 0 0 !important` }}>
+        {groups[lastGroup]}
+      </Heading>
+    </GroupWrapper>
   );
 });
 
@@ -208,7 +203,9 @@ export const GroupComponent = TLShapeUtil.Component<GroupShape, HTMLDivElement>(
     return (
       <HTMLContainer ref={ref} {...events}>
         {shape.visibility !== "hidden" && (
-          <StoryGroup {...meta} shape={shape} />
+          <React.Suspense>
+            <StoryGroup {...meta} shape={shape} />
+          </React.Suspense>
         )}
       </HTMLContainer>
     );

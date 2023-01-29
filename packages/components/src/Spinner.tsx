@@ -85,7 +85,7 @@ export const Spinner = ({
   }, [delay]);
 
   return (
-    <Wrapper {...props}>
+    <Wrapper data-fwoosh-fallback={true} {...props}>
       <SpinnerComponent
         css={{
           opacity: show ? 1 : 0,

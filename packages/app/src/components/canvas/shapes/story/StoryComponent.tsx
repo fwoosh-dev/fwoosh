@@ -65,33 +65,31 @@ const Story = React.memo(
     const { grouping, slug, title } = item;
     const groups = grouping.split("/");
     const id = useId();
-    const { ref, hasRendered } = useRender({ id, slug: item.slug });
-    const measureRef = useShapeMeasure(shape, hasRendered);
+    const { ref } = useRender({ id, slug: item.slug });
+    const measureRef = useShapeMeasure(shape, id);
 
     return (
-      <React.Suspense fallback={<Spinner delay={1000} />}>
-        <ItemWrapper
-          ref={measureRef}
-          css={{
-            boxShadow:
-              storyId === item.slug ? "0 0 0 4px $colors$gray8" : undefined,
-          }}
-        >
-          <StoryTitle as={Link} to={`/canvas/workbench/${slug}`}>
-            <Grouping>{groups[groups.length - 1]}</Grouping> {title}
-            <Split />
-            <Tooltip message="Open story">
-              <IconButton as={Link} to={`/workbench/${slug}`}>
-                <ExternalLink />
-              </IconButton>
-            </Tooltip>
-          </StoryTitle>
+      <ItemWrapper
+        ref={measureRef}
+        css={{
+          boxShadow:
+            storyId === item.slug ? "0 0 0 4px $colors$gray8" : undefined,
+        }}
+      >
+        <StoryTitle as={Link} to={`/canvas/workbench/${slug}`}>
+          <Grouping>{groups[groups.length - 1]}</Grouping> {title}
+          <Split />
+          <Tooltip message="Open story">
+            <IconButton as={Link} to={`/workbench/${slug}`}>
+              <ExternalLink />
+            </IconButton>
+          </Tooltip>
+        </StoryTitle>
 
-          <StoryWrapper>
-            <div ref={ref} />
-          </StoryWrapper>
-        </ItemWrapper>
-      </React.Suspense>
+        <StoryWrapper>
+          <div id={id} ref={ref} />
+        </StoryWrapper>
+      </ItemWrapper>
     );
   }
 );

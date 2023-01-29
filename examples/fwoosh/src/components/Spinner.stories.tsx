@@ -13,7 +13,7 @@ export const meta: StoryMeta = {
  * A spinner is a simple loading indicator.
  */
 export const Basic: Story = () => {
-  return <Spinner delay={0} />;
+  return <Spinner data-fwoosh-fallback={false} delay={0} />;
 };
 
 /**
@@ -21,14 +21,14 @@ export const Basic: Story = () => {
  * This is useful when the spinner is used as a fallback for a suspense boundary.
  */
 export const Delay: Story = () => {
-  return <Spinner delay={2000} />;
+  return <Spinner data-fwoosh-fallback={false} delay={2000} />;
 };
 
 /**
  * A spinner can be displayed at any of the design system sizes.
  */
 export const Size: Story = () => {
-  return <Spinner delay={0} size={6} />;
+  return <Spinner data-fwoosh-fallback={false} delay={0} size={6} />;
 };
 
 /**
@@ -37,5 +37,9 @@ export const Size: Story = () => {
  * Use this to provide more context to the user about what is happening.
  */
 export const Message: Story = () => {
-  return <Spinner delay={0}>Loading the thing...</Spinner>;
+  return (
+    <Spinner data-fwoosh-fallback={false} delay={0}>
+      Loading the thing...
+    </Spinner>
+  );
 };
