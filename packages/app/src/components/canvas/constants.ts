@@ -8,11 +8,10 @@ import {
   TLPerformanceMode,
   TLSnapLine,
 } from "@tldraw/core";
-import { StorySidebarChildItem, StoryTree } from "@fwoosh/types";
+import { StorySidebarChildItem } from "@fwoosh/types";
 
 import { Shape, shapeUtils } from "./shapes/index.js";
 import { createGroup } from "./utils";
-import { GroupShape } from "./shapes/group/GroupShape.js";
 
 export const VERSION = 1;
 export const PERSIST_DATA = true;
@@ -137,12 +136,20 @@ export const INITIAL_DATA = {
     containerRef: { current: null },
     tree,
     hasMeasured: false,
-  },
+    mode: "docs",
+  } as CanvasMeta,
   performanceMode: undefined as TLPerformanceMode | undefined,
 };
 
 export const INITIAL_WORKBENCH_PAGE = {
   ...INITIAL_DATA,
+  meta: {
+    storyId: "",
+    containerRef: { current: null },
+    tree,
+    hasMeasured: false,
+    mode: "workbench",
+  } as CanvasMeta,
   page: {
     ...INITIAL_PAGE,
     shapes: window.FWOOSH_CANVAS_SHAPES

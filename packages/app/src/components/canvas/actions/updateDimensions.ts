@@ -1,6 +1,6 @@
 import { Action } from "../constants";
 import { machine } from "../machine";
-import { packShapesIntoGroups } from "../utils";
+import { DOCS_GUTTER, packShapesIntoGroups, WORKBENCH_GUTTER } from "../utils";
 
 /** Kicks off measuring each object 1 by 1 */
 export const startMeasure: Action = (data) => {
@@ -48,7 +48,11 @@ export const updateDimensions: Action = (
       shape.size = "contentSize" in shape ? shape.contentSize : shape.size;
     });
 
-    packShapesIntoGroups(data.meta.tree, data.page.shapes);
+    packShapesIntoGroups(
+      data.meta.tree,
+      data.page.shapes,
+      data.meta.mode === "docs" ? DOCS_GUTTER : WORKBENCH_GUTTER
+    );
 
     Object.values(data.page.shapes).forEach((shape) => {
       Object.assign(shape, {

@@ -44,11 +44,14 @@ export const getBounds = {
   story: getGroupBounds,
 };
 
-function convertShapesToPotpackData(data: Shape[]) {
+export const WORKBENCH_GUTTER = 16;
+export const DOCS_GUTTER = 64;
+
+function convertShapesToPotpackData(data: Shape[], gutter: number) {
   return data.filter(Boolean).map((i) => {
     return {
-      h: i.size[1] + 16,
-      w: i.size[0] + 16,
+      h: i.size[1] + gutter,
+      w: i.size[0] + gutter,
       x: i.point[0],
       y: i.point[1],
       id: i.id,
@@ -89,9 +92,10 @@ function updateChildPositions(
 function packGroup(
   boxes: Shape[],
   shapes: Record<string, Shape>,
-  offset: number[] = [0, 0]
+  offset: number[] = [0, 0],
+  gutter: number
 ) {
-  const data = convertShapesToPotpackData(boxes);
+  const data = convertShapesToPotpackData(boxes, gutter);
 
   potpack(data);
 
@@ -122,7 +126,8 @@ function packGroup(
  */
 export function packShapesIntoGroups(
   items: StorySidebarChildItem[],
-  shapes: Record<string, Shape>
+  shapes: Record<string, Shape>,
+  gutter = WORKBENCH_GUTTER
 ) {
   const boxes: Shape[] = [];
 
@@ -149,7 +154,8 @@ export function packShapesIntoGroups(
           ...childrenBoxes,
         ],
         shapes,
-        [0, "contentSize" in shape ? shape.contentSize[1] + 16 : 0]
+        [0, "contentSize" in shape ? shape.contentSize[1] + gutter : 0],
+        gutter
       );
 
       const childBounds = data.map((i) => {
@@ -166,7 +172,7 @@ export function packShapesIntoGroups(
     }
   }
 
-  packGroup(boxes, shapes);
+  packGroup(boxes, shapes, undefined, gutter);
 
   return boxes;
 }
