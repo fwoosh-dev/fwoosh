@@ -107,7 +107,7 @@ function packGroup(
     shape.point = Vec.add([i.x, i.y], offset);
     const moveDistance = Vec.sub(shape.point, oldPoint);
 
-    if (shape.type === "group") {
+    if (shape.type === "group" && shape.stories[0] !== shape.id) {
       updateChildPositions(shape, shapes, moveDistance);
     }
   });
@@ -138,13 +138,11 @@ export function packShapesIntoGroups(
       continue;
     }
 
-    if (item.type === "story") {
-      if (item.story.type === "basic") {
-        boxes.push(shapes[item.id]);
-      }
-      continue;
+    if (item.type === "story" && item.story.type === "basic") {
+      boxes.push(shapes[item.id]);
     } else {
-      const childrenBoxes = packShapesIntoGroups(item.children, shapes);
+      const childrenBoxes =
+        "children" in item ? packShapesIntoGroups(item.children, shapes) : [];
       const hasChildren =
         ("childIds" in shape && shape.childIds.length > 0) ||
         ("stories" in shape && shape.stories.length > 0);

@@ -40,6 +40,15 @@ function createShapesForTree(
 
     if (item.type === "story") {
       if (item.story.type === "mdx") {
+        if (options.shape === "docs") {
+          const group = createGroup({
+            id: item.id,
+            childIndex: index,
+          });
+          group.stories.push(item.id);
+          acc[item.id] = group;
+        }
+
         return acc;
       }
 
@@ -96,8 +105,6 @@ function createShapesForTree(
 
     return acc;
   }, map);
-
-  // packShapesIntoGroups(items, shapes);
 
   return shapes;
 }
