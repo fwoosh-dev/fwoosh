@@ -11,14 +11,14 @@ import {
 import { styled } from "@fwoosh/styling";
 import { Outlet } from "react-router-dom";
 import { useId } from "@radix-ui/react-id";
+import { ParameterContext } from "@fwoosh/hooks";
+import { config } from "@fwoosh/app/config";
+import { CONTENT_ID } from "@fwoosh/utils";
 
 import { StoryIdContext } from "./Story";
 import { WorkbenchSidebarTree } from "./sidebar/WorkbenchSidebarTree";
-import { CONTENT_ID } from "@fwoosh/utils";
 import { useParameters } from "../hooks/useParameters";
-import { ParameterContext } from "@fwoosh/hooks";
-import { config } from "@fwoosh/app/config";
-import { ToolbarControls } from "./toolbar";
+import { WorkbenchToolbar } from "./WorkbenchToolbar";
 
 const StoryWrapper = styled("div", {
   position: "relative",
@@ -49,7 +49,7 @@ export const Workbench = () => {
       <HeaderBar>
         <HeaderTitle>{config.title}</HeaderTitle>
         <React.Suspense fallback={<Spinner delay={2000} size={5} />}>
-          <ToolbarControls />
+          <WorkbenchToolbar />
         </React.Suspense>
       </HeaderBar>
 

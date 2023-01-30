@@ -26,10 +26,6 @@ export const WorkbenchToolbar = () => {
         <Suspense fallback={<Spinner size={5} />}>
           <GlobalToolbarItems />
         </Suspense>
-
-        <Toolbar.Button asChild>
-          <ThemeToggle />
-        </Toolbar.Button>
       </GlobalToolbarControls>
     </>
   );
