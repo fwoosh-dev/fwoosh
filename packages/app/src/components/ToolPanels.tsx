@@ -35,7 +35,12 @@ const ToolPanelsContent = () => {
   });
 
   return (
-    <Tabs.Root defaultValue={panels[0]?.componentName}>
+    <Tabs.Root
+      defaultValue={
+        localStorage.getItem("fwoosh:active-panel") || panels[0]?.componentName
+      }
+      onValueChange={(id) => localStorage.setItem("fwoosh:active-panel", id)}
+    >
       <TabsList>
         <Suspense fallback={<Spinner delay={3000} size={5} />}>
           {shownPanel.map((Panel) => {
