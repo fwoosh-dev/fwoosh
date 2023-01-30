@@ -1,3 +1,16 @@
+# v0.0.106 (Mon Jan 30 2023)
+
+#### ⚠️ Pushed to `main`
+
+- actually fix build ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix build command ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.104 (Sat Jan 28 2023)
 
 #### ⚠️ Pushed to `main`

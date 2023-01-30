@@ -1,3 +1,16 @@
+# v0.0.106 (Mon Jan 30 2023)
+
+#### ⚠️ Pushed to `main`
+
+- fix story rendering in docs view ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- rename story ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.104 (Sat Jan 28 2023)
 
 #### ⚠️ Pushed to `main`
