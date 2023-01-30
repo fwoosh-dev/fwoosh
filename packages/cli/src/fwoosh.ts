@@ -527,6 +527,12 @@ export class Fwoosh implements FwooshClass {
             }
 
             const data = await msgArgs[1].jsonValue();
+            Object.values(data).forEach((item) => {
+              if ((item as any).story) {
+                delete (item as any).story.code;
+                delete (item as any).story.comment;
+              }
+            });
             res(data);
           });
         }),
@@ -538,9 +544,45 @@ export class Fwoosh implements FwooshClass {
         ),
       ]);
 
+      const [docsShapes] = await Promise.all([
+        new Promise<Record<string, unknown>>((res) => {
+          canvas.on("console", async (msg) => {
+            const msgArgs = msg.args();
+
+            if (msgArgs.length !== 2) {
+              return;
+            }
+
+            const firstMsg = await msgArgs[0].jsonValue();
+
+            if (firstMsg !== "window.FWOOSH_CANVAS_SHAPE") {
+              return;
+            }
+
+            const data = await msgArgs[1].jsonValue();
+            Object.values(data).forEach((item) => {
+              if ((item as any).story) {
+                delete (item as any).story.code;
+                delete (item as any).story.comment;
+              }
+            });
+            res(data);
+          });
+        }),
+        canvas.goto(
+          `http://localhost:3000${path.join(
+            this.options.basename,
+            "canvas/docs"
+          )}`
+        ),
+      ]);
+
       await fs.writeFile(
         path.join(outDir, "assets", "shapes.js"),
-        `window.FWOOSH_CANVAS_SHAPES = ${JSON.stringify(shapes)};`
+        endent`
+          window.FWOOSH_WORKBENCH_CANVAS_SHAPES = ${JSON.stringify(shapes)};
+          window.FWOOSH_DOCS_CANVAS_SHAPES = ${JSON.stringify(docsShapes)};
+        `
       );
 
       await browser.close();

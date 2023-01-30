@@ -21,7 +21,8 @@ export const SNAP_DISTANCE = 5;
 
 declare global {
   interface Window {
-    FWOOSH_CANVAS_SHAPES: Record<string, Shape>;
+    FWOOSH_DOCS_CANVAS_SHAPES: Record<string, Shape>;
+    FWOOSH_WORKBENCH_CANVAS_SHAPES: Record<string, Shape>;
   }
 }
 
@@ -103,8 +104,8 @@ function createShapesForTree(
 
 export const INITIAL_PAGE: TLPage<Shape, TLBinding> = {
   id: "canvas",
-  shapes: window.FWOOSH_CANVAS_SHAPES
-    ? window.FWOOSH_CANVAS_SHAPES
+  shapes: window.FWOOSH_DOCS_CANVAS_SHAPES
+    ? window.FWOOSH_DOCS_CANVAS_SHAPES
     : createShapesForTree(tree, {}, { shape: "docs" }),
   bindings: {},
 };
@@ -152,8 +153,8 @@ export const INITIAL_WORKBENCH_PAGE = {
   } as CanvasMeta,
   page: {
     ...INITIAL_PAGE,
-    shapes: window.FWOOSH_CANVAS_SHAPES
-      ? window.FWOOSH_CANVAS_SHAPES
+    shapes: window.FWOOSH_WORKBENCH_CANVAS_SHAPES
+      ? window.FWOOSH_WORKBENCH_CANVAS_SHAPES
       : createShapesForTree(tree, {}, { shape: "workbench" }),
   },
 };

@@ -127,7 +127,9 @@ export const Canvas = React.memo(
     }
 
     React.useEffect(() => {
-      machine.send("START_MEASURE");
+      if (!window.FWOOSH_WORKBENCH_CANVAS_SHAPES) {
+        machine.send("START_MEASURE");
+      }
     }, []);
 
     return (
