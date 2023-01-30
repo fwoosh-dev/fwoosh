@@ -1,7 +1,7 @@
 {
   "name": "@fwoosh/pages",
   "type": "module",
-  "version": "0.0.105",
+  "version": "0.0.106",
   "description": "Useful extra pages for fwoosh websites.",
   "main": "dist/index.js",
   "author": "Andrew Lisowski <lisowski54@gmail.com>",
