@@ -47,7 +47,7 @@ export const StoryWithTools = () => {
     }
 
     return 75;
-  }, []);
+  }, [storyId]);
   const storyPaneSizeSet = React.useCallback((size: number) => {
     localStorage.setItem("fwoosh:storyPaneSize", String(size));
   }, []);
