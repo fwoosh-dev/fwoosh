@@ -1,3 +1,18 @@
+# v0.0.109 (Mon Jan 30 2023)
+
+#### ⚠️ Pushed to `main`
+
+- `@fwoosh/app`
+  - improve ui flashing on nav ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/react`
+  - use createRoot if available ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.108 (Mon Jan 30 2023)
 
 #### ⚠️ Pushed to `main`

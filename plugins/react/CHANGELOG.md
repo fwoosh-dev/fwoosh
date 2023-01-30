@@ -1,3 +1,15 @@
+# v0.0.109 (Mon Jan 30 2023)
+
+#### ⚠️ Pushed to `main`
+
+- use createRoot if available ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.106 (Mon Jan 30 2023)
 
 #### ⚠️ Pushed to `main`
