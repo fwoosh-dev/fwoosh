@@ -93,7 +93,7 @@ const StoryGroup = React.memo(function StoryGroup({
             {mdxStories.map((story) => {
               if (story.story.type === "mdx") {
                 return (
-                  <DocsPageWrapper>
+                  <DocsPageWrapper key={story.id}>
                     <story.story.component />
                   </DocsPageWrapper>
                 );

@@ -72,6 +72,10 @@ export function render(
   function Fallback() {
     React.useEffect(() => {
       onStart();
+
+      return () => {
+        onComplete();
+      };
     });
     return <Spinner delay={300} />;
   }
@@ -89,8 +93,8 @@ export function render(
         <Suspense fallback={<Fallback />}>
           <ErrorBoundary>
             <App slug={slug} params={params} />
+            <OnStart />
           </ErrorBoundary>
-          <OnStart />
         </Suspense>
       </TooltipPrimitive.Provider>,
       el
