@@ -1,3 +1,16 @@
+# v0.0.107 (Mon Jan 30 2023)
+
+#### ⚠️ Pushed to `main`
+
+- save active panel id (closes #37) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix panel resizer reseting to old position on change + route change (closes #40) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.106 (Mon Jan 30 2023)
 
 #### ⚠️ Pushed to `main`
