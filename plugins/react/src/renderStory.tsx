@@ -1,8 +1,8 @@
-import React, { Suspense } from "react";
+import * as React from "react";
 import ReactDOM from "react-dom";
 import { StoryData, StoryParameters } from "@fwoosh/types";
 import { stories } from "@fwoosh/app/stories";
-import { Spinner, ErrorBoundary, Tooltip } from "@fwoosh/components";
+import { Spinner, ErrorBoundary } from "@fwoosh/components";
 import type { Decorator, Story as ReactStory, StoryMeta } from "./types";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 
@@ -87,18 +87,26 @@ export function render(
     return <></>;
   }
 
+  const app = (
+    <TooltipPrimitive.Provider>
+      <React.Suspense fallback={<Fallback />}>
+        <ErrorBoundary>
+          <App slug={slug} params={params} />
+          <OnStart />
+        </ErrorBoundary>
+      </React.Suspense>
+    </TooltipPrimitive.Provider>
+  );
+
   try {
-    ReactDOM.render(
-      <TooltipPrimitive.Provider>
-        <Suspense fallback={<Fallback />}>
-          <ErrorBoundary>
-            <App slug={slug} params={params} />
-            <OnStart />
-          </ErrorBoundary>
-        </Suspense>
-      </TooltipPrimitive.Provider>,
-      el
-    );
+    import("react-dom/client")
+      .then(({ createRoot }) => {
+        const root = createRoot(el);
+        root.render(app);
+      })
+      .catch(() => {
+        ReactDOM.render(app, el);
+      });
   } catch (e) {
     console.error("error", e);
   }
