@@ -502,14 +502,14 @@ export class Fwoosh implements FwooshClass {
         JSON.stringify(searchData)
       );
 
-      log.log("Measuring stories and documentation in canvas...");
-
       const canvas = await browser.newPage();
 
       await canvas.evaluate(() => {
         // @ts-ignore
         window.isMeasuring = true;
       });
+
+      log.log("Measuring workbench canvas...");
 
       const [shapes] = await Promise.all([
         new Promise<Record<string, unknown>>((res) => {
@@ -543,6 +543,8 @@ export class Fwoosh implements FwooshClass {
           )}`
         ),
       ]);
+
+      log.log("Measuring docs canvas...");
 
       const [docsShapes] = await Promise.all([
         new Promise<Record<string, unknown>>((res) => {
