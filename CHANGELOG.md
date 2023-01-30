@@ -1,3 +1,18 @@
+# v0.0.108 (Mon Jan 30 2023)
+
+#### ⚠️ Pushed to `main`
+
+- `@fwoosh/app`
+  - Fix storybook toolbar not rendering (closes #46) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `fwoosh`
+  - fix workbench showing first docs page as default (closes #55) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.107 (Mon Jan 30 2023)
 
 #### ⚠️ Pushed to `main`

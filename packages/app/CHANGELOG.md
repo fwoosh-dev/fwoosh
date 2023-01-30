@@ -1,3 +1,15 @@
+# v0.0.108 (Mon Jan 30 2023)
+
+#### ⚠️ Pushed to `main`
+
+- Fix storybook toolbar not rendering (closes #46) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.107 (Mon Jan 30 2023)
 
 #### ⚠️ Pushed to `main`
