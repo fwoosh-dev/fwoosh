@@ -1,3 +1,15 @@
+# v0.0.110 (Tue Jan 31 2023)
+
+#### ⚠️ Pushed to `main`
+
+- Let user apply light/dark class (closes #27) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.96 (Tue Jan 24 2023)
 
 #### ⚠️ Pushed to `main`

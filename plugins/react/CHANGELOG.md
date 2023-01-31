@@ -1,3 +1,16 @@
+# v0.0.110 (Tue Jan 31 2023)
+
+#### ⚠️ Pushed to `main`
+
+- fix canvas mode stories not rendering ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- reuse react root if we can ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.109 (Mon Jan 30 2023)
 
 #### ⚠️ Pushed to `main`

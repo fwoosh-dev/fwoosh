@@ -1,3 +1,26 @@
+# v0.0.110 (Tue Jan 31 2023)
+
+#### ⚠️ Pushed to `main`
+
+- `@fwoosh/app`
+  - dont include mdx as stories and don't show open stories group if there are none closes #39 ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - fix trees showing up in open story commands ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - center shape once done measuring ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - fix canvas measurement ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - fix add undefined class ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - upgrade react arborist ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/react`
+  - fix canvas mode stories not rendering ([@hipstersmoothie](https://github.com/hipstersmoothie))
+  - reuse react root if we can ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/styling`, `@fwoosh/types`
+  - Let user apply light/dark class (closes #27) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.109 (Mon Jan 30 2023)
 
 #### ⚠️ Pushed to `main`
