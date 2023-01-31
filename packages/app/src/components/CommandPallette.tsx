@@ -254,6 +254,42 @@ function SwitchToWorkbenchCommand({ onClose }: { onClose: () => void }) {
     };
   }, []);
 
+  const shownGroups = group
+    .map((item) => {
+      if (item.type === "tree" || item.story.type === "mdx") {
+        return null;
+      }
+
+      const groups = item.story.grouping.split("/");
+
+      return (
+        <Command.Item
+          key={item.id}
+          title={
+            <>
+              <Grouping>{groups[groups.length - 1]}</Grouping>
+              <span>{item.name}</span>
+            </>
+          }
+          icon={<ArrowRight />}
+          onSelect={() => {
+            if (hasMetaHeld) {
+              navigate(`/canvas/workbench/${item.story.slug}`);
+            } else {
+              navigate(`/workbench/${item.story.slug}`);
+            }
+
+            onClose();
+          }}
+        />
+      );
+    })
+    .filter(Boolean);
+
+  if (shownGroups.length === 0) {
+    return null;
+  }
+
   return (
     <Command.Group
       heading={
@@ -263,35 +299,7 @@ function SwitchToWorkbenchCommand({ onClose }: { onClose: () => void }) {
         </Command.Heading>
       }
     >
-      {group.map((item) => {
-        if (item.type === "tree") {
-          return null;
-        }
-
-        const groups = item.story.grouping.split("/");
-
-        return (
-          <Command.Item
-            key={item.id}
-            title={
-              <>
-                <Grouping>{groups[groups.length - 1]}</Grouping>
-                <span>{item.name}</span>
-              </>
-            }
-            icon={<ArrowRight />}
-            onSelect={() => {
-              if (hasMetaHeld) {
-                navigate(`/canvas/workbench/${item.story.slug}`);
-              } else {
-                navigate(`/workbench/${item.story.slug}`);
-              }
-
-              onClose();
-            }}
-          />
-        );
-      })}
+      {shownGroups}
     </Command.Group>
   );
 }
