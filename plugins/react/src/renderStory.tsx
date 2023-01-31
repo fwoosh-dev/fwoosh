@@ -58,6 +58,8 @@ function App({ slug, params }: AppProps) {
   return <Component />;
 }
 
+const roots: Record<string, any> = {};
+
 export function render(
   el: Element,
   slug: string,
@@ -101,8 +103,11 @@ export function render(
   try {
     import("react-dom/client")
       .then(({ createRoot }) => {
-        const root = createRoot(el);
-        root.render(app);
+        if (!roots[slug]) {
+          roots[slug] = createRoot(el);
+        }
+
+        roots[slug].render(app);
       })
       .catch(() => {
         ReactDOM.render(app, el);
