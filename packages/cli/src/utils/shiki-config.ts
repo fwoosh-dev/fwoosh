@@ -1,9 +1,19 @@
-import shiki from "rehype-shiki-reloaded";
+// import darkTheme from "shiki/themes/github-dark.json";
 
-export const shikiConfig = [
-  (shiki as any).default,
-  {
-    theme: "github-light",
-    darkTheme: "github-dark",
-  } satisfies Parameters<typeof shiki>[0],
-] as const;
+import { createRequire } from "module";
+import fs from "fs";
+import { remarkCodeHike } from "@code-hike/mdx";
+
+const require = createRequire(import.meta.url);
+
+// theme: "github-light",
+// darkTheme: "github-dark",
+
+const theme = JSON.parse(
+  fs.readFileSync(require.resolve("shiki/themes/github-light.json"), "utf8")
+);
+
+export const codeHikeConfig: Parameters<typeof remarkCodeHike>[0] = {
+  theme,
+  skipLanguages: [],
+};

@@ -442,6 +442,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@code-hike/lighter@npm:^0.2.0":
+  version: 0.2.6
+  resolution: "@code-hike/lighter@npm:0.2.6"
+  checksum: 99fc5e12c371825a6dc57790ef6bfbcd62a65773f1d525b48b82780134a6269da348c0b67923949880b64e43075dfde81aa13d61ca3b5a27a8ce4c43fbba35b8
+  languageName: node
+  linkType: hard
+
+"@code-hike/mdx@npm:^0.8.0":
+  version: 0.8.0
+  resolution: "@code-hike/mdx@npm:0.8.0"
+  dependencies:
+    "@code-hike/lighter": ^0.2.0
+    node-fetch: ^2.0.0
+    shiki: ^0.10.1
+  peerDependencies:
+    react: ^16.8.3 || ^17 || ^18
+  checksum: e9e59397b946714853b2a14486f1fddc58ce875496b6e245def60aa66cb199123b4a5a7577e99af9363f54586e559a4317c75f7e6e19513421f848fe3b408826
+  languageName: node
+  linkType: hard
+
 "@cspotcode/source-map-support@npm:^0.8.0":
   version: 0.8.1
   resolution: "@cspotcode/source-map-support@npm:0.8.1"
@@ -737,6 +757,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fwoosh/app@workspace:packages/app"
   dependencies:
+    "@code-hike/mdx": ^0.8.0
     "@fontsource/inter": ^4.5.14
     "@fwoosh/hooks": "link:../hooks"
     "@fwoosh/utils": "link:../utils"
@@ -1017,6 +1038,7 @@ __metadata:
   resolution: "@fwoosh/panel-source@workspace:plugins/panel-source"
   dependencies:
     "@fwoosh/hooks": "link:../../packages/hooks"
+    "@fwoosh/styling": "link:../../packages/styling"
     "@types/node": ^14.14.31
     fwoosh: "link:../../packages/cli"
   peerDependencies:
@@ -1090,6 +1112,12 @@ __metadata:
 "@fwoosh/styling@link:../../packages/styling::locator=%40fwoosh%2Fpanel-designs%40workspace%3Aplugins%2Fpanel-designs":
   version: 0.0.0-use.local
   resolution: "@fwoosh/styling@link:../../packages/styling::locator=%40fwoosh%2Fpanel-designs%40workspace%3Aplugins%2Fpanel-designs"
+  languageName: node
+  linkType: soft
+
+"@fwoosh/styling@link:../../packages/styling::locator=%40fwoosh%2Fpanel-source%40workspace%3Aplugins%2Fpanel-source":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/styling@link:../../packages/styling::locator=%40fwoosh%2Fpanel-source%40workspace%3Aplugins%2Fpanel-source"
   languageName: node
   linkType: soft
 
@@ -7112,6 +7140,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "fwoosh@workspace:packages/cli"
   dependencies:
+    "@code-hike/mdx": ^0.8.0
     "@fwoosh/app": "link:../app"
     "@fwoosh/types": "link:../types"
     "@fwoosh/utils": "link:../utils"
@@ -7164,6 +7193,7 @@ __metadata:
     ts-node: ^10
     typescript: ^4
     unified: ^10.1.2
+    unist-util-remove: ^3.1.1
     unist-util-visit: ^4.1.1
     vite: ^4.0.4
   dependenciesMeta:
@@ -8590,7 +8620,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsonc-parser@npm:3.2.0, jsonc-parser@npm:^3.2.0":
+"jsonc-parser@npm:3.2.0, jsonc-parser@npm:^3.0.0, jsonc-parser@npm:^3.2.0":
   version: 3.2.0
   resolution: "jsonc-parser@npm:3.2.0"
   checksum: 946dd9a5f326b745aa326d48a7257e3f4a4b62c5e98ec8e49fa2bdd8d96cef7e6febf1399f5c7016114fd1f68a1c62c6138826d5d90bc650448e3cf0951c53c7
@@ -10282,6 +10312,20 @@ __metadata:
     encoding:
       optional: true
   checksum: 8d816ffd1ee22cab8301c7756ef04f3437f18dace86a1dae22cf81db8ef29c0bf6655f3215cb0cdb22b420b6fe141e64b26905e7f33f9377a7fa59135ea3e10b
+  languageName: node
+  linkType: hard
+
+"node-fetch@npm:^2.0.0":
+  version: 2.6.9
+  resolution: "node-fetch@npm:2.6.9"
+  dependencies:
+    whatwg-url: ^5.0.0
+  peerDependencies:
+    encoding: ^0.1.0
+  peerDependenciesMeta:
+    encoding:
+      optional: true
+  checksum: acb04f9ce7224965b2b59e71b33c639794d8991efd73855b0b250921382b38331ffc9d61bce502571f6cc6e11a8905ca9b1b6d4aeb586ab093e2756a1fd190d0
   languageName: node
   linkType: hard
 
@@ -12697,6 +12741,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"shiki@npm:^0.10.1":
+  version: 0.10.1
+  resolution: "shiki@npm:0.10.1"
+  dependencies:
+    jsonc-parser: ^3.0.0
+    vscode-oniguruma: ^1.6.1
+    vscode-textmate: 5.2.0
+  checksum: fb746f3cb3de7e545e3b10a6cb658d3938f840e4ccc9a3c90ceb7e69a8f89dbb432171faac1e9f02a03f103684dad88ee5e54b5c4964fa6b579fca6e8e26424d
+  languageName: node
+  linkType: hard
+
 "shiki@npm:^0.12.1":
   version: 0.12.1
   resolution: "shiki@npm:0.12.1"
@@ -13850,6 +13905,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"unist-util-remove@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "unist-util-remove@npm:3.1.1"
+  dependencies:
+    "@types/unist": ^2.0.0
+    unist-util-is: ^5.0.0
+    unist-util-visit-parents: ^5.0.0
+  checksum: ed7c762941e6a9b6db230e9417697c8eb7d36093240b6f6d4ec265c4237d33e332a96a18307c8fb322a1842e3feb2a7564b032b5535fa0634eb1e075a6e344cb
+  languageName: node
+  linkType: hard
+
 "unist-util-stringify-position@npm:^3.0.0":
   version: 3.0.2
   resolution: "unist-util-stringify-position@npm:3.0.2"
@@ -14288,10 +14354,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vscode-oniguruma@npm:^1.7.0":
+"vscode-oniguruma@npm:^1.6.1, vscode-oniguruma@npm:^1.7.0":
   version: 1.7.0
   resolution: "vscode-oniguruma@npm:1.7.0"
   checksum: 53519d91d90593e6fb080260892e87d447e9b200c4964d766772b5053f5699066539d92100f77f1302c91e8fc5d9c772fbe40fe4c90f3d411a96d5a9b1e63f42
+  languageName: node
+  linkType: hard
+
+"vscode-textmate@npm:5.2.0":
+  version: 5.2.0
+  resolution: "vscode-textmate@npm:5.2.0"
+  checksum: 5449b42d451080f6f3649b66948f4b5ee4643c4e88cfe3558a3b31c84c78060cfdd288c4958c1690eaa5cd65d09992fa6b7c3bef9d4aa72b3651054a04624d20
   languageName: node
   linkType: hard
 

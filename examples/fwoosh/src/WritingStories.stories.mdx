@@ -20,7 +20,7 @@ Create a file with the `.stories.tsx` extension that will be matched by your <Li
 In this file add a `meta` export.
 This is the metadata for your story.
 
-```tsx
+```tsx Button.stories.tsx
 import type { StoryMeta } from "fwoosh";
 
 export const meta: StoryMeta = {
@@ -38,7 +38,7 @@ In this example the stories for the `Button` component will be grouped under the
 
 To write a story you need to export a function that returns a component.
 
-```tsx
+```tsx Button.stories.tsx
 /**
  * Use jsDoc comments to add a description to your story.
  */
@@ -54,7 +54,7 @@ export const Basic = () => {
 The `component` property is used to link a group of stories to a component.
 This is used to generate the documentation for the properties of the component in the story.
 
-```tsx
+```tsx Button.stories.tsx
 export const meta: StoryMeta = {
   title: "Components/Button",
   component: Button,
@@ -66,6 +66,6 @@ export const meta: StoryMeta = {
 You can override the `component` property on a story.
 This is useful if you want to generate documentation for components that only appear on a specific story.
 
-```tsx
+```tsx Button.stories.tsx
 Basic.component = OtherButton;
 ```

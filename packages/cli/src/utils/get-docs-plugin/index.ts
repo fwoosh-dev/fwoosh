@@ -1,5 +1,4 @@
-import { ComponentDoc, FwooshOptions } from "@fwoosh/types";
-import { log } from "@fwoosh/utils";
+import { ComponentDoc } from "@fwoosh/types";
 import { loadVirtualFile } from "@fwoosh/virtual-file";
 import { createRequire } from "module";
 import micromatch from "micromatch";

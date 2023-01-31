@@ -1,4 +1,5 @@
 import "@unocss/reset/tailwind.css";
+import "@code-hike/mdx/dist/index.css";
 
 import React from "react";
 import { createRoot } from "react-dom/client";

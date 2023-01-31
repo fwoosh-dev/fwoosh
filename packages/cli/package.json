@@ -21,6 +21,7 @@
     "@types/serve-handler": "^6.1.1"
   },
   "dependencies": {
+    "@code-hike/mdx": "^0.8.0",
     "@fwoosh/app": "link:../app",
     "@fwoosh/types": "link:../types",
     "@fwoosh/utils": "link:../utils",
@@ -65,6 +66,7 @@
     "title-case": "^3.0.3",
     "ts-node": "^10",
     "unified": "^10.1.2",
+    "unist-util-remove": "^3.1.1",
     "unist-util-visit": "^4.1.1",
     "vite": "^4.0.4"
   },

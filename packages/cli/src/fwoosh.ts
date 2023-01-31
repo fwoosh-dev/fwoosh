@@ -11,6 +11,7 @@ import {
   AsyncSeriesWaterfallHook,
   SyncWaterfallHook,
 } from "tapable";
+import { remarkCodeHike } from "@code-hike/mdx";
 import mdx from "@mdx-js/rollup";
 import { checkLink, log, sortTree } from "@fwoosh/utils";
 import bodyParser from "body-parser";
@@ -23,7 +24,6 @@ import handler from "serve-handler";
 import http from "http";
 import { chromium } from "playwright";
 
-import { Pluggable } from "unified";
 import remarkFrontmatter from "remark-frontmatter";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import remarkSlug from "remark-slug";
@@ -48,7 +48,7 @@ import { fwooshSetupPlugin } from "./utils/fwoosh-setup-plugin.js";
 import { fwooshConfigPlugin } from "./utils/fwoosh-config-plugin.js";
 import { fwooshUiPlugin } from "./utils/fwoosh-ui-plugin.js";
 import { convertMarkdownToHtml } from "./utils/get-stories.js";
-import { shikiConfig } from "./utils/shiki-config.js";
+import { codeHikeConfig } from "./utils/shiki-config.js";
 import { componentOverridePlugin } from "./utils/component-override-plugins.js";
 
 const require = createRequire(import.meta.url);
@@ -259,7 +259,11 @@ export class Fwoosh implements FwooshClass {
       base: mode === "production" ? this.options.basename : "/",
       plugins: [
         mdx({
-          remarkPlugins: [remarkFrontmatter, remarkSlug],
+          remarkPlugins: [
+            remarkFrontmatter,
+            remarkSlug,
+            [remarkCodeHike, codeHikeConfig],
+          ],
           rehypePlugins: [
             rehypeInferTitleMeta,
             // Inline data from above plugins into the page
@@ -348,7 +352,6 @@ export class Fwoosh implements FwooshClass {
                   ),
               },
             ],
-            shikiConfig as Pluggable,
             [
               toc,
               {
@@ -693,11 +696,12 @@ export class Fwoosh implements FwooshClass {
 
     app.use(bodyParser.text());
     app.post("/highlight-code", async (req, res) => {
-      const html = await convertMarkdownToHtml(endent`
+      const markdown = endent`
         \`\`\`tsx
         ${req.body}
         \`\`\`
-      `);
+      `;
+      const html = await convertMarkdownToHtml(markdown);
       res.json({ html });
     });
 

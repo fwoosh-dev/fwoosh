@@ -19,7 +19,7 @@ The following file are valid configuration files:
 
 Customize the title in the header.
 
-```ts
+```ts fwoosh.config.ts
 export const config: FwooshConfig = {
   title: "My Design System",
 };
@@ -29,7 +29,7 @@ export const config: FwooshConfig = {
 
 Customize the glob used to match story files.
 
-```ts
+```ts fwoosh.config.ts
 export const config: FwooshConfig = {
   stories: ["src/design-system/**/*.stories.(mdx|tsx)"],
 };
@@ -45,7 +45,7 @@ Provide an array of plugins to use with fwoosh.
 
 Customize the directory build output files are put in.
 
-```ts
+```ts fwoosh.config.ts
 export const config: FwooshConfig = {
   outDir: "dist",
 };
@@ -56,7 +56,7 @@ export const config: FwooshConfig = {
 Provide a global setup file for your stories.
 Typically used to import global global assets such as CSS.
 
-```ts
+```ts fwoosh.config.ts
 export const config: FwooshConfig = {
   setup: "./path/to/setup.ts",
 };
@@ -69,7 +69,7 @@ Fwoosh uses [stitches](https://stitches.dev/docs/tokens) for styling refer to th
 
 You can either define the theme directly in your `fwoosh.config.ts`:
 
-```ts
+```ts fwoosh.config.ts
 export const config: FwooshConfig = {
   theme: {
     light: {
@@ -88,7 +88,7 @@ export const config: FwooshConfig = {
 
 You can also use a path or a package name for configuring the theme.
 
-```ts
+```ts fwoosh.config.ts
 export const config: FwooshConfig = {
   theme: "@my-company/fwoosh-theme",
 };
@@ -103,7 +103,7 @@ Override a host of presentation and layout components.
 > BEWARE! This is a powerful API, make sure you look up what the base component is
 > doing before overriding it.
 
-```ts
+```ts fwoosh.config.ts
 export const config: FwooshConfig = {
   componentOverrides: "./path/to/componentOverrides.tsx",
 };
@@ -115,7 +115,7 @@ Visit the <Link to="Theming/Introduction#component-overrides">override docs</Lin
 
 Control whether the dev server opens a browser window.
 
-```ts
+```ts fwoosh.config.ts
 export const config: FwooshConfig = {
   open: "docs", // "workbench" | "docs"
 };
@@ -125,7 +125,7 @@ export const config: FwooshConfig = {
 
 Modify the Vite configuration used to load your fwoosh instance.
 
-```ts
+```ts fwoosh.config.ts
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export const config: FwooshConfig = {
@@ -146,7 +146,7 @@ export const config: FwooshConfig = {
 
 Modify the sorting of items in the sidebar.
 
-```ts
+```ts fwoosh.config.ts
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export const config: FwooshConfig = {
@@ -166,7 +166,7 @@ Generate docs for only these files.
 This is only needed during build time where we generate docs for all files.
 During dev we only generate docs for the component that's being viewed.
 
-```ts
+```ts fwoosh.config.ts
 export const config: FwooshConfig = {
   docgen: { include: ["**/packages/components/**/*"] },
 };
@@ -179,7 +179,7 @@ If you serve your website from a subdirectory you'll need to set this.
 
 For example if you serve your website from https://example.com/docs:
 
-```ts
+```ts fwoosh.config.ts
 export const config: FwooshConfig = {
   basePath: "/docs",
 };
@@ -190,7 +190,7 @@ export const config: FwooshConfig = {
 By default we don't show the docs in workbench mode.
 If you want to see the mdx content in workbench mode set this to true
 
-```ts
+```ts fwoosh.config.ts
 export const config: FwooshConfig = {
   includeMdxInWorkbench: true,
 };
