@@ -3,6 +3,9 @@ import { createStitches } from "@stitches/react";
 import { light, dark } from "@fwoosh/theme-default";
 import { config } from "@fwoosh/app/config";
 
+export const lightClass = config.theme?.lightClass || "";
+export const darkClass = config.theme?.darkClass || "";
+
 type TextSize =
   | "xs"
   | "sm"
@@ -172,9 +175,8 @@ export const darkTheme = createTheme({ ...dark, ...config.theme?.dark });
 export type ColorMode = "light" | "dark";
 
 export function getInitialColorMode(): "light" | "dark" {
-  const persistedColorPreference = window.localStorage.getItem(
-    "fwoosh-color-mode"
-  );
+  const persistedColorPreference =
+    window.localStorage.getItem("fwoosh-color-mode");
   const hasPersistedPreference = typeof persistedColorPreference === "string";
 
   // If the user has explicitly chosen light or dark,

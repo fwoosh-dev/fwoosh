@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { Sun, Moon } from "react-feather";
 import { IconButton, Tooltip } from "@fwoosh/components";
-import { getInitialColorMode, setColorMode, darkTheme } from "@fwoosh/styling";
+import {
+  getInitialColorMode,
+  setColorMode,
+  darkTheme,
+  lightClass,
+  darkClass,
+} from "@fwoosh/styling";
 
 export const ThemeToggle = React.forwardRef(
   (
@@ -17,11 +23,9 @@ export const ThemeToggle = React.forwardRef(
       setTheme(newTheme);
       setColorMode(newTheme);
 
-      if (newTheme === "light") {
-        document.body.classList.remove(darkTheme);
-      } else {
-        document.body.classList.add(darkTheme);
-      }
+      document.body.classList.toggle(darkTheme);
+      document.body.classList.toggle(darkClass);
+      document.body.classList.toggle(lightClass);
     }, [theme]);
 
     return (

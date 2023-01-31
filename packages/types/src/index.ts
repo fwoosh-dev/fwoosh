@@ -164,7 +164,11 @@ export type Theme = NonNullable<
 
 export type ThemeObject = {
   light: Theme;
+  /** A className to apply to the body when light theme is active */
+  lightClass?: string;
   dark: Theme;
+  /** A className to apply to the body when dark theme is active */
+  darkClass?: string;
 };
 
 export interface FwooshOptions {

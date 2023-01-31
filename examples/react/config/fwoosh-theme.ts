@@ -12,6 +12,8 @@ export const light: Theme = {
   },
 };
 
+export const lightClass = "light-mode";
+
 export const dark: Theme = {
   colors: {
     ...(Object.fromEntries(
@@ -22,3 +24,5 @@ export const dark: Theme = {
     ) as Record<string, string>),
   },
 };
+
+export const darkClass = "dark-mode";
