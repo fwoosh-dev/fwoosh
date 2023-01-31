@@ -11,7 +11,7 @@ import { shapeUtils } from "./shapes/index.js";
 import { styled } from "@fwoosh/styling";
 import { components, IconButton, Spinner, Tooltip } from "@fwoosh/components";
 import { Minus, Plus, RotateCw } from "react-feather";
-import { useStoryId } from "@fwoosh/hooks";
+import { useDidChange, useStoryId } from "@fwoosh/hooks";
 import { MDXProvider } from "@mdx-js/react";
 
 const Loading = styled("div", {
@@ -131,6 +131,16 @@ export const Canvas = React.memo(
         machine.send("START_MEASURE");
       }
     }, []);
+
+    if (useDidChange(doneMeasuring) && doneMeasuring) {
+      machine.send("CENTER_SHAPE", {
+        id: storyId,
+        client: {
+          height: containerRef.current?.clientHeight,
+          width: containerRef.current?.clientWidth,
+        },
+      });
+    }
 
     return (
       <MDXProvider components={components as MDXComponents}>
