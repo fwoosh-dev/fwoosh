@@ -46,7 +46,7 @@ export function useShapeMeasure(shape: Shape, id: string) {
     function checkLoadingLoop() {
       const isLoading = checkLoading();
 
-      if (isLoading) {
+      if (isLoading || !root || root.childNodes.length === 0) {
         requestAnimationFrame(checkLoadingLoop);
         return true;
       }
