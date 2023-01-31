@@ -103,11 +103,14 @@ export function render(
   try {
     import("react-dom/client")
       .then(({ createRoot }) => {
-        if (!roots[slug]) {
-          roots[slug] = createRoot(el);
+        const root = createRoot(el);
+
+        if (roots[slug]) {
+          roots[slug].unmount();
+          roots[slug] = root;
         }
 
-        roots[slug].render(app);
+        root.render(app);
       })
       .catch(() => {
         ReactDOM.render(app, el);
