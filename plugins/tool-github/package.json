@@ -3,7 +3,7 @@
   "type": "module",
   "main": "dist/index.js",
   "description": "Add a button to open the websites GitHub repo.",
-  "version": "0.0.109",
+  "version": "0.0.110",
   "license": "MIT",
   "author": {
     "name": "Andrew Lisowski",

@@ -1,7 +1,7 @@
 {
   "name": "@fwoosh/tool-measure",
   "type": "module",
-  "version": "0.0.109",
+  "version": "0.0.110",
   "description": "Toolbar plugin to visualize the box model of a story",
   "main": "dist/index.js",
   "author": "Andrew Lisowski <lisowski54@gmail.com>",
