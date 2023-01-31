@@ -7,7 +7,10 @@ import {
 
 if (getInitialColorMode() === "dark") {
   document.body.classList.add(darkTheme);
-  document.body.classList.add(darkClass);
-} else {
+
+  if (darkClass) {
+    document.body.classList.add(darkClass);
+  }
+} else if (lightClass) {
   document.body.classList.add(lightClass);
 }
