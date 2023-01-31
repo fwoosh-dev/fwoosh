@@ -264,31 +264,30 @@ function SwitchToWorkbenchCommand({ onClose }: { onClose: () => void }) {
       }
     >
       {group.map((item) => {
-        const groups =
-          item.type === "story" ? item.story.grouping.split("/") : [];
+        if (item.type === "tree") {
+          return null;
+        }
+
+        const groups = item.story.grouping.split("/");
 
         return (
           <Command.Item
             key={item.id}
             title={
               <>
-                {item.type === "story" && (
-                  <Grouping>{groups[groups.length - 1]}</Grouping>
-                )}
+                <Grouping>{groups[groups.length - 1]}</Grouping>
                 <span>{item.name}</span>
               </>
             }
             icon={<ArrowRight />}
             onSelect={() => {
-              if (item.type === "story") {
-                if (hasMetaHeld) {
-                  navigate(`/canvas/workbench/${item.story.slug}`);
-                } else {
-                  navigate(`/workbench/${item.story.slug}`);
-                }
-
-                onClose();
+              if (hasMetaHeld) {
+                navigate(`/canvas/workbench/${item.story.slug}`);
+              } else {
+                navigate(`/workbench/${item.story.slug}`);
               }
+
+              onClose();
             }}
           />
         );
