@@ -1,0 +1,1 @@
+import{R as r}from"./jsx-runtime-45b8ed70.js";const o=r.createContext({});function a(t){const e=r.useContext(o);return r.useMemo(()=>typeof t=="function"?t(e):{...e,...t},[e,t])}const i={};function c({components:t,children:e,disableParentContext:u}){let n=a(t);return u&&(n=t||i),r.createElement(o.Provider,{value:n},e)}export{c as M,a as u};

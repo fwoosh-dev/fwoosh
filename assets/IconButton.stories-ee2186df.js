@@ -1,0 +1,1 @@
+import{j as o}from"./jsx-runtime-45b8ed70.js";import{I as t}from"./index-2769b282.js";import{a as n}from"./index-86beff25.js";import{P as i}from"./plus-76396f80.js";import"./index-49f43349.js";const a={title:"Theming/Components/IconButton",component:t},p=()=>o(t,{title:"Add",onClick:n("onClick"),children:o(i,{})});export{p as Basic,a as meta};
