@@ -14,7 +14,7 @@ yarn add -D @fwoosh/tool-github`
 
 Then add it to your `fwoosh.config.ts`:
 
-```ts
+```ts fwoosh.config.ts
 import GitHubPlugin from "@fwoosh/tool-github";
 
 export const config: FwooshConfig = {

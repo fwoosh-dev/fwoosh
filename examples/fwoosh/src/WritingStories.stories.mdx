@@ -54,7 +54,7 @@ export const Basic = () => {
 The `component` property is used to link a group of stories to a component.
 This is used to generate the documentation for the properties of the component in the story.
 
-```tsx Button.stories.tsx
+```tsx Button.stories.tsx focus=3
 export const meta: StoryMeta = {
   title: "Components/Button",
   component: Button,
@@ -66,6 +66,10 @@ export const meta: StoryMeta = {
 You can override the `component` property on a story.
 This is useful if you want to generate documentation for components that only appear on a specific story.
 
-```tsx Button.stories.tsx
+```tsx Button.stories.tsx focus=5
+export const Basic = () => {
+  return <Button>Click Me</Button>;
+};
+
 Basic.component = OtherButton;
 ```

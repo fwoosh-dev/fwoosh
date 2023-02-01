@@ -14,7 +14,7 @@ yarn add -D @fwoosh/react
 
 Then add it to your `fwoosh.config.ts`:
 
-```ts
+```ts fwoosh.config.ts
 export const config: FwooshConfig = {
   plugins: ["@fwoosh/react"],
 };

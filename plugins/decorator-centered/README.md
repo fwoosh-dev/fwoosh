@@ -16,7 +16,7 @@ yarn add -D @fwoosh/decorator-centered`
 
 This decorator work at the story level:
 
-```tsx
+```tsx Example.stories.tsx
 import { centered } from "@fwoosh/decorator-centered";
 
 export const Example: Story = () => <div>Foo</div>;
@@ -26,7 +26,7 @@ Example.decorator = [centered];
 
 At the file level:
 
-```tsx
+```tsx Example.stories.tsx
 import { centered } from "@fwoosh/decorator-centered";
 
 export const meta: StoryMeta = {
@@ -38,7 +38,7 @@ export const meta: StoryMeta = {
 
 And globally in a setup file:
 
-```tsx
+```tsx fwoosh-setup.ts
 import { centered } from "@fwoosh/decorator-centered";
 import { Decorator } from "@fwoosh/react";
 

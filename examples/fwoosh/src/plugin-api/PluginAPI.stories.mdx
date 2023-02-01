@@ -23,7 +23,7 @@ rendering a story.
 
 Here is a simplified examples of what a react plugin might look like:
 
-```tsx
+```tsx ReactPlugin.ts
 import { Plugin, Fwoosh } from "fwoosh";
 import { createRequire } from "module";
 
@@ -69,7 +69,7 @@ This hook registers a function for documentation generation.
 Given a file path it should return docs for all the components
 in that file. That information is then consumed throughout the app.
 
-```tsx
+```tsx ReactPlugin.ts focus=8:10
 import { Plugin, Fwoosh } from "fwoosh";
 import { createRequire } from "module";
 
@@ -88,7 +88,7 @@ export default class ReactPlugin implements Plugin {
 
 This hooks registers a tool in the top toolbar of the workbench.
 
-```tsx
+```tsx MaximizePlugin.ts focus=8:10
 import { Plugin, Fwoosh } from "fwoosh";
 import { createRequire } from "module";
 
@@ -106,9 +106,7 @@ export default class MaximizePlugin implements Plugin {
 The file should export a react component that acts as the toolbar control.
 Here is a simple plugin that maximizes the page when clicked.
 
-**`toolbar.tsx`:**
-
-```tsx
+```tsx toolbar.tsx
 import React from "react";
 import { IconButton, Toolbar } from "@fwoosh/components";
 
@@ -135,7 +133,7 @@ Panels are great for showing detailed information or controls for a particular s
 It should add a path + title to the array.
 The title is used for the text of the Tab trigger.
 
-```tsx
+```tsx DescriptionPanelPlugin.ts focus=8:17
 import { Plugin, Fwoosh } from "fwoosh";
 import { createRequire } from "module";
 
@@ -160,9 +158,7 @@ export default class DescriptionPanelPlugin implements Plugin {
 The file should export a react component that renders the panel.
 Here is a simplified version of the plugin that display's each stories comment as a panel.
 
-**`panel.tsx`:**
-
-```tsx
+```tsx panel.tsx
 import React from "react";
 import { MDXContent, styled, components } from "@fwoosh/components";
 import { useParams } from "react-router-dom";
@@ -192,7 +188,7 @@ You can configure a panel to only show when a story has parameters.
 
 Now the following panel will only be shown when the story has a `description` parameter.
 
-```tsx
+```tsx DescriptionPlugin.ts focus=15
 import { Plugin, Fwoosh } from "fwoosh";
 import { createRequire } from "module";
 
@@ -219,7 +215,7 @@ export default class DescriptionPlugin implements Plugin {
 
 Modify the Vite configuration used to load your fwoosh instance.
 
-```tsx
+```tsx DescriptionPlugin.ts focus=8:11
 import { Plugin, Fwoosh } from "fwoosh";
 import { createRequire } from "module";
 

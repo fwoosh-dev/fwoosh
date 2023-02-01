@@ -24,7 +24,7 @@ A theme simply sets the values of the tokens used by Fwoosh.
 
 > NOTE: For colors we suggest you use [Radix colors](https://www.radix-ui.com/colors)
 
-```tsx
+```tsx my-theme.ts
 import { Theme } from "@fwoosh/types";
 import { slate, blue, blueDark, slateDark } from "@radix-ui/colors";
 
@@ -60,7 +60,7 @@ Fwoosh offers the ability to take full control of most presentation and layout c
 
 You can add component overrides to Fwoosh by using the <Link to="Configuration#componentOverrides">`componentOverrides` options</Link>.
 
-```ts
+```ts fwoosh.config.ts
 export const config: FwooshConfig = {
   componentOverrides: "./path/to/componentOverrides.tsx",
 };
@@ -68,7 +68,7 @@ export const config: FwooshConfig = {
 
 Once you have that configured create the file that contains your overrides.
 
-```tsx
+```tsx my-theme.ts
 import * as React from "react";
 
 export const Spinner = () => <div>loading</div>;

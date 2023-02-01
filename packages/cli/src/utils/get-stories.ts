@@ -33,19 +33,11 @@ function sanitizeMarkdownString(str: string) {
     .join("\n");
 }
 
-// @ts-ignore
-import { remove } from "unist-util-remove";
-
 export async function convertMarkdownToHtml(markdown: string) {
-  console.log({ markdown });
   const compiledMdx = await compile(markdown, {
-    remarkPlugins: [
-      [remarkCodeHike, { autoImport: false, ...codeHikeConfig }],
-      // () => (tree) => remove(tree, "mdxjsEsm"),
-    ],
+    remarkPlugins: [[remarkCodeHike, { autoImport: false, ...codeHikeConfig }]],
     outputFormat: "function-body",
     providerImportSource: "@mdx-js/react",
-    // baseUrl: "/",
   });
 
   return String(compiledMdx);

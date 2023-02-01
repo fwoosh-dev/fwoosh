@@ -14,7 +14,7 @@ yarn add -D @fwoosh/panel-designs`
 
 Then add it to your `fwoosh.config.ts`:
 
-```ts
+```ts fwoosh.config.ts
 export const config: FwooshConfig = {
   plugins: ["@fwoosh/panel-designs`"],
 };
@@ -24,7 +24,7 @@ export const config: FwooshConfig = {
 
 To use this plugin you can either configure a link to your design in the file meta:
 
-```tsx
+```tsx Example.stories.tsx
 export const meta: StoryMeta = {
   parameters: {
     designs: "https://figma.com/file/ASDF",
@@ -34,7 +34,7 @@ export const meta: StoryMeta = {
 
 or directly on a story:
 
-```tsx
+```tsx Example.stories.tsx
 export const BasicStory = () => {};
 
 BasicStory.parameters = {
@@ -48,7 +48,7 @@ BasicStory.parameters = {
 
 Only show the panel if there are parameters configured for the story.
 
-```tsx
+```tsx fwoosh.config.ts
 import { FwooshOptions } from "fwoosh";
 import DesignsPanel from "@fwoosh/panel-designs";
 

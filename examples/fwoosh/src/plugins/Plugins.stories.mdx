@@ -19,7 +19,7 @@ There are four types of plugins:
 
 Plugins are configured in the `fwoosh.config.ts` file.
 
-```ts
+```ts fwoosh.config.ts focus=2:7
 export const config: FwooshConfig = {
   plugins: [
     // Just list the name of the plugin to use it
@@ -33,7 +33,7 @@ export const config: FwooshConfig = {
 You can also import the plugins directly and use them in your config.
 This provides a better auto-complete experience in your editor.
 
-```ts
+```ts focus=1,5:7
 import StoryDescriptionPanel from "@fwoosh/panel-story-description";
 
 export const config: FwooshConfig = {
@@ -52,7 +52,7 @@ Plugins can also be configured using parameters.
 Parameters can be configured in a story file's `meta` object.
 This will set the parameter for all stories in the file.
 
-```tsx
+```tsx Example.stories.tsx focus=2:4
 export const meta: StoryMeta = {
   parameters: {
     PLUGIN: "OPTION",
@@ -63,7 +63,7 @@ export const meta: StoryMeta = {
 or directly on a story.
 This will set the parameter for that specific story.
 
-```tsx
+```tsx Example.stories.tsx focus=3:5
 export const BasicStory = () => {};
 
 BasicStory.parameters = {
@@ -75,7 +75,7 @@ BasicStory.parameters = {
 
 To disable a plugin, set the parameter to `false`.
 
-```tsx
+```tsx Example.stories.tsx focus=3:5
 export const BasicStory = () => {};
 
 BasicStory.parameters = {

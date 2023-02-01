@@ -72,12 +72,22 @@ const ShowCodeButton = styled("button", {
   borderColor: "$gray7",
   borderTopLeftRadius: "$round",
   color: "$gray10",
+  zIndex: 100,
 });
 
 const CollapsibleRoot = styled(Collapsible.Root, {
   position: "relative",
   mt: 8,
   mb: 12,
+
+  "& .ch-codeblock": {
+    margin: 0,
+  },
+
+  "&[data-state='open'] :is(.ch-codeblock,.ch-code)": {
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
+  },
 });
 
 const StoryCode = React.memo(({ code }: { code: string }) => {
