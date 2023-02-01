@@ -1,9 +1,8 @@
 import React from "react";
 import { stories } from "@fwoosh/app/stories";
-import { StyledMarkdown } from "@fwoosh/components";
+import { MDXContent } from "@fwoosh/components";
 import { styled } from "@fwoosh/styling";
 import { useHighlightedCode, useStoryId } from "@fwoosh/hooks";
-import { MDXRemote } from "./MDXContent";
 
 const Panel = styled("div", {
   height: "100%",
@@ -25,11 +24,19 @@ const Panel = styled("div", {
   "& pre pre": {
     p: 4,
   },
+
+  "& .ch-codeblock": {
+    margin: 0,
+    borderRadius: 0,
+    height: "100%",
+    position: "sticky",
+    top: 4,
+  },
 });
 
 function HighlightedSource({ code }: { code: string }) {
   const highlightedCode = useHighlightedCode({ code });
-  return <MDXRemote compiledSource={highlightedCode} />;
+  return <MDXContent compiledSource={highlightedCode} />;
 }
 
 export default function SourcePanel() {

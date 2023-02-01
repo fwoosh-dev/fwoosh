@@ -15,5 +15,6 @@ const theme = JSON.parse(
 
 export const codeHikeConfig: Parameters<typeof remarkCodeHike>[0] = {
   theme,
+  showCopyButton: true,
   skipLanguages: [],
 };

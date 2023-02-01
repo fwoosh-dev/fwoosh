@@ -1,38 +1,16 @@
 import React, { useMemo } from "react";
-import { components } from "@fwoosh/components";
 import * as mdx from "@mdx-js/react";
 import * as jsxRuntime from "react/jsx-runtime";
 import { CH } from "@code-hike/mdx/components";
 
-// requestIdleCallback types found here: https://github.com/microsoft/TypeScript/issues/21309
-type RequestIdleCallbackHandle = number;
-type RequestIdleCallbackOptions = {
-  timeout?: number;
-};
-type RequestIdleCallbackDeadline = {
-  readonly didTimeout: boolean;
-  timeRemaining: () => number;
-};
-
-declare global {
-  interface Window {
-    requestIdleCallback: (
-      callback: (deadline: RequestIdleCallbackDeadline) => void,
-      opts?: RequestIdleCallbackOptions
-    ) => RequestIdleCallbackHandle;
-    cancelIdleCallback: (handle: RequestIdleCallbackHandle) => void;
-  }
-}
+import { components } from "./components.js";
 
 const allComponents = {
   ...components,
   CH,
 };
 
-/**
- * Renders compiled source from next-mdx-remote/serialize.
- */
-export function MDXRemote({ compiledSource }: { compiledSource: string }) {
+export function MDXContent({ compiledSource }: { compiledSource: string }) {
   const Content: React.ElementType = useMemo(() => {
     const fullScope = Object.assign({ opts: { ...mdx, ...jsxRuntime } });
     const keys = Object.keys(fullScope);
@@ -43,7 +21,6 @@ export function MDXRemote({ compiledSource }: { compiledSource: string }) {
     // and all our components in scope for the function, which is the case here
     // we pass the names (via keys) in as the function's args, and execute the
     // function with the actual values.
-    console.log("compiledSource", compiledSource);
     const hydrateFn = Reflect.construct(
       Function,
       keys.concat(`${compiledSource}`)

@@ -104,8 +104,9 @@ const SidebarFolderOpenIndicator = (overrides.SidebarFolderOpenIndicator ||
   SidebarFolderOpenIndicatorDefault) as typeof SidebarFolderOpenIndicatorDefault;
 const SIDEBAR_ITEM_INDENT = (overrides.SIDEBAR_ITEM_INDENT ||
   SIDEBAR_ITEM_INDENTDefault) as typeof SIDEBAR_ITEM_INDENTDefault;
-const SidebarFolderOpenIndicatorWrapper = (overrides.SidebarFolderOpenIndicatorWrapper ||
-  SidebarFolderOpenIndicatorWrapperDefault) as typeof SidebarFolderOpenIndicatorWrapperDefault;
+const SidebarFolderOpenIndicatorWrapper =
+  (overrides.SidebarFolderOpenIndicatorWrapper ||
+    SidebarFolderOpenIndicatorWrapperDefault) as typeof SidebarFolderOpenIndicatorWrapperDefault;
 const SidebarItem = (overrides.SidebarItem ||
   SidebarItemDefault) as typeof SidebarItemDefault;
 const SidebarItems = (overrides.SidebarItems ||
@@ -114,6 +115,8 @@ const SidebarLayout = (overrides.SidebarLayout ||
   SidebarLayoutDefault) as typeof SidebarLayoutDefault;
 const SidebarSectionTitle = (overrides.SidebarSectionTitle ||
   SidebarSectionTitleDefault) as typeof SidebarSectionTitleDefault;
+
+export * from "./MDXContent.js";
 
 export {
   Tabs,
