@@ -10,7 +10,7 @@ const require = createRequire(import.meta.url);
 // darkTheme: "github-dark",
 
 const theme = JSON.parse(
-  fs.readFileSync(require.resolve("shiki/themes/github-light.json"), "utf8")
+  fs.readFileSync(require.resolve("shiki/themes/github-dark.json"), "utf8")
 );
 
 export const codeHikeConfig: Parameters<typeof remarkCodeHike>[0] = {
