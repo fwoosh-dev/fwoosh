@@ -1,6 +1,5 @@
 import * as overrides from "@fwoosh/app/overrides";
 
-import { StyledMarkdown } from "./StyledMarkdown.js";
 import { DelayedRender, Spinner as SpinnerDefault } from "./Spinner.js";
 import {
   HeaderBar as HeaderBarDefault,
@@ -123,7 +122,6 @@ export {
   Toolbar,
   QuickNav,
   ChevronRightIcon,
-  StyledMarkdown,
   ErrorBoundary,
   Sidebar,
   SidebarActiveDot,

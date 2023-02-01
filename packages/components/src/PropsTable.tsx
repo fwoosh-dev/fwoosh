@@ -2,9 +2,9 @@ import React from "react";
 import { useDocgen } from "@fwoosh/app/docs";
 import { styled } from "@fwoosh/styling";
 
-import { StyledMarkdown } from "./StyledMarkdown.js";
 import { components } from "./components.js";
 import * as Tabs from "./Tabs.js";
+import { MDXContent } from "./MDXContent.js";
 
 const NoPropMessage = styled(components.p, {
   color: "$gray10",
@@ -19,7 +19,7 @@ const Table = ({ doc }: TableProps) => {
 
   return (
     <>
-      {doc.description && <StyledMarkdown>{doc.description}</StyledMarkdown>}
+      {doc.description && <MDXContent compiledSource={doc.description} />}
       {rows.length > 0 ? (
         <components.table>
           <thead>

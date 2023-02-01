@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { useId } from "@radix-ui/react-id";
-import { BasicStoryData, StoryBasicTreeItem, StoryMeta } from "@fwoosh/types";
+import { BasicStoryData, StoryMeta } from "@fwoosh/types";
 import { useDocgen } from "@fwoosh/app/docs";
 import { styled } from "@fwoosh/styling";
 import {
@@ -8,17 +8,16 @@ import {
   PageWrapper,
   Spinner,
   PropsTable,
-  StyledMarkdown,
   QuickNav,
   DocsLayout,
+  MDXContent,
 } from "@fwoosh/components";
 import * as Collapsible from "@radix-ui/react-collapsible";
 import { capitalCase, paramCase } from "change-case";
 import { titleCase } from "title-case";
 import { StorySidebarChildItem } from "@fwoosh/types";
-import { useHighlightedCode, useDocsPath } from "@fwoosh/hooks";
+import { useHighlightedCode } from "@fwoosh/hooks";
 
-import * as styles from "./DocsPage.module.css";
 import { useRender } from "../hooks/useRender";
 import { PageSwitchButton } from "./PageSwitchButtons";
 import { useActiveHeader } from "../hooks/useActiveHeader";
@@ -88,11 +87,7 @@ const StoryCode = React.memo(({ code }: { code: string }) => {
     return null;
   }
 
-  return (
-    <StyledMarkdown className={styles.showingCode}>
-      {highlightedCode}
-    </StyledMarkdown>
-  );
+  return <MDXContent compiledSource={highlightedCode} />;
 });
 
 const OverlaySpinner = styled("div", {
@@ -184,7 +179,7 @@ export const PageContent = ({
     docsIntro = (
       <>
         {firstStory.story.comment && (
-          <StyledMarkdown>{firstStory.story.comment}</StyledMarkdown>
+          <MDXContent compiledSource={firstStory.story.comment} />
         )}
         <StoryDiv
           slug={firstStory.story.slug}
@@ -231,7 +226,7 @@ export const PageContent = ({
                   </components.h3>
                 </HeaderWrapper>
                 {story.story.comment && (
-                  <StyledMarkdown>{story.story.comment}</StyledMarkdown>
+                  <MDXContent compiledSource={story.story.comment} />
                 )}
                 <StoryDiv slug={story.story.slug} code={story.story.code} />
                 <Suspense

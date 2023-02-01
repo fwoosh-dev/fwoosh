@@ -164,7 +164,7 @@ Here is a simplified version of the plugin that display's each stories comment a
 
 ```tsx
 import React from "react";
-import { StyledMarkdown, styled, components } from "@fwoosh/components";
+import { MDXContent, styled, components } from "@fwoosh/components";
 import { useParams } from "react-router-dom";
 import { stories } from "@fwoosh/app/stories";
 
@@ -180,7 +180,7 @@ export default function DescriptionPanel() {
 
   return (
     <Panel>
-      <StyledMarkdown>{story.comment}</StyledMarkdown>
+      <MDXContent compiledSource={story.comment} />
     </Panel>
   );
 }

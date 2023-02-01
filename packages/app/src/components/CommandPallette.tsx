@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Command } from "@fwoosh/components";
-import { capitalCase, headerCase, paramCase } from "change-case";
+import { headerCase, paramCase } from "change-case";
 import { useLocation, useNavigate } from "react-router-dom";
 import { stories, tree } from "@fwoosh/app/stories";
 import commandScore from "command-score";
