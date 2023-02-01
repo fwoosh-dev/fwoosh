@@ -1,7 +1,6 @@
 import * as React from "react";
 import type { StoryMeta } from "fwoosh";
 import type { Story } from "@fwoosh/react/dist/types";
-import { ChevronDown } from "react-feather";
 import { Select } from "@fwoosh/components";
 
 export const meta: StoryMeta = {

@@ -804,9 +804,9 @@ __metadata:
   languageName: node
   linkType: soft
 
-"@fwoosh/components@link:../../packages/components::locator=%40fwoosh%2Ffwoosh-example%40workspace%3Aexamples%2Ffwoosh":
+"@fwoosh/components@link:../../packages/components::locator=%40fwoosh%2Fdocs%40workspace%3Aexamples%2Fdocs":
   version: 0.0.0-use.local
-  resolution: "@fwoosh/components@link:../../packages/components::locator=%40fwoosh%2Ffwoosh-example%40workspace%3Aexamples%2Ffwoosh"
+  resolution: "@fwoosh/components@link:../../packages/components::locator=%40fwoosh%2Fdocs%40workspace%3Aexamples%2Fdocs"
   languageName: node
   linkType: soft
 
@@ -839,7 +839,9 @@ __metadata:
   resolution: "@fwoosh/components@workspace:packages/components"
   dependencies:
     "@alisowski/cmdk": ^0.1.20
+    "@code-hike/mdx": ^0.8.0
     "@fwoosh/styling": "link:../styling"
+    "@mdx-js/react": ^2.2.1
     "@radix-ui/react-dropdown-menu": ^2.0.2
     "@radix-ui/react-select": ^1.2.0
     "@radix-ui/react-tabs": ^1.0.2
@@ -847,7 +849,6 @@ __metadata:
     "@radix-ui/react-tooltip": ^1.0.3
     "@stitches/react": ^1.2.8
     "@types/react": ^18.0.26
-    interweave: ^13.0.0
     react: ^18.2.0
     react-dom: ^18.2.0
     react-feather: ^2.0.10
@@ -868,9 +869,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fwoosh/fwoosh-example@workspace:examples/fwoosh":
+"@fwoosh/docs@workspace:examples/docs":
   version: 0.0.0-use.local
-  resolution: "@fwoosh/fwoosh-example@workspace:examples/fwoosh"
+  resolution: "@fwoosh/docs@workspace:examples/docs"
   dependencies:
     "@fwoosh/components": "link:../../packages/components"
     "@fwoosh/panel-actions": "link:../../plugins/panel-actions"
@@ -981,9 +982,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fwoosh/panel-actions@link:../../plugins/panel-actions::locator=%40fwoosh%2Ffwoosh-example%40workspace%3Aexamples%2Ffwoosh":
+"@fwoosh/panel-actions@link:../../plugins/panel-actions::locator=%40fwoosh%2Fdocs%40workspace%3Aexamples%2Fdocs":
   version: 0.0.0-use.local
-  resolution: "@fwoosh/panel-actions@link:../../plugins/panel-actions::locator=%40fwoosh%2Ffwoosh-example%40workspace%3Aexamples%2Ffwoosh"
+  resolution: "@fwoosh/panel-actions@link:../../plugins/panel-actions::locator=%40fwoosh%2Fdocs%40workspace%3Aexamples%2Fdocs"
   languageName: node
   linkType: soft
 
@@ -1070,9 +1071,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fwoosh/react@link:../../plugins/react::locator=%40fwoosh%2Ffwoosh-example%40workspace%3Aexamples%2Ffwoosh":
+"@fwoosh/react@link:../../plugins/react::locator=%40fwoosh%2Fdocs%40workspace%3Aexamples%2Fdocs":
   version: 0.0.0-use.local
-  resolution: "@fwoosh/react@link:../../plugins/react::locator=%40fwoosh%2Ffwoosh-example%40workspace%3Aexamples%2Ffwoosh"
+  resolution: "@fwoosh/react@link:../../plugins/react::locator=%40fwoosh%2Fdocs%40workspace%3Aexamples%2Fdocs"
   languageName: node
   linkType: soft
 
@@ -7082,9 +7083,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"fwoosh@link:../../packages/cli::locator=%40fwoosh%2Ffwoosh-example%40workspace%3Aexamples%2Ffwoosh":
+"fwoosh@link:../../packages/cli::locator=%40fwoosh%2Fdocs%40workspace%3Aexamples%2Fdocs":
   version: 0.0.0-use.local
-  resolution: "fwoosh@link:../../packages/cli::locator=%40fwoosh%2Ffwoosh-example%40workspace%3Aexamples%2Ffwoosh"
+  resolution: "fwoosh@link:../../packages/cli::locator=%40fwoosh%2Fdocs%40workspace%3Aexamples%2Fdocs"
   languageName: node
   linkType: soft
 

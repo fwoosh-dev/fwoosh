@@ -32,6 +32,10 @@ const Panel = styled("div", {
     position: "sticky",
     top: 4,
   },
+
+  "& .ch-code-scroll-content > *": {
+    transform: "translateX(0px) translateY(20.367px) scale(1) !important",
+  },
 });
 
 function HighlightedSource({ code }: { code: string }) {

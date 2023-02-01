@@ -48,3 +48,7 @@ nav.toc {
 html {
   font-family: Inter, sans-serif;
 }
+
+[hidden] {
+  display: none !important;
+}
