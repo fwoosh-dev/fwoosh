@@ -13,6 +13,48 @@ There are two main ways to theme Fwoosh:
 1. Providing custom theme tokens
 2. Overriding components
 
+## Defining a Theme
+
+A theme is define like the following:
+
+```ts
+{
+  // The type of theme
+  type: "light" | "dark"
+  // The tokens used to render the theme
+  tokens: {},
+  // Optional class name to apply to the theme
+  class: "light-theme"
+}
+```
+
+You can either define the theme directly in your `fwoosh.config.ts`:
+
+```ts fwoosh.config.ts
+export const config: FwooshConfig = {
+  theme: [
+    {
+      type: "light",
+      class: "light-theme",
+    },
+    {
+      type: "dark",
+      class: "dark-theme",
+    },
+  ],
+};
+```
+
+You can also use a path or a package name for configuring the theme.
+
+```ts fwoosh.config.ts
+export const config: FwooshConfig = {
+  theme: "@my-company/fwoosh-theme",
+};
+```
+
+This file must have a named export names `themes`.
+
 ## Tokens
 
 Tokens are the building blocks of a theme.

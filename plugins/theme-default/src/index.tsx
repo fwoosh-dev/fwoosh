@@ -1,4 +1,4 @@
-import { Tokens } from "@fwoosh/types";
+import { ThemeObject, Tokens } from "@fwoosh/types";
 import { mauve, pink, mauveDark, pinkDark } from "@radix-ui/colors";
 
 const space = {
@@ -40,6 +40,8 @@ const space = {
   auto: "auto",
 };
 
+export type Space = keyof typeof space;
+
 const sizes = {
   xs: "20rem",
   sm: "24rem",
@@ -57,36 +59,47 @@ const sizes = {
 type Gray = `gray${0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11}`;
 type Primary = `primary${0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11}`;
 
-export const light = {
-  colors: {
-    ...(Object.fromEntries(
-      Object.values(mauve).map((color, index) => [`gray${index}`, color])
-    ) as Record<Gray, string>),
-    ...(Object.fromEntries(
-      Object.values(pink).map((color, index) => [`primary${index}`, color])
-    ) as Record<Primary, string>),
-  },
-  space: space,
-  sizes: { ...space, ...sizes },
-  radii: {
-    sm: "2px",
-    round: "4px",
-  },
-  borderWidths: {
-    sm: "1px",
-  },
-  borderStyles: {
-    solid: "solid",
-  },
-} satisfies Tokens;
+export const baseTheme: ThemeObject = {
+  type: "light",
+  tokens: {
+    colors: {
+      ...(Object.fromEntries(
+        Object.values(mauve).map((color, index) => [`gray${index}`, color])
+      ) as Record<Gray, string>),
+      ...(Object.fromEntries(
+        Object.values(pink).map((color, index) => [`primary${index}`, color])
+      ) as Record<Primary, string>),
+    },
+    space: space,
+    sizes: { ...space, ...sizes },
+    radii: {
+      sm: "2px",
+      round: "4px",
+    },
+    borderWidths: {
+      sm: "1px",
+    },
+    borderStyles: {
+      solid: "solid",
+    },
+  } satisfies Tokens,
+};
 
-export const dark = {
-  colors: {
-    ...Object.fromEntries(
-      Object.values(mauveDark).map((color, index) => [`gray${index}`, color])
-    ),
-    ...Object.fromEntries(
-      Object.values(pinkDark).map((color, index) => [`primary${index}`, color])
-    ),
-  },
-} satisfies Tokens;
+export const darkTheme: ThemeObject = {
+  type: "dark",
+  tokens: {
+    colors: {
+      ...Object.fromEntries(
+        Object.values(mauveDark).map((color, index) => [`gray${index}`, color])
+      ),
+      ...Object.fromEntries(
+        Object.values(pinkDark).map((color, index) => [
+          `primary${index}`,
+          color,
+        ])
+      ),
+    },
+  } satisfies Tokens,
+};
+
+export const themes = [baseTheme, darkTheme];

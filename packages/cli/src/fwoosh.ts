@@ -126,11 +126,29 @@ export class Fwoosh implements FwooshClass {
     };
 
     if (theme) {
-      if (typeof theme === "object") {
-        this.options.theme = theme;
+      if (Array.isArray(theme)) {
+        this.options.themes = theme;
+      } else if (typeof theme === "object") {
+        this.options.themes = [theme];
       } else {
-        this.options.theme = require(theme);
+        const loaded = require(theme);
+
+        if (Array.isArray(loaded)) {
+          this.options.themes = loaded;
+        } else if (typeof theme === "object") {
+          this.options.themes = [loaded];
+        } else {
+          throw new Error(
+            `Invalid theme. Expected an array or object, got ${JSON.stringify(
+              loaded,
+              null,
+              2
+            )}`
+          );
+        }
       }
+    } else {
+      this.options.themes = [];
     }
 
     log.info("Loaded options:", this.options);

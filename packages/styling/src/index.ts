@@ -1,10 +1,16 @@
 import * as React from "react";
 import { createStitches } from "@stitches/react";
-import { light, dark } from "@fwoosh/theme-default";
+import * as base from "@fwoosh/theme-default";
 import { config } from "@fwoosh/app/config";
 
-export const lightClass = config.theme?.lightClass || "";
-export const darkClass = config.theme?.darkClass || "";
+console.log(config);
+
+const lightThemeOverride = config.themes.find((t) => t.type === "light");
+
+const darkThemeOverride = config.themes.find((t) => t.type === "light");
+
+export const lightClass = lightThemeOverride?.class || "";
+export const darkClass = darkThemeOverride?.class || "";
 
 type TextSize =
   | "xs"
@@ -20,7 +26,10 @@ type TextSize =
   | "8xl"
   | "9xl";
 
-type Space = NonNullable<typeof light.space>;
+const baseTheme = {
+  ...base.baseTheme.tokens,
+  ...lightThemeOverride?.tokens,
+};
 
 export const {
   styled,
@@ -31,7 +40,7 @@ export const {
   theme,
   createTheme,
 } = createStitches({
-  theme: { ...light, ...(config.theme?.light as typeof light | undefined) },
+  theme: baseTheme,
   media: {
     sm: "(min-width: 640px)",
     md: "(min-width: 768px)",
@@ -43,51 +52,51 @@ export const {
     linearGradient: (value: string) => ({
       backgroundImage: `linear-gradient(${value})`,
     }),
-    m: (value: keyof Space) => ({
-      margin: light.space![value],
+    m: (value: base.Space) => ({
+      margin: baseTheme.space?.[value],
     }),
-    mt: (value: keyof Space) => ({
-      marginTop: light.space![value],
+    mt: (value: base.Space) => ({
+      marginTop: baseTheme.space?.[value],
     }),
-    mr: (value: keyof Space) => ({
-      marginRight: light.space![value],
+    mr: (value: base.Space) => ({
+      marginRight: baseTheme.space?.[value],
     }),
-    mb: (value: keyof Space) => ({
-      marginBottom: light.space![value],
+    mb: (value: base.Space) => ({
+      marginBottom: baseTheme.space?.[value],
     }),
-    ml: (value: keyof Space) => ({
-      marginLeft: light.space![value],
+    ml: (value: base.Space) => ({
+      marginLeft: baseTheme.space?.[value],
     }),
-    mx: (value: keyof Space) => ({
-      marginLeft: light.space![value],
-      marginRight: light.space![value],
+    mx: (value: base.Space) => ({
+      marginLeft: baseTheme.space?.[value],
+      marginRight: baseTheme.space?.[value],
     }),
-    my: (value: keyof Space) => ({
-      marginTop: light.space![value],
-      marginBottom: light.space![value],
+    my: (value: base.Space) => ({
+      marginTop: baseTheme.space?.[value],
+      marginBottom: baseTheme.space?.[value],
     }),
-    p: (value: keyof Space) => ({
-      padding: light.space![value],
+    p: (value: base.Space) => ({
+      padding: baseTheme.space?.[value],
     }),
-    pt: (value: keyof Space) => ({
-      paddingTop: light.space![value],
+    pt: (value: base.Space) => ({
+      paddingTop: baseTheme.space?.[value],
     }),
-    pr: (value: keyof Space) => ({
-      paddingRight: light.space![value],
+    pr: (value: base.Space) => ({
+      paddingRight: baseTheme.space?.[value],
     }),
-    pb: (value: keyof Space) => ({
-      paddingBottom: light.space![value],
+    pb: (value: base.Space) => ({
+      paddingBottom: baseTheme.space?.[value],
     }),
-    pl: (value: keyof Space) => ({
-      paddingLeft: light.space![value],
+    pl: (value: base.Space) => ({
+      paddingLeft: baseTheme.space?.[value],
     }),
-    px: (value: keyof Space) => ({
-      paddingLeft: light.space![value],
-      paddingRight: light.space![value],
+    px: (value: base.Space) => ({
+      paddingLeft: baseTheme.space?.[value],
+      paddingRight: baseTheme.space?.[value],
     }),
-    py: (value: keyof Space) => ({
-      paddingTop: light.space![value],
-      paddingBottom: light.space![value],
+    py: (value: base.Space) => ({
+      paddingTop: baseTheme.space?.[value],
+      paddingBottom: baseTheme.space?.[value],
     }),
     text: (value: TextSize) => {
       if (value === "xs") {
@@ -170,7 +179,10 @@ export const {
   },
 });
 
-export const darkTheme = createTheme({ ...dark, ...config.theme?.dark });
+export const darkTheme = createTheme({
+  ...base.darkTheme.tokens,
+  ...darkThemeOverride?.tokens,
+});
 
 export type ColorMode = "light" | "dark";
 

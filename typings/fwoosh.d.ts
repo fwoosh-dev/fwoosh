@@ -14,7 +14,7 @@ declare module "@fwoosh/app/config" {
     FwooshOptions,
     "title" | "includeMdxInWorkbench"
   > & {
-    theme: ThemeObject;
+    themes: ThemeObject[];
   };
 }
 
