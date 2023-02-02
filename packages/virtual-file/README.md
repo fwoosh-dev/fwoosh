@@ -6,7 +6,7 @@ Utility function to help create virtual files for fwoosh. Enables authoring in T
 
 The following will load the contents of `my-file.ts` as ESM JS.
 
-```js
+```js example.js
 import { loadVirtualFile } from "@fwoosh/virtual-file";
 import { createRequire } from "module";
 
@@ -22,7 +22,7 @@ You can inject variables into loaded files by using `process.env.YOUR_VARIABLE` 
 
 Give this file:
 
-```tsx
+```tsx my-file.ts
 export function getVariable() {
   return process.env.YOUR_VARIABLE;
 }
@@ -30,7 +30,7 @@ export function getVariable() {
 
 And this usage:
 
-```tsx
+```tsx my-usage.ts
 await loadVirtualFile(require.resolve("./my-file.js"), {
   YOUR_VARIABLE: 1000,
 });
@@ -38,7 +38,7 @@ await loadVirtualFile(require.resolve("./my-file.js"), {
 
 The virtual file will be:
 
-```tsx
+```tsx output.ts
 export function getVariable() {
   return 1000;
 }

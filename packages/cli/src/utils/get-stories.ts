@@ -5,29 +5,20 @@ import ms from "pretty-ms";
 import { performance } from "perf_hooks";
 import { Story, StoryMeta } from "@fwoosh/types";
 import { chunkPromisesTimes, createStorySlug, log } from "@fwoosh/utils";
+import { compile } from "@mdx-js/mdx";
 
 import glob from "fast-glob";
 import path from "path";
 import { createRequire } from "module";
 import gfm from "remark-gfm";
 import yaml from "js-yaml";
-import { unified } from "unified";
-import remarkParse from "remark-parse";
-import remarkRehype from "remark-rehype";
-import rehypeStringify from "rehype-stringify";
+import { remarkCodeHike } from "@code-hike/mdx";
 
 import { FwooshOptionsLoaded, ResolvedStoryMeta } from "@fwoosh/types";
-import { shikiConfig } from "./shiki-config.js";
+import { getCodeHikeConfig } from "./code-hike-config.js";
 import { endent } from "./endent.js";
 
 const require = createRequire(import.meta.url);
-
-const markdownToHtml = unified()
-  .use(remarkParse)
-  .use(remarkRehype)
-  .use(...shikiConfig)
-  .use(rehypeStringify)
-  .use(gfm);
 
 /** Replaces characters in a string that are problematic when inserting into a template string  */
 function sanitizeTemplateString(str: string) {
@@ -43,8 +34,16 @@ function sanitizeMarkdownString(str: string) {
 }
 
 export async function convertMarkdownToHtml(markdown: string) {
-  const html = await markdownToHtml.process(markdown.trim());
-  return sanitizeTemplateString(String(html));
+  const compiledMdx = await compile(markdown, {
+    remarkPlugins: [
+      gfm,
+      [remarkCodeHike, { autoImport: false, ...getCodeHikeConfig() }],
+    ],
+    outputFormat: "function-body",
+    providerImportSource: "@mdx-js/react",
+  });
+
+  return String(compiledMdx);
 }
 
 async function getComment(contents: string, i: number) {

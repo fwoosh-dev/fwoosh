@@ -1,6 +1,5 @@
 import * as overrides from "@fwoosh/app/overrides";
 
-import { StyledMarkdown } from "./StyledMarkdown.js";
 import { DelayedRender, Spinner as SpinnerDefault } from "./Spinner.js";
 import {
   HeaderBar as HeaderBarDefault,
@@ -104,8 +103,9 @@ const SidebarFolderOpenIndicator = (overrides.SidebarFolderOpenIndicator ||
   SidebarFolderOpenIndicatorDefault) as typeof SidebarFolderOpenIndicatorDefault;
 const SIDEBAR_ITEM_INDENT = (overrides.SIDEBAR_ITEM_INDENT ||
   SIDEBAR_ITEM_INDENTDefault) as typeof SIDEBAR_ITEM_INDENTDefault;
-const SidebarFolderOpenIndicatorWrapper = (overrides.SidebarFolderOpenIndicatorWrapper ||
-  SidebarFolderOpenIndicatorWrapperDefault) as typeof SidebarFolderOpenIndicatorWrapperDefault;
+const SidebarFolderOpenIndicatorWrapper =
+  (overrides.SidebarFolderOpenIndicatorWrapper ||
+    SidebarFolderOpenIndicatorWrapperDefault) as typeof SidebarFolderOpenIndicatorWrapperDefault;
 const SidebarItem = (overrides.SidebarItem ||
   SidebarItemDefault) as typeof SidebarItemDefault;
 const SidebarItems = (overrides.SidebarItems ||
@@ -115,12 +115,13 @@ const SidebarLayout = (overrides.SidebarLayout ||
 const SidebarSectionTitle = (overrides.SidebarSectionTitle ||
   SidebarSectionTitleDefault) as typeof SidebarSectionTitleDefault;
 
+export * from "./MDXContent.js";
+
 export {
   Tabs,
   Toolbar,
   QuickNav,
   ChevronRightIcon,
-  StyledMarkdown,
   ErrorBoundary,
   Sidebar,
   SidebarActiveDot,

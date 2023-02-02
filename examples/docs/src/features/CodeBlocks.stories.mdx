@@ -1,0 +1,149 @@
+---
+title: Features/Code Blocks
+---
+
+# Code Blocks
+
+Fwoosh comes with with [Code Hike](https://codehike.org/) built in.
+Coke hike enhances your code blocks with editor-grade syntax highlighting and a host of useful features for documenting code.
+All of the markdown content in your site (including jsDoc!) is automatically enhanced with Code Hike.
+
+For a full list of Code Hike features, see the [Code Hike documentation](https://codehike.org/docs/).
+
+## Code Hike Features
+
+### File Titles
+
+Add a title to your code blocks by adding a comment with the title in it.
+
+```tsx button.stories.tsx
+export const Basic = () => <Button>Click me</Button>;
+```
+
+### Annotations
+
+Add annotations to your code blocks by adding a comment with the annotation in it.
+
+[Focus lines](https://codehike.org/docs/annotations#focus-annotation).
+
+```tsx button.stories.tsx focus=1
+export const Basic = () => {
+  return <Button>Click me</Button>;
+};
+```
+
+[Mark lines](https://codehike.org/docs/annotations#mark-annotation).
+
+```tsx button.stories.tsx mark=1
+export const Basic = () => {
+  return <Button>Click me</Button>;
+};
+```
+
+[Mark parts of lines](https://codehike.org/docs/annotations#mark-annotation).
+
+```tsx button.stories.tsx
+export const Basic = () => {
+  // mark[10:34]
+  return <Button>Click me</Button>;
+};
+```
+
+[Link lines](https://codehike.org/docs/annotations#link-annotation).
+
+```tsx button.stories.tsx
+// link[15:20] https://fwoo.sh/
+export const Basic = () => {
+  return <Button>Click me</Button>;
+};
+```
+
+[Embed code from other files](https://codehike.org/docs/annotations#from-annotation).
+
+```css example.css
+// from ./example.css
+```
+
+### MDX components
+
+#### `CH.Code`
+
+Show code files in tabs or panels and customize styling.
+
+[Read the docs](https://codehike.org/docs/ch-code).
+
+<CH.Code>
+
+```html index.html
+<!DOCTYPE html>
+<html>
+  <head> </head>
+  <body></body>
+</html>
+```
+
+```js index.js
+console.log("here");
+```
+
+```css index.css
+body {
+  background: red;
+}
+```
+
+</CH.Code>
+
+<CH.Code>
+
+```html index.html
+<!DOCTYPE html>
+<html>
+  <head> </head>
+  <body></body>
+</html>
+```
+
+---
+
+```js index.js
+console.log("here");
+```
+
+```css index.css
+body {
+  background: red;
+}
+```
+
+</CH.Code>
+
+#### `CH.Section`
+
+[Syntax highlight inline code](https://codehike.org/docs/ch-section#inline-code).
+
+<CH.Section>
+
+This has syntax highlighting => _`<Button>Click me</Button>`_
+
+```tsx button.stories.tsx
+export const Basic = () => {
+  return <Button>Click me</Button>;
+};
+```
+
+</CH.Section>
+
+[Mention portions of code](https://codehike.org/docs/ch-section#inline-code).
+
+<CH.Section>
+
+Hello, [hover me](focus://2[10:34])
+
+```tsx button.stories.tsx
+export const Basic = () => {
+  return <Button>Click me</Button>;
+};
+```
+
+</CH.Section>

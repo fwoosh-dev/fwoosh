@@ -1,6 +1,6 @@
 import React from "react";
 import { stories } from "@fwoosh/app/stories";
-import { StyledMarkdown } from "@fwoosh/components";
+import { MDXContent } from "@fwoosh/components";
 import { styled } from "@fwoosh/styling";
 import { useHighlightedCode, useStoryId } from "@fwoosh/hooks";
 
@@ -24,11 +24,27 @@ const Panel = styled("div", {
   "& pre pre": {
     p: 4,
   },
+
+  "& .ch-codeblock": {
+    margin: 0,
+    borderRadius: "0 !important",
+    height: "100%",
+    position: "sticky",
+    top: 4,
+
+    "& .ch-code": {
+      borderRadius: "0 !important",
+    },
+  },
+
+  "& .ch-code-scroll-content > *": {
+    transform: "translateX(0px) translateY(20.367px) scale(1) !important",
+  },
 });
 
 function HighlightedSource({ code }: { code: string }) {
   const highlightedCode = useHighlightedCode({ code });
-  return <StyledMarkdown>{highlightedCode}</StyledMarkdown>;
+  return <MDXContent compiledSource={highlightedCode} />;
 }
 
 export default function SourcePanel() {

@@ -1,5 +1,5 @@
 {
-  "name": "@fwoosh/fwoosh-example",
+  "name": "@fwoosh/docs",
   "private": true,
   "scripts": {
     "fwoosh": "../../packages/cli/bin/fwoosh.js",

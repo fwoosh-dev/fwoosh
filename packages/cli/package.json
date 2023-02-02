@@ -21,6 +21,7 @@
     "@types/serve-handler": "^6.1.1"
   },
   "dependencies": {
+    "@code-hike/mdx": "^0.8.0",
     "@fwoosh/app": "link:../app",
     "@fwoosh/types": "link:../types",
     "@fwoosh/utils": "link:../utils",
@@ -50,7 +51,6 @@
     "pretty-ms": "^7.0.1",
     "rehype-autolink-headings": "^6.1.1",
     "rehype-infer-title-meta": "^1.1.0",
-    "rehype-shiki-reloaded": "^0.0.11",
     "rehype-stringify": "^9.0.3",
     "remark-frontmatter": "^4.0.1",
     "remark-gfm": "^3.0.1",
@@ -59,12 +59,13 @@
     "remark-slug": "^7.0.1",
     "rollup": "^3.7.0",
     "serve-handler": "^6.1.5",
-    "shiki": "^0.12.1",
+    "shiki": "^0.10.1",
     "tapable": "^2.2.1",
     "terminal-link": "^3.0.0",
     "title-case": "^3.0.3",
     "ts-node": "^10",
     "unified": "^10.1.2",
+    "unist-util-remove": "^3.1.1",
     "unist-util-visit": "^4.1.1",
     "vite": "^4.0.4"
   },

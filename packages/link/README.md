@@ -21,9 +21,9 @@ yarn add -D @fwoosh/link
 
 ## Usage
 
-You can use a `Link` in javscript or typescript
+You can use a `Link` in javascript or typescript
 
-```tsx
+```tsx SomeFile.tsx
 import { Link } from "@fwoosh/link";
 
 export const Example = () => {
@@ -33,7 +33,7 @@ export const Example = () => {
 
 Or in MDX:
 
-```mdx
+```mdx Page.mdx
 import { Link } from "@fwoosh/link";
 
 <Link to="Welcome">Go to welcome page</Link>
@@ -45,7 +45,7 @@ import { Link } from "@fwoosh/link";
 
 Given the following MDX file:
 
-```mdx
+```mdx Page.mdx
 ---
 title: Getting Started/Welcome
 ---
@@ -53,7 +53,7 @@ title: Getting Started/Welcome
 
 You can link to it from another page:
 
-```tsx
+```tsx AnotherPage.mdx
 <Link to="Getting Started/Welcome">Go to path</Link>
 ```
 
@@ -61,7 +61,7 @@ You can link to it from another page:
 
 Given the following story file:
 
-```tsx
+```tsx Example.stories.tsx
 export const meta: StoryMeta = {
   title: "Components/Button",
 };
@@ -69,7 +69,7 @@ export const meta: StoryMeta = {
 
 You can link to it from another page:
 
-```tsx
+```tsx AnotherPage.mdx
 <Link to="Components/Button">Go to path</Link>
 ```
 
@@ -80,7 +80,7 @@ You can link to it from another page:
 
 Given the following story file:
 
-```tsx
+```tsx Example.stories.tsx
 export const meta: StoryMeta = {
   title: "Components/Button",
 };
@@ -90,6 +90,6 @@ export const Basic = () => <div />;
 
 You can link to it from another page:
 
-```tsx
+```tsx AnotherPage.mdx
 <Link to="Components/Button/Basic">Go to path</Link>
 ```

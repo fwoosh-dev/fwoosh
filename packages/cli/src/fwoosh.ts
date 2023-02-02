@@ -11,6 +11,7 @@ import {
   AsyncSeriesWaterfallHook,
   SyncWaterfallHook,
 } from "tapable";
+import { remarkCodeHike } from "@code-hike/mdx";
 import mdx from "@mdx-js/rollup";
 import { checkLink, log, sortTree } from "@fwoosh/utils";
 import bodyParser from "body-parser";
@@ -23,7 +24,6 @@ import handler from "serve-handler";
 import http from "http";
 import { chromium } from "playwright";
 
-import { Pluggable } from "unified";
 import remarkFrontmatter from "remark-frontmatter";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import remarkSlug from "remark-slug";
@@ -48,7 +48,7 @@ import { fwooshSetupPlugin } from "./utils/fwoosh-setup-plugin.js";
 import { fwooshConfigPlugin } from "./utils/fwoosh-config-plugin.js";
 import { fwooshUiPlugin } from "./utils/fwoosh-ui-plugin.js";
 import { convertMarkdownToHtml } from "./utils/get-stories.js";
-import { shikiConfig } from "./utils/shiki-config.js";
+import { getCodeHikeConfig, setSyntaxTheme } from "./utils/code-hike-config.js";
 import { componentOverridePlugin } from "./utils/component-override-plugins.js";
 
 const require = createRequire(import.meta.url);
@@ -89,6 +89,7 @@ export class Fwoosh implements FwooshClass {
   constructor({ theme, ...options }: FwooshOptionWithCLIDefaults) {
     this.options = {
       docgen: {},
+      syntaxTheme: "github-dark-dimmed",
       componentOverrides: undefined,
       title: "Fwoosh",
       setup: "",
@@ -125,12 +126,32 @@ export class Fwoosh implements FwooshClass {
       },
     };
 
+    setSyntaxTheme(this.options.syntaxTheme);
+
     if (theme) {
-      if (typeof theme === "object") {
-        this.options.theme = theme;
+      if (Array.isArray(theme)) {
+        this.options.themes = theme;
+      } else if (typeof theme === "object") {
+        this.options.themes = [theme];
       } else {
-        this.options.theme = require(theme);
+        const loaded = require(theme);
+
+        if (Array.isArray(loaded)) {
+          this.options.themes = loaded;
+        } else if (typeof loaded === "object") {
+          this.options.themes = [loaded.themes];
+        } else {
+          throw new Error(
+            `Invalid theme. Expected an array or object, got ${JSON.stringify(
+              loaded,
+              null,
+              2
+            )}`
+          );
+        }
       }
+    } else {
+      this.options.themes = [];
     }
 
     log.info("Loaded options:", this.options);
@@ -259,7 +280,11 @@ export class Fwoosh implements FwooshClass {
       base: mode === "production" ? this.options.basename : "/",
       plugins: [
         mdx({
-          remarkPlugins: [remarkFrontmatter, remarkSlug],
+          remarkPlugins: [
+            remarkFrontmatter,
+            remarkSlug,
+            [remarkCodeHike, getCodeHikeConfig()],
+          ],
           rehypePlugins: [
             rehypeInferTitleMeta,
             // Inline data from above plugins into the page
@@ -348,7 +373,6 @@ export class Fwoosh implements FwooshClass {
                   ),
               },
             ],
-            shikiConfig as Pluggable,
             [
               toc,
               {
@@ -693,11 +717,12 @@ export class Fwoosh implements FwooshClass {
 
     app.use(bodyParser.text());
     app.post("/highlight-code", async (req, res) => {
-      const html = await convertMarkdownToHtml(endent`
+      const markdown = endent`
         \`\`\`tsx
         ${req.body}
         \`\`\`
-      `);
+      `;
+      const html = await convertMarkdownToHtml(markdown);
       res.json({ html });
     });
 

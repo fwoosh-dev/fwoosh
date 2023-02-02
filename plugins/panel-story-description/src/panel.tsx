@@ -1,6 +1,6 @@
 import React from "react";
 import { stories } from "@fwoosh/app/stories";
-import { StyledMarkdown, components } from "@fwoosh/components";
+import { components, MDXContent } from "@fwoosh/components";
 import { styled } from "@fwoosh/styling";
 import { useStoryId } from "@fwoosh/hooks";
 
@@ -30,7 +30,7 @@ export default function DescriptionPanel() {
 
   return (
     <Panel>
-      <StyledMarkdown>{story.comment}</StyledMarkdown>
+      <MDXContent compiledSource={story.comment} />
     </Panel>
   );
 }

@@ -175,6 +175,7 @@ const router = createBrowserRouter(
   }
 );
 
+console.log("here");
 const globalStyles = globalCss({
   mark: { background: "$primary6" },
   html: { background: "$gray1" },
@@ -189,6 +190,18 @@ const globalStyles = globalCss({
   },
 
   [`.${darkTheme} .syntax-dark`]: {
+    display: "block",
+  },
+
+  ".ch-codeblock.ch-codeblock, .ch-codegroup.ch-codegroup, .ch-preview.ch-preview":
+    { margin: "$9 0" },
+  ".ch-codeblock > *, .ch-codegroup > *, .ch-preview > *": {
+    borderRadius: "6px",
+  },
+  ".ch-codeblock .ch-code-button": {
+    display: "none",
+  },
+  ".ch-codeblock:hover .ch-code-button": {
     display: "block",
   },
 });

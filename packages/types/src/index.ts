@@ -6,6 +6,7 @@ import {
 } from "tapable";
 import type { ComponentDoc } from "react-docgen-typescript";
 import { CreateStitches } from "@stitches/react";
+import type { Theme } from "shiki";
 
 export type { ComponentDoc } from "react-docgen-typescript";
 
@@ -158,17 +159,17 @@ export interface FwooshHooks {
   modifyViteConfig: AsyncSeriesWaterfallHook<[ViteConfig]>;
 }
 
-export type Theme = NonNullable<
+export type Tokens = NonNullable<
   NonNullable<Parameters<CreateStitches>[0]>["theme"]
 >;
 
+export type SyntaxTheme = Theme;
+
 export type ThemeObject = {
-  light: Theme;
-  /** A className to apply to the body when light theme is active */
-  lightClass?: string;
-  dark: Theme;
-  /** A className to apply to the body when dark theme is active */
-  darkClass?: string;
+  tokens?: Tokens;
+  /** A className to apply to the body when theme is active */
+  class?: string;
+  type: "light" | "dark";
 };
 
 export interface FwooshOptions {
@@ -194,7 +195,7 @@ export interface FwooshOptions {
     b: StorySidebarChildItem
   ) => number | undefined;
   /** Customize the theme tokens used to render the website */
-  theme?: string | ThemeObject;
+  theme?: string | ThemeObject | ThemeObject[];
   /** Override any component from @fwoosh/components and take full control of the UI. */
   componentOverrides?: string;
   /**
@@ -221,6 +222,8 @@ export interface FwooshOptions {
    * If you want to see the mdx content in workbench mode set this to true
    */
   includeMdxInWorkbench?: boolean;
+  /** Theme to use for highlighting code */
+  syntaxTheme?: SyntaxTheme;
 }
 
 export type FwooshOptionWithCLIDefaults = FwooshOptions &
@@ -230,7 +233,7 @@ export type FwooshOptionsLoaded = Required<
   Omit<FwooshOptions, "theme" | "componentOverrides">
 > &
   Pick<FwooshOptions, "componentOverrides"> & {
-    theme?: ThemeObject;
+    themes?: ThemeObject[];
   } & {
     /** Modify the sorting of items in the sidebar */
     sortSidebarItems?: (

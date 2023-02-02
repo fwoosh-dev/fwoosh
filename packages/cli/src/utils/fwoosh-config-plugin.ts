@@ -1,8 +1,8 @@
-import { FwooshOptions } from "@fwoosh/types";
+import { FwooshOptionsLoaded } from "@fwoosh/types";
 import { endent } from "./endent.js";
 
 /** Plugin that injects fwoosh config options into the front-end */
-export function fwooshConfigPlugin(config: FwooshOptions) {
+export function fwooshConfigPlugin(config: FwooshOptionsLoaded) {
   const virtualFileId = "@fwoosh/app/config";
 
   return {
@@ -22,7 +22,7 @@ export function fwooshConfigPlugin(config: FwooshOptions) {
           export const config = {
             title: "${config.title}",
             includeMdxInWorkbench: ${config.includeMdxInWorkbench},
-            theme: ${JSON.stringify(config.theme)},
+            themes: ${JSON.stringify(config.themes)},
           }
         `;
       }

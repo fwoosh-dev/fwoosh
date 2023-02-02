@@ -442,6 +442,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@code-hike/lighter@npm:^0.2.0":
+  version: 0.2.6
+  resolution: "@code-hike/lighter@npm:0.2.6"
+  checksum: 99fc5e12c371825a6dc57790ef6bfbcd62a65773f1d525b48b82780134a6269da348c0b67923949880b64e43075dfde81aa13d61ca3b5a27a8ce4c43fbba35b8
+  languageName: node
+  linkType: hard
+
+"@code-hike/mdx@npm:^0.8.0":
+  version: 0.8.0
+  resolution: "@code-hike/mdx@npm:0.8.0"
+  dependencies:
+    "@code-hike/lighter": ^0.2.0
+    node-fetch: ^2.0.0
+    shiki: ^0.10.1
+  peerDependencies:
+    react: ^16.8.3 || ^17 || ^18
+  checksum: e9e59397b946714853b2a14486f1fddc58ce875496b6e245def60aa66cb199123b4a5a7577e99af9363f54586e559a4317c75f7e6e19513421f848fe3b408826
+  languageName: node
+  linkType: hard
+
 "@cspotcode/source-map-support@npm:^0.8.0":
   version: 0.8.1
   resolution: "@cspotcode/source-map-support@npm:0.8.1"
@@ -737,6 +757,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fwoosh/app@workspace:packages/app"
   dependencies:
+    "@code-hike/mdx": ^0.8.0
     "@fontsource/inter": ^4.5.14
     "@fwoosh/hooks": "link:../hooks"
     "@fwoosh/utils": "link:../utils"
@@ -783,9 +804,9 @@ __metadata:
   languageName: node
   linkType: soft
 
-"@fwoosh/components@link:../../packages/components::locator=%40fwoosh%2Ffwoosh-example%40workspace%3Aexamples%2Ffwoosh":
+"@fwoosh/components@link:../../packages/components::locator=%40fwoosh%2Fdocs%40workspace%3Aexamples%2Fdocs":
   version: 0.0.0-use.local
-  resolution: "@fwoosh/components@link:../../packages/components::locator=%40fwoosh%2Ffwoosh-example%40workspace%3Aexamples%2Ffwoosh"
+  resolution: "@fwoosh/components@link:../../packages/components::locator=%40fwoosh%2Fdocs%40workspace%3Aexamples%2Fdocs"
   languageName: node
   linkType: soft
 
@@ -818,7 +839,9 @@ __metadata:
   resolution: "@fwoosh/components@workspace:packages/components"
   dependencies:
     "@alisowski/cmdk": ^0.1.20
+    "@code-hike/mdx": ^0.8.0
     "@fwoosh/styling": "link:../styling"
+    "@mdx-js/react": ^2.2.1
     "@radix-ui/react-dropdown-menu": ^2.0.2
     "@radix-ui/react-select": ^1.2.0
     "@radix-ui/react-tabs": ^1.0.2
@@ -826,7 +849,6 @@ __metadata:
     "@radix-ui/react-tooltip": ^1.0.3
     "@stitches/react": ^1.2.8
     "@types/react": ^18.0.26
-    interweave: ^13.0.0
     react: ^18.2.0
     react-dom: ^18.2.0
     react-feather: ^2.0.10
@@ -847,9 +869,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fwoosh/fwoosh-example@workspace:examples/fwoosh":
+"@fwoosh/docs@workspace:examples/docs":
   version: 0.0.0-use.local
-  resolution: "@fwoosh/fwoosh-example@workspace:examples/fwoosh"
+  resolution: "@fwoosh/docs@workspace:examples/docs"
   dependencies:
     "@fwoosh/components": "link:../../packages/components"
     "@fwoosh/panel-actions": "link:../../plugins/panel-actions"
@@ -960,9 +982,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fwoosh/panel-actions@link:../../plugins/panel-actions::locator=%40fwoosh%2Ffwoosh-example%40workspace%3Aexamples%2Ffwoosh":
+"@fwoosh/panel-actions@link:../../plugins/panel-actions::locator=%40fwoosh%2Fdocs%40workspace%3Aexamples%2Fdocs":
   version: 0.0.0-use.local
-  resolution: "@fwoosh/panel-actions@link:../../plugins/panel-actions::locator=%40fwoosh%2Ffwoosh-example%40workspace%3Aexamples%2Ffwoosh"
+  resolution: "@fwoosh/panel-actions@link:../../plugins/panel-actions::locator=%40fwoosh%2Fdocs%40workspace%3Aexamples%2Fdocs"
   languageName: node
   linkType: soft
 
@@ -1017,6 +1039,7 @@ __metadata:
   resolution: "@fwoosh/panel-source@workspace:plugins/panel-source"
   dependencies:
     "@fwoosh/hooks": "link:../../packages/hooks"
+    "@fwoosh/styling": "link:../../packages/styling"
     "@types/node": ^14.14.31
     fwoosh: "link:../../packages/cli"
   peerDependencies:
@@ -1048,9 +1071,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fwoosh/react@link:../../plugins/react::locator=%40fwoosh%2Ffwoosh-example%40workspace%3Aexamples%2Ffwoosh":
+"@fwoosh/react@link:../../plugins/react::locator=%40fwoosh%2Fdocs%40workspace%3Aexamples%2Fdocs":
   version: 0.0.0-use.local
-  resolution: "@fwoosh/react@link:../../plugins/react::locator=%40fwoosh%2Ffwoosh-example%40workspace%3Aexamples%2Ffwoosh"
+  resolution: "@fwoosh/react@link:../../plugins/react::locator=%40fwoosh%2Fdocs%40workspace%3Aexamples%2Fdocs"
   languageName: node
   linkType: soft
 
@@ -1090,6 +1113,12 @@ __metadata:
 "@fwoosh/styling@link:../../packages/styling::locator=%40fwoosh%2Fpanel-designs%40workspace%3Aplugins%2Fpanel-designs":
   version: 0.0.0-use.local
   resolution: "@fwoosh/styling@link:../../packages/styling::locator=%40fwoosh%2Fpanel-designs%40workspace%3Aplugins%2Fpanel-designs"
+  languageName: node
+  linkType: soft
+
+"@fwoosh/styling@link:../../packages/styling::locator=%40fwoosh%2Fpanel-source%40workspace%3Aplugins%2Fpanel-source":
+  version: 0.0.0-use.local
+  resolution: "@fwoosh/styling@link:../../packages/styling::locator=%40fwoosh%2Fpanel-source%40workspace%3Aplugins%2Fpanel-source"
   languageName: node
   linkType: soft
 
@@ -1241,6 +1270,7 @@ __metadata:
   dependencies:
     react-docgen-typescript: ^2.2.2
     remark-mdx-toc: ^0.3.1
+    shiki: ^0.10.1
     tapable: ^2.2.1
     typescript: ^4.9.3
     vite: ^4.0.4
@@ -6688,13 +6718,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-copy@npm:^2.1.1":
-  version: 2.1.7
-  resolution: "fast-copy@npm:2.1.7"
-  checksum: af8016c174b02bd4f706ffdf9f138511b17b748665b291fec6c5ca1922cb55da35cf86ded46b31890930bcf9b1c2481c03c793a47110ab81ec385e14972b9d7e
-  languageName: node
-  linkType: hard
-
 "fast-deep-equal@npm:^3.1.3":
   version: 3.1.3
   resolution: "fast-deep-equal@npm:3.1.3"
@@ -7054,9 +7077,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"fwoosh@link:../../packages/cli::locator=%40fwoosh%2Ffwoosh-example%40workspace%3Aexamples%2Ffwoosh":
+"fwoosh@link:../../packages/cli::locator=%40fwoosh%2Fdocs%40workspace%3Aexamples%2Fdocs":
   version: 0.0.0-use.local
-  resolution: "fwoosh@link:../../packages/cli::locator=%40fwoosh%2Ffwoosh-example%40workspace%3Aexamples%2Ffwoosh"
+  resolution: "fwoosh@link:../../packages/cli::locator=%40fwoosh%2Fdocs%40workspace%3Aexamples%2Fdocs"
   languageName: node
   linkType: soft
 
@@ -7112,6 +7135,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "fwoosh@workspace:packages/cli"
   dependencies:
+    "@code-hike/mdx": ^0.8.0
     "@fwoosh/app": "link:../app"
     "@fwoosh/types": "link:../types"
     "@fwoosh/utils": "link:../utils"
@@ -7148,7 +7172,6 @@ __metadata:
     pretty-ms: ^7.0.1
     rehype-autolink-headings: ^6.1.1
     rehype-infer-title-meta: ^1.1.0
-    rehype-shiki-reloaded: ^0.0.11
     rehype-stringify: ^9.0.3
     remark-frontmatter: ^4.0.1
     remark-gfm: ^3.0.1
@@ -7157,13 +7180,14 @@ __metadata:
     remark-slug: ^7.0.1
     rollup: ^3.7.0
     serve-handler: ^6.1.5
-    shiki: ^0.12.1
+    shiki: ^0.10.1
     tapable: ^2.2.1
     terminal-link: ^3.0.0
     title-case: ^3.0.3
     ts-node: ^10
     typescript: ^4
     unified: ^10.1.2
+    unist-util-remove: ^3.1.1
     unist-util-visit: ^4.1.1
     vite: ^4.0.4
   dependenciesMeta:
@@ -7707,13 +7731,6 @@ __metadata:
     web-namespaces: ^2.0.0
     zwitch: ^2.0.0
   checksum: 3a7f2175a3db599bbae7e49ba73d3e5e688e5efca7590ff50130ba108ad649f728402815d47db49146f6b94c14c934bf119915da9f6964e38802c122bcc8af6b
-  languageName: node
-  linkType: hard
-
-"hast-util-to-string@npm:^1.0.4":
-  version: 1.0.4
-  resolution: "hast-util-to-string@npm:1.0.4"
-  checksum: 8132508d5c08d542b64979ad558e474f481011c29d5fce9b1a1fe779fc97e151b734b5c6d94f4937c4ec978b1d641977ee7f9f5ed61ea0611600764abdff7cbb
   languageName: node
   linkType: hard
 
@@ -8590,7 +8607,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsonc-parser@npm:3.2.0, jsonc-parser@npm:^3.2.0":
+"jsonc-parser@npm:3.2.0, jsonc-parser@npm:^3.0.0, jsonc-parser@npm:^3.2.0":
   version: 3.2.0
   resolution: "jsonc-parser@npm:3.2.0"
   checksum: 946dd9a5f326b745aa326d48a7257e3f4a4b62c5e98ec8e49fa2bdd8d96cef7e6febf1399f5c7016114fd1f68a1c62c6138826d5d90bc650448e3cf0951c53c7
@@ -10282,6 +10299,20 @@ __metadata:
     encoding:
       optional: true
   checksum: 8d816ffd1ee22cab8301c7756ef04f3437f18dace86a1dae22cf81db8ef29c0bf6655f3215cb0cdb22b420b6fe141e64b26905e7f33f9377a7fa59135ea3e10b
+  languageName: node
+  linkType: hard
+
+"node-fetch@npm:^2.0.0":
+  version: 2.6.9
+  resolution: "node-fetch@npm:2.6.9"
+  dependencies:
+    whatwg-url: ^5.0.0
+  peerDependencies:
+    encoding: ^0.1.0
+  peerDependenciesMeta:
+    encoding:
+      optional: true
+  checksum: acb04f9ce7224965b2b59e71b33c639794d8991efd73855b0b250921382b38331ffc9d61bce502571f6cc6e11a8905ca9b1b6d4aeb586ab093e2756a1fd190d0
   languageName: node
   linkType: hard
 
@@ -12154,20 +12185,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rehype-shiki-reloaded@npm:^0.0.11":
-  version: 0.0.11
-  resolution: "rehype-shiki-reloaded@npm:0.0.11"
-  dependencies:
-    fast-copy: ^2.1.1
-    hast-util-to-string: ^1.0.4
-    unist-builder: ^2.0.3
-    unist-util-visit: ^2.0.3
-  peerDependencies:
-    shiki: ">= 0.9"
-  checksum: 6c70f294f71b2c6e9123ff06f062f75d39e369f7856ff9b552c5125008c4da048d561dcb3674c146591ec682082a43e2b9a9f4f9457a44d91cd162c39c28c893
-  languageName: node
-  linkType: hard
-
 "rehype-stringify@npm:^9.0.3":
   version: 9.0.3
   resolution: "rehype-stringify@npm:9.0.3"
@@ -12697,14 +12714,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"shiki@npm:^0.12.1":
-  version: 0.12.1
-  resolution: "shiki@npm:0.12.1"
+"shiki@npm:^0.10.1":
+  version: 0.10.1
+  resolution: "shiki@npm:0.10.1"
   dependencies:
-    jsonc-parser: ^3.2.0
-    vscode-oniguruma: ^1.7.0
-    vscode-textmate: ^8.0.0
-  checksum: a5d78a79d282f5c5168786980c66e82f075e91fa015097456486624fc5775688d685ad9b1972b0617d7f1ef50927d21b61dca476247a6f6c6b7042046e89a979
+    jsonc-parser: ^3.0.0
+    vscode-oniguruma: ^1.6.1
+    vscode-textmate: 5.2.0
+  checksum: fb746f3cb3de7e545e3b10a6cb658d3938f840e4ccc9a3c90ceb7e69a8f89dbb432171faac1e9f02a03f103684dad88ee5e54b5c4964fa6b579fca6e8e26424d
   languageName: node
   linkType: hard
 
@@ -13775,13 +13792,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unist-builder@npm:^2.0.3":
-  version: 2.0.3
-  resolution: "unist-builder@npm:2.0.3"
-  checksum: e946fdf77dbfc320feaece137ce4959ae2da6614abd1623bd39512dc741a9d5f313eb2ba79f8887d941365dccddec7fef4e953827475e392bf49b45336f597f6
-  languageName: node
-  linkType: hard
-
 "unist-builder@npm:^3.0.0":
   version: 3.0.0
   resolution: "unist-builder@npm:3.0.0"
@@ -13805,13 +13815,6 @@ __metadata:
   version: 2.0.1
   resolution: "unist-util-generated@npm:2.0.1"
   checksum: 6221ad0571dcc9c8964d6b054f39ef6571ed59cc0ce3e88ae97ea1c70afe76b46412a5ffaa91f96814644ac8477e23fb1b477d71f8d70e625728c5258f5c0d99
-  languageName: node
-  linkType: hard
-
-"unist-util-is@npm:^4.0.0":
-  version: 4.1.0
-  resolution: "unist-util-is@npm:4.1.0"
-  checksum: 726484cd2adc9be75a939aeedd48720f88294899c2e4a3143da413ae593f2b28037570730d5cf5fd910ff41f3bc1501e3d636b6814c478d71126581ef695f7ea
   languageName: node
   linkType: hard
 
@@ -13850,22 +13853,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"unist-util-remove@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "unist-util-remove@npm:3.1.1"
+  dependencies:
+    "@types/unist": ^2.0.0
+    unist-util-is: ^5.0.0
+    unist-util-visit-parents: ^5.0.0
+  checksum: ed7c762941e6a9b6db230e9417697c8eb7d36093240b6f6d4ec265c4237d33e332a96a18307c8fb322a1842e3feb2a7564b032b5535fa0634eb1e075a6e344cb
+  languageName: node
+  linkType: hard
+
 "unist-util-stringify-position@npm:^3.0.0":
   version: 3.0.2
   resolution: "unist-util-stringify-position@npm:3.0.2"
   dependencies:
     "@types/unist": ^2.0.0
   checksum: 2dfd7a0fb2a55e99cc319c3bf7f9f1f73ed652978fa70d19117faa7245d20f21738ec926ecc47f341705ca1bb157e87ced0b6bb5ecaa666bd2ae6b2510d6a671
-  languageName: node
-  linkType: hard
-
-"unist-util-visit-parents@npm:^3.0.0":
-  version: 3.1.1
-  resolution: "unist-util-visit-parents@npm:3.1.1"
-  dependencies:
-    "@types/unist": ^2.0.0
-    unist-util-is: ^4.0.0
-  checksum: 1170e397dff88fab01e76d5154981666eb0291019d2462cff7a2961a3e76d3533b42eaa16b5b7e2d41ad42a5ea7d112301458283d255993e660511387bf67bc3
   languageName: node
   linkType: hard
 
@@ -13876,17 +13880,6 @@ __metadata:
     "@types/unist": ^2.0.0
     unist-util-is: ^5.0.0
   checksum: c699d18f5b26461dee37612b84c243fd5457c98f4c0540d9ba8bee05062aece5f3b4fb1af6b07423ce6750d8926e8c01fc2b1a4de1e54925ef6795c177ed8e18
-  languageName: node
-  linkType: hard
-
-"unist-util-visit@npm:^2.0.3":
-  version: 2.0.3
-  resolution: "unist-util-visit@npm:2.0.3"
-  dependencies:
-    "@types/unist": ^2.0.0
-    unist-util-is: ^4.0.0
-    unist-util-visit-parents: ^3.0.0
-  checksum: 1fe19d500e212128f96d8c3cfa3312846e586b797748a1fd195fe6479f06bc90a6f6904deb08eefc00dd58e83a1c8a32fb8677252d2273ad7a5e624525b69b8f
   languageName: node
   linkType: hard
 
@@ -14288,17 +14281,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vscode-oniguruma@npm:^1.7.0":
+"vscode-oniguruma@npm:^1.6.1":
   version: 1.7.0
   resolution: "vscode-oniguruma@npm:1.7.0"
   checksum: 53519d91d90593e6fb080260892e87d447e9b200c4964d766772b5053f5699066539d92100f77f1302c91e8fc5d9c772fbe40fe4c90f3d411a96d5a9b1e63f42
   languageName: node
   linkType: hard
 
-"vscode-textmate@npm:^8.0.0":
-  version: 8.0.0
-  resolution: "vscode-textmate@npm:8.0.0"
-  checksum: 127780dfea89559d70b8326df6ec344cfd701312dd7f3f591a718693812b7852c30b6715e3cfc8b3200a4e2515b4c96f0843c0eacc0a3020969b5de262c2a4bb
+"vscode-textmate@npm:5.2.0":
+  version: 5.2.0
+  resolution: "vscode-textmate@npm:5.2.0"
+  checksum: 5449b42d451080f6f3649b66948f4b5ee4643c4e88cfe3558a3b31c84c78060cfdd288c4958c1690eaa5cd65d09992fa6b7c3bef9d4aa72b3651054a04624d20
   languageName: node
   linkType: hard
 

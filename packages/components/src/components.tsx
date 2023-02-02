@@ -2,9 +2,8 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { styled } from "@fwoosh/styling";
 
-export type Element<
-  T extends keyof JSX.IntrinsicElements
-> = React.PropsWithoutRef<JSX.IntrinsicElements[T]>;
+export type Element<T extends keyof JSX.IntrinsicElements> =
+  React.PropsWithoutRef<JSX.IntrinsicElements[T]>;
 
 /** The component used to render a h1 */
 export const h1 = styled("h1", {
@@ -15,7 +14,7 @@ export const h1 = styled("h1", {
   scrollMarginTop: "$4",
 
   "@md": {
-    mb: 5,
+    mb: 8,
   },
   "@lg": {
     text: "4xl",
@@ -40,7 +39,7 @@ export const h2 = styled("h2", {
   },
   "@lg": {
     text: "3xl",
-    my: 8,
+    mb: 8,
   },
 });
 

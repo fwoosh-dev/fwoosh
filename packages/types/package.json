@@ -23,6 +23,7 @@
   "dependencies": {
     "react-docgen-typescript": "^2.2.2",
     "remark-mdx-toc": "^0.3.1",
+    "shiki": "^0.10.1",
     "tapable": "^2.2.1",
     "vite": "^4.0.4"
   },

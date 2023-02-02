@@ -24,7 +24,7 @@ yarn add -D @playwright/test
 
 Then create a `playwright.config.ts`:
 
-```ts
+```ts playwright.config.ts
 import { PlaywrightTestConfig } from "@playwright/test";
 
 const config: PlaywrightTestConfig = {
@@ -38,9 +38,7 @@ export default config;
 
 Once you have `@fwoosh/test` configured you can start writing tests.
 
-**`Button.spec.ts`:**
-
-```tsx
+```tsx Button.spec.ts
 import { expect, test } from "@fwoosh/test";
 
 test.describe.parallel("Button", () => {
@@ -57,7 +55,7 @@ test.describe.parallel("Button", () => {
 
 or if you have lots of tests for the same story:
 
-```tsx
+```tsx Button.spec.ts
 import { expect, test } from "@fwoosh/test";
 
 test.beforeEach(async ({ workbench }) => {
