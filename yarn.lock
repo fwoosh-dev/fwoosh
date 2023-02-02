@@ -87,20 +87,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@auto-it/gh-pages@npm:^10.37.6":
-  version: 10.37.6
-  resolution: "@auto-it/gh-pages@npm:10.37.6"
-  dependencies:
-    "@auto-it/core": 10.37.6
-    endent: ^2.1.0
-    fp-ts: ^2.5.3
-    io-ts: ^2.1.2
-    push-dir: ^0.4.1
-    tslib: 2.1.0
-  checksum: 7c0327b49dfcaa3050f79bde85acff9b709a0c41da6efaa0d2a69eeedef4b44b082a311b03c6c63406dba12b23cd211044f724d2924adcafdd6859ccb13fa992
-  languageName: node
-  linkType: hard
-
 "@auto-it/npm@npm:10.37.6":
   version: 10.37.6
   resolution: "@auto-it/npm@npm:10.37.6"
@@ -7061,7 +7047,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "fwoosh-monorepo@workspace:."
   dependencies:
-    "@auto-it/gh-pages": ^10.37.6
     "@types/node": ^14.14.31
     auto: ^10.37.6
     command-line-application: ^0.10.1
@@ -11520,17 +11505,6 @@ __metadata:
   version: 1.4.1
   resolution: "punycode@npm:1.4.1"
   checksum: fa6e698cb53db45e4628559e557ddaf554103d2a96a1d62892c8f4032cd3bc8871796cae9eabc1bc700e2b6677611521ce5bb1d9a27700086039965d0cf34518
-  languageName: node
-  linkType: hard
-
-"push-dir@npm:^0.4.1":
-  version: 0.4.1
-  resolution: "push-dir@npm:0.4.1"
-  dependencies:
-    minimist: ^1.2.0
-  bin:
-    push-dir: bin/push-dir.js
-  checksum: b35b2f5c883903510297f2ce28f172f0c5206adea79506ec4dbbe5b4b055c3c0c0c98761201d79ad3b4791eaa03b69602b3e4cc9656e98e5af47de1f612c4f17
   languageName: node
   linkType: hard
 
