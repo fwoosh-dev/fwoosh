@@ -27,10 +27,14 @@ const Panel = styled("div", {
 
   "& .ch-codeblock": {
     margin: 0,
-    borderRadius: 0,
+    borderRadius: "0 !important",
     height: "100%",
     position: "sticky",
     top: 4,
+
+    "& .ch-code": {
+      borderRadius: "0 !important",
+    },
   },
 
   "& .ch-code-scroll-content > *": {
