@@ -1,7 +1,7 @@
 {
   "name": "@fwoosh/panel-actions",
   "type": "module",
-  "version": "0.0.110",
+  "version": "0.0.111",
   "description": "Log callback values from story interactions",
   "main": "dist/index.js",
   "author": "Andrew Lisowski <lisowski54@gmail.com>",

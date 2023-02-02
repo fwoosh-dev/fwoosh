@@ -3,7 +3,7 @@
   "type": "module",
   "main": "dist/index.js",
   "description": "Display your designs for you component right along with your stories",
-  "version": "0.0.110",
+  "version": "0.0.111",
   "license": "MIT",
   "author": {
     "name": "Andrew Lisowski",
