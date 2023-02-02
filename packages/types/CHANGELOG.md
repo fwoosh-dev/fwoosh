@@ -1,3 +1,18 @@
+# v0.0.111 (Thu Feb 02 2023)
+
+#### ⚠️ Pushed to `main`
+
+- Merge branch 'codehike' ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add way to configure syntax highlighting ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- refactor theme into list of objects ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- rename type ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.110 (Tue Jan 31 2023)
 
 #### ⚠️ Pushed to `main`

@@ -1,3 +1,36 @@
+# v0.0.111 (Thu Feb 02 2023)
+
+#### ⚠️ Pushed to `main`
+
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/components`, `@fwoosh/link`, `@fwoosh/styling`, `@fwoosh/test`, `@fwoosh/types`, `@fwoosh/virtual-file`, `@fwoosh/decorator-centered`, `@fwoosh/panel-actions`, `@fwoosh/panel-designs`, `@fwoosh/panel-props`, `@fwoosh/panel-source`, `@fwoosh/panel-story-description`, `@fwoosh/react`, `@fwoosh/theme-default`, `@fwoosh/tool-github`, `@fwoosh/tool-measure`, `@fwoosh/tool-viewport`, `@fwoosh/tool-zoom`
+  - Merge branch 'codehike' ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `fwoosh`, `@fwoosh/types`
+  - add way to configure syntax highlighting ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `fwoosh`, `@fwoosh/styling`, `@fwoosh/types`, `@fwoosh/theme-default`
+  - refactor theme into list of objects ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/panel-source`
+  - fix source panel border radius ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/types`, `@fwoosh/theme-default`
+  - rename type ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/panel-source`
+  - fix panels in built code ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `fwoosh`
+  - update shiki theme to dark ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/components`, `@fwoosh/virtual-file`, `@fwoosh/decorator-centered`, `@fwoosh/panel-actions`, `@fwoosh/panel-designs`, `@fwoosh/panel-props`, `@fwoosh/panel-source`, `@fwoosh/panel-story-description`, `@fwoosh/react`, `@fwoosh/tool-github`, `@fwoosh/tool-measure`, `@fwoosh/tool-viewport`, `@fwoosh/tool-zoom`
+  - use code hike more ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `@fwoosh/components`, `@fwoosh/panel-story-description`
+  - refactor all usage to MDXContent ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `fwoosh`, `@fwoosh/components`, `@fwoosh/panel-source`
+  - move mdxcontent and style for source panel ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/link`, `@fwoosh/test`, `@fwoosh/panel-source`
+  - get it kinda working ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.110 (Tue Jan 31 2023)
 
 #### ⚠️ Pushed to `main`

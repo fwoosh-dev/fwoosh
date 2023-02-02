@@ -1,3 +1,21 @@
+# v0.0.111 (Thu Feb 02 2023)
+
+#### ⚠️ Pushed to `main`
+
+- Merge branch 'codehike' ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add way to configure syntax highlighting ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- refactor theme into list of objects ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- update shiki theme to dark ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- use code hike more ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- move mdxcontent and style for source panel ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- get it kinda working ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.108 (Mon Jan 30 2023)
 
 #### ⚠️ Pushed to `main`
