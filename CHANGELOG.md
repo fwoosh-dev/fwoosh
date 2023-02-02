@@ -1,3 +1,15 @@
+# v0.0.112 (Thu Feb 02 2023)
+
+#### ⚠️ Pushed to `main`
+
+- remove gh-pages plugin ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.111 (Thu Feb 02 2023)
 
 #### ⚠️ Pushed to `main`
