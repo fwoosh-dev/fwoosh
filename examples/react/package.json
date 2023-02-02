@@ -13,7 +13,7 @@
     "@playwright/test": "^1.29.2",
     "fwoosh": "link:../../packages/cli"
   },
-  "version": "0.0.111",
+  "version": "0.0.112",
   "dependencies": {
     "react": "^17"
   }
