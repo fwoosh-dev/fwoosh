@@ -48,7 +48,7 @@ import { fwooshSetupPlugin } from "./utils/fwoosh-setup-plugin.js";
 import { fwooshConfigPlugin } from "./utils/fwoosh-config-plugin.js";
 import { fwooshUiPlugin } from "./utils/fwoosh-ui-plugin.js";
 import { convertMarkdownToHtml } from "./utils/get-stories.js";
-import { codeHikeConfig } from "./utils/shiki-config.js";
+import { getCodeHikeConfig, setSyntaxTheme } from "./utils/code-hike-config.js";
 import { componentOverridePlugin } from "./utils/component-override-plugins.js";
 
 const require = createRequire(import.meta.url);
@@ -89,6 +89,7 @@ export class Fwoosh implements FwooshClass {
   constructor({ theme, ...options }: FwooshOptionWithCLIDefaults) {
     this.options = {
       docgen: {},
+      syntaxTheme: "github-dark-dimmed",
       componentOverrides: undefined,
       title: "Fwoosh",
       setup: "",
@@ -125,6 +126,8 @@ export class Fwoosh implements FwooshClass {
       },
     };
 
+    setSyntaxTheme(this.options.syntaxTheme);
+
     if (theme) {
       if (Array.isArray(theme)) {
         this.options.themes = theme;
@@ -135,8 +138,8 @@ export class Fwoosh implements FwooshClass {
 
         if (Array.isArray(loaded)) {
           this.options.themes = loaded;
-        } else if (typeof theme === "object") {
-          this.options.themes = [loaded];
+        } else if (typeof loaded === "object") {
+          this.options.themes = [loaded.themes];
         } else {
           throw new Error(
             `Invalid theme. Expected an array or object, got ${JSON.stringify(
@@ -280,7 +283,7 @@ export class Fwoosh implements FwooshClass {
           remarkPlugins: [
             remarkFrontmatter,
             remarkSlug,
-            [remarkCodeHike, codeHikeConfig],
+            [remarkCodeHike, getCodeHikeConfig()],
           ],
           rehypePlugins: [
             rehypeInferTitleMeta,

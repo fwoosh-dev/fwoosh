@@ -15,7 +15,7 @@ import yaml from "js-yaml";
 import { remarkCodeHike } from "@code-hike/mdx";
 
 import { FwooshOptionsLoaded, ResolvedStoryMeta } from "@fwoosh/types";
-import { codeHikeConfig } from "./shiki-config.js";
+import { getCodeHikeConfig } from "./code-hike-config.js";
 import { endent } from "./endent.js";
 
 const require = createRequire(import.meta.url);
@@ -35,7 +35,10 @@ function sanitizeMarkdownString(str: string) {
 
 export async function convertMarkdownToHtml(markdown: string) {
   const compiledMdx = await compile(markdown, {
-    remarkPlugins: [[remarkCodeHike, { autoImport: false, ...codeHikeConfig }]],
+    remarkPlugins: [
+      gfm,
+      [remarkCodeHike, { autoImport: false, ...getCodeHikeConfig() }],
+    ],
     outputFormat: "function-body",
     providerImportSource: "@mdx-js/react",
   });

@@ -6,6 +6,7 @@ import {
 } from "tapable";
 import type { ComponentDoc } from "react-docgen-typescript";
 import { CreateStitches } from "@stitches/react";
+import type { Theme } from "shiki";
 
 export type { ComponentDoc } from "react-docgen-typescript";
 
@@ -162,6 +163,8 @@ export type Tokens = NonNullable<
   NonNullable<Parameters<CreateStitches>[0]>["theme"]
 >;
 
+export type SyntaxTheme = Theme;
+
 export type ThemeObject = {
   tokens?: Tokens;
   /** A className to apply to the body when theme is active */
@@ -219,6 +222,8 @@ export interface FwooshOptions {
    * If you want to see the mdx content in workbench mode set this to true
    */
   includeMdxInWorkbench?: boolean;
+  /** Theme to use for highlighting code */
+  syntaxTheme?: SyntaxTheme;
 }
 
 export type FwooshOptionWithCLIDefaults = FwooshOptions &
