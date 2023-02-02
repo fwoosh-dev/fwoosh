@@ -158,15 +158,15 @@ export interface FwooshHooks {
   modifyViteConfig: AsyncSeriesWaterfallHook<[ViteConfig]>;
 }
 
-export type Theme = NonNullable<
+export type Tokens = NonNullable<
   NonNullable<Parameters<CreateStitches>[0]>["theme"]
 >;
 
 export type ThemeObject = {
-  light: Theme;
+  light: Tokens;
   /** A className to apply to the body when light theme is active */
   lightClass?: string;
-  dark: Theme;
+  dark: Tokens;
   /** A className to apply to the body when dark theme is active */
   darkClass?: string;
 };

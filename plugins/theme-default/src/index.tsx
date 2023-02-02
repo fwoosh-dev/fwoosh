@@ -1,4 +1,4 @@
-import { Theme } from "@fwoosh/types";
+import { Tokens } from "@fwoosh/types";
 import { mauve, pink, mauveDark, pinkDark } from "@radix-ui/colors";
 
 const space = {
@@ -78,7 +78,7 @@ export const light = {
   borderStyles: {
     solid: "solid",
   },
-} satisfies Theme;
+} satisfies Tokens;
 
 export const dark = {
   colors: {
@@ -89,4 +89,4 @@ export const dark = {
       Object.values(pinkDark).map((color, index) => [`primary${index}`, color])
     ),
   },
-} satisfies Theme;
+} satisfies Tokens;
