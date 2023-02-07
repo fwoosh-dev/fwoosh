@@ -8,6 +8,10 @@ import { ToolPanels } from "./ToolPanels";
 import { ErrorBoundary } from "@fwoosh/components";
 import { useStoryId } from "@fwoosh/hooks";
 
+const StyledPanel = styled(Panel, {
+  overflow: "auto !important",
+});
+
 const PanelContainer = styled("div", {
   height: "100%",
   borderTopWidth: "$sm",
@@ -57,13 +61,13 @@ export const StoryWithTools = () => {
   if (panels.length > 0) {
     content = (
       <PanelGroup direction="vertical">
-        <Panel
+        <StyledPanel
           maxSize={75}
           defaultSize={storyPaneSize}
           onResize={storyPaneSizeSet}
         >
           {content}
-        </Panel>
+        </StyledPanel>
         <PanelResizeHandle>
           <PanelResizer />
         </PanelResizeHandle>
