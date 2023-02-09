@@ -1,6 +1,7 @@
 import React from "react";
 import { IconButton, Toolbar, Tooltip } from "@fwoosh/components";
 import { ZoomIn, ZoomOut, Maximize } from "react-feather";
+import { PanelPluginProps } from "fwoosh";
 
 export function browserSupportsCssZoom(): boolean {
   try {
@@ -16,11 +17,7 @@ export function browserSupportsCssZoom(): boolean {
 
 const hasBrowserSupportForCssZoom = browserSupportsCssZoom();
 
-export default function ZoomControl({
-  storyPreviewId,
-}: {
-  storyPreviewId: string;
-}) {
+export default function ZoomControl({ storyPreviewId }: PanelPluginProps) {
   const [zoom, zoomSet] = React.useState(100);
   const zoomInLabel = "Zoom in";
   const zoomOutLabel = "Zoom out";

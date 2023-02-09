@@ -58,7 +58,7 @@ export const StoryWithTools = () => {
 
   let content = <Story />;
 
-  if (panels.length > 0) {
+  if (panels.length > 0 && storyId) {
     content = (
       <PanelGroup direction="vertical">
         <StyledPanel
@@ -73,7 +73,7 @@ export const StoryWithTools = () => {
         </PanelResizeHandle>
         <Panel maxSize={75}>
           <PanelContainer>
-            <ToolPanels />
+            <ToolPanels storySlug={storyId} />
           </PanelContainer>
         </Panel>
       </PanelGroup>

@@ -11,10 +11,12 @@ export const meta: StoryMeta = {
 
 type CheckedState = boolean | "indeterminate";
 
+/**
+ * Displays a menu to the user — such as a set of actions or functions — triggered by a button.
+ */
 export const Basis: Story = () => {
-  const [bookmarksChecked, setBookmarksChecked] = React.useState<CheckedState>(
-    true
-  );
+  const [bookmarksChecked, setBookmarksChecked] =
+    React.useState<CheckedState>(true);
   const [urlsChecked, setUrlsChecked] = React.useState<CheckedState>(false);
   const [person, setPerson] = React.useState("pedro");
 

@@ -5,7 +5,7 @@ import { useId } from "@radix-ui/react-id";
 import { ColorModeContext, styled } from "@fwoosh/styling";
 
 import { setAddAction } from ".";
-import { useStoryId } from "@fwoosh/hooks";
+import { PanelPluginProps } from "fwoosh";
 
 type Action = [string, number, any[]];
 
@@ -28,9 +28,8 @@ const createShareState = () => {
     });
   };
 
-  return () => {
+  return (storyId: string) => {
     const [currentActions, currentActionsSet] = React.useState(actions);
-    const storyId = useStoryId();
     const id = useId();
 
     React.useEffect(() => {
@@ -64,13 +63,13 @@ const ActionRow = styled("div", {
   gap: 1,
 });
 
-export const Name = () => {
-  const actions = useSharedState();
+export const Name = (props: PanelPluginProps) => {
+  const actions = useSharedState(props.storyId);
   return <div>Actions ({actions.length})</div>;
 };
 
-export default function ActionPanel() {
-  const actions = useSharedState();
+export default function ActionPanel(props: PanelPluginProps) {
+  const actions = useSharedState(props.storyId);
   const colorMode = React.useContext(ColorModeContext);
 
   return (

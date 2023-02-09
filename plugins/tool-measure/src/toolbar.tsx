@@ -1,18 +1,16 @@
 import React from "react";
 import { IconButton, Tooltip, Toolbar } from "@fwoosh/components";
-import { useStoryId } from "@fwoosh/hooks";
 import { DivideSquare, XSquare } from "react-feather";
 
 import { findAndDrawElement } from "./box-model/visualizer";
 import { destroy, init, rescale, clear } from "./box-model/canvas";
+import { PanelPluginProps } from "fwoosh";
 
 export default function MeasureControl({
   storyPreviewId,
-}: {
-  storyPreviewId: string;
-}) {
+  storyId,
+}: PanelPluginProps) {
   const [on, onSet] = React.useState(false);
-  const storyId = useStoryId();
   const label = on ? "Turn off measure" : "Turn on measure";
 
   const onToggle = React.useCallback(() => {

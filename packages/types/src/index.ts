@@ -256,3 +256,30 @@ export interface Plugin {
   /** Hook into fwoosh */
   apply(fwoosh: FwooshClass): void;
 }
+
+export interface PanelPluginProps {
+  storyPreviewId: string;
+  storyId: string;
+}
+
+export interface PanelPlugin {
+  (props: PanelPluginProps): JSX.Element;
+  componentName: string;
+  displayName: (props: PanelPluginProps) => JSX.Element;
+  paramKey?: string;
+  hideWithoutParams?: string | false;
+}
+
+export interface ToolbarPluginProps {
+  storyPreviewId: string;
+  storyId?: string;
+}
+
+export interface ToolbarPlugin {
+  (props: ToolbarPluginProps): JSX.Element;
+  componentName: string;
+  displayName: string;
+  paramKey?: string;
+  scope: "story" | "global";
+  hideWithoutParams?: string | false;
+}

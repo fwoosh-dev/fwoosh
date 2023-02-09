@@ -42,7 +42,7 @@ export const SidebarLayout = styled("div", {
 export const Sidebar = styled("div", {
   borderRightWidth: "$sm",
   borderRightStyle: "$solid",
-  borderColor: "$gray4",
+  borderColor: "$gray6",
   minHeight: 0,
   height: "100%",
   overflow: "auto",

@@ -1,35 +1,30 @@
 import React, { Suspense } from "react";
 import { useId } from "@radix-ui/react-id";
-import { BasicStoryData, StoryMeta } from "@fwoosh/types";
-import { useDocgen } from "@fwoosh/app/docs";
 import { styled } from "@fwoosh/styling";
 import {
   components,
   PageWrapper,
   Spinner,
-  PropsTable,
   QuickNav,
   DocsLayout,
   MDXContent,
+  HeaderBar,
 } from "@fwoosh/components";
 import * as Collapsible from "@radix-ui/react-collapsible";
 import { capitalCase, paramCase } from "change-case";
 import { titleCase } from "title-case";
 import { StorySidebarChildItem } from "@fwoosh/types";
-import { useHighlightedCode } from "@fwoosh/hooks";
 
 import { useRender } from "../hooks/useRender";
 import { PageSwitchButton } from "./PageSwitchButtons";
 import { useActiveHeader } from "../hooks/useActiveHeader";
+import { StoryIdContext } from "./Story";
+import { ToolPanels } from "./ToolPanels";
+import { GlobalToolbarControls, ToolbarControls } from "./toolbar";
+import { WorkbenchToolbarItems } from "./toolbar/WorkbenchToolbarItems";
 
 const HeaderWrapper = styled("div", {
   position: "relative",
-});
-
-const CollapsibleContent = styled(Collapsible.Content, {
-  "& pre": {
-    margin: 0,
-  },
 });
 
 const HeaderLink = ({ title, id }: { title: React.ReactNode; id: string }) => {
@@ -40,64 +35,22 @@ const HeaderLink = ({ title, id }: { title: React.ReactNode; id: string }) => {
   );
 };
 
-const StoryPreview = styled("div", {
+const StoryPreviewWrapper = styled("div", {
   borderWidth: "$sm",
   borderStyle: "$solid",
-  borderColor: "$gray7",
+  borderColor: "$gray6",
+  borderRadius: "$sm",
+  my: 8,
+});
+
+const StoryPreviewArea = styled("div", {
   px: 4,
   py: 8,
-  borderRadius: "$round",
   overflow: "auto",
-
-  variants: {
-    state: {
-      open: {
-        borderBottomLeftRadius: 0,
-        borderBottomRightRadius: 0,
-        borderBottom: "none",
-      },
-    },
-  },
 });
 
-const ShowCodeButton = styled("button", {
-  px: 2,
-  position: "absolute",
-  bottom: 0,
-  right: 0,
-  borderTopWidth: "$sm",
-  borderTopStyle: "$solid",
-  borderLeftWidth: "$sm",
-  borderLeftStyle: "$solid",
-  borderColor: "$gray7",
-  borderTopLeftRadius: "$round",
-  color: "$gray10",
-  zIndex: 100,
-});
-
-const CollapsibleRoot = styled(Collapsible.Root, {
+const StoryPreview = styled("div", {
   position: "relative",
-  mt: 8,
-  mb: 12,
-
-  "& .ch-codeblock": {
-    margin: 0,
-  },
-
-  "&[data-state='open'] :is(.ch-codeblock,.ch-code)": {
-    borderTopLeftRadius: 0,
-    borderTopRightRadius: 0,
-  },
-});
-
-const StoryCode = React.memo(({ code }: { code: string }) => {
-  const highlightedCode = useHighlightedCode({ code });
-
-  if (!highlightedCode) {
-    return null;
-  }
-
-  return <MDXContent compiledSource={highlightedCode} />;
 });
 
 const OverlaySpinner = styled("div", {
@@ -110,59 +63,50 @@ const OverlaySpinner = styled("div", {
 const StoryDiv = React.memo(
   ({
     slug,
-    code,
     showSpinnerWhileLoading,
+    defaultOpen,
   }: {
     slug: string;
-    code: string;
     showSpinnerWhileLoading?: boolean;
+    defaultOpen: boolean;
   }) => {
+    const [isOpen, setIsOpen] = React.useState(defaultOpen);
     const id = useId();
-    const [codeShowing, codeShowingSet] = React.useState(false);
     const { ref, hasRendered } = useRender({ id, slug });
 
     return (
-      <>
-        <CollapsibleRoot open={codeShowing} onOpenChange={codeShowingSet}>
-          <StoryPreview state={codeShowing ? "open" : undefined} ref={ref} />
-          <Collapsible.Trigger asChild={true}>
-            <ShowCodeButton>
-              {codeShowing ? "Hide" : "Show"} code
-            </ShowCodeButton>
-          </Collapsible.Trigger>
-          <CollapsibleContent>
-            <Suspense fallback={<Spinner delay={2000} />}>
-              <StoryCode code={code} />
-            </Suspense>
-          </CollapsibleContent>
-        </CollapsibleRoot>
+      <StoryIdContext.Provider value={id}>
+        <StoryPreviewWrapper>
+          {isOpen && (
+            <HeaderBar>
+              <GlobalToolbarControls />
+              <ToolbarControls>
+                <Suspense fallback={<Spinner size={5} />}>
+                  <WorkbenchToolbarItems />
+                </Suspense>
+              </ToolbarControls>
+              <GlobalToolbarControls />
+            </HeaderBar>
+          )}
+
+          <StoryPreviewArea>
+            <StoryPreview>
+              <div ref={ref} />
+            </StoryPreview>
+          </StoryPreviewArea>
+
+          {isOpen && <ToolPanels storySlug={slug} />}
+        </StoryPreviewWrapper>
+
         {showSpinnerWhileLoading && !hasRendered && (
           <OverlaySpinner>
             <Spinner delay={2000} />
           </OverlaySpinner>
         )}
-      </>
+      </StoryIdContext.Provider>
     );
   }
 );
-
-const DocsPropsTable = ({
-  story,
-  meta,
-  hasTitle,
-}: {
-  story: BasicStoryData;
-  meta: StoryMeta;
-  hasTitle?: boolean | string;
-}) => {
-  const docs = useDocgen(story.slug, meta);
-
-  return (
-    <div style={{ height: "fit-content" }}>
-      <PropsTable docs={docs} hasTitle={hasTitle} />
-    </div>
-  );
-};
 
 interface PageContentProps {
   stories: StorySidebarChildItem[];
@@ -178,14 +122,6 @@ export const PageContent = ({
     firstStory.type === "story" &&
     firstStory.story.type === "basic"
   ) {
-    const introProps = (
-      <DocsPropsTable
-        story={firstStory.story}
-        meta={firstStory.story.meta}
-        hasTitle="props"
-      />
-    );
-
     docsIntro = (
       <>
         {firstStory.story.comment && (
@@ -193,19 +129,10 @@ export const PageContent = ({
         )}
         <StoryDiv
           slug={firstStory.story.slug}
-          code={firstStory.story.code}
           key={firstStory.story.slug}
           showSpinnerWhileLoading={true}
+          defaultOpen={true}
         />
-        {process.env.NODE_ENV === "production" ? (
-          // In prod we want the whole page to render before showing so it jumps less
-          // since all the data is already inlined though should be fast.
-          introProps
-        ) : (
-          <Suspense fallback={<Spinner style={{ height: 200 }} />}>
-            {introProps}
-          </Suspense>
-        )}
       </>
     );
   }
@@ -238,16 +165,7 @@ export const PageContent = ({
                 {story.story.comment && (
                   <MDXContent compiledSource={story.story.comment} />
                 )}
-                <StoryDiv slug={story.story.slug} code={story.story.code} />
-                <Suspense
-                  fallback={<Spinner style={{ height: 200 }} delay={2000} />}
-                >
-                  <DocsPropsTable
-                    story={story.story}
-                    meta={story.story?.component?._payload?._result}
-                    hasTitle={true}
-                  />
-                </Suspense>
+                <StoryDiv slug={story.story.slug} defaultOpen={false} />
               </div>
             );
           })}

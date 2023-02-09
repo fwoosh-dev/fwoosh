@@ -7,9 +7,7 @@ import { stories } from "@fwoosh/app/stories";
 import { Helmet } from "react-helmet-async";
 import { useStoryId } from "@fwoosh/hooks";
 
-export const StoryIdContext = React.createContext<string | undefined>(
-  undefined
-);
+export const StoryIdContext = React.createContext("");
 
 const Root = styled("div", {
   position: "relative",
