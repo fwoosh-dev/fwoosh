@@ -56,6 +56,10 @@ const StoryPreviewArea = styled("div", {
   overflow: "auto",
 });
 
+const ToolsArea = styled("div", {
+  maxHeight: 400,
+});
+
 const StoryPreview = styled("div", {
   position: "relative",
 });
@@ -117,7 +121,11 @@ const StoryDiv = React.memo(
               </StoryPreview>
             </StoryPreviewArea>
 
-            {isOpen && <ToolPanels storySlug={slug} />}
+            {isOpen && (
+              <ToolsArea>
+                <ToolPanels storySlug={slug} />
+              </ToolsArea>
+            )}
           </StoryPreviewWrapper>
 
           <ExpandToggle>
