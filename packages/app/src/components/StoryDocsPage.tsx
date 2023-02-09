@@ -9,6 +9,8 @@ import {
   DocsLayout,
   MDXContent,
   HeaderBar,
+  IconButton,
+  Tooltip,
 } from "@fwoosh/components";
 import * as Collapsible from "@radix-ui/react-collapsible";
 import { capitalCase, paramCase } from "change-case";
@@ -22,6 +24,7 @@ import { StoryIdContext } from "./Story";
 import { ToolPanels } from "./ToolPanels";
 import { GlobalToolbarControls, ToolbarControls } from "./toolbar";
 import { WorkbenchToolbarItems } from "./toolbar/WorkbenchToolbarItems";
+import { Minus, Plus } from "react-feather";
 
 const HeaderWrapper = styled("div", {
   position: "relative",
@@ -35,12 +38,16 @@ const HeaderLink = ({ title, id }: { title: React.ReactNode; id: string }) => {
   );
 };
 
+const StoryPreviewWrapperSpacing = styled("div", {
+  my: 8,
+  position: "relative",
+});
+
 const StoryPreviewWrapper = styled("div", {
   borderWidth: "$sm",
   borderStyle: "$solid",
   borderColor: "$gray6",
   borderRadius: "$sm",
-  my: 8,
 });
 
 const StoryPreviewArea = styled("div", {
@@ -60,6 +67,20 @@ const OverlaySpinner = styled("div", {
   zIndex: 100000,
 });
 
+const ExpandToggle = styled("div", {
+  position: "absolute",
+  right: 0,
+  bottom: 0,
+  top: "$2",
+  paddingLeft: "$2",
+  transform: "translate(calc(100%))",
+  opacity: 0,
+
+  [`&:hover, &:focus, ${StoryPreviewWrapperSpacing}:hover &`]: {
+    opacity: 1,
+  },
+});
+
 const StoryDiv = React.memo(
   ({
     slug,
@@ -76,27 +97,45 @@ const StoryDiv = React.memo(
 
     return (
       <StoryIdContext.Provider value={id}>
-        <StoryPreviewWrapper>
-          {isOpen && (
-            <HeaderBar>
-              <GlobalToolbarControls />
-              <ToolbarControls>
-                <Suspense fallback={<Spinner size={5} />}>
-                  <WorkbenchToolbarItems />
-                </Suspense>
-              </ToolbarControls>
-              <GlobalToolbarControls />
-            </HeaderBar>
-          )}
+        <StoryPreviewWrapperSpacing>
+          <StoryPreviewWrapper>
+            {isOpen && (
+              <HeaderBar>
+                <GlobalToolbarControls />
+                <ToolbarControls>
+                  <Suspense fallback={<Spinner size={5} />}>
+                    <WorkbenchToolbarItems />
+                  </Suspense>
+                </ToolbarControls>
+                <GlobalToolbarControls />
+              </HeaderBar>
+            )}
 
-          <StoryPreviewArea>
-            <StoryPreview>
-              <div ref={ref} />
-            </StoryPreview>
-          </StoryPreviewArea>
+            <StoryPreviewArea>
+              <StoryPreview>
+                <div ref={ref} />
+              </StoryPreview>
+            </StoryPreviewArea>
 
-          {isOpen && <ToolPanels storySlug={slug} />}
-        </StoryPreviewWrapper>
+            {isOpen && <ToolPanels storySlug={slug} />}
+          </StoryPreviewWrapper>
+
+          <ExpandToggle>
+            {isOpen ? (
+              <Tooltip message="Collapse tools">
+                <IconButton onClick={() => setIsOpen(false)}>
+                  <Minus />
+                </IconButton>
+              </Tooltip>
+            ) : (
+              <Tooltip message="Expand tools">
+                <IconButton onClick={() => setIsOpen(true)}>
+                  <Plus />
+                </IconButton>
+              </Tooltip>
+            )}
+          </ExpandToggle>
+        </StoryPreviewWrapperSpacing>
 
         {showSpinnerWhileLoading && !hasRendered && (
           <OverlaySpinner>

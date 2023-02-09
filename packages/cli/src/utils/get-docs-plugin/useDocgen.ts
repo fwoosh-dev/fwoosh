@@ -7,7 +7,6 @@ export const useDocgen = (key: string, story: Story) => {
     key,
     async () => {
       const component = await resolveStoryMeta(story);
-      debugger;
 
       if (!component?.component) {
         return;
