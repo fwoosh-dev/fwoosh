@@ -211,6 +211,35 @@ export default class DescriptionPlugin implements Plugin {
 }
 ```
 
+#### `hideInDocs`
+
+You can configure a panel or tool to not show in docs mode.
+
+Now the following panel not be shown in docs mode
+
+```tsx DescriptionPlugin.ts focus=15
+import { Plugin, Fwoosh } from "fwoosh";
+import { createRequire } from "module";
+
+export default class DescriptionPlugin implements Plugin {
+  name = "description";
+
+  apply(fwoosh: Fwoosh) {
+    fwoosh.hooks.registerPanel.tap(this.name, (panels) => {
+      return [
+        ...panels,
+        {
+          name: this.options.title,
+          filepath: require.resolve("./panel"),
+          paramKey: this.name,
+          hideInDocs: true,
+        },
+      ];
+    });
+  }
+}
+```
+
 ### `modifyViteConfig`
 
 Modify the Vite configuration used to load your fwoosh instance.
