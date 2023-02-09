@@ -4,7 +4,7 @@ import { Spinner, Tabs, ErrorBoundary } from "@fwoosh/components";
 import { panels } from "@fwoosh/app/ui";
 
 import { StoryIdContext } from "./Story";
-import { useParameters } from "@fwoosh/hooks";
+import { useIsDocs, useIsWorkbench, useParameters } from "@fwoosh/hooks";
 
 const TabsList = styled(Tabs.List, {
   height: "$12",
@@ -30,13 +30,18 @@ interface ToolPanelsContentProps {
 const ToolPanelsContent = ({ storySlug }: ToolPanelsContentProps) => {
   const storyPreviewId = useContext(StoryIdContext);
   const parameters = useParameters();
+  const isDocs = useIsDocs();
 
   const shownPanel = panels.filter((Panel) => {
     const paramValue = Panel.paramKey
       ? parameters?.[Panel.paramKey]
       : undefined;
 
-    if ((Panel.hideWithoutParams && !paramValue) || paramValue === false) {
+    if (
+      (Panel.hideWithoutParams && !paramValue) ||
+      paramValue === false ||
+      (Panel.hideInDocs && isDocs)
+    ) {
       return false;
     }
 

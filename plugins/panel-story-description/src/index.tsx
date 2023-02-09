@@ -26,6 +26,7 @@ export default class StoryDescriptionPanel implements Plugin {
         {
           name: this.options.title,
           paramKey: this.name,
+          hideInDocs: true,
           filepath: require.resolve("./panel"),
         },
       ];

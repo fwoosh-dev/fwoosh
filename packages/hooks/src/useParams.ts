@@ -20,3 +20,8 @@ export function useIsWorkbench() {
   const location = useLocation();
   return location.pathname.startsWith("/workbench");
 }
+
+export function useIsDocs() {
+  const location = useLocation();
+  return location.pathname.startsWith("/docs/");
+}

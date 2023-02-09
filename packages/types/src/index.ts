@@ -110,11 +110,15 @@ export interface StoryTree extends BaseTreeItem {
 
 type ViteConfig = Omit<InlineConfig, "mode" | "root">;
 
-interface FwooshTool {
+interface UIPluginProps {
+  hideWithoutParams?: boolean;
+  hideInDocs?: boolean;
+}
+
+export interface FwooshTool extends UIPluginProps {
   name: string;
   filepath: string;
   paramKey?: string;
-  hideWithoutParams?: boolean;
 }
 
 export type FwooshPanel = FwooshTool;
@@ -262,12 +266,11 @@ export interface PanelPluginProps {
   storyId: string;
 }
 
-export interface PanelPlugin {
+export interface PanelPlugin extends UIPluginProps {
   (props: PanelPluginProps): JSX.Element;
   componentName: string;
   displayName: (props: PanelPluginProps) => JSX.Element;
   paramKey?: string;
-  hideWithoutParams?: string | false;
 }
 
 export interface ToolbarPluginProps {
@@ -275,11 +278,10 @@ export interface ToolbarPluginProps {
   storyId?: string;
 }
 
-export interface ToolbarPlugin {
+export interface ToolbarPlugin extends UIPluginProps {
   (props: ToolbarPluginProps): JSX.Element;
   componentName: string;
   displayName: string;
   paramKey?: string;
   scope: "story" | "global";
-  hideWithoutParams?: string | false;
 }

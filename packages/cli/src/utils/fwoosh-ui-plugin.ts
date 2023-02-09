@@ -1,15 +1,11 @@
 import { endent } from "./endent.js";
 import { pascalCase } from "change-case";
-import { FwooshPanel, FwooshToolbarButton } from "@fwoosh/types";
+import { FwooshPanel, FwooshTool, FwooshToolbarButton } from "@fwoosh/types";
 
 function lazyLoadComponents(
-  imports: {
-    name?: string;
-    filepath: string;
-    paramKey?: string;
+  imports: (FwooshTool & {
     scope?: "global" | "story";
-    hideWithoutParams?: boolean;
-  }[]
+  })[]
 ) {
   const names: string[] = [];
   const components = imports.map((i) => {
@@ -29,6 +25,7 @@ function lazyLoadComponents(
       }));
       ${i.paramKey ? `${name}.paramKey = "${i.paramKey}";` : ""}
       ${i.hideWithoutParams ? `${name}.hideWithoutParams = true;` : ""}
+      ${i.hideInDocs ? `${name}.hideInDocs = true;` : ""}
       ${i.scope ? `${name}.scope = "${i.scope}";` : ""}
     `;
   });
