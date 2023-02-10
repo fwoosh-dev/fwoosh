@@ -15,7 +15,7 @@ yarn add -D @fwoosh/tool-viewport`
 Then add it to your `fwoosh.config.ts`:
 
 ```ts fwoosh.config.ts
-export const config: FwooshConfig = {
+export const config: FwooshOptions = {
   plugins: ["@fwoosh/tool-viewport`"],
 };
 ```

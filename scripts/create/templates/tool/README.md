@@ -15,7 +15,7 @@ yarn add -D @fwoosh/{{kebab}}`
 Then add it to your `fwoosh.config.ts`:
 
 ```ts
-export const config: FwooshConfig = {
+export const config: FwooshOptions = {
   plugins: ["@fwoosh/{{kebab}}`"],
 };
 ```

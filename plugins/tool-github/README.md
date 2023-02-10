@@ -17,7 +17,7 @@ Then add it to your `fwoosh.config.ts`:
 ```ts fwoosh.config.ts
 import GitHubPlugin from "@fwoosh/tool-github";
 
-export const config: FwooshConfig = {
+export const config: FwooshOptions = {
   plugins: [
     new GitHubPlugin({ repo: "fwooshjs/fwoosh" }),
     // or
