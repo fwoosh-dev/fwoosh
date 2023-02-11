@@ -4,7 +4,7 @@ import { Spinner, Tabs, ErrorBoundary } from "@fwoosh/components";
 import { panels } from "@fwoosh/app/ui";
 
 import { StoryIdContext } from "./Story";
-import { useIsDocs, useIsWorkbench, useParameters } from "@fwoosh/hooks";
+import { useIsDocs, useParameters } from "@fwoosh/hooks";
 
 const TabsList = styled(Tabs.List, {
   height: "$12",

@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useContext } from "react";
 import { useId } from "@radix-ui/react-id";
 import { styled } from "@fwoosh/styling";
 import {
@@ -25,6 +25,9 @@ import { ToolPanels } from "./ToolPanels";
 import { GlobalToolbarControls, ToolbarControls } from "./toolbar";
 import { WorkbenchToolbarItems } from "./toolbar/WorkbenchToolbarItems";
 import { Minus, Plus } from "react-feather";
+import { panels } from "@fwoosh/app/ui";
+import { useToolbarControls } from "../hooks/useToolbarControls";
+import { ParameterContext, useParameters } from "@fwoosh/hooks";
 
 const HeaderWrapper = styled("div", {
   position: "relative",
@@ -85,6 +88,32 @@ const ExpandToggle = styled("div", {
   },
 });
 
+const StoryToolbar = () => {
+  const id = useContext(StoryIdContext);
+  const { storyControls } = useToolbarControls();
+  const parameters = useParameters();
+
+  if (!storyControls.length) {
+    return null;
+  }
+
+  return (
+    <ParameterContext.Provider value={parameters}>
+      <Suspense fallback={<Spinner size={5} />}>
+        <HeaderBar>
+          <GlobalToolbarControls />
+          <ToolbarControls>
+            {storyControls.map((Control) => (
+              <Control key={Control.componentName} storyPreviewId={id} />
+            ))}
+          </ToolbarControls>
+          <GlobalToolbarControls />
+        </HeaderBar>
+      </Suspense>
+    </ParameterContext.Provider>
+  );
+};
+
 const StoryDiv = React.memo(
   ({
     slug,
@@ -103,17 +132,7 @@ const StoryDiv = React.memo(
       <StoryIdContext.Provider value={id}>
         <StoryPreviewWrapperSpacing>
           <StoryPreviewWrapper>
-            {isOpen && (
-              <HeaderBar>
-                <GlobalToolbarControls />
-                <ToolbarControls>
-                  <Suspense fallback={<Spinner size={5} />}>
-                    <WorkbenchToolbarItems />
-                  </Suspense>
-                </ToolbarControls>
-                <GlobalToolbarControls />
-              </HeaderBar>
-            )}
+            {isOpen && <StoryToolbar />}
 
             <StoryPreviewArea>
               <StoryPreview>
@@ -121,7 +140,7 @@ const StoryDiv = React.memo(
               </StoryPreview>
             </StoryPreviewArea>
 
-            {isOpen && (
+            {panels.length > 0 && isOpen && (
               <ToolsArea>
                 <ToolPanels storySlug={slug} />
               </ToolsArea>
