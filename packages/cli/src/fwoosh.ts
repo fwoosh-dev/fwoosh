@@ -492,9 +492,15 @@ export class Fwoosh implements FwooshClass {
 
   /** Clean up all the output files */
   async clean() {
-    await Promise.all([
-      fs.rm(this.options.outDir, { recursive: true, force: true }),
-    ]);
+    try {
+      await fs.stat(this.options.outDir);
+
+      await Promise.all([
+        fs.rm(this.options.outDir, { recursive: true, force: true }),
+      ]);
+    } catch (e) {
+      log.warn("No output directory found, skipping clean");
+    }
   }
 
   /** Do a production build of the website */
