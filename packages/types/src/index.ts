@@ -10,7 +10,7 @@ import type { Theme } from "shiki";
 
 export type { ComponentDoc } from "react-docgen-typescript";
 
-export interface Story {
+export interface ParsedStoryData {
   /** The exported name of the story */
   exportName: string;
   /** A human readable title for the story */
@@ -32,13 +32,13 @@ export interface ResolvedStoryMeta extends StoryMeta {
 
 export type StoryParameters = Record<string, any>;
 
-export interface StoryMeta<P extends StoryParameters = StoryParameters> {
+export interface StoryMeta<C extends FwooshOptions = FwooshOptions> {
   /** The title used to create the sidebar tree structure. */
   title: string;
   /** The component docs should be generated for */
   component?: any;
   /** Parameters for addons rendered with all the stories in the file */
-  parameters?: P;
+  parameters?: ExtractParamsFromPlugins<C["plugins"][number]>;
 }
 
 interface BaseStoryData {
@@ -254,11 +254,13 @@ export interface FwooshClass {
 }
 
 /** A fwoosh plugin */
-export interface Plugin {
+export interface Plugin<Params = {}> {
   /** The name of the plugin */
   name: string;
   /** Hook into fwoosh */
   apply(fwoosh: FwooshClass): void;
+  /** Parameters the plugin can take. */
+  params?: Params;
 }
 
 export interface PanelPluginProps {
@@ -285,3 +287,23 @@ export interface ToolbarPlugin extends UIPluginProps {
   paramKey?: string;
   scope: "story" | "global";
 }
+
+export type ExtractParamsFromPlugins<
+  T extends FwooshOptions["plugins"][number]
+> =
+  // plugin supplied as a string
+  T extends string
+    ? never
+    : // plugin supplied as a tuple
+    T extends any[]
+    ? never
+    : // plugin is a class and has params and a name
+    T extends { params: infer U; name: infer N }
+    ? // that name is a string
+      N extends string
+      ? // and the params are an object with the plugin's name as a key
+        {
+          [K in N]: U | false;
+        }
+      : never
+    : never;

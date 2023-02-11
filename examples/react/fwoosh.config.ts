@@ -1,9 +1,13 @@
 import { FwooshOptions } from "fwoosh";
 import path from "path";
-import ReactPlugin from "@fwoosh/react";
+import ReactPlugin, {
+  StoryMeta as ReactStoryMeta,
+  Story as ReactStory,
+} from "@fwoosh/react";
 import DesignsPanel from "@fwoosh/panel-designs";
+import ViewportTool from "@fwoosh/tool-viewport";
 
-export const config: FwooshOptions = {
+export const config = {
   title: "@fwoosh/react",
   syntaxTheme: "material-ocean",
   setup: path.resolve("./config/fwoosh-setup.ts"),
@@ -19,7 +23,7 @@ export const config: FwooshOptions = {
     "@fwoosh/panel-actions",
     "@fwoosh/tool-zoom",
     "@fwoosh/tool-measure",
-    "@fwoosh/tool-viewport",
+    new ViewportTool(),
     new ReactPlugin({
       docgenOptions: {
         propFilter: (prop) => {
@@ -31,4 +35,9 @@ export const config: FwooshOptions = {
       },
     }),
   ],
-};
+} satisfies FwooshOptions;
+
+declare module "@fwoosh/types" {
+  type Meta = ReactStoryMeta<typeof config>;
+  type Story = ReactStory<Meta>;
+}

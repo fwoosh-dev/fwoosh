@@ -44,15 +44,15 @@ const Empty = styled("div", {
 });
 
 export default function DesignsPanel() {
-  const params = useParameters() as DesignsPanelParameters;
+  const params = useParameters() as { designs: DesignsPanelParameters };
+  const url =
+    typeof params.designs === "string" ? params.designs : params.designs.spec;
 
   if (!params.designs) {
     return <Empty>No designs configured for this story.</Empty>;
   }
 
   return (
-    <Preview
-      src={`https://www.figma.com/embed?embed_host=astra&url=${params.designs}`}
-    />
+    <Preview src={`https://www.figma.com/embed?embed_host=astra&url=${url}`} />
   );
 }

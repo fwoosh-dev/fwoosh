@@ -1,12 +1,10 @@
 import * as React from "react";
-import type { StoryMeta, Story } from "@fwoosh/react";
+import type { Meta, Story } from "fwoosh";
 import { action } from "@fwoosh/panel-actions";
-import { ViewportParameters } from "@fwoosh/tool-viewport";
-import type { DesignsPanelParameters } from "@fwoosh/panel-designs";
 
 import { Button } from "./Button";
 
-export const meta: StoryMeta<DesignsPanelParameters> = {
+export const meta: Meta = {
   title: "Components/Buttons/Button",
   component: Button,
   parameters: {
@@ -21,8 +19,14 @@ export const meta: StoryMeta<DesignsPanelParameters> = {
  *
  * > Even quote things!
  */
-export const Playground: Story<DesignsPanelParameters> = () => {
+export const Playground: Story = () => {
   return <Button onClick={action("onClick")}>Click me</Button>;
+};
+
+Playground.parameters = {
+  designs: {
+    spec: "https://www.figma.com/file/LKQ4FJ4bTnCSjedbRpk931/Sample-File?node-id=1%3A2",
+  },
 };
 
 /**
@@ -36,7 +40,7 @@ export const Playground: Story<DesignsPanelParameters> = () => {
  * }
  * ```
  */
-export const WithDisabled: Story<DesignsPanelParameters> = () => {
+export const WithDisabled: Story = () => {
   return (
     <Button disabled onClick={action("onClick")}>
       Click me
@@ -49,7 +53,7 @@ WithDisabled.parameters = {
 };
 
 /** Add custom styles to a button */
-export const WithStyle: Story<ViewportParameters> = () => {
+export const WithStyle: Story = () => {
   return (
     <Button variant="destructive" onClick={action("onClick")}>
       Click me
@@ -64,7 +68,7 @@ WithStyle.parameters = {
 };
 
 /** Add custom styles to a button */
-export const WithoutStyle: Story<ViewportParameters> = () => {
+export const WithoutStyle: Story = () => {
   return <button onClick={action("onClick")}>Click me</button>;
 };
 

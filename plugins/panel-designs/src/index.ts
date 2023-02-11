@@ -1,5 +1,6 @@
 import { Plugin, Fwoosh } from "fwoosh";
 import { createRequire } from "module";
+import { DesignsPanelParameters } from "./types.js";
 
 const require = createRequire(import.meta.url);
 
@@ -8,7 +9,8 @@ interface DesignsOptions {
 }
 
 export default class Designs implements Plugin {
-  name = "designs";
+  name = "designs" as const;
+  params = {} as DesignsPanelParameters;
 
   private options: DesignsOptions;
 
@@ -30,5 +32,3 @@ export default class Designs implements Plugin {
     });
   }
 }
-
-export * from "./types.js";

@@ -1,5 +1,6 @@
 import { FwooshOptions } from "fwoosh";
 
+import type { StoryMeta as StoryMetaReact, Story } from "@fwoosh/react";
 import ReactPlugin from "@fwoosh/react";
 import GitHubPlugin from "@fwoosh/tool-github";
 import { StorySidebarChildItem } from "@fwoosh/types";
@@ -38,7 +39,7 @@ function sortBasedOnOrder(
   }
 }
 
-export const config: FwooshOptions = {
+export const config = {
   title: "Fwoosh",
   docgen: { include: ["**/packages/components/**/*"] },
   sortSidebarItems: (a, b) => {
@@ -55,12 +56,6 @@ export const config: FwooshOptions = {
     }
   },
   plugins: [
-    "@fwoosh/panel-story-description",
-    "@fwoosh/panel-props",
-    "@fwoosh/panel-source",
-    "@fwoosh/panel-actions",
-    "@fwoosh/tool-zoom",
-    "@fwoosh/tool-measure",
     new GitHubPlugin({ repo: "fwoosh-dev/fwoosh" }),
     new ReactPlugin({
       docgenOptions: {
@@ -73,4 +68,6 @@ export const config: FwooshOptions = {
       },
     }),
   ],
-};
+} satisfies FwooshOptions;
+
+export type StoryMeta = StoryMetaReact<typeof config>;
