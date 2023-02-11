@@ -46,10 +46,10 @@ export const config = {
 or if you're not using TypeScript, create a `fwoosh.config.mjs` instead:
 
 ```js fwoosh.config.mjs
-export const config: FwooshOptions = {
+/** @type {import("fwoosh").FwooshOptions} */ 
+export const config = {
   title: "My Design System",
 };
-```
 
 ## Getting started with React
 
