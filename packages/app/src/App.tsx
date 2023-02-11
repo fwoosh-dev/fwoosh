@@ -80,21 +80,14 @@ const router = createBrowserRouter(
       path: "/",
       errorElement: <RouteError />,
       element: (
-        <TooltipPrimitive.Provider>
-          <HelmetProvider>
-            <ErrorBoundary fullScreen>
-              <ProductionSearchIndex />
-              <AppWrapper>
-                <Head />
-                <Outlet />
-                <ScrollRestoration />
-                <React.Suspense>
-                  <CommandPallette />
-                </React.Suspense>
-              </AppWrapper>
-            </ErrorBoundary>
-          </HelmetProvider>
-        </TooltipPrimitive.Provider>
+        <>
+          <Head />
+          <Outlet />
+          <ScrollRestoration />
+          <React.Suspense>
+            <CommandPallette />
+          </React.Suspense>
+        </>
       ),
       children: [
         {
@@ -175,7 +168,6 @@ const router = createBrowserRouter(
   }
 );
 
-console.log("here");
 const globalStyles = globalCss({
   mark: { background: "$primary6" },
   html: { background: "$gray1" },
@@ -220,14 +212,19 @@ export const App = () => {
   }, []);
 
   return (
-    <>
-      <QueryClientProvider client={queryClient}>
-        <ColorModeContext.Provider value={colorMode}>
-          <AppWrapper data-color-mode={colorMode}>
-            <RouterProvider router={router} />
-          </AppWrapper>
-        </ColorModeContext.Provider>
-      </QueryClientProvider>
-    </>
+    <TooltipPrimitive.Provider>
+      <HelmetProvider>
+        <QueryClientProvider client={queryClient}>
+          <ColorModeContext.Provider value={colorMode}>
+            <ErrorBoundary fullScreen>
+              <AppWrapper data-color-mode={colorMode}>
+                <ProductionSearchIndex />
+                <RouterProvider router={router} />
+              </AppWrapper>
+            </ErrorBoundary>
+          </ColorModeContext.Provider>
+        </QueryClientProvider>
+      </HelmetProvider>
+    </TooltipPrimitive.Provider>
   );
 };
