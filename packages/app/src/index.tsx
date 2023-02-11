@@ -2,7 +2,7 @@ import "@unocss/reset/tailwind.css";
 import "@code-hike/mdx/dist/index.css";
 
 import React from "react";
-import { createRoot } from "react-dom/client";
+import ReactDOM, { version as reactDomVersion } from "react-dom";
 import { App } from "./App";
 
 import "@fontsource/inter/latin-400.css";
@@ -16,6 +16,12 @@ if (!container) {
   throw new Error("No container element found");
 }
 
-const root = createRoot(container);
+const isReact18 = reactDomVersion && reactDomVersion.startsWith("18");
 
-root.render(<App />);
+if (isReact18) {
+  import("react-dom/client").then(({ createRoot }) => {
+    createRoot(container).render(<App />);
+  });
+} else {
+  ReactDOM.render(<App />, container);
+}
