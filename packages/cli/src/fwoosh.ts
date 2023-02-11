@@ -274,6 +274,14 @@ export class Fwoosh implements FwooshClass {
 
     process.env.NODE_ENV = mode;
 
+    const optimizedDeps = depsToOptimize.filter((d) => {
+      try {
+        // Test if the dependency is installed
+        // Fixes warning for different versions of react-dom not being installed
+        return require.resolve(d);
+      } catch (e) {}
+    });
+
     const baseConfig: InlineConfig = {
       mode,
       root: path.dirname(path.dirname(require.resolve("@fwoosh/app"))),
@@ -417,7 +425,7 @@ export class Fwoosh implements FwooshClass {
       optimizeDeps: {
         entries: [require.resolve("@fwoosh/app/index.html")],
         exclude: ["@fwoosh/*", "@fwoosh/components"],
-        include: depsToOptimize,
+        include: optimizedDeps,
       },
       build: {
         outDir,
