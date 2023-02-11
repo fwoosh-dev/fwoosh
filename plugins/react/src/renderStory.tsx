@@ -22,7 +22,7 @@ function useDecorators(story: StoryData) {
     async function getDecorators() {
       const [meta, storyComponentImport] = await Promise.all([
         story.meta,
-        story.component._payload._result,
+        story.component._payload?._result,
       ]);
       const storyComponent =
         storyComponentImport.default || storyComponentImport;
