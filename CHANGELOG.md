@@ -1,3 +1,17 @@
+# v0.0.113 (Sat Feb 11 2023)
+
+#### 🐛 Bug Fix
+
+- `fwoosh`, `@fwoosh/panel-actions`, `@fwoosh/panel-designs`, `@fwoosh/panel-props`, `@fwoosh/panel-source`, `@fwoosh/panel-story-description`, `@fwoosh/react`, `@fwoosh/tool-github`, `@fwoosh/tool-measure`, `@fwoosh/tool-viewport`, `@fwoosh/tool-zoom`
+  - fix(docs): show `FwooshOptions` in docs [#64](https://github.com/fwoosh-dev/fwoosh/pull/64) ([@msutkowski](https://github.com/msutkowski) [@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 2
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- Matt Sutkowski ([@msutkowski](https://github.com/msutkowski))
+
+---
+
 # v0.0.112 (Thu Feb 02 2023)
 
 #### ⚠️ Pushed to `main`
