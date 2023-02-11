@@ -50,6 +50,7 @@ import { fwooshUiPlugin } from "./utils/fwoosh-ui-plugin.js";
 import { convertMarkdownToHtml } from "./utils/get-stories.js";
 import { getCodeHikeConfig, setSyntaxTheme } from "./utils/code-hike-config.js";
 import { componentOverridePlugin } from "./utils/component-override-plugins.js";
+import { perfLog } from "./utils/performance.js";
 
 const require = createRequire(import.meta.url);
 
@@ -716,14 +717,11 @@ export class Fwoosh implements FwooshClass {
           .replace("/dist/", "/src/")
           .replace(".js", ".tsx");
 
-        const generateDocsStart = performance.now();
-        const docs = await this.hooks.generateDocs.promise(file);
-        const generateDocsEnd = performance.now();
-        log.info(
-          `Generate docs: ${path.relative(process.cwd(), file)} (${ms(
-            generateDocsEnd - generateDocsStart
-          )})`
+        const generateDocsTimerEnd = perfLog(
+          `Generate docs: ${path.relative(process.cwd(), file)}`
         );
+        const docs = await this.hooks.generateDocs.promise(file);
+        generateDocsTimerEnd();
 
         const docsWithHtmlDescriptions = await Promise.all(
           docs.map(async (doc) => ({

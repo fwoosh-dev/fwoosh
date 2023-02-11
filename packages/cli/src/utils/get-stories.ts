@@ -17,6 +17,7 @@ import { remarkCodeHike } from "@code-hike/mdx";
 import { FwooshOptionsLoaded, ResolvedStoryMeta } from "@fwoosh/types";
 import { getCodeHikeConfig } from "./code-hike-config.js";
 import { endent } from "./endent.js";
+import { perfLog } from "./performance.js";
 
 const require = createRequire(import.meta.url);
 
@@ -34,6 +35,7 @@ function sanitizeMarkdownString(str: string) {
 }
 
 export async function convertMarkdownToHtml(markdown: string) {
+  const mdxTimerEnd = perfLog("MDX compile");
   const compiledMdx = await compile(markdown, {
     remarkPlugins: [
       gfm,
@@ -42,6 +44,7 @@ export async function convertMarkdownToHtml(markdown: string) {
     outputFormat: "function-body",
     providerImportSource: "@mdx-js/react",
   });
+  mdxTimerEnd();
 
   return String(compiledMdx);
 }
@@ -138,7 +141,7 @@ export type FwooshFileDescriptor = StoryFileDescriptor | MDXFileDescriptor;
 const lastEnd = { value: 0 };
 
 async function getStory(file: string, data: FwooshFileDescriptor[]) {
-  const start = performance.now();
+  const parseStoryTimerEnd = perfLog(`Parse '${file}'`);
   const contents = await fs.readFile(file, "utf8");
   const fullPath = path.resolve(file);
 
@@ -234,27 +237,22 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
     log.trace("Found story file:", fileDescriptor);
   }
 
-  const end = performance.now();
-
-  log.info(`Parse: ${path.basename(file)} (${ms(end - start)})`);
+  parseStoryTimerEnd();
 }
 
 export async function getStoryData({ stories, outDir }: FwooshOptionsLoaded) {
-  const startFiles = performance.now();
+  const getStoryListTimerEnd = perfLog("Get story list");
   const files = await getStoryList({ stories, outDir });
-  const endFiles = performance.now();
+  getStoryListTimerEnd();
 
-  log.info(`Get stories: (${ms(endFiles - startFiles)})`);
   log.info(`Found ${files.length} files`);
   log.debug(files);
 
-  const startStories = performance.now();
+  const parseAllStoriesTimerEnd = perfLog("Parse stories");
   const data: FwooshFileDescriptor[] = [];
 
   await chunkPromisesTimes(files, 1, (file) => getStory(file, data));
-
-  const endStories = performance.now();
-  log.info(`Parse stories: (${ms(endStories - startStories)})`);
+  parseAllStoriesTimerEnd();
 
   return data;
 }

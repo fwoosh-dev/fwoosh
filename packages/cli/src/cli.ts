@@ -1,6 +1,4 @@
-import { performance } from "perf_hooks";
 import { app, MultiCommand, Option } from "command-line-application";
-import ms from "pretty-ms";
 import ora from "ora";
 import path from "path";
 import { lilconfig } from "lilconfig";
@@ -70,7 +68,13 @@ const sharedOptions: Option[] = [
     description: "The amount of logs to print",
     type: String,
     defaultValue: "log",
-    typeLabel: "log | info | debug | trace",
+    typeLabel: "log | info | debug | trace | perf",
+  },
+  {
+    name: "perf",
+    description: "Measure performance of fwoosh and plugins.",
+    type: Boolean,
+    defaultValue: false,
   },
 ];
 
@@ -102,8 +106,18 @@ const fwooshCli: MultiCommand = {
 };
 
 async function run() {
-  const start = performance.now();
   const options = app(fwooshCli);
+
+  if (options?.logLevel) {
+    process.env.LOG_LEVEL = options.logLevel;
+  }
+
+  if (options?.perf) {
+    process.env.MEASURE_PERF = "true";
+  }
+  const { perfLog } = await import("./utils/performance.js");
+
+  const startupTimerStop = perfLog("Dev server start up");
   const { config = {}, filepath } = (await explorer.search()) || {};
   const dir = path.dirname(filepath || process.cwd());
 
@@ -127,10 +141,6 @@ async function run() {
     fwooshOptions.stories = config.stories;
   }
 
-  if (options?.logLevel) {
-    process.env.LOG_LEVEL = options.logLevel;
-  }
-
   // Dynamic import so we can set env vars before loading
   const { Fwoosh } = await import("./fwoosh.js");
   const fwoosh = new Fwoosh(fwooshOptions);
@@ -152,9 +162,7 @@ async function run() {
     }
   }
 
-  const { log } = await import("@fwoosh/utils");
-  const end = performance.now();
-  log.info(`Dev server start up took: ${ms(end - start)}`);
+  startupTimerStop();
 }
 
 run();
