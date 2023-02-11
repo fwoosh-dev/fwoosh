@@ -1,10 +1,14 @@
 import * as React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM, { version as reactDomVersion } from "react-dom";
+import * as TooltipPrimitive from "@radix-ui/react-tooltip";
+
 import { StoryData, StoryParameters } from "@fwoosh/types";
 import { stories } from "@fwoosh/app/stories";
 import { Spinner, ErrorBoundary } from "@fwoosh/components";
+
 import type { Decorator, Story as ReactStory, StoryMeta } from "./types";
-import * as TooltipPrimitive from "@radix-ui/react-tooltip";
+
+const isReact18 = reactDomVersion && reactDomVersion.startsWith("18");
 
 function reverse<T>(arr: T[]) {
   return arr.slice().reverse();
@@ -100,22 +104,18 @@ export function render(
     </TooltipPrimitive.Provider>
   );
 
-  try {
-    import("react-dom/client")
-      .then(({ createRoot }) => {
-        const root = createRoot(el);
+  if (isReact18) {
+    import("react-dom/client").then(({ createRoot }) => {
+      const root = createRoot(el);
 
-        if (roots[slug]) {
-          roots[slug].unmount();
-          roots[slug] = root;
-        }
+      if (roots[slug]) {
+        roots[slug].unmount();
+        roots[slug] = root;
+      }
 
-        root.render(app);
-      })
-      .catch(() => {
-        ReactDOM.render(app, el);
-      });
-  } catch (e) {
-    console.error("error", e);
+      root.render(app);
+    });
+  } else {
+    ReactDOM.render(app, el);
   }
 }

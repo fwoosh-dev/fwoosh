@@ -2,7 +2,7 @@ import { promises as fs } from "fs";
 import ms from "pretty-ms";
 import boxen from "boxen";
 import path from "path";
-import { createServer, InlineConfig, build } from "vite";
+import { createServer, InlineConfig, build, Alias } from "vite";
 import express from "express";
 import expressWs from "express-ws";
 import { createRequire } from "module";
@@ -274,6 +274,14 @@ export class Fwoosh implements FwooshClass {
 
     process.env.NODE_ENV = mode;
 
+    const optimizedDeps = depsToOptimize.filter((d) => {
+      try {
+        // Test if the dependency is installed
+        // Fixes warning for different versions of react-dom not being installed
+        return require.resolve(d);
+      } catch (e) {}
+    });
+
     const baseConfig: InlineConfig = {
       mode,
       root: path.dirname(path.dirname(require.resolve("@fwoosh/app"))),
@@ -413,11 +421,33 @@ export class Fwoosh implements FwooshClass {
             );
           },
         },
+        // This plugin is used to alias react-dom/client to a placeholder
+        // when it's not installed. This is to prevent the build from failing
+        // when react 18 is not installed.
+        //
+        // I couldn't find a way to do this with the alias option so this mirrors roughly
+        // what the alias plugin does.
+        {
+          name: "fwoosh:react-alias",
+          resolveId(importee, importer) {
+            if (!importer) {
+              return null;
+            }
+
+            if (importee === "react-dom/client") {
+              try {
+                require.resolve("react-dom/client");
+              } catch (e) {
+                return require.resolve("./react18-placeholder.js");
+              }
+            }
+          },
+        },
       ],
       optimizeDeps: {
         entries: [require.resolve("@fwoosh/app/index.html")],
         exclude: ["@fwoosh/*", "@fwoosh/components"],
-        include: depsToOptimize,
+        include: optimizedDeps,
       },
       build: {
         outDir,
