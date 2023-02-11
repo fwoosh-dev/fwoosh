@@ -20,7 +20,7 @@ There are four types of plugins:
 Plugins are configured in the `fwoosh.config.ts` file.
 
 ```ts fwoosh.config.ts focus=2:7
-export const config: FwooshConfig = {
+export const config: FwooshOptions = {
   plugins: [
     // Just list the name of the plugin to use it
     "@fwoosh/panel-story-description",
@@ -36,7 +36,7 @@ This provides a better auto-complete experience in your editor.
 ```ts focus=1,5:7
 import StoryDescriptionPanel from "@fwoosh/panel-story-description";
 
-export const config: FwooshConfig = {
+export const config: FwooshOptions = {
   plugins: [
     new StoryDescriptionPanel({
       title: "Comment",

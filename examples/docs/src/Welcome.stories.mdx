@@ -33,12 +33,35 @@ npm i --save-dev fwoosh
 yarn add -D fwoosh
 ```
 
-Then create a `fwoosh.config.mjs` file in the root of your project:
+Then create a `fwoosh.config.ts` file in the root of your project:
 
-```ts
-import { FwooshConfig } from "fwoosh";
+```ts fwoosh.config.ts
+import type { FwooshOptions } from "fwoosh";
 
-export const config: FwooshConfig = {
+export const config = {
+  title: "My Design System",
+} satisfies FwooshOptions;
+```
+
+or if you're not using TypeScript, create a `fwoosh.config.mjs` instead:
+
+```js fwoosh.config.mjs
+/** @type {import("fwoosh").FwooshOptions} */ 
+export const config = {
   title: "My Design System",
 };
+
+## Getting started with React
+
+In order to start working with React, you'll need to install [`the React renderer`](../Plugins-Renderers-React) then add it to your plugins.
+
+```ts
+import type { FwooshOptions } from "fwoosh";
+
+export const config: FwooshOptions = {
+  title: "My Design System",
+  plugins: ["@fwoosh/react"],
+};
 ```
+
+To see a complete example of configuring a more complex React app, check out the [example repo](https://github.com/fwoosh-dev/fwoosh/blob/main/examples/react/fwoosh.config.ts).
