@@ -63,3 +63,5 @@ export function Tooltip({ children, message, ...props }: TooltipProps) {
     </TooltipPrimitive.Root>
   );
 }
+
+export const TooltipProvider = TooltipPrimitive.Provider;

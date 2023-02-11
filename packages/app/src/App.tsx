@@ -10,14 +10,18 @@ import {
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { HelmetProvider } from "react-helmet-async";
-import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 
 import { Story } from "./components/Story";
 import { Workbench } from "./components/Workbench";
 import { Docs } from "./components/Docs";
 import { DocsPage } from "./components/DocsPage";
 import "./index.css";
-import { AppWrapper, Spinner, ErrorBoundary } from "@fwoosh/components";
+import {
+  AppWrapper,
+  Spinner,
+  ErrorBoundary,
+  TooltipProvider,
+} from "@fwoosh/components";
 import {
   ColorMode,
   ColorModeContext,
@@ -212,7 +216,7 @@ export const App = () => {
   }, []);
 
   return (
-    <TooltipPrimitive.Provider>
+    <TooltipProvider>
       <HelmetProvider>
         <QueryClientProvider client={queryClient}>
           <ColorModeContext.Provider value={colorMode}>
@@ -225,6 +229,6 @@ export const App = () => {
           </ColorModeContext.Provider>
         </QueryClientProvider>
       </HelmetProvider>
-    </TooltipPrimitive.Provider>
+    </TooltipProvider>
   );
 };
