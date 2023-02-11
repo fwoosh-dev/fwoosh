@@ -2,7 +2,7 @@ import { promises as fs } from "fs";
 import ms from "pretty-ms";
 import boxen from "boxen";
 import path from "path";
-import { createServer, InlineConfig, build } from "vite";
+import { createServer, InlineConfig, build, Alias } from "vite";
 import express from "express";
 import expressWs from "express-ws";
 import { createRequire } from "module";
@@ -282,6 +282,18 @@ export class Fwoosh implements FwooshClass {
       } catch (e) {}
     });
 
+    const aliases: Alias[] = [];
+
+    // Detect if react 18 is installed.  If not, alias it to a virtual placeholder file.
+    try {
+      require.resolve("react-dom/client");
+    } catch (e) {
+      aliases.push({
+        find: "react-dom/client",
+        replacement: require.resolve("./react18-placeholder.js"),
+      });
+    }
+
     const baseConfig: InlineConfig = {
       mode,
       root: path.dirname(path.dirname(require.resolve("@fwoosh/app"))),
@@ -458,6 +470,7 @@ export class Fwoosh implements FwooshClass {
               paths: [require.resolve("@fwoosh/app")],
             }),
           },
+          ...aliases,
         ],
       },
     };
