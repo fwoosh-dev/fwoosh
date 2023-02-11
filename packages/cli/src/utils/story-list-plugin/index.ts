@@ -1,7 +1,7 @@
 import { pascalCase } from "change-case";
 import chokidar from "chokidar";
 import {
-  Story,
+  ParsedStoryData,
   FwooshOptionsLoaded,
   MDXStoryData,
   BasicStoryData,
@@ -25,7 +25,7 @@ const defaultListModule = endent`
   export const stories = {};
 `;
 
-type StoryWithGrouping = Story & { grouping: string };
+type StoryWithGrouping = ParsedStoryData & { grouping: string };
 
 function stringifyStories(
   fileMap: Record<string, MDXStoryData | BasicStoryData>

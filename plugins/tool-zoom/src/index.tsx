@@ -13,7 +13,7 @@ export default class ZoomPlugin implements Plugin {
 
   private options: ZoomPluginOptions;
 
-  constructor(options: ZoomPluginOptions) {
+  constructor(options: ZoomPluginOptions = {}) {
     this.options = options;
   }
 

@@ -2,7 +2,8 @@ import React from "react";
 import { stories } from "@fwoosh/app/stories";
 import { MDXContent } from "@fwoosh/components";
 import { styled } from "@fwoosh/styling";
-import { useHighlightedCode, useStoryId } from "@fwoosh/hooks";
+import { useHighlightedCode } from "@fwoosh/hooks";
+import { PanelPluginProps } from "fwoosh";
 
 const Panel = styled("div", {
   height: "100%",
@@ -47,8 +48,7 @@ function HighlightedSource({ code }: { code: string }) {
   return <MDXContent compiledSource={highlightedCode} />;
 }
 
-export default function SourcePanel() {
-  const storyId = useStoryId();
+export default function SourcePanel({ storyId }: PanelPluginProps) {
   const story = Object.values(stories).find((s) => s.slug === storyId);
 
   if (!story || !("code" in story) || !story.code) {

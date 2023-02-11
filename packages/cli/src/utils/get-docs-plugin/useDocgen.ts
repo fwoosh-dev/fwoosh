@@ -1,8 +1,8 @@
-import { Story } from "@fwoosh/types";
+import { ParsedStoryData } from "@fwoosh/types";
 import { useQuery } from "react-query";
 import { resolveStoryMeta } from "@fwoosh/utils";
 
-export const useDocgen = (key: string, story: Story) => {
+export const useDocgen = (key: string, story: ParsedStoryData) => {
   const { data } = useQuery(
     key,
     async () => {

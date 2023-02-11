@@ -1,6 +1,5 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["src/**/*", "../../typings/**/*"],
 
   "compilerOptions": {
     "module": "NodeNext",

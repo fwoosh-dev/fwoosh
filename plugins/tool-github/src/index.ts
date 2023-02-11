@@ -15,7 +15,9 @@ interface GithubOptions {
 }
 
 export default class Github implements Plugin {
-  name = "github";
+  name = "github" as const;
+
+  params: { branch?: string } = {};
 
   private options: GithubOptions;
 

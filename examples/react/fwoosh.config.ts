@@ -1,9 +1,16 @@
 import { FwooshOptions } from "fwoosh";
 import path from "path";
-import ReactPlugin from "@fwoosh/react";
-import DesignsPanel from "@fwoosh/panel-designs";
 
-export const config: FwooshOptions = {
+import ReactPlugin, { StoryMeta as ReactStoryMeta, Story } from "@fwoosh/react";
+import DesignsPanel from "@fwoosh/panel-designs";
+import ViewportTool from "@fwoosh/tool-viewport";
+import PropsPanelPlugin from "@fwoosh/panel-props";
+import SourcePanelPlugin from "@fwoosh/panel-source";
+import ActionsPanelPlugin from "@fwoosh/panel-actions/plugin";
+import ZoomPanelPlugin from "@fwoosh/tool-zoom";
+import MeasurePanelPlugin from "@fwoosh/tool-measure";
+
+export const config = {
   title: "@fwoosh/react",
   syntaxTheme: "material-ocean",
   setup: path.resolve("./config/fwoosh-setup.ts"),
@@ -14,12 +21,12 @@ export const config: FwooshOptions = {
   },
   plugins: [
     new DesignsPanel({ hideWithoutParams: true }),
-    "@fwoosh/panel-props",
-    "@fwoosh/panel-source",
-    "@fwoosh/panel-actions",
-    "@fwoosh/tool-zoom",
-    "@fwoosh/tool-measure",
-    "@fwoosh/tool-viewport",
+    new PropsPanelPlugin(),
+    new SourcePanelPlugin(),
+    new ActionsPanelPlugin(),
+    new ZoomPanelPlugin(),
+    new MeasurePanelPlugin(),
+    new ViewportTool(),
     new ReactPlugin({
       docgenOptions: {
         propFilter: (prop) => {
@@ -31,4 +38,9 @@ export const config: FwooshOptions = {
       },
     }),
   ],
-};
+} satisfies FwooshOptions;
+
+declare global {
+  type ReactMeta = ReactStoryMeta<typeof config>;
+  type ReactStory = Story<ReactMeta>;
+}

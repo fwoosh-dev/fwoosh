@@ -3,23 +3,26 @@ import { useDocgen } from "@fwoosh/app/docs";
 import { stories } from "@fwoosh/app/stories";
 import { PropsTable, components, DelayedRender } from "@fwoosh/components";
 import { styled, keyframes } from "@fwoosh/styling";
-import { useStoryId } from "@fwoosh/hooks";
+import { PanelPluginProps } from "fwoosh";
 
 const Wrapper = styled("div", {
   px: 4,
   width: "100%",
 });
 
-function PropsPanelContent() {
-  const storyId = useStoryId();
+function PropsPanelContent({ storyId }: PanelPluginProps) {
   const [, story] =
     Object.entries(stories).find(([slug]) => slug === storyId) || [];
-  const key = story?.slug || "none";
-  const docs = useDocgen(key, (story?.component as any)._result || story?.meta);
+  const docs = useDocgen(
+    storyId,
+    (story?.component as any)._result || story?.meta
+  );
+
+  console.log({ storyId, docs });
 
   return (
     <Wrapper>
-      <PropsTable key={key} docs={docs} />
+      <PropsTable key={storyId} docs={docs} />
     </Wrapper>
   );
 }
@@ -89,10 +92,10 @@ function PropsPanelSkeleton() {
   );
 }
 
-export default function PropsPanel() {
+export default function PropsPanel(props: PanelPluginProps) {
   return (
     <React.Suspense fallback={<PropsPanelSkeleton />}>
-      <PropsPanelContent />
+      <PropsPanelContent {...props} />
     </React.Suspense>
   );
 }

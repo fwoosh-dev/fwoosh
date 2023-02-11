@@ -11,7 +11,5 @@ export type Device = keyof typeof devices;
 export const SetSizeEvent = "fwoosh-viewport:set-size";
 
 export interface ViewportParameters {
-  viewport?: {
-    defaultSize?: Device | Device[];
-  };
+  defaultSize?: Device | Device[];
 }

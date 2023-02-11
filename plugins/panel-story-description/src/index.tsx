@@ -13,9 +13,11 @@ export default class StoryDescriptionPanel implements Plugin {
 
   private options: StoryDescriptionPanelOptions;
 
-  constructor(options: StoryDescriptionPanelOptions) {
+  constructor(
+    { title }: StoryDescriptionPanelOptions = { title: "Description" }
+  ) {
     this.options = {
-      title: options.title || "Description",
+      title,
     };
   }
 
@@ -26,6 +28,7 @@ export default class StoryDescriptionPanel implements Plugin {
         {
           name: this.options.title,
           paramKey: this.name,
+          hideInDocs: true,
           filepath: require.resolve("./panel"),
         },
       ];

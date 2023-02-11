@@ -1,7 +1,5 @@
 import * as React from "react";
-import type { StoryMeta } from "fwoosh";
-// todo make this work right
-import type { Story } from "@fwoosh/react/dist/types";
+import type { StoryMeta, Story } from "fwoosh";
 import { Check, MoreHorizontal, ExternalLink } from "react-feather";
 import { DropdownMenu, IconButton, ChevronRightIcon } from "@fwoosh/components";
 
@@ -11,10 +9,12 @@ export const meta: StoryMeta = {
 
 type CheckedState = boolean | "indeterminate";
 
+/**
+ * Displays a menu to the user — such as a set of actions or functions — triggered by a button.
+ */
 export const Basis: Story = () => {
-  const [bookmarksChecked, setBookmarksChecked] = React.useState<CheckedState>(
-    true
-  );
+  const [bookmarksChecked, setBookmarksChecked] =
+    React.useState<CheckedState>(true);
   const [urlsChecked, setUrlsChecked] = React.useState<CheckedState>(false);
   const [person, setPerson] = React.useState("pedro");
 

@@ -2,7 +2,7 @@ import React from "react";
 import { stories } from "@fwoosh/app/stories";
 import { components, MDXContent } from "@fwoosh/components";
 import { styled } from "@fwoosh/styling";
-import { useStoryId } from "@fwoosh/hooks";
+import { PanelPluginProps } from "fwoosh";
 
 const Panel = styled("div", {
   height: "100%",
@@ -14,8 +14,7 @@ const NoDescriptionMessage = styled(components.p, {
   color: "$gray10",
 });
 
-export default function DescriptionPanel() {
-  const storyId = useStoryId();
+export default function DescriptionPanel({ storyId }: PanelPluginProps) {
   const story = Object.values(stories).find((s) => s.slug === storyId);
 
   if (!story || !("comment" in story) || !story.comment) {

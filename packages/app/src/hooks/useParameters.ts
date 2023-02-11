@@ -16,7 +16,7 @@ export const useParameters = () => {
           : await story?.component?._payload?._result;
 
       return {
-        ...meta?.parameters,
+        ...(meta?.parameters || {}),
         ...component?.default?.parameters,
       };
     },

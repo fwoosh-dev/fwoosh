@@ -1,7 +1,16 @@
 import { FwooshOptions } from "fwoosh";
 
-import ReactPlugin from "@fwoosh/react";
+import ReactPlugin, {
+  StoryMeta as ReactStoryMeta,
+  Story as ReactStory,
+} from "@fwoosh/react";
 import GitHubPlugin from "@fwoosh/tool-github";
+import StoryDescriptionPanelPlugin from "@fwoosh/panel-story-description";
+import PropsPanelPlugin from "@fwoosh/panel-props";
+import SourcePanelPlugin from "@fwoosh/panel-source";
+import ActionsPanelPlugin from "@fwoosh/panel-actions/plugin";
+import ZoomPanelPlugin from "@fwoosh/tool-zoom";
+import MeasurePanelPlugin from "@fwoosh/tool-measure";
 import { StorySidebarChildItem } from "@fwoosh/types";
 
 const rootOrder = [
@@ -38,7 +47,7 @@ function sortBasedOnOrder(
   }
 }
 
-export const config: FwooshOptions = {
+export const config = {
   title: "Fwoosh",
   docgen: { include: ["**/packages/components/**/*"] },
   sortSidebarItems: (a, b) => {
@@ -55,12 +64,12 @@ export const config: FwooshOptions = {
     }
   },
   plugins: [
-    "@fwoosh/panel-story-description",
-    "@fwoosh/panel-props",
-    "@fwoosh/panel-source",
-    "@fwoosh/panel-actions",
-    "@fwoosh/tool-zoom",
-    "@fwoosh/tool-measure",
+    new StoryDescriptionPanelPlugin(),
+    new PropsPanelPlugin(),
+    new SourcePanelPlugin(),
+    new ActionsPanelPlugin(),
+    new ZoomPanelPlugin(),
+    new MeasurePanelPlugin(),
     new GitHubPlugin({ repo: "fwoosh-dev/fwoosh" }),
     new ReactPlugin({
       docgenOptions: {
@@ -73,4 +82,9 @@ export const config: FwooshOptions = {
       },
     }),
   ],
-};
+} satisfies FwooshOptions;
+
+declare module "fwoosh" {
+  type Meta = ReactStoryMeta<typeof config>;
+  type Story = ReactStory<Meta>;
+}

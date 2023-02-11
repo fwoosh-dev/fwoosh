@@ -1,8 +1,7 @@
 import React, { Suspense } from "react";
-import { Toolbar, Spinner } from "@fwoosh/components";
+import { Spinner } from "@fwoosh/components";
 import { useStoryId } from "@fwoosh/hooks";
 
-import { ThemeToggle } from "./ThemeToggle";
 import { GlobalToolbarControls, ToolbarControls } from "./toolbar";
 import { GlobalToolbarItems } from "./toolbar/GlobalToolbarItems";
 import { WorkbenchToolbarItems } from "./toolbar/WorkbenchToolbarItems";

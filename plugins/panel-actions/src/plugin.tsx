@@ -10,7 +10,7 @@ export default class ActionsPanel implements Plugin {
 
   private options: ActionsPanelOptions;
 
-  constructor(options: ActionsPanelOptions) {
+  constructor(options: ActionsPanelOptions = {}) {
     this.options = options;
   }
 

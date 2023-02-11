@@ -39,7 +39,7 @@ function arrayify<T>(value: T | T[] | undefined): T[] {
 }
 
 export function useCurrentSize(defaultValueProp?: Device | Device[]) {
-  const params = useParameters<ViewportParameters>();
+  const params = useParameters<{ viewport: ViewportParameters }>();
   const defaultValue: Device[] = React.useMemo(() => {
     return defaultValueProp
       ? arrayify(defaultValueProp)

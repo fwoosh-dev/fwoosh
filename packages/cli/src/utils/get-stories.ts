@@ -3,7 +3,7 @@ import { promises as fs } from "fs";
 import { titleCase } from "title-case";
 import ms from "pretty-ms";
 import { performance } from "perf_hooks";
-import { Story, StoryMeta } from "@fwoosh/types";
+import { ParsedStoryData, StoryMeta } from "@fwoosh/types";
 import { chunkPromisesTimes, createStorySlug, log } from "@fwoosh/utils";
 import { compile } from "@mdx-js/mdx";
 
@@ -125,7 +125,7 @@ function findExportKeyword(contents: string, index: number): number {
 }
 
 interface StoryFileDescriptor {
-  stories: Story[];
+  stories: ParsedStoryData[];
   meta: ResolvedStoryMeta;
 }
 
@@ -197,7 +197,7 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
       {}
     );
     const storiesDeclarations = exports.filter((e) => e !== metaDeclaration);
-    const stories: Story[] = await Promise.all(
+    const stories: ParsedStoryData[] = await Promise.all(
       (storiesDeclarations as any).map(async (d: any) => {
         const exportName = d.declaration.declarations[0].id.value;
         const start = d.span.start + offset - ast.span.start;

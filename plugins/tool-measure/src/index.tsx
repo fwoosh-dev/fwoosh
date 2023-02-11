@@ -10,7 +10,7 @@ export default class MeasurePlugin implements Plugin {
 
   private options: MeasurePluginOptions;
 
-  constructor(options: MeasurePluginOptions) {
+  constructor(options: MeasurePluginOptions = {}) {
     this.options = options;
   }
 

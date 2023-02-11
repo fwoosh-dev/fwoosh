@@ -37,21 +37,7 @@ declare module "@fwoosh/app/docs" {
 }
 
 declare module "@fwoosh/app/ui" {
-  interface ToolbarPlugin {
-    ({ storyPreviewId: string }): JSX.Element;
-    componentName: string;
-    displayName: string;
-    paramKey?: string;
-    scope: "story" | "global";
-    hideWithoutParams?: string | false;
-  }
-  interface PanelPlugin {
-    ({ storyPreviewId: string }): JSX.Element;
-    componentName: string;
-    displayName: () => JSX.Element;
-    paramKey?: string;
-    hideWithoutParams?: string | false;
-  }
+  import { ToolbarPlugin, PanelPlugin } from "@fwoosh/types";
 
   export const toolbarControls: Array<ToolbarPlugin>;
   export const panels: Array<PanelPlugin>;

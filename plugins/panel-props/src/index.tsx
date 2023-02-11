@@ -10,7 +10,7 @@ export default class PropsPanel implements Plugin {
 
   private options: PropsPanelOptions;
 
-  constructor(options: PropsPanelOptions) {
+  constructor(options: PropsPanelOptions = {}) {
     this.options = options;
   }
 

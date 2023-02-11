@@ -1,7 +1,5 @@
 import * as React from "react";
-import type { StoryMeta } from "fwoosh";
-
-import type { Story } from "@fwoosh/react/dist/types";
+import type { StoryMeta, Story } from "fwoosh";
 import { Spinner } from "@fwoosh/components";
 
 export const meta: StoryMeta = {

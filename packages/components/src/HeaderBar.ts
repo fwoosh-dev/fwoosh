@@ -1,12 +1,12 @@
 import { styled } from "@fwoosh/styling";
 
 export const HeaderBar = styled("div", {
-  height: "$14",
+  height: "$12",
   display: "flex",
   alignItems: "center",
-  borderWidth: "$sm",
-  borderStyle: "$solid",
-  borderColor: "$gray4",
+  borderBottomWidth: "$sm",
+  borderBottomStyle: "$solid",
+  borderBottomColor: "$gray6",
   gap: "$2",
   px: 4,
   py: 2,

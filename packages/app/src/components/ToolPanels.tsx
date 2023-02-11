@@ -4,10 +4,15 @@ import { Spinner, Tabs, ErrorBoundary } from "@fwoosh/components";
 import { panels } from "@fwoosh/app/ui";
 
 import { StoryIdContext } from "./Story";
-import { useParameters, useStoryId } from "@fwoosh/hooks";
+import { useIsDocs, useParameters } from "@fwoosh/hooks";
 
 const TabsList = styled(Tabs.List, {
   height: "$12",
+  borderWidth: "$sm",
+  borderStyle: "$solid",
+  borderColor: "$gray6",
+  borderLeft: "none",
+  borderRight: "none",
 });
 
 const TabContent = styled(Tabs.Content, {
@@ -17,17 +22,25 @@ const TabContent = styled(Tabs.Content, {
   height: "100%",
 });
 
-const ToolPanelsContent = () => {
-  const id = useContext(StoryIdContext);
-  const storyId = useStoryId();
+interface ToolPanelsContentProps {
+  storySlug: string;
+}
+
+const ToolPanelsContent = ({ storySlug }: ToolPanelsContentProps) => {
+  const storyPreviewId = useContext(StoryIdContext);
   const parameters = useParameters();
+  const isDocs = useIsDocs();
 
   const shownPanel = panels.filter((Panel) => {
     const paramValue = Panel.paramKey
       ? parameters?.[Panel.paramKey]
       : undefined;
 
-    if ((Panel.hideWithoutParams && !paramValue) || paramValue === false) {
+    if (
+      (Panel.hideWithoutParams && !paramValue) ||
+      paramValue === false ||
+      (Panel.hideInDocs && isDocs)
+    ) {
       return false;
     }
 
@@ -49,7 +62,10 @@ const ToolPanelsContent = () => {
                 key={`trigger-${Panel.componentName}`}
                 value={Panel.componentName}
               >
-                <Panel.displayName />
+                <Panel.displayName
+                  storyPreviewId={storyPreviewId}
+                  storyId={storySlug}
+                />
               </Tabs.Trigger>
             );
           })}
@@ -59,12 +75,12 @@ const ToolPanelsContent = () => {
       {shownPanel.map((Panel) => {
         return (
           <TabContent
-            key={`content-${Panel.componentName}-${storyId}`}
+            key={`content-${Panel.componentName}-${storySlug}`}
             value={Panel.componentName}
           >
             <ErrorBoundary>
               <Suspense fallback={<Spinner />}>
-                <Panel storyPreviewId={id} />
+                <Panel storyPreviewId={storyPreviewId} storyId={storySlug} />
               </Suspense>
             </ErrorBoundary>
           </TabContent>
@@ -74,10 +90,14 @@ const ToolPanelsContent = () => {
   );
 };
 
-export const ToolPanels = () => {
+interface ToolPanelsProps {
+  storySlug: string;
+}
+
+export const ToolPanels = ({ storySlug }: ToolPanelsProps) => {
   return (
     <Suspense fallback={<Spinner delay={3000} />}>
-      <ToolPanelsContent />
+      <ToolPanelsContent storySlug={storySlug} />
     </Suspense>
   );
 };
