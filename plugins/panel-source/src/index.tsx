@@ -10,7 +10,7 @@ export default class SourcePanel implements Plugin {
 
   private options: SourcePanelOptions;
 
-  constructor(options: SourcePanelOptions) {
+  constructor(options: SourcePanelOptions = {}) {
     this.options = options;
   }
 

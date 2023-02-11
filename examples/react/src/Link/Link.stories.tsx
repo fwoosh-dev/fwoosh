@@ -1,9 +1,8 @@
 import * as React from "react";
-import type { Story, StoryMeta } from "@fwoosh/react";
 
 import { Link } from "./Link";
 
-export const meta: StoryMeta = {
+export const meta: ReactMeta = {
   title: "Components/Buttons/Link",
   component: Link,
 };
@@ -11,14 +10,14 @@ export const meta: StoryMeta = {
 /**
  * A link leads to another page on the internet.
  */
-export const Playground: Story = () => {
+export const Playground: ReactStory = () => {
   return <Link href="http://google.com">Open link</Link>;
 };
 
 /**
  * A Link can open in a new window
  */
-export const WithDisabled: Story = () => {
+export const WithDisabled: ReactStory = () => {
   return (
     <Link href="http://google.com" newWindow={true}>
       Open link in new window

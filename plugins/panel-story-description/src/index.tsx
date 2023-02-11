@@ -13,9 +13,11 @@ export default class StoryDescriptionPanel implements Plugin {
 
   private options: StoryDescriptionPanelOptions;
 
-  constructor(options: StoryDescriptionPanelOptions) {
+  constructor(
+    { title }: StoryDescriptionPanelOptions = { title: "Description" }
+  ) {
     this.options = {
-      title: options.title || "Description",
+      title,
     };
   }
 

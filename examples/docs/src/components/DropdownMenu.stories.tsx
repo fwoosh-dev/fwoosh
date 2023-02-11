@@ -1,7 +1,5 @@
 import * as React from "react";
-import type { StoryMeta } from "fwoosh";
-// todo make this work right
-import type { Story } from "@fwoosh/react/dist/types";
+import type { StoryMeta, Story } from "fwoosh";
 import { Check, MoreHorizontal, ExternalLink } from "react-feather";
 import { DropdownMenu, IconButton, ChevronRightIcon } from "@fwoosh/components";
 

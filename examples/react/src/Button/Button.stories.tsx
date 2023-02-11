@@ -1,10 +1,9 @@
 import * as React from "react";
-import type { Meta, Story } from "fwoosh";
 import { action } from "@fwoosh/panel-actions";
 
 import { Button } from "./Button";
 
-export const meta: Meta = {
+export const meta: ReactMeta = {
   title: "Components/Buttons/Button",
   component: Button,
   parameters: {
@@ -19,7 +18,7 @@ export const meta: Meta = {
  *
  * > Even quote things!
  */
-export const Playground: Story = () => {
+export const Playground: ReactStory = () => {
   return <Button onClick={action("onClick")}>Click me</Button>;
 };
 
@@ -40,7 +39,7 @@ Playground.parameters = {
  * }
  * ```
  */
-export const WithDisabled: Story = () => {
+export const WithDisabled: ReactStory = () => {
   return (
     <Button disabled onClick={action("onClick")}>
       Click me
@@ -53,7 +52,7 @@ WithDisabled.parameters = {
 };
 
 /** Add custom styles to a button */
-export const WithStyle: Story = () => {
+export const WithStyle: ReactStory = () => {
   return (
     <Button variant="destructive" onClick={action("onClick")}>
       Click me
@@ -68,7 +67,7 @@ WithStyle.parameters = {
 };
 
 /** Add custom styles to a button */
-export const WithoutStyle: Story = () => {
+export const WithoutStyle: ReactStory = () => {
   return <button onClick={action("onClick")}>Click me</button>;
 };
 

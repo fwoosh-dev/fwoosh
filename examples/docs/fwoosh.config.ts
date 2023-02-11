@@ -1,8 +1,16 @@
 import { FwooshOptions } from "fwoosh";
 
-import type { StoryMeta as StoryMetaReact, Story } from "@fwoosh/react";
-import ReactPlugin from "@fwoosh/react";
+import ReactPlugin, {
+  StoryMeta as ReactStoryMeta,
+  Story as ReactStory,
+} from "@fwoosh/react";
 import GitHubPlugin from "@fwoosh/tool-github";
+import StoryDescriptionPanelPlugin from "@fwoosh/panel-story-description";
+import PropsPanelPlugin from "@fwoosh/panel-props";
+import SourcePanelPlugin from "@fwoosh/panel-source";
+import ActionsPanelPlugin from "@fwoosh/panel-actions/plugin";
+import ZoomPanelPlugin from "@fwoosh/tool-zoom";
+import MeasurePanelPlugin from "@fwoosh/tool-measure";
 import { StorySidebarChildItem } from "@fwoosh/types";
 
 const rootOrder = [
@@ -56,6 +64,12 @@ export const config = {
     }
   },
   plugins: [
+    new StoryDescriptionPanelPlugin(),
+    new PropsPanelPlugin(),
+    new SourcePanelPlugin(),
+    new ActionsPanelPlugin(),
+    new ZoomPanelPlugin(),
+    new MeasurePanelPlugin(),
     new GitHubPlugin({ repo: "fwoosh-dev/fwoosh" }),
     new ReactPlugin({
       docgenOptions: {
@@ -70,4 +84,7 @@ export const config = {
   ],
 } satisfies FwooshOptions;
 
-export type StoryMeta = StoryMetaReact<typeof config>;
+declare module "@fwoosh/types" {
+  type Meta = ReactStoryMeta<typeof config>;
+  type Story = ReactStory<Meta>;
+}

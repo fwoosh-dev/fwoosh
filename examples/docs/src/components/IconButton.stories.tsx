@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Plus } from "react-feather";
 
-import type { Story, StoryMeta } from "@fwoosh/react";
+import type { StoryMeta, Story } from "fwoosh";
 import { IconButton } from "@fwoosh/components";
 import { action } from "@fwoosh/panel-actions";
 

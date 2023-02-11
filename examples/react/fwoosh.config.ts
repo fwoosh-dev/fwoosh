@@ -1,11 +1,14 @@
 import { FwooshOptions } from "fwoosh";
 import path from "path";
-import ReactPlugin, {
-  StoryMeta as ReactStoryMeta,
-  Story as ReactStory,
-} from "@fwoosh/react";
+
+import ReactPlugin, { StoryMeta as ReactStoryMeta, Story } from "@fwoosh/react";
 import DesignsPanel from "@fwoosh/panel-designs";
 import ViewportTool from "@fwoosh/tool-viewport";
+import PropsPanelPlugin from "@fwoosh/panel-props";
+import SourcePanelPlugin from "@fwoosh/panel-source";
+import ActionsPanelPlugin from "@fwoosh/panel-actions/plugin";
+import ZoomPanelPlugin from "@fwoosh/tool-zoom";
+import MeasurePanelPlugin from "@fwoosh/tool-measure";
 
 export const config = {
   title: "@fwoosh/react",
@@ -18,11 +21,11 @@ export const config = {
   },
   plugins: [
     new DesignsPanel({ hideWithoutParams: true }),
-    "@fwoosh/panel-props",
-    "@fwoosh/panel-source",
-    "@fwoosh/panel-actions",
-    "@fwoosh/tool-zoom",
-    "@fwoosh/tool-measure",
+    new PropsPanelPlugin(),
+    new SourcePanelPlugin(),
+    new ActionsPanelPlugin(),
+    new ZoomPanelPlugin(),
+    new MeasurePanelPlugin(),
     new ViewportTool(),
     new ReactPlugin({
       docgenOptions: {
@@ -37,7 +40,7 @@ export const config = {
   ],
 } satisfies FwooshOptions;
 
-declare module "@fwoosh/types" {
-  type Meta = ReactStoryMeta<typeof config>;
-  type Story = ReactStory<Meta>;
+declare global {
+  type ReactMeta = ReactStoryMeta<typeof config>;
+  type ReactStory = Story<ReactMeta>;
 }
