@@ -282,18 +282,6 @@ export class Fwoosh implements FwooshClass {
       } catch (e) {}
     });
 
-    const aliases: Alias[] = [];
-
-    // Detect if react 18 is installed.  If not, alias it to a virtual placeholder file.
-    try {
-      require.resolve("react-dom/client");
-    } catch (e) {
-      aliases.push({
-        find: "react-dom/client",
-        replacement: require.resolve("./react18-placeholder.js"),
-      });
-    }
-
     const baseConfig: InlineConfig = {
       mode,
       root: path.dirname(path.dirname(require.resolve("@fwoosh/app"))),
@@ -433,6 +421,28 @@ export class Fwoosh implements FwooshClass {
             );
           },
         },
+        // This plugin is used to alias react-dom/client to a placeholder
+        // when it's not installed. This is to prevent the build from failing
+        // when react 18 is not installed.
+        //
+        // I couldn't find a way to do this with the alias option so this mirrors roughly
+        // what the alias plugin does.
+        {
+          name: "fwoosh:react-alias",
+          resolveId(importee, importer) {
+            if (!importer) {
+              return null;
+            }
+
+            if (importee === "react-dom/client") {
+              try {
+                require.resolve("react-dom/client");
+              } catch (e) {
+                return require.resolve("./react18-placeholder.js");
+              }
+            }
+          },
+        },
       ],
       optimizeDeps: {
         entries: [require.resolve("@fwoosh/app/index.html")],
@@ -470,7 +480,6 @@ export class Fwoosh implements FwooshClass {
               paths: [require.resolve("@fwoosh/app")],
             }),
           },
-          ...aliases,
         ],
       },
     };
