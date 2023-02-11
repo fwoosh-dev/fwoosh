@@ -46,22 +46,46 @@ export const config = {
 or if you're not using TypeScript, create a `fwoosh.config.mjs` instead:
 
 ```js fwoosh.config.mjs
-/** @type {import("fwoosh").FwooshOptions} */ 
+/** @type {import("fwoosh").FwooshOptions} */
 export const config = {
   title: "My Design System",
 };
+```
 
 ## Getting started with React
 
 In order to start working with React, you'll need to install [`the React renderer`](../Plugins-Renderers-React) then add it to your plugins.
 
-```ts
+```ts fwoosh.config.mjs focus=2,6
 import type { FwooshOptions } from "fwoosh";
+import ReactPlugin from "@fwoosh/react";
 
 export const config: FwooshOptions = {
   title: "My Design System",
   plugins: ["@fwoosh/react"],
 };
+```
+
+If you're using typescript you can define the types of your `Meta` and `Story`s.
+With this you will get autocompletion for decorators and other configuration.
+
+```ts fwoosh.config.mjs focus=3:6,13:16
+import type { FwooshOptions } from "fwoosh";
+import ReactPlugin from "@fwoosh/react";
+import type {
+  StoryMeta as ReactStoryMeta,
+  Story as ReactStory,
+} from "@fwoosh/react";
+
+export const config: FwooshOptions = {
+  title: "My Design System",
+  plugins: ["@fwoosh/react"],
+};
+
+declare module "fwoosh" {
+  type Meta = ReactStoryMeta<typeof config>;
+  type Story = ReactStory<Meta>;
+}
 ```
 
 To see a complete example of configuring a more complex React app, check out the [example repo](https://github.com/fwoosh-dev/fwoosh/blob/main/examples/react/fwoosh.config.ts).

@@ -84,7 +84,7 @@ export const config = {
   ],
 } satisfies FwooshOptions;
 
-declare module "@fwoosh/types" {
+declare module "fwoosh" {
   type Meta = ReactStoryMeta<typeof config>;
   type Story = ReactStory<Meta>;
 }
