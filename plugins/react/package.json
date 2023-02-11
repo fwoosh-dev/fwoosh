@@ -2,7 +2,7 @@
   "name": "@fwoosh/react",
   "type": "module",
   "version": "0.0.112",
-  "description": "A lightening quick component development",
+  "description": "A lightning quick component development",
   "main": "./dist/index.js",
   "author": "Andrew Lisowski <lisowski54@gmail.com>",
   "repository": "hipstersmoothie/fwoosh",

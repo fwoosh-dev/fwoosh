@@ -76,7 +76,7 @@ const sharedOptions: Option[] = [
 
 const fwooshCli: MultiCommand = {
   name,
-  description: "A lightening quick component development",
+  description: "A lightning quick component development",
   commands: [
     {
       name: "dev",

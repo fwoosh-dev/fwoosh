@@ -31,7 +31,7 @@ A theme is define like the following:
 You can either define the theme directly in your `fwoosh.config.ts`:
 
 ```ts fwoosh.config.ts
-export const config: FwooshConfig = {
+export const config: FwooshOptions = {
   theme: [
     {
       type: "light",
@@ -48,7 +48,7 @@ export const config: FwooshConfig = {
 You can also use a path or a package name for configuring the theme.
 
 ```ts fwoosh.config.ts
-export const config: FwooshConfig = {
+export const config: FwooshOptions = {
   theme: "@my-company/fwoosh-theme",
 };
 ```
@@ -103,7 +103,7 @@ Fwoosh offers the ability to take full control of most presentation and layout c
 You can add component overrides to Fwoosh by using the <Link to="Configuration#componentOverrides">`componentOverrides` options</Link>.
 
 ```ts fwoosh.config.ts
-export const config: FwooshConfig = {
+export const config: FwooshOptions = {
   componentOverrides: "./path/to/componentOverrides.tsx",
 };
 ```

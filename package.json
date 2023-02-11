@@ -1,7 +1,7 @@
 {
   "name": "fwoosh-monorepo",
   "private": true,
-  "description": "A lightening quick MDX static website generator!",
+  "description": "A lightning quick MDX static website generator!",
   "author": "Andrew Lisowski <lisowski54@gmail.com>",
   "workspaces": [
     "packages/*",
