@@ -38,9 +38,9 @@ Then create a `fwoosh.config.ts` file in the root of your project:
 ```ts fwoosh.config.ts
 import type { FwooshOptions } from "fwoosh";
 
-export const config: FwooshOptions = {
+export const config = {
   title: "My Design System",
-};
+} satisfies FwooshOptions;
 ```
 
 or if you're not using TypeScript, create a `fwoosh.config.mjs` instead:
