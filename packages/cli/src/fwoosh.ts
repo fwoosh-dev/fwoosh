@@ -449,7 +449,12 @@ export class Fwoosh implements FwooshClass {
         },
       ],
       optimizeDeps: {
-        entries: [require.resolve("@fwoosh/app/index.html"), ...stories],
+        entries: [
+          require.resolve("@fwoosh/app/index.html"),
+          ...stories,
+          ...panels.map((p) => p.filepath),
+          ...toolbarControls.map((p) => p.filepath),
+        ],
         exclude: ["@fwoosh/*", "@fwoosh/components", "@fwoosh/hooks"],
         include: optimizedDeps,
       },
