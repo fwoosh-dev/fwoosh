@@ -151,10 +151,15 @@ export interface MDXFileDescriptor {
   meta: ResolvedStoryMeta;
 }
 
+const storyFileCache = new Map<
+  string,
+  { descriptor: StoryFileDescriptor; time: number }
+>();
+
 export type FwooshFileDescriptor = StoryFileDescriptor | MDXFileDescriptor;
 const lastEnd = { value: 0 };
 
-async function getStory(file: string, data: FwooshFileDescriptor[]) {
+async function parseStoryFile(file: string, data: FwooshFileDescriptor[]) {
   const parseStoryTimerEnd = perfLog(`Parse '${file}'`);
   const fullPath = path.resolve(file);
 
@@ -174,6 +179,15 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
       console.error(e);
     }
   } else {
+    const cached = storyFileCache.get(fullPath);
+    const modifiedTime = await fs.stat(fullPath).then((s) => s.mtimeMs);
+
+    if (cached && cached.time === modifiedTime) {
+      log.info("Using cached story data for", fullPath);
+      data.push(cached.descriptor);
+      return;
+    }
+
     const contents = await fs.readFile(file, "utf8");
     const currentLastEnd = lastEnd.value;
     const ast = await swc.parse(contents, {
@@ -246,7 +260,13 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
       stories,
       meta: { ...meta, file: fullPath },
     };
+
     data.push(fileDescriptor);
+    storyFileCache.set(fullPath, {
+      descriptor: fileDescriptor,
+      time: modifiedTime,
+    });
+
     log.trace("Found story file:", fileDescriptor);
   }
 
@@ -265,7 +285,7 @@ export async function getStoryData({ stories, outDir }: FwooshOptionsLoaded) {
   const data: FwooshFileDescriptor[] = [];
 
   // Running in parallel causes issues with the AST
-  await chunkPromisesTimes(files, 1, (file) => getStory(file, data));
+  await chunkPromisesTimes(files, 1, (file) => parseStoryFile(file, data));
   parseAllStoriesTimerEnd();
 
   return data;
