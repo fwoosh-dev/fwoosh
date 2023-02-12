@@ -44,7 +44,6 @@ const Panel = styled("div", {
 });
 
 function HighlightedSource({ code }: { code: string }) {
-  return null;
   const highlightedCode = useHighlightedCode({ code });
   return <MDXContent compiledSource={highlightedCode} />;
 }
