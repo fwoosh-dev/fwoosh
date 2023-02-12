@@ -8,11 +8,10 @@
   "repository": "hipstersmoothie/fwoosh",
   "license": "MIT",
   "dependencies": {
-    "@fwoosh/hooks": "link:../../packages/hooks",
-    "fwoosh": "link:../../packages/cli"
+    "@fwoosh/hooks": "workspace:*"
   },
   "devDependencies": {
-    "@types/node": "^14.14.31"
+    "@types/node": "^14.18.36"
   },
   "publishConfig": {
     "access": "public"

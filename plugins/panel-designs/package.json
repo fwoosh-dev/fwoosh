@@ -18,8 +18,8 @@
     "dist"
   ],
   "dependencies": {
-    "@fwoosh/hooks": "link:../../packages/hooks",
-    "@fwoosh/styling": "link:../../packages/styling"
+    "@fwoosh/hooks": "workspace:*",
+    "@fwoosh/styling": "workspace:*"
   },
   "peerDependencies": {
     "fwoosh": ">= 0.x"

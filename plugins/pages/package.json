@@ -11,13 +11,12 @@
     "access": "public"
   },
   "dependencies": {
-    "@fwoosh/app": "link:../../packages/app",
-    "@fwoosh/components": "link:../../packages/components",
-    "@fwoosh/styling": "link:../../packages/styling",
-    "@fwoosh/types": "link:../../packages/types",
+    "@fwoosh/app": "workspace:*",
+    "@fwoosh/components": "workspace:*",
+    "@fwoosh/styling": "workspace:*",
+    "@fwoosh/types": "workspace:*",
     "react-feather": "^2.0.10",
-    "react-router-dom": "^6.6.1",
-    "react-zoom-pan-pinch": "^2.2.0"
+    "react-router-dom": "^6.8.1"
   },
   "peerDependencies": {
     "fwoosh": ">= 0.x",
@@ -25,7 +24,7 @@
     "react-dom": "^16.8 || ^17.0 || ^18.0"
   },
   "devDependencies": {
-    "@types/react": "^18.0.26",
+    "@types/react": "^18.0.28",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }

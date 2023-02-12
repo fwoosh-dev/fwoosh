@@ -7,10 +7,10 @@
   "license": "MIT",
   "main": "dist/index.js",
   "dependencies": {
-    "@alisowski/cmdk": "^0.1.20",
+    "@alisowski/cmdk": "^0.1.23",
     "@code-hike/mdx": "^0.8.0",
-    "@fwoosh/styling": "link:../styling",
-    "@mdx-js/react": "^2.2.1",
+    "@fwoosh/styling": "workspace:*",
+    "@mdx-js/react": "^2.3.0",
     "@radix-ui/react-dropdown-menu": "^2.0.2",
     "@radix-ui/react-select": "^1.2.0",
     "@radix-ui/react-tabs": "^1.0.2",
@@ -18,14 +18,14 @@
     "@radix-ui/react-tooltip": "^1.0.3",
     "@stitches/react": "^1.2.8",
     "react-feather": "^2.0.10",
-    "react-router-dom": "^6.6.1"
+    "react-router-dom": "^6.8.1"
   },
   "peerDependencies": {
     "react": "^16.8 || ^17.0 || ^18.0",
     "react-dom": "^16.8 || ^17.0 || ^18.0"
   },
   "devDependencies": {
-    "@types/react": "^18.0.26",
+    "@types/react": "^18.0.28",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

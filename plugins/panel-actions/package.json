@@ -9,13 +9,12 @@
   "license": "MIT",
   "dependencies": {
     "@devtools-ds/object-inspector": "^1.2.1",
-    "@fwoosh/components": "link:../../packages/components",
-    "@fwoosh/hooks": "link:../../packages/hooks",
-    "@radix-ui/react-id": "^1.0.0",
-    "fwoosh": "link:../../packages/cli"
+    "@fwoosh/components": "workspace:*",
+    "@fwoosh/hooks": "workspace:*",
+    "@radix-ui/react-id": "^1.0.0"
   },
   "devDependencies": {
-    "@types/node": "^14.14.31",
+    "@types/node": "^14.18.36",
     "react": "^18.2.0"
   },
   "publishConfig": {

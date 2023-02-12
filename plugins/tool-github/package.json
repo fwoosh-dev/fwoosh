@@ -18,8 +18,8 @@
     "dist"
   ],
   "dependencies": {
-    "@fwoosh/hooks": "link:../../packages/hooks",
-    "@fwoosh/styling": "link:../../packages/styling",
+    "@fwoosh/hooks": "workspace:*",
+    "@fwoosh/styling": "workspace:*",
     "parse-github-url": "^1.0.2",
     "react-feather": "^2.0.10"
   },

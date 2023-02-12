@@ -18,7 +18,7 @@
     "dist"
   ],
   "dependencies": {
-    "@fwoosh/theme-default": "link:../../plugins/theme-default",
+    "@fwoosh/theme-default": "workspace:*",
     "@stitches/react": "^1.2.8"
   },
   "peerDependencies": {

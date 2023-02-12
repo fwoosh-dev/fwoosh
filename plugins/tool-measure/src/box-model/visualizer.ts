@@ -68,14 +68,8 @@ function measureElement(
   const containerBox = container.getBoundingClientRect();
   const style = getComputedStyle(element);
   // eslint-disable-next-line prefer-const
-  let {
-    top,
-    left,
-    right,
-    bottom,
-    width,
-    height,
-  } = element.getBoundingClientRect();
+  let { top, left, right, bottom, width, height } =
+    element.getBoundingClientRect();
 
   const {
     marginTop,

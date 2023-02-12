@@ -1,0 +1,5 @@
+scripts/create/templates/**
+.yarn
+**/out
+**/dist
+**/CHANGELOG.md
