@@ -82,14 +82,14 @@ export function render(
       return () => {
         onComplete();
       };
-    });
+    }, []);
     return <Spinner delay={300} />;
   }
 
   function OnStart() {
     React.useEffect(() => {
       onComplete();
-    });
+    }, []);
     return <></>;
   }
 
