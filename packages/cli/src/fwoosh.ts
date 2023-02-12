@@ -250,6 +250,7 @@ export class Fwoosh implements FwooshClass {
     const panels = this.hooks.registerPanel.call([]);
     const includedHeadings = ["h2", "h3", "h4", "h5", "h6"];
     const depsToOptimize = [
+      "react-query",
       "react-helmet-async",
       "command-score",
       "mousetrap",
@@ -451,7 +452,7 @@ export class Fwoosh implements FwooshClass {
       optimizeDeps: {
         entries: [
           require.resolve("@fwoosh/app/index.html"),
-          ...stories,
+          ...stories.map((s) => path.resolve(s)),
           ...panels.map((p) => p.filepath),
           ...toolbarControls.map((p) => p.filepath),
         ],
