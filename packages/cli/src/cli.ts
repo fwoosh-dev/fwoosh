@@ -128,11 +128,7 @@ async function run() {
   const fwooshOptions = {
     ...options,
     open:
-      options?.open === "workbench" || options?.open === null
-        ? "workbench"
-        : options?.open === "docs"
-        ? "docs"
-        : false,
+      options?.open === "docs" ? "docs" : options?.open ? "workbench" : false,
     ...(config.config || config.default),
   } as FwooshOptionWithCLIDefaults;
 
