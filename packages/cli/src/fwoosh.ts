@@ -274,6 +274,7 @@ export class Fwoosh implements FwooshClass {
     ];
 
     process.env.NODE_ENV = mode;
+    process.env.FWOOSH_DEV_SERVER_PORT = String(port);
 
     const optimizedDeps = depsToOptimize.filter((d) => {
       try {

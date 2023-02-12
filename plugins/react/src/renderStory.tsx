@@ -25,7 +25,7 @@ function useDecorators(story: StoryData) {
         story.component._payload?._result,
       ]);
       const storyComponent =
-        storyComponentImport.default || storyComponentImport;
+        storyComponentImport?.default || storyComponentImport;
 
       setDecorators([
         ...reverse<Decorator>(storyComponent.decorators || []),
