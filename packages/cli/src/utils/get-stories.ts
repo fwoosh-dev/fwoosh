@@ -1,8 +1,6 @@
 import swc, { ImportDeclaration, Module } from "@swc/core";
 import { promises as fs } from "fs";
 import { titleCase } from "title-case";
-import ms from "pretty-ms";
-import { performance } from "perf_hooks";
 import { ParsedStoryData, StoryMeta } from "@fwoosh/types";
 import { chunkPromisesTimes, createStorySlug, log } from "@fwoosh/utils";
 import { compile } from "@mdx-js/mdx";
@@ -11,7 +9,7 @@ import glob from "fast-glob";
 import path from "path";
 import { createRequire } from "module";
 import gfm from "remark-gfm";
-import yaml from "js-yaml";
+import matter from "gray-matter";
 import { remarkCodeHike } from "@code-hike/mdx";
 
 import { FwooshOptionsLoaded, ResolvedStoryMeta } from "@fwoosh/types";
@@ -142,19 +140,17 @@ const lastEnd = { value: 0 };
 
 async function getStory(file: string, data: FwooshFileDescriptor[]) {
   const parseStoryTimerEnd = perfLog(`Parse '${file}'`);
-  const contents = await fs.readFile(file, "utf8");
   const fullPath = path.resolve(file);
 
   if (file.endsWith(".mdx")) {
     try {
-      const [, frontmatter] = contents.match(/^---\n([^---]+)\n---/) || [];
+      const frontmatter = matter.read(fullPath);
 
-      if (frontmatter) {
+      if (frontmatter.content) {
         const fileDescriptor: FwooshFileDescriptor = {
-          meta: yaml.load(frontmatter) as StoryMeta,
+          meta: frontmatter.data as StoryMeta,
           mdxFile: fullPath,
         };
-
         data.push(fileDescriptor);
         log.trace("Found MDX file:", fileDescriptor);
       }
@@ -162,6 +158,7 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
       console.error(e);
     }
   } else {
+    const contents = await fs.readFile(file, "utf8");
     const currentLastEnd = lastEnd.value;
     const ast = await swc.parse(contents, {
       syntax: "typescript",
