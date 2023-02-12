@@ -447,7 +447,7 @@ export class Fwoosh implements FwooshClass {
       ],
       optimizeDeps: {
         entries: [require.resolve("@fwoosh/app/index.html")],
-        exclude: ["@fwoosh/*", "@fwoosh/components"],
+        exclude: ["@fwoosh/*", "@fwoosh/components", "@fwoosh/hooks"],
         include: optimizedDeps,
       },
       build: {
