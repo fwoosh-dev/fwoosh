@@ -1,3 +1,17 @@
+# v0.0.116 (Sun Feb 12 2023)
+
+#### 🐛 Bug Fix
+
+- Upgrade Deps [#68](https://github.com/fwoosh-dev/fwoosh/pull/68) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- upgrade deps ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- switch to workspace:* ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.115 (Sat Feb 11 2023)
 
 ### Release Notes

@@ -1,3 +1,16 @@
+# v0.0.116 (Sun Feb 12 2023)
+
+#### 🐛 Bug Fix
+
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/components`, `@fwoosh/hooks`, `@fwoosh/link`, `@fwoosh/styling`, `@fwoosh/test`, `@fwoosh/types`, `@fwoosh/utils`, `@fwoosh/virtual-file`, `@fwoosh/decorator-centered`, `@fwoosh/pages`, `@fwoosh/panel-actions`, `@fwoosh/panel-designs`, `@fwoosh/panel-props`, `@fwoosh/panel-source`, `@fwoosh/panel-story-description`, `@fwoosh/react`, `@fwoosh/theme-default`, `@fwoosh/tool-github`, `@fwoosh/tool-measure`, `@fwoosh/tool-viewport`, `@fwoosh/tool-zoom`
+  - Upgrade Deps [#68](https://github.com/fwoosh-dev/fwoosh/pull/68) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.115 (Sat Feb 11 2023)
 
 ### Release Notes
