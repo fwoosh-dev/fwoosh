@@ -32,19 +32,31 @@ function sanitizeMarkdownString(str: string) {
     .join("\n");
 }
 
+const markdownToHtmlCache = new Map<string, string>();
+
 export async function convertMarkdownToHtml(markdown: string) {
+  const html = markdownToHtmlCache.get(markdown);
+
+  if (html) {
+    log.info("Using cached markdown to html conversion");
+    return html;
+  }
+
   const mdxTimerEnd = perfLog("MDX compile");
-  const compiledMdx = await compile(markdown, {
-    remarkPlugins: [
-      gfm,
-      [remarkCodeHike, { autoImport: false, ...getCodeHikeConfig() }],
-    ],
-    outputFormat: "function-body",
-    providerImportSource: "@mdx-js/react",
-  });
+  const compiledMdx = String(
+    await compile(markdown, {
+      remarkPlugins: [
+        gfm,
+        [remarkCodeHike, { autoImport: false, ...getCodeHikeConfig() }],
+      ],
+      outputFormat: "function-body",
+      providerImportSource: "@mdx-js/react",
+    })
+  );
   mdxTimerEnd();
 
-  return String(compiledMdx);
+  markdownToHtmlCache.set(markdown, compiledMdx);
+  return compiledMdx;
 }
 
 async function getComment(contents: string, i: number) {
