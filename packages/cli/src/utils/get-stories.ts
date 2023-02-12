@@ -73,8 +73,12 @@ async function getComment(contents: string, i: number) {
       comment.unshift(contents[i--]);
     }
 
-    return await convertMarkdownToHtml(
-      sanitizeMarkdownString(comment.join(""))
+    const fullComment = comment.join("");
+
+    return sanitizeMarkdownString(
+      process.env.NODE_ENV === "production"
+        ? await convertMarkdownToHtml(fullComment)
+        : fullComment
     );
   }
 }
@@ -248,6 +252,7 @@ export async function getStoryData({ stories, outDir }: FwooshOptionsLoaded) {
   const parseAllStoriesTimerEnd = perfLog("Parse stories");
   const data: FwooshFileDescriptor[] = [];
 
+  // Running in parallel causes issues with the AST
   await chunkPromisesTimes(files, 1, (file) => getStory(file, data));
   parseAllStoriesTimerEnd();
 

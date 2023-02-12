@@ -18,8 +18,6 @@ function PropsPanelContent({ storyId }: PanelPluginProps) {
     (story?.component as any)._result || story?.meta
   );
 
-  console.log({ storyId, docs });
-
   return (
     <Wrapper>
       <PropsTable key={storyId} docs={docs} />

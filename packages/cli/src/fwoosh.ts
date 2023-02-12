@@ -462,6 +462,7 @@ export class Fwoosh implements FwooshClass {
         },
       },
       define: {
+        "process.env.FWOOSH_DEV_SERVER_PORT": `${port}`,
         "process.env.LOG_LEVEL": `"${process.env.LOG_LEVEL}"`,
         "process.env.FWOOSH_BASE_NAME": `"${
           mode === "production" ? this.options.basename : "/"
@@ -731,6 +732,12 @@ export class Fwoosh implements FwooshClass {
         );
 
         ws.send(JSON.stringify(docsWithHtmlDescriptions));
+      });
+    });
+
+    ws.app.ws("/get-mdx-content", async (ws) => {
+      ws.on("message", async (message: string) => {
+        ws.send(await convertMarkdownToHtml(message));
       });
     });
 

@@ -1,8 +1,9 @@
 import React from "react";
 import { stories } from "@fwoosh/app/stories";
-import { components, MDXContent } from "@fwoosh/components";
+import { components, MDXContent, Spinner } from "@fwoosh/components";
 import { styled } from "@fwoosh/styling";
 import { PanelPluginProps } from "fwoosh";
+import { useMdxContent } from "@fwoosh/hooks";
 
 const Panel = styled("div", {
   height: "100%",
@@ -13,6 +14,16 @@ const Panel = styled("div", {
 const NoDescriptionMessage = styled(components.p, {
   color: "$gray10",
 });
+
+function Content({ rawContent }: { rawContent: string }) {
+  const content = useMdxContent(rawContent);
+
+  if (!content) {
+    return null;
+  }
+
+  return <MDXContent compiledSource={content} />;
+}
 
 export default function DescriptionPanel({ storyId }: PanelPluginProps) {
   const story = Object.values(stories).find((s) => s.slug === storyId);
@@ -29,7 +40,9 @@ export default function DescriptionPanel({ storyId }: PanelPluginProps) {
 
   return (
     <Panel>
-      <MDXContent compiledSource={story.comment} />
+      <React.Suspense fallback={<Spinner />}>
+        <Content rawContent={story.comment} />
+      </React.Suspense>
     </Panel>
   );
 }

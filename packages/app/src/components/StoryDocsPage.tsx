@@ -12,7 +12,6 @@ import {
   IconButton,
   Tooltip,
 } from "@fwoosh/components";
-import * as Collapsible from "@radix-ui/react-collapsible";
 import { capitalCase, paramCase } from "change-case";
 import { titleCase } from "title-case";
 import { StorySidebarChildItem } from "@fwoosh/types";
@@ -23,11 +22,10 @@ import { useActiveHeader } from "../hooks/useActiveHeader";
 import { StoryIdContext } from "./Story";
 import { ToolPanels } from "./ToolPanels";
 import { GlobalToolbarControls, ToolbarControls } from "./toolbar";
-import { WorkbenchToolbarItems } from "./toolbar/WorkbenchToolbarItems";
 import { Minus, Plus } from "react-feather";
 import { panels } from "@fwoosh/app/ui";
 import { useToolbarControls } from "../hooks/useToolbarControls";
-import { ParameterContext, useParameters } from "@fwoosh/hooks";
+import { ParameterContext, useMdxContent, useParameters } from "@fwoosh/hooks";
 
 const HeaderWrapper = styled("div", {
   position: "relative",
@@ -174,6 +172,16 @@ const StoryDiv = React.memo(
   }
 );
 
+function LazyComment({ comment: rawComment }: { comment: string }) {
+  const comment = useMdxContent(rawComment);
+
+  if (!comment) {
+    return null;
+  }
+
+  return <MDXContent compiledSource={comment} />;
+}
+
 interface PageContentProps {
   stories: StorySidebarChildItem[];
 }
@@ -191,7 +199,7 @@ export const PageContent = ({
     docsIntro = (
       <>
         {firstStory.story.comment && (
-          <MDXContent compiledSource={firstStory.story.comment} />
+          <LazyComment comment={firstStory.story.comment} />
         )}
         <StoryDiv
           slug={firstStory.story.slug}
@@ -229,7 +237,7 @@ export const PageContent = ({
                   </components.h3>
                 </HeaderWrapper>
                 {story.story.comment && (
-                  <MDXContent compiledSource={story.story.comment} />
+                  <LazyComment comment={story.story.comment} />
                 )}
                 <StoryDiv slug={story.story.slug} defaultOpen={false} />
               </div>
