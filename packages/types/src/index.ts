@@ -45,7 +45,7 @@ interface BaseStoryData {
   title: string;
   slug: string;
   grouping: string;
-  meta: StoryMeta;
+  meta: StoryMeta | Promise<StoryMeta>;
   component: any;
 }
 
