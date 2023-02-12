@@ -47,7 +47,7 @@ import { getDocsPlugin } from "./utils/get-docs-plugin/index.js";
 import { fwooshSetupPlugin } from "./utils/fwoosh-setup-plugin.js";
 import { fwooshConfigPlugin } from "./utils/fwoosh-config-plugin.js";
 import { fwooshUiPlugin } from "./utils/fwoosh-ui-plugin.js";
-import { convertMarkdownToHtml } from "./utils/get-stories.js";
+import { convertMarkdownToHtml, getStoryList } from "./utils/get-stories.js";
 import { getCodeHikeConfig, setSyntaxTheme } from "./utils/code-hike-config.js";
 import { componentOverridePlugin } from "./utils/component-override-plugins.js";
 import { perfLog } from "./utils/performance.js";
@@ -284,6 +284,8 @@ export class Fwoosh implements FwooshClass {
       } catch (e) {}
     });
 
+    const stories = await getStoryList(this.options);
+
     const baseConfig: InlineConfig = {
       mode,
       root: path.dirname(path.dirname(require.resolve("@fwoosh/app"))),
@@ -447,7 +449,7 @@ export class Fwoosh implements FwooshClass {
         },
       ],
       optimizeDeps: {
-        entries: [require.resolve("@fwoosh/app/index.html")],
+        entries: [require.resolve("@fwoosh/app/index.html"), ...stories],
         exclude: ["@fwoosh/*", "@fwoosh/components", "@fwoosh/hooks"],
         include: optimizedDeps,
       },
