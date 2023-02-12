@@ -1,19 +1,18 @@
 {
   "name": "@fwoosh/panel-source",
   "type": "module",
-  "version": "0.0.114",
+  "version": "0.0.115",
   "description": "Render your stories source code in a panel.",
   "main": "dist/index.js",
   "author": "Andrew Lisowski <lisowski54@gmail.com>",
   "repository": "hipstersmoothie/fwoosh",
   "license": "MIT",
   "dependencies": {
-    "@fwoosh/hooks": "link:../../packages/hooks",
-    "@fwoosh/styling": "link:../../packages/styling",
-    "fwoosh": "link:../../packages/cli"
+    "@fwoosh/hooks": "workspace:*",
+    "@fwoosh/styling": "workspace:*"
   },
   "devDependencies": {
-    "@types/node": "^14.14.31"
+    "@types/node": "^14.18.36"
   },
   "publishConfig": {
     "access": "public"

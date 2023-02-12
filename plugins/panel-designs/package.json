@@ -3,7 +3,7 @@
   "type": "module",
   "main": "dist/index.js",
   "description": "Display your designs for you component right along with your stories",
-  "version": "0.0.114",
+  "version": "0.0.115",
   "license": "MIT",
   "author": {
     "name": "Andrew Lisowski",
@@ -18,8 +18,8 @@
     "dist"
   ],
   "dependencies": {
-    "@fwoosh/hooks": "link:../../packages/hooks",
-    "@fwoosh/styling": "link:../../packages/styling"
+    "@fwoosh/hooks": "workspace:*",
+    "@fwoosh/styling": "workspace:*"
   },
   "peerDependencies": {
     "fwoosh": ">= 0.x"

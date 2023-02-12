@@ -3,7 +3,7 @@
   "type": "module",
   "main": "dist/index.js",
   "description": "Render your stories at different viewport sizes",
-  "version": "0.0.114",
+  "version": "0.0.115",
   "license": "MIT",
   "author": {
     "name": "Andrew Lisowski",
@@ -18,7 +18,7 @@
     "dist"
   ],
   "dependencies": {
-    "@fwoosh/hooks": "link:../../packages/hooks",
+    "@fwoosh/hooks": "workspace:*",
     "devices-viewport-size": "^1.0.4",
     "react-feather": "^2.0.10"
   },

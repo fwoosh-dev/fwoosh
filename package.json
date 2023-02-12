@@ -19,20 +19,20 @@
     "create:plugin": "yarn run create --type plugin"
   },
   "devDependencies": {
-    "@types/node": "^14.14.31",
-    "auto": "^10.37.6",
+    "@types/node": "^14.18.36",
+    "auto": "^10.42.0",
     "command-line-application": "^0.10.1",
     "copy-template-dir": "^1.4.0",
     "endent": "^2.1.0",
     "lerna": "^6.4.1",
-    "patch-package": "^6.4.7",
-    "prettier": "^2.2.1",
+    "patch-package": "^6.5.1",
+    "prettier": "^2.8.4",
     "rimraf": "^3.0.2",
-    "typescript": "^4.9.3"
+    "typescript": "^4.9.5"
   },
   "dependencies": {
-    "fwoosh": "link:./packages/cli",
-    "vitest": "^0.28.3"
+    "fwoosh": "workspace:*",
+    "vitest": "^0.28.4"
   },
   "auto": {
     "plugins": [

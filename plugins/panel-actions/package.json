@@ -1,7 +1,7 @@
 {
   "name": "@fwoosh/panel-actions",
   "type": "module",
-  "version": "0.0.114",
+  "version": "0.0.115",
   "description": "Log callback values from story interactions",
   "main": "dist/index.js",
   "author": "Andrew Lisowski <lisowski54@gmail.com>",
@@ -9,13 +9,12 @@
   "license": "MIT",
   "dependencies": {
     "@devtools-ds/object-inspector": "^1.2.1",
-    "@fwoosh/components": "link:../../packages/components",
-    "@fwoosh/hooks": "link:../../packages/hooks",
-    "@radix-ui/react-id": "^1.0.0",
-    "fwoosh": "link:../../packages/cli"
+    "@fwoosh/components": "workspace:*",
+    "@fwoosh/hooks": "workspace:*",
+    "@radix-ui/react-id": "^1.0.0"
   },
   "devDependencies": {
-    "@types/node": "^14.14.31",
+    "@types/node": "^14.18.36",
     "react": "^18.2.0"
   },
   "publishConfig": {

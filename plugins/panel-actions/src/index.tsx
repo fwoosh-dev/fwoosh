@@ -7,6 +7,8 @@ export const setAddAction = (
   addAction = fn;
 };
 
-export const action = (name: string) => (...args: any[]) => {
-  addAction?.(name, actionId++, args);
-};
+export const action =
+  (name: string) =>
+  (...args: any[]) => {
+    addAction?.(name, actionId++, args);
+  };

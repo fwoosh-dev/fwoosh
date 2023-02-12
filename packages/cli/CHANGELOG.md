@@ -1,3 +1,26 @@
+# v0.0.115 (Sat Feb 11 2023)
+
+### Release Notes
+
+#### Fix some react issues ([#66](https://github.com/fwoosh-dev/fwoosh/pull/66))
+
+This release will fix some errors at the console for incompatibilities between react versions it should now always use the user's version of react without errors.
+
+---
+
+#### 🐛 Bug Fix
+
+- Fix some react issues [#66](https://github.com/fwoosh-dev/fwoosh/pull/66) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix react-dom-client alias ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- support user react version better ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix warning about react-dom not being installed to optimize ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.114 (Sat Feb 11 2023)
 
 ### Release Notes

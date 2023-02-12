@@ -3,7 +3,7 @@
   "main": "dist/index.js",
   "type": "module",
   "description": "Function for testing stories in fwoosh with playwright.",
-  "version": "0.0.114",
+  "version": "0.0.115",
   "license": "MIT",
   "author": {
     "name": "Andrew Lisowski",
@@ -18,8 +18,8 @@
     "dist"
   ],
   "dependencies": {
-    "@fwoosh/utils": "link:../utils",
-    "@playwright/test": "^1.29.2",
-    "playwright": "^1.29.2"
+    "@fwoosh/utils": "workspace:*",
+    "@playwright/test": "^1.30.0",
+    "playwright": "^1.30.0"
   }
 }

@@ -1,5 +1,4 @@
 import { app, MultiCommand, Option } from "command-line-application";
-import ora from "ora";
 import path from "path";
 import { lilconfig } from "lilconfig";
 import { register } from "ts-node";
@@ -148,13 +147,15 @@ async function run() {
 
   await fwoosh.loadPlugins();
 
+  const { log } = await import("@fwoosh/utils");
+
   if (options) {
     if (options._command === "build") {
       await fwoosh.clean();
       await fwoosh.build({ outDir });
     } else if (options._command === "clean") {
       await fwoosh.clean();
-      ora("").succeed("Cleaned output files.");
+      log.log("Cleaned output files.");
     } else if (options._command === "serve") {
       await fwoosh.serve({ outDir });
     } else {
