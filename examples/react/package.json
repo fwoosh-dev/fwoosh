@@ -8,13 +8,12 @@
     "test": "playwright test"
   },
   "devDependencies": {
-    "@fwoosh/panel-actions": "link:../../plugins/panel-actions",
-    "@fwoosh/react": "link:../../plugins/react",
+    "@fwoosh/panel-actions": "workspace:*",
+    "@fwoosh/react": "workspace:*",
     "@playwright/test": "^1.29.2",
-    "fwoosh": "link:../../packages/cli"
+    "fwoosh": "workspace:*",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
-  "version": "0.0.115",
-  "dependencies": {
-    "react": "^17"
-  }
+  "version": "0.0.115"
 }

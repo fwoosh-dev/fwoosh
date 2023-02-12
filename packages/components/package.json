@@ -9,7 +9,7 @@
   "dependencies": {
     "@alisowski/cmdk": "^0.1.20",
     "@code-hike/mdx": "^0.8.0",
-    "@fwoosh/styling": "link:../styling",
+    "@fwoosh/styling": "workspace:*",
     "@mdx-js/react": "^2.2.1",
     "@radix-ui/react-dropdown-menu": "^2.0.2",
     "@radix-ui/react-select": "^1.2.0",

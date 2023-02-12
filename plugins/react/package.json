@@ -8,10 +8,9 @@
   "repository": "hipstersmoothie/fwoosh",
   "license": "MIT",
   "dependencies": {
-    "@fwoosh/types": "link:../../packages/types",
-    "@fwoosh/virtual-file": "link:../../packages/virtual-file",
+    "@fwoosh/types": "workspace:*",
+    "@fwoosh/virtual-file": "workspace:*",
     "@vitejs/plugin-react": "^3.0.1",
-    "fwoosh": "link:../../packages/cli",
     "react-docgen-typescript": "^2.2.2"
   },
   "peerDependencies": {

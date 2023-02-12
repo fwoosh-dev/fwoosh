@@ -727,26 +727,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fwoosh/app@link:../../packages/app::locator=%40fwoosh%2Fpages%40workspace%3Aplugins%2Fpages":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/app@link:../../packages/app::locator=%40fwoosh%2Fpages%40workspace%3Aplugins%2Fpages"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/app@link:../app::locator=fwoosh%40workspace%3Apackages%2Fcli":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/app@link:../app::locator=fwoosh%40workspace%3Apackages%2Fcli"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/app@workspace:packages/app":
+"@fwoosh/app@workspace:*, @fwoosh/app@workspace:packages/app":
   version: 0.0.0-use.local
   resolution: "@fwoosh/app@workspace:packages/app"
   dependencies:
     "@code-hike/mdx": ^0.8.0
     "@fontsource/inter": ^4.5.14
-    "@fwoosh/hooks": "link:../hooks"
-    "@fwoosh/utils": "link:../utils"
+    "@fwoosh/hooks": "workspace:*"
+    "@fwoosh/utils": "workspace:*"
     "@mdx-js/react": ^2.2.1
     "@radix-ui/react-collapsible": ^1.0.1
     "@radix-ui/react-id": ^1.0.0
@@ -784,49 +772,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fwoosh/components@link:../../packages/components::locator=%40fwoosh%2Fdecorator-centered%40workspace%3Aplugins%2Fdecorator-centered":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/components@link:../../packages/components::locator=%40fwoosh%2Fdecorator-centered%40workspace%3Aplugins%2Fdecorator-centered"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/components@link:../../packages/components::locator=%40fwoosh%2Fdocs%40workspace%3Aexamples%2Fdocs":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/components@link:../../packages/components::locator=%40fwoosh%2Fdocs%40workspace%3Aexamples%2Fdocs"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/components@link:../../packages/components::locator=%40fwoosh%2Fpages%40workspace%3Aplugins%2Fpages":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/components@link:../../packages/components::locator=%40fwoosh%2Fpages%40workspace%3Aplugins%2Fpages"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/components@link:../../packages/components::locator=%40fwoosh%2Fpanel-actions%40workspace%3Aplugins%2Fpanel-actions":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/components@link:../../packages/components::locator=%40fwoosh%2Fpanel-actions%40workspace%3Aplugins%2Fpanel-actions"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/components@link:../../packages/components::locator=%40fwoosh%2Ftool-zoom%40workspace%3Aplugins%2Ftool-zoom":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/components@link:../../packages/components::locator=%40fwoosh%2Ftool-zoom%40workspace%3Aplugins%2Ftool-zoom"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/components@link:./components::locator=%40fwoosh%2Flink%40workspace%3Apackages%2Flink":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/components@link:./components::locator=%40fwoosh%2Flink%40workspace%3Apackages%2Flink"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/components@workspace:packages/components":
+"@fwoosh/components@workspace:*, @fwoosh/components@workspace:packages/components":
   version: 0.0.0-use.local
   resolution: "@fwoosh/components@workspace:packages/components"
   dependencies:
     "@alisowski/cmdk": ^0.1.20
     "@code-hike/mdx": ^0.8.0
-    "@fwoosh/styling": "link:../styling"
+    "@fwoosh/styling": "workspace:*"
     "@mdx-js/react": ^2.2.1
     "@radix-ui/react-dropdown-menu": ^2.0.2
     "@radix-ui/react-select": ^1.2.0
@@ -849,7 +801,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fwoosh/decorator-centered@workspace:plugins/decorator-centered"
   dependencies:
-    "@fwoosh/components": "link:../../packages/components"
+    "@fwoosh/components": "workspace:*"
   peerDependencies:
     fwoosh: ">= 0.x"
   languageName: unknown
@@ -859,72 +811,20 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fwoosh/docs@workspace:examples/docs"
   dependencies:
-    "@fwoosh/components": "link:../../packages/components"
-    "@fwoosh/panel-actions": "link:../../plugins/panel-actions"
-    "@fwoosh/react": "link:../../plugins/react"
-    fwoosh: "link:../../packages/cli"
+    "@fwoosh/components": "workspace:*"
+    "@fwoosh/panel-actions": "workspace:*"
+    "@fwoosh/react": "workspace:*"
+    fwoosh: "workspace:*"
+    react: ^18.2.0
+    react-dom: ^18.2.0
   languageName: unknown
   linkType: soft
 
-"@fwoosh/hooks@link:../../packages/hooks::locator=%40fwoosh%2Fpanel-actions%40workspace%3Aplugins%2Fpanel-actions":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/hooks@link:../../packages/hooks::locator=%40fwoosh%2Fpanel-actions%40workspace%3Aplugins%2Fpanel-actions"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/hooks@link:../../packages/hooks::locator=%40fwoosh%2Fpanel-designs%40workspace%3Aplugins%2Fpanel-designs":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/hooks@link:../../packages/hooks::locator=%40fwoosh%2Fpanel-designs%40workspace%3Aplugins%2Fpanel-designs"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/hooks@link:../../packages/hooks::locator=%40fwoosh%2Fpanel-props%40workspace%3Aplugins%2Fpanel-props":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/hooks@link:../../packages/hooks::locator=%40fwoosh%2Fpanel-props%40workspace%3Aplugins%2Fpanel-props"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/hooks@link:../../packages/hooks::locator=%40fwoosh%2Fpanel-source%40workspace%3Aplugins%2Fpanel-source":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/hooks@link:../../packages/hooks::locator=%40fwoosh%2Fpanel-source%40workspace%3Aplugins%2Fpanel-source"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/hooks@link:../../packages/hooks::locator=%40fwoosh%2Fpanel-story-description%40workspace%3Aplugins%2Fpanel-story-description":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/hooks@link:../../packages/hooks::locator=%40fwoosh%2Fpanel-story-description%40workspace%3Aplugins%2Fpanel-story-description"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/hooks@link:../../packages/hooks::locator=%40fwoosh%2Ftool-github%40workspace%3Aplugins%2Ftool-github":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/hooks@link:../../packages/hooks::locator=%40fwoosh%2Ftool-github%40workspace%3Aplugins%2Ftool-github"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/hooks@link:../../packages/hooks::locator=%40fwoosh%2Ftool-viewport%40workspace%3Aplugins%2Ftool-viewport":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/hooks@link:../../packages/hooks::locator=%40fwoosh%2Ftool-viewport%40workspace%3Aplugins%2Ftool-viewport"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/hooks@link:../hooks::locator=%40fwoosh%2Fapp%40workspace%3Apackages%2Fapp":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/hooks@link:../hooks::locator=%40fwoosh%2Fapp%40workspace%3Apackages%2Fapp"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/hooks@link:../hooks::locator=%40fwoosh%2Flink%40workspace%3Apackages%2Flink":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/hooks@link:../hooks::locator=%40fwoosh%2Flink%40workspace%3Apackages%2Flink"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/hooks@workspace:packages/hooks":
+"@fwoosh/hooks@workspace:*, @fwoosh/hooks@workspace:packages/hooks":
   version: 0.0.0-use.local
   resolution: "@fwoosh/hooks@workspace:packages/hooks"
   dependencies:
-    "@fwoosh/types": "link:../types"
+    "@fwoosh/types": "workspace:*"
     "@types/lodash.chunk": ^4.2.7
     change-case: ^4.1.2
     react: ^18.2.0
@@ -941,9 +841,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fwoosh/link@workspace:packages/link"
   dependencies:
-    "@fwoosh/components": "link:./components"
-    "@fwoosh/hooks": "link:../hooks"
-    "@fwoosh/utils": "link:../utils"
+    "@fwoosh/components": "workspace:*"
+    "@fwoosh/hooks": "workspace:*"
+    "@fwoosh/utils": "workspace:*"
   languageName: unknown
   linkType: soft
 
@@ -951,10 +851,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fwoosh/pages@workspace:plugins/pages"
   dependencies:
-    "@fwoosh/app": "link:../../packages/app"
-    "@fwoosh/components": "link:../../packages/components"
-    "@fwoosh/styling": "link:../../packages/styling"
-    "@fwoosh/types": "link:../../packages/types"
+    "@fwoosh/app": "workspace:*"
+    "@fwoosh/components": "workspace:*"
+    "@fwoosh/styling": "workspace:*"
+    "@fwoosh/types": "workspace:*"
     "@types/react": ^18.0.26
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -968,28 +868,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fwoosh/panel-actions@link:../../plugins/panel-actions::locator=%40fwoosh%2Fdocs%40workspace%3Aexamples%2Fdocs":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/panel-actions@link:../../plugins/panel-actions::locator=%40fwoosh%2Fdocs%40workspace%3Aexamples%2Fdocs"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/panel-actions@link:../../plugins/panel-actions::locator=%40fwoosh%2Freact-example%40workspace%3Aexamples%2Freact":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/panel-actions@link:../../plugins/panel-actions::locator=%40fwoosh%2Freact-example%40workspace%3Aexamples%2Freact"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/panel-actions@workspace:plugins/panel-actions":
+"@fwoosh/panel-actions@workspace:*, @fwoosh/panel-actions@workspace:plugins/panel-actions":
   version: 0.0.0-use.local
   resolution: "@fwoosh/panel-actions@workspace:plugins/panel-actions"
   dependencies:
     "@devtools-ds/object-inspector": ^1.2.1
-    "@fwoosh/components": "link:../../packages/components"
-    "@fwoosh/hooks": "link:../../packages/hooks"
+    "@fwoosh/components": "workspace:*"
+    "@fwoosh/hooks": "workspace:*"
     "@radix-ui/react-id": ^1.0.0
     "@types/node": ^14.14.31
-    fwoosh: "link:../../packages/cli"
     react: ^18.2.0
   peerDependencies:
     fwoosh: ">= 0.x"
@@ -1001,8 +888,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fwoosh/panel-designs@workspace:plugins/panel-designs"
   dependencies:
-    "@fwoosh/hooks": "link:../../packages/hooks"
-    "@fwoosh/styling": "link:../../packages/styling"
+    "@fwoosh/hooks": "workspace:*"
+    "@fwoosh/styling": "workspace:*"
   peerDependencies:
     fwoosh: ">= 0.x"
   languageName: unknown
@@ -1012,9 +899,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fwoosh/panel-props@workspace:plugins/panel-props"
   dependencies:
-    "@fwoosh/hooks": "link:../../packages/hooks"
+    "@fwoosh/hooks": "workspace:*"
     "@types/node": ^14.14.31
-    fwoosh: "link:../../packages/cli"
   peerDependencies:
     fwoosh: ">= 0.x"
   languageName: unknown
@@ -1024,10 +910,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fwoosh/panel-source@workspace:plugins/panel-source"
   dependencies:
-    "@fwoosh/hooks": "link:../../packages/hooks"
-    "@fwoosh/styling": "link:../../packages/styling"
+    "@fwoosh/hooks": "workspace:*"
+    "@fwoosh/styling": "workspace:*"
     "@types/node": ^14.14.31
-    fwoosh: "link:../../packages/cli"
   peerDependencies:
     fwoosh: ">= 0.x"
   languageName: unknown
@@ -1037,9 +922,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fwoosh/panel-story-description@workspace:plugins/panel-story-description"
   dependencies:
-    "@fwoosh/hooks": "link:../../packages/hooks"
+    "@fwoosh/hooks": "workspace:*"
     "@types/node": ^14.14.31
-    fwoosh: "link:../../packages/cli"
   peerDependencies:
     fwoosh: ">= 0.x"
   languageName: unknown
@@ -1049,34 +933,22 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fwoosh/react-example@workspace:examples/react"
   dependencies:
-    "@fwoosh/panel-actions": "link:../../plugins/panel-actions"
-    "@fwoosh/react": "link:../../plugins/react"
+    "@fwoosh/panel-actions": "workspace:*"
+    "@fwoosh/react": "workspace:*"
     "@playwright/test": ^1.29.2
-    fwoosh: "link:../../packages/cli"
-    react: ^17
+    fwoosh: "workspace:*"
+    react: ^18.2.0
+    react-dom: ^18.2.0
   languageName: unknown
   linkType: soft
 
-"@fwoosh/react@link:../../plugins/react::locator=%40fwoosh%2Fdocs%40workspace%3Aexamples%2Fdocs":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/react@link:../../plugins/react::locator=%40fwoosh%2Fdocs%40workspace%3Aexamples%2Fdocs"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/react@link:../../plugins/react::locator=%40fwoosh%2Freact-example%40workspace%3Aexamples%2Freact":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/react@link:../../plugins/react::locator=%40fwoosh%2Freact-example%40workspace%3Aexamples%2Freact"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/react@workspace:plugins/react":
+"@fwoosh/react@workspace:*, @fwoosh/react@workspace:plugins/react":
   version: 0.0.0-use.local
   resolution: "@fwoosh/react@workspace:plugins/react"
   dependencies:
-    "@fwoosh/types": "link:../../packages/types"
-    "@fwoosh/virtual-file": "link:../../packages/virtual-file"
+    "@fwoosh/types": "workspace:*"
+    "@fwoosh/virtual-file": "workspace:*"
     "@vitejs/plugin-react": ^3.0.1
-    fwoosh: "link:../../packages/cli"
     react: ^17
     react-docgen-typescript: ^2.2.2
     typescript: ^4.9.3
@@ -1090,41 +962,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fwoosh/styling@link:../../packages/styling::locator=%40fwoosh%2Fpages%40workspace%3Aplugins%2Fpages":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/styling@link:../../packages/styling::locator=%40fwoosh%2Fpages%40workspace%3Aplugins%2Fpages"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/styling@link:../../packages/styling::locator=%40fwoosh%2Fpanel-designs%40workspace%3Aplugins%2Fpanel-designs":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/styling@link:../../packages/styling::locator=%40fwoosh%2Fpanel-designs%40workspace%3Aplugins%2Fpanel-designs"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/styling@link:../../packages/styling::locator=%40fwoosh%2Fpanel-source%40workspace%3Aplugins%2Fpanel-source":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/styling@link:../../packages/styling::locator=%40fwoosh%2Fpanel-source%40workspace%3Aplugins%2Fpanel-source"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/styling@link:../../packages/styling::locator=%40fwoosh%2Ftool-github%40workspace%3Aplugins%2Ftool-github":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/styling@link:../../packages/styling::locator=%40fwoosh%2Ftool-github%40workspace%3Aplugins%2Ftool-github"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/styling@link:../styling::locator=%40fwoosh%2Fcomponents%40workspace%3Apackages%2Fcomponents":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/styling@link:../styling::locator=%40fwoosh%2Fcomponents%40workspace%3Apackages%2Fcomponents"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/styling@workspace:packages/styling":
+"@fwoosh/styling@workspace:*, @fwoosh/styling@workspace:packages/styling":
   version: 0.0.0-use.local
   resolution: "@fwoosh/styling@workspace:packages/styling"
   dependencies:
-    "@fwoosh/theme-default": "link:../../plugins/theme-default"
+    "@fwoosh/theme-default": "workspace:*"
     "@stitches/react": ^1.2.8
     "@types/dlv": ^1.1.2
     react: ^18.2.0
@@ -1137,26 +979,18 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fwoosh/test@workspace:packages/test"
   dependencies:
-    "@fwoosh/utils": "link:../utils"
+    "@fwoosh/utils": "workspace:*"
     "@playwright/test": ^1.29.2
     playwright: ^1.29.2
   languageName: unknown
   linkType: soft
 
-"@fwoosh/theme-default@link:../../plugins/theme-default::locator=%40fwoosh%2Fstyling%40workspace%3Apackages%2Fstyling":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/theme-default@link:../../plugins/theme-default::locator=%40fwoosh%2Fstyling%40workspace%3Apackages%2Fstyling"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/theme-default@workspace:plugins/theme-default":
+"@fwoosh/theme-default@workspace:*, @fwoosh/theme-default@workspace:plugins/theme-default":
   version: 0.0.0-use.local
   resolution: "@fwoosh/theme-default@workspace:plugins/theme-default"
   dependencies:
-    "@fwoosh/types": "link:../../packages/types"
+    "@fwoosh/types": "workspace:*"
     "@radix-ui/colors": ^0.1.8
-  peerDependencies:
-    fwoosh: ">= 0.x"
   languageName: unknown
   linkType: soft
 
@@ -1164,8 +998,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fwoosh/tool-github@workspace:plugins/tool-github"
   dependencies:
-    "@fwoosh/hooks": "link:../../packages/hooks"
-    "@fwoosh/styling": "link:../../packages/styling"
+    "@fwoosh/hooks": "workspace:*"
+    "@fwoosh/styling": "workspace:*"
     "@types/parse-github-url": ^1.0.0
     parse-github-url: ^1.0.2
     react-feather: ^2.0.10
@@ -1179,7 +1013,6 @@ __metadata:
   resolution: "@fwoosh/tool-measure@workspace:plugins/tool-measure"
   dependencies:
     "@types/node": ^14.14.31
-    fwoosh: "link:../../packages/cli"
     react: ^18.2.0
     react-feather: ^2.0.10
   peerDependencies:
@@ -1192,7 +1025,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fwoosh/tool-viewport@workspace:plugins/tool-viewport"
   dependencies:
-    "@fwoosh/hooks": "link:../../packages/hooks"
+    "@fwoosh/hooks": "workspace:*"
     devices-viewport-size: ^1.0.4
     react-feather: ^2.0.10
   peerDependencies:
@@ -1204,7 +1037,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fwoosh/tool-zoom@workspace:plugins/tool-zoom"
   dependencies:
-    "@fwoosh/components": "link:../../packages/components"
+    "@fwoosh/components": "workspace:*"
     "@types/node": ^14.14.31
     react: ^18.2.0
     react-feather: ^2.0.10
@@ -1214,43 +1047,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fwoosh/types@link:../../packages/types::locator=%40fwoosh%2Fpages%40workspace%3Aplugins%2Fpages":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/types@link:../../packages/types::locator=%40fwoosh%2Fpages%40workspace%3Aplugins%2Fpages"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/types@link:../../packages/types::locator=%40fwoosh%2Freact%40workspace%3Aplugins%2Freact":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/types@link:../../packages/types::locator=%40fwoosh%2Freact%40workspace%3Aplugins%2Freact"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/types@link:../../packages/types::locator=%40fwoosh%2Ftheme-default%40workspace%3Aplugins%2Ftheme-default":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/types@link:../../packages/types::locator=%40fwoosh%2Ftheme-default%40workspace%3Aplugins%2Ftheme-default"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/types@link:../types::locator=%40fwoosh%2Fhooks%40workspace%3Apackages%2Fhooks":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/types@link:../types::locator=%40fwoosh%2Fhooks%40workspace%3Apackages%2Fhooks"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/types@link:../types::locator=%40fwoosh%2Futils%40workspace%3Apackages%2Futils":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/types@link:../types::locator=%40fwoosh%2Futils%40workspace%3Apackages%2Futils"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/types@link:../types::locator=fwoosh%40workspace%3Apackages%2Fcli":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/types@link:../types::locator=fwoosh%40workspace%3Apackages%2Fcli"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/types@workspace:packages/types":
+"@fwoosh/types@workspace:*, @fwoosh/types@workspace:packages/types":
   version: 0.0.0-use.local
   resolution: "@fwoosh/types@workspace:packages/types"
   dependencies:
@@ -1263,35 +1060,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fwoosh/utils@link:../utils::locator=%40fwoosh%2Fapp%40workspace%3Apackages%2Fapp":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/utils@link:../utils::locator=%40fwoosh%2Fapp%40workspace%3Apackages%2Fapp"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/utils@link:../utils::locator=%40fwoosh%2Flink%40workspace%3Apackages%2Flink":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/utils@link:../utils::locator=%40fwoosh%2Flink%40workspace%3Apackages%2Flink"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/utils@link:../utils::locator=%40fwoosh%2Ftest%40workspace%3Apackages%2Ftest":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/utils@link:../utils::locator=%40fwoosh%2Ftest%40workspace%3Apackages%2Ftest"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/utils@link:../utils::locator=fwoosh%40workspace%3Apackages%2Fcli":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/utils@link:../utils::locator=fwoosh%40workspace%3Apackages%2Fcli"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/utils@workspace:packages/utils":
+"@fwoosh/utils@workspace:*, @fwoosh/utils@workspace:packages/utils":
   version: 0.0.0-use.local
   resolution: "@fwoosh/utils@workspace:packages/utils"
   dependencies:
-    "@fwoosh/types": "link:../types"
+    "@fwoosh/types": "workspace:*"
     "@types/lodash.chunk": ^4.2.7
     change-case: ^4.1.2
     consola: ^2.15.3
@@ -1299,19 +1072,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fwoosh/virtual-file@link:../../packages/virtual-file::locator=%40fwoosh%2Freact%40workspace%3Aplugins%2Freact":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/virtual-file@link:../../packages/virtual-file::locator=%40fwoosh%2Freact%40workspace%3Aplugins%2Freact"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/virtual-file@link:../virtual-file::locator=fwoosh%40workspace%3Apackages%2Fcli":
-  version: 0.0.0-use.local
-  resolution: "@fwoosh/virtual-file@link:../virtual-file::locator=fwoosh%40workspace%3Apackages%2Fcli"
-  languageName: node
-  linkType: soft
-
-"@fwoosh/virtual-file@workspace:packages/virtual-file":
+"@fwoosh/virtual-file@workspace:*, @fwoosh/virtual-file@workspace:packages/virtual-file":
   version: 0.0.0-use.local
   resolution: "@fwoosh/virtual-file@workspace:packages/virtual-file"
   dependencies:
@@ -7052,7 +6813,7 @@ __metadata:
     command-line-application: ^0.10.1
     copy-template-dir: ^1.4.0
     endent: ^2.1.0
-    fwoosh: "link:./packages/cli"
+    fwoosh: "workspace:*"
     lerna: ^6.4.1
     patch-package: ^6.4.7
     prettier: ^2.2.1
@@ -7062,69 +6823,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"fwoosh@link:../../packages/cli::locator=%40fwoosh%2Fdocs%40workspace%3Aexamples%2Fdocs":
-  version: 0.0.0-use.local
-  resolution: "fwoosh@link:../../packages/cli::locator=%40fwoosh%2Fdocs%40workspace%3Aexamples%2Fdocs"
-  languageName: node
-  linkType: soft
-
-"fwoosh@link:../../packages/cli::locator=%40fwoosh%2Fpanel-actions%40workspace%3Aplugins%2Fpanel-actions":
-  version: 0.0.0-use.local
-  resolution: "fwoosh@link:../../packages/cli::locator=%40fwoosh%2Fpanel-actions%40workspace%3Aplugins%2Fpanel-actions"
-  languageName: node
-  linkType: soft
-
-"fwoosh@link:../../packages/cli::locator=%40fwoosh%2Fpanel-props%40workspace%3Aplugins%2Fpanel-props":
-  version: 0.0.0-use.local
-  resolution: "fwoosh@link:../../packages/cli::locator=%40fwoosh%2Fpanel-props%40workspace%3Aplugins%2Fpanel-props"
-  languageName: node
-  linkType: soft
-
-"fwoosh@link:../../packages/cli::locator=%40fwoosh%2Fpanel-source%40workspace%3Aplugins%2Fpanel-source":
-  version: 0.0.0-use.local
-  resolution: "fwoosh@link:../../packages/cli::locator=%40fwoosh%2Fpanel-source%40workspace%3Aplugins%2Fpanel-source"
-  languageName: node
-  linkType: soft
-
-"fwoosh@link:../../packages/cli::locator=%40fwoosh%2Fpanel-story-description%40workspace%3Aplugins%2Fpanel-story-description":
-  version: 0.0.0-use.local
-  resolution: "fwoosh@link:../../packages/cli::locator=%40fwoosh%2Fpanel-story-description%40workspace%3Aplugins%2Fpanel-story-description"
-  languageName: node
-  linkType: soft
-
-"fwoosh@link:../../packages/cli::locator=%40fwoosh%2Freact%40workspace%3Aplugins%2Freact":
-  version: 0.0.0-use.local
-  resolution: "fwoosh@link:../../packages/cli::locator=%40fwoosh%2Freact%40workspace%3Aplugins%2Freact"
-  languageName: node
-  linkType: soft
-
-"fwoosh@link:../../packages/cli::locator=%40fwoosh%2Freact-example%40workspace%3Aexamples%2Freact":
-  version: 0.0.0-use.local
-  resolution: "fwoosh@link:../../packages/cli::locator=%40fwoosh%2Freact-example%40workspace%3Aexamples%2Freact"
-  languageName: node
-  linkType: soft
-
-"fwoosh@link:../../packages/cli::locator=%40fwoosh%2Ftool-measure%40workspace%3Aplugins%2Ftool-measure":
-  version: 0.0.0-use.local
-  resolution: "fwoosh@link:../../packages/cli::locator=%40fwoosh%2Ftool-measure%40workspace%3Aplugins%2Ftool-measure"
-  languageName: node
-  linkType: soft
-
-"fwoosh@link:./packages/cli::locator=fwoosh-monorepo%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "fwoosh@link:./packages/cli::locator=fwoosh-monorepo%40workspace%3A."
-  languageName: node
-  linkType: soft
-
-"fwoosh@workspace:packages/cli":
+"fwoosh@workspace:*, fwoosh@workspace:packages/cli":
   version: 0.0.0-use.local
   resolution: "fwoosh@workspace:packages/cli"
   dependencies:
     "@code-hike/mdx": ^0.8.0
-    "@fwoosh/app": "link:../app"
-    "@fwoosh/types": "link:../types"
-    "@fwoosh/utils": "link:../utils"
-    "@fwoosh/virtual-file": "link:../virtual-file"
+    "@fwoosh/app": "workspace:*"
+    "@fwoosh/types": "workspace:*"
+    "@fwoosh/utils": "workspace:*"
+    "@fwoosh/virtual-file": "workspace:*"
     "@jsdevtools/rehype-toc": ^3.0.2
     "@mdx-js/rollup": ^2.2.1
     "@swc/core": ^1.3.24
@@ -7176,6 +6883,9 @@ __metadata:
     unist-util-remove: ^3.1.1
     unist-util-visit: ^4.1.1
     vite: ^4.0.4
+  peerDependencies:
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
   dependenciesMeta:
     typescript:
       optional: true

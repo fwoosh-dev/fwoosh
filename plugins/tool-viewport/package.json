@@ -18,7 +18,7 @@
     "dist"
   ],
   "dependencies": {
-    "@fwoosh/hooks": "link:../../packages/hooks",
+    "@fwoosh/hooks": "workspace:*",
     "devices-viewport-size": "^1.0.4",
     "react-feather": "^2.0.10"
   },

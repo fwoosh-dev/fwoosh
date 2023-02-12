@@ -8,8 +8,8 @@
   "dependencies": {
     "@code-hike/mdx": "^0.8.0",
     "@fontsource/inter": "^4.5.14",
-    "@fwoosh/hooks": "link:../hooks",
-    "@fwoosh/utils": "link:../utils",
+    "@fwoosh/hooks": "workspace:*",
+    "@fwoosh/utils": "workspace:*",
     "@mdx-js/react": "^2.2.1",
     "@radix-ui/react-collapsible": "^1.0.1",
     "@radix-ui/react-id": "^1.0.0",

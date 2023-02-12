@@ -8,7 +8,6 @@
   "repository": "hipstersmoothie/fwoosh",
   "license": "MIT",
   "dependencies": {
-    "fwoosh": "link:../../packages/cli",
     "react-feather": "^2.0.10"
   },
   "devDependencies": {

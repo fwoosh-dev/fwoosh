@@ -18,7 +18,7 @@
     "dist"
   ],
   "dependencies": {
-    "@fwoosh/utils": "link:../utils",
+    "@fwoosh/utils": "workspace:*",
     "@playwright/test": "^1.29.2",
     "playwright": "^1.29.2"
   }
