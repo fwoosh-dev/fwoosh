@@ -10,7 +10,7 @@
   "devDependencies": {
     "@fwoosh/panel-actions": "workspace:*",
     "@fwoosh/react": "workspace:*",
-    "@playwright/test": "^1.29.2",
+    "@playwright/test": "^1.30.0",
     "fwoosh": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
