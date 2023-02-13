@@ -121,7 +121,7 @@ export async function getStoryList({
   outDir,
 }: Pick<FwooshOptionsLoaded, "stories" | "outDir">) {
   return await glob(stories, {
-    ignore: [`${outDir}/**`, "**/node_modules/**"],
+    ignore: [`${outDir}/**`, "**/node_modules/**", "**/dist/**", "**/out/**"],
   });
 }
 
