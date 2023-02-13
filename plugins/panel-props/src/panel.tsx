@@ -13,10 +13,8 @@ const Wrapper = styled("div", {
 function PropsPanelContent({ storyId }: PanelPluginProps) {
   const [, story] =
     Object.entries(stories).find(([slug]) => slug === storyId) || [];
-  const docs = useDocgen(
-    storyId,
-    (story?.component as any)._result || story?.meta
-  );
+  const meta = story?.component?._payload?._result || story?.meta;
+  const docs = useDocgen(storyId, meta);
 
   return (
     <Wrapper>
