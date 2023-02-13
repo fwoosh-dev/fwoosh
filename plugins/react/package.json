@@ -1,7 +1,7 @@
 {
   "name": "@fwoosh/react",
   "type": "module",
-  "version": "0.0.117",
+  "version": "0.0.118",
   "description": "A lightning quick component development",
   "main": "./dist/index.js",
   "author": "Andrew Lisowski <lisowski54@gmail.com>",

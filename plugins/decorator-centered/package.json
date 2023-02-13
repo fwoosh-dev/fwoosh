@@ -2,7 +2,7 @@
   "name": "@fwoosh/decorator-centered",
   "main": "dist/react.js",
   "description": "",
-  "version": "0.0.117",
+  "version": "0.0.118",
   "license": "MIT",
   "author": {
     "name": "Andrew Lisowski",
