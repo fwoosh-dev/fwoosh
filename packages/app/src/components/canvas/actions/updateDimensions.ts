@@ -1,5 +1,4 @@
 import { Action } from "../constants";
-import { machine } from "../machine";
 import { DOCS_GUTTER, packShapesIntoGroups, WORKBENCH_GUTTER } from "../utils";
 
 /** Kicks off measuring each object 1 by 1 */
