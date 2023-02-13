@@ -11,10 +11,6 @@ import {
 import { QueryClient, QueryClientProvider } from "react-query";
 import { HelmetProvider } from "react-helmet-async";
 
-import { Story } from "./components/Story";
-import { Workbench } from "./components/Workbench";
-import { Docs } from "./components/Docs";
-import { DocsPage } from "./components/DocsPage";
 import "./index.css";
 import {
   AppWrapper,
@@ -29,15 +25,54 @@ import {
   globalCss,
 } from "@fwoosh/styling";
 import { tree } from "@fwoosh/app/stories";
-import { StoryWithTools } from "./components/StoryWithTools";
 import { getFirstStory, convertMetaTitleToUrlParam } from "@fwoosh/utils";
 import { Head } from "./components/Head";
 import { CommandPallette } from "./components/CommandPallette";
 import { ProductionSearchIndex } from "./components/ProductionSearchIndex";
 import { darkTheme } from "@fwoosh/styling";
 import { config } from "@fwoosh/app/config";
-import { WorkbenchCanvas } from "./components/canvas/WorkbenchCanvas";
-import { DocsCanvas } from "./components/canvas/DocsCanvas";
+
+const WorkBenchCanvas = React.lazy(() =>
+  import("./components/canvas/WorkbenchCanvas").then((m) => ({
+    default: m.WorkbenchCanvas,
+  }))
+);
+
+const DocsCanvas = React.lazy(() =>
+  import("./components/canvas/DocsCanvas").then((m) => ({
+    default: m.DocsCanvas,
+  }))
+);
+
+const DocsPage = React.lazy(() =>
+  import("./components/DocsPage").then((m) => ({
+    default: m.DocsPage,
+  }))
+);
+
+const Docs = React.lazy(() =>
+  import("./components/Docs").then((m) => ({
+    default: m.Docs,
+  }))
+);
+
+const Workbench = React.lazy(() =>
+  import("./components/Workbench").then((m) => ({
+    default: m.Workbench,
+  }))
+);
+
+const StoryWithTools = React.lazy(() =>
+  import("./components/StoryWithTools").then((m) => ({
+    default: m.StoryWithTools,
+  }))
+);
+
+const Story = React.lazy(() =>
+  import("./components/Story").then((m) => ({
+    default: m.Story,
+  }))
+);
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -105,14 +140,20 @@ const router = createBrowserRouter(
         {
           path: "story/:storyId",
           element: (
-            <ErrorBoundary>
-              <Story />
-            </ErrorBoundary>
+            <React.Suspense fallback={<Spinner delay={2000} />}>
+              <ErrorBoundary>
+                <Story />
+              </ErrorBoundary>
+            </React.Suspense>
           ),
         },
         {
           path: "workbench",
-          element: <Workbench />,
+          element: (
+            <React.Suspense fallback={<Spinner delay={2000} />}>
+              <Workbench />
+            </React.Suspense>
+          ),
           children: [
             {
               index: true,
@@ -156,11 +197,19 @@ const router = createBrowserRouter(
           children: [
             {
               path: "workbench/:storyId?",
-              element: <WorkbenchCanvas />,
+              element: (
+                <React.Suspense fallback={<Spinner delay={2000} />}>
+                  <WorkBenchCanvas />
+                </React.Suspense>
+              ),
             },
             {
               path: "docs/:docsPath?",
-              element: <DocsCanvas />,
+              element: (
+                <React.Suspense fallback={<Spinner delay={2000} />}>
+                  <DocsCanvas />
+                </React.Suspense>
+              ),
             },
           ],
         },
