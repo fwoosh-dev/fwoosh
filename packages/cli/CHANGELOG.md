@@ -1,3 +1,16 @@
+# v0.0.118 (Mon Feb 13 2023)
+
+#### 🐛 Bug Fix
+
+- switch to fdir + picomatch [#69](https://github.com/fwoosh-dev/fwoosh/pull/69) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- switch to fdir ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.117 (Mon Feb 13 2023)
 
 #### 🐛 Bug Fix
