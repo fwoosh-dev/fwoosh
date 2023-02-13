@@ -1,7 +1,7 @@
 {
   "name": "@fwoosh/components",
   "type": "module",
-  "version": "0.0.118",
+  "version": "0.0.119",
   "author": "Andrew Lisowski <lisowski54@gmail.com>",
   "repository": "hipstersmoothie/fwoosh",
   "license": "MIT",

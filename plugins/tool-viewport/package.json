@@ -3,7 +3,7 @@
   "type": "module",
   "main": "dist/index.js",
   "description": "Render your stories at different viewport sizes",
-  "version": "0.0.118",
+  "version": "0.0.119",
   "license": "MIT",
   "author": {
     "name": "Andrew Lisowski",
