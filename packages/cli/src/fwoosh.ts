@@ -272,6 +272,7 @@ export class Fwoosh implements FwooshClass {
       "use-sync-external-store/shim",
       "consola",
       "lodash.chunk",
+      "@mdx-js/react",
     ];
 
     process.env.NODE_ENV = mode;
