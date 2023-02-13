@@ -47,9 +47,10 @@ import { getDocsPlugin } from "./utils/get-docs-plugin/index.js";
 import { fwooshSetupPlugin } from "./utils/fwoosh-setup-plugin.js";
 import { fwooshConfigPlugin } from "./utils/fwoosh-config-plugin.js";
 import { fwooshUiPlugin } from "./utils/fwoosh-ui-plugin.js";
-import { convertMarkdownToHtml } from "./utils/get-stories.js";
+import { convertMarkdownToHtml, getStoryList } from "./utils/get-stories.js";
 import { getCodeHikeConfig, setSyntaxTheme } from "./utils/code-hike-config.js";
 import { componentOverridePlugin } from "./utils/component-override-plugins.js";
+import { perfLog } from "./utils/performance.js";
 
 const require = createRequire(import.meta.url);
 
@@ -249,6 +250,7 @@ export class Fwoosh implements FwooshClass {
     const panels = this.hooks.registerPanel.call([]);
     const includedHeadings = ["h2", "h3", "h4", "h5", "h6"];
     const depsToOptimize = [
+      "react-query",
       "react-helmet-async",
       "command-score",
       "mousetrap",
@@ -270,9 +272,11 @@ export class Fwoosh implements FwooshClass {
       "use-sync-external-store/shim",
       "consola",
       "lodash.chunk",
+      "@mdx-js/react",
     ];
 
     process.env.NODE_ENV = mode;
+    process.env.FWOOSH_DEV_SERVER_PORT = String(port);
 
     const optimizedDeps = depsToOptimize.filter((d) => {
       try {
@@ -281,6 +285,8 @@ export class Fwoosh implements FwooshClass {
         return require.resolve(d);
       } catch (e) {}
     });
+
+    const stories = await getStoryList(this.options);
 
     const baseConfig: InlineConfig = {
       mode,
@@ -445,8 +451,13 @@ export class Fwoosh implements FwooshClass {
         },
       ],
       optimizeDeps: {
-        entries: [require.resolve("@fwoosh/app/index.html")],
-        exclude: ["@fwoosh/*", "@fwoosh/components"],
+        entries: [
+          require.resolve("@fwoosh/app/index.html"),
+          ...stories.map((s) => path.resolve(s)),
+          ...panels.map((p) => p.filepath),
+          ...toolbarControls.map((p) => p.filepath),
+        ],
+        exclude: ["@fwoosh/*", "@fwoosh/components", "@fwoosh/hooks"],
         include: optimizedDeps,
       },
       build: {
@@ -461,6 +472,7 @@ export class Fwoosh implements FwooshClass {
         },
       },
       define: {
+        "process.env.FWOOSH_DEV_SERVER_PORT": `${port}`,
         "process.env.LOG_LEVEL": `"${process.env.LOG_LEVEL}"`,
         "process.env.FWOOSH_BASE_NAME": `"${
           mode === "production" ? this.options.basename : "/"
@@ -492,9 +504,15 @@ export class Fwoosh implements FwooshClass {
 
   /** Clean up all the output files */
   async clean() {
-    await Promise.all([
-      fs.rm(this.options.outDir, { recursive: true, force: true }),
-    ]);
+    try {
+      await fs.stat(this.options.outDir);
+
+      await Promise.all([
+        fs.rm(this.options.outDir, { recursive: true, force: true }),
+      ]);
+    } catch (e) {
+      log.warn("No output directory found, skipping clean");
+    }
   }
 
   /** Do a production build of the website */
@@ -710,14 +728,11 @@ export class Fwoosh implements FwooshClass {
           .replace("/dist/", "/src/")
           .replace(".js", ".tsx");
 
-        const generateDocsStart = performance.now();
-        const docs = await this.hooks.generateDocs.promise(file);
-        const generateDocsEnd = performance.now();
-        log.info(
-          `Generate docs: ${path.relative(process.cwd(), file)} (${ms(
-            generateDocsEnd - generateDocsStart
-          )})`
+        const generateDocsTimerEnd = perfLog(
+          `Generate docs: ${path.relative(process.cwd(), file)}`
         );
+        const docs = await this.hooks.generateDocs.promise(file);
+        generateDocsTimerEnd();
 
         const docsWithHtmlDescriptions = await Promise.all(
           docs.map(async (doc) => ({
@@ -727,6 +742,12 @@ export class Fwoosh implements FwooshClass {
         );
 
         ws.send(JSON.stringify(docsWithHtmlDescriptions));
+      });
+    });
+
+    ws.app.ws("/get-mdx-content", async (ws) => {
+      ws.on("message", async (message: string) => {
+        ws.send(await convertMarkdownToHtml(message));
       });
     });
 

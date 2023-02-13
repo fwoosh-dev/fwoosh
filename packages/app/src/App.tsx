@@ -10,14 +10,14 @@ import {
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { HelmetProvider } from "react-helmet-async";
-import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 
-import { Story } from "./components/Story";
-import { Workbench } from "./components/Workbench";
-import { Docs } from "./components/Docs";
-import { DocsPage } from "./components/DocsPage";
 import "./index.css";
-import { AppWrapper, Spinner, ErrorBoundary } from "@fwoosh/components";
+import {
+  AppWrapper,
+  Spinner,
+  ErrorBoundary,
+  TooltipProvider,
+} from "@fwoosh/components";
 import {
   ColorMode,
   ColorModeContext,
@@ -25,15 +25,54 @@ import {
   globalCss,
 } from "@fwoosh/styling";
 import { tree } from "@fwoosh/app/stories";
-import { StoryWithTools } from "./components/StoryWithTools";
 import { getFirstStory, convertMetaTitleToUrlParam } from "@fwoosh/utils";
 import { Head } from "./components/Head";
 import { CommandPallette } from "./components/CommandPallette";
 import { ProductionSearchIndex } from "./components/ProductionSearchIndex";
 import { darkTheme } from "@fwoosh/styling";
 import { config } from "@fwoosh/app/config";
-import { WorkbenchCanvas } from "./components/canvas/WorkbenchCanvas";
-import { DocsCanvas } from "./components/canvas/DocsCanvas";
+
+const WorkBenchCanvas = React.lazy(() =>
+  import("./components/canvas/WorkbenchCanvas").then((m) => ({
+    default: m.WorkbenchCanvas,
+  }))
+);
+
+const DocsCanvas = React.lazy(() =>
+  import("./components/canvas/DocsCanvas").then((m) => ({
+    default: m.DocsCanvas,
+  }))
+);
+
+const DocsPage = React.lazy(() =>
+  import("./components/DocsPage").then((m) => ({
+    default: m.DocsPage,
+  }))
+);
+
+const Docs = React.lazy(() =>
+  import("./components/Docs").then((m) => ({
+    default: m.Docs,
+  }))
+);
+
+const Workbench = React.lazy(() =>
+  import("./components/Workbench").then((m) => ({
+    default: m.Workbench,
+  }))
+);
+
+const StoryWithTools = React.lazy(() =>
+  import("./components/StoryWithTools").then((m) => ({
+    default: m.StoryWithTools,
+  }))
+);
+
+const Story = React.lazy(() =>
+  import("./components/Story").then((m) => ({
+    default: m.Story,
+  }))
+);
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -80,21 +119,14 @@ const router = createBrowserRouter(
       path: "/",
       errorElement: <RouteError />,
       element: (
-        <TooltipPrimitive.Provider>
-          <HelmetProvider>
-            <ErrorBoundary fullScreen>
-              <ProductionSearchIndex />
-              <AppWrapper>
-                <Head />
-                <Outlet />
-                <ScrollRestoration />
-                <React.Suspense>
-                  <CommandPallette />
-                </React.Suspense>
-              </AppWrapper>
-            </ErrorBoundary>
-          </HelmetProvider>
-        </TooltipPrimitive.Provider>
+        <>
+          <Head />
+          <Outlet />
+          <ScrollRestoration />
+          <React.Suspense>
+            <CommandPallette />
+          </React.Suspense>
+        </>
       ),
       children: [
         {
@@ -108,14 +140,20 @@ const router = createBrowserRouter(
         {
           path: "story/:storyId",
           element: (
-            <ErrorBoundary>
-              <Story />
-            </ErrorBoundary>
+            <React.Suspense fallback={<Spinner delay={2000} />}>
+              <ErrorBoundary>
+                <Story />
+              </ErrorBoundary>
+            </React.Suspense>
           ),
         },
         {
           path: "workbench",
-          element: <Workbench />,
+          element: (
+            <React.Suspense fallback={<Spinner delay={2000} />}>
+              <Workbench />
+            </React.Suspense>
+          ),
           children: [
             {
               index: true,
@@ -159,11 +197,19 @@ const router = createBrowserRouter(
           children: [
             {
               path: "workbench/:storyId?",
-              element: <WorkbenchCanvas />,
+              element: (
+                <React.Suspense fallback={<Spinner delay={2000} />}>
+                  <WorkBenchCanvas />
+                </React.Suspense>
+              ),
             },
             {
               path: "docs/:docsPath?",
-              element: <DocsCanvas />,
+              element: (
+                <React.Suspense fallback={<Spinner delay={2000} />}>
+                  <DocsCanvas />
+                </React.Suspense>
+              ),
             },
           ],
         },
@@ -175,7 +221,6 @@ const router = createBrowserRouter(
   }
 );
 
-console.log("here");
 const globalStyles = globalCss({
   mark: { background: "$primary6" },
   html: { background: "$gray1" },
@@ -220,14 +265,19 @@ export const App = () => {
   }, []);
 
   return (
-    <>
-      <QueryClientProvider client={queryClient}>
-        <ColorModeContext.Provider value={colorMode}>
-          <AppWrapper data-color-mode={colorMode}>
-            <RouterProvider router={router} />
-          </AppWrapper>
-        </ColorModeContext.Provider>
-      </QueryClientProvider>
-    </>
+    <TooltipProvider>
+      <HelmetProvider>
+        <QueryClientProvider client={queryClient}>
+          <ColorModeContext.Provider value={colorMode}>
+            <ErrorBoundary fullScreen>
+              <AppWrapper data-color-mode={colorMode}>
+                <ProductionSearchIndex />
+                <RouterProvider router={router} />
+              </AppWrapper>
+            </ErrorBoundary>
+          </ColorModeContext.Provider>
+        </QueryClientProvider>
+      </HelmetProvider>
+    </TooltipProvider>
   );
 };

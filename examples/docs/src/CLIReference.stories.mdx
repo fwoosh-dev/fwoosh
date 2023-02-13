@@ -28,11 +28,11 @@ Start the development server
 ```sh
 Options
 
-  --stories string[]                       Globs to match story files
-  --log-level log | info | debug | trace   The amount of logs to print
-  --open workbench | docs                  Open the browser to the dev
-                                           server
-  -h, --help                               Display the help output
+  --log-level log | info | debug | trace | perf   The amount of logs to print
+  --perf                                          Measure performance of fwoosh and plugins.
+  --stories string[]                              Globs to match story files
+  --open workbench | docs                         Open the browser to the dev server
+  -h, --help                                      Display the help output
 ```
 
 ## `build`
@@ -42,11 +42,11 @@ Do a production build of the website.
 ```sh
 Options
 
-  --stories string[]                       Globs to match story files
-  --out-dir string                         The directory that the built
-                                           website should
-  --log-level log | info | debug | trace   The amount of logs to print
-  -h, --help                               Display the help output
+  --log-level log | info | debug | trace | perf   The amount of logs to print
+  --perf                                          Measure performance of fwoosh and plugins.
+  --stories string[]                              Globs to match story files
+  --out-dir string                                The directory that the built website should
+  -h, --help                                      Display the help output
 ```
 
 ## `serve`
@@ -67,6 +67,7 @@ Clean up all the output files
 ```sh
 Options
 
-  --log-level log | info | debug | trace   The amount of logs to print
-  -h, --help                               Display the help output
+  --log-level log | info | debug | trace | perf   The amount of logs to print
+  --perf                                          Measure performance of fwoosh and plugins.
+  -h, --help                                      Display the help output
 ```

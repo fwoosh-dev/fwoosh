@@ -116,8 +116,7 @@ export async function createVirtualStoriesFile(config: FwooshOptionsLoaded) {
         component: componentName,
         // @ts-ignore
         meta: `
-          new Promise(resolve => {
-            // PERF TODO: this happens multiple times
+          () => new Promise(resolve => {
             import('${file.file}')
               .then((module) => module.meta || module.default)
               .then(resolve)

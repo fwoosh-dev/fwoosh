@@ -3,8 +3,6 @@ import { createStitches } from "@stitches/react";
 import * as base from "@fwoosh/theme-default";
 import { config } from "@fwoosh/app/config";
 
-console.log(config);
-
 const lightThemeOverride = config.themes.find((t) => t.type === "light");
 
 const darkThemeOverride = config.themes.find((t) => t.type === "light");

@@ -150,3 +150,5 @@ export {
   DropdownMenu,
   Select,
 };
+
+export { TooltipProvider } from "./Tooltip";

@@ -22,10 +22,10 @@ function useDecorators(story: StoryData) {
     async function getDecorators() {
       const [meta, storyComponentImport] = await Promise.all([
         story.meta,
-        story.component._payload._result,
+        story.component._payload?._result,
       ]);
       const storyComponent =
-        storyComponentImport.default || storyComponentImport;
+        storyComponentImport?.default || storyComponentImport;
 
       setDecorators([
         ...reverse<Decorator>(storyComponent.decorators || []),
@@ -82,14 +82,14 @@ export function render(
       return () => {
         onComplete();
       };
-    });
+    }, []);
     return <Spinner delay={300} />;
   }
 
   function OnStart() {
     React.useEffect(() => {
       onComplete();
-    });
+    }, []);
     return <></>;
   }
 

@@ -1,8 +1,6 @@
 import swc, { ImportDeclaration, Module } from "@swc/core";
 import { promises as fs } from "fs";
 import { titleCase } from "title-case";
-import ms from "pretty-ms";
-import { performance } from "perf_hooks";
 import { ParsedStoryData, StoryMeta } from "@fwoosh/types";
 import { chunkPromisesTimes, createStorySlug, log } from "@fwoosh/utils";
 import { compile } from "@mdx-js/mdx";
@@ -11,12 +9,13 @@ import glob from "fast-glob";
 import path from "path";
 import { createRequire } from "module";
 import gfm from "remark-gfm";
-import yaml from "js-yaml";
+import matter from "gray-matter";
 import { remarkCodeHike } from "@code-hike/mdx";
 
 import { FwooshOptionsLoaded, ResolvedStoryMeta } from "@fwoosh/types";
 import { getCodeHikeConfig } from "./code-hike-config.js";
 import { endent } from "./endent.js";
+import { perfLog } from "./performance.js";
 
 const require = createRequire(import.meta.url);
 
@@ -33,17 +32,31 @@ function sanitizeMarkdownString(str: string) {
     .join("\n");
 }
 
-export async function convertMarkdownToHtml(markdown: string) {
-  const compiledMdx = await compile(markdown, {
-    remarkPlugins: [
-      gfm,
-      [remarkCodeHike, { autoImport: false, ...getCodeHikeConfig() }],
-    ],
-    outputFormat: "function-body",
-    providerImportSource: "@mdx-js/react",
-  });
+const markdownToHtmlCache = new Map<string, string>();
 
-  return String(compiledMdx);
+export async function convertMarkdownToHtml(markdown: string) {
+  const html = markdownToHtmlCache.get(markdown);
+
+  if (html) {
+    log.info("Using cached markdown to html conversion");
+    return html;
+  }
+
+  const mdxTimerEnd = perfLog("MDX compile");
+  const compiledMdx = String(
+    await compile(markdown, {
+      remarkPlugins: [
+        gfm,
+        [remarkCodeHike, { autoImport: false, ...getCodeHikeConfig() }],
+      ],
+      outputFormat: "function-body",
+      providerImportSource: "@mdx-js/react",
+    })
+  );
+  mdxTimerEnd();
+
+  markdownToHtmlCache.set(markdown, compiledMdx);
+  return compiledMdx;
 }
 
 async function getComment(contents: string, i: number) {
@@ -72,8 +85,12 @@ async function getComment(contents: string, i: number) {
       comment.unshift(contents[i--]);
     }
 
-    return await convertMarkdownToHtml(
-      sanitizeMarkdownString(comment.join(""))
+    const fullComment = comment.join("");
+
+    return sanitizeMarkdownString(
+      process.env.NODE_ENV === "production"
+        ? await convertMarkdownToHtml(fullComment)
+        : fullComment
     );
   }
 }
@@ -104,7 +121,7 @@ export async function getStoryList({
   outDir,
 }: Pick<FwooshOptionsLoaded, "stories" | "outDir">) {
   return await glob(stories, {
-    ignore: [`${outDir}/**`, "**/node_modules/**"],
+    ignore: [`${outDir}/**`, "**/node_modules/**", "**/dist/**", "**/out/**"],
   });
 }
 
@@ -134,24 +151,27 @@ export interface MDXFileDescriptor {
   meta: ResolvedStoryMeta;
 }
 
+const storyFileCache = new Map<
+  string,
+  { descriptor: StoryFileDescriptor; time: number }
+>();
+
 export type FwooshFileDescriptor = StoryFileDescriptor | MDXFileDescriptor;
 const lastEnd = { value: 0 };
 
-async function getStory(file: string, data: FwooshFileDescriptor[]) {
-  const start = performance.now();
-  const contents = await fs.readFile(file, "utf8");
+async function parseStoryFile(file: string, data: FwooshFileDescriptor[]) {
+  const parseStoryTimerEnd = perfLog(`Parse '${file}'`);
   const fullPath = path.resolve(file);
 
   if (file.endsWith(".mdx")) {
     try {
-      const [, frontmatter] = contents.match(/^---\n([^---]+)\n---/) || [];
+      const frontmatter = matter.read(fullPath);
 
-      if (frontmatter) {
+      if (frontmatter.content) {
         const fileDescriptor: FwooshFileDescriptor = {
-          meta: yaml.load(frontmatter) as StoryMeta,
+          meta: frontmatter.data as StoryMeta,
           mdxFile: fullPath,
         };
-
         data.push(fileDescriptor);
         log.trace("Found MDX file:", fileDescriptor);
       }
@@ -159,6 +179,16 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
       console.error(e);
     }
   } else {
+    const cached = storyFileCache.get(fullPath);
+    const modifiedTime = await fs.stat(fullPath).then((s) => s.mtimeMs);
+
+    if (cached && cached.time === modifiedTime) {
+      log.info("Using cached story data for", fullPath);
+      data.push(cached.descriptor);
+      return;
+    }
+
+    const contents = await fs.readFile(file, "utf8");
     const currentLastEnd = lastEnd.value;
     const ast = await swc.parse(contents, {
       syntax: "typescript",
@@ -230,31 +260,33 @@ async function getStory(file: string, data: FwooshFileDescriptor[]) {
       stories,
       meta: { ...meta, file: fullPath },
     };
+
     data.push(fileDescriptor);
+    storyFileCache.set(fullPath, {
+      descriptor: fileDescriptor,
+      time: modifiedTime,
+    });
+
     log.trace("Found story file:", fileDescriptor);
   }
 
-  const end = performance.now();
-
-  log.info(`Parse: ${path.basename(file)} (${ms(end - start)})`);
+  parseStoryTimerEnd();
 }
 
 export async function getStoryData({ stories, outDir }: FwooshOptionsLoaded) {
-  const startFiles = performance.now();
+  const getStoryListTimerEnd = perfLog("Get story list");
   const files = await getStoryList({ stories, outDir });
-  const endFiles = performance.now();
+  getStoryListTimerEnd();
 
-  log.info(`Get stories: (${ms(endFiles - startFiles)})`);
   log.info(`Found ${files.length} files`);
   log.debug(files);
 
-  const startStories = performance.now();
+  const parseAllStoriesTimerEnd = perfLog("Parse stories");
   const data: FwooshFileDescriptor[] = [];
 
-  await chunkPromisesTimes(files, 1, (file) => getStory(file, data));
-
-  const endStories = performance.now();
-  log.info(`Parse stories: (${ms(endStories - startStories)})`);
+  // Running in parallel causes issues with the AST
+  await chunkPromisesTimes(files, 1, (file) => parseStoryFile(file, data));
+  parseAllStoriesTimerEnd();
 
   return data;
 }
