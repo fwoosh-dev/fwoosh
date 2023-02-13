@@ -1,3 +1,16 @@
+# v0.0.119 (Mon Feb 13 2023)
+
+#### 🐛 Bug Fix
+
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/panel-props`
+  - Remove extra story watches [#71](https://github.com/fwoosh-dev/fwoosh/pull/71) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.118 (Mon Feb 13 2023)
 
 #### 🐛 Bug Fix

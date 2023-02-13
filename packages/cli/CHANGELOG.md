@@ -1,3 +1,17 @@
+# v0.0.119 (Mon Feb 13 2023)
+
+#### 🐛 Bug Fix
+
+- Remove extra story watches [#71](https://github.com/fwoosh-dev/fwoosh/pull/71) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- remove chokidar ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- remove extra fresh ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.118 (Mon Feb 13 2023)
 
 #### 🐛 Bug Fix
