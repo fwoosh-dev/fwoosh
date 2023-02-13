@@ -13,10 +13,8 @@ const Wrapper = styled("div", {
 function PropsPanelContent({ storyId }: PanelPluginProps) {
   const [, story] =
     Object.entries(stories).find(([slug]) => slug === storyId) || [];
-  const docs = useDocgen(
-    storyId,
-    (story?.component as any)._result || story?.meta
-  );
+  const meta = story?.component?._payload?._result || story?.meta;
+  const docs = useDocgen(storyId, meta);
 
   return (
     <Wrapper>
@@ -62,7 +60,7 @@ const placeholderBoxRow = (
 
 function PropsPanelSkeleton() {
   return (
-    <DelayedRender delay={2500}>
+    <DelayedRender delay={500}>
       <Wrapper>
         <components.p>
           <PlaceholderBox style={{ width: "80%" }} />

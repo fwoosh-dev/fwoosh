@@ -1,5 +1,4 @@
 import { pascalCase } from "change-case";
-import chokidar from "chokidar";
 import {
   ParsedStoryData,
   FwooshOptionsLoaded,
@@ -7,8 +6,6 @@ import {
   BasicStoryData,
   Stories,
 } from "@fwoosh/types";
-import debounce from "lodash.debounce";
-import { ViteDevServer } from "vite";
 import { convertMetaTitleToUrlParam, log, sortTree } from "@fwoosh/utils";
 import { loadVirtualFile } from "@fwoosh/virtual-file";
 import { createRequire } from "module";
@@ -193,29 +190,6 @@ export function storyListPlugin(config: FwooshOptionsLoaded) {
         }
       }
       return;
-    },
-
-    configureServer(server: ViteDevServer) {
-      const storyWatcher = chokidar.watch(config.stories, {
-        persistent: true,
-        ignored: /node_modules/,
-        atomic: true,
-        ignoreInitial: true,
-      });
-
-      const reload = (type: string) =>
-        debounce(async (path: string) => {
-          const mod = await server.moduleGraph.getModuleByUrl(virtualFileId);
-
-          if (mod) {
-            log.warn(`Reloading, story "${type}" detected:`, path);
-            await server.reloadModule(mod);
-          }
-        }, 1000);
-
-      storyWatcher.on("add", reload("add"));
-      storyWatcher.on("change", reload("change"));
-      storyWatcher.on("unlink", reload("unlink"));
     },
   };
 }
