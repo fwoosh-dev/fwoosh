@@ -5,7 +5,7 @@ import { ParsedStoryData, StoryMeta } from "@fwoosh/types";
 import { chunkPromisesTimes, createStorySlug, log } from "@fwoosh/utils";
 import { compile } from "@mdx-js/mdx";
 
-import glob from "fast-glob";
+import { fdir } from "fdir";
 import path from "path";
 import { createRequire } from "module";
 import gfm from "remark-gfm";
@@ -18,6 +18,13 @@ import { endent } from "./endent.js";
 import { perfLog } from "./performance.js";
 
 const require = createRequire(import.meta.url);
+
+const crawler = new fdir()
+  .withBasePath()
+  .withRelativePaths()
+  .exclude((dirName) =>
+    ["node_modules", "/dist/", "/out/"].some((i) => dirName.includes(i))
+  );
 
 /** Replaces characters in a string that are problematic when inserting into a template string  */
 function sanitizeTemplateString(str: string) {
@@ -120,9 +127,13 @@ export async function getStoryList({
   stories,
   outDir,
 }: Pick<FwooshOptionsLoaded, "stories" | "outDir">) {
-  return await glob(stories, {
-    ignore: [`${outDir}/**`, "**/node_modules/**", "**/dist/**", "**/out/**"],
-  });
+  const files = await crawler
+    .exclude((dirName) => dirName.startsWith(outDir))
+    .glob(...stories)
+    .crawl(process.cwd())
+    .withPromise();
+
+  return files.map((f) => f);
 }
 
 function findExportKeyword(contents: string, index: number): number {
