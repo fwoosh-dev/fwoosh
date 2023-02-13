@@ -62,7 +62,7 @@ const placeholderBoxRow = (
 
 function PropsPanelSkeleton() {
   return (
-    <DelayedRender delay={2500}>
+    <DelayedRender delay={500}>
       <Wrapper>
         <components.p>
           <PlaceholderBox style={{ width: "80%" }} />
