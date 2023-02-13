@@ -117,7 +117,9 @@ async function run() {
   const { perfLog } = await import("./utils/performance.js");
 
   const startupTimerStop = perfLog("Dev server start up");
+  const configTimerStop = perfLog("Get config");
   const { config = {}, filepath } = (await explorer.search()) || {};
+  configTimerStop();
   const dir = path.dirname(filepath || process.cwd());
 
   if (options) {
@@ -137,11 +139,13 @@ async function run() {
   }
 
   // Dynamic import so we can set env vars before loading
+  const initTimerStop = perfLog("Initialize fwoosh");
   const { Fwoosh } = await import("./fwoosh.js");
   const fwoosh = new Fwoosh(fwooshOptions);
   const outDir = path.join(dir, "out");
 
   await fwoosh.loadPlugins();
+  initTimerStop();
 
   const { log } = await import("@fwoosh/utils");
 
