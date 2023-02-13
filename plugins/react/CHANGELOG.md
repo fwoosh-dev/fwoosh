@@ -1,3 +1,18 @@
+# v0.0.117 (Mon Feb 13 2023)
+
+#### 🐛 Bug Fix
+
+- Startup Speed Improvements [#67](https://github.com/fwoosh-dev/fwoosh/pull/67) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix effects ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix startup errors ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix access error ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.116 (Sun Feb 12 2023)
 
 #### 🐛 Bug Fix

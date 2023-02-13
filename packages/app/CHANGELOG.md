@@ -1,3 +1,20 @@
+# v0.0.117 (Mon Feb 13 2023)
+
+#### 🐛 Bug Fix
+
+- Startup Speed Improvements [#67](https://github.com/fwoosh-dev/fwoosh/pull/67) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix loading canvas ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- lazy load different routes ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- improve initial load by generating mdx on demand ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- attempt to solve mismatched tooltip providers ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- move shared wrapper out of router ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.116 (Sun Feb 12 2023)
 
 #### 🐛 Bug Fix

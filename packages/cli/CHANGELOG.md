@@ -1,3 +1,30 @@
+# v0.0.117 (Mon Feb 13 2023)
+
+#### 🐛 Bug Fix
+
+- Startup Speed Improvements [#67](https://github.com/fwoosh-dev/fwoosh/pull/67) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- ignore common root dirs ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add mdx dep to optimize ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- don't load all stories to get their metas. be more lazy ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix story paths ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add panels and toolbars too ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add stories as entries ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- default to opening workbench ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix startup errors ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix inserting env var in hooks package ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add cache for story parse ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- cache html generation ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- improve initial load by generating mdx on demand ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- switch to grey-matter for speed. improves MDX front matter parsing ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add --perf flag ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix running clean before build ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.116 (Sun Feb 12 2023)
 
 #### 🐛 Bug Fix
