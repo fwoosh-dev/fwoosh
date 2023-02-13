@@ -12,7 +12,7 @@ import MeasurePanelPlugin from "@fwoosh/tool-measure";
 
 export const config = {
   title: "@fwoosh/react",
-  syntaxTheme: "material-ocean",
+  syntaxTheme: "poimandres",
   setup: path.resolve("./config/fwoosh-setup.ts"),
   theme: path.resolve("./config/fwoosh-theme.ts"),
   componentOverrides: path.resolve("./config/fwoosh-overrides.tsx"),
