@@ -9,6 +9,7 @@
       "outputs": ["dist/**", "tsconfig.build.tsbuildinfo"],
       "persistent": true
     },
-    "lint": {}
+    "lint": {},
+    "test": {}
   }
 }

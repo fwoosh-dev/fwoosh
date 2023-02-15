@@ -13,7 +13,7 @@
     "build": "turbo build",
     "dev": "turbo dev --parallel",
     "lint": "turbo lint",
-    "test": "vitest",
+    "test": "turbo test",
     "release": "auto shipit",
     "create": "node -r esbuild-register scripts/create/create.ts"
   },
@@ -27,15 +27,12 @@
     "endent": "^2.1.0",
     "eslint-plugin-react": "latest",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "fwoosh": "workspace:*",
     "lerna": "^6.4.1",
     "patch-package": "^6.5.1",
     "prettier": "^2.8.4",
     "rimraf": "^3.0.2",
     "turbo": "^1.7.4"
-  },
-  "dependencies": {
-    "fwoosh": "workspace:*",
-    "vitest": "^0.28.4"
   },
   "auto": {
     "plugins": [

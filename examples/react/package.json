@@ -5,7 +5,7 @@
     "fwoosh": "../../packages/cli/bin/fwoosh.js",
     "start": "yarn fwoosh dev",
     "build": "yarn fwoosh build",
-    "test": "playwright test",
+    "test:e2e": "playwright test",
     "lint": "eslint --ext .ts,.tsx,.js,.jsx src"
   },
   "devDependencies": {
