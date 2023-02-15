@@ -4,17 +4,9 @@ import { ViewportParameters } from "./types.js";
 
 const require = createRequire(import.meta.url);
 
-interface ViewportOptions {}
-
 export default class Viewport implements Plugin {
   name = "tool-viewport";
   params = {} as ViewportParameters;
-
-  private options: ViewportOptions;
-
-  constructor(options: ViewportOptions = {}) {
-    this.options = options;
-  }
 
   apply(fwoosh: Fwoosh) {
     fwoosh.hooks.registerToolbarControl.tap(this.name, (controls) => {

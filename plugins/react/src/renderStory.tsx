@@ -1,5 +1,8 @@
 import * as React from "react";
-import ReactDOM, { version as reactDomVersion } from "react-dom";
+import {
+  version as reactDomVersion,
+  render as ReactDomRender,
+} from "react-dom";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 
 import { StoryData, StoryParameters } from "@fwoosh/types";
@@ -8,18 +11,23 @@ import { Spinner, ErrorBoundary } from "@fwoosh/components";
 
 import type { Decorator, Story as ReactStory, StoryMeta } from "./types";
 
-const isReact18 = reactDomVersion && reactDomVersion.startsWith("18");
+const isReact18 = reactDomVersion.startsWith("18");
 
 function reverse<T>(arr: T[]) {
   return arr.slice().reverse();
 }
 
-function useDecorators(story: StoryData) {
+function useDecorators(story: StoryData | undefined) {
   const [decorators, setDecorators] =
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     React.useState<ReactStory<any>["decorators"]>();
 
   React.useLayoutEffect(() => {
     async function getDecorators() {
+      if (!story) {
+        return;
+      }
+
       const [meta, storyComponentImport] = await Promise.all([
         story.meta,
         story.component._payload?._result,
@@ -29,8 +37,10 @@ function useDecorators(story: StoryData) {
 
       setDecorators([
         ...reverse<Decorator>(storyComponent.decorators || []),
-        ...reverse<Decorator>((meta as StoryMeta<any>).decorators || []),
-        ...reverse<Decorator>((window as any).__FWOOSH_DECORATORS__ || []),
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ...reverse<Decorator>((meta as StoryMeta<any>).decorators ?? []),
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ...reverse<Decorator>((window as any).__FWOOSH_DECORATORS__ ?? []),
       ]);
     }
 
@@ -49,7 +59,7 @@ function App({ slug, params }: AppProps) {
   const story = stories[slug];
   const decorators = useDecorators(story);
 
-  let content = story.component;
+  let content = story?.component;
 
   if (decorators?.length) {
     for (const decorator of decorators) {
@@ -62,6 +72,7 @@ function App({ slug, params }: AppProps) {
   return <Component />;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const roots: Record<string, any> = {};
 
 export function render(
@@ -71,6 +82,7 @@ export function render(
   onStart: () => void,
   onComplete: () => void
 ) {
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (!el) {
     return;
   }
@@ -116,6 +128,6 @@ export function render(
       root.render(app);
     });
   } else {
-    ReactDOM.render(app, el);
+    ReactDomRender(app, el);
   }
 }

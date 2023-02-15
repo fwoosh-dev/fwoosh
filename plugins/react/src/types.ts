@@ -6,6 +6,7 @@ import {
   StoryParameters,
 } from "@fwoosh/types";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Component = React.FunctionComponent<any> | React.ClassicComponent<any>;
 
 export type Decorator = (
@@ -27,6 +28,7 @@ export interface Story<P extends StoryMeta> {
 export interface StoryMeta<C extends FwooshOptions = FwooshOptions>
   extends BaseStoryMeta<C> {
   /** The component docs should be generated for */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   component?: React.ComponentType<any> | React.ComponentType<any>[];
   /** Decorators the render around all of the stories associated with this meta */
   decorators?: Decorator[];

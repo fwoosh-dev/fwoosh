@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { IconButton, Toolbar } from "@fwoosh/components";
 
 export default function {{pascal}}({

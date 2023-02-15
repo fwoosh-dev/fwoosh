@@ -1,9 +1,8 @@
 import { promises as fs } from "fs";
-import ms from "pretty-ms";
 import boxen from "boxen";
 import path from "path";
-import { createServer, InlineConfig, build, Alias } from "vite";
-import express from "express";
+import { createServer, InlineConfig, build } from "vite";
+import express, { json } from "express";
 import expressWs from "express-ws";
 import { createRequire } from "module";
 import {
@@ -18,7 +17,6 @@ import bodyParser from "body-parser";
 import terminalLink from "terminal-link";
 import open from "better-opn";
 import { h } from "hastscript";
-import { Element } from "hast";
 import { visit } from "unist-util-visit";
 import handler from "serve-handler";
 import http from "http";
@@ -27,7 +25,7 @@ import { chromium } from "playwright";
 import remarkFrontmatter from "remark-frontmatter";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import remarkSlug from "remark-slug";
-import toc from "@jsdevtools/rehype-toc";
+import { toc } from "@jsdevtools/rehype-toc";
 import rehypeInferTitleMeta from "rehype-infer-title-meta";
 
 import { endent } from "./utils/endent.js";
@@ -218,7 +216,7 @@ export class Fwoosh implements FwooshClass {
               "code" in e &&
               e.code !== "ERR_MODULE_NOT_FOUND"
             ) {
-              throw e;
+              throw e as unknown as Error;
             }
           }
 
@@ -283,7 +281,9 @@ export class Fwoosh implements FwooshClass {
         // Test if the dependency is installed
         // Fixes warning for different versions of react-dom not being installed
         return require.resolve(d);
-      } catch (e) {}
+      } catch (e) {
+        // Ignore
+      }
     });
 
     const stories = await getStoryList(this.options);
@@ -319,7 +319,7 @@ export class Fwoosh implements FwooshClass {
             // Check validity of links during build
             () => {
               if (mode !== "production") {
-                return () => {};
+                return () => undefined;
               }
 
               const storiesPromise = createVirtualStoriesFile(this.options);
@@ -372,7 +372,7 @@ export class Fwoosh implements FwooshClass {
                     "data-link-group": true,
                     style: { position: "relative" },
                     "data-level": parseInt(el.tagName.replace("h", "")),
-                    "data-level-id": el.properties.id,
+                    "data-level-id": el.properties?.id,
                   });
                 },
                 properties: {
@@ -531,7 +531,7 @@ export class Fwoosh implements FwooshClass {
       log.log("Building search data for MDX files...");
 
       const browser = await chromium.launch();
-      const searchData: Record<string, any> = {};
+      const searchData: Record<string, unknown> = {};
 
       for (const file of mdx) {
         log.info("Building search data:", file.title);
@@ -577,8 +577,8 @@ export class Fwoosh implements FwooshClass {
       const canvas = await browser.newPage();
 
       await canvas.evaluate(() => {
-        // @ts-ignore
-        window.isMeasuring = true;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (window as any).isMeasuring = true;
       });
 
       log.log("Measuring workbench canvas...");
@@ -599,10 +599,13 @@ export class Fwoosh implements FwooshClass {
             }
 
             const data = await msgArgs[1].jsonValue();
-            Object.values(data).forEach((item) => {
-              if ((item as any).story) {
-                delete (item as any).story.code;
-                delete (item as any).story.comment;
+            Object.values(data).forEach((i) => {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              const item = i as any;
+
+              if (item.story) {
+                delete item.story.code;
+                delete item.story.comment;
               }
             });
             res(data);
@@ -634,10 +637,13 @@ export class Fwoosh implements FwooshClass {
             }
 
             const data = await msgArgs[1].jsonValue();
-            Object.values(data).forEach((item) => {
-              if ((item as any).story) {
-                delete (item as any).story.code;
-                delete (item as any).story.comment;
+            Object.values(data).forEach((i) => {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              const item = i as any;
+
+              if (item.story) {
+                delete item.story.code;
+                delete item.story.comment;
               }
             });
             res(data);
@@ -751,14 +757,14 @@ export class Fwoosh implements FwooshClass {
       });
     });
 
-    app.use(express.json({ limit: "50mb" }));
+    app.use(json({ limit: "50mb" }));
     app.use(bodyParser.urlencoded({ extended: false, limit: "50mb" }));
     app.use(bodyParser.json());
 
     ws.app.ws("/sort", (ws) => {
       ws.on("message", (message) => {
         const result = sortTree(
-          JSON.parse(message.toString()),
+          JSON.parse((message as any).toString()),
           this.options.sortSidebarItems
         );
 

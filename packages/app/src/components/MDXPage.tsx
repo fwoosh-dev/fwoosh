@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import {
   components,
   DocsLayout,
@@ -43,29 +43,34 @@ function getTocFromNav(el: HTMLElement, level: number) {
     el.querySelectorAll<HTMLElement>(`.toc-level-${level} > .toc-item`)
   );
 
-  return items.map((item) => {
-    const anchor = item.querySelector<HTMLAnchorElement>(
-      "a"
-    ) as HTMLAnchorElement;
-    const href = anchor.getAttribute("href");
-    let id = "";
+  return items
+    .map((item) => {
+      const anchor = item.querySelector<HTMLAnchorElement>("a");
 
-    if (href) {
-      const hrefUrl = new URL(href, window.location.href);
-      id = hrefUrl.hash.replace("#", "");
-    }
+      if (!anchor) {
+        return null;
+      }
 
-    const entry: TocEntry = {
-      value: anchor.text,
-      attributes: {
-        id: id,
-      },
-      children: getTocFromNav(item, level + 1),
-      depth: level,
-    };
+      const href = anchor.getAttribute("href");
+      let id = "";
 
-    return entry;
-  });
+      if (href) {
+        const hrefUrl = new URL(href, window.location.href);
+        id = hrefUrl.hash.replace("#", "");
+      }
+
+      const entry: TocEntry = {
+        value: anchor.text,
+        attributes: {
+          id: id,
+        },
+        children: getTocFromNav(item, level + 1),
+        depth: level,
+      };
+
+      return entry;
+    })
+    .filter((x): x is TocEntry => Boolean(x));
 }
 
 function TableOfContents() {
@@ -143,7 +148,7 @@ export const MDXPage = ({ page }: { page: StoryTreeItem }) => {
     // The leaf story name we don't care about. Instead we'll use
     // the H1 from the MDX page.
     rest.pop();
-    let lvl1 = rest.join(" / ");
+    const lvl1 = rest.join(" / ");
 
     const headingNodes = document
       ?.getElementById(CONTENT_ID)
@@ -180,7 +185,7 @@ export const MDXPage = ({ page }: { page: StoryTreeItem }) => {
 
   React.useLayoutEffect(() => {
     location.hash && document.querySelector(location.hash)?.scrollIntoView();
-  }, []);
+  }, [location.hash]);
 
   const hasWrapper =
     !("fullPage" in page.story.meta) || page.story.meta.fullPage !== true;

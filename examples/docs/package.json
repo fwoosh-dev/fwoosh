@@ -4,15 +4,26 @@
   "scripts": {
     "fwoosh": "../../packages/cli/bin/fwoosh.js",
     "start": "yarn fwoosh dev",
-    "build": "yarn fwoosh build"
+    "build": "yarn fwoosh build",
+    "lint": "eslint --ext .ts,.tsx,.js,.jsx src src fwoosh.config.ts"
   },
   "devDependencies": {
     "@fwoosh/components": "workspace:*",
     "@fwoosh/panel-actions": "workspace:*",
+    "@fwoosh/panel-props": "workspace:*",
+    "@fwoosh/panel-source": "workspace:*",
+    "@fwoosh/panel-story-description": "workspace:*",
     "@fwoosh/react": "workspace:*",
+    "@fwoosh/styling": "workspace:*",
+    "@fwoosh/tool-github": "workspace:*",
+    "@fwoosh/tool-measure": "workspace:*",
+    "@fwoosh/tool-zoom": "workspace:*",
+    "@fwoosh/types": "workspace:*",
+    "eslint": "^8.34.0",
     "fwoosh": "workspace:*",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-feather": "^2.0.10"
   },
   "version": "0.0.120"
 }

@@ -1,5 +1,134 @@
 // Vitest Snapshot v1
 
+exports[`packShapesIntoGroups > it should be correct for a group with two children beside each other 1`] = `
+{
+  "1": {
+    "childIds": [],
+    "childIndex": 1,
+    "children": [
+      "2",
+      "3",
+    ],
+    "contentSize": [
+      100,
+      100,
+    ],
+    "id": "1",
+    "name": "1",
+    "parentId": "canvas",
+    "point": [
+      0,
+      0,
+    ],
+    "rotation": 0,
+    "size": [
+      100,
+      216,
+    ],
+    "stories": [],
+    "type": "group",
+    "visibility": "hidden",
+  },
+  "2": {
+    "childIds": [],
+    "childIndex": 2,
+    "contentSize": [
+      0,
+      0,
+    ],
+    "id": "2",
+    "name": "2",
+    "parentId": "canvas",
+    "point": [
+      0,
+      116,
+    ],
+    "rotation": 0,
+    "size": [
+      100,
+      100,
+    ],
+    "stories": [],
+    "type": "group",
+    "visibility": "hidden",
+  },
+  "3": {
+    "childIds": [],
+    "childIndex": 2,
+    "contentSize": [
+      0,
+      0,
+    ],
+    "id": "3",
+    "name": "3",
+    "parentId": "canvas",
+    "point": [
+      0,
+      232,
+    ],
+    "rotation": 0,
+    "size": [
+      100,
+      100,
+    ],
+    "stories": [],
+    "type": "group",
+    "visibility": "hidden",
+  },
+}
+`;
+
+exports[`packShapesIntoGroups > it should group two shapes 1`] = `
+{
+  "1": {
+    "childIds": [],
+    "childIndex": 1,
+    "contentSize": [
+      0,
+      0,
+    ],
+    "id": "1",
+    "name": "1",
+    "parentId": "canvas",
+    "point": [
+      0,
+      0,
+    ],
+    "rotation": 0,
+    "size": [
+      100,
+      100,
+    ],
+    "stories": [],
+    "type": "group",
+    "visibility": "hidden",
+  },
+  "2": {
+    "childIds": [],
+    "childIndex": 2,
+    "contentSize": [
+      0,
+      0,
+    ],
+    "id": "2",
+    "name": "2",
+    "parentId": "canvas",
+    "point": [
+      0,
+      116,
+    ],
+    "rotation": 0,
+    "size": [
+      100,
+      100,
+    ],
+    "stories": [],
+    "type": "group",
+    "visibility": "hidden",
+  },
+}
+`;
+
 exports[`packShapesIntoGroups > it should work long and wide children 1`] = `
 {
   "Components": {
@@ -108,6 +237,324 @@ exports[`packShapesIntoGroups > it should work long and wide children 1`] = `
       "components-text--anchor",
     ],
     "type": "group",
+  },
+}
+`;
+
+exports[`packShapesIntoGroups > it should work with 2 groups of 2 levels of nesting 1`] = `
+{
+  "1": {
+    "childIds": [],
+    "childIndex": 1,
+    "children": [
+      "2",
+      "4",
+    ],
+    "contentSize": [
+      100,
+      100,
+    ],
+    "id": "1",
+    "name": "1",
+    "parentId": "canvas",
+    "point": [
+      0,
+      0,
+    ],
+    "rotation": 0,
+    "size": [
+      100,
+      216,
+    ],
+    "stories": [],
+    "type": "group",
+    "visibility": "hidden",
+  },
+  "2": {
+    "childIds": [],
+    "childIndex": 2,
+    "children": [
+      "3",
+    ],
+    "contentSize": [
+      100,
+      100,
+    ],
+    "id": "2",
+    "name": "2",
+    "parentId": "canvas",
+    "point": [
+      0,
+      116,
+    ],
+    "rotation": 0,
+    "size": [
+      100,
+      100,
+    ],
+    "stories": [],
+    "type": "group",
+    "visibility": "hidden",
+  },
+  "3": {
+    "childIds": [],
+    "childIndex": 3,
+    "contentSize": [
+      0,
+      0,
+    ],
+    "id": "3",
+    "name": "3",
+    "parentId": "canvas",
+    "point": [
+      0,
+      116,
+    ],
+    "rotation": 0,
+    "size": [
+      100,
+      100,
+    ],
+    "stories": [],
+    "type": "group",
+    "visibility": "hidden",
+  },
+  "4": {
+    "childIds": [],
+    "childIndex": 4,
+    "children": [
+      "5",
+    ],
+    "contentSize": [
+      100,
+      100,
+    ],
+    "id": "4",
+    "name": "4",
+    "parentId": "canvas",
+    "point": [
+      0,
+      232,
+    ],
+    "rotation": 0,
+    "size": [
+      100,
+      100,
+    ],
+    "stories": [],
+    "type": "group",
+    "visibility": "hidden",
+  },
+  "5": {
+    "childIds": [],
+    "childIndex": 5,
+    "contentSize": [
+      0,
+      0,
+    ],
+    "id": "5",
+    "name": "5",
+    "parentId": "canvas",
+    "point": [
+      0,
+      116,
+    ],
+    "rotation": 0,
+    "size": [
+      100,
+      100,
+    ],
+    "stories": [],
+    "type": "group",
+    "visibility": "hidden",
+  },
+}
+`;
+
+exports[`packShapesIntoGroups > it should work with 2 levels of nesting 1`] = `
+{
+  "1": {
+    "childIds": [],
+    "childIndex": 1,
+    "children": [
+      "2",
+    ],
+    "contentSize": [
+      100,
+      100,
+    ],
+    "id": "1",
+    "name": "1",
+    "parentId": "canvas",
+    "point": [
+      0,
+      0,
+    ],
+    "rotation": 0,
+    "size": [
+      100,
+      100,
+    ],
+    "stories": [],
+    "type": "group",
+    "visibility": "hidden",
+  },
+  "2": {
+    "childIds": [],
+    "childIndex": 2,
+    "children": [
+      "3",
+    ],
+    "contentSize": [
+      100,
+      100,
+    ],
+    "id": "2",
+    "name": "2",
+    "parentId": "canvas",
+    "point": [
+      0,
+      116,
+    ],
+    "rotation": 0,
+    "size": [
+      100,
+      100,
+    ],
+    "stories": [],
+    "type": "group",
+    "visibility": "hidden",
+  },
+  "3": {
+    "childIds": [],
+    "childIndex": 2,
+    "contentSize": [
+      0,
+      0,
+    ],
+    "id": "3",
+    "name": "3",
+    "parentId": "canvas",
+    "point": [
+      0,
+      116,
+    ],
+    "rotation": 0,
+    "size": [
+      100,
+      100,
+    ],
+    "stories": [],
+    "type": "group",
+    "visibility": "hidden",
+  },
+}
+`;
+
+exports[`packShapesIntoGroups > it should wrap single item in nested group 1`] = `
+{
+  "1": {
+    "childIds": [],
+    "childIndex": 1,
+    "children": [
+      "2",
+    ],
+    "contentSize": [
+      0,
+      0,
+    ],
+    "id": "1",
+    "name": "1",
+    "parentId": "canvas",
+    "point": [
+      0,
+      0,
+    ],
+    "rotation": 0,
+    "size": [
+      100,
+      100,
+    ],
+    "stories": [],
+    "type": "group",
+    "visibility": "hidden",
+  },
+  "2": {
+    "childIds": [],
+    "childIndex": 2,
+    "contentSize": [
+      0,
+      0,
+    ],
+    "id": "2",
+    "name": "2",
+    "parentId": "canvas",
+    "point": [
+      0,
+      16,
+    ],
+    "rotation": 0,
+    "size": [
+      100,
+      100,
+    ],
+    "stories": [],
+    "type": "group",
+    "visibility": "hidden",
+  },
+}
+`;
+
+exports[`packShapesIntoGroups > it should wrap single item in nested group with content size 1`] = `
+{
+  "1": {
+    "childIds": [],
+    "childIndex": 1,
+    "children": [
+      "2",
+    ],
+    "contentSize": [
+      100,
+      100,
+    ],
+    "id": "1",
+    "name": "1",
+    "parentId": "canvas",
+    "point": [
+      0,
+      0,
+    ],
+    "rotation": 0,
+    "size": [
+      100,
+      100,
+    ],
+    "stories": [],
+    "type": "group",
+    "visibility": "hidden",
+  },
+  "2": {
+    "childIds": [],
+    "childIndex": 2,
+    "contentSize": [
+      0,
+      0,
+    ],
+    "id": "2",
+    "name": "2",
+    "parentId": "canvas",
+    "point": [
+      0,
+      116,
+    ],
+    "rotation": 0,
+    "size": [
+      100,
+      100,
+    ],
+    "stories": [],
+    "type": "group",
+    "visibility": "hidden",
   },
 }
 `;

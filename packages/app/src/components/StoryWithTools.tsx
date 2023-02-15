@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { styled } from "@fwoosh/styling";
 import { panels } from "@fwoosh/app/ui";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
@@ -51,7 +51,7 @@ export const StoryWithTools = () => {
     }
 
     return 75;
-  }, [storyId]);
+  }, []);
   const storyPaneSizeSet = React.useCallback((size: number) => {
     localStorage.setItem("fwoosh:storyPaneSize", String(size));
   }, []);

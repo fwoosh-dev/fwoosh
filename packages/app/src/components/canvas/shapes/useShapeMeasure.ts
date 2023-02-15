@@ -61,7 +61,7 @@ export function useShapeMeasure(shape: Shape, id: string) {
     return () => {
       cancelAnimationFrame(checkSpinner);
     };
-  }, [shape.id, shape.visibility]);
+  }, [id, shape.id, shape.visibility]);
 
   return measureRef;
 }

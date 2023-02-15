@@ -24,7 +24,7 @@ export const WorkbenchSidebarTree = () => {
   const isCanvas = location.pathname.includes("/canvas/");
 
   return (
-    <SidebarTree data={workbenchTree} activeId={storyId || docsPath}>
+    <SidebarTree data={workbenchTree} activeId={storyId ?? docsPath}>
       {({ node, style }) => {
         const finalStyle = {
           ...style,

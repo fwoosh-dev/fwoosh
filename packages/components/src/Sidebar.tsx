@@ -27,6 +27,7 @@ export const SidebarItem = styled("li", {
   },
 });
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 (SidebarItem as any).height = 32;
 
 export const SidebarSectionTitle = styled(SidebarItem, {

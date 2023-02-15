@@ -7,8 +7,8 @@ const lightThemeOverride = config.themes.find((t) => t.type === "light");
 
 const darkThemeOverride = config.themes.find((t) => t.type === "light");
 
-export const lightClass = lightThemeOverride?.class || "";
-export const darkClass = darkThemeOverride?.class || "";
+export const lightClass = lightThemeOverride?.class ?? "";
+export const darkClass = darkThemeOverride?.class ?? "";
 
 type TextSize =
   | "xs"
@@ -96,7 +96,7 @@ export const {
       paddingTop: baseTheme.space?.[value],
       paddingBottom: baseTheme.space?.[value],
     }),
-    text: (value: TextSize) => {
+    text: (value: TextSize | undefined) => {
       if (value === "xs") {
         return {
           fontSize: "0.75rem",

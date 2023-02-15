@@ -32,6 +32,7 @@ export function MDXContent({ compiledSource }: { compiledSource: string }) {
   // wrapping the content with MDXProvider will allow us to customize the standard
   // markdown components (such as "h1" or "a") with the "components" object
   return (
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     <mdx.MDXProvider components={allComponents as any}>
       <Content />
     </mdx.MDXProvider>

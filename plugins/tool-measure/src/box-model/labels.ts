@@ -150,7 +150,7 @@ function offset(
   labelPaddingSize: number,
   external: boolean
 ) {
-  let shift = (dir: Direction) => 0;
+  let shift = (_: Direction) => 0;
   let offsetX = 0;
   let offsetY = 0;
 

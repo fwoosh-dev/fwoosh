@@ -10,29 +10,32 @@
   ],
   "scripts": {
     "clean": "rimraf '**/*.tsbuildinfo' && rimraf '**/dist' && rimraf '**/node_modules'",
-    "build": "tsc -b tsconfig.dev.json -v && lerna run build --concurrency 1",
-    "start": "tsc -b tsconfig.dev.json -v --watch",
-    "test": "vitest",
+    "build": "turbo build",
+    "dev": "turbo dev --parallel",
+    "lint": "turbo lint",
+    "test": "turbo test",
     "release": "auto shipit",
-    "create": "node -r esbuild-register scripts/create/create.ts",
-    "create:package": "yarn run create --type package",
-    "create:plugin": "yarn run create --type plugin"
+    "create": "node -r esbuild-register scripts/create/create.ts"
   },
   "devDependencies": {
     "@types/node": "^14.18.36",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
     "auto": "^10.42.0",
     "command-line-application": "^0.10.1",
     "copy-template-dir": "^1.4.0",
     "endent": "^2.1.0",
+    "eslint-import-resolver-typescript": "^3.5.3",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-react": "latest",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-vitest": "^0.0.34",
+    "fwoosh": "workspace:*",
     "lerna": "^6.4.1",
     "patch-package": "^6.5.1",
     "prettier": "^2.8.4",
     "rimraf": "^3.0.2",
-    "typescript": "^4.9.5"
-  },
-  "dependencies": {
-    "fwoosh": "workspace:*",
-    "vitest": "^0.28.4"
+    "turbo": "^1.7.4"
   },
   "auto": {
     "plugins": [

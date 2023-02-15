@@ -50,7 +50,7 @@ const ToolPanelsContent = ({ storySlug }: ToolPanelsContentProps) => {
   return (
     <Tabs.Root
       defaultValue={
-        localStorage.getItem("fwoosh:active-panel") || panels[0]?.componentName
+        localStorage.getItem("fwoosh:active-panel") ?? panels[0]?.componentName
       }
       onValueChange={(id) => localStorage.setItem("fwoosh:active-panel", id)}
     >

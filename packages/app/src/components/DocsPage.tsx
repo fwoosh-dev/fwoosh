@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import * as React from "react";
 import { useLocation } from "react-router-dom";
 import { StoryBasicTreeItem } from "@fwoosh/types";
 import { Spinner, ErrorBoundary } from "@fwoosh/components";
@@ -8,10 +8,10 @@ import { StoryDocsPage } from "./StoryDocsPage";
 import { useDocsStoryGroup } from "../hooks/useDocsStoryGroup";
 import { useDocsPath } from "@fwoosh/hooks";
 
-const DocsContent = React.memo(() => {
+const DocsContent = React.memo(function DocsContent() {
   const [firstStory, ...restStories] = useDocsStoryGroup();
   const docsPath = useDocsPath();
-  const nameParts = docsPath?.split("-") || [];
+  const nameParts = docsPath?.split("-") ?? [];
   const name = nameParts[nameParts.length - 1];
 
   if (!firstStory) {
@@ -30,14 +30,14 @@ const DocsContent = React.memo(() => {
   );
 });
 
-export const DocsPage = React.memo(() => {
+export const DocsPage = React.memo(function DocsPage() {
   const location = useLocation();
 
   return (
     <ErrorBoundary key={location.pathname}>
-      <Suspense fallback={<Spinner>Loading documentation...</Spinner>}>
+      <React.Suspense fallback={<Spinner>Loading documentation...</Spinner>}>
         <DocsContent />
-      </Suspense>
+      </React.Suspense>
     </ErrorBoundary>
   );
 });

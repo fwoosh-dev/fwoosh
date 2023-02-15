@@ -44,7 +44,7 @@ export function fwooshUiPlugin({
   const virtualFileId = "@fwoosh/app/ui";
 
   return {
-    name: "fwoosh-config",
+    name: "fwoosh-ui",
 
     resolveId(id: string) {
       if (id.includes(virtualFileId)) {

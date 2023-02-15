@@ -125,7 +125,7 @@ export const CodeBlock = styled("pre", {
 
 /** The component used to render an block of code */
 export const code = ({ className, ...props }: Element<"code">) =>
-  className && className.includes("language") ? (
+  className?.includes("language") ? (
     <CodeBlock className={className} {...props} />
   ) : (
     <InlineCode className={className} {...props} />
@@ -151,18 +151,16 @@ const Anchor = styled("a", {
 });
 
 /** The component used to render an anchor */
-export const a = React.forwardRef(
-  (
-    { href = "", className, ...props }: Element<"a">,
-    ref: React.Ref<HTMLAnchorElement>
-  ) => {
-    if (href.startsWith("http")) {
-      return <Anchor ref={ref} href={href} {...props} />;
-    }
-
-    return <Anchor as={Link} to={href} ref={ref} {...props} />;
+export const a = React.forwardRef(function A(
+  { href = "", ...props }: Element<"a">,
+  ref: React.Ref<HTMLAnchorElement>
+) {
+  if (href.startsWith("http")) {
+    return <Anchor ref={ref} href={href} {...props} />;
   }
-);
+
+  return <Anchor as={Link} to={href} ref={ref} {...props} />;
+});
 
 const TableWrapper = styled("div", {
   width: "100%",

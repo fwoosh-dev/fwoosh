@@ -107,7 +107,7 @@ The file should export a react component that acts as the toolbar control.
 Here is a simple plugin that maximizes the page when clicked.
 
 ```tsx toolbar.tsx
-import React from "react";
+import * as React from "react";
 import { IconButton, Toolbar } from "@fwoosh/components";
 
 export default function MaximizeControl() {
@@ -159,7 +159,7 @@ The file should export a react component that renders the panel.
 Here is a simplified version of the plugin that display's each stories comment as a panel.
 
 ```tsx panel.tsx
-import React from "react";
+import * as React from "react";
 import { MDXContent, styled, components } from "@fwoosh/components";
 import { useParams } from "react-router-dom";
 import { stories } from "@fwoosh/app/stories";

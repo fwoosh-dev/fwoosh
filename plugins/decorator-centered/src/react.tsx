@@ -9,10 +9,12 @@ const Center = styled("div", {
   justifyContent: "center",
 });
 
-export const centered = (Story: () => any) => () => {
-  return (
-    <Center>
-      <Story />
-    </Center>
-  );
-};
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const centered = (Story: () => any) =>
+  function CenteredDecorator() {
+    return (
+      <Center>
+        <Story />
+      </Center>
+    );
+  };

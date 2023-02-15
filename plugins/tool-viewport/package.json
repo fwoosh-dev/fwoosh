@@ -9,6 +9,11 @@
     "name": "Andrew Lisowski",
     "email": "lisowski54@gmail.com"
   },
+  "scripts": {
+    "build": "tsc -b tsconfig.json",
+    "dev": "yarn build --watch --preserveWatchOutput",
+    "lint": "eslint --ext .ts,.tsx,.js,.jsx src"
+  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
@@ -18,9 +23,16 @@
     "dist"
   ],
   "dependencies": {
+    "@fwoosh/components": "workspace:*",
     "@fwoosh/hooks": "workspace:*",
+    "@fwoosh/styling": "workspace:*",
     "devices-viewport-size": "^1.0.4",
     "react-feather": "^2.0.10"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.28",
+    "eslint": "^8.34.0",
+    "typescript": "^4.9.5"
   },
   "peerDependencies": {
     "fwoosh": ">= 0.x"

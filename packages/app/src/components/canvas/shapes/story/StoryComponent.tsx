@@ -2,7 +2,7 @@ import { flattenTree } from "@fwoosh/utils";
 import { HTMLContainer, TLShapeUtil } from "@tldraw/core";
 import * as React from "react";
 import { styled } from "@fwoosh/styling";
-import { IconButton, Spinner, Tooltip } from "@fwoosh/components";
+import { IconButton, Tooltip } from "@fwoosh/components";
 
 import { StoryShape } from "./StoryShape";
 import { ExternalLink } from "react-feather";
@@ -53,46 +53,44 @@ const StoryWrapper = styled("div", {
   width: "max-content",
 });
 
-const Story = React.memo(
-  ({
-    item,
-    storyId,
-    shape,
-  }: {
-    item: StoryData;
-    shape: StoryShape;
-  } & CanvasMeta) => {
-    const { grouping, slug, title } = item;
-    const groups = grouping.split("/");
-    const id = useId();
-    const { ref } = useRender({ id, slug: item.slug });
-    const measureRef = useShapeMeasure(shape, id);
+const Story = React.memo(function Story({
+  item,
+  storyId,
+  shape,
+}: {
+  item: StoryData;
+  shape: StoryShape;
+} & CanvasMeta) {
+  const { grouping, slug, title } = item;
+  const groups = grouping.split("/");
+  const id = useId();
+  const { ref } = useRender({ id, slug: item.slug });
+  const measureRef = useShapeMeasure(shape, id);
 
-    return (
-      <ItemWrapper
-        ref={measureRef}
-        css={{
-          boxShadow:
-            storyId === item.slug ? "0 0 0 4px $colors$gray8" : undefined,
-        }}
-      >
-        <StoryTitle as={Link} to={`/canvas/workbench/${slug}`}>
-          <Grouping>{groups[groups.length - 1]}</Grouping> {title}
-          <Split />
-          <Tooltip message="Open story">
-            <IconButton as={Link} to={`/workbench/${slug}`}>
-              <ExternalLink />
-            </IconButton>
-          </Tooltip>
-        </StoryTitle>
+  return (
+    <ItemWrapper
+      ref={measureRef}
+      css={{
+        boxShadow:
+          storyId === item.slug ? "0 0 0 4px $colors$gray8" : undefined,
+      }}
+    >
+      <StoryTitle as={Link} to={`/canvas/workbench/${slug}`}>
+        <Grouping>{groups[groups.length - 1]}</Grouping> {title}
+        <Split />
+        <Tooltip message="Open story">
+          <IconButton as={Link} to={`/workbench/${slug}`}>
+            <ExternalLink />
+          </IconButton>
+        </Tooltip>
+      </StoryTitle>
 
-        <StoryWrapper>
-          <div id={id} ref={ref} />
-        </StoryWrapper>
-      </ItemWrapper>
-    );
-  }
-);
+      <StoryWrapper>
+        <div id={id} ref={ref} />
+      </StoryWrapper>
+    </ItemWrapper>
+  );
+});
 
 export const StoryComponent = TLShapeUtil.Component<
   StoryShape,

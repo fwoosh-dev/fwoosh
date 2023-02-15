@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { IconButton, Tooltip, Toolbar } from "@fwoosh/components";
 import { DivideSquare, XSquare } from "react-feather";
 

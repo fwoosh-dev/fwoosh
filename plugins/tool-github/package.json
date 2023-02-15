@@ -5,6 +5,11 @@
   "description": "Add a button to open the websites GitHub repo.",
   "version": "0.0.120",
   "license": "MIT",
+  "scripts": {
+    "build": "tsc -b tsconfig.json",
+    "dev": "yarn build --watch --preserveWatchOutput",
+    "lint": "eslint --ext .ts,.tsx,.js,.jsx src"
+  },
   "author": {
     "name": "Andrew Lisowski",
     "email": "lisowski54@gmail.com"
@@ -18,6 +23,7 @@
     "dist"
   ],
   "dependencies": {
+    "@fwoosh/components": "workspace:*",
     "@fwoosh/hooks": "workspace:*",
     "@fwoosh/styling": "workspace:*",
     "parse-github-url": "^1.0.2",
@@ -27,6 +33,9 @@
     "fwoosh": ">= 0.x"
   },
   "devDependencies": {
-    "@types/parse-github-url": "^1.0.0"
+    "@types/parse-github-url": "^1.0.0",
+    "@types/react": "^18.0.28",
+    "eslint": "^8.34.0",
+    "typescript": "^4.9.5"
   }
 }

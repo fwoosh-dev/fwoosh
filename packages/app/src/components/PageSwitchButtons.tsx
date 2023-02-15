@@ -1,9 +1,9 @@
-import React from "react";
+import * as React from "react";
 
 import { tree } from "@fwoosh/app/stories";
 import { styled } from "@fwoosh/styling";
 import { ChevronRightIcon } from "@fwoosh/components";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { StoryData } from "@fwoosh/types";
 import {
   convertMetaTitleToUrlParam,
@@ -121,7 +121,7 @@ export function PageSwitchButton({ current }: PageSwitchButtonProps) {
       prev: getPreviousStory(tree, current),
       next: getNextStory(tree, current, !isWorkbench),
     };
-  }, [tree, isWorkbench]);
+  }, [current, isWorkbench]);
   const getUrl = React.useCallback(
     (data: StoryData) => {
       if (isWorkbench) {

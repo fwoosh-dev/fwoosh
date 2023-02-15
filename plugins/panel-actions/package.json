@@ -7,15 +7,24 @@
   "author": "Andrew Lisowski <lisowski54@gmail.com>",
   "repository": "hipstersmoothie/fwoosh",
   "license": "MIT",
+  "scripts": {
+    "build": "tsc -b tsconfig.json",
+    "dev": "yarn build --watch --preserveWatchOutput",
+    "lint": "eslint --ext .ts,.tsx,.js,.jsx src"
+  },
   "dependencies": {
     "@devtools-ds/object-inspector": "^1.2.1",
+    "@devtools-ds/themes": "^1.2.1",
     "@fwoosh/components": "workspace:*",
     "@fwoosh/hooks": "workspace:*",
+    "@fwoosh/styling": "workspace:*",
     "@radix-ui/react-id": "^1.0.0"
   },
   "devDependencies": {
     "@types/node": "^14.18.36",
-    "react": "^18.2.0"
+    "eslint": "^8.34.0",
+    "react": "^18.2.0",
+    "typescript": "^4.9.5"
   },
   "publishConfig": {
     "access": "public"

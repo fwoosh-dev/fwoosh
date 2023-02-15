@@ -2,7 +2,6 @@ import { createContext } from "react";
 import { tree } from "@fwoosh/app/stories";
 import type { S } from "@state-designer/react";
 import {
-  TLBinding,
   TLPage,
   TLPageState,
   TLPerformanceMode,
@@ -109,7 +108,7 @@ function createShapesForTree(
   return shapes;
 }
 
-export const INITIAL_PAGE: TLPage<Shape, TLBinding> = {
+export const INITIAL_PAGE: TLPage<Shape> = {
   id: "canvas",
   shapes: window.FWOOSH_DOCS_CANVAS_SHAPES
     ? window.FWOOSH_DOCS_CANVAS_SHAPES
@@ -166,10 +165,10 @@ export const INITIAL_WORKBENCH_PAGE = {
   },
 };
 
-export type AppDocument = {
+export interface AppDocument {
   id: string;
   page: TLPage<Shape>;
-};
+}
 
 export type AppData = typeof INITIAL_DATA;
 
@@ -183,9 +182,9 @@ export const CanvasContext = createContext<{
   containerRef: { current: null },
 });
 
-export type CanvasMeta = {
+export interface CanvasMeta {
   storyId: string | undefined;
   containerRef: React.MutableRefObject<HTMLElement | null>;
   tree: typeof tree;
   mode: "docs" | "workbench";
-};
+}

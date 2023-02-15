@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { stories } from "@fwoosh/app/stories";
 import { components, MDXContent, Spinner } from "@fwoosh/components";
 import { styled } from "@fwoosh/styling";
@@ -26,7 +26,7 @@ function Content({ rawContent }: { rawContent: string }) {
 }
 
 export default function DescriptionPanel({ storyId }: PanelPluginProps) {
-  const story = Object.values(stories).find((s) => s.slug === storyId);
+  const story = Object.values(stories).find((s) => s?.slug === storyId);
 
   if (!story || !("comment" in story) || !story.comment) {
     return (

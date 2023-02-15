@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { IconButton, Toolbar, Tooltip, DropdownMenu } from "@fwoosh/components";
 import { Check, Crop } from "react-feather";
 
@@ -26,10 +26,9 @@ export default function Viewport() {
               checked={currentSizes.some((s) => s.name === name)}
               onCheckedChange={(checked) => {
                 if (checked) {
-                  setSize([
-                    ...currentSizes,
-                    sizes.find((s) => s.name === name)!,
-                  ]);
+                  const size = sizes.find((s) => s.name === name)!;
+
+                  setSize([...currentSizes, size]);
                 } else {
                   setSize(currentSizes.filter((s) => s.name !== name));
                 }

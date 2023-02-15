@@ -18,7 +18,7 @@ function convertToStorySlug(to: string) {
   return (
     to
       // Replace the last / with two --
-      .replace(/(\/)([^\/]*)$/g, (_, __, storyName) => {
+      .replace(/(\/)([^/]*)$/g, (_, __, storyName) => {
         // and param case the story name
         return `--${paramCase(storyName)}`;
       })
@@ -44,12 +44,14 @@ export function checkLink(
   const [pathname] = to.split("#");
   const storySlug = convertToStorySlug(pathname);
 
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (stories[storySlug]) {
     return stories[storySlug];
   }
 
   const docSlug = convertToDocSlug(pathname);
 
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (stories[docSlug]) {
     return stories[docSlug];
   }
@@ -62,7 +64,7 @@ export function checkLink(
   const parts = pathname.split("/");
   const group = getStoryGroup(tree, parts);
 
-  if (group && group[0]) {
+  if (group?.[0]) {
     const firstStory = getFirstStory(group);
 
     if (firstStory) {

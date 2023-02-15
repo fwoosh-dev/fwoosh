@@ -1,6 +1,6 @@
 import potpack from "potpack";
 import { TLBounds, Utils } from "@tldraw/core";
-import Vec from "@tldraw/vec";
+import { Vec } from "@tldraw/vec";
 import { StorySidebarChildItem } from "@fwoosh/types";
 
 import { GroupShape } from "./shapes/group";
@@ -158,7 +158,7 @@ export function packShapesIntoGroups(
 
       const childBounds = data.map((i) => {
         const shape = shapes[i.id];
-        return getBounds[shape.type](shape as any);
+        return getBounds[shape.type](shape as GroupShape);
       });
       const bounds = Utils.getCommonBounds(childBounds);
 

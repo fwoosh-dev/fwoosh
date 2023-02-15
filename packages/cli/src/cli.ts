@@ -118,9 +118,9 @@ async function run() {
 
   const startupTimerStop = perfLog("Dev server start up");
   const configTimerStop = perfLog("Get config");
-  const { config = {}, filepath } = (await explorer.search()) || {};
+  const { config = {}, filepath } = (await explorer.search()) ?? {};
   configTimerStop();
-  const dir = path.dirname(filepath || process.cwd());
+  const dir = path.dirname(filepath ?? process.cwd());
 
   if (options) {
     delete options._none;

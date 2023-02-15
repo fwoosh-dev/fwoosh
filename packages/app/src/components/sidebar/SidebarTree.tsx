@@ -26,6 +26,7 @@ export function SidebarTree<T>({ activeId, children, data }: SidebarProps<T>) {
       <Tree
         initialData={data}
         selection={activeId}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         rowHeight={(SidebarItem as any).height}
         width={bounds.width}
         height={bounds.height}

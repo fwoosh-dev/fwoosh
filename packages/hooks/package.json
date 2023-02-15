@@ -9,8 +9,14 @@
   "publishConfig": {
     "access": "public"
   },
+  "scripts": {
+    "build": "tsc -b tsconfig.json",
+    "dev": "yarn build --watch --preserveWatchOutput",
+    "lint": "eslint --ext .ts,.tsx,.js,.jsx src"
+  },
   "dependencies": {
     "@fwoosh/types": "workspace:*",
+    "@fwoosh/utils": "workspace:*",
     "change-case": "^4.1.2",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.8.1"
@@ -21,7 +27,9 @@
   },
   "devDependencies": {
     "@types/lodash.chunk": "^4.2.7",
+    "eslint": "^8.34.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "typescript": "^4.9.5"
   }
 }

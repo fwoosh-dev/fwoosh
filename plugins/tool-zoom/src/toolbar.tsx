@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { IconButton, Toolbar, Tooltip } from "@fwoosh/components";
 import { ZoomIn, ZoomOut, Maximize } from "react-feather";
 import { PanelPluginProps } from "fwoosh";
@@ -25,23 +25,23 @@ export default function ZoomControl({ storyPreviewId }: PanelPluginProps) {
 
   const increaseZoom = React.useCallback(() => {
     zoomSet((z) => z * 1.2);
-  }, [zoom]);
+  }, []);
 
   const decreaseZoom = React.useCallback(() => {
     zoomSet((z) => z * 0.8);
-  }, [zoom]);
+  }, []);
 
   const resetZoom = React.useCallback(() => {
     zoomSet(100);
-  }, [zoom]);
+  }, []);
 
   React.useEffect(() => {
     const storyPreview = document.getElementById(storyPreviewId);
 
     if (storyPreview) {
       if (hasBrowserSupportForCssZoom) {
-        // @ts-ignore
-        storyPreview.style.zoom = `${zoom / 100}`;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (storyPreview.style as any).zoom = `${zoom / 100}`;
       } else {
         storyPreview.style.transformOrigin = "top left";
 
@@ -52,7 +52,7 @@ export default function ZoomControl({ storyPreviewId }: PanelPluginProps) {
         }
       }
     }
-  }, [zoom]);
+  }, [storyPreviewId, zoom]);
 
   return (
     <>

@@ -8,9 +8,8 @@ import { Interweave } from "interweave";
 import { StoryData, StoryTree, StoryTreeItem } from "@fwoosh/types";
 import useMousetrap from "react-hook-mousetrap";
 import { ArrowRight, Bookmark, Code } from "react-feather";
-import { SearchData } from "@fwoosh/utils";
+import { SearchData, convertMetaTitleToUrlParam } from "@fwoosh/utils";
 import { useDocsPath, useIsWorkbench, useStoryId } from "@fwoosh/hooks";
-import { convertMetaTitleToUrlParam } from "@fwoosh/utils";
 import { useDocsStoryGroup } from "../hooks/useDocsStoryGroup";
 import { styled } from "@fwoosh/styling";
 
@@ -45,35 +44,35 @@ function highlightSearchResult(text: string, search: string) {
     null
   );
 
-  let match = matches.iterateNext();
+  const match = matches.iterateNext();
 
-  let textNodeIndex = Array.from(match?.childNodes || []).findIndex((n) =>
+  let textNodeIndex = Array.from(match?.childNodes ?? []).findIndex((n) =>
     n.textContent?.toLowerCase()?.includes(search?.toLowerCase())
   );
 
-  while (match && match.childNodes[textNodeIndex]) {
-    const searchIndex = match.childNodes[textNodeIndex].textContent
-      ?.toLowerCase()
-      ?.indexOf(search?.toLowerCase());
+  while (match?.childNodes[textNodeIndex]) {
+    const nodeText = match.childNodes[textNodeIndex].textContent;
+
+    if (!nodeText) {
+      throw new Error("No text content");
+    }
+
+    const searchIndex = nodeText.toLowerCase().indexOf(search?.toLowerCase());
 
     if (searchIndex === -1 || typeof searchIndex === "undefined") {
       break;
     }
 
-    const before = match.childNodes[textNodeIndex].textContent!.slice(
-      0,
-      searchIndex
-    );
-    const after = match.childNodes[textNodeIndex].textContent!.slice(
-      searchIndex + search.length
-    );
+    const before = nodeText.slice(0, searchIndex);
+    const after = nodeText.slice(searchIndex + search.length);
 
     const beforeNode = document.createTextNode(before);
     const afterNode = document.createTextNode(after);
     const highlightNode = document.createElement("mark");
-    highlightNode.textContent = match.childNodes[
-      textNodeIndex
-    ].textContent!.slice(searchIndex, searchIndex + search.length);
+    highlightNode.textContent = nodeText.slice(
+      searchIndex,
+      searchIndex + search.length
+    );
 
     match.replaceChild(afterNode, match.childNodes[textNodeIndex]);
     match.insertBefore(highlightNode, afterNode);
@@ -114,7 +113,7 @@ function StoryCommandTreeChild({
     if (parts[0] === groupName) {
       parts.shift();
     }
-    const pageName = parts.pop()!;
+    const pageName = parts.pop();
     const newGrouping = parts.join(" / ");
 
     return (
@@ -209,7 +208,7 @@ function StoryCommandTree({
     }
 
     return allChildren;
-  }, []);
+  }, [tree.children]);
 
   return (
     <Command.Group heading={<Command.Heading>{tree.name}</Command.Heading>}>
@@ -320,6 +319,10 @@ function SwitchCommand({ onClose }: { onClose: () => void }) {
           title="Switch to docs"
           icon={<ArrowRight />}
           onSelect={() => {
+            if (!story) {
+              return;
+            }
+
             navigate(
               `/docs/${convertMetaTitleToUrlParam(story.grouping)}#${paramCase(
                 story.title
@@ -333,6 +336,10 @@ function SwitchCommand({ onClose }: { onClose: () => void }) {
             title="Switch to workbench"
             icon={<ArrowRight />}
             onSelect={() => {
+              if (!story) {
+                return;
+              }
+
               navigate(`/workbench/${story.slug}`);
               onClose();
             }}
@@ -342,6 +349,10 @@ function SwitchCommand({ onClose }: { onClose: () => void }) {
             title="Switch to canvas"
             icon={<ArrowRight />}
             onSelect={() => {
+              if (!story) {
+                return;
+              }
+
               navigate(`/canvas/workbench/${story.slug}`);
               onClose();
             }}
@@ -391,7 +402,7 @@ export function CommandPallette() {
       navigate(url);
       onClose();
     },
-    [onClose]
+    [isWorkbench, navigate, onClose]
   );
 
   useMousetrap("meta+k", () => openSet(true));
@@ -404,7 +415,7 @@ export function CommandPallette() {
       filter={(value, search) => {
         const [slug, content] = value.split("|||");
 
-        if (content && content.toLowerCase().includes(search.toLowerCase())) {
+        if (content?.toLowerCase().includes(search.toLowerCase())) {
           return 1;
         }
 
@@ -436,7 +447,7 @@ export function CommandPallette() {
                       data={item}
                       onNavigate={() => {
                         const url = item.url.replace(
-                          process.env.FWOOSH_BASE_NAME || "",
+                          process.env.FWOOSH_BASE_NAME ?? "",
                           ""
                         );
                         navigate(url);

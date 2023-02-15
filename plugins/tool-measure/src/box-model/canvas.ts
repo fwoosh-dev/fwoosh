@@ -111,7 +111,7 @@ export function rescale(id: string) {
 }
 
 export function destroy() {
-  if (state.canvas && state.canvas.parentNode) {
+  if (state.canvas?.parentNode) {
     clear();
     state.canvas.parentNode.removeChild(state.canvas);
     state = {};

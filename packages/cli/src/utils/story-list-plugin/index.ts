@@ -6,7 +6,7 @@ import {
   BasicStoryData,
   Stories,
 } from "@fwoosh/types";
-import { convertMetaTitleToUrlParam, log, sortTree } from "@fwoosh/utils";
+import { convertMetaTitleToUrlParam, sortTree } from "@fwoosh/utils";
 import { loadVirtualFile } from "@fwoosh/virtual-file";
 import { createRequire } from "module";
 
@@ -33,7 +33,7 @@ function stringifyStories(
         ...${JSON.stringify(v)},
         component: ${v.component},
         code: \`${"code" in v ? v.code : undefined}\`,
-        meta: ${v.meta}
+        meta: ${v.meta as unknown as string}
       }`;
     })
     .join(",")} }`;
@@ -88,9 +88,10 @@ export async function createVirtualStoriesFile(config: FwooshOptionsLoaded) {
         title: file.meta.title,
         slug,
         grouping: file.meta.title,
-        // @ts-ignore
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error  // todo this isn't a string
         meta: JSON.stringify(file.meta),
-        component: componentName, // todo this isn't a string
+        component: componentName,
       };
     } else {
       const componentName = getComponentName(file.slug);
@@ -111,7 +112,8 @@ export async function createVirtualStoriesFile(config: FwooshOptionsLoaded) {
         comment: file.comment,
         code: file.code,
         component: componentName,
-        // @ts-ignore
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         meta: `
           () => new Promise(resolve => {
             import('${file.file}')
@@ -162,7 +164,6 @@ export async function createVirtualStoriesFile(config: FwooshOptionsLoaded) {
 /** Plugin that creates a virtual module with references to all the stories */
 export function storyListPlugin(config: FwooshOptionsLoaded) {
   const virtualFileId = "@fwoosh/app/stories";
-  let file = "";
 
   return {
     name: "story-list",
@@ -178,10 +179,6 @@ export function storyListPlugin(config: FwooshOptionsLoaded) {
     async load(id: string) {
       if (id.includes(virtualFileId)) {
         try {
-          if (file) {
-            return file;
-          }
-
           const virtualFile = await createVirtualStoriesFile(config);
           return virtualFile.file;
         } catch (e) {

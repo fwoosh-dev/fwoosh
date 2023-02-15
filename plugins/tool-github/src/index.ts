@@ -45,7 +45,7 @@ export default class Github implements Plugin {
     });
 
     fwoosh.hooks.modifyViteConfig.tap(this.name, (config) => {
-      config.define = config.define || {};
+      config.define = config.define ?? {};
       config.define["process.env.FWOOSH_GITHUB_URL"] = `"${this.options.repo}"`;
 
       return config;

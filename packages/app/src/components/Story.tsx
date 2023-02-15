@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { useId } from "@radix-ui/react-id";
 import { Helmet } from "react-helmet-async";
 
@@ -18,9 +18,20 @@ const Root = styled("div", {
   width: "100%",
 });
 
-const StoryDiv = React.memo(({ slug, id }: { slug: string; id: string }) => {
+const StoryDiv = React.memo(function StoryDiv({
+  slug,
+  id,
+}: {
+  slug: string;
+  id: string;
+}) {
   const { ref } = useRender({ id, slug });
   const story = stories[slug];
+
+  if (!story) {
+    throw new Error(`Story not found: ${slug}`);
+  }
+
   const groups = story.grouping.split("/");
 
   return (
