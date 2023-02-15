@@ -8,10 +8,10 @@ import { StoryDocsPage } from "./StoryDocsPage";
 import { useDocsStoryGroup } from "../hooks/useDocsStoryGroup";
 import { useDocsPath } from "@fwoosh/hooks";
 
-const DocsContent = React.memo(() => {
+const DocsContent = React.memo(function DocsContent() {
   const [firstStory, ...restStories] = useDocsStoryGroup();
   const docsPath = useDocsPath();
-  const nameParts = docsPath?.split("-") || [];
+  const nameParts = docsPath?.split("-") ?? [];
   const name = nameParts[nameParts.length - 1];
 
   if (!firstStory) {
@@ -30,7 +30,7 @@ const DocsContent = React.memo(() => {
   );
 });
 
-export const DocsPage = React.memo(() => {
+export const DocsPage = React.memo(function DocsPage() {
   const location = useLocation();
 
   return (

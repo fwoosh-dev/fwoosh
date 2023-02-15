@@ -141,8 +141,13 @@ function ViewportSize({
   );
 }
 
-export const viewport =
-  (Story: () => any, slug: string, params: StoryParameters) => () => {
+export const viewport = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Story: () => any,
+  slug: string,
+  params: StoryParameters
+) =>
+  function ViewportDecorator() {
     const pathname =
       typeof window !== "undefined" ? window.location.pathname : "";
     const isStory = pathname.includes("/story/");
@@ -162,7 +167,7 @@ export const viewport =
             size={size}
             slug={slug}
             onSizeChange={(size) => {
-              let newSizes = [...currentSizes];
+              const newSizes = [...currentSizes];
 
               if (size) {
                 newSizes[index] = size;

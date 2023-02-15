@@ -25,6 +25,6 @@ export async function resolveStoryMeta(meta: UnresolvedMeta) {
 
   if (typeof meta === "function") {
     const resolvedPromise = await meta();
-    return resolvedPromise.default || (resolvedPromise as StoryMeta);
+    return resolvedPromise.default ?? (resolvedPromise as StoryMeta);
   }
 }

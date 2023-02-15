@@ -30,21 +30,19 @@ const StyledTrigger = styled(Select.SelectTrigger, {
   "&[data-placeholder]": { color: "$gray9" },
 });
 
-export const Trigger = React.forwardRef(
-  (
-    { children, ...props }: React.ComponentProps<typeof StyledTrigger>,
-    forwardedRef: React.ForwardedRef<HTMLButtonElement>
-  ) => {
-    return (
-      <StyledTrigger {...props} ref={forwardedRef}>
-        {children}
-        <Icon>
-          <ChevronDown />
-        </Icon>
-      </StyledTrigger>
-    );
-  }
-);
+export const Trigger = React.forwardRef(function Trigger(
+  { children, ...props }: React.ComponentProps<typeof StyledTrigger>,
+  forwardedRef: React.ForwardedRef<HTMLButtonElement>
+) {
+  return (
+    <StyledTrigger {...props} ref={forwardedRef}>
+      {children}
+      <Icon>
+        <ChevronDown />
+      </Icon>
+    </StyledTrigger>
+  );
+});
 
 export const Icon = styled(Select.SelectIcon, {
   color: "@gray11",
@@ -81,26 +79,24 @@ const Viewport = styled(Select.Viewport, {
   padding: "$1",
 });
 
-export const Content = React.forwardRef(
-  (
-    { children, ...props }: React.ComponentProps<typeof StyledContent>,
-    forwardedRef: React.ForwardedRef<HTMLDivElement>
-  ) => {
-    return (
-      <Select.Portal>
-        <StyledContent {...props} ref={forwardedRef}>
-          <ScrollUpButton>
-            <ChevronUp />
-          </ScrollUpButton>
-          <Viewport>{children}</Viewport>
-          <ScrollDownButton>
-            <ChevronDown />
-          </ScrollDownButton>
-        </StyledContent>
-      </Select.Portal>
-    );
-  }
-);
+export const Content = React.forwardRef(function Content(
+  { children, ...props }: React.ComponentProps<typeof StyledContent>,
+  forwardedRef: React.ForwardedRef<HTMLDivElement>
+) {
+  return (
+    <Select.Portal>
+      <StyledContent {...props} ref={forwardedRef}>
+        <ScrollUpButton>
+          <ChevronUp />
+        </ScrollUpButton>
+        <Viewport>{children}</Viewport>
+        <ScrollDownButton>
+          <ChevronDown />
+        </ScrollDownButton>
+      </StyledContent>
+    </Select.Portal>
+  );
+});
 
 const StyledItem = styled(Select.Item, {
   text: "sm",
@@ -134,21 +130,19 @@ const StyledItemIndicator = styled(Select.ItemIndicator, {
   justifyContent: "center",
 });
 
-export const Item = React.forwardRef(
-  (
-    { children, ...props }: React.ComponentProps<typeof StyledItem>,
-    forwardedRef: React.ForwardedRef<HTMLDivElement>
-  ) => {
-    return (
-      <StyledItem {...props} ref={forwardedRef}>
-        <Select.ItemText>{children}</Select.ItemText>
-        <StyledItemIndicator>
-          <Check />
-        </StyledItemIndicator>
-      </StyledItem>
-    );
-  }
-);
+export const Item = React.forwardRef(function Item(
+  { children, ...props }: React.ComponentProps<typeof StyledItem>,
+  forwardedRef: React.ForwardedRef<HTMLDivElement>
+) {
+  return (
+    <StyledItem {...props} ref={forwardedRef}>
+      <Select.ItemText>{children}</Select.ItemText>
+      <StyledItemIndicator>
+        <Check />
+      </StyledItemIndicator>
+    </StyledItem>
+  );
+});
 
 export const Label = styled(Select.Label, {
   padding: "0 $8",

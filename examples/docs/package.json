@@ -4,12 +4,14 @@
   "scripts": {
     "fwoosh": "../../packages/cli/bin/fwoosh.js",
     "start": "yarn fwoosh dev",
-    "build": "yarn fwoosh build"
+    "build": "yarn fwoosh build",
+    "lint": "eslint --ext .ts,.tsx,.js,.jsx src"
   },
   "devDependencies": {
     "@fwoosh/components": "workspace:*",
     "@fwoosh/panel-actions": "workspace:*",
     "@fwoosh/react": "workspace:*",
+    "eslint": "^8.34.0",
     "fwoosh": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

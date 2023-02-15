@@ -50,8 +50,8 @@ export default class ReactPlugin implements Plugin {
       this.options.docgenOptions
     );
 
+    const files = new Set<string>();
     let tsProgram: ts.Program;
-    let files = new Set<string>();
 
     function createProgram() {
       const newProgram = ts.createProgram(

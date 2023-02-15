@@ -6,7 +6,7 @@ function getHeadingLevel(node: Element) {
   if (node.nodeName.match(/^H\d$/)) {
     lvl = node.nodeName.replace("H", "");
   } else {
-    lvl = node.getAttribute("data-level") || "";
+    lvl = node.getAttribute("data-level") ?? "";
   }
 
   if (!lvl) {
@@ -17,6 +17,7 @@ function getHeadingLevel(node: Element) {
 }
 
 const getHeadingsBeforeNextHeading = (node: Element, lvl: number) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const titles: any[] = [];
 
   while (node.nextElementSibling) {
@@ -71,7 +72,7 @@ export const buildSearchIndex = (
   const nextHeadings = lvl ? getHeadingsBeforeNextHeading(node, lvl) : [];
   const path = [
     ...parents,
-    node.querySelector(HEADING_SELECTOR)?.textContent || node.textContent || "",
+    node.querySelector(HEADING_SELECTOR)?.textContent ?? node.textContent ?? "",
   ];
   const id = node.getAttribute("data-level-id");
   const currentNode = {

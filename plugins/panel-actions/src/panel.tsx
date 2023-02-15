@@ -7,6 +7,7 @@ import { ColorModeContext, styled } from "@fwoosh/styling";
 import { setAddAction } from ".";
 import { PanelPluginProps } from "fwoosh";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Action = [string, number, any[]];
 
 const createShareState = () => {

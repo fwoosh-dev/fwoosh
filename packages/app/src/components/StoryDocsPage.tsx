@@ -112,65 +112,63 @@ const StoryToolbar = () => {
   );
 };
 
-const StoryDiv = React.memo(
-  ({
-    slug,
-    showSpinnerWhileLoading,
-    defaultOpen,
-  }: {
-    slug: string;
-    showSpinnerWhileLoading?: boolean;
-    defaultOpen: boolean;
-  }) => {
-    const [isOpen, setIsOpen] = React.useState(defaultOpen);
-    const id = useId();
-    const { ref, hasRendered } = useRender({ id, slug });
+const StoryDiv = React.memo(function StoryDiv({
+  slug,
+  showSpinnerWhileLoading,
+  defaultOpen,
+}: {
+  slug: string;
+  showSpinnerWhileLoading?: boolean;
+  defaultOpen: boolean;
+}) {
+  const [isOpen, setIsOpen] = React.useState(defaultOpen);
+  const id = useId();
+  const { ref, hasRendered } = useRender({ id, slug });
 
-    return (
-      <StoryIdContext.Provider value={id}>
-        <StoryPreviewWrapperSpacing>
-          <StoryPreviewWrapper>
-            {isOpen && <StoryToolbar />}
+  return (
+    <StoryIdContext.Provider value={id}>
+      <StoryPreviewWrapperSpacing>
+        <StoryPreviewWrapper>
+          {isOpen && <StoryToolbar />}
 
-            <StoryPreviewArea>
-              <StoryPreview>
-                <div ref={ref} />
-              </StoryPreview>
-            </StoryPreviewArea>
+          <StoryPreviewArea>
+            <StoryPreview>
+              <div ref={ref} />
+            </StoryPreview>
+          </StoryPreviewArea>
 
-            {panels.length > 0 && isOpen && (
-              <ToolsArea>
-                <ToolPanels storySlug={slug} />
-              </ToolsArea>
-            )}
-          </StoryPreviewWrapper>
+          {panels.length > 0 && isOpen && (
+            <ToolsArea>
+              <ToolPanels storySlug={slug} />
+            </ToolsArea>
+          )}
+        </StoryPreviewWrapper>
 
-          <ExpandToggle>
-            {isOpen ? (
-              <Tooltip message="Collapse tools">
-                <IconButton onClick={() => setIsOpen(false)}>
-                  <Minus />
-                </IconButton>
-              </Tooltip>
-            ) : (
-              <Tooltip message="Expand tools">
-                <IconButton onClick={() => setIsOpen(true)}>
-                  <Plus />
-                </IconButton>
-              </Tooltip>
-            )}
-          </ExpandToggle>
-        </StoryPreviewWrapperSpacing>
+        <ExpandToggle>
+          {isOpen ? (
+            <Tooltip message="Collapse tools">
+              <IconButton onClick={() => setIsOpen(false)}>
+                <Minus />
+              </IconButton>
+            </Tooltip>
+          ) : (
+            <Tooltip message="Expand tools">
+              <IconButton onClick={() => setIsOpen(true)}>
+                <Plus />
+              </IconButton>
+            </Tooltip>
+          )}
+        </ExpandToggle>
+      </StoryPreviewWrapperSpacing>
 
-        {showSpinnerWhileLoading && !hasRendered && (
-          <OverlaySpinner>
-            <Spinner delay={2000} />
-          </OverlaySpinner>
-        )}
-      </StoryIdContext.Provider>
-    );
-  }
-);
+      {showSpinnerWhileLoading && !hasRendered && (
+        <OverlaySpinner>
+          <Spinner delay={2000} />
+        </OverlaySpinner>
+      )}
+    </StoryIdContext.Provider>
+  );
+});
 
 function LazyComment({ comment: rawComment }: { comment: string }) {
   const comment = useMdxContent(rawComment);

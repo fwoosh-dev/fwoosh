@@ -8,27 +8,28 @@ type LinkProps = Omit<React.ComponentProps<typeof components.a>, "href"> & {
   to: string;
 };
 
-export const Link = React.forwardRef(
-  ({ to, ...props }: LinkProps, ref: React.Ref<HTMLAnchorElement>) => {
-    const isWorkbench = useIsWorkbench();
-    const [, hash] = to.split("#");
-    const story = checkLink(to, stories, tree);
+export const Link = React.forwardRef(function Link(
+  { to, ...props }: LinkProps,
+  ref: React.Ref<HTMLAnchorElement>
+) {
+  const isWorkbench = useIsWorkbench();
+  const [, hash] = to.split("#");
+  const story = checkLink(to, stories, tree);
 
-    if (story.type === "basic" && isWorkbench) {
-      return (
-        <components.a ref={ref} href={`/workbench/${story.slug}`} {...props} />
-      );
-    }
-
+  if (story.type === "basic" && isWorkbench) {
     return (
-      <components.a
-        ref={ref}
-        href={`${isWorkbench ? "/workbench" : ""}/docs/${story.grouping.replace(
-          /\//g,
-          "-"
-        )}#${hash}`}
-        {...props}
-      />
+      <components.a ref={ref} href={`/workbench/${story.slug}`} {...props} />
     );
   }
-);
+
+  return (
+    <components.a
+      ref={ref}
+      href={`${isWorkbench ? "/workbench" : ""}/docs/${story.grouping.replace(
+        /\//g,
+        "-"
+      )}#${hash}`}
+      {...props}
+    />
+  );
+});

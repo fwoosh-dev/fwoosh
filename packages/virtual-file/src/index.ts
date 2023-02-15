@@ -9,10 +9,7 @@ export async function loadVirtualFile(
   let { code } = await esbuild.transform(contents, {});
 
   for (const [name, value] of Object.entries(vars)) {
-    code = code.replace(
-      new RegExp(`process\.env\.${name}`, "g"),
-      String(value)
-    );
+    code = code.replace(new RegExp(`process.env.${name}`, "g"), String(value));
   }
 
   return code;

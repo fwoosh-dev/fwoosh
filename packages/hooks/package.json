@@ -11,7 +11,8 @@
   },
   "scripts": {
     "build": "tsc -b tsconfig.json",
-    "dev": "yarn build --watch --preserveWatchOutput"
+    "dev": "yarn build --watch --preserveWatchOutput",
+    "lint": "eslint --ext .ts,.tsx,.js,.jsx src"
   },
   "dependencies": {
     "@fwoosh/types": "workspace:*",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "@types/lodash.chunk": "^4.2.7",
+    "eslint": "^8.34.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "^4.9.5"

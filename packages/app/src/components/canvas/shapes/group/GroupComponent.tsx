@@ -47,7 +47,6 @@ const headings = [
 const StoryGroup = React.memo(function StoryGroup({
   shape,
   mode,
-  ...props
 }: { shape: GroupShape } & CanvasMeta) {
   const groups = shape.name.split("-");
   const lastGroup = groups.length - 1;

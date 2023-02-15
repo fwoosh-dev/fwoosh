@@ -75,6 +75,7 @@ async function getComment(contents: string, i: number) {
     i -= 3;
     const comment = [contents[i]];
 
+    // eslint-disable-next-line no-constant-condition
     while (true) {
       if (
         contents[i - 2] === "/" &&
@@ -158,6 +159,7 @@ interface StoryFileDescriptor {
 }
 
 export interface MDXFileDescriptor {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   mdxFile: any;
   meta: ResolvedStoryMeta;
 }
@@ -225,9 +227,12 @@ async function parseStoryFile(file: string, data: FwooshFileDescriptor[]) {
       (node) => node.type === "ExportDefaultExpression"
     );
     const metaObject = metaDeclaration
-      ? (metaDeclaration as any).declaration.declarations[0].init
-      : (defaultExport as any).expression;
+      ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (metaDeclaration as any).declaration.declarations[0].init
+      : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (defaultExport as any).expression;
     const meta = metaObject.properties.reduce(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (acc: Record<string, unknown>, property: Record<string, any>) => ({
         ...acc,
         [property.key.value]:
@@ -239,6 +244,7 @@ async function parseStoryFile(file: string, data: FwooshFileDescriptor[]) {
     );
     const storiesDeclarations = exports.filter((e) => e !== metaDeclaration);
     const stories: ParsedStoryData[] = await Promise.all(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (storiesDeclarations as any).map(async (d: any) => {
         const exportName = d.declaration.declarations[0].id.value;
         const start = d.span.start + offset - ast.span.start;

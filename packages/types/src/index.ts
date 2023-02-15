@@ -30,12 +30,14 @@ export interface ResolvedStoryMeta extends StoryMeta {
   file?: string;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type StoryParameters = Record<string, any>;
 
 export interface StoryMeta<C extends FwooshOptions = FwooshOptions> {
   /** The title used to create the sidebar tree structure. */
   title: string;
   /** The component docs should be generated for */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   component?: any;
   /** Parameters for addons rendered with all the stories in the file */
   parameters?: ExtractParamsFromPlugins<C["plugins"][number]>;
@@ -46,6 +48,7 @@ interface BaseStoryData {
   slug: string;
   grouping: string;
   meta: StoryMeta | Promise<StoryMeta>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   component: any;
 }
 
@@ -69,9 +72,7 @@ export interface MdxMeta {
 export interface TocEntry {
   depth: number;
   value: string;
-  attributes: {
-    [key: string]: string;
-  };
+  attributes: Record<string, string>;
   children: TocEntry[];
 }
 
@@ -82,9 +83,7 @@ export interface MDXStoryData extends BaseStoryData {
 
 export type StoryData = BasicStoryData | MDXStoryData;
 
-export interface Stories {
-  [key: string]: StoryData;
-}
+export type Stories = Record<string, StoryData | undefined>;
 
 interface BaseTreeItem {
   id: string;
@@ -169,12 +168,12 @@ export type Tokens = NonNullable<
 
 export type SyntaxTheme = Theme;
 
-export type ThemeObject = {
+export interface ThemeObject {
   tokens?: Tokens;
   /** A className to apply to the body when theme is active */
   class?: string;
   type: "light" | "dark";
-};
+}
 
 export interface FwooshOptions {
   /** The title for the website */
@@ -188,9 +187,11 @@ export interface FwooshOptions {
   /** Open the browser when running the dev server */
   open?: "workbench" | "docs" | false;
   /** Plugins applied to this fwoosh instance, contains default plugins */
-  plugins: Array<
-    string | [name: string, options: Record<string, unknown>] | Plugin
-  >;
+  plugins: (
+    | string
+    | [name: string, options: Record<string, unknown>]
+    | Plugin
+  )[];
   /** Modify the Vite configuration used to load your fwoosh instance. */
   modifyViteConfig?: (config: ViteConfig) => Promise<ViteConfig> | ViteConfig;
   /** Modify the sorting of items in the sidebar */
@@ -254,7 +255,7 @@ export interface FwooshClass {
 }
 
 /** A fwoosh plugin */
-export interface Plugin<Params = {}> {
+export interface Plugin<Params = Record<string, unknown>> {
   /** The name of the plugin */
   name: string;
   /** Hook into fwoosh */
@@ -295,7 +296,7 @@ export type ExtractParamsFromPlugins<
   T extends string
     ? never
     : // plugin supplied as a tuple
-    T extends any[]
+    T extends unknown[]
     ? never
     : // plugin is a class and has params and a name
     T extends { params: infer U; name: infer N }

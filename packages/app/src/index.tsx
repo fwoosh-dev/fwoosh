@@ -16,7 +16,7 @@ if (!container) {
   throw new Error("No container element found");
 }
 
-const isReact18 = reactDomVersion && reactDomVersion.startsWith("18");
+const isReact18 = reactDomVersion.startsWith("18");
 
 if (isReact18) {
   import("react-dom/client").then(({ createRoot }) => {

@@ -1,4 +1,4 @@
-import { keyframes, styled, css } from "@fwoosh/styling";
+import { keyframes, styled } from "@fwoosh/styling";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
 const slideUpAndFade = keyframes({

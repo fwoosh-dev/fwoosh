@@ -19,7 +19,8 @@
   ],
   "scripts": {
     "build": "tsc -b tsconfig.json",
-    "dev": "yarn build --watch --preserveWatchOutput"
+    "dev": "yarn build --watch --preserveWatchOutput",
+    "lint": "eslint --ext .ts,.tsx,.js,.jsx src"
   },
   "dependencies": {
     "react-docgen-typescript": "^2.2.2",
@@ -29,6 +30,7 @@
     "vite": "^4.1.1"
   },
   "devDependencies": {
+    "eslint": "^8.34.0",
     "typescript": "^4.9.5"
   }
 }

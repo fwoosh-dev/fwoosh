@@ -11,7 +11,8 @@
   },
   "scripts": {
     "build": "tsc -b tsconfig.json",
-    "dev": "yarn build --watch --preserveWatchOutput"
+    "dev": "yarn build --watch --preserveWatchOutput",
+    "lint": "eslint --ext .ts,.tsx,.js,.jsx src"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
@@ -27,6 +28,7 @@
     "react-feather": "^2.0.10"
   },
   "devDependencies": {
+    "eslint": "^8.34.0",
     "typescript": "^4.9.5"
   },
   "peerDependencies": {

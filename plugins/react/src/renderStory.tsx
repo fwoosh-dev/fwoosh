@@ -8,7 +8,7 @@ import { Spinner, ErrorBoundary } from "@fwoosh/components";
 
 import type { Decorator, Story as ReactStory, StoryMeta } from "./types";
 
-const isReact18 = reactDomVersion && reactDomVersion.startsWith("18");
+const isReact18 = reactDomVersion.startsWith("18");
 
 function reverse<T>(arr: T[]) {
   return arr.slice().reverse();
@@ -16,6 +16,7 @@ function reverse<T>(arr: T[]) {
 
 function useDecorators(story: StoryData) {
   const [decorators, setDecorators] =
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     React.useState<ReactStory<any>["decorators"]>();
 
   React.useLayoutEffect(() => {
@@ -29,8 +30,10 @@ function useDecorators(story: StoryData) {
 
       setDecorators([
         ...reverse<Decorator>(storyComponent.decorators || []),
-        ...reverse<Decorator>((meta as StoryMeta<any>).decorators || []),
-        ...reverse<Decorator>((window as any).__FWOOSH_DECORATORS__ || []),
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ...reverse<Decorator>((meta as StoryMeta<any>).decorators ?? []),
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ...reverse<Decorator>((window as any).__FWOOSH_DECORATORS__ ?? []),
       ]);
     }
 
@@ -62,6 +65,7 @@ function App({ slug, params }: AppProps) {
   return <Component />;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const roots: Record<string, any> = {};
 
 export function render(
@@ -71,6 +75,7 @@ export function render(
   onStart: () => void,
   onComplete: () => void
 ) {
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (!el) {
     return;
   }

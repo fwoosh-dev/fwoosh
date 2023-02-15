@@ -44,11 +44,11 @@ const ViewControls = styled("div", {
   padding: "$2",
 });
 
-const onPinch: TLPinchEventHandler = (info, e) => {
+const onPinch: TLPinchEventHandler = (info) => {
   machine.send("PINCHED", info);
 };
 
-const onPan: TLWheelEventHandler = (info, e) => {
+const onPan: TLWheelEventHandler = (info) => {
   machine.send("PANNED", info);
 };
 
@@ -90,7 +90,7 @@ const onKeyDown: TLKeyboardEventHandler = (key, info, e) => {
   }
 };
 
-const onKeyUp: TLKeyboardEventHandler = (key, info, e) => {
+const onKeyUp: TLKeyboardEventHandler = (key, info) => {
   switch (key) {
     case "Alt":
     case "Meta":
@@ -104,87 +104,85 @@ const onKeyUp: TLKeyboardEventHandler = (key, info, e) => {
 
 type MDXComponents = React.ComponentProps<typeof MDXProvider>["components"];
 
-export const Canvas = React.memo(
-  ({
-    appState,
-    mode,
-  }: {
-    appState: typeof machine;
-    mode: "docs" | "workbench";
-  }) => {
-    const containerRef = React.useRef<HTMLDivElement>(null);
-    const storyId = useStoryId();
-    const toMeasure = Object.values(appState.data.page.shapes).length;
-    const hasMeasured = Object.values(appState.data.page.shapes).filter(
-      (s) => s.size[0] > 0
-    );
-    const doneMeasuring = hasMeasured.length === toMeasure;
+export const Canvas = React.memo(function Canvas({
+  appState,
+  mode,
+}: {
+  appState: typeof machine;
+  mode: "docs" | "workbench";
+}) {
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const storyId = useStoryId();
+  const toMeasure = Object.values(appState.data.page.shapes).length;
+  const hasMeasured = Object.values(appState.data.page.shapes).filter(
+    (s) => s.size[0] > 0
+  );
+  const doneMeasuring = hasMeasured.length === toMeasure;
 
-    if (doneMeasuring) {
-      // This log is used to communicate the search index to the
-      // built app.
-      console.log("window.FWOOSH_CANVAS_SHAPE", appState.data.page.shapes);
-    }
+  if (doneMeasuring) {
+    // This log is used to communicate the search index to the
+    // built app.
+    console.log("window.FWOOSH_CANVAS_SHAPE", appState.data.page.shapes);
+  }
 
-    React.useEffect(() => {
-      if (!window.FWOOSH_WORKBENCH_CANVAS_SHAPES) {
-        requestAnimationFrame(() => {
-          machine.send("START_MEASURE");
-        });
-      }
-    }, []);
-
-    if (useDidChange(doneMeasuring) && doneMeasuring) {
-      machine.send("CENTER_SHAPE", {
-        id: storyId,
-        client: {
-          height: containerRef.current?.clientHeight,
-          width: containerRef.current?.clientWidth,
-        },
+  React.useEffect(() => {
+    if (!window.FWOOSH_WORKBENCH_CANVAS_SHAPES) {
+      requestAnimationFrame(() => {
+        machine.send("START_MEASURE");
       });
     }
+  }, []);
 
-    return (
-      <MDXProvider components={components as MDXComponents}>
-        <Wrapper ref={containerRef}>
-          <Renderer
-            theme={{ background: "transparent" }}
-            page={appState.data.page}
-            pageState={appState.data.pageState}
-            shapeUtils={shapeUtils}
-            onKeyDown={onKeyDown}
-            onKeyUp={onKeyUp}
-            onPinch={onPinch}
-            onPan={onPan}
-            meta={{ storyId, containerRef, mode }}
-          />
-
-          <ViewControls>
-            <Tooltip side="left" message="Zoom in">
-              <IconButton onClick={zoomIn}>
-                <Plus />
-              </IconButton>
-            </Tooltip>
-            <Tooltip side="left" message="Zoom out">
-              <IconButton onClick={zoomOut}>
-                <Minus />
-              </IconButton>
-            </Tooltip>
-            <Tooltip side="left" message="Reset zoom">
-              <IconButton onClick={zoomReset}>
-                <RotateCw />
-              </IconButton>
-            </Tooltip>
-          </ViewControls>
-          {!doneMeasuring && (
-            <Loading>
-              <Spinner delay={500} size={8}>
-                Measuring shapes ({hasMeasured.length + 1} / {toMeasure})
-              </Spinner>
-            </Loading>
-          )}
-        </Wrapper>
-      </MDXProvider>
-    );
+  if (useDidChange(doneMeasuring) && doneMeasuring) {
+    machine.send("CENTER_SHAPE", {
+      id: storyId,
+      client: {
+        height: containerRef.current?.clientHeight,
+        width: containerRef.current?.clientWidth,
+      },
+    });
   }
-);
+
+  return (
+    <MDXProvider components={components as MDXComponents}>
+      <Wrapper ref={containerRef}>
+        <Renderer
+          theme={{ background: "transparent" }}
+          page={appState.data.page}
+          pageState={appState.data.pageState}
+          shapeUtils={shapeUtils}
+          onKeyDown={onKeyDown}
+          onKeyUp={onKeyUp}
+          onPinch={onPinch}
+          onPan={onPan}
+          meta={{ storyId, containerRef, mode }}
+        />
+
+        <ViewControls>
+          <Tooltip side="left" message="Zoom in">
+            <IconButton onClick={zoomIn}>
+              <Plus />
+            </IconButton>
+          </Tooltip>
+          <Tooltip side="left" message="Zoom out">
+            <IconButton onClick={zoomOut}>
+              <Minus />
+            </IconButton>
+          </Tooltip>
+          <Tooltip side="left" message="Reset zoom">
+            <IconButton onClick={zoomReset}>
+              <RotateCw />
+            </IconButton>
+          </Tooltip>
+        </ViewControls>
+        {!doneMeasuring && (
+          <Loading>
+            <Spinner delay={500} size={8}>
+              Measuring shapes ({hasMeasured.length + 1} / {toMeasure})
+            </Spinner>
+          </Loading>
+        )}
+      </Wrapper>
+    </MDXProvider>
+  );
+});

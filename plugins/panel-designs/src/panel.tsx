@@ -11,7 +11,6 @@ const Iframe = styled("iframe", {
 
 function Preview({ src }: { src: string }) {
   const [url, setUrl] = React.useState<string | undefined>(undefined);
-  const [loaded, setLoaded] = React.useState(false);
 
   // Defer loading iframe URL.
   // Some sites (e.g. Figma) detects Fullscreen API capability on
@@ -20,7 +19,7 @@ function Preview({ src }: { src: string }) {
   // and it causes "outdated Fullscreen capability" problem.
   // This might be a browser bug that "`fullscreenEnabled` property does not
   // updated" but I'm not sure what the correct behavior (I couldn't see the
-  // statement in the Fulscreen API spec).
+  // statement in the Fullscreen API spec).
   // This side-effect delays the loading of an iframe contents by one frame to
   // make sure the contents gets updated attributes.
   React.useEffect(() => {
@@ -31,11 +30,7 @@ function Preview({ src }: { src: string }) {
     return () => cancelAnimationFrame(handle);
   }, [src]);
 
-  React.useEffect(() => {
-    setLoaded(false);
-  }, [url]);
-
-  return <Iframe src={url} onLoad={() => setLoaded(true)} />;
+  return <Iframe src={url} />;
 }
 
 const Empty = styled("div", {

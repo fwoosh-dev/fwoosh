@@ -8,7 +8,7 @@ interface LinkProps extends React.ComponentProps<"a"> {
   newWindow?: boolean;
 }
 
-export const Link = ({ className, style, newWindow, ...props }: LinkProps) => {
+export const Link = ({ className, newWindow, ...props }: LinkProps) => {
   return (
     <a
       className={makeClass(className, styles.root)}

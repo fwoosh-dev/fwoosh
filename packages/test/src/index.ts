@@ -63,10 +63,10 @@ export class Workbench {
   }
 }
 
-type ElectronTestFixtures = {
+interface ElectronTestFixtures {
   workbench: Workbench;
   page: Page;
-};
+}
 
 export { expect } from "@playwright/test";
 
@@ -79,6 +79,6 @@ export const electronFixtures: Fixtures<ElectronTestFixtures> = {
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore some error about a string type now having `undefined` as part of it's union
+// @ts-expect-error some error about a string type now having `undefined` as part of it's union
 export const test = base.extend<ElectronTestFixtures>(electronFixtures);
 export { Page, Locator } from "playwright";

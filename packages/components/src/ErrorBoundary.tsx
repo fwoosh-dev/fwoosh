@@ -30,7 +30,7 @@ export class ErrorBoundary extends React.Component<
   ErrorBoundaryProps,
   { error: Error | ErrorResponse | undefined }
 > {
-  constructor(props: any) {
+  constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { error: props.error };
   }

@@ -5,12 +5,14 @@
     "fwoosh": "../../packages/cli/bin/fwoosh.js",
     "start": "yarn fwoosh dev",
     "build": "yarn fwoosh build",
-    "test": "playwright test"
+    "test": "playwright test",
+    "lint": "eslint --ext .ts,.tsx,.js,.jsx src"
   },
   "devDependencies": {
     "@fwoosh/panel-actions": "workspace:*",
     "@fwoosh/react": "workspace:*",
     "@playwright/test": "^1.30.0",
+    "eslint": "^8.34.0",
     "fwoosh": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

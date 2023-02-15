@@ -3,7 +3,7 @@ import React from "react";
 import { tree } from "@fwoosh/app/stories";
 import { styled } from "@fwoosh/styling";
 import { ChevronRightIcon } from "@fwoosh/components";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { StoryData } from "@fwoosh/types";
 import {
   convertMetaTitleToUrlParam,

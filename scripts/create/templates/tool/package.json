@@ -11,9 +11,11 @@
   },
   "scripts": {
     "build": "tsc -b tsconfig.json",
-    "dev": "yarn build --watch --preserveWatchOutput"
+    "dev": "yarn build --watch --preserveWatchOutput",
+    "lint": "eslint --ext .ts,.tsx,.js,.jsx src"
   },
   "devDependencies": {
+    "eslint": "^8.34.0",
     "typescript": "^4.9.5"
   },
   "publishConfig": {

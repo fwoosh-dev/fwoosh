@@ -158,7 +158,7 @@ export function packShapesIntoGroups(
 
       const childBounds = data.map((i) => {
         const shape = shapes[i.id];
-        return getBounds[shape.type](shape as any);
+        return getBounds[shape.type](shape as GroupShape);
       });
       const bounds = Utils.getCommonBounds(childBounds);
 

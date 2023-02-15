@@ -40,8 +40,8 @@ export default function ZoomControl({ storyPreviewId }: PanelPluginProps) {
 
     if (storyPreview) {
       if (hasBrowserSupportForCssZoom) {
-        // @ts-ignore
-        storyPreview.style.zoom = `${zoom / 100}`;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (storyPreview.style as any).zoom = `${zoom / 100}`;
       } else {
         storyPreview.style.transformOrigin = "top left";
 
