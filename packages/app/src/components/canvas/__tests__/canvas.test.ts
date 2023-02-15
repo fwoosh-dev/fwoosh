@@ -1,11 +1,11 @@
-import { expect, describe, it } from "vitest";
+import { expect, describe, test } from "vitest";
 
 import twoTree from "./data/two-tree.json";
 
 import { createGroup, packShapesIntoGroups } from "../utils";
 
 describe("packShapesIntoGroups", () => {
-  it("it should group two shapes", () => {
+  test("it should group two shapes", () => {
     const group1 = createGroup({ id: "1", childIndex: 1 });
     group1.size = [100, 100];
 
@@ -31,7 +31,7 @@ describe("packShapesIntoGroups", () => {
     expect(shapes).toMatchSnapshot();
   });
 
-  it("it should wrap single item in nested group", () => {
+  test("it should wrap single item in nested group", () => {
     const group1 = createGroup({ id: "1", childIndex: 1 });
     group1.size = [100, 100];
 
@@ -60,7 +60,7 @@ describe("packShapesIntoGroups", () => {
     expect(shapes).toMatchSnapshot();
   });
 
-  it("it should wrap single item in nested group with content size", () => {
+  test("it should wrap single item in nested group with content size", () => {
     const group1 = createGroup({ id: "1", childIndex: 1 });
     group1.size = [100, 100];
     group1.contentSize = [100, 100];
@@ -90,7 +90,7 @@ describe("packShapesIntoGroups", () => {
     expect(shapes).toMatchSnapshot();
   });
 
-  it("it should be correct for a group with two children beside each other", () => {
+  test("it should be correct for a group with two children beside each other", () => {
     const group1 = createGroup({ id: "1", childIndex: 1 });
     group1.size = [100, 100];
     group1.contentSize = [100, 100];
@@ -127,7 +127,7 @@ describe("packShapesIntoGroups", () => {
     expect(shapes).toMatchSnapshot();
   });
 
-  it("it should work with 2 levels of nesting", () => {
+  test("it should work with 2 levels of nesting", () => {
     const group1 = createGroup({ id: "1", childIndex: 1 });
     group1.size = [100, 100];
     group1.contentSize = [100, 100];
@@ -172,7 +172,7 @@ describe("packShapesIntoGroups", () => {
     expect(shapes).toMatchSnapshot();
   });
 
-  it("it should work with 2 groups of 2 levels of nesting", () => {
+  test("it should work with 2 groups of 2 levels of nesting", () => {
     const group1 = createGroup({ id: "1", childIndex: 1 });
     group1.size = [100, 100];
     group1.contentSize = [100, 100];
@@ -233,7 +233,7 @@ describe("packShapesIntoGroups", () => {
     expect(shapes).toMatchSnapshot();
   });
 
-  it.only("it should work long and wide children", () => {
+  test("it should work long and wide children", () => {
     packShapesIntoGroups(twoTree.tree as any, twoTree.shapes as any);
     expect(twoTree.shapes).toMatchSnapshot();
   });

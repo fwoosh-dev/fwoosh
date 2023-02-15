@@ -24,7 +24,7 @@ module.exports = {
     sourceType: "module",
     project: "./tsconfig.json",
   },
-  plugins: ["react", "@typescript-eslint"],
+  plugins: ["react", "@typescript-eslint", "vitest"],
   rules: {
     "react/prop-types": "off",
     "@typescript-eslint/no-unnecessary-condition": "off",
@@ -37,6 +37,14 @@ module.exports = {
         caughtErrorsIgnorePattern: "^_",
       },
     ],
+
+    "vitest/consistent-test-it": ["error", { fn: "test" }],
+    "vitest/expect-expect": "error",
+    "vitest/no-conditional-tests": "error",
+    "vitest/no-focused-tests": "error",
+    "vitest/no-identical-title": "error",
+    "vitest/no-skipped-tests": "warn",
+    "vitest/prefer-to-be": "error",
   },
   settings: {
     react: {

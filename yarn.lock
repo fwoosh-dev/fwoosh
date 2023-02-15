@@ -4181,7 +4181,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/utils@npm:5.52.0":
+"@typescript-eslint/utils@npm:5.52.0, @typescript-eslint/utils@npm:^5.48.1":
   version: 5.52.0
   resolution: "@typescript-eslint/utils@npm:5.52.0"
   dependencies:
@@ -6855,6 +6855,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eslint-plugin-vitest@npm:^0.0.34":
+  version: 0.0.34
+  resolution: "eslint-plugin-vitest@npm:0.0.34"
+  dependencies:
+    "@typescript-eslint/utils": ^5.48.1
+  peerDependencies:
+    eslint: ">=8.0.0"
+  checksum: 19f056d387e30ba49c35bea739cfd22d2fb50fdacbc29be09842d667473226b02ef9274e73e58157502e29f2b29b8164c4fd82bfb84115c92f053dc9c7d7b30c
+  languageName: node
+  linkType: hard
+
 "eslint-scope@npm:^5.1.1":
   version: 5.1.1
   resolution: "eslint-scope@npm:5.1.1"
@@ -7663,6 +7674,7 @@ __metadata:
     endent: ^2.1.0
     eslint-plugin-react: latest
     eslint-plugin-react-hooks: ^4.6.0
+    eslint-plugin-vitest: ^0.0.34
     fwoosh: "workspace:*"
     lerna: ^6.4.1
     patch-package: ^6.5.1
