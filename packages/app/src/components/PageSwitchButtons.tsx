@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { tree } from "@fwoosh/app/stories";
 import { styled } from "@fwoosh/styling";

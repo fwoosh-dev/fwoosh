@@ -2,7 +2,7 @@ import { promises as fs } from "fs";
 import boxen from "boxen";
 import path from "path";
 import { createServer, InlineConfig, build } from "vite";
-import express from "express";
+import express, { json } from "express";
 import expressWs from "express-ws";
 import { createRequire } from "module";
 import {
@@ -17,7 +17,6 @@ import bodyParser from "body-parser";
 import terminalLink from "terminal-link";
 import open from "better-opn";
 import { h } from "hastscript";
-import { Element } from "hast";
 import { visit } from "unist-util-visit";
 import handler from "serve-handler";
 import http from "http";
@@ -26,7 +25,7 @@ import { chromium } from "playwright";
 import remarkFrontmatter from "remark-frontmatter";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import remarkSlug from "remark-slug";
-import toc from "@jsdevtools/rehype-toc";
+import { toc } from "@jsdevtools/rehype-toc";
 import rehypeInferTitleMeta from "rehype-infer-title-meta";
 
 import { endent } from "./utils/endent.js";
@@ -368,7 +367,7 @@ export class Fwoosh implements FwooshClass {
               {
                 behavior: "before",
                 test: includedHeadings,
-                group(el: Element) {
+                group(el: any) {
                   return h("div", {
                     "data-link-group": true,
                     style: { position: "relative" },
@@ -758,7 +757,7 @@ export class Fwoosh implements FwooshClass {
       });
     });
 
-    app.use(express.json({ limit: "50mb" }));
+    app.use(json({ limit: "50mb" }));
     app.use(bodyParser.urlencoded({ extended: false, limit: "50mb" }));
     app.use(bodyParser.json());
 

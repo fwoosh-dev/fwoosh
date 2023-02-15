@@ -8,6 +8,8 @@ module.exports = {
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript",
     "plugin:@typescript-eslint/strict",
   ],
   overrides: [
@@ -45,10 +47,21 @@ module.exports = {
     "vitest/no-identical-title": "error",
     "vitest/no-skipped-tests": "warn",
     "vitest/prefer-to-be": "error",
+
+    "import/no-unresolved": [
+      "error",
+      {
+        ignore: ["@fwoosh/app/.*"],
+      },
+    ],
   },
   settings: {
     react: {
       version: "detect",
+    },
+    "import/resolver": {
+      typescript: true,
+      node: true,
     },
   },
 };

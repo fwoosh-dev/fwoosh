@@ -1,7 +1,12 @@
-import swc, { ImportDeclaration, Module } from "@swc/core";
+import { ImportDeclaration, Module, parse } from "@swc/core";
 import { promises as fs } from "fs";
 import { titleCase } from "title-case";
-import { ParsedStoryData, StoryMeta } from "@fwoosh/types";
+import {
+  ParsedStoryData,
+  StoryMeta,
+  FwooshOptionsLoaded,
+  ResolvedStoryMeta,
+} from "@fwoosh/types";
 import { chunkPromisesTimes, createStorySlug, log } from "@fwoosh/utils";
 import { compile } from "@mdx-js/mdx";
 
@@ -12,7 +17,6 @@ import gfm from "remark-gfm";
 import matter from "gray-matter";
 import { remarkCodeHike } from "@code-hike/mdx";
 
-import { FwooshOptionsLoaded, ResolvedStoryMeta } from "@fwoosh/types";
 import { getCodeHikeConfig } from "./code-hike-config.js";
 import { endent } from "./endent.js";
 import { perfLog } from "./performance.js";
@@ -178,6 +182,7 @@ async function parseStoryFile(file: string, data: FwooshFileDescriptor[]) {
 
   if (file.endsWith(".mdx")) {
     try {
+      // eslint-disable-next-line import/no-named-as-default-member
       const frontmatter = matter.read(fullPath);
 
       if (frontmatter.content) {
@@ -203,7 +208,7 @@ async function parseStoryFile(file: string, data: FwooshFileDescriptor[]) {
 
     const contents = await fs.readFile(file, "utf8");
     const currentLastEnd = lastEnd.value;
-    const ast = await swc.parse(contents, {
+    const ast = await parse(contents, {
       syntax: "typescript",
       tsx: true,
       comments: false,

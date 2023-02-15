@@ -1,5 +1,8 @@
 import * as React from "react";
-import ReactDOM, { version as reactDomVersion } from "react-dom";
+import {
+  version as reactDomVersion,
+  render as ReactDomRender,
+} from "react-dom";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 
 import { StoryData, StoryParameters } from "@fwoosh/types";
@@ -14,13 +17,17 @@ function reverse<T>(arr: T[]) {
   return arr.slice().reverse();
 }
 
-function useDecorators(story: StoryData) {
+function useDecorators(story: StoryData | undefined) {
   const [decorators, setDecorators] =
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     React.useState<ReactStory<any>["decorators"]>();
 
   React.useLayoutEffect(() => {
     async function getDecorators() {
+      if (!story) {
+        return;
+      }
+
       const [meta, storyComponentImport] = await Promise.all([
         story.meta,
         story.component._payload?._result,
@@ -52,7 +59,7 @@ function App({ slug, params }: AppProps) {
   const story = stories[slug];
   const decorators = useDecorators(story);
 
-  let content = story.component;
+  let content = story?.component;
 
   if (decorators?.length) {
     for (const decorator of decorators) {
@@ -121,6 +128,6 @@ export function render(
       root.render(app);
     });
   } else {
-    ReactDOM.render(app, el);
+    ReactDomRender(app, el);
   }
 }

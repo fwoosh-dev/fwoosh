@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { useId } from "@radix-ui/react-id";
 import { Helmet } from "react-helmet-async";
 

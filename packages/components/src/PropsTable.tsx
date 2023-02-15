@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { useDocgen } from "@fwoosh/app/docs";
 import { styled } from "@fwoosh/styling";
 

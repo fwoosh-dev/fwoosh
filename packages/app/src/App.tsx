@@ -1,5 +1,5 @@
 import "@fwoosh/app/setup";
-import React from "react";
+import * as React from "react";
 import {
   createBrowserRouter,
   Navigate,
@@ -23,13 +23,13 @@ import {
   ColorModeContext,
   getInitialColorMode,
   globalCss,
+  darkTheme,
 } from "@fwoosh/styling";
 import { tree } from "@fwoosh/app/stories";
 import { getFirstStory, convertMetaTitleToUrlParam } from "@fwoosh/utils";
 import { Head } from "./components/Head";
 import { CommandPallette } from "./components/CommandPallette";
 import { ProductionSearchIndex } from "./components/ProductionSearchIndex";
-import { darkTheme } from "@fwoosh/styling";
 import { config } from "@fwoosh/app/config";
 
 const WorkBenchCanvas = React.lazy(() =>

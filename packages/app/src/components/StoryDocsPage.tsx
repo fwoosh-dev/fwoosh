@@ -1,4 +1,4 @@
-import React, { Suspense, useContext } from "react";
+import * as React from "react";
 import { useId } from "@radix-ui/react-id";
 import { styled } from "@fwoosh/styling";
 import {
@@ -87,7 +87,7 @@ const ExpandToggle = styled("div", {
 });
 
 const StoryToolbar = () => {
-  const id = useContext(StoryIdContext);
+  const id = React.useContext(StoryIdContext);
   const { storyControls } = useToolbarControls();
   const parameters = useParameters();
 
@@ -97,7 +97,7 @@ const StoryToolbar = () => {
 
   return (
     <ParameterContext.Provider value={parameters}>
-      <Suspense fallback={<Spinner size={5} />}>
+      <React.Suspense fallback={<Spinner size={5} />}>
         <HeaderBar>
           <GlobalToolbarControls />
           <ToolbarControls>
@@ -107,7 +107,7 @@ const StoryToolbar = () => {
           </ToolbarControls>
           <GlobalToolbarControls />
         </HeaderBar>
-      </Suspense>
+      </React.Suspense>
     </ParameterContext.Provider>
   );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { IconButton, Toolbar, Tooltip } from "@fwoosh/components";
 import { ZoomIn, ZoomOut, Maximize } from "react-feather";
 import { PanelPluginProps } from "fwoosh";

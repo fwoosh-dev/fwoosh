@@ -1,6 +1,6 @@
 import potpack from "potpack";
 import { TLBounds, Utils } from "@tldraw/core";
-import Vec from "@tldraw/vec";
+import { Vec } from "@tldraw/vec";
 import { StorySidebarChildItem } from "@fwoosh/types";
 
 import { GroupShape } from "./shapes/group";

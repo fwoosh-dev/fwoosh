@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { ObjectInspector } from "@devtools-ds/object-inspector";
 import { firefox } from "@devtools-ds/themes";
 import { useId } from "@radix-ui/react-id";

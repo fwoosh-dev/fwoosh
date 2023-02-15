@@ -6,16 +6,15 @@ import {
   SidebarItem,
   SidebarSectionTitle,
   SIDEBAR_ITEM_INDENT,
+  SidebarFolderOpenIndicatorWrapper,
 } from "@fwoosh/components";
 import { Link } from "react-router-dom";
-import { stories } from "@fwoosh/app/stories";
+import { stories, tree } from "@fwoosh/app/stories";
 import { StorySidebarChildItem } from "@fwoosh/types";
-import { SidebarFolderOpenIndicatorWrapper } from "@fwoosh/components";
 import {
   resetContentScrollPosition,
   convertMetaTitleToUrlParam,
 } from "@fwoosh/utils";
-import { tree } from "@fwoosh/app/stories";
 import { useDocsPath } from "@fwoosh/hooks";
 import { titleCase } from "title-case";
 
@@ -29,7 +28,8 @@ function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
   const name = titleCase(node.data.name);
   const isValidPath = React.useMemo(() => {
     return Object.values(stories).some(
-      (story) => convertMetaTitleToUrlParam(story.grouping) === node.data.id
+      (story) =>
+        story && convertMetaTitleToUrlParam(story.grouping) === node.data.id
     );
   }, [node.data.id]);
   const finalStyle = {

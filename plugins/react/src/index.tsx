@@ -1,6 +1,6 @@
 import { Plugin, Fwoosh } from "fwoosh";
 import * as docgen from "react-docgen-typescript";
-import ts from "typescript";
+import * as ts from "typescript";
 import { loadVirtualFile } from "@fwoosh/virtual-file";
 import { createRequire } from "module";
 import react from "@vitejs/plugin-react";

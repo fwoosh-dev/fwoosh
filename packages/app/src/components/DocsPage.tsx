@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import * as React from "react";
 import { useLocation } from "react-router-dom";
 import { StoryBasicTreeItem } from "@fwoosh/types";
 import { Spinner, ErrorBoundary } from "@fwoosh/components";
@@ -35,9 +35,9 @@ export const DocsPage = React.memo(function DocsPage() {
 
   return (
     <ErrorBoundary key={location.pathname}>
-      <Suspense fallback={<Spinner>Loading documentation...</Spinner>}>
+      <React.Suspense fallback={<Spinner>Loading documentation...</Spinner>}>
         <DocsContent />
-      </Suspense>
+      </React.Suspense>
     </ErrorBoundary>
   );
 });

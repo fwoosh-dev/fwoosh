@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import * as React from "react";
 import { Sun, Moon } from "react-feather";
 import { IconButton, Tooltip } from "@fwoosh/components";
 import {
@@ -13,7 +13,7 @@ export const ThemeToggle = React.forwardRef(function ThemeToggle(
   props: React.ComponentPropsWithoutRef<"button">,
   ref?: React.Ref<HTMLButtonElement>
 ) {
-  const [theme, setTheme] = useState(getInitialColorMode());
+  const [theme, setTheme] = React.useState(getInitialColorMode());
   const ariaLabel =
     theme === "dark" ? "Activate light mode" : "Activate dark mode";
   const onToggleTheme = React.useCallback(() => {

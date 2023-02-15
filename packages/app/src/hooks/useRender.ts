@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { render } from "@fwoosh/app/render";
 import { stories } from "@fwoosh/app/stories";
 import { useParameters } from "@fwoosh/hooks";

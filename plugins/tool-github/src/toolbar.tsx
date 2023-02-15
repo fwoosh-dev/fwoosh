@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { IconButton, Toolbar, Tooltip } from "@fwoosh/components";
 import { GitHub as GithubIcon } from "react-feather";
 import { styled } from "@fwoosh/styling";

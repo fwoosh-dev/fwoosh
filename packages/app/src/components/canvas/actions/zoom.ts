@@ -1,5 +1,5 @@
 import { TLPointerInfo } from "@tldraw/core";
-import Vec from "@tldraw/vec";
+import { Vec } from "@tldraw/vec";
 import type { Action } from "../constants";
 import { mutables } from "../mutables.js";
 

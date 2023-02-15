@@ -1,8 +1,11 @@
 import "@unocss/reset/tailwind.css";
 import "@code-hike/mdx/dist/index.css";
 
-import React from "react";
-import ReactDOM, { version as reactDomVersion } from "react-dom";
+import * as React from "react";
+import {
+  version as reactDomVersion,
+  render as ReactDOMRender,
+} from "react-dom";
 import { App } from "./App";
 
 import "@fontsource/inter/latin-400.css";
@@ -23,5 +26,5 @@ if (isReact18) {
     createRoot(container).render(<App />);
   });
 } else {
-  ReactDOM.render(<App />, container);
+  ReactDOMRender(<App />, container);
 }

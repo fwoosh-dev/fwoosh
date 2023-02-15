@@ -8,9 +8,8 @@ import { Interweave } from "interweave";
 import { StoryData, StoryTree, StoryTreeItem } from "@fwoosh/types";
 import useMousetrap from "react-hook-mousetrap";
 import { ArrowRight, Bookmark, Code } from "react-feather";
-import { SearchData } from "@fwoosh/utils";
+import { SearchData, convertMetaTitleToUrlParam } from "@fwoosh/utils";
 import { useDocsPath, useIsWorkbench, useStoryId } from "@fwoosh/hooks";
-import { convertMetaTitleToUrlParam } from "@fwoosh/utils";
 import { useDocsStoryGroup } from "../hooks/useDocsStoryGroup";
 import { styled } from "@fwoosh/styling";
 
