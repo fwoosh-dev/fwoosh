@@ -92,13 +92,13 @@ async function getComment(contents: string, i: number) {
       comment.unshift(contents[i--]);
     }
 
-    const fullComment = comment.join("");
-
-    return sanitizeMarkdownString(
-      process.env.NODE_ENV === "production"
-        ? await convertMarkdownToHtml(fullComment)
-        : fullComment
+    const fullComment = sanitizeMarkdownString(
+      comment.map((line) => line).join("")
     );
+
+    return process.env.NODE_ENV === "production"
+      ? await convertMarkdownToHtml(fullComment)
+      : fullComment;
   }
 }
 
