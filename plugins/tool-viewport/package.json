@@ -9,6 +9,10 @@
     "name": "Andrew Lisowski",
     "email": "lisowski54@gmail.com"
   },
+  "scripts": {
+    "build": "tsc -b tsconfig.json",
+    "dev": "yarn build --watch --preserveWatchOutput"
+  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
@@ -21,6 +25,9 @@
     "@fwoosh/hooks": "workspace:*",
     "devices-viewport-size": "^1.0.4",
     "react-feather": "^2.0.10"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5"
   },
   "peerDependencies": {
     "fwoosh": ">= 0.x"

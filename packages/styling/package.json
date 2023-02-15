@@ -9,6 +9,10 @@
     "name": "Andrew Lisowski",
     "email": "lisowski54@gmail.com"
   },
+  "scripts": {
+    "build": "tsc -b tsconfig.json",
+    "dev": "yarn build --watch --preserveWatchOutput"
+  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
@@ -26,6 +30,7 @@
   },
   "devDependencies": {
     "@types/dlv": "^1.1.2",
-    "react": "^18.2.0"
+    "react": "^18.2.0",
+    "typescript": "^4.9.5"
   }
 }

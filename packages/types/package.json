@@ -18,7 +18,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc -b tsconfig.json"
+    "build": "tsc -b tsconfig.json",
+    "dev": "yarn build --watch --preserveWatchOutput"
   },
   "dependencies": {
     "react-docgen-typescript": "^2.2.2",

@@ -920,6 +920,7 @@ __metadata:
     react-router-dom: ^6.8.1
     react-use-measure: ^2.1.1
     title-case: ^3.0.3
+    typescript: ^4.9.5
   peerDependencies:
     react: ^16.8 || ^17.0 || ^18.0
     react-dom: ^16.8 || ^17.0 || ^18.0
@@ -945,6 +946,7 @@ __metadata:
     react-dom: ^18.2.0
     react-feather: ^2.0.10
     react-router-dom: ^6.8.1
+    typescript: ^4.9.5
   peerDependencies:
     react: ^16.8 || ^17.0 || ^18.0
     react-dom: ^16.8 || ^17.0 || ^18.0
@@ -956,6 +958,7 @@ __metadata:
   resolution: "@fwoosh/decorator-centered@workspace:plugins/decorator-centered"
   dependencies:
     "@fwoosh/components": "workspace:*"
+    typescript: ^4.9.5
   peerDependencies:
     fwoosh: ">= 0.x"
   languageName: unknown
@@ -985,6 +988,7 @@ __metadata:
     react-dom: ^18.2.0
     react-query: ^3.39.3
     react-router-dom: ^6.8.1
+    typescript: ^4.9.5
   peerDependencies:
     react: ^16.8 || ^17.0 || ^18.0
     react-dom: ^16.8 || ^17.0 || ^18.0
@@ -998,6 +1002,7 @@ __metadata:
     "@fwoosh/components": "workspace:*"
     "@fwoosh/hooks": "workspace:*"
     "@fwoosh/utils": "workspace:*"
+    typescript: ^4.9.5
   languageName: unknown
   linkType: soft
 
@@ -1014,6 +1019,7 @@ __metadata:
     react-dom: ^18.2.0
     react-feather: ^2.0.10
     react-router-dom: ^6.8.1
+    typescript: ^4.9.5
   peerDependencies:
     fwoosh: ">= 0.x"
     react: ^16.8 || ^17.0 || ^18.0
@@ -1031,6 +1037,7 @@ __metadata:
     "@radix-ui/react-id": ^1.0.0
     "@types/node": ^14.18.36
     react: ^18.2.0
+    typescript: ^4.9.5
   peerDependencies:
     fwoosh: ">= 0.x"
     react: ^16.8 || ^17.0 || ^18.0
@@ -1043,6 +1050,7 @@ __metadata:
   dependencies:
     "@fwoosh/hooks": "workspace:*"
     "@fwoosh/styling": "workspace:*"
+    typescript: ^4.9.5
   peerDependencies:
     fwoosh: ">= 0.x"
   languageName: unknown
@@ -1054,6 +1062,7 @@ __metadata:
   dependencies:
     "@fwoosh/hooks": "workspace:*"
     "@types/node": ^14.18.36
+    typescript: ^4.9.5
   peerDependencies:
     fwoosh: ">= 0.x"
   languageName: unknown
@@ -1066,6 +1075,7 @@ __metadata:
     "@fwoosh/hooks": "workspace:*"
     "@fwoosh/styling": "workspace:*"
     "@types/node": ^14.18.36
+    typescript: ^4.9.5
   peerDependencies:
     fwoosh: ">= 0.x"
   languageName: unknown
@@ -1077,6 +1087,7 @@ __metadata:
   dependencies:
     "@fwoosh/hooks": "workspace:*"
     "@types/node": ^14.18.36
+    typescript: ^4.9.5
   peerDependencies:
     fwoosh: ">= 0.x"
   languageName: unknown
@@ -1123,6 +1134,7 @@ __metadata:
     "@stitches/react": ^1.2.8
     "@types/dlv": ^1.1.2
     react: ^18.2.0
+    typescript: ^4.9.5
   peerDependencies:
     react: ^16.8 || ^17.0 || ^18.0
   languageName: unknown
@@ -1135,6 +1147,7 @@ __metadata:
     "@fwoosh/utils": "workspace:*"
     "@playwright/test": ^1.30.0
     playwright: ^1.30.0
+    typescript: ^4.9.5
   languageName: unknown
   linkType: soft
 
@@ -1144,6 +1157,7 @@ __metadata:
   dependencies:
     "@fwoosh/types": "workspace:*"
     "@radix-ui/colors": ^0.1.8
+    typescript: ^4.9.5
   languageName: unknown
   linkType: soft
 
@@ -1156,6 +1170,7 @@ __metadata:
     "@types/parse-github-url": ^1.0.0
     parse-github-url: ^1.0.2
     react-feather: ^2.0.10
+    typescript: ^4.9.5
   peerDependencies:
     fwoosh: ">= 0.x"
   languageName: unknown
@@ -1168,6 +1183,7 @@ __metadata:
     "@types/node": ^14.18.36
     react: ^18.2.0
     react-feather: ^2.0.10
+    typescript: ^4.9.5
   peerDependencies:
     fwoosh: ">= 0.x"
     react: ^16.8 || ^17.0 || ^18.0
@@ -1181,6 +1197,7 @@ __metadata:
     "@fwoosh/hooks": "workspace:*"
     devices-viewport-size: ^1.0.4
     react-feather: ^2.0.10
+    typescript: ^4.9.5
   peerDependencies:
     fwoosh: ">= 0.x"
   languageName: unknown
@@ -1194,6 +1211,7 @@ __metadata:
     "@types/node": ^14.18.36
     react: ^18.2.0
     react-feather: ^2.0.10
+    typescript: ^4.9.5
   peerDependencies:
     fwoosh: ">= 0.x"
     react: ^16.8 || ^17.0 || ^18.0
@@ -1222,6 +1240,7 @@ __metadata:
     change-case: ^4.1.2
     consola: ^2.15.3
     lodash.chunk: ^4.2.0
+    typescript: ^4.9.5
   languageName: unknown
   linkType: soft
 
@@ -1230,6 +1249,7 @@ __metadata:
   resolution: "@fwoosh/virtual-file@workspace:packages/virtual-file"
   dependencies:
     esbuild: ^0.17.7
+    typescript: ^4.9.5
   languageName: unknown
   linkType: soft
 
@@ -7063,6 +7083,7 @@ __metadata:
     patch-package: ^6.5.1
     prettier: ^2.8.4
     rimraf: ^3.0.2
+    turbo: ^1.7.4
     typescript: ^4.9.5
     vitest: ^0.28.4
   languageName: unknown
@@ -13550,6 +13571,77 @@ __metadata:
   version: 2.4.1
   resolution: "tslib@npm:2.4.1"
   checksum: 19480d6e0313292bd6505d4efe096a6b31c70e21cf08b5febf4da62e95c265c8f571f7b36fcc3d1a17e068032f59c269fab3459d6cd3ed6949eafecf64315fca
+  languageName: node
+  linkType: hard
+
+"turbo-darwin-64@npm:1.7.4":
+  version: 1.7.4
+  resolution: "turbo-darwin-64@npm:1.7.4"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"turbo-darwin-arm64@npm:1.7.4":
+  version: 1.7.4
+  resolution: "turbo-darwin-arm64@npm:1.7.4"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"turbo-linux-64@npm:1.7.4":
+  version: 1.7.4
+  resolution: "turbo-linux-64@npm:1.7.4"
+  conditions: os=linux & cpu=x64
+  languageName: node
+  linkType: hard
+
+"turbo-linux-arm64@npm:1.7.4":
+  version: 1.7.4
+  resolution: "turbo-linux-arm64@npm:1.7.4"
+  conditions: os=linux & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"turbo-windows-64@npm:1.7.4":
+  version: 1.7.4
+  resolution: "turbo-windows-64@npm:1.7.4"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"turbo-windows-arm64@npm:1.7.4":
+  version: 1.7.4
+  resolution: "turbo-windows-arm64@npm:1.7.4"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"turbo@npm:^1.7.4":
+  version: 1.7.4
+  resolution: "turbo@npm:1.7.4"
+  dependencies:
+    turbo-darwin-64: 1.7.4
+    turbo-darwin-arm64: 1.7.4
+    turbo-linux-64: 1.7.4
+    turbo-linux-arm64: 1.7.4
+    turbo-windows-64: 1.7.4
+    turbo-windows-arm64: 1.7.4
+  dependenciesMeta:
+    turbo-darwin-64:
+      optional: true
+    turbo-darwin-arm64:
+      optional: true
+    turbo-linux-64:
+      optional: true
+    turbo-linux-arm64:
+      optional: true
+    turbo-windows-64:
+      optional: true
+    turbo-windows-arm64:
+      optional: true
+  bin:
+    turbo: bin/turbo
+  checksum: c4387cfee36c57dd1490e9b2452888d8450faa390aec5bc148389b426bc079d03044891d61ad84a6a3a7454e66dfbe9e9cfba05f636b36fef7ece7af275ef9ce
   languageName: node
   linkType: hard
 

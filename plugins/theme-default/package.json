@@ -7,11 +7,18 @@
   "author": "Andrew Lisowski <lisowski54@gmail.com>",
   "repository": "hipstersmoothie/fwoosh",
   "license": "MIT",
+  "scripts": {
+    "build": "tsc -b tsconfig.json",
+    "dev": "yarn build --watch --preserveWatchOutput"
+  },
   "dependencies": {
     "@fwoosh/types": "workspace:*",
     "@radix-ui/colors": "^0.1.8"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5"
   }
 }

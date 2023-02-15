@@ -5,6 +5,10 @@
   "repository": "hipstersmoothie/fwoosh",
   "license": "MIT",
   "main": "dist/exports.js",
+  "scripts": {
+    "build": "cpy 'src/**/*.css' dist -s && tsc -b tsconfig.build.json",
+    "dev": "tsc -b tsconfig.build.json --watch --preserveWatchOutput"
+  },
   "dependencies": {
     "@code-hike/mdx": "^0.8.0",
     "@fontsource/inter": "^4.5.15",
@@ -46,12 +50,10 @@
     "@types/react-dom": "^18.0.10",
     "cpy-cli": "^4.2.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "typescript": "^4.9.5"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "scripts": {
-    "build": "cpy 'src/**/*.css' dist -s"
   }
 }

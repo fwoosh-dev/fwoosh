@@ -9,6 +9,10 @@
     "name": "Andrew Lisowski",
     "email": "lisowski54@gmail.com"
   },
+  "scripts": {
+    "build": "tsc -b tsconfig.json",
+    "dev": "yarn build --watch --preserveWatchOutput"
+  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
@@ -19,5 +23,8 @@
   ],
   "dependencies": {
     "esbuild": "^0.17.7"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5"
   }
 }

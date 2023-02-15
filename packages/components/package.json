@@ -6,6 +6,10 @@
   "repository": "hipstersmoothie/fwoosh",
   "license": "MIT",
   "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -b tsconfig.json",
+    "dev": "yarn build --watch --preserveWatchOutput"
+  },
   "dependencies": {
     "@alisowski/cmdk": "^0.1.23",
     "@code-hike/mdx": "^0.8.0",
@@ -27,7 +31,8 @@
   "devDependencies": {
     "@types/react": "^18.0.28",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "typescript": "^4.9.5"
   },
   "publishConfig": {
     "access": "public"

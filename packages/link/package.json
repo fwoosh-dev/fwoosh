@@ -9,9 +9,16 @@
   "publishConfig": {
     "access": "public"
   },
+  "scripts": {
+    "build": "tsc -b tsconfig.json",
+    "dev": "yarn build --watch --preserveWatchOutput"
+  },
   "dependencies": {
     "@fwoosh/components": "workspace:*",
     "@fwoosh/hooks": "workspace:*",
     "@fwoosh/utils": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5"
   }
 }

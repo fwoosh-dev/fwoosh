@@ -1,0 +1,14 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", "tsconfig.build.tsbuildinfo"]
+    },
+    "dev": {
+      "outputs": ["dist/**", "tsconfig.build.tsbuildinfo"],
+      "persistent": true
+    },
+    "lint": {}
+  }
+}

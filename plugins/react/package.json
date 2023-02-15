@@ -13,6 +13,10 @@
     "@vitejs/plugin-react": "^3.1.0",
     "react-docgen-typescript": "^2.2.2"
   },
+  "scripts": {
+    "build": "tsc -b tsconfig.json",
+    "dev": "yarn build --watch --preserveWatchOutput"
+  },
   "peerDependencies": {
     "fwoosh": ">= 0.x",
     "react": "^16.8 || ^17.0 || ^18.0"

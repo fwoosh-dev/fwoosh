@@ -5,6 +5,10 @@
   "description": "Add a button to open the websites GitHub repo.",
   "version": "0.0.120",
   "license": "MIT",
+  "scripts": {
+    "build": "tsc -b tsconfig.json",
+    "dev": "yarn build --watch --preserveWatchOutput"
+  },
   "author": {
     "name": "Andrew Lisowski",
     "email": "lisowski54@gmail.com"
@@ -27,6 +31,7 @@
     "fwoosh": ">= 0.x"
   },
   "devDependencies": {
-    "@types/parse-github-url": "^1.0.0"
+    "@types/parse-github-url": "^1.0.0",
+    "typescript": "^4.9.5"
   }
 }
