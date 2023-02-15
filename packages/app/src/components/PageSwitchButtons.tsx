@@ -121,7 +121,7 @@ export function PageSwitchButton({ current }: PageSwitchButtonProps) {
       prev: getPreviousStory(tree, current),
       next: getNextStory(tree, current, !isWorkbench),
     };
-  }, [tree, isWorkbench]);
+  }, [current, isWorkbench]);
   const getUrl = React.useCallback(
     (data: StoryData) => {
       if (isWorkbench) {

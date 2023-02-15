@@ -125,7 +125,7 @@ export const CodeBlock = styled("pre", {
 
 /** The component used to render an block of code */
 export const code = ({ className, ...props }: Element<"code">) =>
-  className && className.includes("language") ? (
+  className?.includes("language") ? (
     <CodeBlock className={className} {...props} />
   ) : (
     <InlineCode className={className} {...props} />

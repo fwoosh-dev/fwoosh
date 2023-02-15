@@ -353,7 +353,7 @@ export const deepElementFromPoint = (x: number, y: number) => {
   const element = document.elementFromPoint(x, y);
 
   const crawlShadows = (node: Element | null): Element | null => {
-    if (node && node.shadowRoot) {
+    if (node?.shadowRoot) {
       const nestedElement = node.shadowRoot.elementFromPoint(x, y);
 
       // Nested node is same as the root one
@@ -371,9 +371,7 @@ export const deepElementFromPoint = (x: number, y: number) => {
     return node;
   };
 
-  const shadowElement = crawlShadows(element);
-
-  return shadowElement || element;
+  return crawlShadows(element) ?? element;
 };
 
 export function findAndDrawElement(x: number, y: number, id: string) {

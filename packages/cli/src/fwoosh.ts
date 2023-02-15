@@ -217,7 +217,7 @@ export class Fwoosh implements FwooshClass {
               "code" in e &&
               e.code !== "ERR_MODULE_NOT_FOUND"
             ) {
-              throw e;
+              throw e as unknown as Error;
             }
           }
 
@@ -765,7 +765,7 @@ export class Fwoosh implements FwooshClass {
     ws.app.ws("/sort", (ws) => {
       ws.on("message", (message) => {
         const result = sortTree(
-          JSON.parse(message.toString()),
+          JSON.parse((message as any).toString()),
           this.options.sortSidebarItems
         );
 

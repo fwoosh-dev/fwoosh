@@ -33,7 +33,7 @@ function stringifyStories(
         ...${JSON.stringify(v)},
         component: ${v.component},
         code: \`${"code" in v ? v.code : undefined}\`,
-        meta: ${v.meta}
+        meta: ${v.meta as unknown as string}
       }`;
     })
     .join(",")} }`;
@@ -89,7 +89,7 @@ export async function createVirtualStoriesFile(config: FwooshOptionsLoaded) {
         slug,
         grouping: file.meta.title,
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore  // todo this isn't a string
+        // @ts-expect-error  // todo this isn't a string
         meta: JSON.stringify(file.meta),
         component: componentName,
       };
@@ -113,7 +113,7 @@ export async function createVirtualStoriesFile(config: FwooshOptionsLoaded) {
         code: file.code,
         component: componentName,
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
+        // @ts-expect-error
         meta: `
           () => new Promise(resolve => {
             import('${file.file}')

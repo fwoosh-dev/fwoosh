@@ -185,7 +185,7 @@ export const MDXPage = ({ page }: { page: StoryTreeItem }) => {
 
   React.useLayoutEffect(() => {
     location.hash && document.querySelector(location.hash)?.scrollIntoView();
-  }, []);
+  }, [location.hash]);
 
   const hasWrapper =
     !("fullPage" in page.story.meta) || page.story.meta.fullPage !== true;

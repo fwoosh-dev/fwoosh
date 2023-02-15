@@ -7,6 +7,7 @@ module.exports = {
   extends: [
     "eslint:recommended",
     "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
     "plugin:@typescript-eslint/strict",
   ],
   overrides: [
@@ -27,8 +28,9 @@ module.exports = {
   rules: {
     "react/prop-types": "off",
     "@typescript-eslint/no-unnecessary-condition": "off",
+    "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": [
-      "warn", // or "error"
+      "error",
       {
         argsIgnorePattern: "^_",
         varsIgnorePattern: "^_",

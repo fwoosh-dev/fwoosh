@@ -25,15 +25,15 @@ export default function ZoomControl({ storyPreviewId }: PanelPluginProps) {
 
   const increaseZoom = React.useCallback(() => {
     zoomSet((z) => z * 1.2);
-  }, [zoom]);
+  }, []);
 
   const decreaseZoom = React.useCallback(() => {
     zoomSet((z) => z * 0.8);
-  }, [zoom]);
+  }, []);
 
   const resetZoom = React.useCallback(() => {
     zoomSet(100);
-  }, [zoom]);
+  }, []);
 
   React.useEffect(() => {
     const storyPreview = document.getElementById(storyPreviewId);
@@ -52,7 +52,7 @@ export default function ZoomControl({ storyPreviewId }: PanelPluginProps) {
         }
       }
     }
-  }, [zoom]);
+  }, [storyPreviewId, zoom]);
 
   return (
     <>

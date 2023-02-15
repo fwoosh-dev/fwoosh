@@ -209,7 +209,7 @@ function StoryCommandTree({
     }
 
     return allChildren;
-  }, []);
+  }, [tree.children]);
 
   return (
     <Command.Group heading={<Command.Heading>{tree.name}</Command.Heading>}>
@@ -403,7 +403,7 @@ export function CommandPallette() {
       navigate(url);
       onClose();
     },
-    [onClose]
+    [isWorkbench, navigate, onClose]
   );
 
   useMousetrap("meta+k", () => openSet(true));
