@@ -1,3 +1,20 @@
+# v0.0.121 (Wed Feb 15 2023)
+
+#### 🐛 Bug Fix
+
+- Dev setup [#73](https://github.com/fwoosh-dev/fwoosh/pull/73) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add dep linting ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add import linting ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add hooks plugin ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add eslint ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- set up turbo ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.117 (Mon Feb 13 2023)
 
 #### 🐛 Bug Fix
