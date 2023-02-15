@@ -33,14 +33,14 @@ jobs:
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
 
-      - name: Lint
-        run: yarn lint
-
       - name: Test
         run: yarn test
 
       - name: Test and build
         run: yarn build
+
+      - name: Lint
+        run: yarn lint
 
       - name: Create Release
         env:

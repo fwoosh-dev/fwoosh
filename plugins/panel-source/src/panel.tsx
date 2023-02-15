@@ -49,7 +49,7 @@ function HighlightedSource({ code }: { code: string }) {
 }
 
 export default function SourcePanel({ storyId }: PanelPluginProps) {
-  const story = Object.values(stories).find((s) => s.slug === storyId);
+  const story = Object.values(stories).find((s) => s?.slug === storyId);
 
   if (!story || !("code" in story) || !story.code) {
     return null;

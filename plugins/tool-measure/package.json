@@ -13,6 +13,7 @@
     "lint": "eslint --ext .ts,.tsx,.js,.jsx src"
   },
   "dependencies": {
+    "@fwoosh/components": "workspace:*",
     "react-feather": "^2.0.10"
   },
   "devDependencies": {

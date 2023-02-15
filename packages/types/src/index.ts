@@ -255,7 +255,8 @@ export interface FwooshClass {
 }
 
 /** A fwoosh plugin */
-export interface Plugin<Params = Record<string, unknown>> {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export interface Plugin<Params = Record<string, any>> {
   /** The name of the plugin */
   name: string;
   /** Hook into fwoosh */

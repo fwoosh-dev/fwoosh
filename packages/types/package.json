@@ -23,6 +23,7 @@
     "lint": "eslint --ext .ts,.tsx,.js,.jsx src"
   },
   "dependencies": {
+    "@stitches/react": "^1.2.8",
     "react-docgen-typescript": "^2.2.2",
     "remark-mdx-toc": "^0.3.1",
     "shiki": "^0.14.1",

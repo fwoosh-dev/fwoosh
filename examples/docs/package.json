@@ -11,10 +11,12 @@
     "@fwoosh/components": "workspace:*",
     "@fwoosh/panel-actions": "workspace:*",
     "@fwoosh/react": "workspace:*",
+    "@fwoosh/styling": "workspace:*",
     "eslint": "^8.34.0",
     "fwoosh": "workspace:*",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-feather": "^2.0.10"
   },
   "version": "0.0.120"
 }

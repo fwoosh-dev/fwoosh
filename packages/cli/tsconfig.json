@@ -10,17 +10,9 @@
   },
 
   "references": [
-    {
-      "path": "../app"
-    },
-    {
-      "path": "../utils"
-    },
-    {
-      "path": "../types"
-    },
-    {
-      "path": "../virtual-file"
-    }
+    { "path": "../app" },
+    { "path": "../utils" },
+    { "path": "../types" },
+    { "path": "../virtual-file" }
   ]
 }

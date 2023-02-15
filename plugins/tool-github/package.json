@@ -23,6 +23,7 @@
     "dist"
   ],
   "dependencies": {
+    "@fwoosh/components": "workspace:*",
     "@fwoosh/hooks": "workspace:*",
     "@fwoosh/styling": "workspace:*",
     "parse-github-url": "^1.0.2",
@@ -33,6 +34,7 @@
   },
   "devDependencies": {
     "@types/parse-github-url": "^1.0.0",
+    "@types/react": "^18.0.28",
     "eslint": "^8.34.0",
     "typescript": "^4.9.5"
   }

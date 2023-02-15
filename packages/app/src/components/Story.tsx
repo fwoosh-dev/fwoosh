@@ -27,6 +27,11 @@ const StoryDiv = React.memo(function StoryDiv({
 }) {
   const { ref } = useRender({ id, slug });
   const story = stories[slug];
+
+  if (!story) {
+    throw new Error(`Story not found: ${slug}`);
+  }
+
   const groups = story.grouping.split("/");
 
   return (

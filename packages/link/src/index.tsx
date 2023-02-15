@@ -16,7 +16,7 @@ export const Link = React.forwardRef(function Link(
   const [, hash] = to.split("#");
   const story = checkLink(to, stories, tree);
 
-  if (story.type === "basic" && isWorkbench) {
+  if (story && story.type === "basic" && isWorkbench) {
     return (
       <components.a ref={ref} href={`/workbench/${story.slug}`} {...props} />
     );
@@ -25,7 +25,7 @@ export const Link = React.forwardRef(function Link(
   return (
     <components.a
       ref={ref}
-      href={`${isWorkbench ? "/workbench" : ""}/docs/${story.grouping.replace(
+      href={`${isWorkbench ? "/workbench" : ""}/docs/${story?.grouping.replace(
         /\//g,
         "-"
       )}#${hash}`}

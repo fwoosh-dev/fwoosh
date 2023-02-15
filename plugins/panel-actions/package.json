@@ -14,8 +14,10 @@
   },
   "dependencies": {
     "@devtools-ds/object-inspector": "^1.2.1",
+    "@devtools-ds/themes": "^1.2.1",
     "@fwoosh/components": "workspace:*",
     "@fwoosh/hooks": "workspace:*",
+    "@fwoosh/styling": "workspace:*",
     "@radix-ui/react-id": "^1.0.0"
   },
   "devDependencies": {

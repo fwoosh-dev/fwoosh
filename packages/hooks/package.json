@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@fwoosh/types": "workspace:*",
+    "@fwoosh/utils": "workspace:*",
     "change-case": "^4.1.2",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.8.1"

@@ -21,6 +21,10 @@ export function getStoryTree(
   const treeData: StorySidebarChildItem[] = [];
 
   Object.values(stories).forEach((story) => {
+    if (!story) {
+      return;
+    }
+
     const { grouping } = story;
     const levels = grouping.split("/");
     let currentItem: StorySidebarChildItem | undefined;

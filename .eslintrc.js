@@ -48,6 +48,7 @@ module.exports = {
     "vitest/no-skipped-tests": "warn",
     "vitest/prefer-to-be": "error",
 
+    "import/no-extraneous-dependencies": "error",
     "import/no-unresolved": [
       "error",
       {

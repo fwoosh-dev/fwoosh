@@ -8,9 +8,13 @@
     "test:e2e": "playwright test",
     "lint": "eslint --ext .ts,.tsx,.js,.jsx src"
   },
+  "dependencies": {
+    "clsx": "^1.2.1"
+  },
   "devDependencies": {
     "@fwoosh/panel-actions": "workspace:*",
     "@fwoosh/react": "workspace:*",
+    "@fwoosh/test": "workspace:*",
     "@playwright/test": "^1.30.0",
     "eslint": "^8.34.0",
     "fwoosh": "workspace:*",
