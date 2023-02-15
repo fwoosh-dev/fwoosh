@@ -75,8 +75,8 @@ export const config = {
       docgenOptions: {
         propFilter: (prop) => {
           return prop.parent
-            ? !/@types\/react/.test(prop.parent.fileName) &&
-                !/@emotion/.test(prop.parent.fileName)
+            ? !prop.parent.fileName.includes("@types/react") &&
+                !prop.parent.fileName.includes("@emotion")
             : true;
         },
       },

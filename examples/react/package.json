@@ -6,15 +6,21 @@
     "start": "yarn fwoosh dev",
     "build": "yarn fwoosh build",
     "test:e2e": "playwright test",
-    "lint": "eslint --ext .ts,.tsx,.js,.jsx src"
+    "lint": "eslint --ext .ts,.tsx,.js,.jsx src fwoosh.config.ts"
   },
   "dependencies": {
     "clsx": "^1.2.1"
   },
   "devDependencies": {
     "@fwoosh/panel-actions": "workspace:*",
+    "@fwoosh/panel-designs": "workspace:*",
+    "@fwoosh/panel-props": "workspace:*",
+    "@fwoosh/panel-source": "workspace:*",
     "@fwoosh/react": "workspace:*",
     "@fwoosh/test": "workspace:*",
+    "@fwoosh/tool-measure": "workspace:*",
+    "@fwoosh/tool-viewport": "workspace:*",
+    "@fwoosh/tool-zoom": "workspace:*",
     "@playwright/test": "^1.30.0",
     "eslint": "^8.34.0",
     "fwoosh": "workspace:*",
