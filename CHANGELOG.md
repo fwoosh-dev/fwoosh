@@ -1,3 +1,20 @@
+# v0.0.122 (Thu Feb 16 2023)
+
+#### ⚠️ Pushed to `main`
+
+- `@fwoosh/app`, `fwoosh`
+  - Merge branch 'dev-setup' ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `fwoosh`
+  - fix build docs source code rendering ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- `@fwoosh/app`
+  - fix source overfow ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.121 (Wed Feb 15 2023)
 
 #### 🐛 Bug Fix
