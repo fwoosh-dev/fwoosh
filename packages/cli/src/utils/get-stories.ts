@@ -32,7 +32,7 @@ const crawler = new fdir()
 
 /** Replaces characters in a string that are problematic when inserting into a template string  */
 function sanitizeTemplateString(str: string) {
-  return str.replace(/`/g, "\\`").replace(/\${/g, "\\${");
+  return str.replace(/`/g, "\\`").replace(/"/g, '\\"').replace(/\${/g, "\\${");
 }
 
 function sanitizeMarkdownString(str: string) {

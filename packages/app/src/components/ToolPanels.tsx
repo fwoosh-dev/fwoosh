@@ -21,6 +21,10 @@ const TabContent = styled(Tabs.Content, {
   width: "100%",
   height: "100%",
 });
+const TabRoot = styled(Tabs.Root, {
+  flex: 1,
+  minHeight: 0,
+});
 
 interface ToolPanelsContentProps {
   storySlug: string;
@@ -48,7 +52,7 @@ const ToolPanelsContent = ({ storySlug }: ToolPanelsContentProps) => {
   });
 
   return (
-    <Tabs.Root
+    <TabRoot
       defaultValue={
         localStorage.getItem("fwoosh:active-panel") ?? panels[0]?.componentName
       }
@@ -86,7 +90,7 @@ const ToolPanelsContent = ({ storySlug }: ToolPanelsContentProps) => {
           </TabContent>
         );
       })}
-    </Tabs.Root>
+    </TabRoot>
   );
 };
 

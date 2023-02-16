@@ -59,6 +59,8 @@ const StoryPreviewArea = styled("div", {
 
 const ToolsArea = styled("div", {
   maxHeight: 400,
+  display: "flex",
+  flexDirection: "column",
 });
 
 const StoryPreview = styled("div", {
