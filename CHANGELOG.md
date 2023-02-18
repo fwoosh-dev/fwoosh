@@ -1,3 +1,16 @@
+# v0.0.123 (Sat Feb 18 2023)
+
+#### 🐛 Bug Fix
+
+- `@fwoosh/app`, `fwoosh`
+  - Fix font flash [#75](https://github.com/fwoosh-dev/fwoosh/pull/75) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.122 (Thu Feb 16 2023)
 
 #### ⚠️ Pushed to `main`
