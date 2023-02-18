@@ -1,3 +1,15 @@
+# v0.0.125 (Sat Feb 18 2023)
+
+#### ⚠️ Pushed to `main`
+
+- actually fix jumping logo ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.124 (Sat Feb 18 2023)
 
 #### 🐛 Bug Fix
