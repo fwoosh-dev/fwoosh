@@ -305,14 +305,6 @@ export class Fwoosh implements FwooshClass {
                 crossorigin: "anonymous",
               },
             },
-            {
-              match: /inter-[a-zA-Z]*-[a-z-0-9]*\.woff$/,
-              attributes: {
-                type: "font/woff",
-                as: "font",
-                crossorigin: "anonymous",
-              },
-            },
           ],
           injectTo: "head-prepend",
         }),
