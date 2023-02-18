@@ -536,6 +536,23 @@ export class Fwoosh implements FwooshClass {
 
     await build(config);
 
+    await fs.writeFile(
+      path.join(outDir, "vercel.json"),
+      JSON.stringify({
+        headers: [
+          {
+            source: "/:all*(ttf|otf|woff|woff2)",
+            headers: [
+              {
+                key: "Cache-Control",
+                value: "public, max-age=31536000, immutable",
+              },
+            ],
+          },
+        ],
+      })
+    );
+
     this.serve({ outDir }, async (server) => {
       const stories = await createVirtualStoriesFile(this.options);
       const mdx = Object.values(stories.fileMap).filter(
