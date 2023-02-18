@@ -3,7 +3,7 @@
   "type": "module",
   "main": "dist/index.js",
   "description": "Add a button to open the websites GitHub repo.",
-  "version": "0.0.123",
+  "version": "0.0.124",
   "license": "MIT",
   "scripts": {
     "build": "tsc -b tsconfig.json",
