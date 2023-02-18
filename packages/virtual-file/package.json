@@ -3,7 +3,7 @@
   "main": "dist/index.js",
   "type": "module",
   "description": "Utility function to help create virtual files for fwoosh. Enables authoring in TS but being loaded in a virtual files as plain JS.",
-  "version": "0.0.124",
+  "version": "0.0.125",
   "license": "MIT",
   "author": {
     "name": "Andrew Lisowski",
