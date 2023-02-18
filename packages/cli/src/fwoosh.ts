@@ -21,6 +21,7 @@ import { visit } from "unist-util-visit";
 import handler from "serve-handler";
 import http from "http";
 import { chromium } from "playwright";
+import VitePluginInjectPreload from "vite-plugin-inject-preload";
 
 import remarkFrontmatter from "remark-frontmatter";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -294,6 +295,27 @@ export class Fwoosh implements FwooshClass {
       root: path.dirname(path.dirname(require.resolve("@fwoosh/app"))),
       base: mode === "production" ? this.options.basename : "/",
       plugins: [
+        VitePluginInjectPreload({
+          files: [
+            {
+              match: /inter-[a-zA-Z]*-[a-z-0-9]*\.woff2$/,
+              attributes: {
+                type: "font/woff2",
+                as: "font",
+                crossorigin: "anonymous",
+              },
+            },
+            {
+              match: /inter-[a-zA-Z]*-[a-z-0-9]*\.woff$/,
+              attributes: {
+                type: "font/woff",
+                as: "font",
+                crossorigin: "anonymous",
+              },
+            },
+          ],
+          injectTo: "head-prepend",
+        }),
         mdx({
           remarkPlugins: [
             remarkFrontmatter,

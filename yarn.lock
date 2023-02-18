@@ -7912,6 +7912,7 @@ __metadata:
     unist-util-remove: ^3.1.1
     unist-util-visit: ^4.1.2
     vite: ^4.1.1
+    vite-plugin-inject-preload: ^1.3.0
   peerDependencies:
     react: ^16.8 || ^17.0 || ^18.0
     react-dom: ^16.8 || ^17.0 || ^18.0
@@ -10927,7 +10928,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mime-types@npm:^2.1.12, mime-types@npm:~2.1.24, mime-types@npm:~2.1.34":
+"mime-types@npm:^2.1.12, mime-types@npm:^2.1.35, mime-types@npm:~2.1.24, mime-types@npm:~2.1.34":
   version: 2.1.35
   resolution: "mime-types@npm:2.1.35"
   dependencies:
@@ -15637,6 +15638,17 @@ __metadata:
   bin:
     vite-node: vite-node.mjs
   checksum: 9cab584544369b26cb94da7b33cf0f36ab24033ba0d977cd6811ff50f3e36602e6f1d32888864ae09d7ec5b3b4214cdfcfe86f1378b701e5246d0a6f48f86b02
+  languageName: node
+  linkType: hard
+
+"vite-plugin-inject-preload@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "vite-plugin-inject-preload@npm:1.3.0"
+  dependencies:
+    mime-types: ^2.1.35
+  peerDependencies:
+    vite: ^3.0.0 || ^4.0.0
+  checksum: eb7d5f3d257f36f88475665f285b720f07de3ead928d3d3dadf08486be052931fdf06d43dab15d74cf5f6c15712ab6a7241b9277b358cd7d7d1d41231e81a6e3
   languageName: node
   linkType: hard
 
