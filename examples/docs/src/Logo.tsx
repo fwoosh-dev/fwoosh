@@ -5,18 +5,26 @@ import logoDark from "../public/logo-dark.svg";
 import { styled } from "@fwoosh/styling";
 
 const LightLogo = styled("img", {
-  aspectRatio: "134/512",
+  aspectRatio: "512/134",
+  maxHeight: 134,
+  height: 134,
   '[data-color-mode="dark"] &': {
     display: "none",
   },
 });
 
 const DarkLogo = styled("img", {
-  aspectRatio: "134/512",
+  aspectRatio: "512/134",
+  maxHeight: 134,
+  height: 80,
   display: "none",
 
   '[data-color-mode="dark"] &': {
     display: "block",
+  },
+
+  "@md": {
+    height: 134,
   },
 });
 
