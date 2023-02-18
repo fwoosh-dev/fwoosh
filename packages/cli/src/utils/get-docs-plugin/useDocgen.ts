@@ -1,20 +1,51 @@
-import { ParsedStoryData } from "@fwoosh/types";
 import { useQuery } from "react-query";
-import { resolveStoryMeta } from "@fwoosh/utils";
+import { resolveStoryMeta, UnresolvedMeta } from "@fwoosh/utils";
 
-export const useDocgen = (key: string, story: ParsedStoryData) => {
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+// Since we lazy load stories we need to wait for them to be loaded
+// before we can get the docgen for them.
+// This is a simple backoff function that will retry a test function
+// until it passes or the number of attempts is reached.
+async function backoff(attempts: number, test: () => boolean) {
+  let i = 0;
+  let delay = 100;
+
+  for (i = 0; i < attempts; i++) {
+    if (test()) {
+      return;
+    }
+
+    await sleep(delay);
+    delay *= 2;
+  }
+}
+
+export const useDocgen = (key: string, meta: UnresolvedMeta, story?: any) => {
   const { data } = useQuery(
     key,
     async () => {
-      const component = await resolveStoryMeta(story);
+      if (story?._payload?._status === -1) {
+        await backoff(10, () => story?._payload?._status === 1);
+      }
 
-      if (!component?.component) {
+      let component = story?._payload?._result?.default?.component;
+
+      if (!component) {
+        const resolvedMeta = await resolveStoryMeta(meta);
+
+        if (resolvedMeta?.component) {
+          component = resolvedMeta.component;
+        }
+      }
+
+      if (!component) {
         return;
       }
 
-      const components = Array.isArray(component.component)
-        ? component.component
-        : [component.component];
+      const components = Array.isArray(component) ? component : [component];
       const displayedComponents = components.map((c) => c.displayName);
       const file = components[0].fwoosh_file;
 
@@ -29,7 +60,7 @@ export const useDocgen = (key: string, story: ParsedStoryData) => {
         );
       }
 
-      // In dev we generate props only as necassary to be quicker
+      // In dev we generate props only as necessary to be quicker
       return new Promise((resolve) => {
         const socket = new WebSocket(
           "ws://localhost:process.env.GET_DOCS_PORT/get-docs"

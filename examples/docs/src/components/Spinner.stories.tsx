@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { StoryMeta, Story } from "fwoosh";
-import { Spinner } from "@fwoosh/components";
+import { Spinner } from "@fwoosh/components/src/Spinner.js";
 
 export const meta: StoryMeta = {
   title: "Theming/Components/Spinner",

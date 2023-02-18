@@ -13,8 +13,13 @@ const Wrapper = styled("div", {
 function PropsPanelContent({ storyId }: PanelPluginProps) {
   const [, story] =
     Object.entries(stories).find(([slug]) => slug === storyId) ?? [];
-  const meta = story?.component?._payload?._result || story?.meta;
-  const docs = useDocgen(storyId, meta);
+
+  if (!story) {
+    throw new Error(`Could not find story with id: ${storyId}`);
+  }
+
+  // return null;
+  const docs = useDocgen(storyId, story.meta, story.component);
 
   return (
     <Wrapper>
