@@ -271,6 +271,7 @@ export class Fwoosh implements FwooshClass {
       "consola",
       "lodash.chunk",
       "@mdx-js/react",
+      "@code-hike/mdx/dist/components.cjs.js",
     ];
 
     process.env.NODE_ENV = mode;
