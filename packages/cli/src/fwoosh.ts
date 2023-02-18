@@ -21,6 +21,7 @@ import { visit } from "unist-util-visit";
 import handler from "serve-handler";
 import http from "http";
 import { chromium } from "playwright";
+import VitePluginInjectPreload from "vite-plugin-inject-preload";
 
 import remarkFrontmatter from "remark-frontmatter";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -271,6 +272,7 @@ export class Fwoosh implements FwooshClass {
       "consola",
       "lodash.chunk",
       "@mdx-js/react",
+      "@code-hike/mdx/dist/components.cjs.js",
     ];
 
     process.env.NODE_ENV = mode;
@@ -293,6 +295,19 @@ export class Fwoosh implements FwooshClass {
       root: path.dirname(path.dirname(require.resolve("@fwoosh/app"))),
       base: mode === "production" ? this.options.basename : "/",
       plugins: [
+        VitePluginInjectPreload({
+          files: [
+            {
+              match: /inter-[a-zA-Z]*-[a-z-0-9]*\.woff2$/,
+              attributes: {
+                type: "font/woff2",
+                as: "font",
+                crossorigin: "anonymous",
+              },
+            },
+          ],
+          injectTo: "head-prepend",
+        }),
         mdx({
           remarkPlugins: [
             remarkFrontmatter,
@@ -520,6 +535,23 @@ export class Fwoosh implements FwooshClass {
     const config = await this.getViteConfig({ outDir, mode: "production" });
 
     await build(config);
+
+    await fs.writeFile(
+      path.join(outDir, "vercel.json"),
+      JSON.stringify({
+        headers: [
+          {
+            source: "/:all*(ttf|otf|woff|woff2)",
+            headers: [
+              {
+                key: "Cache-Control",
+                value: "public, max-age=31536000, immutable",
+              },
+            ],
+          },
+        ],
+      })
+    );
 
     this.serve({ outDir }, async (server) => {
       const stories = await createVirtualStoriesFile(this.options);
