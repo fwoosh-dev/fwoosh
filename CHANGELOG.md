@@ -1,3 +1,15 @@
+# v0.0.124 (Sat Feb 18 2023)
+
+#### 🐛 Bug Fix
+
+- fix relayout when logo loads [#77](https://github.com/fwoosh-dev/fwoosh/pull/77) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.123 (Sat Feb 18 2023)
 
 #### 🐛 Bug Fix
