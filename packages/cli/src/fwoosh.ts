@@ -540,7 +540,7 @@ export class Fwoosh implements FwooshClass {
       JSON.stringify({
         headers: [
           {
-            source: "/:all*(ttf|otf|woff|woff2)",
+            source: "/assets/:path*",
             headers: [
               {
                 key: "Cache-Control",
