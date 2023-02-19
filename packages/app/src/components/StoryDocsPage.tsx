@@ -133,7 +133,12 @@ const StoryDiv = React.memo(function StoryDiv({
           <StoryPreviewWrapper>
             {isOpen && <StoryToolbar />}
 
-            <StoryPreviewArea>
+            <StoryPreviewArea
+              style={{
+                width: window.FWOOSH_WORKBENCH_CANVAS_SHAPES?.[slug]?.size[0],
+                height: window.FWOOSH_WORKBENCH_CANVAS_SHAPES?.[slug]?.size[1],
+              }}
+            >
               <StoryPreview>
                 <div ref={ref} />
               </StoryPreview>
