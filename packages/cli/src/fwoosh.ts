@@ -775,7 +775,9 @@ export class Fwoosh implements FwooshClass {
         const docsWithHtmlDescriptions = await Promise.all(
           docs.map(async (doc) => ({
             ...doc,
-            description: await convertMarkdownToHtml(doc.description),
+            description: doc.description
+              ? await convertMarkdownToHtml(doc.description)
+              : undefined,
           }))
         );
 
