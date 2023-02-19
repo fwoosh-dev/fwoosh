@@ -35,7 +35,7 @@ const ToolPanelsContent = ({ storySlug }: ToolPanelsContentProps) => {
   const parameters = useParameters();
   const isDocs = useIsDocs();
 
-  const shownPanel = panels.filter((Panel) => {
+  const shownPanels = panels.filter((Panel) => {
     const paramValue = Panel.paramKey
       ? parameters?.[Panel.paramKey]
       : undefined;
@@ -54,13 +54,14 @@ const ToolPanelsContent = ({ storySlug }: ToolPanelsContentProps) => {
   return (
     <TabRoot
       defaultValue={
-        localStorage.getItem("fwoosh:active-panel") ?? panels[0]?.componentName
+        localStorage.getItem("fwoosh:active-panel") ??
+        shownPanels[0]?.componentName
       }
       onValueChange={(id) => localStorage.setItem("fwoosh:active-panel", id)}
     >
       <TabsList>
         <Suspense fallback={<Spinner delay={3000} size={5} />}>
-          {shownPanel.map((Panel) => {
+          {shownPanels.map((Panel) => {
             return (
               <Tabs.Trigger
                 key={`trigger-${Panel.componentName}`}
@@ -76,7 +77,7 @@ const ToolPanelsContent = ({ storySlug }: ToolPanelsContentProps) => {
         </Suspense>
       </TabsList>
 
-      {shownPanel.map((Panel) => {
+      {shownPanels.map((Panel) => {
         return (
           <TabContent
             key={`content-${Panel.componentName}-${storySlug}`}
