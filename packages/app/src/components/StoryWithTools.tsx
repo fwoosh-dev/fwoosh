@@ -8,8 +8,8 @@ import { ToolPanels } from "./ToolPanels";
 import { ErrorBoundary } from "@fwoosh/components";
 import { useStoryId } from "@fwoosh/hooks";
 
-const StyledPanel = styled(Panel, {
-  overflow: "auto !important",
+const Scrollable = styled("div", {
+  overflow: "auto",
 });
 
 const PanelContainer = styled("div", {
@@ -45,33 +45,19 @@ const PanelResizer = styled("div", {
 
 export const StoryWithTools = () => {
   const storyId = useStoryId();
-  const storyPaneSize = React.useMemo(() => {
-    if (localStorage.getItem("fwoosh:storyPaneSize")) {
-      return Number(localStorage.getItem("fwoosh:storyPaneSize"));
-    }
-
-    return 75;
-  }, []);
-  const storyPaneSizeSet = React.useCallback((size: number) => {
-    localStorage.setItem("fwoosh:storyPaneSize", String(size));
-  }, []);
 
   let content = <Story />;
 
   if (panels.length > 0 && storyId) {
     content = (
-      <PanelGroup direction="vertical">
-        <StyledPanel
-          maxSize={75}
-          defaultSize={storyPaneSize}
-          onResize={storyPaneSizeSet}
-        >
-          {content}
-        </StyledPanel>
+      <PanelGroup autoSaveId="fwoosh-tools" direction="vertical">
+        <Panel>
+          <Scrollable>{content}</Scrollable>
+        </Panel>
         <PanelResizeHandle>
           <PanelResizer />
         </PanelResizeHandle>
-        <Panel maxSize={75}>
+        <Panel collapsible maxSize={75}>
           <PanelContainer>
             <ToolPanels storySlug={storyId} />
           </PanelContainer>
