@@ -94,7 +94,6 @@ export class Fwoosh implements FwooshClass {
       title: "Fwoosh",
       setup: "",
       open: false,
-      includeMdxInWorkbench: false,
       basename: "/",
       modifyViteConfig: (config) => config,
       ...options,

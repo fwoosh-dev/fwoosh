@@ -21,7 +21,6 @@ export function fwooshConfigPlugin(config: FwooshOptionsLoaded) {
         return endent`
           export const config = {
             title: "${config.title}",
-            includeMdxInWorkbench: ${config.includeMdxInWorkbench},
             themes: ${JSON.stringify(config.themes)},
           }
         `;
