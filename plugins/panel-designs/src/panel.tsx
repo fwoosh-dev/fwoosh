@@ -39,7 +39,7 @@ const Empty = styled("div", {
 });
 
 export default function DesignsPanel() {
-  const params = useParameters() as { designs: DesignsPanelParameters };
+  const params = useParameters<{ designs: DesignsPanelParameters }>();
   const url =
     typeof params?.designs === "string"
       ? params?.designs

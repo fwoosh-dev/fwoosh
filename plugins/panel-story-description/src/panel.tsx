@@ -1,6 +1,6 @@
 import * as React from "react";
 import { stories } from "@fwoosh/app/stories";
-import { components, MDXContent, Spinner } from "@fwoosh/components";
+import { components, MDXContent } from "@fwoosh/components";
 import { styled } from "@fwoosh/styling";
 import { PanelPluginProps } from "fwoosh";
 import { useMdxContent } from "@fwoosh/hooks";

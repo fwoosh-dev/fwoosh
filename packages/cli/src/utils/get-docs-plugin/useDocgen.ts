@@ -1,30 +1,5 @@
 import { useQuery } from "react-query";
-import { resolveStoryMeta, UnresolvedMeta, log } from "@fwoosh/utils";
-
-function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-// Since we lazy load stories we need to wait for them to be loaded
-// before we can get the docgen for them.
-// This is a simple backoff function that will retry a test function
-// until it passes or the number of attempts is reached.
-async function backoff(attempts: number, test: () => boolean) {
-  let i = 0;
-  let delay = 100;
-
-  for (i = 0; i < attempts; i++) {
-    if (test()) {
-      return;
-    }
-
-    log.log(`Waiting for story to load...`);
-    await sleep(delay);
-    delay *= 2;
-  }
-
-  throw new Error(`Story failed to load after ${i} attempts`);
-}
+import { resolveStoryMeta, UnresolvedMeta } from "@fwoosh/utils";
 
 export const useDocgen = (key: string, meta: UnresolvedMeta, story?: any) => {
   const { data } = useQuery(

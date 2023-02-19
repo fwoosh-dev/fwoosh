@@ -1,10 +1,4 @@
-import React, {
-  Suspense,
-  useContext,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-} from "react";
+import React, { Suspense, useContext, useLayoutEffect, useRef } from "react";
 import { styled } from "@fwoosh/styling";
 import { Spinner, Tabs, ErrorBoundary } from "@fwoosh/components";
 import { panels } from "@fwoosh/app/ui";
@@ -48,7 +42,7 @@ const ToolPanelsContent = ({ storySlug }: ToolPanelsContentProps) => {
   const storyPreviewId = useContext(StoryIdContext);
   const currentParameters = useParameters();
   const previousParams = usePrevious(currentParameters);
-  const parameters = currentParameters || previousParams;
+  const parameters = currentParameters ?? previousParams;
   const isDocs = useIsDocs();
 
   const shownPanels = panels.filter((Panel) => {

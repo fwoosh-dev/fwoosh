@@ -27,7 +27,7 @@ export const useRender = ({ id, slug }: UseRenderOptions) => {
     render(
       ref.current,
       slug,
-      parameters || {},
+      parameters ?? {},
       () => setHasRendered(false),
       () => setHasRendered(true)
     );
