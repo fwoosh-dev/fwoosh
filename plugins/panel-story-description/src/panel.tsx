@@ -40,9 +40,7 @@ export default function DescriptionPanel({ storyId }: PanelPluginProps) {
 
   return (
     <Panel>
-      <React.Suspense fallback={<Spinner />}>
-        <Content rawContent={story.comment} />
-      </React.Suspense>
+      <Content rawContent={story.comment} />
     </Panel>
   );
 }

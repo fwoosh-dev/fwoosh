@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { resolveStoryMeta, UnresolvedMeta } from "@fwoosh/utils";
+import { resolveStoryMeta, UnresolvedMeta, log } from "@fwoosh/utils";
 
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -18,20 +18,28 @@ async function backoff(attempts: number, test: () => boolean) {
       return;
     }
 
+    log.log(`Waiting for story to load...`);
     await sleep(delay);
     delay *= 2;
   }
+
+  throw new Error(`Story failed to load after ${i} attempts`);
 }
 
 export const useDocgen = (key: string, meta: UnresolvedMeta, story?: any) => {
   const { data } = useQuery(
     key,
     async () => {
+      let storyDefinition: { component: any } | undefined;
+
       if (story?._payload?._status === -1) {
-        await backoff(10, () => story?._payload?._status === 1);
+        const storyComponent = await story._payload._result();
+        storyDefinition = storyComponent.default;
+      } else {
+        storyDefinition = story?._payload?._result?.default;
       }
 
-      let component = story?._payload?._result?.default?.component;
+      let component = storyDefinition?.component;
 
       if (!component) {
         const resolvedMeta = await resolveStoryMeta(meta);
