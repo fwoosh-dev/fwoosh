@@ -25,7 +25,8 @@ import { GlobalToolbarControls, ToolbarControls } from "./toolbar";
 import { Minus, Plus } from "react-feather";
 import { panels } from "@fwoosh/app/ui";
 import { useToolbarControls } from "../hooks/useToolbarControls";
-import { ParameterContext, useMdxContent, useParameters } from "@fwoosh/hooks";
+import { ParameterContext, useMdxContent } from "@fwoosh/hooks";
+import { useParameters } from "../hooks/useParameters";
 
 const HeaderWrapper = styled("div", {
   position: "relative",
@@ -91,26 +92,23 @@ const ExpandToggle = styled("div", {
 const StoryToolbar = () => {
   const id = React.useContext(StoryIdContext);
   const { storyControls } = useToolbarControls();
-  const parameters = useParameters();
 
   if (!storyControls.length) {
     return null;
   }
 
   return (
-    <ParameterContext.Provider value={parameters}>
-      <React.Suspense fallback={<Spinner size={5} />}>
-        <HeaderBar>
-          <GlobalToolbarControls />
-          <ToolbarControls>
-            {storyControls.map((Control) => (
-              <Control key={Control.componentName} storyPreviewId={id} />
-            ))}
-          </ToolbarControls>
-          <GlobalToolbarControls />
-        </HeaderBar>
-      </React.Suspense>
-    </ParameterContext.Provider>
+    <React.Suspense fallback={<Spinner size={5} />}>
+      <HeaderBar>
+        <GlobalToolbarControls />
+        <ToolbarControls>
+          {storyControls.map((Control) => (
+            <Control key={Control.componentName} storyPreviewId={id} />
+          ))}
+        </ToolbarControls>
+        <GlobalToolbarControls />
+      </HeaderBar>
+    </React.Suspense>
   );
 };
 
@@ -126,49 +124,52 @@ const StoryDiv = React.memo(function StoryDiv({
   const [isOpen, setIsOpen] = React.useState(defaultOpen);
   const id = useId();
   const { ref, hasRendered } = useRender({ id, slug });
+  const parameters = useParameters({ id: slug, suspense: true });
 
   return (
-    <StoryIdContext.Provider value={id}>
-      <StoryPreviewWrapperSpacing>
-        <StoryPreviewWrapper>
-          {isOpen && <StoryToolbar />}
+    <ParameterContext.Provider value={parameters}>
+      <StoryIdContext.Provider value={id}>
+        <StoryPreviewWrapperSpacing>
+          <StoryPreviewWrapper>
+            {isOpen && <StoryToolbar />}
 
-          <StoryPreviewArea>
-            <StoryPreview>
-              <div ref={ref} />
-            </StoryPreview>
-          </StoryPreviewArea>
+            <StoryPreviewArea>
+              <StoryPreview>
+                <div ref={ref} />
+              </StoryPreview>
+            </StoryPreviewArea>
 
-          {panels.length > 0 && isOpen && (
-            <ToolsArea>
-              <ToolPanels storySlug={slug} />
-            </ToolsArea>
-          )}
-        </StoryPreviewWrapper>
+            {panels.length > 0 && isOpen && (
+              <ToolsArea>
+                <ToolPanels storySlug={slug} />
+              </ToolsArea>
+            )}
+          </StoryPreviewWrapper>
 
-        <ExpandToggle>
-          {isOpen ? (
-            <Tooltip message="Collapse tools">
-              <IconButton onClick={() => setIsOpen(false)}>
-                <Minus />
-              </IconButton>
-            </Tooltip>
-          ) : (
-            <Tooltip message="Expand tools">
-              <IconButton onClick={() => setIsOpen(true)}>
-                <Plus />
-              </IconButton>
-            </Tooltip>
-          )}
-        </ExpandToggle>
-      </StoryPreviewWrapperSpacing>
+          <ExpandToggle>
+            {isOpen ? (
+              <Tooltip message="Collapse tools">
+                <IconButton onClick={() => setIsOpen(false)}>
+                  <Minus />
+                </IconButton>
+              </Tooltip>
+            ) : (
+              <Tooltip message="Expand tools">
+                <IconButton onClick={() => setIsOpen(true)}>
+                  <Plus />
+                </IconButton>
+              </Tooltip>
+            )}
+          </ExpandToggle>
+        </StoryPreviewWrapperSpacing>
 
-      {showSpinnerWhileLoading && !hasRendered && (
-        <OverlaySpinner>
-          <Spinner delay={2000} />
-        </OverlaySpinner>
-      )}
-    </StoryIdContext.Provider>
+        {showSpinnerWhileLoading && !hasRendered && (
+          <OverlaySpinner>
+            <Spinner delay={2000} />
+          </OverlaySpinner>
+        )}
+      </StoryIdContext.Provider>
+    </ParameterContext.Provider>
   );
 });
 

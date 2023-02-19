@@ -1,4 +1,10 @@
-import React, { Suspense, useContext } from "react";
+import React, {
+  Suspense,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+} from "react";
 import { styled } from "@fwoosh/styling";
 import { Spinner, Tabs, ErrorBoundary } from "@fwoosh/components";
 import { panels } from "@fwoosh/app/ui";
@@ -30,9 +36,19 @@ interface ToolPanelsContentProps {
   storySlug: string;
 }
 
+function usePrevious<T>(value: T) {
+  const ref = useRef<T>();
+  useLayoutEffect(() => {
+    ref.current = value || ref.current;
+  });
+  return ref.current;
+}
+
 const ToolPanelsContent = ({ storySlug }: ToolPanelsContentProps) => {
   const storyPreviewId = useContext(StoryIdContext);
-  const parameters = useParameters();
+  const currentParameters = useParameters();
+  const previousParams = usePrevious(currentParameters);
+  const parameters = currentParameters || previousParams;
   const isDocs = useIsDocs();
 
   const shownPanels = panels.filter((Panel) => {
@@ -61,19 +77,20 @@ const ToolPanelsContent = ({ storySlug }: ToolPanelsContentProps) => {
     >
       <TabsList>
         <Suspense fallback={<Spinner delay={3000} size={5} />}>
-          {shownPanels.map((Panel) => {
-            return (
-              <Tabs.Trigger
-                key={`trigger-${Panel.componentName}`}
-                value={Panel.componentName}
-              >
-                <Panel.displayName
-                  storyPreviewId={storyPreviewId}
-                  storyId={storySlug}
-                />
-              </Tabs.Trigger>
-            );
-          })}
+          {parameters &&
+            shownPanels.map((Panel) => {
+              return (
+                <Tabs.Trigger
+                  key={`trigger-${Panel.componentName}`}
+                  value={Panel.componentName}
+                >
+                  <Panel.displayName
+                    storyPreviewId={storyPreviewId}
+                    storyId={storySlug}
+                  />
+                </Tabs.Trigger>
+              );
+            })}
         </Suspense>
       </TabsList>
 

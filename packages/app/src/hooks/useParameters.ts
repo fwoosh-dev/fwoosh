@@ -3,8 +3,12 @@ import { stories } from "@fwoosh/app/stories";
 import { useQuery } from "react-query";
 import { resolveStoryMeta } from "@fwoosh/utils";
 
-export const useParameters = () => {
-  const storyId = useStoryId();
+export const useParameters = ({
+  id,
+  suspense,
+}: { id?: string; suspense?: boolean } = {}) => {
+  const storyIdParam = useStoryId();
+  const storyId = id ?? storyIdParam;
   const story = storyId ? stories[storyId] : undefined;
   const { data } = useQuery(
     `params-${storyId}`,
@@ -20,7 +24,7 @@ export const useParameters = () => {
         ...component?.default?.parameters,
       };
     },
-    { suspense: false }
+    { suspense }
   );
 
   return data;
