@@ -6,8 +6,11 @@ import { styled, keyframes } from "@fwoosh/styling";
 import { PanelPluginProps } from "fwoosh";
 
 const Wrapper = styled("div", {
-  px: 4,
   width: "100%",
+});
+
+const PlaceholderWrapper = styled("div", {
+  px: 4,
 });
 
 function PropsPanelContent({ storyId }: PanelPluginProps) {
@@ -66,7 +69,7 @@ const placeholderBoxRow = (
 function PropsPanelSkeleton() {
   return (
     <DelayedRender delay={500}>
-      <Wrapper>
+      <PlaceholderWrapper>
         <components.p>
           <PlaceholderBox style={{ width: "80%" }} />
         </components.p>
@@ -88,7 +91,7 @@ function PropsPanelSkeleton() {
             {placeholderBoxRow}
           </tbody>
         </components.table>
-      </Wrapper>
+      </PlaceholderWrapper>
     </DelayedRender>
   );
 }
