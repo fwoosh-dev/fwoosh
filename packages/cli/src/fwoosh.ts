@@ -706,6 +706,11 @@ export class Fwoosh implements FwooshClass {
     onReady?: (server: http.Server) => void
   ) {
     const server = http.createServer((request, response) => {
+      response.setHeader(
+        "Cache-Control",
+        "public, max-age=31536000, immutable"
+      );
+
       return handler(request, response, {
         public: outDir,
         rewrites: [
