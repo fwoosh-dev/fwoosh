@@ -25,8 +25,9 @@ import { GlobalToolbarControls, ToolbarControls } from "./toolbar";
 import { Minus, Plus } from "react-feather";
 import { panels } from "@fwoosh/app/ui";
 import { useToolbarControls } from "../hooks/useToolbarControls";
-import { ParameterContext, useMdxContent } from "@fwoosh/hooks";
+import { ParameterContext, useDocsPath, useMdxContent } from "@fwoosh/hooks";
 import { useParameters } from "../hooks/useParameters";
+import { useBuildSearchIndex } from "../hooks/useBuildSearchIndex";
 
 const HeaderWrapper = styled("div", {
   position: "relative",
@@ -129,7 +130,7 @@ const StoryDiv = React.memo(function StoryDiv({
   return (
     <ParameterContext.Provider value={parameters}>
       <StoryIdContext.Provider value={id}>
-        <StoryPreviewWrapperSpacing>
+        <StoryPreviewWrapperSpacing data-type="preview">
           <StoryPreviewWrapper>
             {isOpen && <StoryToolbar />}
 
@@ -230,7 +231,7 @@ export const PageContent = ({
             }
 
             return (
-              <div key={story.story.slug}>
+              <React.Fragment key={story.story.slug}>
                 <HeaderWrapper data-link-group>
                   <HeaderLink
                     id={paramCase(story.story.title)}
@@ -242,7 +243,7 @@ export const PageContent = ({
                 </HeaderWrapper>
                 {story.story.comment && <LazyComment story={story.story} />}
                 <StoryDiv slug={story.story.slug} defaultOpen={false} />
-              </div>
+              </React.Fragment>
             );
           })}
         </>
@@ -276,8 +277,11 @@ export const StoryDocsPage = ({
   stories: [firstStory, ...stories],
 }: PageContentProps & { name: string }) => {
   const quickNavRef = React.useRef<HTMLDivElement>(null);
+  const docsPath = useDocsPath() ?? "";
+  const title = docsPath?.split("-").join("/") ?? "";
 
   useActiveHeader(quickNavRef);
+  useBuildSearchIndex({ title, slug: docsPath });
 
   return (
     <DocsLayout>

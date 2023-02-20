@@ -9,7 +9,10 @@ export function useBuildSearchIndex({
   slug: string;
 }) {
   useEffect(() => {
-    if (process.env.NODE_ENV !== "production") {
+    if (
+      process.env.NODE_ENV !== "production" ||
+      window.FWOOSH_SEARCH_INDEX?.[slug]
+    ) {
       return;
     }
 

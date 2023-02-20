@@ -34,8 +34,7 @@ const crawler = new fdir()
 function sanitizeTemplateString(str: string) {
   return str
     .replace(/`/g, "\\`")
-    .replace(/(\r\n|\n|\r)/gm, "")
-    .replace(/\\n/gm, "\\\\n")
+    .replace(/"\\n"/gm, '"\\\\n"')
     .replace(/"/g, '\\"')
     .replace(/\${/g, "\\${");
 }
