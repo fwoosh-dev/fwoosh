@@ -14,6 +14,7 @@ import { StorySidebarChildItem } from "@fwoosh/types";
 import {
   resetContentScrollPosition,
   convertMetaTitleToUrlParam,
+  filterOutStories,
 } from "@fwoosh/utils";
 import { useDocsPath } from "@fwoosh/hooks";
 import { titleCase } from "title-case";
@@ -103,25 +104,6 @@ function Node({ node, style }: NodeRendererProps<StorySidebarChildItem>) {
       {name}
     </SidebarSectionTitle>
   );
-}
-
-function filterOutStories(tree: StorySidebarChildItem[]) {
-  const filteredTree: StorySidebarChildItem[] = [];
-
-  for (const item of tree) {
-    if (item.type === "story") {
-      if (item.story.type === "mdx") {
-        filteredTree.push(item);
-      }
-
-      continue;
-    }
-
-    const filteredChildren = filterOutStories(item.children);
-    filteredTree.push({ ...item, children: filteredChildren });
-  }
-
-  return filteredTree;
 }
 
 export const DocsSidebarTree = () => {

@@ -12,12 +12,8 @@ import { useQuery } from "react-query";
 import { PageSwitchButton } from "./PageSwitchButtons";
 import { useActiveHeader } from "../hooks/useActiveHeader";
 import { useLocation } from "react-router-dom";
-import {
-  buildSearchIndex,
-  SearchData,
-  CONTENT_ID,
-  HEADING_SELECTOR,
-} from "@fwoosh/utils";
+import { SearchData } from "@fwoosh/utils";
+import { useBuildSearchIndex } from "../hooks/useBuildSearchIndex";
 
 function TableOfContentsGroup({ entry }: { entry: TocEntry }) {
   return (
@@ -139,49 +135,12 @@ declare global {
 
 export const MDXPage = ({ page }: { page: StoryTreeItem }) => {
   const location = useLocation();
-  const { component: MDXPage, meta, slug } = stories[page.id] as MDXStoryData;
+  const story = stories[page.id] as MDXStoryData;
+  const { component: MDXPage, meta } = story;
   // TODO
   const { data } = useQuery(`toc-${page.id}`, () => []);
 
-  React.useEffect(() => {
-    const [lvl0, ...rest] = meta.title.split("/");
-    // The leaf story name we don't care about. Instead we'll use
-    // the H1 from the MDX page.
-    rest.pop();
-    const lvl1 = rest.join(" / ");
-
-    const headingNodes = document
-      ?.getElementById(CONTENT_ID)
-      ?.querySelectorAll<HTMLHeadingElement>(HEADING_SELECTOR);
-
-    if (!headingNodes) {
-      return;
-    }
-
-    const headings = Array.from(headingNodes);
-    const levels = [lvl0];
-
-    if (lvl1) {
-      levels.push(lvl1);
-    }
-
-    if (!window.FWOOSH_SEARCH_INDEX) {
-      window.FWOOSH_SEARCH_INDEX = {};
-    }
-
-    window.FWOOSH_SEARCH_INDEX[slug] =
-      headings.length > 0 ? buildSearchIndex(levels, headings[0]) : [];
-
-    if (process.env.NODE_ENV === "production") {
-      // This log is used to communicate the search index to the
-      // built app.
-      console.log(
-        "window.FWOOSH_SEARCH_INDEX",
-        slug,
-        window.FWOOSH_SEARCH_INDEX[slug]
-      );
-    }
-  }, [meta, slug]);
+  useBuildSearchIndex(story);
 
   React.useLayoutEffect(() => {
     location.hash && document.querySelector(location.hash)?.scrollIntoView();

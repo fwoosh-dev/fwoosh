@@ -3,7 +3,7 @@ import { stories } from "@fwoosh/app/stories";
 import { MDXContent } from "@fwoosh/components";
 import { styled } from "@fwoosh/styling";
 import { useHighlightedCode } from "@fwoosh/hooks";
-import { PanelPluginProps } from "fwoosh";
+import { BasicStoryData, PanelPluginProps } from "fwoosh";
 
 const Panel = styled("div", {
   height: "100%",
@@ -43,21 +43,21 @@ const Panel = styled("div", {
   },
 });
 
-function HighlightedSource({ code }: { code: string }) {
-  const highlightedCode = useHighlightedCode({ code });
+function HighlightedSource({ story }: { story: BasicStoryData }) {
+  const highlightedCode = useHighlightedCode(story);
   return <MDXContent compiledSource={highlightedCode} />;
 }
 
 export default function SourcePanel({ storyId }: PanelPluginProps) {
   const story = Object.values(stories).find((s) => s?.slug === storyId);
 
-  if (!story || !("code" in story) || !story.code) {
+  if (!story || !("code" in story)) {
     return null;
   }
 
   return (
     <Panel>
-      <HighlightedSource code={story.code} />
+      <HighlightedSource story={story} />
     </Panel>
   );
 }

@@ -14,7 +14,7 @@ import {
 } from "@fwoosh/components";
 import { capitalCase, paramCase } from "change-case";
 import { titleCase } from "title-case";
-import { StorySidebarChildItem } from "@fwoosh/types";
+import { BasicStoryData, StorySidebarChildItem } from "@fwoosh/types";
 
 import { useRender } from "../hooks/useRender";
 import { PageSwitchButton } from "./PageSwitchButtons";
@@ -178,8 +178,8 @@ const StoryDiv = React.memo(function StoryDiv({
   );
 });
 
-function LazyComment({ comment: rawComment }: { comment: string }) {
-  const comment = useMdxContent(rawComment);
+function LazyComment({ story }: { story: BasicStoryData }) {
+  const comment = useMdxContent(story.slug, story.comment!);
 
   if (!comment) {
     return null;
@@ -204,9 +204,7 @@ export const PageContent = ({
   ) {
     docsIntro = (
       <>
-        {firstStory.story.comment && (
-          <LazyComment comment={firstStory.story.comment} />
-        )}
+        {firstStory.story.comment && <LazyComment story={firstStory.story} />}
         <StoryDiv
           slug={firstStory.story.slug}
           key={firstStory.story.slug}
@@ -242,9 +240,7 @@ export const PageContent = ({
                     {story.story.title}
                   </components.h3>
                 </HeaderWrapper>
-                {story.story.comment && (
-                  <LazyComment comment={story.story.comment} />
-                )}
+                {story.story.comment && <LazyComment story={story.story} />}
                 <StoryDiv slug={story.story.slug} defaultOpen={false} />
               </div>
             );

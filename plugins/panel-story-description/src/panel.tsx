@@ -2,7 +2,7 @@ import * as React from "react";
 import { stories } from "@fwoosh/app/stories";
 import { components, MDXContent } from "@fwoosh/components";
 import { styled } from "@fwoosh/styling";
-import { PanelPluginProps } from "fwoosh";
+import { BasicStoryData, PanelPluginProps } from "fwoosh";
 import { useMdxContent } from "@fwoosh/hooks";
 
 const Panel = styled("div", {
@@ -15,8 +15,8 @@ const NoDescriptionMessage = styled(components.p, {
   color: "$gray10",
 });
 
-function Content({ rawContent }: { rawContent: string }) {
-  const content = useMdxContent(rawContent);
+function Content({ story }: { story: BasicStoryData }) {
+  const content = useMdxContent(story.slug, story.comment!);
 
   if (!content) {
     return null;
@@ -40,7 +40,7 @@ export default function DescriptionPanel({ storyId }: PanelPluginProps) {
 
   return (
     <Panel>
-      <Content rawContent={story.comment} />
+      <Content story={story} />
     </Panel>
   );
 }

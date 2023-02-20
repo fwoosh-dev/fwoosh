@@ -20,9 +20,9 @@ export interface ParsedStoryData {
   /** The file where the story is defined */
   file: string;
   /** The code that defines the story */
-  code: string;
+  code: () => Promise<string>;
   /** The jsDoc comment above the story */
-  comment?: string;
+  comment?: () => Promise<string>;
 }
 
 export interface ResolvedStoryMeta extends StoryMeta {
@@ -54,8 +54,8 @@ interface BaseStoryData {
 
 export interface BasicStoryData extends BaseStoryData {
   type: "basic";
-  code: string;
-  comment?: string;
+  code: () => Promise<string>;
+  comment?: () => Promise<string>;
 }
 
 export interface MdxMeta {
