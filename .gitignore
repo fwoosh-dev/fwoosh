@@ -14,3 +14,4 @@ lib/
 dist/
 .env
 .turbo
+fwoosh-static

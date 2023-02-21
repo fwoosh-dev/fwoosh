@@ -2,6 +2,7 @@ import { promises as fs } from "fs";
 import boxen from "boxen";
 import path from "path";
 import mkdirp from "mkdirp";
+import { renderToString } from "react-dom/server";
 import { createServer, InlineConfig, build } from "vite";
 import express, { json } from "express";
 import expressWs from "express-ws";
@@ -97,7 +98,7 @@ export class Fwoosh implements FwooshClass {
   /** Places for plugins to "tap" to add to or modify fwoosh's functionality */
   public hooks: FwooshHooks;
 
-  constructor({ theme, ...options }: FwooshOptionWithCLIDefaults) {
+  constructor({ theme, stories, ...options }: FwooshOptionWithCLIDefaults) {
     this.options = {
       docgen: {},
       syntaxTheme: "github-dark-dimmed",
@@ -106,6 +107,7 @@ export class Fwoosh implements FwooshClass {
       setup: "",
       open: false,
       basename: "/",
+      stories: stories || ["**/*.stories.@(js|jsx|ts|tsx|mdx)"],
       modifyViteConfig: (config) => config,
       ...options,
       sortSidebarItems: (a, b) => {
@@ -271,8 +273,8 @@ export class Fwoosh implements FwooshClass {
       "@devtools-ds/tree",
       "@devtools-ds/object-inspector",
       "escape-html",
-      "react-router",
-      "react-router-dom",
+      // "react-router",
+      // "react-router-dom",
       "debounce",
       "react/jsx-runtime",
       "hoist-non-react-statics",
@@ -301,7 +303,7 @@ export class Fwoosh implements FwooshClass {
     const stories = await getStoryList(this.options);
 
     const baseConfig: InlineConfig = {
-      mode,
+      // mode,
       root: path.dirname(path.dirname(require.resolve("@fwoosh/app"))),
       base: mode === "production" ? this.options.basename : "/",
       plugins: [
@@ -487,7 +489,13 @@ export class Fwoosh implements FwooshClass {
           ...panels.map((p) => p.filepath),
           ...toolbarControls.map((p) => p.filepath),
         ],
-        exclude: ["@fwoosh/*", "@fwoosh/components", "@fwoosh/hooks"],
+        exclude: [
+          "@fwoosh/*",
+          "@fwoosh/components",
+          "@fwoosh/hooks",
+          // "react-router",
+          // "react-router-dom",
+        ],
         include: optimizedDeps,
       },
       build: {
@@ -502,28 +510,30 @@ export class Fwoosh implements FwooshClass {
         },
       },
       define: {
+        // "process.env.NODE_ENV": `"${mode}"`,
         "process.env.FWOOSH_DEV_SERVER_PORT": `${port}`,
         "process.env.LOG_LEVEL": `"${process.env.LOG_LEVEL}"`,
         "process.env.FWOOSH_BASE_NAME": `"${
           mode === "production" ? this.options.basename : "/"
         }"`,
       },
-      resolve: {
-        alias: [
-          {
-            find: "react-router",
-            replacement: require.resolve("react-router", {
-              paths: [require.resolve("@fwoosh/app")],
-            }),
-          },
-          {
-            find: /^react-router-dom$/,
-            replacement: require.resolve("react-router-dom", {
-              paths: [require.resolve("@fwoosh/app")],
-            }),
-          },
-        ],
-      },
+      // TODO figure out how to do this correctly and not break SSR
+      // resolve: {
+      //   alias: [
+      //     {
+      //       find: "react-router",
+      //       replacement: require.resolve("react-router", {
+      //         paths: [require.resolve("@fwoosh/app")],
+      //       }),
+      //     },
+      //     {
+      //       find: /^react-router-dom$/,
+      //       replacement: require.resolve("react-router-dom", {
+      //         paths: [require.resolve("@fwoosh/app")],
+      //       }),
+      //     },
+      //   ],
+      // },
     };
 
     const configWithPluginModifications =
@@ -556,20 +566,11 @@ export class Fwoosh implements FwooshClass {
       build: {
         ssr: "src/entryServer.tsx",
         outDir: path.join(outDir, "ssg"),
-        rollupOptions: {
-          output: {
-            format: "esm",
-          },
-        },
       },
     });
 
     this.serve({ outDir }, async (server) => {
-      const { data } = await getStoryData(this.options);
-      const stories = await createVirtualStoriesFile(data, this.options);
-      const pages = Object.values(
-        flattenDocsTreeItems(filterOutStories(stories.tree))
-      );
+      const pages = await this.getPages();
       log.log("Building search data...");
 
       const searchData: Record<string, unknown> = {};
@@ -843,9 +844,40 @@ export class Fwoosh implements FwooshClass {
   }
 
   async export({ staticDir }: { staticDir: string }) {
+    await mkdirp(staticDir);
+
     const out = path.join(process.cwd(), this.options.outDir);
     const template = await fs.readFile(path.join(out, "index.html"), "utf-8");
-    const { render } = await import(path.join(out, "ssg/entryServer.js"));
-    console.log({ template, render });
+    const { render } = await import(path.join(out, "ssg/entryServer.mjs"));
+    const pages = await this.getPages();
+
+    for (const page of pages) {
+      const url = `/docs/${page.id}`;
+
+      log.log("pre-rendering:", url);
+
+      const context = {};
+      const { result, headTags } = await render(url, context);
+      const html = template
+        .replace(`<!--app-html-->`, result)
+        .replace(`<!--app-head-->`, renderToString(headTags));
+
+      if (html) {
+        const filePath = `${staticDir}/${encodeURIComponent(page.id)}.html`;
+        await fs.writeFile(filePath, html);
+        log.log("pre-rendered:", url);
+      }
+    }
+  }
+
+  private async getPages() {
+    const { data } = await getStoryData(this.options);
+    const stories = await createVirtualStoriesFile(data, this.options);
+
+    const pages = Object.values(
+      flattenDocsTreeItems(filterOutStories(stories.tree))
+    );
+
+    return pages;
   }
 }

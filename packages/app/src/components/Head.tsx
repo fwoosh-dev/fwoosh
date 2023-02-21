@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useLocation } from "react-router-dom";
-import { HeadProvider, Style } from "react-head";
+import { HeadProvider, Style, Title } from "react-head";
 import { getCssText } from "@fwoosh/styling";
 import { useDocsPath, useStoryId } from "@fwoosh/hooks";
 
@@ -46,30 +46,30 @@ export const Head = () => {
     };
   }, [getMeta]);
 
-  const [css, setCss] = React.useState("");
-  const storyId = useStoryId();
-  const docsPath = useDocsPath();
+  // const [css, setCss] = React.useState("");
+  // const storyId = useStoryId();
+  // const docsPath = useDocsPath();
 
-  React.useEffect(() => {
-    setTimeout(() => {
-      setCss(getCssText());
-    }, 1000); // todo maybe wait for spinner to not be visible
-  }, [storyId, docsPath]);
+  // React.useEffect(() => {
+  //   setTimeout(() => {
+  //     setCss(getCssText());
+  //   }, 1000); // todo maybe wait for spinner to not be visible
+  // }, [storyId, docsPath]);
 
   return (
-    <HeadProvider>
-      <Style
+    <>
+      {/* <Style
         type="text/css"
         id="stitches"
         data-rh=""
         dangerouslySetInnerHTML={{ __html: css }}
-      />
+      /> */}
       {meta &&
         Object.entries(meta).map(([name, value]) => {
           if (name === "title") {
-            return <title key={name}>{value}</title>;
+            return <Title key={name}>{value}</Title>;
           }
         })}
-    </HeadProvider>
+    </>
   );
 };

@@ -6,8 +6,9 @@ import {
   version as reactDomVersion,
   render as ReactDOMRender,
 } from "react-dom";
-import { App, router } from "./App";
-import { RouterProvider } from "react-router-dom";
+import { App } from "./App";
+import { BrowserRouter } from "react-router-dom";
+import { HeadProvider } from "react-head";
 
 const root = document.getElementById("root");
 
@@ -17,9 +18,11 @@ if (!root) {
 
 const isReact18 = reactDomVersion.startsWith("18");
 const app = (
-  <App>
-    <RouterProvider router={router} />
-  </App>
+  <BrowserRouter>
+    <HeadProvider>
+      <App />
+    </HeadProvider>
+  </BrowserRouter>
 );
 
 if (isReact18) {
