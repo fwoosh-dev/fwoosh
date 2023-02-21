@@ -3,7 +3,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "description": "",
-  "version": "0.0.125",
+  "version": "0.0.126",
   "license": "MIT",
   "author": {
     "name": "Andrew Lisowski",

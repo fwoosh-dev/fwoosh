@@ -1,7 +1,7 @@
 {
   "name": "@fwoosh/theme-default",
   "type": "module",
-  "version": "0.0.125",
+  "version": "0.0.126",
   "description": "The default theme for fwoosh",
   "main": "dist/index.js",
   "author": "Andrew Lisowski <lisowski54@gmail.com>",
