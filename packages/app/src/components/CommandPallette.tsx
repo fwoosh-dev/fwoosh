@@ -6,7 +6,7 @@ import { stories, tree } from "@fwoosh/app/stories";
 import commandScore from "command-score";
 import { Interweave } from "interweave";
 import { StoryData, StoryTree, StoryTreeItem } from "@fwoosh/types";
-import useMousetrap from "react-hook-mousetrap";
+import { useHotkeys } from "react-hotkeys-hook";
 import { ArrowRight, Bookmark, Code } from "react-feather";
 import { SearchData, convertMetaTitleToUrlParam } from "@fwoosh/utils";
 import { useDocsPath, useIsWorkbench, useStoryId } from "@fwoosh/hooks";
@@ -403,7 +403,7 @@ export function CommandPallette() {
     [isWorkbench, navigate, onClose]
   );
 
-  useMousetrap("meta+k", () => openSet(true));
+  useHotkeys("meta+k", () => openSet(true));
 
   return (
     <Command.Dialog

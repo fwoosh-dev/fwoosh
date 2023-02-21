@@ -262,7 +262,7 @@ export class Fwoosh implements FwooshClass {
       "react-query",
       "react-head",
       "command-score",
-      "mousetrap",
+      "react-hotkeys-hook",
       "react",
       "react-dom",
       "react-dom/client",

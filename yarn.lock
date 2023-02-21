@@ -935,7 +935,7 @@ __metadata:
     react-dom: ^18.2.0
     react-feather: ^2.0.10
     react-head: ^3.4.2
-    react-hook-mousetrap: ^2.0.4
+    react-hotkeys-hook: ^4.3.7
     react-query: ^3.39.3
     react-resizable-panels: ^0.0.36
     react-router-dom: ^6.8.1
@@ -11171,13 +11171,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mousetrap@npm:^1.6.2":
-  version: 1.6.5
-  resolution: "mousetrap@npm:1.6.5"
-  checksum: 1ce36af5ac57e1fab687e3da004cc18914275f8ceef33f16d01110edc5126a5dbaace578b1e61179f93a506e71a88fe886f305db537a3673cf9f73affd1dffa6
-  languageName: node
-  linkType: hard
-
 "mri@npm:^1.1.0":
   version: 1.2.0
   resolution: "mri@npm:1.2.0"
@@ -12836,15 +12829,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-mousetrap@npm:^2.0.4":
-  version: 2.0.4
-  resolution: "react-hook-mousetrap@npm:2.0.4"
-  dependencies:
-    mousetrap: ^1.6.2
+"react-hotkeys-hook@npm:^4.3.7":
+  version: 4.3.7
+  resolution: "react-hotkeys-hook@npm:4.3.7"
   peerDependencies:
-    react: ^16.8.0
-    react-dom: ^16.8.0
-  checksum: 4b2f68edc49a7b59d55932ffcf25edd3649fa49b20e66276f5573c13736b9eadd1cca6092961a69ef046297d32605c58b23637403b592d59dbe58a87018989b1
+    react: ">=16.8.1"
+    react-dom: ">=16.8.1"
+  checksum: f37330e17a320bfb83b1e8d8cb0f4e465fda0ea62c5db59d9a67ccbec6066b317e6f621c796a86cbca958ba3a240be1d00d3a18f4675c30a79b9f6bd28f2d741
   languageName: node
   linkType: hard
 
