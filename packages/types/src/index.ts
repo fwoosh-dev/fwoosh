@@ -182,7 +182,7 @@ export interface FwooshOptions {
   setup?: string;
   /** Globs to match story files */
   stories?: string[];
-  /** the directory with the mdx pages */
+  /** The directory to build the website into */
   outDir?: string;
   /** Open the browser when running the dev server */
   open?: "workbench" | "docs" | false;

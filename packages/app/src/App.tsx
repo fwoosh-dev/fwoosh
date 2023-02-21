@@ -1,15 +1,14 @@
-import "@fwoosh/app/setup";
+// import "@fwoosh/app/setup";
 import * as React from "react";
 import {
   createBrowserRouter,
   Navigate,
   Outlet,
-  RouterProvider,
   ScrollRestoration,
   useRouteError,
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { HelmetProvider } from "react-helmet-async";
+import { HeadProvider } from "react-head";
 
 import "./index.css";
 import {
@@ -106,7 +105,7 @@ function RouteError() {
   return <ErrorBoundary error={error as Error} />;
 }
 
-const router = createBrowserRouter(
+export const router = createBrowserRouter(
   [
     {
       path: "/",
@@ -235,7 +234,7 @@ const globalStyles = globalCss({
   },
 });
 
-export const App = () => {
+export const App = ({ children }: { children: React.ReactNode }) => {
   const [colorMode, colorModeSet] = React.useState<ColorMode | undefined>();
 
   globalStyles();
@@ -250,18 +249,18 @@ export const App = () => {
 
   return (
     <TooltipProvider>
-      <HelmetProvider>
+      <HeadProvider>
         <QueryClientProvider client={queryClient}>
           <ColorModeContext.Provider value={colorMode}>
             <ErrorBoundary fullScreen>
-              <AppWrapper data-color-mode={colorMode}>
+              <AppWrapper>
                 <ProductionSearchIndex />
-                <RouterProvider router={router} />
+                {children}
               </AppWrapper>
             </ErrorBoundary>
           </ColorModeContext.Provider>
         </QueryClientProvider>
-      </HelmetProvider>
+      </HeadProvider>
     </TooltipProvider>
   );
 };

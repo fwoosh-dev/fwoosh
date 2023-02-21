@@ -92,6 +92,21 @@ const fwooshCli: MultiCommand = {
       options: [...sharedOptions, storiesOption, outDirOption],
     },
     {
+      name: "export",
+      description: "Create a static website from the build",
+      options: [
+        ...sharedOptions,
+        outDirOption,
+        {
+          name: "static-dir",
+          description:
+            "The directory that the static website should be placed in.",
+          type: String,
+          defaultValue: "./fwoosh-static",
+        },
+      ],
+    },
+    {
       name: "serve",
       description: "Run a server for the production build of the website",
       options: [openOption],
@@ -143,6 +158,7 @@ async function run() {
   const { Fwoosh } = await import("./fwoosh.js");
   const fwoosh = new Fwoosh(fwooshOptions);
   const outDir = path.join(dir, "out");
+  const staticDir = path.join(dir, "fwoosh-static");
 
   await fwoosh.loadPlugins();
   initTimerStop();
@@ -153,6 +169,9 @@ async function run() {
     if (options._command === "build") {
       await fwoosh.clean();
       await fwoosh.build({ outDir });
+    }
+    if (options._command === "export") {
+      await fwoosh.export({ staticDir });
     } else if (options._command === "clean") {
       await fwoosh.clean();
       log.log("Cleaned output files.");

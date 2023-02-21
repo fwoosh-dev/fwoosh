@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import boxen from "boxen";
 import path from "path";
+import mkdirp from "mkdirp";
 import { createServer, InlineConfig, build } from "vite";
 import express, { json } from "express";
 import expressWs from "express-ws";
@@ -259,7 +260,7 @@ export class Fwoosh implements FwooshClass {
     const includedHeadings = ["h2", "h3", "h4", "h5", "h6"];
     const depsToOptimize = [
       "react-query",
-      "react-helmet-async",
+      "react-head",
       "command-score",
       "mousetrap",
       "react",
@@ -516,7 +517,7 @@ export class Fwoosh implements FwooshClass {
             }),
           },
           {
-            find: "react-router-dom",
+            find: /^react-router-dom$/,
             replacement: require.resolve("react-router-dom", {
               paths: [require.resolve("@fwoosh/app")],
             }),
@@ -547,8 +548,21 @@ export class Fwoosh implements FwooshClass {
   /** Do a production build of the website */
   async build({ outDir }: BuildOptions) {
     const config = await this.getViteConfig({ outDir, mode: "production" });
+    const browser = await chromium.launch();
 
     await build(config);
+    await build({
+      ...config,
+      build: {
+        ssr: "src/entryServer.tsx",
+        outDir: path.join(outDir, "ssg"),
+        rollupOptions: {
+          output: {
+            format: "esm",
+          },
+        },
+      },
+    });
 
     this.serve({ outDir }, async (server) => {
       const { data } = await getStoryData(this.options);
@@ -558,8 +572,8 @@ export class Fwoosh implements FwooshClass {
       );
       log.log("Building search data...");
 
-      const browser = await chromium.launch();
       const searchData: Record<string, unknown> = {};
+      await mkdirp(path.join(outDir, "docs"));
 
       for (const file of pages) {
         log.info("Building search data:", file);
@@ -695,8 +709,6 @@ export class Fwoosh implements FwooshClass {
 
       await browser.close();
       server.close();
-
-      log.success("Build complete!");
     });
   }
 
@@ -713,16 +725,16 @@ export class Fwoosh implements FwooshClass {
 
       return handler(request, response, {
         public: outDir,
-        rewrites: [
-          {
-            source: "fwoosh/assets/:id",
-            destination: "assets/:id",
-          },
-          {
-            source: "!assets/**",
-            destination: "index.html",
-          },
-        ],
+        // rewrites: [
+        //   {
+        //     source: "fwoosh/assets/:id",
+        //     destination: "assets/:id",
+        //   },
+        //   {
+        //     source: "!assets/**",
+        //     destination: "index.html",
+        //   },
+        // ],
       });
     });
 
@@ -828,5 +840,12 @@ export class Fwoosh implements FwooshClass {
         open(`http://localhost:${port}/${this.options.open}`);
       }
     });
+  }
+
+  async export({ staticDir }: { staticDir: string }) {
+    const out = path.join(process.cwd(), this.options.outDir);
+    const template = await fs.readFile(path.join(out, "index.html"), "utf-8");
+    const { render } = await import(path.join(out, "ssg/entryServer.js"));
+    console.log({ template, render });
   }
 }

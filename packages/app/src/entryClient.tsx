@@ -6,20 +6,26 @@ import {
   version as reactDomVersion,
   render as ReactDOMRender,
 } from "react-dom";
-import { App } from "./App";
+import { App, router } from "./App";
+import { RouterProvider } from "react-router-dom";
 
-const container = document.getElementById("root");
+const root = document.getElementById("root");
 
-if (!container) {
+if (!root) {
   throw new Error("No container element found");
 }
 
 const isReact18 = reactDomVersion.startsWith("18");
+const app = (
+  <App>
+    <RouterProvider router={router} />
+  </App>
+);
 
 if (isReact18) {
-  import("react-dom/client").then(({ createRoot }) => {
-    createRoot(container).render(<App />);
+  import("react-dom/client").then(({ hydrateRoot }) => {
+    hydrateRoot(root, app);
   });
 } else {
-  ReactDOMRender(<App />, container);
+  ReactDOMRender(app, root);
 }

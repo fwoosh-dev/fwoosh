@@ -1,6 +1,8 @@
 import * as React from "react";
 import { useLocation } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
+import { HeadProvider, Style } from "react-head";
+import { getCssText } from "@fwoosh/styling";
+import { useDocsPath, useStoryId } from "@fwoosh/hooks";
 
 interface DocumentMeta {
   title: string;
@@ -44,17 +46,30 @@ export const Head = () => {
     };
   }, [getMeta]);
 
-  if (!meta) {
-    return null;
-  }
+  const [css, setCss] = React.useState("");
+  const storyId = useStoryId();
+  const docsPath = useDocsPath();
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setCss(getCssText());
+    }, 1000); // todo maybe wait for spinner to not be visible
+  }, [storyId, docsPath]);
 
   return (
-    <Helmet>
-      {Object.entries(meta).map(([name, value]) => {
-        if (name === "title") {
-          return <title key={name}>{value}</title>;
-        }
-      })}
-    </Helmet>
+    <HeadProvider>
+      <Style
+        type="text/css"
+        id="stitches"
+        data-rh=""
+        dangerouslySetInnerHTML={{ __html: css }}
+      />
+      {meta &&
+        Object.entries(meta).map(([name, value]) => {
+          if (name === "title") {
+            return <title key={name}>{value}</title>;
+          }
+        })}
+    </HeadProvider>
   );
 };

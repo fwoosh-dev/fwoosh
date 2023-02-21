@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useId } from "@radix-ui/react-id";
-import { Helmet } from "react-helmet-async";
 
 import { styled } from "@fwoosh/styling";
 import { stories } from "@fwoosh/app/stories";
@@ -32,18 +31,7 @@ const StoryDiv = React.memo(function StoryDiv({
     throw new Error(`Story not found: ${slug}`);
   }
 
-  const groups = story.grouping.split("/");
-
-  return (
-    <>
-      <Helmet>
-        <title>
-          {story.title} - {groups.slice(-2).join("/")}
-        </title>
-      </Helmet>
-      <Root ref={ref} />
-    </>
-  );
+  return <Root ref={ref} />;
 });
 
 export const Story = () => {
