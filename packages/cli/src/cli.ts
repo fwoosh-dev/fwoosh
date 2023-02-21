@@ -166,19 +166,26 @@ async function run() {
   const { log } = await import("@fwoosh/utils");
 
   if (options) {
-    if (options._command === "build") {
-      await fwoosh.clean();
-      await fwoosh.build({ outDir });
-    }
-    if (options._command === "export") {
-      await fwoosh.export({ staticDir });
-    } else if (options._command === "clean") {
-      await fwoosh.clean();
-      log.log("Cleaned output files.");
-    } else if (options._command === "serve") {
-      await fwoosh.serve({ outDir });
-    } else {
-      await fwoosh.dev();
+    switch (options._command) {
+      case "build":
+        await fwoosh.clean();
+        await fwoosh.build({ outDir });
+        break;
+      case "export":
+        await fwoosh.export({ staticDir });
+        break;
+      case "clean":
+        await fwoosh.clean();
+        log.log("Cleaned output files.");
+        break;
+      case "serve":
+        await fwoosh.serve({ outDir });
+        break;
+      case "dev":
+        await fwoosh.dev();
+        break;
+      default:
+        throw new Error(`Unknown command ${options._command}`);
     }
   }
 
