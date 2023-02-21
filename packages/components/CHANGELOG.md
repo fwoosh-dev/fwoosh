@@ -1,3 +1,17 @@
+# v0.0.126 (Tue Feb 21 2023)
+
+#### 🐛 Bug Fix
+
+- fix props tables [#78](https://github.com/fwoosh-dev/fwoosh/pull/78) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- base64 code/comments so it's easier to inject into a module ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix stlying ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.121 (Wed Feb 15 2023)
 
 #### 🐛 Bug Fix

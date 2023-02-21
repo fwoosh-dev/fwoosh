@@ -1,3 +1,17 @@
+# v0.0.126 (Tue Feb 21 2023)
+
+#### 🐛 Bug Fix
+
+- fix props tables [#78](https://github.com/fwoosh-dev/fwoosh/pull/78) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix stlying ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix props tables ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.122 (Thu Feb 16 2023)
 
 #### ⚠️ Pushed to `main`

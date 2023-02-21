@@ -1,3 +1,16 @@
+# v0.0.126 (Tue Feb 21 2023)
+
+#### 🐛 Bug Fix
+
+- `@fwoosh/app`, `fwoosh`, `@fwoosh/components`, `@fwoosh/hooks`, `@fwoosh/types`, `@fwoosh/utils`, `@fwoosh/panel-designs`, `@fwoosh/panel-props`, `@fwoosh/panel-source`, `@fwoosh/panel-story-description`, `@fwoosh/tool-viewport`
+  - fix props tables [#78](https://github.com/fwoosh-dev/fwoosh/pull/78) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.125 (Sat Feb 18 2023)
 
 #### ⚠️ Pushed to `main`

@@ -1,3 +1,23 @@
+# v0.0.126 (Tue Feb 21 2023)
+
+#### 🐛 Bug Fix
+
+- fix props tables [#78](https://github.com/fwoosh-dev/fwoosh/pull/78) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- make search index work for generated docs pages ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- make comments/code into modules so we can load less ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- lint ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- use measured height-width for docs pages so that page doesn't jump while story renders ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix params in docs mode ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- remove includeMdxInWorkbench and improve flickering tools when switching stories ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- make tools collapsible ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- default to first shown panel ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.123 (Sat Feb 18 2023)
 
 #### 🐛 Bug Fix

@@ -1,3 +1,26 @@
+# v0.0.126 (Tue Feb 21 2023)
+
+#### 🐛 Bug Fix
+
+- fix props tables [#78](https://github.com/fwoosh-dev/fwoosh/pull/78) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- base64 code/comments so it's easier to inject into a module ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- set up caching for fwoosh serve ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- make search index work for generated docs pages ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- make comments/code into modules so we can load less ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- remove unneeded code ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix cache ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- lint ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- remove includeMdxInWorkbench and improve flickering tools when switching stories ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- bugs ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- don't run mdx on blank comments ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix props tables ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.123 (Sat Feb 18 2023)
 
 #### 🐛 Bug Fix
