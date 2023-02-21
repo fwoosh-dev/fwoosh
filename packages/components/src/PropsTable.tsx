@@ -6,6 +6,10 @@ import { components } from "./components.js";
 import * as Tabs from "./Tabs.js";
 import { MDXContent } from "./MDXContent.js";
 
+const Description = styled("div", {
+  px: 4,
+});
+
 const NoPropMessage = styled(components.p, {
   color: "$gray10",
 });
@@ -19,7 +23,11 @@ const Table = ({ doc }: TableProps) => {
 
   return (
     <>
-      {doc.description && <MDXContent compiledSource={doc.description} />}
+      {doc.description && (
+        <Description>
+          <MDXContent compiledSource={doc.description} />
+        </Description>
+      )}
       {rows.length > 0 ? (
         <components.table>
           <thead>
@@ -75,10 +83,9 @@ const Table = ({ doc }: TableProps) => {
 
 export interface PropsTableProps {
   docs: ReturnType<typeof useDocgen>;
-  hasTitle?: boolean | string;
 }
 
-export const PropsTable = ({ docs, hasTitle }: PropsTableProps) => {
+export const PropsTable = ({ docs }: PropsTableProps) => {
   if (!docs) {
     return null;
   }
@@ -87,40 +94,30 @@ export const PropsTable = ({ docs, hasTitle }: PropsTableProps) => {
     return <NoPropMessage>No property documentation found.</NoPropMessage>;
   }
 
-  const titleId = typeof hasTitle === "string" ? hasTitle : undefined;
-
   if (docs.length === 1) {
-    return (
-      <>
-        {hasTitle && <components.h3 id={titleId}>Properties</components.h3>}
-        <Table doc={docs[0]} />
-      </>
-    );
+    return <Table doc={docs[0]} />;
   }
 
   return (
-    <>
-      {hasTitle && <components.h3 id={titleId}>Properties</components.h3>}
-      <Tabs.Root defaultValue={docs?.[0].displayName}>
-        <Tabs.List>
-          {docs?.map((doc) => (
-            <Tabs.Trigger
-              key={`trigger-${doc.displayName}`}
-              value={doc.displayName}
-            >
-              {doc.displayName}
-            </Tabs.Trigger>
-          ))}
-        </Tabs.List>
+    <Tabs.Root defaultValue={docs?.[0].displayName}>
+      <Tabs.List>
         {docs?.map((doc) => (
-          <Tabs.Content
-            key={`content-${doc.displayName}`}
+          <Tabs.Trigger
+            key={`trigger-${doc.displayName}`}
             value={doc.displayName}
           >
-            <Table doc={doc} />
-          </Tabs.Content>
+            {doc.displayName}
+          </Tabs.Trigger>
         ))}
-      </Tabs.Root>
-    </>
+      </Tabs.List>
+      {docs?.map((doc) => (
+        <Tabs.Content
+          key={`content-${doc.displayName}`}
+          value={doc.displayName}
+        >
+          <Table doc={doc} />
+        </Tabs.Content>
+      ))}
+    </Tabs.Root>
   );
 };

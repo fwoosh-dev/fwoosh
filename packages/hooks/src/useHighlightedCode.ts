@@ -1,16 +1,23 @@
 import { useQuery } from "react-query";
 
-export const useHighlightedCode = ({ code }: { code: string }) => {
-  // In prod mode we highlight code on the server so we don't need to
-  // load the highlighter on the client
-  if (process.env.NODE_ENV === "production") {
-    return code;
-  }
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+export const useHighlightedCode = ({
+  slug,
+  code,
+}: {
+  code: () => Promise<string>;
+  slug: string;
+}) => {
   const { data } = useQuery(
-    code,
+    `highlight-code-${slug}`,
     async () => {
+      const content = atob(await code());
+
+      // In prod mode we highlight code on the server so we don't need to
+      // load the highlighter on the client
+      if (process.env.NODE_ENV === "production") {
+        return content;
+      }
+
       // TODO switch to web socket for speed
       const res = await fetch("/highlight-code", {
         method: "POST",
@@ -18,7 +25,7 @@ export const useHighlightedCode = ({ code }: { code: string }) => {
           Accept: "text/plain",
           "Content-Type": "text/plain",
         },
-        body: code,
+        body: content,
       });
       const { html } = await res.json();
 

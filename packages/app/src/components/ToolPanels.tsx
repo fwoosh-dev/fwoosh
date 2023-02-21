@@ -1,4 +1,4 @@
-import React, { Suspense, useContext } from "react";
+import React, { Suspense, useContext, useLayoutEffect, useRef } from "react";
 import { styled } from "@fwoosh/styling";
 import { Spinner, Tabs, ErrorBoundary } from "@fwoosh/components";
 import { panels } from "@fwoosh/app/ui";
@@ -30,12 +30,22 @@ interface ToolPanelsContentProps {
   storySlug: string;
 }
 
+function usePrevious<T>(value: T) {
+  const ref = useRef<T>();
+  useLayoutEffect(() => {
+    ref.current = value || ref.current;
+  });
+  return ref.current;
+}
+
 const ToolPanelsContent = ({ storySlug }: ToolPanelsContentProps) => {
   const storyPreviewId = useContext(StoryIdContext);
-  const parameters = useParameters();
+  const currentParameters = useParameters();
+  const previousParams = usePrevious(currentParameters);
+  const parameters = currentParameters ?? previousParams;
   const isDocs = useIsDocs();
 
-  const shownPanel = panels.filter((Panel) => {
+  const shownPanels = panels.filter((Panel) => {
     const paramValue = Panel.paramKey
       ? parameters?.[Panel.paramKey]
       : undefined;
@@ -54,29 +64,31 @@ const ToolPanelsContent = ({ storySlug }: ToolPanelsContentProps) => {
   return (
     <TabRoot
       defaultValue={
-        localStorage.getItem("fwoosh:active-panel") ?? panels[0]?.componentName
+        localStorage.getItem("fwoosh:active-panel") ??
+        shownPanels[0]?.componentName
       }
       onValueChange={(id) => localStorage.setItem("fwoosh:active-panel", id)}
     >
       <TabsList>
         <Suspense fallback={<Spinner delay={3000} size={5} />}>
-          {shownPanel.map((Panel) => {
-            return (
-              <Tabs.Trigger
-                key={`trigger-${Panel.componentName}`}
-                value={Panel.componentName}
-              >
-                <Panel.displayName
-                  storyPreviewId={storyPreviewId}
-                  storyId={storySlug}
-                />
-              </Tabs.Trigger>
-            );
-          })}
+          {parameters &&
+            shownPanels.map((Panel) => {
+              return (
+                <Tabs.Trigger
+                  key={`trigger-${Panel.componentName}`}
+                  value={Panel.componentName}
+                >
+                  <Panel.displayName
+                    storyPreviewId={storyPreviewId}
+                    storyId={storySlug}
+                  />
+                </Tabs.Trigger>
+              );
+            })}
         </Suspense>
       </TabsList>
 
-      {shownPanel.map((Panel) => {
+      {shownPanels.map((Panel) => {
         return (
           <TabContent
             key={`content-${Panel.componentName}-${storySlug}`}

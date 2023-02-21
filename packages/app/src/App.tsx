@@ -30,7 +30,6 @@ import { getFirstStory, convertMetaTitleToUrlParam } from "@fwoosh/utils";
 import { Head } from "./components/Head";
 import { CommandPallette } from "./components/CommandPallette";
 import { ProductionSearchIndex } from "./components/ProductionSearchIndex";
-import { config } from "@fwoosh/app/config";
 
 const WorkBenchCanvas = React.lazy(() =>
   import("./components/canvas/WorkbenchCanvas").then((m) => ({
@@ -62,12 +61,6 @@ const Workbench = React.lazy(() =>
   }))
 );
 
-const StoryWithTools = React.lazy(() =>
-  import("./components/StoryWithTools").then((m) => ({
-    default: m.StoryWithTools,
-  }))
-);
-
 const Story = React.lazy(() =>
   import("./components/Story").then((m) => ({
     default: m.Story,
@@ -95,7 +88,7 @@ const FirstDocsPage = () => {
 };
 
 const FirstStory = () => {
-  const firstStory = getFirstStory(tree, { mdx: config.includeMdxInWorkbench });
+  const firstStory = getFirstStory(tree);
 
   if (!firstStory) {
     throw new Error('No stories found. Did you forget to add a "meta" export?');
@@ -161,16 +154,7 @@ const router = createBrowserRouter(
             },
             {
               path: ":storyId",
-              element: <StoryWithTools />,
-            },
-            {
-              path: "docs",
-              children: [
-                {
-                  path: ":docsPath",
-                  element: <DocsPage />,
-                },
-              ],
+              element: <Story />,
             },
           ],
         },

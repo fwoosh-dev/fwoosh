@@ -1,6 +1,6 @@
 import { StoryMeta } from "@fwoosh/types";
 
-type UnresolvedMeta =
+export type UnresolvedMeta =
   | undefined
   | StoryMeta
   | Promise<StoryMeta>

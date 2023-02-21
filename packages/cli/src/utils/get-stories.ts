@@ -30,11 +30,6 @@ const crawler = new fdir()
     ["node_modules", "/dist/", "/out/"].some((i) => dirName.includes(i))
   );
 
-/** Replaces characters in a string that are problematic when inserting into a template string  */
-function sanitizeTemplateString(str: string) {
-  return str.replace(/`/g, "\\`").replace(/"/g, '\\"').replace(/\${/g, "\\${");
-}
-
 function sanitizeMarkdownString(str: string) {
   return str
     .split("\n")
@@ -176,7 +171,12 @@ const storyFileCache = new Map<
 export type FwooshFileDescriptor = StoryFileDescriptor | MDXFileDescriptor;
 const lastEnd = { value: 0 };
 
-async function parseStoryFile(file: string, data: FwooshFileDescriptor[]) {
+async function parseStoryFile(
+  file: string,
+  data: FwooshFileDescriptor[],
+  codeMap: Record<string, string>,
+  commentMap: Record<string, string | undefined>
+) {
   const parseStoryTimerEnd = perfLog(`Parse '${file}'`);
   const fullPath = path.resolve(file);
 
@@ -254,27 +254,32 @@ async function parseStoryFile(file: string, data: FwooshFileDescriptor[]) {
         const exportName = d.declaration.declarations[0].id.value;
         const start = d.span.start + offset - ast.span.start;
         const nearestExport = findExportKeyword(contents, start);
+        const slug = createStorySlug(meta.title, exportName);
         const code = contents.slice(
           nearestExport,
           d.span.end + offset - ast.span.start - (start - nearestExport)
         );
 
-        return {
-          exportName,
-          title: titleCase(exportName),
-          slug: createStorySlug(meta.title, exportName),
-          file: fullPath,
-          comment: await getComment(contents, nearestExport),
-          code: sanitizeTemplateString(
-            process.env.NODE_ENV === "production"
-              ? await convertMarkdownToHtml(endent`
+        commentMap[slug] = await getComment(contents, nearestExport);
+        codeMap[slug] =
+          process.env.NODE_ENV === "production"
+            ? await convertMarkdownToHtml(endent`
                   \`\`\`tsx
                   ${code}
                   \`\`\`
                 `)
-              : code
-          ),
-        };
+            : code;
+
+        return {
+          exportName,
+          title: titleCase(exportName),
+          slug,
+          file: fullPath,
+          // @ts-ignore
+          code: `() => new Promise((resolve) => import("@fwoosh/code/${slug}").then(m => m.default).then(resolve))`,
+          // @ts-ignore
+          comment: `() => new Promise((resolve) => import("@fwoosh/comment/${slug}").then(m => m.default).then(resolve))`,
+        } satisfies ParsedStoryData;
       })
     );
 
@@ -305,10 +310,14 @@ export async function getStoryData({ stories, outDir }: FwooshOptionsLoaded) {
 
   const parseAllStoriesTimerEnd = perfLog("Parse stories");
   const data: FwooshFileDescriptor[] = [];
+  const codeMap: Record<string, string> = {};
+  const commentMap: Record<string, string | undefined> = {};
 
   // Running in parallel causes issues with the AST
-  await chunkPromisesTimes(files, 1, (file) => parseStoryFile(file, data));
+  await chunkPromisesTimes(files, 1, (file) =>
+    parseStoryFile(file, data, codeMap, commentMap)
+  );
   parseAllStoriesTimerEnd();
 
-  return data;
+  return { data, codeMap, commentMap };
 }

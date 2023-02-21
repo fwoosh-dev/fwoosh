@@ -43,8 +43,8 @@ export function useCurrentSize(defaultValueProp?: Device | Device[]) {
   const defaultValue: Device[] = React.useMemo(() => {
     return defaultValueProp
       ? arrayify(defaultValueProp)
-      : arrayify(params.viewport?.defaultSize);
-  }, [defaultValueProp, params.viewport?.defaultSize]);
+      : arrayify(params?.viewport?.defaultSize);
+  }, [defaultValueProp, params?.viewport?.defaultSize]);
 
   const [size, setSize] = React.useState<Size[]>(
     sizes.filter((s) => defaultValue.some((v) => v === s.name))

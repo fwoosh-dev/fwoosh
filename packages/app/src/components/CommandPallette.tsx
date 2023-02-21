@@ -106,7 +106,7 @@ function StoryCommandTreeChild({
       return;
     }
 
-    return highlightSearchResult(item.story.comment, search);
+    return highlightSearchResult("", search);
   }, [search, item]);
 
   if (item.story.type === "mdx") {
@@ -137,9 +137,7 @@ function StoryCommandTreeChild({
   return (
     <Command.Item
       key={item.story.slug}
-      value={`${item.story.grouping}#${
-        item.story.title
-      }|||${item.story.comment?.toLowerCase()}`}
+      value={`${item.story.grouping}#${item.story.title}|||`}
       grouping={parts.join(" / ")}
       title={
         highlightedSearchResult ? (

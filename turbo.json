@@ -3,7 +3,7 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", "tsconfig.build.tsbuildinfo"]
+      "outputs": ["dist/**", "out/**", "tsconfig.build.tsbuildinfo"]
     },
     "dev": {
       "outputs": ["dist/**", "tsconfig.build.tsbuildinfo"],

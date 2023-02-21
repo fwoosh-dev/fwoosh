@@ -1,9 +1,16 @@
 import * as React from "react";
 import type { StoryMeta, Story } from "fwoosh";
-import { Select } from "@fwoosh/components";
+import * as Select from "@fwoosh/components/src/Select.js";
 
 export const meta: StoryMeta = {
   title: "Theming/Components/Select",
+  component: [
+    Select.Root,
+    Select.Trigger,
+    Select.Content,
+    Select.Group,
+    Select.Label,
+  ],
 };
 
 /**

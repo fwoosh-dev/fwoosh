@@ -1,12 +1,27 @@
 import { HEADING_SELECTOR } from "./constants.js";
 
+function getHeadingNode(node: Element) {
+  let headingNode = node;
+
+  if (headingNode.hasAttribute("data-link-group")) {
+    const subHeading = headingNode.querySelector(HEADING_SELECTOR);
+
+    if (subHeading) {
+      headingNode = subHeading;
+    }
+  }
+
+  return headingNode;
+}
+
 function getHeadingLevel(node: Element) {
+  const headingNode = getHeadingNode(node);
   let lvl: string;
 
-  if (node.nodeName.match(/^H\d$/)) {
-    lvl = node.nodeName.replace("H", "");
+  if (headingNode.nodeName.match(/^H\d$/)) {
+    lvl = headingNode.nodeName.replace("H", "");
   } else {
-    lvl = node.getAttribute("data-level") ?? "";
+    lvl = headingNode.getAttribute("data-level") ?? "";
   }
 
   if (!lvl) {
@@ -42,17 +57,28 @@ const getContentBeforeNextHeading = (node: Element) => {
 
   while (node.nextElementSibling) {
     node = node.nextElementSibling;
+
     const headingLevel = getHeadingLevel(node);
 
     if (typeof headingLevel !== "undefined") {
       break;
     }
 
-    if (node.nodeName === "PRE" || node.nodeName === "SCRIPT") {
+    if (
+      node.nodeName === "PRE" ||
+      node.nodeName === "SCRIPT" ||
+      node.getAttribute("data-type") === "preview"
+    ) {
       continue;
     }
 
-    content += `\n${node.textContent}`;
+    const clone = node.cloneNode(true) as HTMLElement;
+
+    clone.querySelectorAll(".ch-codeblock").forEach((el) => {
+      el.remove();
+    });
+
+    content += `\n${clone.textContent}`;
   }
 
   return content.trim();
@@ -82,7 +108,7 @@ export const buildSearchIndex = (
   };
 
   return [
-    currentNode,
+    ...(currentNode.content ? [currentNode] : []),
     ...nextHeadings.reduce(
       (acc, heading) => [...acc, ...buildSearchIndex(path, heading)],
       []

@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { StoryMeta, Story } from "fwoosh";
-import { components } from "@fwoosh/components";
+import { components } from "@fwoosh/components/src/components.js";
 
 export const meta: StoryMeta = {
   title: "Theming/Components/Text",

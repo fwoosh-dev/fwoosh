@@ -10,10 +10,7 @@ declare module "@fwoosh/app/overrides";
 
 declare module "@fwoosh/app/config" {
   import { FwooshOptions, ThemeObject } from "@fwoosh/types";
-  export const config: Pick<
-    FwooshOptions,
-    "title" | "includeMdxInWorkbench"
-  > & {
+  export const config: Pick<FwooshOptions, "title"> & {
     themes: ThemeObject[];
   };
 }
@@ -32,8 +29,12 @@ declare module "@fwoosh/app/render" {
 
 declare module "@fwoosh/app/docs" {
   import type { ComponentDoc } from "react-docgen-typescript";
-  import { StoryMeta } from "@fwoosh/types";
-  export function useDocgen(key: string, story: StoryMeta): ComponentDoc[];
+  import { StoryData } from "@fwoosh/types";
+  export function useDocgen(
+    key: string,
+    meta: StoryData["meta"],
+    story?: any
+  ): ComponentDoc[];
 }
 
 declare module "@fwoosh/app/ui" {

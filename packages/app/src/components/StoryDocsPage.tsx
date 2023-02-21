@@ -14,7 +14,7 @@ import {
 } from "@fwoosh/components";
 import { capitalCase, paramCase } from "change-case";
 import { titleCase } from "title-case";
-import { StorySidebarChildItem } from "@fwoosh/types";
+import { BasicStoryData, StorySidebarChildItem } from "@fwoosh/types";
 
 import { useRender } from "../hooks/useRender";
 import { PageSwitchButton } from "./PageSwitchButtons";
@@ -25,7 +25,9 @@ import { GlobalToolbarControls, ToolbarControls } from "./toolbar";
 import { Minus, Plus } from "react-feather";
 import { panels } from "@fwoosh/app/ui";
 import { useToolbarControls } from "../hooks/useToolbarControls";
-import { ParameterContext, useMdxContent, useParameters } from "@fwoosh/hooks";
+import { ParameterContext, useDocsPath, useMdxContent } from "@fwoosh/hooks";
+import { useParameters } from "../hooks/useParameters";
+import { useBuildSearchIndex } from "../hooks/useBuildSearchIndex";
 
 const HeaderWrapper = styled("div", {
   position: "relative",
@@ -91,26 +93,23 @@ const ExpandToggle = styled("div", {
 const StoryToolbar = () => {
   const id = React.useContext(StoryIdContext);
   const { storyControls } = useToolbarControls();
-  const parameters = useParameters();
 
   if (!storyControls.length) {
     return null;
   }
 
   return (
-    <ParameterContext.Provider value={parameters}>
-      <React.Suspense fallback={<Spinner size={5} />}>
-        <HeaderBar>
-          <GlobalToolbarControls />
-          <ToolbarControls>
-            {storyControls.map((Control) => (
-              <Control key={Control.componentName} storyPreviewId={id} />
-            ))}
-          </ToolbarControls>
-          <GlobalToolbarControls />
-        </HeaderBar>
-      </React.Suspense>
-    </ParameterContext.Provider>
+    <React.Suspense fallback={<Spinner size={5} />}>
+      <HeaderBar>
+        <GlobalToolbarControls />
+        <ToolbarControls>
+          {storyControls.map((Control) => (
+            <Control key={Control.componentName} storyPreviewId={id} />
+          ))}
+        </ToolbarControls>
+        <GlobalToolbarControls />
+      </HeaderBar>
+    </React.Suspense>
   );
 };
 
@@ -126,54 +125,62 @@ const StoryDiv = React.memo(function StoryDiv({
   const [isOpen, setIsOpen] = React.useState(defaultOpen);
   const id = useId();
   const { ref, hasRendered } = useRender({ id, slug });
+  const parameters = useParameters({ id: slug, suspense: true });
 
   return (
-    <StoryIdContext.Provider value={id}>
-      <StoryPreviewWrapperSpacing>
-        <StoryPreviewWrapper>
-          {isOpen && <StoryToolbar />}
+    <ParameterContext.Provider value={parameters}>
+      <StoryIdContext.Provider value={id}>
+        <StoryPreviewWrapperSpacing data-type="preview">
+          <StoryPreviewWrapper>
+            {isOpen && <StoryToolbar />}
 
-          <StoryPreviewArea>
-            <StoryPreview>
-              <div ref={ref} />
-            </StoryPreview>
-          </StoryPreviewArea>
+            <StoryPreviewArea
+              style={{
+                width: window.FWOOSH_WORKBENCH_CANVAS_SHAPES?.[slug]?.size[0],
+                height: window.FWOOSH_WORKBENCH_CANVAS_SHAPES?.[slug]?.size[1],
+              }}
+            >
+              <StoryPreview>
+                <div ref={ref} />
+              </StoryPreview>
+            </StoryPreviewArea>
 
-          {panels.length > 0 && isOpen && (
-            <ToolsArea>
-              <ToolPanels storySlug={slug} />
-            </ToolsArea>
-          )}
-        </StoryPreviewWrapper>
+            {panels.length > 0 && isOpen && (
+              <ToolsArea>
+                <ToolPanels storySlug={slug} />
+              </ToolsArea>
+            )}
+          </StoryPreviewWrapper>
 
-        <ExpandToggle>
-          {isOpen ? (
-            <Tooltip message="Collapse tools">
-              <IconButton onClick={() => setIsOpen(false)}>
-                <Minus />
-              </IconButton>
-            </Tooltip>
-          ) : (
-            <Tooltip message="Expand tools">
-              <IconButton onClick={() => setIsOpen(true)}>
-                <Plus />
-              </IconButton>
-            </Tooltip>
-          )}
-        </ExpandToggle>
-      </StoryPreviewWrapperSpacing>
+          <ExpandToggle>
+            {isOpen ? (
+              <Tooltip message="Collapse tools">
+                <IconButton onClick={() => setIsOpen(false)}>
+                  <Minus />
+                </IconButton>
+              </Tooltip>
+            ) : (
+              <Tooltip message="Expand tools">
+                <IconButton onClick={() => setIsOpen(true)}>
+                  <Plus />
+                </IconButton>
+              </Tooltip>
+            )}
+          </ExpandToggle>
+        </StoryPreviewWrapperSpacing>
 
-      {showSpinnerWhileLoading && !hasRendered && (
-        <OverlaySpinner>
-          <Spinner delay={2000} />
-        </OverlaySpinner>
-      )}
-    </StoryIdContext.Provider>
+        {showSpinnerWhileLoading && !hasRendered && (
+          <OverlaySpinner>
+            <Spinner delay={2000} />
+          </OverlaySpinner>
+        )}
+      </StoryIdContext.Provider>
+    </ParameterContext.Provider>
   );
 });
 
-function LazyComment({ comment: rawComment }: { comment: string }) {
-  const comment = useMdxContent(rawComment);
+function LazyComment({ story }: { story: BasicStoryData }) {
+  const comment = useMdxContent(story.slug, story.comment!);
 
   if (!comment) {
     return null;
@@ -198,9 +205,7 @@ export const PageContent = ({
   ) {
     docsIntro = (
       <>
-        {firstStory.story.comment && (
-          <LazyComment comment={firstStory.story.comment} />
-        )}
+        {firstStory.story.comment && <LazyComment story={firstStory.story} />}
         <StoryDiv
           slug={firstStory.story.slug}
           key={firstStory.story.slug}
@@ -226,7 +231,7 @@ export const PageContent = ({
             }
 
             return (
-              <div key={story.story.slug}>
+              <React.Fragment key={story.story.slug}>
                 <HeaderWrapper data-link-group>
                   <HeaderLink
                     id={paramCase(story.story.title)}
@@ -236,11 +241,9 @@ export const PageContent = ({
                     {story.story.title}
                   </components.h3>
                 </HeaderWrapper>
-                {story.story.comment && (
-                  <LazyComment comment={story.story.comment} />
-                )}
+                {story.story.comment && <LazyComment story={story.story} />}
                 <StoryDiv slug={story.story.slug} defaultOpen={false} />
-              </div>
+              </React.Fragment>
             );
           })}
         </>
@@ -274,8 +277,11 @@ export const StoryDocsPage = ({
   stories: [firstStory, ...stories],
 }: PageContentProps & { name: string }) => {
   const quickNavRef = React.useRef<HTMLDivElement>(null);
+  const docsPath = useDocsPath() ?? "";
+  const title = docsPath?.split("-").join("/") ?? "";
 
   useActiveHeader(quickNavRef);
+  useBuildSearchIndex({ title, slug: docsPath });
 
   return (
     <DocsLayout>

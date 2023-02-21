@@ -11,7 +11,11 @@ import { loadVirtualFile } from "@fwoosh/virtual-file";
 import { createRequire } from "module";
 
 import { endent } from "../endent.js";
-import { getStoryData, MDXFileDescriptor } from "../get-stories.js";
+import {
+  FwooshFileDescriptor,
+  getStoryData,
+  MDXFileDescriptor,
+} from "../get-stories.js";
 import { getStoryTree } from "./get-story-tree.js";
 
 const require = createRequire(import.meta.url);
@@ -32,7 +36,8 @@ function stringifyStories(
       return `"${k}": {
         ...${JSON.stringify(v)},
         component: ${v.component},
-        code: \`${"code" in v ? v.code : undefined}\`,
+        code: ${"code" in v ? (v.code as unknown as string) : "''"},
+        comment: ${"comment" in v ? (v.comment as unknown as string) : "''"},
         meta: ${v.meta as unknown as string}
       }`;
     })
@@ -40,8 +45,10 @@ function stringifyStories(
 }
 
 /** Creates an array of all the stories included in the fwoosh config */
-export async function createVirtualStoriesFile(config: FwooshOptionsLoaded) {
-  const stories = await getStoryData(config);
+export async function createVirtualStoriesFile(
+  stories: FwooshFileDescriptor[],
+  config: FwooshOptionsLoaded
+) {
   const allFiles = stories.flatMap<MDXFileDescriptor | StoryWithGrouping>(
     (file) => {
       return "stories" in file
@@ -154,39 +161,61 @@ export async function createVirtualStoriesFile(config: FwooshOptionsLoaded) {
   ` +
     `\nexport const stories = ${stringifyStories(fileMap)}` +
     `\nexport const tree = matchTreeSortingOrder(getStoryTree(stories), order);` +
-    `\nexport const workbenchTree = matchTreeSortingOrder(getStoryTree(stories, { includeMDX: ${Boolean(
-      config.includeMdxInWorkbench
-    )} }), order);`;
+    `\nexport const workbenchTree = matchTreeSortingOrder(getStoryTree(stories), order);`;
 
   return { file, fileMap, tree };
 }
 
 /** Plugin that creates a virtual module with references to all the stories */
-export function storyListPlugin(config: FwooshOptionsLoaded) {
+export async function storyListPlugin(config: FwooshOptionsLoaded) {
   const virtualFileId = "@fwoosh/app/stories";
+  const { data: stories, codeMap, commentMap } = await getStoryData(config);
+  const virtualModules = [
+    ...Object.entries(codeMap).map(([k, v]) => [
+      `@fwoosh/code/${k}`,
+      `export default \`${Buffer.from(v).toString("base64")}\``,
+    ]),
+    ...Object.entries(commentMap).map(([k, v]) => [
+      `@fwoosh/comment/${k}`,
+      v ? `export default \`${Buffer.from(v).toString("base64")}\`` : "",
+    ]),
+  ];
 
-  return {
-    name: "story-list",
+  return [
+    ...virtualModules.map(([k, v]) => ({
+      name: k,
+      resolveId(id: string) {
+        if (id.includes(k)) return k;
+        return null;
+      },
+      async load(id: string) {
+        if (id.includes(k)) return v;
+        return;
+      },
+    })),
+    {
+      name: "story-list",
 
-    resolveId(id: string) {
-      if (id.includes(virtualFileId)) {
-        return virtualFileId;
-      }
-
-      return null;
-    },
-
-    async load(id: string) {
-      if (id.includes(virtualFileId)) {
-        try {
-          const virtualFile = await createVirtualStoriesFile(config);
-          return virtualFile.file;
-        } catch (e) {
-          console.error(e);
-          return defaultListModule;
+      resolveId(id: string) {
+        if (id.includes(virtualFileId)) {
+          return virtualFileId;
         }
-      }
-      return;
+
+        return null;
+      },
+
+      async load(id: string) {
+        if (id.includes(virtualFileId)) {
+          try {
+            const virtualFile = await createVirtualStoriesFile(stories, config);
+            return virtualFile.file;
+          } catch (e) {
+            console.error(e);
+            return defaultListModule;
+          }
+        }
+        return;
+      },
     },
-  };
+  ];
 }

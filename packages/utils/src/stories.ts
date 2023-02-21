@@ -99,6 +99,22 @@ export const flattenTreeItems = (tree: StorySidebarChildItem[]) => {
   return flatTree;
 };
 
+export const flattenDocsTreeItems = (tree: StorySidebarChildItem[]) => {
+  const flatTree: Record<string, StorySidebarChildItem> = {};
+
+  function flatten(item: StorySidebarChildItem) {
+    if (item.type === "tree" && item.children.length > 0) {
+      item.children.forEach(flatten);
+    } else {
+      flatTree[item.id] = item;
+    }
+  }
+
+  tree.forEach(flatten);
+
+  return flatTree;
+};
+
 export const getPreviousStory = (tree: StorySidebarChildItem[], id: string) => {
   const flatTree = Object.entries(flattenTree(tree));
   const currentIndex = flatTree.findIndex(([key]) => key === id);
@@ -143,3 +159,22 @@ export const getNextStory = (
 
   return flatTree[currentIndex + 1][1];
 };
+
+export function filterOutStories(tree: StorySidebarChildItem[]) {
+  const filteredTree: StorySidebarChildItem[] = [];
+
+  for (const item of tree) {
+    if (item.type === "story") {
+      if (item.story.type === "mdx") {
+        filteredTree.push(item);
+      }
+
+      continue;
+    }
+
+    const filteredChildren = filterOutStories(item.children);
+    filteredTree.push({ ...item, children: filteredChildren });
+  }
+
+  return filteredTree;
+}

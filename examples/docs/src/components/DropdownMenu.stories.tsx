@@ -1,10 +1,12 @@
 import * as React from "react";
 import type { StoryMeta, Story } from "fwoosh";
 import { Check, MoreHorizontal, ExternalLink } from "react-feather";
-import { DropdownMenu, IconButton, ChevronRightIcon } from "@fwoosh/components";
+import { IconButton, ChevronRightIcon } from "@fwoosh/components";
+import * as DropdownMenu from "@fwoosh/components/src/DropdownMenu.js";
 
 export const meta: StoryMeta = {
   title: "Theming/Components/DropdownMenu",
+  component: [DropdownMenu.Root, DropdownMenu.Content, DropdownMenu.Trigger],
 };
 
 type CheckedState = boolean | "indeterminate";

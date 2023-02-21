@@ -6,15 +6,23 @@ import { styled, keyframes } from "@fwoosh/styling";
 import { PanelPluginProps } from "fwoosh";
 
 const Wrapper = styled("div", {
-  px: 4,
   width: "100%",
+});
+
+const PlaceholderWrapper = styled("div", {
+  px: 4,
 });
 
 function PropsPanelContent({ storyId }: PanelPluginProps) {
   const [, story] =
     Object.entries(stories).find(([slug]) => slug === storyId) ?? [];
-  const meta = story?.component?._payload?._result || story?.meta;
-  const docs = useDocgen(storyId, meta);
+
+  if (!story) {
+    throw new Error(`Could not find story with id: ${storyId}`);
+  }
+
+  // return null;
+  const docs = useDocgen(storyId, story.meta, story.component);
 
   return (
     <Wrapper>
@@ -61,7 +69,7 @@ const placeholderBoxRow = (
 function PropsPanelSkeleton() {
   return (
     <DelayedRender delay={500}>
-      <Wrapper>
+      <PlaceholderWrapper>
         <components.p>
           <PlaceholderBox style={{ width: "80%" }} />
         </components.p>
@@ -83,7 +91,7 @@ function PropsPanelSkeleton() {
             {placeholderBoxRow}
           </tbody>
         </components.table>
-      </Wrapper>
+      </PlaceholderWrapper>
     </DelayedRender>
   );
 }

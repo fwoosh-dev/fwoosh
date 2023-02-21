@@ -12,7 +12,13 @@ import {
 } from "tapable";
 import { remarkCodeHike } from "@code-hike/mdx";
 import mdx from "@mdx-js/rollup";
-import { checkLink, log, sortTree } from "@fwoosh/utils";
+import {
+  checkLink,
+  filterOutStories,
+  flattenDocsTreeItems,
+  log,
+  sortTree,
+} from "@fwoosh/utils";
 import bodyParser from "body-parser";
 import terminalLink from "terminal-link";
 import open from "better-opn";
@@ -46,7 +52,11 @@ import { getDocsPlugin } from "./utils/get-docs-plugin/index.js";
 import { fwooshSetupPlugin } from "./utils/fwoosh-setup-plugin.js";
 import { fwooshConfigPlugin } from "./utils/fwoosh-config-plugin.js";
 import { fwooshUiPlugin } from "./utils/fwoosh-ui-plugin.js";
-import { convertMarkdownToHtml, getStoryList } from "./utils/get-stories.js";
+import {
+  convertMarkdownToHtml,
+  getStoryData,
+  getStoryList,
+} from "./utils/get-stories.js";
 import { getCodeHikeConfig, setSyntaxTheme } from "./utils/code-hike-config.js";
 import { componentOverridePlugin } from "./utils/component-override-plugins.js";
 import { perfLog } from "./utils/performance.js";
@@ -94,7 +104,6 @@ export class Fwoosh implements FwooshClass {
       title: "Fwoosh",
       setup: "",
       open: false,
-      includeMdxInWorkbench: false,
       basename: "/",
       modifyViteConfig: (config) => config,
       ...options,
@@ -337,7 +346,12 @@ export class Fwoosh implements FwooshClass {
                 return () => undefined;
               }
 
-              const storiesPromise = createVirtualStoriesFile(this.options);
+              const getStories = async () => {
+                const { data: stories } = await getStoryData(this.options);
+                return createVirtualStoriesFile(stories, this.options);
+              };
+
+              const storiesPromise = getStories();
 
               return async (tree, file) => {
                 const stories = await storiesPromise;
@@ -536,45 +550,28 @@ export class Fwoosh implements FwooshClass {
 
     await build(config);
 
-    await fs.writeFile(
-      path.join(outDir, "vercel.json"),
-      JSON.stringify({
-        headers: [
-          {
-            source: "/:all*(ttf|otf|woff|woff2)",
-            headers: [
-              {
-                key: "Cache-Control",
-                value: "public, max-age=31536000, immutable",
-              },
-            ],
-          },
-        ],
-      })
-    );
-
     this.serve({ outDir }, async (server) => {
-      const stories = await createVirtualStoriesFile(this.options);
-      const mdx = Object.values(stories.fileMap).filter(
-        (i) =>
-          i.type === "mdx" && !JSON.parse(i.meta as unknown as string).skipIndex
+      const { data } = await getStoryData(this.options);
+      const stories = await createVirtualStoriesFile(data, this.options);
+      const pages = Object.values(
+        flattenDocsTreeItems(filterOutStories(stories.tree))
       );
-
-      log.log("Building search data for MDX files...");
+      log.log("Building search data...");
 
       const browser = await chromium.launch();
       const searchData: Record<string, unknown> = {};
 
-      for (const file of mdx) {
-        log.info("Building search data:", file.title);
+      for (const file of pages) {
+        log.info("Building search data:", file);
 
         const page = await browser.newPage();
         const url = `http://localhost:3000${path.join(
           this.options.basename,
           "docs",
-          file.slug
+          encodeURIComponent(file.id)
         )}`;
 
+        log.trace("Visiting:", url);
         await page.goto(url);
 
         // This makes use wait for the page to load
@@ -587,7 +584,6 @@ export class Fwoosh implements FwooshClass {
             }
 
             const firstMsg = await msgArgs[0].jsonValue();
-
             if (firstMsg !== "window.FWOOSH_SEARCH_INDEX") {
               return;
             }
@@ -710,6 +706,11 @@ export class Fwoosh implements FwooshClass {
     onReady?: (server: http.Server) => void
   ) {
     const server = http.createServer((request, response) => {
+      response.setHeader(
+        "Cache-Control",
+        "public, max-age=31536000, immutable"
+      );
+
       return handler(request, response, {
         public: outDir,
         rewrites: [
@@ -775,7 +776,9 @@ export class Fwoosh implements FwooshClass {
         const docsWithHtmlDescriptions = await Promise.all(
           docs.map(async (doc) => ({
             ...doc,
-            description: await convertMarkdownToHtml(doc.description),
+            description: doc.description
+              ? await convertMarkdownToHtml(doc.description)
+              : undefined,
           }))
         );
 

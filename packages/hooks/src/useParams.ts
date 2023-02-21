@@ -10,10 +10,12 @@ export function useDocsPath() {
   return useParams<{ docsPath: string }>().docsPath;
 }
 
-export const ParameterContext = React.createContext<StoryParameters>({});
+export const ParameterContext = React.createContext<
+  StoryParameters | undefined
+>(undefined);
 
-export function useParameters<T = StoryParameters>() {
-  return React.useContext(ParameterContext) as T;
+export function useParameters<T extends StoryParameters>() {
+  return React.useContext(ParameterContext) as T | undefined;
 }
 
 export function useIsWorkbench() {

@@ -1,0 +1,52 @@
+---
+title: Deployment
+---
+
+import { Link } from "@fwoosh/link";
+
+# Deployment
+
+To deploy your application, you need to build it first. This is done by running the following command:
+
+```bash
+npx fwoosh build
+```
+
+This will build your application into the `outDir` directory, which is `out` by default.
+You can then deploy the contents of this directory to your web server.
+
+To test that your application is working, you can run the following command:
+
+```bash
+npx fwoosh serve
+```
+
+This will start a local server on port 3000. You can then visit `http://localhost:3000` to see your application.
+
+## GitHub Pages
+
+If you want to deploy your application to GitHub Pages, simply push the contents of the `outDir` directory to the `gh-pages` branch of your repository.
+
+[More instructions here](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#)
+
+## Vercel
+
+If you want to deploy your website on Vercel you must first create a `vercel.json` at the root of your project with the following content:
+
+```json
+{
+  "buildCommand": "fwoosh build",
+  "outputDirectory": "out",
+  "headers": [
+    {
+      "source": "/assets/:path*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}
+```
