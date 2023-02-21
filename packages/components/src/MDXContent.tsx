@@ -21,10 +21,7 @@ export function MDXContent({ compiledSource }: { compiledSource: string }) {
     // and all our components in scope for the function, which is the case here
     // we pass the names (via keys) in as the function's args, and execute the
     // function with the actual values.
-    const hydrateFn = Reflect.construct(
-      Function,
-      keys.concat(`${compiledSource}`)
-    );
+    const hydrateFn = Reflect.construct(Function, keys.concat(compiledSource));
 
     return hydrateFn.apply(hydrateFn, values).default;
   }, [compiledSource]);

@@ -4,7 +4,7 @@ export const useMdxContent = (slug: string, mdx: () => Promise<string>) => {
   const { data } = useQuery(
     `mdx-content-${slug}`,
     async () => {
-      const content = await mdx();
+      const content = atob(await mdx());
 
       if (process.env.NODE_ENV === "production") {
         return content;

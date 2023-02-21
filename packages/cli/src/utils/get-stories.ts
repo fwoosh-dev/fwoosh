@@ -30,15 +30,6 @@ const crawler = new fdir()
     ["node_modules", "/dist/", "/out/"].some((i) => dirName.includes(i))
   );
 
-/** Replaces characters in a string that are problematic when inserting into a template string  */
-function sanitizeTemplateString(str: string) {
-  return str
-    .replace(/`/g, "\\`")
-    .replace(/"\\n"/gm, '"\\\\n"')
-    .replace(/"/g, '\\"')
-    .replace(/\${/g, "\\${");
-}
-
 function sanitizeMarkdownString(str: string) {
   return str
     .split("\n")
@@ -106,8 +97,8 @@ async function getComment(contents: string, i: number) {
     );
 
     return process.env.NODE_ENV === "production"
-      ? sanitizeTemplateString(await convertMarkdownToHtml(fullComment))
-      : sanitizeTemplateString(fullComment);
+      ? await convertMarkdownToHtml(fullComment)
+      : fullComment;
   }
 }
 
@@ -272,14 +263,12 @@ async function parseStoryFile(
         commentMap[slug] = await getComment(contents, nearestExport);
         codeMap[slug] =
           process.env.NODE_ENV === "production"
-            ? sanitizeTemplateString(
-                await convertMarkdownToHtml(endent`
+            ? await convertMarkdownToHtml(endent`
                   \`\`\`tsx
                   ${code}
                   \`\`\`
                 `)
-              )
-            : sanitizeTemplateString(code);
+            : code;
 
         return {
           exportName,

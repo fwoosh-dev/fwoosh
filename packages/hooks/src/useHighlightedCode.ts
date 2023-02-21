@@ -10,7 +10,7 @@ export const useHighlightedCode = ({
   const { data } = useQuery(
     `highlight-code-${slug}`,
     async () => {
-      const content = await code();
+      const content = atob(await code());
 
       // In prod mode we highlight code on the server so we don't need to
       // load the highlighter on the client

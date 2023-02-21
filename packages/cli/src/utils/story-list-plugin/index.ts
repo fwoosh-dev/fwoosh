@@ -173,11 +173,11 @@ export async function storyListPlugin(config: FwooshOptionsLoaded) {
   const virtualModules = [
     ...Object.entries(codeMap).map(([k, v]) => [
       `@fwoosh/code/${k}`,
-      `export default \`${v}\``,
+      `export default \`${Buffer.from(v).toString("base64")}\``,
     ]),
     ...Object.entries(commentMap).map(([k, v]) => [
       `@fwoosh/comment/${k}`,
-      v ? `export default \`${v}\`` : "",
+      v ? `export default \`${Buffer.from(v).toString("base64")}\`` : "",
     ]),
   ];
 
