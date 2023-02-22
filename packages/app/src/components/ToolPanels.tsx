@@ -1,7 +1,8 @@
-import React, { Suspense, useContext, useLayoutEffect, useRef } from "react";
+import React, { Suspense, useContext, useRef } from "react";
 import { styled } from "@fwoosh/styling";
 import { Spinner, Tabs, ErrorBoundary } from "@fwoosh/components";
 import { panels } from "@fwoosh/app/ui";
+import useLayoutEffect from "@react-hook/passive-layout-effect";
 
 import { StoryIdContext } from "./Story";
 import { useIsDocs, useParameters } from "@fwoosh/hooks";

@@ -17,6 +17,7 @@
     "@fwoosh/types": "workspace:*",
     "@fwoosh/virtual-file": "workspace:*",
     "@radix-ui/react-tooltip": "^1.0.3",
+    "@react-hook/passive-layout-effect": "^1.2.1",
     "@vitejs/plugin-react": "^3.1.0",
     "react-docgen-typescript": "^2.2.2"
   },

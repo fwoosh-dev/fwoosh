@@ -1,8 +1,9 @@
 import * as React from "react";
 import { SearchData } from "@fwoosh/utils";
+import useLayoutEffect from "@react-hook/passive-layout-effect";
 
 export function ProductionSearchIndex() {
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     if (process.env.NODE_ENV !== "production") {
       return;
     }

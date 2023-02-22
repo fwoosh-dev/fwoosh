@@ -25,6 +25,7 @@
     "@radix-ui/react-collapsible": "^1.0.1",
     "@radix-ui/react-id": "^1.0.0",
     "@radix-ui/react-tooltip": "^1.0.3",
+    "@react-hook/passive-layout-effect": "^1.2.1",
     "@state-designer/react": "^3.0.0",
     "@tldraw/core": "^1.22.0",
     "@tldraw/vec": "^1.9.0",

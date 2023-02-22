@@ -14,6 +14,7 @@ import { useActiveHeader } from "../hooks/useActiveHeader";
 import { useLocation } from "react-router-dom";
 import { SearchData } from "@fwoosh/utils";
 import { useBuildSearchIndex } from "../hooks/useBuildSearchIndex";
+import useLayoutEffect from "@react-hook/passive-layout-effect";
 
 function TableOfContentsGroup({ entry }: { entry: TocEntry }) {
   return (
@@ -142,7 +143,7 @@ export const MDXPage = ({ page }: { page: StoryTreeItem }) => {
 
   useBuildSearchIndex(story);
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     location.hash && document.querySelector(location.hash)?.scrollIntoView();
   }, [location.hash]);
 

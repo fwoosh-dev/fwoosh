@@ -8,6 +8,7 @@ import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import { StoryData, StoryParameters } from "@fwoosh/types";
 import { stories } from "@fwoosh/app/stories";
 import { Spinner, ErrorBoundary } from "@fwoosh/components";
+import useLayoutEffect from "@react-hook/passive-layout-effect";
 
 import type { Decorator, Story as ReactStory, StoryMeta } from "./types";
 
@@ -22,7 +23,7 @@ function useDecorators(story: StoryData | undefined) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     React.useState<ReactStory<any>["decorators"]>();
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     async function getDecorators() {
       if (!story) {
         return;
