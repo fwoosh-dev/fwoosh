@@ -36,12 +36,18 @@ function useDecorators(story: StoryData | undefined) {
       const storyComponent =
         storyComponentImport?.default || storyComponentImport;
 
+      const globalDecorators =
+        (typeof window !== "undefined" &&
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (window as any).__FWOOSH_DECORATORS__) ??
+        [];
+
       setDecorators([
         ...reverse<Decorator>(storyComponent.decorators || []),
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ...reverse<Decorator>((meta as StoryMeta<any>).decorators ?? []),
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ...reverse<Decorator>((window as any).__FWOOSH_DECORATORS__ ?? []),
+        ...reverse<Decorator>(globalDecorators),
       ]);
     }
 

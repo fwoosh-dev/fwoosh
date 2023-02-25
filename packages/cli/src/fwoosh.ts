@@ -328,21 +328,6 @@ export class Fwoosh implements FwooshClass {
           ],
           rehypePlugins: [
             rehypeInferTitleMeta,
-            // Inline data from above plugins into the page
-            () => {
-              return (tree, file) => {
-                tree.children.push(
-                  h(
-                    "script",
-                    {
-                      id: "html-metadata",
-                      type: "application/json",
-                    },
-                    JSON.stringify(file.data)
-                  )
-                );
-              };
-            },
             // Check validity of links during build
             () => {
               if (mode !== "production") {
@@ -561,13 +546,6 @@ export class Fwoosh implements FwooshClass {
     const browser = await chromium.launch();
 
     await build(config);
-    await build({
-      ...config,
-      build: {
-        ssr: "src/entryServer.tsx",
-        outDir: path.join(outDir, "ssg"),
-      },
-    });
 
     this.serve({ outDir }, async (server) => {
       const pages = await this.getPages();
@@ -710,6 +688,24 @@ export class Fwoosh implements FwooshClass {
 
       await browser.close();
       server.close();
+
+      await build({
+        ...config,
+        build: {
+          ssr: "src/entryServer.tsx",
+          outDir: path.join(outDir, "ssg"),
+        },
+        ssr: {
+          noExternal: [
+            // Bundled by parcel and apparently that ESM it emits is
+            // not compatible with vite SSR :(
+            "react-arborist",
+            /^@radix-ui\/.+/,
+            // exports esm under main
+            "devices-viewport-size",
+          ],
+        },
+      });
     });
   }
 
@@ -726,16 +722,16 @@ export class Fwoosh implements FwooshClass {
 
       return handler(request, response, {
         public: outDir,
-        // rewrites: [
-        //   {
-        //     source: "fwoosh/assets/:id",
-        //     destination: "assets/:id",
-        //   },
-        //   {
-        //     source: "!assets/**",
-        //     destination: "index.html",
-        //   },
-        // ],
+        rewrites: [
+          {
+            source: "fwoosh/assets/:id",
+            destination: "assets/:id",
+          },
+          {
+            source: "!assets/**",
+            destination: "index.html",
+          },
+        ],
       });
     });
 
@@ -843,31 +839,46 @@ export class Fwoosh implements FwooshClass {
     });
   }
 
-  async export({ staticDir }: { staticDir: string }) {
-    await mkdirp(staticDir);
+  async export({ outDir }: { outDir: string }) {
+    process.env.NODE_ENV = "production";
+
+    const docsDir = path.join(outDir, "docs");
+
+    await mkdirp(docsDir);
 
     const out = path.join(process.cwd(), this.options.outDir);
     const template = await fs.readFile(path.join(out, "index.html"), "utf-8");
-    const { render } = await import(path.join(out, "ssg/entryServer.mjs"));
+    const { render, renderStyle } = await import(
+      path.join(out, "ssg/entryServer.mjs")
+    );
     const pages = await this.getPages();
 
+    console.log({ pages });
     for (const page of pages) {
       const url = `/docs/${page.id}`;
-
       log.log("pre-rendering:", url);
-
       const context = {};
+
       const { result, headTags } = await render(url, context);
+      const style = renderStyle();
       const html = template
         .replace(`<!--app-html-->`, result)
+        .replace(`<!--app-styles-->`, style)
         .replace(`<!--app-head-->`, renderToString(headTags));
 
       if (html) {
-        const filePath = `${staticDir}/${encodeURIComponent(page.id)}.html`;
+        const filePath = path.join(
+          docsDir,
+          `${encodeURIComponent(page.id)}.html`
+        );
+        console.log(filePath);
         await fs.writeFile(filePath, html);
         log.log("pre-rendered:", url);
       }
     }
+
+    log.log("Static export competed successfully!");
+    process.exit(0);
   }
 
   private async getPages() {

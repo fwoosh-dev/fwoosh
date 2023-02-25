@@ -185,8 +185,14 @@ export const darkTheme = createTheme({
 export type ColorMode = "light" | "dark";
 
 export function getInitialColorMode(): "light" | "dark" {
+  if (typeof window === "undefined") {
+    return "light";
+  }
+
   const persistedColorPreference =
-    window.localStorage.getItem("fwoosh-color-mode");
+    typeof window !== "undefined"
+      ? window.localStorage.getItem("fwoosh-color-mode")
+      : null;
   const hasPersistedPreference = typeof persistedColorPreference === "string";
 
   // If the user has explicitly chosen light or dark,
@@ -210,6 +216,10 @@ export function getInitialColorMode(): "light" | "dark" {
 }
 
 export function setColorMode(colorMode: ColorMode) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
   window.localStorage.setItem("fwoosh-color-mode", colorMode);
   const event = new CustomEvent("fwoosh-color-mode-change", {
     detail: { colorMode },
@@ -218,6 +228,10 @@ export function setColorMode(colorMode: ColorMode) {
 }
 
 export function getColorMode() {
+  if (typeof window === "undefined") {
+    return;
+  }
+
   return window.localStorage.getItem("fwoosh-color-mode");
 }
 

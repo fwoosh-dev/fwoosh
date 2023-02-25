@@ -110,9 +110,10 @@ function createShapesForTree(
 
 export const INITIAL_PAGE: TLPage<Shape> = {
   id: "canvas",
-  shapes: window.FWOOSH_DOCS_CANVAS_SHAPES
-    ? window.FWOOSH_DOCS_CANVAS_SHAPES
-    : createShapesForTree(tree, {}, { shape: "docs" }),
+  shapes:
+    typeof window !== "undefined" && window.FWOOSH_DOCS_CANVAS_SHAPES
+      ? window.FWOOSH_DOCS_CANVAS_SHAPES
+      : createShapesForTree(tree, {}, { shape: "docs" }),
   bindings: {},
 };
 
@@ -159,9 +160,10 @@ export const INITIAL_WORKBENCH_PAGE = {
   } as CanvasMeta,
   page: {
     ...INITIAL_PAGE,
-    shapes: window.FWOOSH_WORKBENCH_CANVAS_SHAPES
-      ? window.FWOOSH_WORKBENCH_CANVAS_SHAPES
-      : createShapesForTree(tree, {}, { shape: "workbench" }),
+    shapes:
+      typeof window !== "undefined" && window.FWOOSH_WORKBENCH_CANVAS_SHAPES
+        ? window.FWOOSH_WORKBENCH_CANVAS_SHAPES
+        : createShapesForTree(tree, {}, { shape: "workbench" }),
   },
 };
 

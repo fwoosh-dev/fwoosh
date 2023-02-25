@@ -11,6 +11,7 @@ export function useBuildSearchIndex({
   useEffect(() => {
     if (
       process.env.NODE_ENV !== "production" ||
+      typeof window === "undefined" ||
       window.FWOOSH_SEARCH_INDEX?.[slug]
     ) {
       return;

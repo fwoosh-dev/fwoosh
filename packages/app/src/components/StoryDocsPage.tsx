@@ -28,6 +28,7 @@ import { useToolbarControls } from "../hooks/useToolbarControls";
 import { ParameterContext, useDocsPath, useMdxContent } from "@fwoosh/hooks";
 import { useParameters } from "../hooks/useParameters";
 import { useBuildSearchIndex } from "../hooks/useBuildSearchIndex";
+import { Title } from "react-head";
 
 const HeaderWrapper = styled("div", {
   position: "relative",
@@ -69,13 +70,6 @@ const StoryPreview = styled("div", {
   position: "relative",
 });
 
-const OverlaySpinner = styled("div", {
-  background: "$gray1",
-  position: "absolute",
-  inset: 0,
-  zIndex: 100000,
-});
-
 const ExpandToggle = styled("div", {
   position: "absolute",
   right: 0,
@@ -115,17 +109,19 @@ const StoryToolbar = () => {
 
 const StoryDiv = React.memo(function StoryDiv({
   slug,
-  showSpinnerWhileLoading,
   defaultOpen,
 }: {
   slug: string;
-  showSpinnerWhileLoading?: boolean;
   defaultOpen: boolean;
 }) {
   const [isOpen, setIsOpen] = React.useState(defaultOpen);
   const id = useId();
-  const { ref, hasRendered } = useRender({ id, slug });
+  const { ref } = useRender({ id, slug });
   const parameters = useParameters({ id: slug, suspense: true });
+  const dimensions =
+    (typeof window !== "undefined" &&
+      window.FWOOSH_WORKBENCH_CANVAS_SHAPES?.[slug]?.size) ||
+    [];
 
   return (
     <ParameterContext.Provider value={parameters}>
@@ -136,8 +132,8 @@ const StoryDiv = React.memo(function StoryDiv({
 
             <StoryPreviewArea
               style={{
-                width: window.FWOOSH_WORKBENCH_CANVAS_SHAPES?.[slug]?.size[0],
-                height: window.FWOOSH_WORKBENCH_CANVAS_SHAPES?.[slug]?.size[1],
+                width: dimensions[0],
+                height: dimensions[1],
               }}
             >
               <StoryPreview>
@@ -168,12 +164,6 @@ const StoryDiv = React.memo(function StoryDiv({
             )}
           </ExpandToggle>
         </StoryPreviewWrapperSpacing>
-
-        {showSpinnerWhileLoading && !hasRendered && (
-          <OverlaySpinner>
-            <Spinner delay={2000} />
-          </OverlaySpinner>
-        )}
       </StoryIdContext.Provider>
     </ParameterContext.Provider>
   );
@@ -209,7 +199,6 @@ export const PageContent = ({
         <StoryDiv
           slug={firstStory.story.slug}
           key={firstStory.story.slug}
-          showSpinnerWhileLoading={true}
           defaultOpen={true}
         />
       </>
@@ -285,6 +274,7 @@ export const StoryDocsPage = ({
 
   return (
     <DocsLayout>
+      <Title>{name}</Title>
       <StoryDocsPageContent name={name} stories={[firstStory, ...stories]}>
         <PageSwitchButton current={firstStory.id} />
       </StoryDocsPageContent>

@@ -19,7 +19,6 @@ import {
 } from "@fwoosh/styling";
 import { tree } from "@fwoosh/app/stories";
 import { getFirstStory, convertMetaTitleToUrlParam } from "@fwoosh/utils";
-import { Head } from "./components/Head";
 import { CommandPallette } from "./components/CommandPallette";
 import { ProductionSearchIndex } from "./components/ProductionSearchIndex";
 
@@ -138,6 +137,10 @@ export const App = () => {
   globalStyles();
 
   React.useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
     colorModeSet(getInitialColorMode());
 
     window.addEventListener("fwoosh-color-mode-change", (e) =>
@@ -146,84 +149,82 @@ export const App = () => {
   }, []);
 
   return (
-    // WHY NO WORK
-    // <TooltipProvider>
-    <QueryClientProvider client={queryClient}>
-      <ColorModeContext.Provider value={colorMode}>
-        <ErrorBoundary fullScreen>
-          <AppWrapper>
-            <Head />
-            <ProductionSearchIndex />
-            <Routes>
-              <Route path="/" errorElement={<RouteError />}>
-                <Route
-                  index={true}
-                  element={
-                    <React.Suspense fallback={<Spinner delay={2000} />}>
-                      <FirstDocsPage />
-                    </React.Suspense>
-                  }
-                />
-                <Route
-                  path="story/:storyId"
-                  element={
-                    <React.Suspense fallback={<Spinner delay={2000} />}>
-                      <ErrorBoundary>
-                        <Story />
-                      </ErrorBoundary>
-                    </React.Suspense>
-                  }
-                />
-                <Route
-                  path="workbench"
-                  element={
-                    <React.Suspense fallback={<Spinner delay={2000} />}>
-                      <Workbench />
-                    </React.Suspense>
-                  }
-                >
-                  <Route index={true} element={<FirstStory />} />
-                  <Route path=":storyId" element={<Story />} />
-                </Route>
-                <Route
-                  path="docs"
-                  element={
-                    <React.Suspense fallback={<Spinner delay={2000} />}>
-                      <Docs />
-                    </React.Suspense>
-                  }
-                >
-                  <Route index={true} element={<FirstDocsPage />} />
-                  <Route path=":docsPath" element={<DocsPage />} />
-                </Route>
-                <Route path="canvas">
+    <TooltipProvider>
+      <QueryClientProvider client={queryClient}>
+        <ColorModeContext.Provider value={colorMode}>
+          <ErrorBoundary fullScreen>
+            <AppWrapper>
+              <ProductionSearchIndex />
+              <Routes>
+                <Route path="/" errorElement={<RouteError />}>
                   <Route
-                    path="workbench/:storyId?"
+                    index={true}
                     element={
                       <React.Suspense fallback={<Spinner delay={2000} />}>
-                        <WorkBenchCanvas />
+                        <FirstDocsPage />
                       </React.Suspense>
                     }
                   />
                   <Route
-                    path="docs/:docsPath?"
+                    path="story/:storyId"
                     element={
                       <React.Suspense fallback={<Spinner delay={2000} />}>
-                        <DocsCanvas />
+                        <ErrorBoundary>
+                          <Story />
+                        </ErrorBoundary>
                       </React.Suspense>
                     }
                   />
+                  <Route
+                    path="workbench"
+                    element={
+                      <React.Suspense fallback={<Spinner delay={2000} />}>
+                        <Workbench />
+                      </React.Suspense>
+                    }
+                  >
+                    <Route index={true} element={<FirstStory />} />
+                    <Route path=":storyId" element={<Story />} />
+                  </Route>
+                  <Route
+                    path="docs"
+                    element={
+                      <React.Suspense fallback={<Spinner delay={2000} />}>
+                        <Docs />
+                      </React.Suspense>
+                    }
+                  >
+                    <Route index={true} element={<FirstDocsPage />} />
+                    <Route path=":docsPath" element={<DocsPage />} />
+                  </Route>
+                  <Route path="canvas">
+                    <Route
+                      path="workbench/:storyId?"
+                      element={
+                        <React.Suspense fallback={<Spinner delay={2000} />}>
+                          <WorkBenchCanvas />
+                        </React.Suspense>
+                      }
+                    />
+                    <Route
+                      path="docs/:docsPath?"
+                      element={
+                        <React.Suspense fallback={<Spinner delay={2000} />}>
+                          <DocsCanvas />
+                        </React.Suspense>
+                      }
+                    />
+                  </Route>
                 </Route>
-              </Route>
-            </Routes>
+              </Routes>
 
-            <React.Suspense>
-              <CommandPallette />
-            </React.Suspense>
-          </AppWrapper>
-        </ErrorBoundary>
-      </ColorModeContext.Provider>
-    </QueryClientProvider>
-    // </TooltipProvider>
+              <React.Suspense>
+                <CommandPallette />
+              </React.Suspense>
+            </AppWrapper>
+          </ErrorBoundary>
+        </ColorModeContext.Provider>
+      </QueryClientProvider>
+    </TooltipProvider>
   );
 };

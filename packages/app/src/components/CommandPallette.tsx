@@ -230,6 +230,10 @@ function SwitchToWorkbenchCommand({ onClose }: { onClose: () => void }) {
   const [hasMetaHeld, setHasMetaHeld] = React.useState(false);
 
   React.useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
     function handleKeyDown(event: KeyboardEvent) {
       if (event.metaKey) {
         setHasMetaHeld(true);
@@ -405,6 +409,9 @@ export function CommandPallette() {
 
   useHotkeys("meta+k", () => openSet(true));
 
+  const searchIndex =
+    (typeof window !== "undefined" && window.FWOOSH_SEARCH_INDEX) || {};
+
   return (
     <Command.Dialog
       open={open}
@@ -438,7 +445,7 @@ export function CommandPallette() {
               <Command.Group
                 heading={<Command.Heading>Results</Command.Heading>}
               >
-                {Object.values(window.FWOOSH_SEARCH_INDEX || {}).map((data) => {
+                {Object.values(searchIndex).map((data) => {
                   return data.map((item) => (
                     <MDXContentMatch
                       key={item.url}

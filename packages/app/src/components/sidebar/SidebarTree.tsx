@@ -28,8 +28,8 @@ export function SidebarTree<T>({ activeId, children, data }: SidebarProps<T>) {
         selection={activeId}
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         rowHeight={(SidebarItem as any).height}
-        width={bounds.width}
-        height={bounds.height}
+        width={bounds.width || 287}
+        height={bounds.height || 10_000}
         indent={SIDEBAR_ITEM_INDENT}
         disableDrag={true}
         disableDrop={true}

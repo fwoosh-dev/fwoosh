@@ -20,6 +20,10 @@ export default function MeasureControl({
   React.useEffect(clear, [storyId]);
 
   React.useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
     const onMouseOver = (event: MouseEvent) => {
       window.requestAnimationFrame(() => {
         event.stopPropagation();

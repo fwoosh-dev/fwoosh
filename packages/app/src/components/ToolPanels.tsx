@@ -62,14 +62,22 @@ const ToolPanelsContent = ({ storySlug }: ToolPanelsContentProps) => {
     return true;
   });
 
-  return (
-    <TabRoot
-      defaultValue={
-        localStorage.getItem("fwoosh:active-panel") ??
+  const defaultValue =
+    typeof localStorage !== "undefined"
+      ? localStorage.getItem("fwoosh:active-panel") ??
         shownPanels[0]?.componentName
-      }
-      onValueChange={(id) => localStorage.setItem("fwoosh:active-panel", id)}
-    >
+      : shownPanels[0]?.componentName;
+
+  const onChange = (id: string) => {
+    if (typeof localStorage === "undefined") {
+      return;
+    }
+
+    localStorage.setItem("fwoosh:active-panel", id);
+  };
+
+  return (
+    <TabRoot defaultValue={defaultValue} onValueChange={onChange}>
       <TabsList>
         <Suspense fallback={<Spinner delay={3000} size={5} />}>
           {parameters &&

@@ -4,7 +4,10 @@ import useLayoutEffect from "@react-hook/passive-layout-effect";
 
 export function ProductionSearchIndex() {
   useLayoutEffect(() => {
-    if (process.env.NODE_ENV !== "production") {
+    if (
+      process.env.NODE_ENV !== "production" ||
+      typeof window === "undefined"
+    ) {
       return;
     }
 

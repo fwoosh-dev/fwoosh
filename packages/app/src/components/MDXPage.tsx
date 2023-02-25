@@ -15,6 +15,7 @@ import { useLocation } from "react-router-dom";
 import { SearchData } from "@fwoosh/utils";
 import { useBuildSearchIndex } from "../hooks/useBuildSearchIndex";
 import useLayoutEffect from "@react-hook/passive-layout-effect";
+import { Title } from "react-head";
 
 function TableOfContentsGroup({ entry }: { entry: TocEntry }) {
   return (
@@ -80,7 +81,7 @@ function TableOfContents() {
   React.useEffect(() => {
     const main = document.querySelector<HTMLElement>("main");
 
-    if (!main) {
+    if (!main || typeof window === "undefined") {
       return;
     }
 
@@ -154,6 +155,7 @@ export const MDXPage = ({ page }: { page: StoryTreeItem }) => {
   if (hasWrapper) {
     content = (
       <PageWrapper>
+        <Title>{page.name}</Title>
         <div>{content}</div>
         <PageSwitchButton current={page.id} />
       </PageWrapper>

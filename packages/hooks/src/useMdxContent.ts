@@ -12,6 +12,9 @@ export const useMdxContent = (slug: string, mdx: () => Promise<string>) => {
 
       // In dev we generate props only as necessary to be quicker
       return new Promise<string>((resolve) => {
+        if (typeof WebSocket === "undefined") {
+          return;
+        }
         const socket = new WebSocket(
           `ws://localhost:${process.env.FWOOSH_DEV_SERVER_PORT}/get-mdx-content`
         );

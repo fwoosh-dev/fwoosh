@@ -6,6 +6,7 @@ import { stories } from "@fwoosh/app/stories";
 import { useStoryId } from "@fwoosh/hooks";
 
 import { useRender } from "../hooks/useRender";
+import { Title } from "react-head";
 
 export const StoryIdContext = React.createContext("");
 
@@ -31,7 +32,12 @@ const StoryDiv = React.memo(function StoryDiv({
     throw new Error(`Story not found: ${slug}`);
   }
 
-  return <Root ref={ref} />;
+  return (
+    <>
+      <Title>{story.title}</Title>
+      <Root ref={ref} />
+    </>
+  );
 });
 
 export const Story = () => {

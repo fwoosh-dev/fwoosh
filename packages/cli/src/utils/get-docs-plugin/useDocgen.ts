@@ -45,6 +45,10 @@ export const useDocgen = (key: string, meta: UnresolvedMeta, story?: any) => {
 
       // In dev we generate props only as necessary to be quicker
       return new Promise((resolve) => {
+        if (typeof WebSocket === "undefined") {
+          return;
+        }
+
         const socket = new WebSocket(
           "ws://localhost:process.env.GET_DOCS_PORT/get-docs"
         );

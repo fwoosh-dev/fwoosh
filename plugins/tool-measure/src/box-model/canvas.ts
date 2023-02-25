@@ -55,7 +55,7 @@ function setCanvasWidthAndHeight(
   canvas.style.height = `${height}px`;
 
   // Scale
-  const scale = window.devicePixelRatio;
+  const scale = typeof window === "undefined" ? 1 : window.devicePixelRatio;
   canvas.width = Math.floor(width * scale);
   canvas.height = Math.floor(height * scale);
 
