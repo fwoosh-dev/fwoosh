@@ -13,6 +13,7 @@ import { components, IconButton, Spinner, Tooltip } from "@fwoosh/components";
 import { Minus, Plus, RotateCw } from "react-feather";
 import { useDidChange, useStoryId } from "@fwoosh/hooks";
 import { MDXProvider } from "@mdx-js/react";
+import { WorkbenchCanvasShapesContext } from "../../hooks/context.js";
 
 const Loading = styled("div", {
   position: "absolute",
@@ -118,6 +119,7 @@ export const Canvas = React.memo(function Canvas({
     (s) => s.size[0] > 0
   );
   const doneMeasuring = hasMeasured.length === toMeasure;
+  const shapes = React.useContext(WorkbenchCanvasShapesContext);
 
   if (doneMeasuring) {
     // This log is used to communicate the search index to the
@@ -130,12 +132,12 @@ export const Canvas = React.memo(function Canvas({
       return;
     }
 
-    if (!window.FWOOSH_WORKBENCH_CANVAS_SHAPES) {
+    if (!shapes) {
       requestAnimationFrame(() => {
         machine.send("START_MEASURE");
       });
     }
-  }, []);
+  }, [shapes]);
 
   if (useDidChange(doneMeasuring) && doneMeasuring) {
     machine.send("CENTER_SHAPE", {

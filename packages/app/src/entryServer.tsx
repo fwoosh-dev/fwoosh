@@ -1,19 +1,23 @@
 import * as React from "react";
 import stream from "stream";
 import { renderToPipeableStream, renderToString } from "react-dom/server";
-import { Style, HeadProvider } from "react-head";
+import { HeadProvider } from "react-head";
 import { StaticRouter } from "react-router-dom/server";
 
 import { App } from "./App";
 import { getCssText } from "@fwoosh/styling";
+import { WorkbenchCanvasShapesContext } from "./hooks/context";
+
+// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+const shapes = JSON.parse(process.env.FWOOSH_SHAPES || "[]");
 
 function ServerApp({ url }: { url: string }) {
-  const css = getCssText();
-
   return (
-    <StaticRouter location={url} basename={process.env.FWOOSH_BASE_NAME}>
-      <App />
-    </StaticRouter>
+    <WorkbenchCanvasShapesContext.Provider value={shapes}>
+      <StaticRouter location={url} basename={process.env.FWOOSH_BASE_NAME}>
+        <App />
+      </StaticRouter>
+    </WorkbenchCanvasShapesContext.Provider>
   );
 }
 

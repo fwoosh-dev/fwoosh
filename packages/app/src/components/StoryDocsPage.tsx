@@ -29,6 +29,7 @@ import { ParameterContext, useDocsPath, useMdxContent } from "@fwoosh/hooks";
 import { useParameters } from "../hooks/useParameters";
 import { useBuildSearchIndex } from "../hooks/useBuildSearchIndex";
 import { Title } from "react-head";
+import { WorkbenchCanvasShapesContext } from "../hooks/context";
 
 const HeaderWrapper = styled("div", {
   position: "relative",
@@ -118,10 +119,8 @@ const StoryDiv = React.memo(function StoryDiv({
   const id = useId();
   const { ref } = useRender({ id, slug });
   const parameters = useParameters({ id: slug, suspense: true });
-  const dimensions =
-    (typeof window !== "undefined" &&
-      window.FWOOSH_WORKBENCH_CANVAS_SHAPES?.[slug]?.size) ||
-    [];
+  const shapes = React.useContext(WorkbenchCanvasShapesContext);
+  const dimensions = shapes?.[slug]?.size ?? [];
 
   return (
     <ParameterContext.Provider value={parameters}>
